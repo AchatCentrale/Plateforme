@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatCentrale\CrmBundle\Entity\ProfilsFourn" table="PROFILS_FOURN">
+    <indexes>
+      <index name="IDX_84165EC03508DF0E" columns="PU_ID"/>
+    </indexes>
+    <id name="pfId" type="integer" column="PF_ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="foId" type="integer" column="FO_ID" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="insDate" type="datetime" column="INS_DATE" nullable="true"/>
+    <field name="insUser" type="string" column="INS_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="majDate" type="datetime" column="MAJ_DATE" nullable="true"/>
+    <field name="majUser" type="string" column="MAJ_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="pu" target-entity="ProfilsUsers" fetch="LAZY">
+      <join-columns>
+        <join-column name="PU_ID" referenced-column-name="PU_ID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

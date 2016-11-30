@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatCentrale\CrmBundle\Entity\Contrats" table="CONTRATS">
+    <indexes>
+      <index name="IDX_B45BA520DA314FF6" columns="CO_CATEGORIE"/>
+      <index name="IDX_B45BA5203F592A49" columns="CL_ID"/>
+    </indexes>
+    <id name="coId" type="integer" column="CO_ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="coUser" type="integer" column="CO_USER" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="coTier" type="string" column="CO_TIER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="coDescr" type="string" column="CO_DESCR" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="coDebut" type="datetime" column="CO_DEBUT" nullable="true"/>
+    <field name="coRenouv" type="datetime" column="CO_RENOUV" nullable="true"/>
+    <field name="coDuree" type="integer" column="CO_DUREE" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="coPreavis" type="integer" column="CO_PREAVIS" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="coContact" type="string" column="CO_CONTACT" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="coContTel" type="string" column="CO_CONT_TEL" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="coContMail" type="string" column="CO_CONT_MAIL" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="coConfident" type="integer" column="CO_CONFIDENT" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="coMontant" type="float" column="CO_MONTANT" precision="53" scale="0" nullable="true"/>
+    <field name="coEcheance" type="string" column="CO_ECHEANCE" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="coModePaie" type="string" column="CO_MODE_PAIE" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="coComment" type="text" column="CO_COMMENT" length="16" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="coStatus" type="integer" column="CO_STATUS" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="coAlert" type="integer" column="CO_ALERT" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="coTempo" type="string" column="CO_TEMPO" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="insDate" type="datetime" column="INS_DATE" nullable="true"/>
+    <field name="insUser" type="string" column="INS_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="majDate" type="datetime" column="MAJ_DATE" nullable="true"/>
+    <field name="majUser" type="string" column="MAJ_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="coCategorie" target-entity="ContratsCat" fetch="LAZY">
+      <join-columns>
+        <join-column name="CO_CATEGORIE" referenced-column-name="CC_ID"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="cl" target-entity="Clients" fetch="LAZY">
+      <join-columns>
+        <join-column name="CL_ID" referenced-column-name="CL_ID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

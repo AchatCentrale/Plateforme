@@ -1,0 +1,3 @@
+achat_centrale_crm_homepage:
+    path:     /
+    defaults: { _controller: AchatCentraleCrmBundle:Default:index }

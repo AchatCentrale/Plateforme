@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatCentrale\CrmBundle\Entity\Textes" table="Textes">
+    <indexes>
+      <index name="IDX_5BFAE4E45919F4AB" columns="CatID"/>
+    </indexes>
+    <id name="txtid" type="integer" column="TxtID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="txttitre" type="string" column="TxtTitre" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="txtdescription" type="string" column="TxtDescription" length="7900" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="txtsort" type="integer" column="TxtSort" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="txtsortdt" type="datetime" column="TxtSortDt" nullable="true"/>
+    <field name="txtdate" type="datetime" column="TxtDate" nullable="true"/>
+    <many-to-one field="catid" target-entity="Categories" fetch="LAZY">
+      <join-columns>
+        <join-column name="CatID" referenced-column-name="CatID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

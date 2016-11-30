@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatCentrale\CrmBundle\Entity\ContratsCat" table="CONTRATS_CAT">
+    <indexes>
+      <index name="IDX_AF50DB674D0C1225" columns="SO_ID"/>
+    </indexes>
+    <id name="ccId" type="integer" column="CC_ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ccDescr" type="string" column="CC_DESCR" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ccDate" type="datetime" column="CC_DATE" nullable="true"/>
+    <many-to-one field="so" target-entity="Societes" fetch="LAZY">
+      <join-columns>
+        <join-column name="SO_ID" referenced-column-name="SO_ID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
