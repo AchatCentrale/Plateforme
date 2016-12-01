@@ -2,6 +2,3 @@ achat_centrale_crm:
     resource: "@AchatCentraleCrmBundle/Resources/config/routing.yml"
     prefix:   /
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
