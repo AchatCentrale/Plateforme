@@ -18,6 +18,8 @@ class AppKernel extends Kernel
             new AchatCentrale\CrmBundle\AchatCentraleCrmBundle(),
             new Realestate\MssqlBundle\RealestateMssqlBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+
 
         ];
 

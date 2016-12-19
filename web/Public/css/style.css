@@ -1,0 +1,26 @@
+img{
+    width: 11%;
+    margin-left: 45%;
+}
+
+
+h1{
+    margin: 33px 10px 36px 42%;
+}
+
+form[name]{
+    margin-left: 46%;
+}
+
+#form_send{
+    margin: 15px 10px 10px 10%;
+}
+
+
+#form_email{
+    margin-left: 5%;
+}
+
+#form_Password{
+    margin-left: 2%;
+}

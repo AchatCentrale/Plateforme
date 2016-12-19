@@ -3,12 +3,13 @@
 namespace AchatCentrale\CrmBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class SiteController extends Controller
 {
@@ -48,10 +49,26 @@ class SiteController extends Controller
                 // si toute les infos sont correcte , l'user est connecté
                 //TODO: Collé un cookies a l'utilisateur fraichement ajouté
 
+                $cookie_info = array(
 
-                return new Response('ok');
+                    'name' => 'token_user', // Nom du cookie
+
+                    'value' => 'Valeur du cookie', // Valeur du cookie
+
+                    'time' => time() + 3600 * 24 * 7 // Durée de vie du cookie
+
+                );
+                $response = new Response();
+                $cookie = new Cookie($cookie_info['name'], $cookie_info['value'], $cookie_info['time']);
+
+                $response->headers->setCookie($cookie);
+
+                $response->send();
+
+                return $this->redirectToRoute('crm_home_auth');
 
             }
+
 
 
 
@@ -68,6 +85,22 @@ class SiteController extends Controller
 
         ));
     }
+
+
+
+
+    public function HomeAuthAction()
+    {
+
+
+
+        return $this->render('AchatCentraleCrmBundle:AuthViews:index.html.twig');
+    }
+
+
+
+
+
 
 
 }

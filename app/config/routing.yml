@@ -2,3 +2,12 @@ achat_centrale_crm:
     resource: "@AchatCentraleCrmBundle/Resources/config/routing.yml"
     prefix:   /
 
+
+users:
+    type:   rest
+    resource: "@AchatCentraleCrmBundle/Controller/UserController.php"
+
+
+clients:
+    type:   rest
+    resource: "@AchatCentraleCrmBundle/Controller/ClientController.php"
