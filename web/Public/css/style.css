@@ -10,23 +10,11 @@ h1{
 
 }
 
-form[name]{
-    margin-left: 46%;
+.login-group-input{
+    width: 45%;
+    margin: 0 auto;
+    padding: 41px 1px 1px 1px;
 }
-
-#form_send{
-    margin: 15px 10px 10px 10%;
-}
-
-
-#form_email{
-    margin-left: 5%;
-}
-
-#form_Password{
-    margin-left: 2%;
-}
-
 
 .login-group{
     background: #FFFFFF;
@@ -35,4 +23,8 @@ form[name]{
     width: 30%;
     height: 400px;
     margin: 0 auto;
+}
+
+.ink-button.green{
+    width: 99%;
 }

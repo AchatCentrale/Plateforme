@@ -17,13 +17,13 @@ class BaseController extends Controller
         // Creation d'un formulaire sans entité , pour l'auth
         $defaultData = array('Auth' => 'Données reçu du formulaire - HomeAction');
         $form = $this->createFormBuilder($defaultData)
-            ->add('email', EmailType::class, array(
+            ->add('email', EmailType::class)
+            ->add('Password', PasswordType::class)
+            ->add('send', SubmitType::class , array(
                 "attr" => array(
-                    "class " => "test"
+                    "class" => "ink-button green"
                 )
             ))
-            ->add('Password', PasswordType::class)
-            ->add('send', SubmitType::class)
             ->getForm();
 
 

@@ -10,7 +10,32 @@
 
 
     <div class="login-group">
-        {{ form(form) }}
+
+
+        {{ form_start(form, {'attr': {'class': 'ink-form login-group-input'}}) }}
+        {{ form_errors(form) }}
+
+        <div class="control-group align-left">
+            {{ form_label(form.email) }}
+            {{ form_errors(form.email) }}
+            <div class="control">
+                {{ form_widget(form.email) }}
+            </div>
+        </div>
+        <br>
+        <div class="control-group align-left ">
+            {{ form_label(form.Password) }}
+            {{ form_errors(form.Password) }}
+            <div class="control">
+                {{ form_widget(form.Password) }}
+            </div>
+        </div>
+        <br>
+        <div>
+            {{ form_widget(form.send) }}
+        </div>
+
+        {{ form_end(form) }}
 
     </div>
 
