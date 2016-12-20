@@ -82,6 +82,24 @@ class UserController extends Controller
     }
 
 
+    /**
+     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     * @Rest\Delete("/users/{id}")
+     */
+    public function removeUserAction(Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $user = $em->getRepository('AchatCentraleCrmBundle:Users')
+
+            ->find($request->get('id'));
+
+        if ($user) {
+            $em->remove($user);
+            $em->flush();
+        }
+    }
+
+
 
 
 }

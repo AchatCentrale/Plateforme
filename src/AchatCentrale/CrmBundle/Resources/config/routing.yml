@@ -7,13 +7,3 @@ crm_home_auth:
     path:     /home
     defaults: { _controller: AchatCentraleCrmBundle:Site:HomeAuth }
 
-
-#users_list:
-#    path: /users
-#    defaults: {_controller: AchatCentraleCrmBundle:User:getUsers}
-#    methods: GET
-#
-#users_one:
-#    path: /users/{place_id}
-#    defaults: {_controller: AchatCentraleCrmBundle:User:getUser}
-#    methods: GET

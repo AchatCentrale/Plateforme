@@ -1,6 +1,10 @@
+site:
+    resource: "@SiteBundle/Resources/config/routing.yml"
+    prefix:   /
+
 achat_centrale_crm:
     resource: "@AchatCentraleCrmBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /crm
 
 
 users:

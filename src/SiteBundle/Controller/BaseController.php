@@ -1,6 +1,6 @@
 <?php
 
-namespace AchatCentrale\CrmBundle\Controller;
+namespace SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -10,24 +10,21 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
-class SiteController extends Controller
+class BaseController extends Controller
 {
-
-    public function HomeAction(Request $request)
+    public function indexAction(Request $request)
     {
-
-
-
         // Creation d'un formulaire sans entité , pour l'auth
         $defaultData = array('Auth' => 'Données reçu du formulaire - HomeAction');
         $form = $this->createFormBuilder($defaultData)
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, array(
+                "attr" => array(
+                    "class " => "test"
+                )
+            ))
             ->add('Password', PasswordType::class)
             ->add('send', SubmitType::class)
             ->getForm();
-
-
-
 
 
         // le formulaire est recuperer dans la request
@@ -40,11 +37,10 @@ class SiteController extends Controller
             $data = $form->getData();
 
 
+            $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array('usMail' => $data['email']));
 
-            $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array('usMail' =>$data['email']  ));
 
-
-            if($data['Password'] == $user[0]->getUsPass()){
+            if ($data['Password'] == $user[0]->getUsPass()) {
                 // si toute les infos sont correcte , l'user est connecté
                 //TODO: Collé un cookies a l'utilisateur fraichement ajouté
 
@@ -68,38 +64,13 @@ class SiteController extends Controller
 
             }
 
-
-
-
-
         }
 
-
-
-
-
         //rendu
-        return $this->render('AchatCentraleCrmBundle:Default:index.html.twig', array(
+        return $this->render('SiteBundle:Base:index.html.twig', array(
             'form' => $form->createView(),
 
         ));
     }
-
-
-
-
-    public function HomeAuthAction()
-    {
-
-
-
-        return $this->render('AchatCentraleCrmBundle:AuthViews:index.html.twig');
-    }
-
-
-
-
-
-
 
 }

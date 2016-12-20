@@ -54,4 +54,21 @@ class ClientController extends Controller
     }
 
 
+
+    /**
+     * @Rest\View(statusCode=Response::HTTP_NO_CONTENT)
+     * @Rest\Delete("/clients/{id}")
+     */
+    public function removeClientAction(Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')
+            ->find($request->get('id'));
+
+        if ($client) {
+            $em->remove($client);
+            $em->flush();
+        }
+    }
+
 }
