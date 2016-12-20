@@ -48,7 +48,7 @@ class BaseController extends Controller
 
                     'name' => 'token_user', // Nom du cookie
 
-                    'value' => 'Valeur du cookie', // Valeur du cookie
+                    'value' =>  $user[0]->getUsId(), // Valeur du cookie
 
                     'time' => time() + 3600 * 24 * 7 // Durée de vie du cookie
 
@@ -60,7 +60,7 @@ class BaseController extends Controller
 
                 $response->send();
 
-                return $this->redirectToRoute('crm_home_auth');
+                return $this->redirectToRoute('index_auth');
 
             }
 
@@ -72,5 +72,26 @@ class BaseController extends Controller
 
         ));
     }
+
+
+
+
+
+    public function indexAuthAction(Request $request)
+    {
+
+
+        $IdUser = $request->cookies->get('token_user');
+
+
+
+        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->find($IdUser);
+
+
+        return $this->render('@Site/Base/home.html.twig', array(
+            "user" => $user
+        ));
+    }
+
 
 }

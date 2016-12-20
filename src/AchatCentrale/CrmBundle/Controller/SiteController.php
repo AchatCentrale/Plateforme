@@ -68,15 +68,7 @@ class SiteController extends Controller
 
             }
 
-
-
-
-
         }
-
-
-
-
 
         //rendu
         return $this->render('AchatCentraleCrmBundle:Default:index.html.twig', array(
