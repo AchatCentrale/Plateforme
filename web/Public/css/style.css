@@ -1,4 +1,4 @@
-img{
+.img-home{
 
     width: 14%;
     margin-left: 42%;
@@ -29,6 +29,27 @@ h1{
     width: 99%;
 }
 
+.ink-navigation ul.menu.blue {
+    background: #1b75ce;
+    height: 88px;
+}
+
+
+.menu-header-name{
+    margin-top: 20px;
+}
+
+.picture-settings1{
+    width: 88%;
+    margin-top: 27px;
+    margin-left: 3800%;
+}
+
+.picture-settings2{
+    width: 88%;
+    margin-top: 27px;
+    margin-left: 3875%;
+}
 
 
 

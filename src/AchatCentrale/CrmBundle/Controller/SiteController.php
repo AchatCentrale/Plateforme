@@ -83,7 +83,7 @@ class SiteController extends Controller
     public function HomeAuthAction()
     {
 
-
+        dump($this->getUser());
 
         return $this->render('AchatCentraleCrmBundle:AuthViews:index.html.twig');
     }
