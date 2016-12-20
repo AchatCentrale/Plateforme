@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatCentrale\CrmBundle\Entity\Categories" table="Categories">
+    <id name="catid" type="integer" column="CatID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="soId" type="integer" column="SO_ID" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="catidparent" type="integer" column="CatIDParent" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="catdescription" type="string" column="CatDescription" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cattitre" type="string" column="CatTitre" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cattitrereq" type="string" column="CatTitreReq" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="catlien" type="string" column="CatLien" length="300" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="catlienrw" type="string" column="CatLienRW" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cattagdescr" type="string" column="CatTagDescr" length="200" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="cattagkeyword" type="string" column="CatTagKeyword" length="1000" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="catimage" type="string" column="CatImage" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="catimageH" type="string" column="CatImage_H" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="catbandeau" type="string" column="CatBandeau" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="catsort" type="integer" column="CatSort" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="catdate" type="datetime" column="CatDate" nullable="true"/>
+  </entity>
+</doctrine-mapping>

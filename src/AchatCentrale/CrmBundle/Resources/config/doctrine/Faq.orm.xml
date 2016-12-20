@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatCentrale\CrmBundle\Entity\Faq" table="FAQ">
+    <id name="qfId" type="integer" column="QF_ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="soId" type="integer" column="SO_ID" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="qfQuestion" type="string" column="QF_QUESTION" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="qfReponse" type="text" column="QF_REPONSE" length="16" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="qfOrdre" type="integer" column="QF_ORDRE" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="qfDate" type="datetime" column="QF_DATE" nullable="true"/>
+  </entity>
+</doctrine-mapping>

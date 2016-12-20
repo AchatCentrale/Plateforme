@@ -1,0 +1,208 @@
+<?php
+
+namespace AchatCentrale\CrmBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ParamFixes
+ *
+ * @ORM\Table(name="PARAM_FIXES")
+ * @ORM\Entity
+ */
+class ParamFixes
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="SO_ID", type="integer", nullable=true)
+     */
+    private $soId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PF_SMTP", type="string", length=50, nullable=false)
+     */
+    private $pfSmtp;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PF_SMTP_USER", type="string", length=50, nullable=true)
+     */
+    private $pfSmtpUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PF_SMTP_PASS", type="string", length=50, nullable=true)
+     */
+    private $pfSmtpPass;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_PAYS", type="integer", nullable=true)
+     */
+    private $pfPays;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PF_PAYS_DESCR", type="string", length=100, nullable=true)
+     */
+    private $pfPaysDescr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PF_SITE_URL", type="string", length=1000, nullable=true)
+     */
+    private $pfSiteUrl;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_ACCUEIL", type="integer", nullable=true)
+     */
+    private $pfAccueil;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_ADHERER", type="integer", nullable=true)
+     */
+    private $pfAdherer;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_CONTACT", type="integer", nullable=true)
+     */
+    private $pfContact;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_DECOUVRIR", type="integer", nullable=true)
+     */
+    private $pfDecouvrir;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_RECHERCHE", type="integer", nullable=true)
+     */
+    private $pfRecherche;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_CONNECTER", type="integer", nullable=true)
+     */
+    private $pfConnecter;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_ESPACE_PRIVE", type="integer", nullable=true)
+     */
+    private $pfEspacePrive;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_ESPACE_PRIVE_F", type="integer", nullable=true)
+     */
+    private $pfEspacePriveF;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_INFOS_UTILES", type="integer", nullable=true)
+     */
+    private $pfInfosUtiles;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_TICKETS", type="integer", nullable=true)
+     */
+    private $pfTickets;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PF_PLUS_PART", type="string", length=50, nullable=true)
+     */
+    private $pfPlusPart;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PF_PLUS_CONSEIL", type="string", length=50, nullable=true)
+     */
+    private $pfPlusConseil;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_PRIX_AFFICHE", type="integer", nullable=true)
+     */
+    private $pfPrixAffiche;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_REGION", type="integer", nullable=true)
+     */
+    private $pfRegion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PF_MESS_ACCUEIL", type="string", length=2000, nullable=true)
+     */
+    private $pfMessAccueil;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
+     */
+    private $insDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
+     */
+    private $insUser;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="MAJ_DATE", type="datetime", nullable=true)
+     */
+    private $majDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
+     */
+    private $majUser;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PF_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $pfId;
+
+
+}
+

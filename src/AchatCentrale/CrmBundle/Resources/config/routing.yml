@@ -1,0 +1,9 @@
+crm_home_no_auth:
+    path:     /
+    defaults: { _controller: AchatCentraleCrmBundle:Site:Home }
+
+
+crm_home_auth:
+    path:     /home
+    defaults: { _controller: AchatCentraleCrmBundle:Site:HomeAuth }
+

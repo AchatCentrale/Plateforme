@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: "@SiteBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -18,7 +19,9 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
+    serializer:
+        enable_annotations: true
+        enabled: true
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -40,13 +43,14 @@ twig:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_mysql
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
+        default_connection:     default
+        connections:
+            default:
+                driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:           "%database_host%"
+                dbname:         "%database_name%"
+                user:           "%database_user%"
+                password:       "%database_password%"
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -66,3 +70,22 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+
+
+fos_rest:
+    routing_loader:
+        include_format: false
+    view:
+        view_response_listener: true
+    format_listener:
+        rules:
+            - { path: '^/clients', priorities: ['json'], fallback_format: 'json' }
+            - { path: '^/users', priorities: ['json'], fallback_format: 'json' }
+            - { path: '^/', priorities: [ 'text/html', '*/*'], fallback_format: html, prefer_extension: true }

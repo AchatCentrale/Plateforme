@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatCentrale\CrmBundle\Entity\ClientsOptions" table="CLIENTS_OPTIONS">
+    <indexes>
+      <index name="IDX_74C57C7D3F592A49" columns="CL_ID"/>
+      <index name="IDX_74C57C7DE0662F6F" columns="OP_ID"/>
+    </indexes>
+    <id name="coId" type="integer" column="CO_ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="coReponse" type="string" column="CO_REPONSE" length="500" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="cl" target-entity="Clients" fetch="LAZY">
+      <join-columns>
+        <join-column name="CL_ID" referenced-column-name="CL_ID"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="op" target-entity="Options" fetch="LAZY">
+      <join-columns>
+        <join-column name="OP_ID" referenced-column-name="OP_ID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

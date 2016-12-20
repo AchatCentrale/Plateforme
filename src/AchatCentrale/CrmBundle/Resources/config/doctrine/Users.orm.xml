@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AchatCentrale\CrmBundle\Entity\Users" table="USERS">
+    <id name="usId" type="integer" column="US_ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="usPrenom" type="string" column="US_PRENOM" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usNom" type="string" column="US_NOM" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usMail" type="string" column="US_MAIL" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usPass" type="string" column="US_PASS" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="usNiveau" type="integer" column="US_NIVEAU" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="insDate" type="datetime" column="INS_DATE" nullable="true"/>
+    <field name="insUser" type="string" column="INS_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="majDate" type="datetime" column="MAJ_DATE" nullable="true"/>
+    <field name="majUser" type="string" column="MAJ_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>
