@@ -1,7 +1,16 @@
-<header class="ink-navigation">
-    <ul class="menu horizontal blue ">
-        <li class="push-left" ><a class="menu-header-name" href="#"> Bienvenue {{ user.usPrenom |title }} {{ user.usNom }}</a></li>
-        <li ><img class="picture-settings1" src="{{ absolute_url(asset('bundles/framework/images/sliders.png')) }}" alt=""></li>
-        <li ><img class="picture-settings2" src="{{ absolute_url(asset('bundles/framework/images/Logout.png')) }}" alt=""></li>
-    </ul>
-</header>
+<div class="mui-appbar mui--z1">
+   <div class="mui-container">
+      <table width="100%">
+         <tbody><tr class="mui--appbar-height">
+            <td class="mui--text-title"> Bienvenue {{ user.usPrenom |title }} {{ user.usNom }}</td>
+            <td align="right">
+               <ul class="mui-list--inline mui--text-body2">
+
+                  <li>  <button class="mui-btn mui-btn--fab"><i class="material-icons icons-settings">&#xE8B8;</i></button></li>
+                  <li>  <button class="mui-btn mui-btn--fab"><i class="material-icons icons-poweroff">&#xE8AC;</i></button></li>
+               </ul>
+            </td>
+         </tr>
+         </tbody></table>
+   </div>
+</div>

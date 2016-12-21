@@ -2,8 +2,14 @@
 
 
 {% block body %}
-    {{ include ('@Site/Header/Header_home.html.twig', {user: user}) }}
 
+    {#include bandeau header#}
+    {{ include ('SiteBundle:Header:Header_home.html.twig', {user: user}) }}
+
+
+
+    {#include element interface#}
+    {{ include('SiteBundle:ui-element:home-ui.html.twig') }}
 
 
 
@@ -12,3 +18,21 @@
 
 
 {% endblock %}
+
+ {% block javascripts %}
+     <script>
+
+         var settings_btn = document.querySelector('.picture-settings1');
+         var logout_btn = document.querySelector('.picture-settings2');
+
+         settings_btn.addEventListener('click', function (e) {
+             console.log(settings_btn);
+         });
+
+
+         logout_btn.addEventListener('click', function (e) {
+             console.log(settings_btn);
+         });
+
+     </script>
+ {% endblock %}

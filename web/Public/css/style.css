@@ -42,15 +42,51 @@ h1{
 .picture-settings1{
     width: 88%;
     margin-top: 27px;
-    margin-left: 3800%;
+    margin-left: 3700%;
 }
 
 .picture-settings2{
     width: 88%;
     margin-top: 27px;
-    margin-left: 3875%;
+    margin-left: 3765%;
 }
 
+.cursor{
+    cursor: pointer;
+}
+
+
+.picture-settings1:hover{
+    background-color: #1f5dc1;
+
+}
+
+.picture-settings2:hover{
+    background-color: #1f5dc1;
+
+}
+
+
+.icons-settings{
+    margin-top: 16px;
+    margin-right: 2px;
+    color: steelblue;
+}
+
+
+
+.icons-poweroff{
+    margin-top: 16px;
+    color: steelblue;
+    font-weight: bold;
+}
+
+.card{
+    width: 68%;
+    height: 500px;
+    margin-left: 100px;
+    margin-top: 92px;
+}
 
 
 
