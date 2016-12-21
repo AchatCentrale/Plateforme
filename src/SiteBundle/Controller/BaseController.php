@@ -69,7 +69,6 @@ class BaseController extends Controller
         //rendu
         return $this->render('SiteBundle:Base:index.html.twig', array(
             'form' => $form->createView(),
-
         ));
     }
 
