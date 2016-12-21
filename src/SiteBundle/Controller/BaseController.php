@@ -14,6 +14,21 @@ class BaseController extends Controller
 {
     public function indexAction(Request $request)
     {
+        $IsConnected = $request->cookies->get('Is_connected');
+
+
+        if($IsConnected == 1){
+
+           $response = new Response();
+           $response->headers->clearCookie('Is_connected');
+           $response->send();
+        }
+
+
+
+
+
+
         // Creation d'un formulaire sans entité , pour l'auth
         $defaultData = array('Auth' => 'Données reçu du formulaire - HomeAction');
         $form = $this->createFormBuilder($defaultData)

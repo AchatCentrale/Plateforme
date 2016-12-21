@@ -16,7 +16,6 @@
 
 
 
-
 {% endblock %}
 
  {% block javascripts %}
@@ -32,7 +31,10 @@
 
          logout_btn.addEventListener('click', function (e) {
              console.log(settings_btn);
+             window.location.replace("{{ path('index') }}");
+
          });
+
 
      </script>
  {% endblock %}
