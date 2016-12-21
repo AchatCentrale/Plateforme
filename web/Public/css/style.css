@@ -45,7 +45,17 @@ h1{
     cursor: pointer;
 }
 
+a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
 
+a:hover {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 .icons-settings{
     margin-top: 16px;
