@@ -2,6 +2,7 @@
 
 namespace SiteBundle\Controller;
 
+use AchatCentrale\CrmBundle\Form\UsersType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -104,14 +105,10 @@ class BaseController extends Controller
 
     public function indexAuthAction(Request $request)
     {
-
-
         $IsConnected = $request->cookies->get('Is_connected');
 
         if($IsConnected == 1){
             $IdUser = $request->cookies->get('token_user');
-
-
 
             $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->find($IdUser);
             dump($IsConnected);
@@ -122,10 +119,55 @@ class BaseController extends Controller
         }else {
             return $this->redirectToRoute('index');
         }
-
-
-
     }
 
+
+
+    public function settingsAction(Request $request)
+    {
+
+
+        $IdUser = $request->cookies->get('token_user');
+        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->find($IdUser);
+
+
+        $form = $this->get('form.factory')->create(UsersType::class, $user);
+
+
+
+
+
+
+
+        // le formulaire est recuperer dans la request
+        $form->handleRequest($request);
+
+
+        //traitement du formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($data);
+            $em->flush();
+
+            $request->getSession()->getFlashBag()->add('notice', 'Profil sauvegardé');
+
+
+        }
+
+
+
+
+
+
+
+
+
+        return $this->render('@Site/Base/settings.html.twig', array(
+            "user" => $user,
+            'form' => $form->createView(),
+        ));
+    }
 
 }

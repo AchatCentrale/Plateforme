@@ -3,7 +3,6 @@
 namespace AchatCentrale\CrmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Users
@@ -11,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Table(name="USERS")
  * @ORM\Entity
  */
-class Users implements UserInterface
+class Users
 {
     /**
      * @var string
