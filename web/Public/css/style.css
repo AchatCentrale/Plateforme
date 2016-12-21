@@ -83,11 +83,16 @@ h1{
 
 .card{
     width: 68%;
-    height: 500px;
+    height: 300px;
     margin-left: 100px;
     margin-top: 92px;
 }
 
+
+.logo-crm{
+    width: 50%;
+    margin: 8% 0% 0% 24%;
+}
 
 
 
