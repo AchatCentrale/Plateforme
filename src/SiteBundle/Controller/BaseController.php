@@ -50,13 +50,24 @@ class BaseController extends Controller
 
                     'value' =>  $user[0]->getUsId(), // Valeur du cookie
 
-                    'time' => time() + 3600 * 24 * 7 // Durée de vie du cookie
 
                 );
+
+                $cookie_isConnected = array(
+
+                    'name' => 'Is_connected', // Nom du cookie
+
+                    'value' =>  true, // Valeur du cookie
+
+
+                );
+
                 $response = new Response();
-                $cookie = new Cookie($cookie_info['name'], $cookie_info['value'], $cookie_info['time']);
+                $cookie = new Cookie($cookie_info['name'], $cookie_info['value']);
+                $cookie_isConnected = new Cookie($cookie_isConnected['name'], $cookie_isConnected['value']);
 
                 $response->headers->setCookie($cookie);
+                $response->headers->setCookie($cookie_isConnected);
 
                 $response->send();
 
@@ -80,16 +91,25 @@ class BaseController extends Controller
     {
 
 
-        $IdUser = $request->cookies->get('token_user');
+        $IsConnected = $request->cookies->get('Is_connected');
+
+        if($IsConnected == 1){
+            $IdUser = $request->cookies->get('token_user');
 
 
 
-        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->find($IdUser);
+            $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->find($IdUser);
+            dump($IsConnected);
+
+            return $this->render('@Site/Base/home.html.twig', array(
+                "user" => $user
+            ));
+        }else {
+            return $this->redirectToRoute('index');
+        }
 
 
-        return $this->render('@Site/Base/home.html.twig', array(
-            "user" => $user
-        ));
+
     }
 
 
