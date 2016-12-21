@@ -2,7 +2,7 @@
    <div class="mui-container">
       <table width="100%">
          <tbody><tr class="mui--appbar-height">
-            <td class="mui--text-title"> <i class="material-icons icon-online">&#xE3A6;</i> <span>Bienvenue {{ user.usPrenom |title }} {{ user.usNom }}</span></td>
+            <td class="mui--text-title"><a href="{{ path('index_auth') }}"><i class="material-icons icon-online">&#xE3A6;</i> <span>Bienvenue {{ user.usPrenom |title }} {{ user.usNom }}</span></a></td>
             <td align="right">
                <ul class="mui-list--inline mui--text-body2">
 
@@ -15,3 +15,24 @@
       </table>
    </div>
 </div>
+
+
+<script>
+    var settings_btn = document.querySelector('.picture-settings1');
+    var logout_btn = document.querySelector('.picture-settings2');
+
+    settings_btn.addEventListener('click', function (e) {
+        console.log(settings_btn);
+        window.location.replace("{{ path('settings') }}");
+
+    });
+
+
+    logout_btn.addEventListener('click', function (e) {
+        console.log(settings_btn);
+        window.location.replace("{{ path('index') }}");
+
+    });
+
+    console.log(logout_btn, "je suis un boss")
+</script>

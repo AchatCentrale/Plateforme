@@ -1,0 +1,83 @@
+{% include 'base.html.twig' %}
+
+
+{% block body %}
+
+    {#include bandeau header#}
+    {{ include ('SiteBundle:Header:Header_home.html.twig', {user: user}) }}
+
+
+
+
+
+
+
+        {{ form_start(form, {'attr': {'class': 'ink-form login-group-input'}}) }}
+        {{ form_errors(form) }}
+
+        <div class="control-group align-left">
+            {{ form_label(form.usPrenom) }}
+            {{ form_errors(form.usPrenom) }}
+            <div class="control">
+                {{ form_widget(form.usPrenom) }}
+            </div>
+        </div>
+        <br>
+        <div class="control-group align-left ">
+            {{ form_label(form.usNom) }}
+            {{ form_errors(form.usNom) }}
+            <div class="control">
+                {{ form_widget(form.usNom) }}
+            </div>
+        </div>
+        <div class="control-group align-left ">
+            {{ form_label(form.usMail) }}
+            {{ form_errors(form.usMail) }}
+            <div class="control">
+                {{ form_widget(form.usMail) }}
+            </div>
+        </div>
+        <div class="control-group align-left ">
+            {{ form_label(form.usPass) }}
+            {{ form_errors(form.usPass) }}
+            <div class="control">
+                {{ form_widget(form.usPass) }}
+            </div>
+        </div>
+
+        <br>
+        <div>
+            {{ form_widget(form.Send, { 'label': 'Mettre a jour' }) }}
+        </div>
+
+        {{ form_end(form) }}
+
+
+
+
+
+
+{% endblock %}
+
+ {% block javascripts %}
+     <script>
+
+         var settings_btn = document.querySelector('.picture-settings1');
+         var logout_btn = document.querySelector('.picture-settings2');
+
+         settings_btn.addEventListener('click', function (e) {
+             console.log(settings_btn);
+             window.location.replace("{{ path('settings') }}");
+
+         });
+
+
+         logout_btn.addEventListener('click', function (e) {
+             console.log(settings_btn);
+             window.location.replace("{{ path('index') }}");
+
+         });
+
+        console.log(logout_btn)
+     </script>
+ {% endblock %}
