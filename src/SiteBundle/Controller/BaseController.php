@@ -17,10 +17,7 @@ class BaseController extends Controller
     public function indexAction(Request $request)
     {
 
-        if($request->getMethod() == "POST"){
-            return $this->redirectToRoute('index_auth', array(), 301);
 
-        }
 
         // Creation d'un formulaire sans entité , pour l'auth
         $defaultData = array('Auth' => 'Données reçu du formulaire - HomeAction');
