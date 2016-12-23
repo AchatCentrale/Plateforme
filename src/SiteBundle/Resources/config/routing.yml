@@ -14,3 +14,8 @@ settings:
 logout:
     path:     /logout
     defaults: {_controller: SiteBundle:Base:logout}
+
+
+test:
+    path:    /test
+    defaults: {_controller: SiteBundle:Base:Client}

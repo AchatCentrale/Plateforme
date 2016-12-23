@@ -4,6 +4,7 @@ namespace SiteBundle\Controller;
 
 use AchatCentrale\CrmBundle\Form\UsersType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -156,7 +157,15 @@ class BaseController extends Controller
 
         }
 
+        return $this->redirectToRoute('index');
 
+
+    }
+
+
+    public function ClientAction()
+    {
+        return $this->render('@Site/test.html.twig');
 
     }
 
