@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a91b4ac4-08f9-47be-ab0a-e4d73f7a4a6c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SiteBundle/Controller/BaseController.php" afterPath="$PROJECT_DIR$/src/SiteBundle/Controller/BaseController.php" />
     </list>
     <ignored path="AchatCentrale.iws" />
@@ -33,20 +32,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BaseController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BaseController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/BaseController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="152" column="63" lean-forward="false" selection-start-line="152" selection-start-column="63" selection-end-line="152" selection-end-column="63" />
+            <state relative-caret-position="210">
+              <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
               <folding>
-                <element signature="e#1400#1430#1#PHP" expanded="true" />
-                <element signature="e#2444#2456#0#PHP" expanded="true" />
-                <element signature="e#3171#3178#0#PHP" expanded="true" />
-                <element signature="e#3485#3515#1#PHP" expanded="true" />
-                <element signature="e#4038#4069#0#PHP" expanded="true" />
-                <element signature="e#4232#4239#0#PHP" expanded="true" />
-                <element signature="e#4607#4614#0#PHP" expanded="true" />
-                <element signature="e#4870#4892#0#PHP" expanded="true" />
+                <element signature="e#708#720#0#PHP" expanded="true" />
+                <element signature="e#1528#1558#1#PHP" expanded="true" />
+                <element signature="e#3226#3233#0#PHP" expanded="true" />
+                <element signature="e#3540#3570#1#PHP" expanded="true" />
+                <element signature="e#4093#4124#0#PHP" expanded="true" />
+                <element signature="e#4287#4294#0#PHP" expanded="true" />
+                <element signature="e#4662#4669#0#PHP" expanded="true" />
+                <element signature="e#4925#4947#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -62,7 +61,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app_dev.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app_dev.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/app_dev.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
@@ -145,8 +144,8 @@
         <option value="$PROJECT_DIR$/src/SiteBundle/Resources/views/test.html.twig" />
         <option value="$PROJECT_DIR$/src/AchatCentrale/CrmBundle/Entity/Users.php" />
         <option value="$PROJECT_DIR$/web/config.php" />
-        <option value="$PROJECT_DIR$/src/SiteBundle/Controller/BaseController.php" />
         <option value="$PROJECT_DIR$/web/app_dev.php" />
+        <option value="$PROJECT_DIR$/src/SiteBundle/Controller/BaseController.php" />
       </list>
     </option>
   </component>
@@ -674,12 +673,12 @@
       <workItem from="1482399102114" duration="74000" />
       <workItem from="1482400244638" duration="1295000" />
       <workItem from="1482424729956" duration="796000" />
-      <workItem from="1482485307145" duration="6429000" />
+      <workItem from="1482485307145" duration="6551000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69286000" />
+    <option name="totallyTimeSpent" value="69408000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1113,29 +1112,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/BaseController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="152" column="63" lean-forward="false" selection-start-line="152" selection-start-column="63" selection-end-line="152" selection-end-column="63" />
-          <folding>
-            <element signature="e#1400#1430#1#PHP" expanded="true" />
-            <element signature="e#2444#2456#0#PHP" expanded="true" />
-            <element signature="e#3171#3178#0#PHP" expanded="true" />
-            <element signature="e#3485#3515#1#PHP" expanded="true" />
-            <element signature="e#4038#4069#0#PHP" expanded="true" />
-            <element signature="e#4232#4239#0#PHP" expanded="true" />
-            <element signature="e#4607#4614#0#PHP" expanded="true" />
-            <element signature="e#4870#4892#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/app_dev.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="14" column="39" lean-forward="false" selection-start-line="14" selection-start-column="39" selection-end-line="14" selection-end-column="39" />
           <folding>
             <element signature="e#7#52#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SiteBundle/Controller/BaseController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="22" column="9" lean-forward="false" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+          <folding>
+            <element signature="e#708#720#0#PHP" expanded="true" />
+            <element signature="e#1528#1558#1#PHP" expanded="true" />
+            <element signature="e#3226#3233#0#PHP" expanded="true" />
+            <element signature="e#3540#3570#1#PHP" expanded="true" />
+            <element signature="e#4093#4124#0#PHP" expanded="true" />
+            <element signature="e#4287#4294#0#PHP" expanded="true" />
+            <element signature="e#4662#4669#0#PHP" expanded="true" />
+            <element signature="e#4925#4947#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
