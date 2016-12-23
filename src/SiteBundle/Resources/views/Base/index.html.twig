@@ -12,7 +12,14 @@
     <div class="login-group">
 
 
-        {{ form_start(form, {'attr': {'class': 'ink-form login-group-input'}}) }}
+        {{ form_start(form,
+            {
+                'attr': {'class': 'ink-form login-group-input'},
+                'action': "/"
+            }
+        )
+
+        }}
         {{ form_errors(form) }}
 
         <div class="control-group align-left">

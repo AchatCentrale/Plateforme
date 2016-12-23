@@ -32,7 +32,7 @@ class BaseController extends Controller
 
         //traitement du formulaire
         if ($form->isSubmitted() && $form->isValid() && $request->getMethod() == "POST") {
-            // data is an array with "name", "email", and "message" keys
+
             $data = $form->getData();
             $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array('usMail' => $data['email']));
             if ($data['Password'] == $user[0]->getUsPass()) {
