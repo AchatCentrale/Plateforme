@@ -38,16 +38,12 @@ class BaseController extends Controller
             $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array('usMail' => $data['email']));
             if ($data['Password'] == $user[0]->getUsPass()) {
                 // si toute les infos sont correcte , l'user est connecté
-                //TODO: Collé un cookies a l'utilisateur fraichement ajouté
-
                 $cookie_info = array(
 
                     'name' => 'token_user', // Nom du cookie
 
                     'value' =>  $user[0]->getUsId(), // Valeur du cookie
-
-
-                );
+                    );
 
                 $cookie_isConnected = array(
 
@@ -67,7 +63,7 @@ class BaseController extends Controller
 
                 $response->send();
 
-                return $this->redirectToRoute('index_auth', array(), 301);
+                return $this->redirectToRoute('index_auth', array(), 307);
 
             }
 
@@ -96,7 +92,8 @@ class BaseController extends Controller
                 "user" => $user
             ));
         }else {
-            return $this->redirectToRoute('index', array(), 301);
+            //it work
+            return $this->redirectToRoute('index', array(), 307);
         }
     }
 
@@ -133,7 +130,7 @@ class BaseController extends Controller
                 'form' => $form->createView(),
             ));
         }else {
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('index', array(), 307);
         }
 
 
@@ -153,7 +150,7 @@ class BaseController extends Controller
             $response = new Response();
             $response->headers->clearCookie('Is_connected');
             $response->send();
-            return $this->redirectToRoute('index', array(), 301);
+            return $this->redirectToRoute('index', array(), 307);
 
         }
 
