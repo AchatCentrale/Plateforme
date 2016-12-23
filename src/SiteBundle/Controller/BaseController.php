@@ -152,9 +152,10 @@ class BaseController extends Controller
             $response = new Response();
             $response->headers->clearCookie('Is_connected');
             $response->send();
+            return $this->redirectToRoute('index');
+
         }
 
-        return $this->redirectToRoute('index');
 
 
     }
