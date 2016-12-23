@@ -18,7 +18,7 @@ class BaseController extends Controller
     {
 
         if($request->getMethod() == "POST"){
-            return $this->redirectToRoute('index_auth', array(), 307);
+            return $this->redirectToRoute('index_auth', array(), 301);
 
         }
 
