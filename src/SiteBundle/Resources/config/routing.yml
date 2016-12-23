@@ -10,3 +10,7 @@ index_auth:
 settings:
     path:     /settings
     defaults: {_controller: SiteBundle:Base:settings}
+
+logout:
+    path:     /logout
+    defaults: {_controller: SiteBundle:Base:logout}
