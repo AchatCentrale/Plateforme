@@ -89,5 +89,14 @@ a:hover {
 }
 
 
+.float-group{
+    margin: 14% 7% 1% 1%;
+    position: absolute;
+    left: 92%;
+}
 
 
+.float-group i {
+    margin-top: 16px;
+    font-weight: bold;
+}
