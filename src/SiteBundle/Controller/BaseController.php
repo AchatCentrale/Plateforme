@@ -165,7 +165,13 @@ class BaseController extends Controller
 
     public function ClientAction()
     {
-        return $this->render('@Site/test.html.twig');
+        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findAll();
+
+
+
+        return $this->render('@Site/test.html.twig', array(
+            "user" => $user
+        ));
 
     }
 
