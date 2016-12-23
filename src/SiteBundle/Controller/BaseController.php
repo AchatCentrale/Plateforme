@@ -67,7 +67,7 @@ class BaseController extends Controller
 
                 $response->send();
 
-                return $this->redirectToRoute('index_auth');
+                return $this->redirectToRoute('index_auth', array(), 301);
 
             }
 
@@ -96,7 +96,7 @@ class BaseController extends Controller
                 "user" => $user
             ));
         }else {
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('index', array(), 301);
         }
     }
 
@@ -153,7 +153,7 @@ class BaseController extends Controller
             $response = new Response();
             $response->headers->clearCookie('Is_connected');
             $response->send();
-            return $this->redirectToRoute('index');
+            return $this->redirectToRoute('index', array(), 301);
 
         }
 
