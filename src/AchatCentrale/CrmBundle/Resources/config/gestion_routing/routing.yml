@@ -1,0 +1,12 @@
+#View all the client
+gestion_home:
+    defaults: { _controller: AchatCentraleCrmBundle:Site:Gestion }
+    path:     /
+
+
+
+#View all the client
+vue_alll:
+    defaults: { _controller: AchatCentraleCrmBundle:Site:ViewAllClient }
+    path:     /client
+
