@@ -5,6 +5,7 @@ namespace SiteBundle\Controller;
 use AchatCentrale\CrmBundle\Form\UsersType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -39,43 +40,22 @@ class BaseController extends Controller
             $data = $form->getData();
             $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array('usMail' => $data['email']));
             if ($data['Password'] == $user[0]->getUsPass()) {
-                // si toute les infos sont correcte , l'user est connecté
-                $cookie_info = array(
-
-                    'name' => 'token_user', // Nom du cookie
-
-                    'value' =>  $user[0]->getUsId(), // Valeur du cookie
-                    );
-
-                $cookie_isConnected = array(
-
-                    'name' => 'Is_connected', // Nom du cookie
-
-                    'value' =>  true, // Valeur du cookie
 
 
-                );
+                $response = new RedirectResponse('/home', 302);
+                $response->headers->setCookie(new Cookie("token_user", $user[0]->getUsId(), time() + (3600 * 48) ));
+                $response->headers->setCookie(new Cookie("Is_connected", 'true', time() + (3600 * 48) ));
 
-                $response = new Response();
-                $cookie = new Cookie($cookie_info['name'], $cookie_info['value']);
-                $cookie_isConnected = new Cookie($cookie_isConnected['name'], $cookie_isConnected['value']);
 
-                $response->headers->setCookie($cookie);
-                $response->headers->setCookie($cookie_isConnected);
-
-                $response->send();
+                return $response;
 
 
             }
-
         }
-
-
-
         //rendu
         return $this->render('SiteBundle:Base:index.html.twig', array(
             'form' => $form->createView(),
-            "user" => $user
+
         ));
     }
 
@@ -87,7 +67,7 @@ class BaseController extends Controller
     {
         $IsConnected = $request->cookies->get('Is_connected');
 
-        if($IsConnected == 1){
+        if($IsConnected == true){
             $IdUser = $request->cookies->get('token_user');
 
             $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->find($IdUser);
