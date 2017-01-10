@@ -1,5 +1,5 @@
-#View all the client
-gestion_home:
+#View all
+crm_home:
     defaults: { _controller: AchatCentraleCrmBundle:Site:Gestion }
     path:     /
 
@@ -9,4 +9,9 @@ gestion_home:
 vue_alll:
     defaults: { _controller: AchatCentraleCrmBundle:Site:ViewAllClient }
     path:     /client
+
+#Add_new_client
+new_client:
+    defaults: { _controller: AchatCentraleCrmBundle:Site:NewClient }
+    path:     /client/new
 

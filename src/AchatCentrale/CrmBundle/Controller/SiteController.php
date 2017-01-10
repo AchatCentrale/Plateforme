@@ -2,6 +2,8 @@
 
 namespace AchatCentrale\CrmBundle\Controller;
 
+use AchatCentrale\CrmBundle\Entity\Clients;
+use AchatCentrale\CrmBundle\Form\ClientsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -35,6 +37,23 @@ class SiteController extends Controller
 
         return $this->render('@AchatCentraleCrm/Clients/show.client.html.twig', array(
             "client" => $clients
+        ));
+
+
+    }
+
+    public function NewClientAction ()
+    {
+
+        $clients = new Clients();
+
+        $form = $this->get('form.factory')->create(ClientsType::class, $clients);
+
+
+
+        return $this->render('@AchatCentraleCrm/Clients/new.client.html.twig', array(
+            'form' => $form->createView()
+
         ));
 
 

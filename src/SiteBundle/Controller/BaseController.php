@@ -88,7 +88,7 @@ class BaseController extends Controller
 
         $IsConnected = $request->cookies->get('Is_connected');
 
-        if($IsConnected == 1){
+        if($IsConnected == true){
             $IdUser = $request->cookies->get('token_user');
             $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->find($IdUser);
 
@@ -144,16 +144,6 @@ class BaseController extends Controller
     }
 
 
-    public function ClientAction()
-    {
-        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findAll();
 
-
-
-        return $this->render('@Site/test.html.twig', array(
-            "user" => $user
-        ));
-
-    }
 
 }
