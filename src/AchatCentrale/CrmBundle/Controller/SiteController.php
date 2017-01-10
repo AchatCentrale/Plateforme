@@ -2,6 +2,8 @@
 
 namespace AchatCentrale\CrmBundle\Controller;
 
+use AchatCentrale\CrmBundle\Entity\Clients;
+use AchatCentrale\CrmBundle\Form\ClientsType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -13,85 +15,49 @@ use Symfony\Component\HttpFoundation\Response;
 class SiteController extends Controller
 {
 
-    public function HomeAction(Request $request)
+
+
+    public function GestionAction(Request $request)
     {
 
 
-
-        // Creation d'un formulaire sans entité , pour l'auth
-        $defaultData = array('Auth' => 'Données reçu du formulaire - HomeAction');
-        $form = $this->createFormBuilder($defaultData)
-            ->add('email', EmailType::class)
-            ->add('Password', PasswordType::class)
-            ->add('send', SubmitType::class)
-            ->getForm();
+        return $this->render('@AchatCentraleCrm/Default/index.html.twig');
 
 
+    }
 
+    public function ViewAllClientAction(Request $request)
+    {
 
-
-        // le formulaire est recuperer dans la request
-        $form->handleRequest($request);
-
-
-        //traitement du formulaire
-        if ($form->isSubmitted() && $form->isValid()) {
-            // data is an array with "name", "email", and "message" keys
-            $data = $form->getData();
+        $clients = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
 
 
 
-            $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array('usMail' =>$data['email']  ));
+        dump($clients);
+
+        return $this->render('@AchatCentraleCrm/Clients/show.client.html.twig', array(
+            "client" => $clients
+        ));
 
 
-            if($data['Password'] == $user[0]->getUsPass()){
-                // si toute les infos sont correcte , l'user est connecté
-                //TODO: Collé un cookies a l'utilisateur fraichement ajouté
+    }
 
-                $cookie_info = array(
+    public function NewClientAction ()
+    {
 
-                    'name' => 'token_user', // Nom du cookie
+        $clients = new Clients();
 
-                    'value' => 'Valeur du cookie', // Valeur du cookie
+        $form = $this->get('form.factory')->create(ClientsType::class, $clients);
 
-                    'time' => time() + 3600 * 24 * 7 // Durée de vie du cookie
 
-                );
-                $response = new Response();
-                $cookie = new Cookie($cookie_info['name'], $cookie_info['value'], $cookie_info['time']);
 
-                $response->headers->setCookie($cookie);
-
-                $response->send();
-
-                return $this->redirectToRoute('crm_home_auth');
-
-            }
-
-        }
-
-        //rendu
-        return $this->render('AchatCentraleCrmBundle:Default:index.html.twig', array(
-            'form' => $form->createView(),
+        return $this->render('@AchatCentraleCrm/Clients/new.client.html.twig', array(
+            'form' => $form->createView()
 
         ));
+
+
     }
-
-
-
-
-    public function HomeAuthAction()
-    {
-
-        dump($this->getUser());
-
-        return $this->render('AchatCentraleCrmBundle:AuthViews:index.html.twig');
-    }
-
-
-
-
-
 
 
 }

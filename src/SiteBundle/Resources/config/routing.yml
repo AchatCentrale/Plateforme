@@ -1,8 +1,6 @@
 index:
     path:     /
     defaults: { _controller: SiteBundle:Base:index }
-
-
 index_auth:
     path:     /home
     defaults: { _controller: SiteBundle:Base:indexAuth }

@@ -3,15 +3,15 @@ site:
     prefix:   /
 
 achat_centrale_crm:
-    resource: "@AchatCentraleCrmBundle/Resources/config/routing.yml"
+    resource: "@AchatCentraleCrmBundle/Resources/config/crm_routing/routing.yml"
     prefix:   /crm
 
 
-users:
-    type:   rest
-    resource: "@AchatCentraleCrmBundle/Controller/UserController.php"
-
-
-clients:
-    type:   rest
-    resource: "@AchatCentraleCrmBundle/Controller/ClientController.php"
+#users:
+#    type:   rest
+#    resource: "@AchatCentraleCrmBundle/Controller/UserController.php"
+#
+#
+#clients:
+#    type:   rest
+#    resource: "@AchatCentraleCrmBundle/Controller/ClientController.php"

@@ -1,0 +1,56 @@
+{% include 'base.html.twig' %}
+
+
+{% block body %}
+
+    <div class="header-gestion">
+        <h1>Gestion client</h1>
+        <div class="gestion-btn-group">
+            <button class="ink-button green"><a href="{{ path('new_client') }}">Nouveau client</a></button>
+            <button class="ink-button red">Supprimer un client</button>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="container">
+        <table class="ink-table hover">
+            <thead>
+            <tr>
+                <th class="align-left"><input type="checkbox"></th>
+                <th class="align-left">ID</th>
+                <th class="align-left">Raison social</th>
+                <th class="align-left">adresse</th>
+                <th class="align-left">ville</th>
+                <th class="align-left">code postal</th>
+                <th class="align-left">Modifier</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for clients in client %}
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>{{ clients.clId }}</td>
+                    <td>{{  clients.clRaisonsoc }}</td>
+                    <td>{{  clients.clAdresse1 }}</td>
+                    <td>{{  clients.clVille }}</td>
+                    <td>{{  clients.clCp }}</td>
+
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+
