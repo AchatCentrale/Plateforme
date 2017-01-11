@@ -51,7 +51,7 @@ class ClientsType extends AbstractType
                 "label" => "Le numero de téléphone du client",
                 "required" => false
             ))
-            ->add('clFax', NumberType::class, array(
+            ->add('clFax', TextType::class, array(
                 "label" => "Le fax du client",
                 "required" => false
             ))

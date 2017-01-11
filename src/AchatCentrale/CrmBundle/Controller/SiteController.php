@@ -66,13 +66,48 @@ class SiteController extends Controller
 
 
 
-    return $this->render('@AchatCentraleCrm/Clients/new.client.html.twig', array(
-        'form' => $form->createView()
+        return $this->render('@AchatCentraleCrm/Clients/new.client.html.twig', array(
+            'form' => $form->createView()
 
-    ));
+        ));
 
 
-}
+    }
+
+
+
+    public function UpdateClientAction (Request $request, $id)
+    {
+
+
+        $clients = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findOneBy(array("clId" => $id));
+
+
+        $form = $this->get('form.factory')->create(ClientsType::class, $clients);
+
+        dump($clients);
+
+        // le formulaire est recuperer dans la request
+        $form->handleRequest($request);
+
+
+        //traitement du formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            dump($data);
+
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($data);
+            $em->flush();
+        }
+
+
+        return $this->render('@AchatCentraleCrm/Clients/update.client.html.twig', array(
+            'form' => $form->createView()
+
+        ));
+    }
 
 
 }
