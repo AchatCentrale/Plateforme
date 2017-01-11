@@ -94,4 +94,12 @@ class Groupe
     {
         return $this->grId;
     }
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getGrDescr();
+    }
 }

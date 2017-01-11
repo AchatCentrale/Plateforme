@@ -42,22 +42,37 @@ class SiteController extends Controller
 
     }
 
-    public function NewClientAction ()
+    public function NewClientAction (Request $request)
     {
 
         $clients = new Clients();
 
         $form = $this->get('form.factory')->create(ClientsType::class, $clients);
 
+        // le formulaire est recuperer dans la request
+        $form->handleRequest($request);
 
 
-        return $this->render('@AchatCentraleCrm/Clients/new.client.html.twig', array(
-            'form' => $form->createView()
+        //traitement du formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            dump($data);
 
-        ));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($data);
+            $em->flush();
+        }
 
 
-    }
+
+    return $this->render('@AchatCentraleCrm/Clients/new.client.html.twig', array(
+        'form' => $form->createView()
+
+    ));
+
+
+}
 
 
 }

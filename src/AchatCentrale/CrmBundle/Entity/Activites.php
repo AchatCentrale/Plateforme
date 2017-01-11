@@ -94,4 +94,13 @@ class Activites
     {
         return $this->acId;
     }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getAcDescr();
+    }
 }

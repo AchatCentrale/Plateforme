@@ -891,13 +891,15 @@ class Clients
     /**
      * Set insDate
      *
-     * @param \DateTime $insDate
      *
      * @return Clients
      */
-    public function setInsDate($insDate)
+    public function setInsDate()
     {
-        $this->insDate = $insDate;
+        $now = date(DATE_RFC2822);
+
+
+        $this->insDate = $now;
 
         return $this;
     }
@@ -909,6 +911,8 @@ class Clients
      */
     public function getInsDate()
     {
+
+
         return $this->insDate;
     }
 
@@ -993,4 +997,5 @@ class Clients
     {
         return $this->clId;
     }
+
 }

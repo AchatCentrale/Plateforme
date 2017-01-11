@@ -125,4 +125,12 @@ class Pays
     {
         return $this->paId;
     }
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getPaDescr();
+    }
 }
