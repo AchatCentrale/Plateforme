@@ -15,3 +15,7 @@ new_client:
     defaults: { _controller: AchatCentraleCrmBundle:Site:NewClient }
     path:     /client/new
 
+#Update_client
+update_client:
+    defaults: { _controller: AchatCentraleCrmBundle:Site:UpdateClient }
+    path:     /client/update/{id}
