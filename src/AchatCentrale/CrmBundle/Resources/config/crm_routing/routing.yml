@@ -19,3 +19,9 @@ new_client:
 update_client:
     defaults: { _controller: AchatCentraleCrmBundle:Site:UpdateClient }
     path:     /client/update/{id}
+
+
+#Delete_client
+delete_client:
+    defaults: { _controller: AchatCentraleCrmBundle:Site:DeleteClient}
+    path:     /client/delete/{id}

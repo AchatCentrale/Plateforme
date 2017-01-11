@@ -32,6 +32,7 @@
                 <th class="align-left">ville</th>
                 <th class="align-left">code postal</th>
                 <th class="align-left">Modifier</th>
+                <th class="align-left">Supprimer</th>
             </tr>
             </thead>
             <tbody>
@@ -45,6 +46,7 @@
                     <td>{{  clients.clVille }}</td>
                     <td>{{  clients.clCp }}</td>
                     <td><a href="{{ path('update_client', { 'id': clients.clId }) }}"><img src="{{ asset('Public/images/modify.png') }}" alt="modifier"></a></td>
+                    <td><a href="{{ path('delete_client', { 'id': clients.clId }) }}"><img src="{{ asset('Public/images/delete.png') }}" alt="delete"></a></td>
 
                 </tr>
 
