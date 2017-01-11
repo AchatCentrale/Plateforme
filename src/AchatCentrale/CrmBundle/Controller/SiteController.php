@@ -56,9 +56,6 @@ class SiteController extends Controller
         //traitement du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            dump($data);
-
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($data);
             $em->flush();
@@ -103,7 +100,7 @@ class SiteController extends Controller
         $em->remove($clients);
         $em->flush();
 
-        $response = $this->forward('AchatCentraleCrmBundle:Site:ViewAllClient');
+        $response = $this->redirectToRoute('vue_alll');
 
         return $response;
     }
