@@ -16,4 +16,5 @@ logout:
 
 test:
     path:    /test
-    defaults: {_controller: SiteBundle:Base:Client}
+    defaults: {_controller: SiteBundle:Base:test}
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="SiteBundle\Entity\ProduitsPhotos" table="PRODUITS_PHOTOS">
+    <indexes>
+      <index name="IDX_35378605A8DFE7B7" columns="PR_ID"/>
+    </indexes>
+    <id name="ppId" type="integer" column="PP_ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ppFichier" type="string" column="PP_FICHIER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ppType" type="string" column="PP_TYPE" length="50" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="insDate" type="datetime" column="INS_DATE" nullable="true"/>
+    <field name="insUser" type="string" column="INS_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="majDate" type="datetime" column="MAJ_DATE" nullable="true"/>
+    <field name="majUser" type="string" column="MAJ_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="pr" target-entity="Produits" fetch="LAZY">
+      <join-columns>
+        <join-column name="PR_ID" referenced-column-name="PR_ID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
