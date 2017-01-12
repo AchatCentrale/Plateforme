@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="SiteBundle\Entity\ProduitsPromo" table="PRODUITS_PROMO">
+    <indexes>
+      <index name="IDX_29E091BEA8DFE7B7" columns="PR_ID"/>
+    </indexes>
+    <id name="ppId" type="integer" column="PP_ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="soId" type="integer" column="SO_ID" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="ppOrdre" type="integer" column="PP_ORDRE" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="ppDate" type="datetime" column="PP_DATE" nullable="true"/>
+    <field name="insDate" type="datetime" column="INS_DATE" nullable="true"/>
+    <field name="insUser" type="string" column="INS_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="pr" target-entity="Produits" fetch="LAZY">
+      <join-columns>
+        <join-column name="PR_ID" referenced-column-name="PR_ID"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

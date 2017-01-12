@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="SiteBundle\Entity\Filtres" table="FILTRES">
+    <id name="fiId" type="integer" column="FI_ID">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="soId" type="integer" column="SO_ID" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="fiCode" type="string" column="FI_CODE" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="fiValeur" type="string" column="FI_VALEUR" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="insDate" type="datetime" column="INS_DATE" nullable="true"/>
+    <field name="insUser" type="string" column="INS_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="majDate" type="datetime" column="MAJ_DATE" nullable="true"/>
+    <field name="majUser" type="string" column="MAJ_USER" length="100" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

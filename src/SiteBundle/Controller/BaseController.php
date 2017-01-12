@@ -143,6 +143,35 @@ class BaseController extends Controller
 
     }
 
+    public function testAction()
+    {
+
+        $rayon = $this->get('doctrine')
+            ->getRepository('SiteBundle:Rayons', "centrale_produits")
+            ->findAll()
+        ;
+
+        $categ = $this->get('doctrine')
+            ->getRepository('AchatCentraleCrmBundle:CategRayons')
+            ->findAll()
+        ;
+
+
+
+
+        $result =  $categ = $this->get('doctrine')
+            ->getRepository('AchatCentraleCrmBundle:CategRayons')
+            ->findBy(array('raId' => $categ->getRaId()))
+        ;
+        dump($result);
+
+        return $this->render('@Site/test.html.twig', array(
+            'rayon' => $rayon,
+            'categ' => $categ
+        ));
+
+    }
+
 
 
 
