@@ -147,3 +147,7 @@ td img{
     width: 100%;
     margin: 0 auto;
 }
+
+.error-login p{
+    margin: 10px;
+}

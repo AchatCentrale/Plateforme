@@ -38,38 +38,32 @@ class BaseController extends Controller
     public function settingsAction(Request $request)
     {
 
-        $IsConnected = $request->cookies->get('Is_connected');
+        $userActual = $this->get('security.token_storage')->getToken()->getUser();
 
-        if($IsConnected == true){
-            $IdUser = $request->cookies->get('token_user');
-            $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->find($IdUser);
-
-
-            $form = $this->get('form.factory')->create(UsersType::class, $user);
+        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array("usMail" => $userActual));
+        dump($user);
+        $form = $this->get('form.factory')->create(UsersType::class, $user[0]);
 
 
-            // le formulaire est recuperer dans la request
-            $form->handleRequest($request);
+        // le formulaire est recuperer dans la request
+        $form->handleRequest($request);
 
 
-            //traitement du formulaire
-            if ($form->isSubmitted() && $form->isValid()) {
-                $data = $form->getData();
+        //traitement du formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($data);
-                $em->flush();
-            }
-
-            return $this->render('@Site/Base/settings.html.twig', array(
-                "user" => $user,
-                'form' => $form->createView(),
-            ));
-        }else {
-            return $this->redirectToRoute('index', array(), 307);
+           dump($data);
         }
 
 
+
+
+
+
+        return $this->render('@Site/Base/settings.html.twig', array(
+            'form' => $form->createView()
+        ));
 
 
 
