@@ -4,7 +4,7 @@
          <tbody>
          <tr class="mui--appbar-height">
             <td class="mui--text-title">
-                <a id="title-welcome" href="{{ path('index_auth') }}"><i class="material-icons icon-online">&#xE3A6;</i> <span>Bienvenue {{ user.usPrenom |title }} {{ user.usNom }}</span></a></td>
+                <a id="title-welcome" href="{{ path('index_auth') }}"><i class="material-icons icon-online">&#xE3A6;</i> <span>Bienvenue {{ app.user }} </span></a></td>
             <td align="right">
                <ul class="mui-list--inline mui--text-body2">
 
@@ -25,7 +25,6 @@
 
     settings_btn.addEventListener('click', function (e) {
         console.log(settings_btn);
-        console.log('salut jb')
         window.location.replace("{{ path('settings') }}");
 
     });

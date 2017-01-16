@@ -1,17 +1,16 @@
-index:
-    path:     /
-    defaults: { _controller: SiteBundle:Base:index }
+login:
+    path:   /login
+    defaults: {_controller: SiteBundle:Security:login}
+logout:
+    path:   /logout
+
 index_auth:
-    path:     /home
+    path:     /
     defaults: { _controller: SiteBundle:Base:indexAuth }
 
 settings:
     path:     /settings
     defaults: {_controller: SiteBundle:Base:settings}
-
-logout:
-    path:     /logout
-    defaults: {_controller: SiteBundle:Base:logout}
 
 
 test:

@@ -26,7 +26,7 @@ class SiteController extends Controller
 
     }
 
-    public function ViewAllClientAction(Request $request)
+    public function ViewAllClientAction()
     {
 
         $clients = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
@@ -91,7 +91,8 @@ class SiteController extends Controller
 
         ));
     }
-    public function DeleteClientAction (Request $request, $id)
+
+    public function DeleteClientAction ( $id)
     {
         $clients = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findOneBy(array("clId" => $id));
 
