@@ -9,12 +9,19 @@ security:
         in_memory:
             memory:
                 users:
-                    ryan:
-                        password: ryanpass
+                    laurent@absonet.com:
+                        password: porsche
                         roles:  'ROLE_USER'
-                    admin:
-                        password: kitten
-                        roles:  'ROLE_ADMIN'
+                    araymond@achatcentrale.fr:
+                        password: azerty11
+                        roles:  'ROLE_USER'
+                    gclery@achatcentrale.fr:
+                        password: armelle
+                        roles:  'ROLE_USER'
+                    morgane@achatcentrale.fr:
+                        password: azerty
+                        roles:
+
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
