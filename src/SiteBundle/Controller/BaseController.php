@@ -3,6 +3,7 @@
 namespace SiteBundle\Controller;
 
 use AchatCentrale\CrmBundle\Form\UsersType;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -80,23 +81,9 @@ class BaseController extends Controller
     public function testAction()
     {
 
-        $rayon = $this->get('doctrine')
-            ->getRepository('SiteBundle:Rayons', "centrale_produits")
-            ->findAll()
-        ;
-
-        $categ = $this->get('doctrine')
-            ->getRepository('AchatCentraleCrmBundle:CategRayons')
-            ->findAll()
-        ;
-
-
-
-
 
         return $this->render('@Site/test.html.twig', array(
-            'rayon' => $rayon,
-            'categ' => $categ
+
         ));
 
     }
