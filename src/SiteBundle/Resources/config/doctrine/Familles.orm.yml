@@ -1,0 +1,80 @@
+SiteBundle\Entity\Familles:
+    type: entity
+    table: FAMILLES
+    indexes:
+        IDX_59A7616B90B34CA6:
+            columns:
+                - RA_ID
+    id:
+        faId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: FA_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        faNom:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: FA_NOM
+        faDescr:
+            type: text
+            nullable: true
+            length: 16
+            options:
+                fixed: false
+            column: FA_DESCR
+        faTri:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: FA_TRI
+        faTempo:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: FA_TEMPO
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    manyToOne:
+        ra:
+            targetEntity: Rayons
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                RA_ID:
+                    referencedColumnName: RA_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

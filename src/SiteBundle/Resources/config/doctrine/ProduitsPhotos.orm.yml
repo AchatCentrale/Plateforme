@@ -1,0 +1,66 @@
+SiteBundle\Entity\ProduitsPhotos:
+    type: entity
+    table: PRODUITS_PHOTOS
+    indexes:
+        IDX_35378605A8DFE7B7:
+            columns:
+                - PR_ID
+    id:
+        ppId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: PP_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        ppFichier:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: PP_FICHIER
+        ppType:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: PP_TYPE
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    manyToOne:
+        pr:
+            targetEntity: Produits
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                PR_ID:
+                    referencedColumnName: PR_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
