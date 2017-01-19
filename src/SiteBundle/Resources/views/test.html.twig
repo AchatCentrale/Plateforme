@@ -9,5 +9,15 @@
 </head>
 <body>
 
+    {% for produit in produits %}
+
+        {{ produit.faId }}<br>
+        {{ produit.foId }}<br>
+        {{ produit.insDate | date }}<br>
+        {{ produit.insUser }}<br>
+        {{ produit.majDate | date }}<br>
+        {{ produit.majUser }}<br>
+
+    {% endfor %}
 </body>
 </html>

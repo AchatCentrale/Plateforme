@@ -125,10 +125,13 @@ a:hover {
     margin: 10px;
 }
 
-.title-ui{
+.title-ui div{
     color: black;
+    margin-top: 30px;
+    margin-left: 37px;
+    font-family: avenir;
+    font-weight: 500;
 }
-
 .gestion-btn-group{
 
 }
@@ -150,4 +153,10 @@ td img{
 
 .error-login p{
     margin: 10px;
+}
+
+.menu-crm-group {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 33px;
 }
