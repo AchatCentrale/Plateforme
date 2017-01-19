@@ -15,6 +15,15 @@ class NousContacter
     /**
      * @var integer
      *
+     * @ORM\Column(name="NC_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ncId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -89,16 +98,17 @@ class NousContacter
      */
     private $ncDate;
 
+
+
     /**
-     * @var integer
+     * Get ncId
      *
-     * @ORM\Column(name="NC_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $ncId;
-
-
+    public function getNcId()
+    {
+        return $this->ncId;
+    }
 
     /**
      * Set soId
@@ -362,15 +372,5 @@ class NousContacter
     public function getNcDate()
     {
         return $this->ncDate;
-    }
-
-    /**
-     * Get ncId
-     *
-     * @return integer
-     */
-    public function getNcId()
-    {
-        return $this->ncId;
     }
 }

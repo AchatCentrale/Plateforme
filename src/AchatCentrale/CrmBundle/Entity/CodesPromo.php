@@ -15,6 +15,15 @@ class CodesPromo
     /**
      * @var integer
      *
+     * @ORM\Column(name="CP_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $cpId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -68,16 +77,17 @@ class CodesPromo
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get cpId
      *
-     * @ORM\Column(name="CP_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $cpId;
-
-
+    public function getCpId()
+    {
+        return $this->cpId;
+    }
 
     /**
      * Set soId
@@ -269,15 +279,5 @@ class CodesPromo
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get cpId
-     *
-     * @return integer
-     */
-    public function getCpId()
-    {
-        return $this->cpId;
     }
 }

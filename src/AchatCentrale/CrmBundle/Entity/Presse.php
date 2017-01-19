@@ -15,6 +15,15 @@ class Presse
     /**
      * @var integer
      *
+     * @ORM\Column(name="PP_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ppId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -110,16 +119,17 @@ class Presse
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get ppId
      *
-     * @ORM\Column(name="PP_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $ppId;
-
-
+    public function getPpId()
+    {
+        return $this->ppId;
+    }
 
     /**
      * Set soId
@@ -455,15 +465,5 @@ class Presse
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get ppId
-     *
-     * @return integer
-     */
-    public function getPpId()
-    {
-        return $this->ppId;
     }
 }

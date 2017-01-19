@@ -15,9 +15,18 @@ class ClientsUsers
     /**
      * @var integer
      *
+     * @ORM\Column(name="CC_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ccId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="PU_ID", type="integer", nullable=true)
      */
-    private $puId;
+    private $puId = '0';
 
     /**
      * @var string
@@ -73,7 +82,7 @@ class ClientsUsers
      *
      * @ORM\Column(name="CC_PASS", type="string", length=50, nullable=true)
      */
-    private $ccPass;
+    private $ccPass = '123456';
 
     /**
      * @var integer
@@ -83,18 +92,18 @@ class ClientsUsers
     private $ccNiveau;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="CIRCUIT_VALIDATION", type="boolean", nullable=false)
+     */
+    private $circuitValidation = '1';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="CC_STATUS", type="integer", nullable=true)
      */
     private $ccStatus;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="CIRCUIT_VALIDATION", type="boolean", nullable=false)
-     */
-    private $circuitValidation;
 
     /**
      * @var \DateTime
@@ -125,15 +134,6 @@ class ClientsUsers
     private $majUser;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="CC_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $ccId;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\Clients
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")
@@ -144,6 +144,16 @@ class ClientsUsers
     private $cl;
 
 
+
+    /**
+     * Get ccId
+     *
+     * @return integer
+     */
+    public function getCcId()
+    {
+        return $this->ccId;
+    }
 
     /**
      * Set puId
@@ -386,30 +396,6 @@ class ClientsUsers
     }
 
     /**
-     * Set ccStatus
-     *
-     * @param integer $ccStatus
-     *
-     * @return ClientsUsers
-     */
-    public function setCcStatus($ccStatus)
-    {
-        $this->ccStatus = $ccStatus;
-
-        return $this;
-    }
-
-    /**
-     * Get ccStatus
-     *
-     * @return integer
-     */
-    public function getCcStatus()
-    {
-        return $this->ccStatus;
-    }
-
-    /**
      * Set circuitValidation
      *
      * @param boolean $circuitValidation
@@ -431,6 +417,30 @@ class ClientsUsers
     public function getCircuitValidation()
     {
         return $this->circuitValidation;
+    }
+
+    /**
+     * Set ccStatus
+     *
+     * @param integer $ccStatus
+     *
+     * @return ClientsUsers
+     */
+    public function setCcStatus($ccStatus)
+    {
+        $this->ccStatus = $ccStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get ccStatus
+     *
+     * @return integer
+     */
+    public function getCcStatus()
+    {
+        return $this->ccStatus;
     }
 
     /**
@@ -527,16 +537,6 @@ class ClientsUsers
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get ccId
-     *
-     * @return integer
-     */
-    public function getCcId()
-    {
-        return $this->ccId;
     }
 
     /**

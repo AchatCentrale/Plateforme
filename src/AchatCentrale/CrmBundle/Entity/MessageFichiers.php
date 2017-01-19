@@ -15,6 +15,15 @@ class MessageFichiers
     /**
      * @var integer
      *
+     * @ORM\Column(name="MF_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $mfId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="MD_ID", type="integer", nullable=true)
      */
     private $mdId;
@@ -48,15 +57,6 @@ class MessageFichiers
     private $mfTempo;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="MF_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $mfId;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\MessageEntete
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\MessageEntete")
@@ -67,6 +67,16 @@ class MessageFichiers
     private $me;
 
 
+
+    /**
+     * Get mfId
+     *
+     * @return integer
+     */
+    public function getMfId()
+    {
+        return $this->mfId;
+    }
 
     /**
      * Set mdId
@@ -186,16 +196,6 @@ class MessageFichiers
     public function getMfTempo()
     {
         return $this->mfTempo;
-    }
-
-    /**
-     * Get mfId
-     *
-     * @return integer
-     */
-    public function getMfId()
-    {
-        return $this->mfId;
     }
 
     /**

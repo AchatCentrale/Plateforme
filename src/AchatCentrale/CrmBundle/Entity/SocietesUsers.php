@@ -15,6 +15,15 @@ class SocietesUsers
     /**
      * @var integer
      *
+     * @ORM\Column(name="SU_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $suId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -61,16 +70,17 @@ class SocietesUsers
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get suId
      *
-     * @ORM\Column(name="SU_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $suId;
-
-
+    public function getSuId()
+    {
+        return $this->suId;
+    }
 
     /**
      * Set soId
@@ -238,15 +248,5 @@ class SocietesUsers
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get suId
-     *
-     * @return integer
-     */
-    public function getSuId()
-    {
-        return $this->suId;
     }
 }

@@ -1,0 +1,176 @@
+AchatCentrale\CrmBundle\Entity\Societes:
+    type: entity
+    table: SOCIETES
+    id:
+        soId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: SO_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        soRaisonsoc:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_RAISONSOC
+        soContact:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_CONTACT
+        soAdresse1:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_ADRESSE1
+        soAdresse2:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_ADRESSE2
+        soCp:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_CP
+        soVille:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_VILLE
+        soPays:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_PAYS
+        soTel:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_TEL
+        soPort:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_PORT
+        soFax:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_FAX
+        soWeb:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: SO_WEB
+        soMail:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: SO_MAIL
+        soSiren:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_SIREN
+        soSiret:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_SIRET
+        soNoTva:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_NO_TVA
+        soType:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_TYPE
+        soCapital:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: SO_CAPITAL
+        soNaf:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_NAF
+        soStatus:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: SO_STATUS
+        soDatabase:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: SO_DATABASE
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    lifecycleCallbacks: {  }

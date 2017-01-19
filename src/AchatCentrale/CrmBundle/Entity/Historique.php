@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Historique
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="mail_exp", type="string", length=255, nullable=false)
@@ -36,7 +45,7 @@ class Historique
     /**
      * @var string
      *
-     * @ORM\Column(name="code_retour", type="string", length=3000, nullable=true)
+     * @ORM\Column(name="code_retour", type="string", length=2000, nullable=true)
      */
     private $codeRetour;
 
@@ -68,16 +77,17 @@ class Historique
      */
     private $bodymessage;
 
+
+
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $id;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set mailExp
@@ -269,15 +279,5 @@ class Historique
     public function getBodymessage()
     {
         return $this->bodymessage;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

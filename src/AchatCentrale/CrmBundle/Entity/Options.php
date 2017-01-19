@@ -15,6 +15,15 @@ class Options
     /**
      * @var integer
      *
+     * @ORM\Column(name="OP_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $opId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -33,16 +42,17 @@ class Options
      */
     private $opFormat;
 
+
+
     /**
-     * @var integer
+     * Get opId
      *
-     * @ORM\Column(name="OP_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $opId;
-
-
+    public function getOpId()
+    {
+        return $this->opId;
+    }
 
     /**
      * Set soId
@@ -114,15 +124,5 @@ class Options
     public function getOpFormat()
     {
         return $this->opFormat;
-    }
-
-    /**
-     * Get opId
-     *
-     * @return integer
-     */
-    public function getOpId()
-    {
-        return $this->opId;
     }
 }

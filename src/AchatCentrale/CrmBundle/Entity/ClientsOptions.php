@@ -7,18 +7,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ClientsOptions
  *
- * @ORM\Table(name="CLIENTS_OPTIONS", indexes={@ORM\Index(name="IDX_74C57C7D3F592A49", columns={"CL_ID"}), @ORM\Index(name="IDX_74C57C7DE0662F6F", columns={"OP_ID"})})
+ * @ORM\Table(name="CLIENTS_OPTIONS", indexes={@ORM\Index(name="IDX_74C57C7DE0662F6F", columns={"OP_ID"}), @ORM\Index(name="IDX_74C57C7D3F592A49", columns={"CL_ID"})})
  * @ORM\Entity
  */
 class ClientsOptions
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="CO_REPONSE", type="string", length=500, nullable=true)
-     */
-    private $coReponse;
-
     /**
      * @var integer
      *
@@ -29,14 +22,11 @@ class ClientsOptions
     private $coId;
 
     /**
-     * @var \AchatCentrale\CrmBundle\Entity\Clients
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
-     * })
+     * @ORM\Column(name="CO_REPONSE", type="string", length=500, nullable=true)
      */
-    private $cl;
+    private $coReponse;
 
     /**
      * @var \AchatCentrale\CrmBundle\Entity\Options
@@ -48,7 +38,27 @@ class ClientsOptions
      */
     private $op;
 
+    /**
+     * @var \AchatCentrale\CrmBundle\Entity\Clients
+     *
+     * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
+     * })
+     */
+    private $cl;
 
+
+
+    /**
+     * Get coId
+     *
+     * @return integer
+     */
+    public function getCoId()
+    {
+        return $this->coId;
+    }
 
     /**
      * Set coReponse
@@ -75,13 +85,27 @@ class ClientsOptions
     }
 
     /**
-     * Get coId
+     * Set op
      *
-     * @return integer
+     * @param \AchatCentrale\CrmBundle\Entity\Options $op
+     *
+     * @return ClientsOptions
      */
-    public function getCoId()
+    public function setOp(\AchatCentrale\CrmBundle\Entity\Options $op = null)
     {
-        return $this->coId;
+        $this->op = $op;
+
+        return $this;
+    }
+
+    /**
+     * Get op
+     *
+     * @return \AchatCentrale\CrmBundle\Entity\Options
+     */
+    public function getOp()
+    {
+        return $this->op;
     }
 
     /**
@@ -106,29 +130,5 @@ class ClientsOptions
     public function getCl()
     {
         return $this->cl;
-    }
-
-    /**
-     * Set op
-     *
-     * @param \AchatCentrale\CrmBundle\Entity\Options $op
-     *
-     * @return ClientsOptions
-     */
-    public function setOp(\AchatCentrale\CrmBundle\Entity\Options $op = null)
-    {
-        $this->op = $op;
-
-        return $this;
-    }
-
-    /**
-     * Get op
-     *
-     * @return \AchatCentrale\CrmBundle\Entity\Options
-     */
-    public function getOp()
-    {
-        return $this->op;
     }
 }

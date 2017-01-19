@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Societes
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="SO_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $soId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="SO_RAISONSOC", type="string", length=50, nullable=true)
@@ -143,7 +152,7 @@ class Societes
      *
      * @ORM\Column(name="SO_STATUS", type="integer", nullable=true)
      */
-    private $soStatus;
+    private $soStatus = '0';
 
     /**
      * @var string
@@ -180,16 +189,17 @@ class Societes
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get soId
      *
-     * @ORM\Column(name="SO_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $soId;
-
-
+    public function getSoId()
+    {
+        return $this->soId;
+    }
 
     /**
      * Set soRaisonsoc
@@ -765,15 +775,5 @@ class Societes
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get soId
-     *
-     * @return integer
-     */
-    public function getSoId()
-    {
-        return $this->soId;
     }
 }

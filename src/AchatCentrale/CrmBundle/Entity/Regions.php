@@ -15,6 +15,15 @@ class Regions
     /**
      * @var integer
      *
+     * @ORM\Column(name="RE_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $reId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -25,6 +34,13 @@ class Regions
      * @ORM\Column(name="RE_NOM", type="string", length=50, nullable=true)
      */
     private $reNom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="RE_POLE", type="string", length=50, nullable=true)
+     */
+    private $rePole;
 
     /**
      * @var \DateTime
@@ -54,16 +70,17 @@ class Regions
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get reId
      *
-     * @ORM\Column(name="RE_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $reId;
-
-
+    public function getReId()
+    {
+        return $this->reId;
+    }
 
     /**
      * Set soId
@@ -111,6 +128,30 @@ class Regions
     public function getReNom()
     {
         return $this->reNom;
+    }
+
+    /**
+     * Set rePole
+     *
+     * @param string $rePole
+     *
+     * @return Regions
+     */
+    public function setRePole($rePole)
+    {
+        $this->rePole = $rePole;
+
+        return $this;
+    }
+
+    /**
+     * Get rePole
+     *
+     * @return string
+     */
+    public function getRePole()
+    {
+        return $this->rePole;
     }
 
     /**
@@ -207,15 +248,5 @@ class Regions
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get reId
-     *
-     * @return integer
-     */
-    public function getReId()
-    {
-        return $this->reId;
     }
 }

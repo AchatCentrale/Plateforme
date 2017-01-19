@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Pays
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="PA_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $paId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="PA_CODE", type="string", length=50, nullable=true)
@@ -33,16 +42,17 @@ class Pays
      */
     private $paProv;
 
+
+
     /**
-     * @var integer
+     * Get paId
      *
-     * @ORM\Column(name="PA_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $paId;
-
-
+    public function getPaId()
+    {
+        return $this->paId;
+    }
 
     /**
      * Set paCode
@@ -114,23 +124,5 @@ class Pays
     public function getPaProv()
     {
         return $this->paProv;
-    }
-
-    /**
-     * Get paId
-     *
-     * @return integer
-     */
-    public function getPaId()
-    {
-        return $this->paId;
-    }
-    /**
-     * toString
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getPaDescr();
     }
 }

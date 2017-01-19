@@ -15,6 +15,15 @@ class Faq
     /**
      * @var integer
      *
+     * @ORM\Column(name="QF_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $qfId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -38,7 +47,7 @@ class Faq
      *
      * @ORM\Column(name="QF_ORDRE", type="integer", nullable=true)
      */
-    private $qfOrdre;
+    private $qfOrdre = '0';
 
     /**
      * @var \DateTime
@@ -47,16 +56,17 @@ class Faq
      */
     private $qfDate;
 
+
+
     /**
-     * @var integer
+     * Get qfId
      *
-     * @ORM\Column(name="QF_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $qfId;
-
-
+    public function getQfId()
+    {
+        return $this->qfId;
+    }
 
     /**
      * Set soId
@@ -176,15 +186,5 @@ class Faq
     public function getQfDate()
     {
         return $this->qfDate;
-    }
-
-    /**
-     * Get qfId
-     *
-     * @return integer
-     */
-    public function getQfId()
-    {
-        return $this->qfId;
     }
 }

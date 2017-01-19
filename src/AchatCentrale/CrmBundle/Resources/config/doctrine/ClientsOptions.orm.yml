@@ -1,0 +1,50 @@
+AchatCentrale\CrmBundle\Entity\ClientsOptions:
+    type: entity
+    table: CLIENTS_OPTIONS
+    indexes:
+        IDX_74C57C7DE0662F6F:
+            columns:
+                - OP_ID
+        IDX_74C57C7D3F592A49:
+            columns:
+                - CL_ID
+    id:
+        coId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: CO_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        coReponse:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+            column: CO_REPONSE
+    manyToOne:
+        op:
+            targetEntity: Options
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                OP_ID:
+                    referencedColumnName: OP_ID
+            orphanRemoval: false
+        cl:
+            targetEntity: Clients
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                CL_ID:
+                    referencedColumnName: CL_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -15,6 +15,15 @@ class Panier
     /**
      * @var integer
      *
+     * @ORM\Column(name="ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="ME_ID", type="integer", nullable=true)
      */
     private $meId;
@@ -76,15 +85,6 @@ class Panier
     private $majUser;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\Clients
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")
@@ -95,6 +95,16 @@ class Panier
     private $cl;
 
 
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set meId
@@ -310,16 +320,6 @@ class Panier
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 
     /**

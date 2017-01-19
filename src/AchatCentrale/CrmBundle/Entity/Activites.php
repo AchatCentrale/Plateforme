@@ -15,6 +15,15 @@ class Activites
     /**
      * @var integer
      *
+     * @ORM\Column(name="AC_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $acId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -26,16 +35,17 @@ class Activites
      */
     private $acDescr;
 
+
+
     /**
-     * @var integer
+     * Get acId
      *
-     * @ORM\Column(name="AC_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $acId;
-
-
+    public function getAcId()
+    {
+        return $this->acId;
+    }
 
     /**
      * Set soId
@@ -83,24 +93,5 @@ class Activites
     public function getAcDescr()
     {
         return $this->acDescr;
-    }
-
-    /**
-     * Get acId
-     *
-     * @return integer
-     */
-    public function getAcId()
-    {
-        return $this->acId;
-    }
-
-    /**
-     * toString
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getAcDescr();
     }
 }

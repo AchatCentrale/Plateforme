@@ -15,6 +15,15 @@ class Categories
     /**
      * @var integer
      *
+     * @ORM\Column(name="CatID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $catid;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -110,16 +119,17 @@ class Categories
      */
     private $catdate;
 
+
+
     /**
-     * @var integer
+     * Get catid
      *
-     * @ORM\Column(name="CatID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $catid;
-
-
+    public function getCatid()
+    {
+        return $this->catid;
+    }
 
     /**
      * Set soId
@@ -455,15 +465,5 @@ class Categories
     public function getCatdate()
     {
         return $this->catdate;
-    }
-
-    /**
-     * Get catid
-     *
-     * @return integer
-     */
-    public function getCatid()
-    {
-        return $this->catid;
     }
 }

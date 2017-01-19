@@ -1,0 +1,107 @@
+AchatCentrale\CrmBundle\Entity\Categories:
+    type: entity
+    table: Categories
+    id:
+        catid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: CatID
+            generator:
+                strategy: IDENTITY
+    fields:
+        soId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: SO_ID
+        catidparent:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CatIDParent
+        catdescription:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: CatDescription
+        cattitre:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: CatTitre
+        cattitrereq:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: CatTitreReq
+        catlien:
+            type: string
+            nullable: true
+            length: 300
+            options:
+                fixed: false
+            column: CatLien
+        catlienrw:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: CatLienRW
+        cattagdescr:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+            column: CatTagDescr
+        cattagkeyword:
+            type: string
+            nullable: true
+            length: 1000
+            options:
+                fixed: false
+            column: CatTagKeyword
+        catimage:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: CatImage
+        catimageH:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: CatImage_H
+        catbandeau:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: CatBandeau
+        catsort:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CatSort
+        catdate:
+            type: datetime
+            nullable: true
+            column: CatDate
+    lifecycleCallbacks: {  }

@@ -15,6 +15,15 @@ class Logs
     /**
      * @var integer
      *
+     * @ORM\Column(name="LO_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $loId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -68,16 +77,17 @@ class Logs
      */
     private $insUser;
 
+
+
     /**
-     * @var integer
+     * Get loId
      *
-     * @ORM\Column(name="LO_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $loId;
-
-
+    public function getLoId()
+    {
+        return $this->loId;
+    }
 
     /**
      * Set soId
@@ -269,15 +279,5 @@ class Logs
     public function getInsUser()
     {
         return $this->insUser;
-    }
-
-    /**
-     * Get loId
-     *
-     * @return integer
-     */
-    public function getLoId()
-    {
-        return $this->loId;
     }
 }

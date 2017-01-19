@@ -15,6 +15,15 @@ class Fonctions
     /**
      * @var integer
      *
+     * @ORM\Column(name="FO_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $foId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -54,16 +63,17 @@ class Fonctions
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get foId
      *
-     * @ORM\Column(name="FO_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $foId;
-
-
+    public function getFoId()
+    {
+        return $this->foId;
+    }
 
     /**
      * Set soId
@@ -207,15 +217,5 @@ class Fonctions
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get foId
-     *
-     * @return integer
-     */
-    public function getFoId()
-    {
-        return $this->foId;
     }
 }

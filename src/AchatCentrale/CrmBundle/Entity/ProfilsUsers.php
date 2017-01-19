@@ -13,11 +13,27 @@ use Doctrine\ORM\Mapping as ORM;
 class ProfilsUsers
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="PU_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $puId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="PU_DESCR", type="string", length=50, nullable=true)
      */
     private $puDescr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="PU_POLE", type="string", length=50, nullable=true)
+     */
+    private $puPole;
 
     /**
      * @var \DateTime
@@ -47,16 +63,17 @@ class ProfilsUsers
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get puId
      *
-     * @ORM\Column(name="PU_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $puId;
-
-
+    public function getPuId()
+    {
+        return $this->puId;
+    }
 
     /**
      * Set puDescr
@@ -80,6 +97,30 @@ class ProfilsUsers
     public function getPuDescr()
     {
         return $this->puDescr;
+    }
+
+    /**
+     * Set puPole
+     *
+     * @param string $puPole
+     *
+     * @return ProfilsUsers
+     */
+    public function setPuPole($puPole)
+    {
+        $this->puPole = $puPole;
+
+        return $this;
+    }
+
+    /**
+     * Get puPole
+     *
+     * @return string
+     */
+    public function getPuPole()
+    {
+        return $this->puPole;
     }
 
     /**
@@ -176,15 +217,5 @@ class ProfilsUsers
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get puId
-     *
-     * @return integer
-     */
-    public function getPuId()
-    {
-        return $this->puId;
     }
 }
