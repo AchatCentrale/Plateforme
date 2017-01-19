@@ -15,6 +15,15 @@ class MessageEntete
     /**
      * @var integer
      *
+     * @ORM\Column(name="ME_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $meId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -31,7 +40,7 @@ class MessageEntete
      *
      * @ORM\Column(name="CC_ID", type="integer", nullable=true)
      */
-    private $ccId;
+    private $ccId = '0';
 
     /**
      * @var integer
@@ -45,14 +54,14 @@ class MessageEntete
      *
      * @ORM\Column(name="FC_ID", type="integer", nullable=true)
      */
-    private $fcId;
+    private $fcId = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="PR_ID", type="integer", nullable=true)
      */
-    private $prId;
+    private $prId = '0';
 
     /**
      * @var \DateTime
@@ -80,28 +89,42 @@ class MessageEntete
      *
      * @ORM\Column(name="ME_STATUS", type="integer", nullable=true)
      */
-    private $meStatus;
+    private $meStatus = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="ME_LU_C", type="integer", nullable=true)
      */
-    private $meLuC;
+    private $meLuC = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="ME_LU_F", type="integer", nullable=true)
      */
-    private $meLuF;
+    private $meLuF = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="ME_RELANCE", type="integer", nullable=true)
      */
-    private $meRelance;
+    private $meRelance = '1';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ME_ADR_FAC", type="integer", nullable=true)
+     */
+    private $meAdrFac = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ME_ADR_LIV", type="integer", nullable=true)
+     */
+    private $meAdrLiv = '0';
 
     /**
      * @var string
@@ -138,16 +161,17 @@ class MessageEntete
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get meId
      *
-     * @ORM\Column(name="ME_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $meId;
-
-
+    public function getMeId()
+    {
+        return $this->meId;
+    }
 
     /**
      * Set soId
@@ -462,6 +486,54 @@ class MessageEntete
     }
 
     /**
+     * Set meAdrFac
+     *
+     * @param integer $meAdrFac
+     *
+     * @return MessageEntete
+     */
+    public function setMeAdrFac($meAdrFac)
+    {
+        $this->meAdrFac = $meAdrFac;
+
+        return $this;
+    }
+
+    /**
+     * Get meAdrFac
+     *
+     * @return integer
+     */
+    public function getMeAdrFac()
+    {
+        return $this->meAdrFac;
+    }
+
+    /**
+     * Set meAdrLiv
+     *
+     * @param integer $meAdrLiv
+     *
+     * @return MessageEntete
+     */
+    public function setMeAdrLiv($meAdrLiv)
+    {
+        $this->meAdrLiv = $meAdrLiv;
+
+        return $this;
+    }
+
+    /**
+     * Get meAdrLiv
+     *
+     * @return integer
+     */
+    public function getMeAdrLiv()
+    {
+        return $this->meAdrLiv;
+    }
+
+    /**
      * Set meTempo
      *
      * @param string $meTempo
@@ -579,15 +651,5 @@ class MessageEntete
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get meId
-     *
-     * @return integer
-     */
-    public function getMeId()
-    {
-        return $this->meId;
     }
 }

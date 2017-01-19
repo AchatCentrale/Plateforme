@@ -1,0 +1,50 @@
+AchatCentrale\CrmBundle\Entity\ClientsFourn:
+    type: entity
+    table: CLIENTS_FOURN
+    indexes:
+        IDX_A04F9C213F592A49:
+            columns:
+                - CL_ID
+    id:
+        cfId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: CF_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        foId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: FO_ID
+        cfUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: CF_USER
+        cfPass:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: CF_PASS
+    manyToOne:
+        cl:
+            targetEntity: Clients
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                CL_ID:
+                    referencedColumnName: CL_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

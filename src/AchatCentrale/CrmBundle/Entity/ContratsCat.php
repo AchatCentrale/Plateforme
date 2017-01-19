@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class ContratsCat
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="CC_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ccId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="CC_DESCR", type="string", length=100, nullable=true)
@@ -27,15 +36,6 @@ class ContratsCat
     private $ccDate;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="CC_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $ccId;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\Societes
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Societes")
@@ -46,6 +46,16 @@ class ContratsCat
     private $so;
 
 
+
+    /**
+     * Get ccId
+     *
+     * @return integer
+     */
+    public function getCcId()
+    {
+        return $this->ccId;
+    }
 
     /**
      * Set ccDescr
@@ -93,16 +103,6 @@ class ContratsCat
     public function getCcDate()
     {
         return $this->ccDate;
-    }
-
-    /**
-     * Get ccId
-     *
-     * @return integer
-     */
-    public function getCcId()
-    {
-        return $this->ccId;
     }
 
     /**

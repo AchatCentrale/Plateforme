@@ -15,14 +15,23 @@ class RegionsFournisseurs
     /**
      * @var integer
      *
-     * @ORM\Column(name="RE_ID", type="integer", nullable=true)
+     * @ORM\Column(name="RF_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $rfId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="RE_ID", type="integer", nullable=false)
      */
     private $reId;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="FO_ID", type="integer", nullable=true)
+     * @ORM\Column(name="FO_ID", type="integer", nullable=false)
      */
     private $foId;
 
@@ -54,16 +63,17 @@ class RegionsFournisseurs
      */
     private $insUser;
 
+
+
     /**
-     * @var integer
+     * Get rfId
      *
-     * @ORM\Column(name="RF_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $rfId;
-
-
+    public function getRfId()
+    {
+        return $this->rfId;
+    }
 
     /**
      * Set reId
@@ -207,15 +217,5 @@ class RegionsFournisseurs
     public function getInsUser()
     {
         return $this->insUser;
-    }
-
-    /**
-     * Get rfId
-     *
-     * @return integer
-     */
-    public function getRfId()
-    {
-        return $this->rfId;
     }
 }

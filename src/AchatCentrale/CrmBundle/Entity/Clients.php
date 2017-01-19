@@ -15,6 +15,15 @@ class Clients
     /**
      * @var integer
      *
+     * @ORM\Column(name="CL_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $clId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -24,7 +33,7 @@ class Clients
      *
      * @ORM\Column(name="RE_ID", type="integer", nullable=true)
      */
-    private $reId;
+    private $reId = '0';
 
     /**
      * @var string
@@ -120,7 +129,7 @@ class Clients
     /**
      * @var string
      *
-     * @ORM\Column(name="CL_LOGO", type="string", length=50, nullable=true)
+     * @ORM\Column(name="CL_LOGO", type="string", length=200, nullable=true)
      */
     private $clLogo;
 
@@ -129,7 +138,7 @@ class Clients
      *
      * @ORM\Column(name="CL_PRESCRIPT", type="integer", nullable=true)
      */
-    private $clPrescript;
+    private $clPrescript = '0';
 
     /**
      * @var float
@@ -164,35 +173,35 @@ class Clients
      *
      * @ORM\Column(name="CL_ACTIVITE", type="integer", nullable=true)
      */
-    private $clActivite;
+    private $clActivite = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CL_GROUPE", type="integer", nullable=true)
      */
-    private $clGroupe;
+    private $clGroupe = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CL_CLASSIF", type="integer", nullable=true)
      */
-    private $clClassif;
+    private $clClassif = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CL_EFFECTIF", type="integer", nullable=true)
      */
-    private $clEffectif;
+    private $clEffectif = '0';
 
     /**
      * @var float
      *
      * @ORM\Column(name="CL_CA", type="float", precision=53, scale=0, nullable=true)
      */
-    private $clCa;
+    private $clCa = '0';
 
     /**
      * @var string
@@ -229,16 +238,17 @@ class Clients
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get clId
      *
-     * @ORM\Column(name="CL_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $clId;
-
-
+    public function getClId()
+    {
+        return $this->clId;
+    }
 
     /**
      * Set soId
@@ -891,15 +901,13 @@ class Clients
     /**
      * Set insDate
      *
+     * @param \DateTime $insDate
      *
      * @return Clients
      */
-    public function setInsDate()
+    public function setInsDate($insDate)
     {
-        $now = date(DATE_RFC2822);
-
-
-        $this->insDate = $now;
+        $this->insDate = $insDate;
 
         return $this;
     }
@@ -911,8 +919,6 @@ class Clients
      */
     public function getInsDate()
     {
-
-
         return $this->insDate;
     }
 
@@ -987,15 +993,4 @@ class Clients
     {
         return $this->majUser;
     }
-
-    /**
-     * Get clId
-     *
-     * @return integer
-     */
-    public function getClId()
-    {
-        return $this->clId;
-    }
-
 }

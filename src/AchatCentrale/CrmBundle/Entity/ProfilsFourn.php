@@ -15,6 +15,15 @@ class ProfilsFourn
     /**
      * @var integer
      *
+     * @ORM\Column(name="PF_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $pfId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="FO_ID", type="integer", nullable=true)
      */
     private $foId;
@@ -48,15 +57,6 @@ class ProfilsFourn
     private $majUser;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="PF_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $pfId;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\ProfilsUsers
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\ProfilsUsers")
@@ -67,6 +67,16 @@ class ProfilsFourn
     private $pu;
 
 
+
+    /**
+     * Get pfId
+     *
+     * @return integer
+     */
+    public function getPfId()
+    {
+        return $this->pfId;
+    }
 
     /**
      * Set foId
@@ -186,16 +196,6 @@ class ProfilsFourn
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get pfId
-     *
-     * @return integer
-     */
-    public function getPfId()
-    {
-        return $this->pfId;
     }
 
     /**

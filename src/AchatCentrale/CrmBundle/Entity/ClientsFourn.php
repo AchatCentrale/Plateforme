@@ -15,6 +15,15 @@ class ClientsFourn
     /**
      * @var integer
      *
+     * @ORM\Column(name="CF_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $cfId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="FO_ID", type="integer", nullable=true)
      */
     private $foId;
@@ -34,15 +43,6 @@ class ClientsFourn
     private $cfPass;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="CF_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $cfId;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\Clients
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")
@@ -53,6 +53,16 @@ class ClientsFourn
     private $cl;
 
 
+
+    /**
+     * Get cfId
+     *
+     * @return integer
+     */
+    public function getCfId()
+    {
+        return $this->cfId;
+    }
 
     /**
      * Set foId
@@ -124,16 +134,6 @@ class ClientsFourn
     public function getCfPass()
     {
         return $this->cfPass;
-    }
-
-    /**
-     * Get cfId
-     *
-     * @return integer
-     */
-    public function getCfId()
-    {
-        return $this->cfId;
     }
 
     /**

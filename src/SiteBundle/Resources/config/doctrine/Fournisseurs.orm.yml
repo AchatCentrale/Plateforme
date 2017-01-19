@@ -1,0 +1,193 @@
+SiteBundle\Entity\Fournisseurs:
+    type: entity
+    table: FOURNISSEURS
+    id:
+        foId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: FO_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        soId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: SO_ID
+        foRef:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: FO_REF
+        foRaisonsoc:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: FO_RAISONSOC
+        foSiret:
+            type: string
+            nullable: true
+            length: 14
+            options:
+                fixed: false
+            column: FO_SIRET
+        foNomCom:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: FO_NOM_COM
+        foAdresse1:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: FO_ADRESSE1
+        foAdresse2:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: FO_ADRESSE2
+        foCp:
+            type: string
+            nullable: true
+            length: 10
+            options:
+                fixed: false
+            column: FO_CP
+        foVille:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: FO_VILLE
+        foPays:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: FO_PAYS
+        foTel:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: FO_TEL
+        foFax:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: FO_FAX
+        foMail:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: FO_MAIL
+        foWeb:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: FO_WEB
+        foLogo:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+            column: FO_LOGO
+        foComm:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            options:
+                default: '0'
+            column: FO_COMM
+        foRfaSup:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: FO_RFA_SUP
+        foStatus:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: FO_STATUS
+        foTempo:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: FO_TEMPO
+        foPortPayantMontant:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: FO_PORT_PAYANT_MONTANT
+        foPortPayantTexte:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: FO_PORT_PAYANT_TEXTE
+        foPortOffertQte:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: FO_PORT_OFFERT_QTE
+        foPortOffertMontant:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: FO_PORT_OFFERT_MONTANT
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    lifecycleCallbacks: {  }

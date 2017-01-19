@@ -15,6 +15,15 @@ class Tarifs
     /**
      * @var integer
      *
+     * @ORM\Column(name="TA_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $taId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -54,16 +63,17 @@ class Tarifs
      */
     private $taDate;
 
+
+
     /**
-     * @var integer
+     * Get taId
      *
-     * @ORM\Column(name="TA_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $taId;
-
-
+    public function getTaId()
+    {
+        return $this->taId;
+    }
 
     /**
      * Set soId
@@ -207,15 +217,5 @@ class Tarifs
     public function getTaDate()
     {
         return $this->taDate;
-    }
-
-    /**
-     * Get taId
-     *
-     * @return integer
-     */
-    public function getTaId()
-    {
-        return $this->taId;
     }
 }

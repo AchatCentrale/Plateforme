@@ -15,6 +15,15 @@ class Classif
     /**
      * @var integer
      *
+     * @ORM\Column(name="CL_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $clId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -26,16 +35,17 @@ class Classif
      */
     private $clDescr;
 
+
+
     /**
-     * @var integer
+     * Get clId
      *
-     * @ORM\Column(name="CL_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $clId;
-
-
+    public function getClId()
+    {
+        return $this->clId;
+    }
 
     /**
      * Set soId
@@ -83,15 +93,5 @@ class Classif
     public function getClDescr()
     {
         return $this->clDescr;
-    }
-
-    /**
-     * Get clId
-     *
-     * @return integer
-     */
-    public function getClId()
-    {
-        return $this->clId;
     }
 }

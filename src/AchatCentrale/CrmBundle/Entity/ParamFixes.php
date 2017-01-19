@@ -15,6 +15,15 @@ class ParamFixes
     /**
      * @var integer
      *
+     * @ORM\Column(name="PF_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $pfId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -150,7 +159,7 @@ class ParamFixes
      *
      * @ORM\Column(name="PF_PRIX_AFFICHE", type="integer", nullable=true)
      */
-    private $pfPrixAffiche;
+    private $pfPrixAffiche = '1';
 
     /**
      * @var integer
@@ -194,16 +203,17 @@ class ParamFixes
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get pfId
      *
-     * @ORM\Column(name="PF_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $pfId;
-
-
+    public function getPfId()
+    {
+        return $this->pfId;
+    }
 
     /**
      * Set soId
@@ -827,15 +837,5 @@ class ParamFixes
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get pfId
-     *
-     * @return integer
-     */
-    public function getPfId()
-    {
-        return $this->pfId;
     }
 }

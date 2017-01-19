@@ -15,6 +15,15 @@ class ProduitsPromo
     /**
      * @var integer
      *
+     * @ORM\Column(name="PP_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ppId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -31,7 +40,7 @@ class ProduitsPromo
      *
      * @ORM\Column(name="PP_ORDRE", type="integer", nullable=true)
      */
-    private $ppOrdre;
+    private $ppOrdre = '0';
 
     /**
      * @var \DateTime
@@ -54,16 +63,17 @@ class ProduitsPromo
      */
     private $insUser;
 
+
+
     /**
-     * @var integer
+     * Get ppId
      *
-     * @ORM\Column(name="PP_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $ppId;
-
-
+    public function getPpId()
+    {
+        return $this->ppId;
+    }
 
     /**
      * Set soId
@@ -207,15 +217,5 @@ class ProduitsPromo
     public function getInsUser()
     {
         return $this->insUser;
-    }
-
-    /**
-     * Get ppId
-     *
-     * @return integer
-     */
-    public function getPpId()
-    {
-        return $this->ppId;
     }
 }

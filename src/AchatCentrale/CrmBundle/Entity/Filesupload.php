@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Filesupload
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="Fichier", type="string", length=200, nullable=false)
@@ -61,16 +70,17 @@ class Filesupload
      */
     private $dateupload;
 
+
+
     /**
-     * @var integer
+     * Get id
      *
-     * @ORM\Column(name="ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $id;
-
-
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set fichier
@@ -238,15 +248,5 @@ class Filesupload
     public function getDateupload()
     {
         return $this->dateupload;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
     }
 }

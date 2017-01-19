@@ -15,6 +15,15 @@ class MessageDetail
     /**
      * @var integer
      *
+     * @ORM\Column(name="MD_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $mdId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="CC_ID", type="integer", nullable=true)
      */
     private $ccId;
@@ -31,7 +40,7 @@ class MessageDetail
      *
      * @ORM\Column(name="US_ID", type="integer", nullable=true)
      */
-    private $usId;
+    private $usId = '0';
 
     /**
      * @var \DateTime
@@ -69,15 +78,6 @@ class MessageDetail
     private $insUser;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="MD_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $mdId;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\MessageEntete
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\MessageEntete")
@@ -88,6 +88,16 @@ class MessageDetail
     private $me;
 
 
+
+    /**
+     * Get mdId
+     *
+     * @return integer
+     */
+    public function getMdId()
+    {
+        return $this->mdId;
+    }
 
     /**
      * Set ccId
@@ -279,16 +289,6 @@ class MessageDetail
     public function getInsUser()
     {
         return $this->insUser;
-    }
-
-    /**
-     * Get mdId
-     *
-     * @return integer
-     */
-    public function getMdId()
-    {
-        return $this->mdId;
     }
 
     /**

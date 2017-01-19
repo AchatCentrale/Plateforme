@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Textes
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="TxtID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $txtid;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="TxtTitre", type="string", length=100, nullable=true)
@@ -48,15 +57,6 @@ class Textes
     private $txtdate;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="TxtID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $txtid;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\Categories
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Categories")
@@ -67,6 +67,16 @@ class Textes
     private $catid;
 
 
+
+    /**
+     * Get txtid
+     *
+     * @return integer
+     */
+    public function getTxtid()
+    {
+        return $this->txtid;
+    }
 
     /**
      * Set txttitre
@@ -186,16 +196,6 @@ class Textes
     public function getTxtdate()
     {
         return $this->txtdate;
-    }
-
-    /**
-     * Get txtid
-     *
-     * @return integer
-     */
-    public function getTxtid()
-    {
-        return $this->txtid;
     }
 
     /**

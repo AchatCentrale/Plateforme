@@ -1,0 +1,50 @@
+AchatCentrale\CrmBundle\Entity\RegionsFournisseurs:
+    type: entity
+    table: REGIONS_FOURNISSEURS
+    id:
+        rfId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: RF_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        reId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: RE_ID
+        foId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: FO_ID
+        fcId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: FC_ID
+        usId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: US_ID
+        insDate:
+            type: date
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+    lifecycleCallbacks: {  }

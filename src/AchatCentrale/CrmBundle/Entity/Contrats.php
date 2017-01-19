@@ -15,9 +15,18 @@ class Contrats
     /**
      * @var integer
      *
+     * @ORM\Column(name="CO_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $coId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="CO_USER", type="integer", nullable=true)
      */
-    private $coUser;
+    private $coUser = '0';
 
     /**
      * @var string
@@ -52,14 +61,14 @@ class Contrats
      *
      * @ORM\Column(name="CO_DUREE", type="integer", nullable=true)
      */
-    private $coDuree;
+    private $coDuree = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CO_PREAVIS", type="integer", nullable=true)
      */
-    private $coPreavis;
+    private $coPreavis = '0';
 
     /**
      * @var string
@@ -87,7 +96,7 @@ class Contrats
      *
      * @ORM\Column(name="CO_CONFIDENT", type="integer", nullable=true)
      */
-    private $coConfident;
+    private $coConfident = '0';
 
     /**
      * @var float
@@ -122,14 +131,14 @@ class Contrats
      *
      * @ORM\Column(name="CO_STATUS", type="integer", nullable=true)
      */
-    private $coStatus;
+    private $coStatus = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CO_ALERT", type="integer", nullable=true)
      */
-    private $coAlert;
+    private $coAlert = '0';
 
     /**
      * @var string
@@ -167,15 +176,6 @@ class Contrats
     private $majUser;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="CO_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $coId;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\ContratsCat
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\ContratsCat")
@@ -196,6 +196,16 @@ class Contrats
     private $cl;
 
 
+
+    /**
+     * Get coId
+     *
+     * @return integer
+     */
+    public function getCoId()
+    {
+        return $this->coId;
+    }
 
     /**
      * Set coUser
@@ -723,16 +733,6 @@ class Contrats
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get coId
-     *
-     * @return integer
-     */
-    public function getCoId()
-    {
-        return $this->coId;
     }
 
     /**

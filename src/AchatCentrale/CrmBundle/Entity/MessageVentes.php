@@ -15,6 +15,15 @@ class MessageVentes
     /**
      * @var integer
      *
+     * @ORM\Column(name="MV_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $mvId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -24,35 +33,35 @@ class MessageVentes
      *
      * @ORM\Column(name="ME_ID", type="integer", nullable=true)
      */
-    private $meId;
+    private $meId = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="MV_CLIENT", type="integer", nullable=true)
      */
-    private $mvClient;
+    private $mvClient = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="MV_CLIENT_U", type="integer", nullable=true)
      */
-    private $mvClientU;
+    private $mvClientU = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="MV_FOURN", type="integer", nullable=true)
      */
-    private $mvFourn;
+    private $mvFourn = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="MV_FOURN_U", type="integer", nullable=true)
      */
-    private $mvFournU;
+    private $mvFournU = '0';
 
     /**
      * @var string
@@ -101,7 +110,7 @@ class MessageVentes
      *
      * @ORM\Column(name="MV_STATUS", type="integer", nullable=true)
      */
-    private $mvStatus;
+    private $mvStatus = '0';
 
     /**
      * @var \DateTime
@@ -131,16 +140,17 @@ class MessageVentes
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get mvId
      *
-     * @ORM\Column(name="MV_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $mvId;
-
-
+    public function getMvId()
+    {
+        return $this->mvId;
+    }
 
     /**
      * Set soId
@@ -548,15 +558,5 @@ class MessageVentes
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get mvId
-     *
-     * @return integer
-     */
-    public function getMvId()
-    {
-        return $this->mvId;
     }
 }

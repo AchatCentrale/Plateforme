@@ -13,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
 class Users
 {
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="US_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $usId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="US_PRENOM", type="string", length=50, nullable=true)
@@ -61,13 +70,6 @@ class Users
      */
     private $insUser;
 
-
-    /**
-     * @ORM\Column(type="string", length=25, unique=true)
-     */
-    private $username;
-
-
     /**
      * @var \DateTime
      *
@@ -82,20 +84,17 @@ class Users
      */
     private $majUser;
 
+
+
     /**
-     * @var integer
+     * Get usId
      *
-     * @ORM\Column(name="US_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $usId;
-
-
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-
+    public function getUsId()
+    {
+        return $this->usId;
+    }
 
     /**
      * Set usPrenom
@@ -312,17 +311,4 @@ class Users
     {
         return $this->majUser;
     }
-
-    /**
-     * Get usId
-     *
-     * @return integer
-     */
-    public function getUsId()
-    {
-        return $this->usId;
-    }
-
-
-
 }

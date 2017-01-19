@@ -1,0 +1,169 @@
+SiteBundle\Entity\Produits:
+    type: entity
+    table: PRODUITS
+    id:
+        prId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: PR_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        soId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: SO_ID
+        foId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: FO_ID
+        raId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: RA_ID
+        faId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: FA_ID
+        prRef:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: PR_REF
+        prRefFrs:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: PR_REF_FRS
+        prNom:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+            column: PR_NOM
+        prDescrCourte:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+            column: PR_DESCR_COURTE
+        prDescrLongue:
+            type: string
+            nullable: true
+            length: 7000
+            options:
+                fixed: false
+            column: PR_DESCR_LONGUE
+        prTriptyque:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: PR_TRIPTYQUE
+        prQteCmde:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '1'
+            column: PR_QTE_CMDE
+        prCondt:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: PR_CONDT
+        prPrixPublic:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: PR_PRIX_PUBLIC
+        prPrixCa:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: PR_PRIX_CA
+        prRemise:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: PR_REMISE
+        prTypeLien:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: PR_TYPE_LIEN
+        prLien:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+            column: PR_LIEN
+        prPhare:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: PR_PHARE
+        prStatus:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: PR_STATUS
+        prTempo:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: PR_TEMPO
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    lifecycleCallbacks: {  }

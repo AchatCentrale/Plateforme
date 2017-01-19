@@ -15,107 +15,116 @@ class UsersDroits
     /**
      * @var integer
      *
+     * @ORM\Column(name="UD_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $udId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="UD_EXTRANET", type="integer", nullable=true)
      */
-    private $udExtranet;
+    private $udExtranet = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_INSTUTIONNEL", type="integer", nullable=true)
      */
-    private $udInstutionnel;
+    private $udInstutionnel = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_PRODUIT", type="integer", nullable=true)
      */
-    private $udProduit;
+    private $udProduit = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_OPTIONS", type="integer", nullable=true)
      */
-    private $udOptions;
+    private $udOptions = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_COMMISSION", type="integer", nullable=true)
      */
-    private $udCommission;
+    private $udCommission = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_RFA_SUP", type="integer", nullable=true)
      */
-    private $udRfaSup;
+    private $udRfaSup = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_CLIENT_INS", type="integer", nullable=true)
      */
-    private $udClientIns;
+    private $udClientIns = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_CLIENT_MAJ", type="integer", nullable=true)
      */
-    private $udClientMaj;
+    private $udClientMaj = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_CLIENT_SUP", type="integer", nullable=true)
      */
-    private $udClientSup;
+    private $udClientSup = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_USER_INS", type="integer", nullable=true)
      */
-    private $udUserIns;
+    private $udUserIns = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_USER_MAJ", type="integer", nullable=true)
      */
-    private $udUserMaj;
+    private $udUserMaj = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_USER_SUP", type="integer", nullable=true)
      */
-    private $udUserSup;
+    private $udUserSup = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_EXTRACTION", type="integer", nullable=true)
      */
-    private $udExtraction;
+    private $udExtraction = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_FOURNISSEUR", type="integer", nullable=true)
      */
-    private $udFournisseur;
+    private $udFournisseur = '0';
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_COPIE_TICKET", type="integer", nullable=true)
      */
-    private $udCopieTicket;
+    private $udCopieTicket = '0';
 
     /**
      * @var \DateTime
@@ -146,15 +155,6 @@ class UsersDroits
     private $majUser;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="UD_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $udId;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\Users
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Users")
@@ -165,6 +165,16 @@ class UsersDroits
     private $us;
 
 
+
+    /**
+     * Get udId
+     *
+     * @return integer
+     */
+    public function getUdId()
+    {
+        return $this->udId;
+    }
 
     /**
      * Set udExtranet
@@ -620,16 +630,6 @@ class UsersDroits
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Get udId
-     *
-     * @return integer
-     */
-    public function getUdId()
-    {
-        return $this->udId;
     }
 
     /**
