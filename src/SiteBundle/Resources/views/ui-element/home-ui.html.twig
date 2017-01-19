@@ -1,24 +1,43 @@
-<div class="mui-row">
-    <div class="mui-col-md-4">
-        <a href="{{ path('crm_home') }}">
+<div class="menu-crm-group">
 
-        <div class="mui-panel card cursor mui-btn--raised">
-            <div class="">
-                <div class="mui--text-headline mui--text-center title-ui ">CRM</div>
-                <img class="logo-crm" src="{{ asset('Public/images/icon-crm.png') }}" alt="crm-logo">
-            </div>
-        </div>
-        </a>
-    </div>
-    <div class="mui-col-md-4">
-        <a href="http://google.com">
 
-        <div class="mui-panel card cursor mui-btn--raised">
-            <div class="">
-                <div class="mui--text-headline mui--text-center black title-ui">Stats</div>
-                <img class="logo-crm" src="{{ asset('Public/images/icon-gestion.png') }}" alt="stats-logo">
-            </div>
-        </div>
-        </a>
+    <div class="mui-panel title-ui">
+        <div class="mui--text-headline push-left black ">CRM</div>
+        <img class="push-right" src="{{ asset('Public/images/crm.png') }}" alt="crm">
     </div>
+    <div class="mui-panel title-ui">
+        <div class="mui--text-headline push-left black ">Stats</div>
+        <img class="push-right" src="{{ asset('Public/images/stat.png') }}" alt="crm">
+
+    </div>
+
 </div>
+<div class="mui-divider"></div>
+
+
+<script>
+
+    $('.title-ui').on('click', function (e) {
+
+        switch (e.currentTarget.innerText) {
+            case 'CRM':
+                console.log('crm');
+                window.location.replace("{{ path('crm_home') }}");
+                break;
+            case 'Stats':
+                window.location.replace("{{ path('index_auth') }}");
+                break;
+        }
+
+    });
+
+    $('.title-ui').hover(function () {
+        $(this).css( 'cursor', 'pointer' );
+
+    });
+
+
+
+
+
+</script>

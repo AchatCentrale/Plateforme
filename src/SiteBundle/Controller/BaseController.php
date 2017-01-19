@@ -75,11 +75,14 @@ class BaseController extends Controller
     public function testAction()
     {
 
+        $produitAll = $this->getDoctrine()->getEntityManager('centrale_produits')->getRepository('SiteBundle:Produits')->findAll();
+
+
 
 
 
         return $this->render('@Site/test.html.twig', array(
-
+            'produits' => $produitAll
         ));
 
     }

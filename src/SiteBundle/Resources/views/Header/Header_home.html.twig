@@ -24,14 +24,12 @@
     var logout_btn = document.querySelector('.picture-settings2');
 
     settings_btn.addEventListener('click', function (e) {
-        console.log(settings_btn);
         window.location.replace("{{ path('settings') }}");
 
     });
 
 
     logout_btn.addEventListener('click', function (e) {
-        console.log(settings_btn);
         window.location.replace("{{ path('logout') }}");
 
     });
