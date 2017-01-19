@@ -160,3 +160,10 @@ td img{
     margin: 0 auto;
     padding-top: 33px;
 }
+
+footer{
+    position: fixed;
+    top: 92%;
+    background-color: #6998C9;
+    width: 100%;
+}

@@ -1,27 +1,41 @@
-<div class="mui-row">
-    <div class="mui-col-md-4">
-        <a href="{{ path('vue_alll') }}">
+<div class="menu-crm-group">
 
-            <div class="mui-panel card cursor mui-btn--raised">
-                <div class="">
-                    <div class="mui--text-headline mui--text-center title-ui ">Gestion Client</div>
-                </div>
-            </div>
-        </a>
+    <div class="mui-panel title-ui">
+        <div class="mui--text-headline push-left black ">Gestion client</div>
+        <img class="push-right" src="{{ asset('Public/images/client.png') }}" alt="crm">
+
     </div>
 
-
-
-
-
-    <div class="mui-col-md-4">
-        <a href="http://google.com">
-
-            <div class="mui-panel card cursor mui-btn--raised">
-                <div class="">
-                    <div class="mui--text-headline mui--text-center black title-ui">Gestion Fournisseur</div>
-                </div>
-            </div>
-        </a>
+    <div class="mui-panel title-ui">
+        <div class="mui--text-headline push-left black ">Gestion fournisseur</div>
+        <img class="push-right" src="{{ asset('Public/images/fournisseur.png') }}" alt="crm">
     </div>
+
 </div>
+<div class="mui-divider"></div>
+
+
+<script>
+
+    $('.title-ui').on('click', function (e) {
+
+        switch (e.currentTarget.innerText) {
+            case 'Gestion fournisseur':
+                console.log('crm');
+                break;
+            case 'Gestion client':
+                window.location.replace("{{ path('vue_alll') }}");
+
+                break;
+        }
+
+    });
+
+    $('.title-ui').hover(function () {
+        $(this).css( 'cursor', 'pointer' );
+
+    });
+
+
+
+</script>
