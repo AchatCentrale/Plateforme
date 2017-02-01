@@ -114,3 +114,5 @@ web_profiler:
 
     # Exclude AJAX requests in the web debug toolbar for specified paths
     excluded_ajax_paths:  ^/bundles|^/_wdt
+
+

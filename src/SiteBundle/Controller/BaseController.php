@@ -33,6 +33,18 @@ class BaseController extends Controller
 
     }
 
+    public function clientAction(Request $request)
+    {
+        $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
+
+        $client_users = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findAll();
+
+        dump($client_users);
+        return $this->render('@Site/Base/client.html.twig', array(
+            "client" => $client_users
+        ));
+    }
+
 
 
     public function settingsAction(Request $request)
@@ -55,11 +67,6 @@ class BaseController extends Controller
 
            dump($data);
         }
-
-
-
-
-
 
         return $this->render('@Site/Base/settings.html.twig', array(
             'form' => $form->createView()
