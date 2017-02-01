@@ -8,6 +8,10 @@ index_auth:
     path:     /
     defaults: { _controller: SiteBundle:Base:indexAuth }
 
+client:
+    path:     /client
+    defaults: { _controller: SiteBundle:Base:client }
+
 settings:
     path:     /settings
     defaults: {_controller: SiteBundle:Base:settings}

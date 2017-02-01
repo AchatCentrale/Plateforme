@@ -1,0 +1,53 @@
+<div class="liste-client">
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Logo</th>
+            <th>Statut</th>
+            <th>Société</th>
+            <th>Contact</th>
+            <th>Comptes</th>
+            <th>Téléphone</th>
+            <th>Mail</th>
+        </tr>
+        </thead>
+        <tfoot>
+        <tr>
+            <th>Logo</th>
+            <th>Statut</th>
+            <th>Société</th>
+            <th>Contact</th>
+            <th>Comptes</th>
+            <th>Téléphone</th>
+            <th>Mail</th>
+        </tr>
+        </tfoot>
+        <tbody>
+
+        {%  for clients in client %}
+        <tr>
+            <td><img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_.png" alt=""></td>
+            {% if clients.cl.clStatus == 1 %}
+                <td>Adhéré</td>
+            {% elseif clients.cl.clStatus == 0 %}
+                <td> A valider</td>
+            {% endif %}
+            <td>{{ clients.cl.clRaisonsoc }}</td>
+            <td>{{ clients.ccNom  }}  {{ clients.ccPrenom }}</td>
+            <td>{{ clients.cl.clGroupe }}</td>
+            <td>{{ clients.cl.clTel }}</td>
+            <td>{{ clients.cl.clMail }}</td>
+        </tr>
+        {%  endfor %}
+
+
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
