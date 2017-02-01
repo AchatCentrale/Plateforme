@@ -197,11 +197,16 @@ footer{
 
 }
 
+body{
+     background-color: #F4F4F4 !important;
+
+}
 
 
 
 
 .nav-bar{
+    float: left;
 }
 
 
@@ -252,8 +257,40 @@ footer{
 .hover p:hover{
     background-color: #132233;
     cursor: pointer;
-   margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 
+.recherche{
+    height:100px;
+    width: 80%;
+    float: right;
+    background-color: white;
 
+}
+
+.ajout{
+    margin-top: 34px;
+    margin-left: 65px;
+    float: left;
+    width: 43%;
+}
+.input-recherche{
+    border: none;
+    border-bottom: 1px solid #DADADA;
+    outline: none;
+    width: 100%;
+}
+.find{
+    float: right;
+    margin-top: 34px;
+    width: 50%;
+}
+
+
+.liste-client{
+    width: 71%;
+    float: right;
+    margin-right: 5%;
+    margin-top: 70px;
+}
