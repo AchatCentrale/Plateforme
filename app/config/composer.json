@@ -1,0 +1,5 @@
+{
+    "require": {
+        "realestateconz/mssql-bundle": "dev-master"
+    }
+}
