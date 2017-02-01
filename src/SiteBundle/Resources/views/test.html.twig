@@ -8,16 +8,33 @@
     <title>Document</title>
 </head>
 <body>
+{% set caTotal = 0 %}
 
-    {% for produit in produits %}
 
-        {{ produit.faId }}<br>
-        {{ produit.foId }}<br>
-        {{ produit.insDate | date }}<br>
-        {{ produit.insUser }}<br>
-        {{ produit.majDate | date }}<br>
-        {{ produit.majUser }}<br>
 
-    {% endfor %}
+
+
+{% for paniers in panier %}
+    <h1>Panier n°{{ paniers.id }} </h1>
+    <p>Date : {{ paniers.insDate | date("d-m-Y", "Europe/Paris") }} par : {{ paniers.insUser }}</p>
+    <p> l'ID du produit : {{ paniers.prId }}</p>
+    <p> le prix : {{ paniers.prixUht }}</p>
+    <p> la quantité : {{ paniers.quantite }}</p>
+    <p>Total : {{ paniers.prixUht + paniers.quantite  }} €</p>
+
+    -----------------------------------------------------------
+
+    <p>Nom du client : {{ paniers.cl.clRaisonsoc |title }}</p>
+    <p>ref du client : {{ paniers.cl.clRef }}</p>
+    {% set caTotal = caTotal + paniers.prixUht + paniers.quantite %}
+
+
+{% endfor %}
+
+
+
+<h1>Total ca : {{ caTotal |round }} €</h1>
+
+
 </body>
 </html>

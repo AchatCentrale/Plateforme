@@ -1,21 +1,53 @@
-<div class="mui-appbar mui--z2">
-   <div class="mui-container">
-      <table width="100%">
-         <tbody>
-         <tr class="mui--appbar-height">
-            <td class="mui--text-title">
-                <a id="title-welcome" href="{{ path('index_auth') }}"> <span>Bienvenue {{ app.user }} </span></a></td>
-            <td align="right">
-               <ul class="mui-list--inline mui--text-body2">
-                  <li>  <button class="mui-btn mui-btn--fab picture-settings1"><i class="material-icons icons-settings">&#xE8B8;</i></button></li>
-                  <li>  <button class="mui-btn mui-btn--fab picture-settings2"><i class="material-icons icons-poweroff">&#xE8AC;</i></button></li>
-               </ul>
-            </td>
-         </tr>
-         </tbody>
-      </table>
-   </div>
-</div>
+<header>
+    <div class="nav-bar">
+
+
+        <!-- Presentation -->
+        <div class="presentation">
+            <p>CRM v1.0</p>
+            <img src="{{ asset('bundles/site/images/profile.png') }}" alt="profile">
+            <p>{{ app.user}}</p>
+        </div>
+
+
+        <!-- menu -->
+        <div class="menu">
+            <div class="menu-home hover">
+                <a href="{{ path('index_auth') }}"><p>Home</p></a>
+            </div>
+            <div class="menu-client hover">
+                <a href=""><p>Clients</p></a>
+            </div>
+            <div class="menu-task hover">
+                <a href=""><p>Tâches</p></a>
+            </div>
+            <div class="menu-call hover">
+                <a href=""><p>Appels</p></a>
+            </div>
+            <div class="menu-calendrier hover">
+                <a href=""><p>Calendrier</p></a>
+            </div>
+            <div class="menu-logout hover">
+                <a href="{{ logout_path() }}"><p>Déconnexion</p></a>
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+</header>
+
+
+
+
+
+
+
+
+
+
 
 <script>
     var settings_btn = document.querySelector('.picture-settings1');
