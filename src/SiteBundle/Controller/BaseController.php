@@ -90,4 +90,22 @@ class BaseController extends Controller
 
 
 
+
+    public function testWithParamAction(Request $request, $id)
+    {
+
+
+
+        $panier = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
+
+
+        return $this->render('@Site/test.html.twig', array(
+            'panier' => $panier
+        ));
+
+    }
+
+
+
+
 }

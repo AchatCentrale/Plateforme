@@ -1,0 +1,259 @@
+.img-home{
+
+    width: 14%;
+    margin-left: 42%;
+    margin-bottom: 55px;
+}
+
+
+
+
+.form-login{
+    width: 90%;
+    margin: 0 auto;
+}
+.login-group-input{
+    width: 45%;
+    margin: 0 auto;
+    padding: 41px 1px 1px 1px;
+}
+
+.login-group{
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px 1px rgba(120,120,120,0.50);
+    border-radius: 8px;
+    width: 30%;
+    height: 300px;
+    margin: 0 auto;
+}
+
+
+
+.ink-navigation ul.menu.blue {
+    background: #1b75ce;
+    height: 88px;
+}
+
+
+.menu-header-name{
+    margin-top: 20px;
+}
+
+
+
+.cursor{
+    cursor: pointer;
+}
+
+#title-welcome{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.icons-settings{
+    margin-top: 16px;
+    margin-right: 2px;
+    color: steelblue;
+}
+
+
+
+.icons-poweroff{
+    margin-top: 16px;
+    color: steelblue;
+    font-weight: bold;
+}
+
+.card{
+    width: 68%;
+    height: 300px;
+    margin-left: 100px;
+    margin-top: 92px;
+}
+
+
+.logo-crm{
+    width: 50%;
+    margin: 8% 0% 0% 24%;
+}
+
+.icon-online{
+    color: green;
+}
+
+
+.float-group{
+    margin: 14% 7% 1% 1%;
+    position: absolute;
+    left: 92%;
+}
+
+
+.float-group i {
+    margin-top: 16px;
+    font-weight: bold;
+}
+
+.container{
+    width: 95%;
+    border: solid 2px;
+    margin: 0 auto;
+    height:500px;
+    overflow: scroll;
+}
+
+.header-gestion{
+    width: 95%;
+    margin: 0 auto;
+    height: 200px;
+    padding: 10px;
+}
+
+.header-gestion h1{
+    margin: 10px;
+}
+
+.title-ui div{
+    color: black;
+    margin-top: 30px;
+    margin-left: 37px;
+    font-family: avenir;
+    font-weight: 500;
+}
+.gestion-btn-group{
+
+}
+
+.new-group-input{
+    width: 90%;
+    margin: 0 auto;
+    padding: 41px 1px 1px 1px;
+}
+
+td img{
+    width: 5%;
+}
+
+.btn-login{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.error-login p{
+    margin: 10px;
+}
+
+.menu-crm-group {
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 33px;
+}
+
+footer{
+    position: fixed;
+    top: 92%;
+    background-color: #6998C9;
+    width: 100%;
+}
+.nav-bar{
+    width: 20%;
+    background-color: #1A2E46;
+    height: 1024px;
+    text-align: center;
+}
+
+
+
+.presentation p{
+    font-size: 13px;
+    color: rgba(255,255,255,0.87);
+    letter-spacing: -1.14px;
+    padding-top: 39px;
+    font-family:avenir;
+
+}
+
+.presentation p:last-child{
+    letter-spacing: 2px;
+    text-transform: capitalize;
+    font-family:"Helvetica Neue";
+    font-weight:300;
+
+
+}
+
+
+.presentation img{
+
+    margin-top: 17px;
+
+
+}
+
+
+
+
+
+.nav-bar{
+}
+
+
+
+.menu{
+    position: relative;
+
+}
+
+.menu-home p{
+    background: url("../../bundles/site/images/Home.png") no-repeat 70px 1px;
+
+}
+.menu-task p{
+    background: url("../../bundles/site/images/task.png") no-repeat 70px 1px;
+
+}
+.menu-client p{
+    background: url("../../bundles/site/images/client.png") no-repeat 70px 1px;
+}
+
+.menu-call p{
+    background: url("../../bundles/site/images/call.png") no-repeat 70px 1px;
+}
+
+.menu-calendrier p{
+    background: url("../../bundles/site/images/calendrier.png") no-repeat 70px 1px;
+    padding-left: 20px;
+}
+
+
+
+.menu a {
+    text-decoration: none;
+    color: white;
+}
+.menu a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+
+.hover{
+    padding: 10px 0px 10px 0px;
+
+}
+
+.hover p:hover{
+    background-color: #132233;
+    cursor: pointer;
+   margin-bottom: 10px;
+}
+
+
+
