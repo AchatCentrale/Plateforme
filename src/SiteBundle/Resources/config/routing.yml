@@ -12,6 +12,11 @@ client:
     path:     /client
     defaults: { _controller: SiteBundle:Base:client }
 
+
+clientById:
+    path:     /client/{id}
+    defaults: { _controller: SiteBundle:Base:clientById }
+
 settings:
     path:     /settings
     defaults: {_controller: SiteBundle:Base:settings}
