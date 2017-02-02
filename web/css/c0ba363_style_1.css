@@ -165,7 +165,7 @@ footer{
 .nav-bar{
     width: 20%;
     background-color: #1A2E46;
-    height: 1024px;
+    height: 1500px;
     text-align: center;
 }
 
@@ -217,23 +217,23 @@ body{
 }
 
 .menu-home p{
-    background: url("../../bundles/site/images/Home.png") no-repeat 70px 1px;
+    background: url("../../bundles/site/images/Home.png") no-repeat 32% 1px;
 
 }
 .menu-task p{
-    background: url("../../bundles/site/images/task.png") no-repeat 70px 1px;
+    background: url("../../bundles/site/images/task.png") no-repeat 32% 1px;
 
 }
 .menu-client p{
-    background: url("../../bundles/site/images/client.png") no-repeat 70px 1px;
+    background: url("../../bundles/site/images/client.png") no-repeat 32% 1px;
 }
 
 .menu-call p{
-    background: url("../../bundles/site/images/call.png") no-repeat 70px 1px;
+    background: url("../../bundles/site/images/call.png") no-repeat 32% 1px;
 }
 
 .menu-calendrier p{
-    background: url("../../bundles/site/images/calendrier.png") no-repeat 70px 1px;
+    background: url("../../bundles/site/images/calendrier.png") no-repeat 32% 1px;
     padding-left: 20px;
 }
 
@@ -293,4 +293,75 @@ body{
     float: right;
     margin-right: 5%;
     margin-top: 70px;
+}
+
+
+.row-client{
+    cursor: pointer;
+}
+
+.client-liste{
+    width: 75%;
+    height:100%;
+    background-color: white;
+    margin: 16px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.top-client-liste h2 {
+    margin-left: 45px;
+    margin-top: 38px !important;
+}
+
+.top-client-liste p {
+    margin-left: 45px;
+}
+
+
+
+.top-client-liste {
+    width: 51%;
+    background-color: white;
+    border: 3px solid #f4f4f4;
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-left: 40px;
+    height: 500px;
+    order:1;
+}
+
+
+.photo-client-liste {
+    width: 40%;
+    margin-top: 32px;
+    height: 500px;
+    text-align: center;
+    order:1;
+}
+
+.user-client-liste{
+    width: 75%;
+    height:100%;
+    background-color: white;
+    margin: 16px auto 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#accordion h3{
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    outline: none;
+}
+
+#accordion p{
+    margin-left: 10px;
+}
+
+.block-list-user{
+    display: flex;
+    text-align: center;
 }

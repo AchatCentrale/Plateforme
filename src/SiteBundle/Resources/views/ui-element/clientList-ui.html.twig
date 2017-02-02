@@ -1,0 +1,66 @@
+
+<div class="client-liste">
+
+    <div class="top-client-liste">
+        <h2>Nom de l'entreprise : {{ client[0].cl.clRaisonsoc }}</h2>
+        <p>Réference de l'entreprise : {{ client[0].cl.clRef }}</p>
+        <p>Siret de l'entreprise : {{ client[0].cl.clSiret }}</p>
+        <p>{{ client[0].cl.clAdresse1 }}</p>
+        <p>{{ client[0].cl.clPays }} {{ client[0].cl.clVille }}</p>
+        <p>{{ client[0].cl.clMail }}</p>
+        <p>{{ client[0].cl.clWeb }}</p>
+        <p>Inscrit le : {{ client[0].cl.insDate | date('d M Y') }}</p>
+        <p>Adhesion le : {{ client[0].cl.insDate | date('d M Y') }}</p>
+        <p>Numero de téléphone : {{ client[0].cl.clTel }}</p>
+    </div>
+
+
+    <div class="photo-client-liste">
+        <img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].cl.clId }}/{{ client[0].cl.clLogo }}" alt="">
+    </div>
+</div>
+
+<div class="user-client-liste">
+
+
+    <div id="accordion">
+        {% for clients in client %}
+
+
+            <h3>{{ clients.ccPrenom }} {{ clients.ccNom }}</h3>
+            <div class="block-list-user">
+                <div>
+                    <p> Membres depuis :{{ clients.insDate | date(' d M Y') }}</p>
+                </div>
+                <div>
+                    <p>Tel: {{ clients.ccGsm }}</p>
+                </div>
+                <div>
+                    <p>Mot de passe: {{ clients.ccPass }}</p>
+
+                </div>
+                <div>
+                    <p>Adresse Mail: {{ clients.ccMail }}</p>
+
+
+                </div>
+
+            </div>
+
+
+
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    $( function() {
+        $( "#accordion" ).accordion({
+            active: false,
+            collapsible: true,
+        });
+    } );
+</script>
+
+
+

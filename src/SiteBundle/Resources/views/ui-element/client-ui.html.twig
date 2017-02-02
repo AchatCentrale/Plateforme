@@ -25,13 +25,9 @@
         <tbody>
 
         {%  for clients in client %}
-        <tr>
+        <tr class="row-client" data-client="{{ clients.cl.clId }}">
             <td><img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_.png" alt=""></td>
-            {% if clients.cl.clStatus == 1 %}
-                <td>Adhéré</td>
-            {% elseif clients.cl.clStatus == 0 %}
-                <td> A valider</td>
-            {% endif %}
+            <td>{{  clients.cl.clAdhesion }}</td>
             <td>{{ clients.cl.clRaisonsoc }}</td>
             <td>{{ clients.ccNom  }}  {{ clients.ccPrenom }}</td>
             <td>{{ clients.cl.clGroupe }}</td>
@@ -48,6 +44,23 @@
 
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
+            }
+        });
+
+
+        $('.row-client').on('click', function (e) {
+            var id = $(this).data('client');
+
+            var url = "/client/"+id;
+
+
+            window.location.href = url;
+
+        })
+
+
     } );
 </script>
