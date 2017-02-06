@@ -2,16 +2,16 @@
 <div class="client-liste">
 
     <div class="top-client-liste">
-        <h2 class="hover-update-client" >Nom de l'entreprise : {{ client[0].cl.clRaisonsoc }}</h2>
-        <p class="hover-update-client" >Réference de l'entreprise : {{ client[0].cl.clRef }}</p>
-        <p class="hover-update-client" >Siret de l'entreprise : {{ client[0].cl.clSiret }}</p>
-        <p class="hover-update-client" >{{ client[0].cl.clAdresse1 }}</p>
-        <p class="hover-update-client" >{{ client[0].cl.clPays }} {{ client[0].cl.clVille }}</p>
-        <p class="hover-update-client" >{{ client[0].cl.clMail }}</p>
-        <p class="hover-update-client" >{{ client[0].cl.clWeb }}</p>
-        <p class="hover-update-client" >Inscrit le : {{ client[0].cl.insDate | date('d M Y') }}</p>
-        <p class="hover-update-client" >Adhesion le : {{ client[0].cl.insDate | date('d M Y') }}</p>
-        <p class="hover-update-client" >Numero de téléphone : {{ client[0].cl.clTel }}</p>
+        <h2 class="hover-update-client"  data-content="{{ client[0].cl.clRaisonsoc }}"  >Nom de l'entreprise : {{ client[0].cl.clRaisonsoc }}  </h2>
+        <p class="hover-update-client" data-content="{{ client[0].cl.clRef }}"  >Réference de l'entreprise : {{ client[0].cl.clRef }}  </p>
+        <p class="hover-update-client" data-content="{{ client[0].cl.clSiret }}"  >Siret de l'entreprise : {{ client[0].cl.clSiret }}  </p>
+        <p class="hover-update-client" data-content="{{ client[0].cl.clAdresse1 }}"  >{{ client[0].cl.clAdresse1 }}  </p>
+        <p class="hover-update-client"  data-content="{{ client[0].cl.clPays }} {{ client[0].cl.clVille }}" >{{ client[0].cl.clPays }} {{ client[0].cl.clVille }}  </p>
+        <p class="hover-update-client" data-content="{{ client[0].cl.clMail }}"  >{{ client[0].cl.clMail }}  </p>
+        <p class="hover-update-client" data-content="{{ client[0].cl.clWeb }} "  >{{ client[0].cl.clWeb }}  </p>
+        <p class="hover-update-client" data-content="{{ client[0].cl.insDate | date('d M Y') }}"  >Inscrit le : {{ client[0].cl.insDate | date('d M Y') }}  </p>
+        <p class="hover-update-client" data-content="{{ client[0].cl.insDate | date('d M Y') }} "  >Adhesion le : {{ client[0].cl.insDate | date('d M Y') }}  </p>
+        <p class="hover-update-client" data-content="{{ client[0].cl.insDate | date('d M Y') }} "  >Numero de téléphone : {{ client[0].cl.clTel }}  </p>
     </div>
 
 
@@ -54,31 +54,7 @@
     </div>
 </div>
 
-<script>
-    $( function() {
 
-
-        //accordeon liste user
-        $( "#accordion" ).accordion({
-            active: false,
-            collapsible: true,
-        });
-        
-        //envoie de mail ajax
-        $('.mail-send').on('click', function (e) {
-
-            var user = $(this).data('user');
-            console.log(user);
-
-            $.ajax({
-                url: "/send/client/"+user,
-                success: function(result){
-                    console.log(result);
-            }});
-        })
-        
-    } );
-</script>
 
 
 

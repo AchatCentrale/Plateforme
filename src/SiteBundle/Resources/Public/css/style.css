@@ -324,7 +324,7 @@ body{
 
 
 .top-client-liste {
-    width: 51%;
+    width: 56%;
     background-color: white;
     border: 3px solid #f4f4f4;
     border-radius: 4px;
@@ -378,5 +378,15 @@ td img {
 .mail-send{
     margin-left: 40px;
     cursor: pointer;
+}
+
+.hover-update-client {
+    width: 70%;
+}
+
+.pencil-update{
+    cursor: pointer;
+    margin-left: 30px;
+
 }
 
