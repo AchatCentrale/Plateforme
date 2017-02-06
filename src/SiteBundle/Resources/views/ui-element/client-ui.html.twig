@@ -26,7 +26,7 @@
 
         {%  for clients in client %}
         <tr class="row-client" data-client="{{ clients.cl.clId }}">
-            <td><img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_.png" alt=""></td>
+            <td><img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_{{ clients.cl.clId }}/{{ clients.cl.clLogo }}" alt=""></td>
             <td>{{  clients.cl.clAdhesion }}</td>
             <td>{{ clients.cl.clRaisonsoc }}</td>
             <td>{{ clients.ccNom  }}  {{ clients.ccPrenom }}</td>
@@ -54,10 +54,10 @@
         $('.row-client').on('click', function (e) {
             var id = $(this).data('client');
 
-            var url = "/client/"+id;
+            var uurl = "/client/"+id;
 
 
-            window.location.href = url;
+            window.location.href = uurl;
 
         })
 
