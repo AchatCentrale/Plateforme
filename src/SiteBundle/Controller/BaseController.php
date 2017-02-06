@@ -50,13 +50,48 @@ class BaseController extends Controller
         $client_users = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('cl' => $id));
 
 
-        dump($client_users);
 
         return $this->render('@Site/Base/clientListe.html.twig', array(
             'client' => $client_users
         ));
     }
 
+    public function sendClientDetailMailAction(Request $request, $clientId)
+    {
+
+
+
+
+        $client_info = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('cl' => $clientId));
+
+
+
+        /**
+         * @var \Swift_Mime_Message $message
+         */
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('contact@achatcentrale.fr')
+            ->setTo('Jbagostin@gmail.com')
+            ->setBody($this->renderView('SiteBundle:mail:mailDetailClient.html.twig', array(
+                'client' => $client_info
+            )), 'text/html')
+
+        ;
+
+        $mailer = $this->get('mailer');
+
+        $mailer->send($message);
+
+        $spool = $mailer->getTransport()->getSpool();
+
+        $transport = $this->get('swiftmailer.transport.real');
+
+        $spool->flushQueue($transport);
+
+
+        return new Response('jb tes trop fort');
+    }
 
 
 
@@ -68,7 +103,6 @@ class BaseController extends Controller
         $userActual = $this->get('security.token_storage')->getToken()->getUser();
 
         $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array("usMail" => $userActual));
-        dump($user);
         $form = $this->get('form.factory')->create(UsersType::class, $user[0]);
 
 
@@ -96,16 +130,28 @@ class BaseController extends Controller
 
     public function testAction()
     {
+        /**
+         * @var \Swift_Mime_Message $message
+         */
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Hello Email')
+            ->setFrom('Jbagostin@gmail.com')
+            ->setTo('Jbagostin@gmail.com')
+            ->setBody($this->renderView('SiteBundle:mail:mail.html.twig'), 'text/html')
 
-        $produitAll = $this->getDoctrine()->getEntityManager('centrale_produits')->getRepository('SiteBundle:Produits')->findAll();
+        ;
 
+        $mailer = $this->get('mailer');
 
+        $mailer->send($message);
 
+        $spool = $mailer->getTransport()->getSpool();
 
+        $transport = $this->get('swiftmailer.transport.real');
 
-        return $this->render('@Site/test.html.twig', array(
-            'produits' => $produitAll
-        ));
+        $spool->flushQueue($transport);
+
+        return $this->render('@Site/test.html.twig');
 
     }
 

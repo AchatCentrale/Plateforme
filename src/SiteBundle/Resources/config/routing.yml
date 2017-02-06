@@ -17,6 +17,11 @@ clientById:
     path:     /client/{id}
     defaults: { _controller: SiteBundle:Base:clientById }
 
+sendClientDetailMail:
+    path:     /send/client/{clientId}
+    defaults: {_controller: SiteBundle:Base:sendClientDetailMail}
+
+
 settings:
     path:     /settings
     defaults: {_controller: SiteBundle:Base:settings}
