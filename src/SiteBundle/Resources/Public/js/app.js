@@ -40,14 +40,27 @@ $( function() {
         var tpl = '<input type="text" placeholder="'+e.delegateTarget.dataset.content+'" >'
         console.log(tpl);
 
-        e.delegateTarget.innerHTML = tpl;
-
+        //TODO: finir l'action
     });
 
 
     $('.hover-update-client').mouseleave( function () {
         $('.pencil-update').remove();
     })
+
+
+    $('.btn-del').on('click', function () {
+
+
+        var user = $('.mail-send').data('user');
+        console.log(user);
+
+        $.ajax({
+            url: "/delete/client/"+user,
+            success: function(result){
+                console.log(result);
+            }});
+    });
 
 
 

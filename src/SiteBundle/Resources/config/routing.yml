@@ -21,6 +21,10 @@ sendClientDetailMail:
     path:     /send/client/{clientId}
     defaults: {_controller: SiteBundle:Base:sendClientDetailMail}
 
+DeleteClientAction:
+    path: /delete/client/{id}
+    defaults:  {_controller: SiteBundle:Base:removeClient}
+
 
 settings:
     path:     /settings

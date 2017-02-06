@@ -94,6 +94,21 @@ class BaseController extends Controller
     }
 
 
+    public function removeClientAction(Request $request, $id)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')
+            ->findBy(array('clId' => $id));
+
+        if ($client) {
+            $em->remove($client);
+            $em->flush();
+        }
+
+        return new Response('jb tes trop fort');
+
+    }
+
 
 
 
