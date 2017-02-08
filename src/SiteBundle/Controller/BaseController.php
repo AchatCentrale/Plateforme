@@ -2,6 +2,8 @@
 
 namespace SiteBundle\Controller;
 
+use AchatCentrale\CrmBundle\Entity\Clients;
+use AchatCentrale\CrmBundle\Form\ClientsType;
 use AchatCentrale\CrmBundle\Form\UsersType;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -36,10 +38,11 @@ class BaseController extends Controller
     public function clientAction(Request $request)
     {
 
-        $client_users = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findAll();
+        $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
+
 
         return $this->render('@Site/Base/client.html.twig', array(
-            "client" => $client_users
+            "client" => $client
         ));
     }
 
@@ -55,6 +58,10 @@ class BaseController extends Controller
             'client' => $client_users
         ));
     }
+
+
+
+
 
     public function sendClientDetailMailAction(Request $request, $clientId)
     {
@@ -93,6 +100,48 @@ class BaseController extends Controller
         return new Response('jb tes trop fort');
     }
 
+
+    public function AddClientAction(Request $request)
+    {
+        $clients = new Clients();
+
+        $form = $this->get('form.factory')->create(ClientsType::class, $clients);
+
+        // le formulaire est recuperer dans la request
+        $form->handleRequest($request);
+
+
+        //traitement du formulaire
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($data);
+            $em->flush();
+        }
+
+
+       return $this->render('SiteBundle:Base:add.client.html.twig', array(
+           'form' => $form->createView()
+       ));
+
+    }
+
+
+
+    public function removeClientAction(Request $request, $id)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')
+            ->findBy(array('clId' => $id));
+
+        if ($client) {
+            $em->remove($client);
+            $em->flush();
+        }
+
+        return new Response('jb tes trop fort');
+
+    }
 
 
 

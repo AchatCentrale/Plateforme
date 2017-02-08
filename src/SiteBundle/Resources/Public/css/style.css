@@ -131,10 +131,11 @@ a:hover {
 
 }
 
-.new-group-input{
-    width: 90%;
-    margin: 0 auto;
+.new-group-input {
+    width: 65%;
+    margin: 8px auto;
     padding: 41px 1px 1px 1px;
+    margin-left: 28%;
 }
 
 td img{
@@ -389,4 +390,14 @@ td img {
     margin-left: 30px;
 
 }
+a.btn-add-client {
+    margin-left: 341px !important;
+}
 
+.client-add-block{
+
+}
+
+.client-add-block h1 {
+    text-align: center;
+}
