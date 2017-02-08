@@ -25,6 +25,10 @@ DeleteClientAction:
     path: /delete/client/{id}
     defaults:  {_controller: SiteBundle:Base:removeClient}
 
+AddClientAction:
+    path: /add/client/
+    defaults:  {_controller: SiteBundle:Base:AddClient}
+
 
 settings:
     path:     /settings
