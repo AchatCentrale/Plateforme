@@ -51,11 +51,20 @@ class BaseController extends Controller
 
 
         $client_users = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('cl' => $id));
+        $log = $this->getDoctrine()
+            ->getRepository('AchatCentraleCrmBundle:Logs')
+            ->findBy(
+                array(
+                    'loIdent' => 'CL_ID',
+                    'loIdentNum' => $id
+                ));
 
+        dump($log);
 
 
         return $this->render('@Site/Base/clientListe.html.twig', array(
-            'client' => $client_users
+            'client' => $client_users,
+            'log' => $log
         ));
     }
 
@@ -77,9 +86,9 @@ class BaseController extends Controller
          * @var \Swift_Mime_Message $message
          */
         $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('contact@achatcentrale.fr')
-            ->setTo('Jbagostin@gmail.com')
+            ->setSubject('Convocation  de Willinski Boris ')
+            ->setFrom(array('bernard.butin@ac-lille.fr' => "Bernard Butin"))
+            ->setTo('@gmail.com')
             ->setBody($this->renderView('SiteBundle:mail:mailDetailClient.html.twig', array(
                 'client' => $client_info
             )), 'text/html')

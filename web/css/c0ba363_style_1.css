@@ -101,6 +101,9 @@ a:hover {
     font-weight: bold;
 }
 
+
+
+
 .container{
     width: 95%;
     border: solid 2px;
@@ -370,7 +373,7 @@ body{
 }
 
 td img {
-    width: 28%;
+    width: 15%;
     text-align: center;
     margin-left: 110px;
 }
@@ -399,5 +402,25 @@ a.btn-add-client {
 }
 
 .client-add-block h1 {
+    text-align: center;
+}
+.row-img{
+    width: 24%;
+}
+.photo-client-liste img {
+    width: 21%;
+    margin: 5%;
+}
+
+.block-logs {
+    margin-top: 45px;
+}
+
+
+.container-boris{
+    text-align: center;
+}
+
+.container-boris{
     text-align: center;
 }

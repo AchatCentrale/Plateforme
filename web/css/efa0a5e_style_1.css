@@ -221,23 +221,23 @@ body{
 }
 
 .menu-home p{
-    background: url("../../site/images/Home.png") no-repeat 32% 1px;
+    background: url("../Resources/site/images/Home.png") no-repeat 32% 1px;
 
 }
 .menu-task p{
-    background: url("../../site/images/task.png") no-repeat 32% 1px;
+    background: url("../Resources/site/images/task.png") no-repeat 32% 1px;
 
 }
 .menu-client p{
-    background: url("../../site/images/client.png") no-repeat 32% 1px;
+    background: url("../Resources/site/images/client.png") no-repeat 32% 1px;
 }
 
 .menu-call p{
-    background: url("../../site/images/call.png") no-repeat 32% 1px;
+    background: url("../Resources/site/images/call.png") no-repeat 32% 1px;
 }
 
 .menu-calendrier p{
-    background: url("../../site/images/calendrier.png") no-repeat 32% 1px;
+    background: url("../Resources/site/images/calendrier.png") no-repeat 32% 1px;
     padding-left: 20px;
 }
 
