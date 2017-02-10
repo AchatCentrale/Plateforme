@@ -28,7 +28,7 @@
 
         {%  for clients in client %}
         <tr class="row-client" data-client="{{ clients.clId }}">
-            <td><img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_{{ clients.clId }}/{{ clients.clLogo }}" alt=""></td>
+            <td class="row-img"><img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_{{ clients.clId }}/{{ clients.clLogo }}" alt=""></td>
             <td>{{  clients.clAdhesion }}</td>
             <td>{{ clients.clRaisonsoc }}</td>
             <td>{{ clients.clGroupe }}</td>

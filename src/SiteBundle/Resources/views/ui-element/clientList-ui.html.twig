@@ -16,9 +16,22 @@
 
 
     <div class="photo-client-liste">
-        <img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].cl.clId }}/{{ client[0].cl.clLogo }}" alt="">
+        {% if client[0].cl.clLogo %}
+            <img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].cl.clId }}/{{ client[0].cl.clLogo }}" alt="">
+
+        {% endif %}
         <div class="button-action">
             <button class="ink-button red btn-del">Supprimer client</button>
+        </div>
+
+        <div class="block-logs">
+            {% if log %}
+                <h5>LOGS : </h5>
+                {% for logs in log|slice(0, 3) %}
+                    <p>{{ logs.loDescr | raw }}</p>
+                {% endfor %}
+            {% else %}
+            {% endif %}
         </div>
     </div>
 
