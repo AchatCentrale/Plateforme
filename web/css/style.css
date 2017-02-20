@@ -169,7 +169,7 @@ footer{
 .nav-bar{
     width: 15%;
     background-color: #1A2E46;
-    height: 1500px;
+    height: 100vh;
     text-align: center;
 }
 
@@ -251,7 +251,7 @@ body{
     width: 85%;
     float: right;
     background-color: white;
-    margin-bottom: 23px;
+    margin-bottom: 40px;
 
 }
 
@@ -472,4 +472,33 @@ a.btn-add-client {
 
 }
 
+
+
+.container-client-liste {
+    position: relative;
+    width: 85%;
+    background-color: white;
+    float: left;
+    height: 100vh;
+}
+
+
+.toolbar-client-liste{
+    background-color: white;
+    height: 9%;
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin-left: 135px;
+    margin-top: 20px;
+}
+
+.new-client-liste{
+    display: flex;
+}
+
+.new-client-liste p{
+    background: url(../images/add.png);
+
+}
 
