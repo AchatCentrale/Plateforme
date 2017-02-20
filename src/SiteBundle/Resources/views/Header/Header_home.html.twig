@@ -4,9 +4,14 @@
 
         <!-- Presentation -->
         <div class="presentation">
-            <p>CRM v1.0</p>
-            <img src="{{ asset('bundles/site/images/profile.png') }}" alt="profile">
-            <p>{{ app.user}}</p>
+            <div class="block-logo">
+                <img src="{{ asset('images/logo-achatcentrale.png') }}" alt="logo_crm">
+                <p>CRM v1.0</p>
+            </div>
+            <div class="block-profile">
+                <img src="{{ asset('images/profile.png') }}" alt="profile">
+                <p>{{ app.user}}</p>
+            </div>
         </div>
 
 
@@ -27,11 +32,17 @@
             <div class="menu-calendrier hover">
                 <a href=""><p>Calendrier</p></a>
             </div>
+        </div>
+
+
+        <div class="menu-bottom">
             <div class="menu-logout hover">
                 <a href="{{ logout_path() }}"><p>Déconnexion</p></a>
             </div>
 
-
+            <div class="menu-settings hover">
+                <a href="{{ logout_path() }}"><p>Settings</p></a>
+            </div>
         </div>
 
 
@@ -55,13 +66,10 @@
 
     settings_btn.addEventListener('click', function (e) {
         window.location.replace("{{ path('settings') }}");
-
     });
-
 
     logout_btn.addEventListener('click', function (e) {
         window.location.replace("{{ path('logout') }}");
-
     });
 
 </script>

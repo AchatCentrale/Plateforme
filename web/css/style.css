@@ -175,31 +175,11 @@ footer{
 
 
 
-.presentation p{
-    font-size: 13px;
-    color: rgba(255,255,255,0.87);
-    letter-spacing: -1.14px;
-    padding-top: 39px;
-    font-family: avenir;
-
-}
-
-.presentation p:last-child{
-    letter-spacing: 2px;
-    text-transform: capitalize;
-    font-family:"Helvetica Neue";
-    font-weight:300;
 
 
-}
 
 
-.presentation img{
 
-    margin-top: 17px;
-
-
-}
 
 body{
      background-color: #F4F4F4 !important;
@@ -221,23 +201,23 @@ body{
 }
 
 .menu-home p{
-    background: url("../images/Home.png") no-repeat 32% 1px;
+    background: url("../images/Home.png") no-repeat 60px 1px;
 
 }
 .menu-task p{
-    background: url("../images/task.png") no-repeat 32% 1px;
+    background: url("../images/task.png") no-repeat 60px 1px;
 
 }
 .menu-client p{
-    background: url("../images/client.png") no-repeat 32% 1px;
+    background: url("../images/client.png") no-repeat 60px 1px;
 }
 
 .menu-call p{
-    background: url("../images/call.png") no-repeat 32% 1px;
+    background: url("../images/call.png") no-repeat 60px 1px;
 }
 
 .menu-calendrier p{
-    background: url("../images/calendrier.png") no-repeat 32% 1px;
+    background: url("../images/calendrier.png") no-repeat 60px 1px;
     padding-left: 20px;
 }
 
@@ -254,7 +234,7 @@ body{
 
 
 .hover{
-    padding: 10px 0 10px 0;
+    padding: 10px 0 2px 0;
 
 }
 
@@ -274,24 +254,41 @@ body{
 
 }
 
-.ajout{
+.ajout {
     margin-top: 34px;
-    margin-left: 65px;
+    margin-left: 12%;
     float: left;
-    width: 43%;
+    width: 30%;
+    border-bottom: 1px solid black;
 }
-.input-recherche{
+.ajout input[type="text"] {
     border: none;
-    border-bottom: 1px solid #DADADA;
     outline: none;
-    width: 100%;
-}
-.find{
     float: right;
-    margin-top: 34px;
-    width: 50%;
+    width: 90%;
+}
+.boule-verte{
+    width: 20px;
+    height: 20px;
+    float: left;
+    background-color: #46EBC6;
+    border-radius: 51%;
+    margin-left: 13px;
 }
 
+.loupe {
+    float: left;
+}
+
+.notification{
+    width: 50px;
+    height: 50px;
+    float: right;
+    border: 5px #D2D2D2 solid;
+    margin-top: 24px;
+    margin-right: 110px;
+    border-radius: 8px;
+}
 
 .liste-client {
     width: 82%;
@@ -417,10 +414,61 @@ a.btn-add-client {
 }
 
 
-.container-boris{
-    text-align: center;
+
+
+.block-logo {
+    position: relative;
+    margin-top: 45px;
 }
 
-.container-boris{
-    text-align: center;
+.block-logo p {
+    color: white;
+    font-family: SanFranciscoText-Bold;
+    font-size: 13px;
+    color: rgba(255,255,255,0.87);
+    letter-spacing: 0.86px;
 }
+
+
+
+.block-profile img {
+    margin-top: 30px;
+    padding-bottom: 20px;
+}
+
+
+.block-profile p {
+    font-family: Lato;
+    font-size: 16px;
+    color: rgba(255,255,255,0.87);
+}
+
+
+
+.menu-logout p{
+
+    background: url(../images/logoutt.png) no-repeat 60px 1px;
+    padding-left: 37px;
+    color: white;
+    font-family: lato;
+    text-decoration: none;
+
+}
+
+
+.menu-bottom {
+    position: relative;
+    margin-top: 50px;
+}
+
+
+.menu-settings p{
+
+    background: url(../images/settings.png) no-repeat 60px 1px;
+    color: white;
+    font-family: lato;
+    text-decoration: none;
+
+}
+
+
