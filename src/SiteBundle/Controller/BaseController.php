@@ -75,10 +75,7 @@ class BaseController extends Controller
     public function sendClientDetailMailAction(Request $request, $clientId)
     {
 
-
-
-
-        $client_info = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('cl' => $clientId));
+        $client_info = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('ccId' => $clientId));
 
 
 
@@ -86,27 +83,19 @@ class BaseController extends Controller
          * @var \Swift_Mime_Message $message
          */
         $message = \Swift_Message::newInstance()
-            ->setSubject('Convocation  de Willinski Boris ')
-            ->setFrom(array('bernard.butin@ac-lille.fr' => "Bernard Butin"))
-            ->setTo('@gmail.com')
+            ->setSubject('Vos codes pour la centrale')
+            ->setFrom(array('contact@achatcentrale.fr'=> "Votre centrale" ))
+            ->setTo('jb@achatcentrale.fr')
             ->setBody($this->renderView('SiteBundle:mail:mailDetailClient.html.twig', array(
                 'client' => $client_info
-            )), 'text/html')
-
-        ;
+            )), 'text/html');
 
         $mailer = $this->get('mailer');
-
         $mailer->send($message);
-
         $spool = $mailer->getTransport()->getSpool();
-
         $transport = $this->get('swiftmailer.transport.real');
-
         $spool->flushQueue($transport);
-
-
-        return new Response('jb tes trop fort');
+        return new Response('Mail envoyé');
     }
 
 
