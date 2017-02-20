@@ -204,21 +204,22 @@ body{
     background: url("../images/Home.png") no-repeat 60px 1px;
 
 }
-.menu-task p{
-    background: url("../images/task.png") no-repeat 60px 1px;
 
-}
 .menu-client p{
     background: url("../images/client.png") no-repeat 60px 1px;
 }
 
-.menu-call p{
-    background: url("../images/call.png") no-repeat 60px 1px;
-}
+
 
 .menu-calendrier p{
     background: url("../images/calendrier.png") no-repeat 60px 1px;
     padding-left: 20px;
+}
+
+.menu-supplier p{
+    background: url(../images/fournisseur.png) no-repeat 20%;
+    padding-left: 20px;
+    background-size: 33px;
 }
 
 
