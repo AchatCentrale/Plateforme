@@ -17,4 +17,5 @@
 /web/bundles/
 .idea/
 composer.lock
-
+node_modules/
+react/app.jsx

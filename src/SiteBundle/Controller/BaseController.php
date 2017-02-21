@@ -5,6 +5,8 @@ namespace SiteBundle\Controller;
 use AchatCentrale\CrmBundle\Entity\Clients;
 use AchatCentrale\CrmBundle\Form\ClientsType;
 use AchatCentrale\CrmBundle\Form\UsersType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -61,9 +63,14 @@ class BaseController extends Controller
 
         return $this->render('@Site/Base/clientListe.html.twig', array(
             'client' => $client_users,
-            'log' => $log
+            'log' => $log,
+            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR
         ));
     }
+
+
+
+
 
 
 
@@ -73,8 +80,6 @@ class BaseController extends Controller
     {
 
         $client_info = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('ccId' => $clientId));
-
-
 
         /**
          * @var \Swift_Mime_Message $message
@@ -201,16 +206,9 @@ class BaseController extends Controller
 
 
 
-
-
     public function testWithParamAction(Request $request, $id)
     {
-
-
-
         $panier = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
-
-
         return $this->render('@Site/test.html.twig', array(
             'panier' => $panier
         ));

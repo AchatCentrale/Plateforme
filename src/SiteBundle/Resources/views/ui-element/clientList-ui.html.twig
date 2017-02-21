@@ -1,16 +1,16 @@
 <div class="container-client-liste">
-    <div class="toolbar-client-liste">
-        <div class="new-client-liste">
-            <h1>Nouveau</h1>
-            <p></p>
+    {% block body %}
+
+        <div id="app">
+
         </div>
-        <div class="export-client-liste">
-            <h1>Exporter</h1>
-            <p></p>
-        </div>
-        <div class="update-client-liste">
-            <h1>Modifier</h1>
-            <p></p>
-        </div>
-    </div>
+
+    {% endblock %}
+
+
+    {% block javascripts %}
+
+            <script src={{ asset('app.bundle.js') }} type="text/javascript"></script>
+
+    {% endblock %}
 </div>

@@ -513,8 +513,67 @@ a.btn-add-client {
     display: flex;
 }
 
-.new-client-liste p{
-    background: url(../images/add.png);
 
+.container-actionBar{
+    display: flex;
+    width: 55%;
+    justify-content: space-around;
+    padding-top: 10px;
+    font-size: 20px;
+    color: rgba(0,0,0,0.87);
+    letter-spacing: -1.76px;
+    margin-left: 55px;
+}
+.add-icon{
+    height: 35px;
+    width: 132px;
+    background: url(../images/add.png) no-repeat 76px;
+    padding-top: 4px;
 }
 
+.export-icon{
+    height: 35px;
+    width: 132px;
+    background: url(../images/export.png) no-repeat 76px;
+    padding-top: 4px;
+}
+
+.update-icon{
+     height: 35px;
+     width: 132px;
+     background: url(../images/update.png) no-repeat 76px;
+     padding-top: 4px;
+ }
+.delete-icon{
+    height: 35px;
+    width: 132px;
+    background: url(../images/Delete-2.png) no-repeat 95px;
+    padding-top: 4px;
+}
+
+.container-marques{
+    display: flex;
+    padding-top: 10px;
+}
+
+.container-marques p{
+    font-family: AvenirNext-DemiBold;
+    font-size: 36px;
+    color: rgba(0,0,0,0.87);
+    letter-spacing: -3.16px;
+    padding-left: 18px;
+}
+
+.container-actionBar-top{
+    display: flex;
+}
+
+.container-delete {
+    padding-top: 15px;
+    margin-left: 10%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    color: rgba(0,0,0,0.87);
+    letter-spacing: -1.76px;
+}
