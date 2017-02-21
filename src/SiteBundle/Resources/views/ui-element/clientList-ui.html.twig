@@ -1,77 +1,16 @@
+<div class="container-client-liste">
+    {% block body %}
 
-<div class="client-liste">
+        <div id="app">
 
-    <div class="top-client-liste">
-        <h2 class="hover-update-client"  data-content="{{ client[0].cl.clRaisonsoc }}"  >Nom de l'entreprise : {{ client[0].cl.clRaisonsoc }}  </h2>
-        <p class="hover-update-client" data-content="{{ client[0].cl.clRef }}"  >Réference de l'entreprise : {{ client[0].cl.clRef }}  </p>
-        <p class="hover-update-client" data-content="{{ client[0].cl.clSiret }}"  >Siret de l'entreprise : {{ client[0].cl.clSiret }}  </p>
-        <p class="hover-update-client" data-content="{{ client[0].cl.clAdresse1 }}"  >{{ client[0].cl.clAdresse1 }}  </p>
-        <p class="hover-update-client"  data-content="{{ client[0].cl.clPays }} {{ client[0].cl.clVille }}" >{{ client[0].cl.clPays }} {{ client[0].cl.clVille }}  </p>
-        <p class="hover-update-client" data-content="{{ client[0].cl.clMail }}"  >{{ client[0].cl.clMail }}  </p>
-        <p class="hover-update-client" data-content="{{ client[0].cl.clWeb }} "  >{{ client[0].cl.clWeb }}  </p>
-        <p class="hover-update-client" data-content="{{ client[0].cl.insDate | date('d M Y') }}"  >Inscrit le : {{ client[0].cl.insDate | date('d M Y') }}  </p>
-        <p class="hover-update-client" data-content="{{ client[0].cl.insDate | date('d M Y') }} "  >Adhesion le : {{ client[0].cl.insDate | date('d M Y') }}  </p>
-        <p class="hover-update-client" data-content="{{ client[0].cl.insDate | date('d M Y') }} "  >Numero de téléphone : {{ client[0].cl.clTel }}  </p>
-    </div>
-
-
-    <div class="photo-client-liste">
-        {% if client[0].cl.clLogo %}
-            <img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].cl.clId }}/{{ client[0].cl.clLogo }}" alt="">
-
-        {% endif %}
-        <div class="button-action">
-            <button class="ink-button red btn-del">Supprimer client</button>
         </div>
 
-        <div class="block-logs">
-            {% if log %}
-                <h5>LOGS : </h5>
-                {% for logs in log|slice(0, 3) %}
-                    <p>{{ logs.loDescr | raw }}</p>
-                {% endfor %}
-            {% else %}
-            {% endif %}
-        </div>
-    </div>
+    {% endblock %}
 
+
+    {% block javascripts %}
+
+            <script src={{ asset('app.bundle.js') }} type="text/javascript"></script>
+
+    {% endblock %}
 </div>
-
-<div class="user-client-liste">
-
-
-    <div id="accordion">
-        {% for clients in client %}
-
-
-            <h3>{{ clients.ccPrenom }} {{ clients.ccNom }}</h3>
-            <div class="block-list-user">
-                <div>
-                    <p> Membres depuis :{{ clients.insDate | date(' d M Y') }}</p>
-                </div>
-                <div>
-                    <p>Tel: {{ clients.ccGsm }}</p>
-                </div>
-                <div>
-                    <p>Mot de passe: {{ clients.ccPass }}</p>
-
-                </div>
-                <div>
-                    <p>Adresse Mail: {{ clients.ccMail }}</p>
-                </div>
-                <div>
-                    <i data-user="{{ clients.ccId }}" class="fa fa-envelope mail-send" aria-hidden="true"></i>
-                </div>
-
-            </div>
-
-
-
-        {% endfor %}
-    </div>
-</div>
-
-
-
-
-

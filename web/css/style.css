@@ -169,7 +169,7 @@ footer{
 .nav-bar{
     width: 15%;
     background-color: #1A2E46;
-    height: 1500px;
+    height: 100vh;
     text-align: center;
 }
 
@@ -202,23 +202,24 @@ body{
 
 .menu-home p{
     background: url("../images/Home.png") no-repeat 60px 1px;
-
+    padding-right: 13px;
 }
-.menu-task p{
-    background: url("../images/task.png") no-repeat 60px 1px;
 
-}
 .menu-client p{
     background: url("../images/client.png") no-repeat 60px 1px;
 }
 
-.menu-call p{
-    background: url("../images/call.png") no-repeat 60px 1px;
-}
+
 
 .menu-calendrier p{
     background: url("../images/calendrier.png") no-repeat 60px 1px;
-    padding-left: 20px;
+}
+
+.menu-supplier p{
+    background: url(../images/fournisseur.png) no-repeat 20%;
+    background-size: 33px;
+    text-align: center;
+    padding-left: 40px;
 }
 
 
@@ -233,15 +234,30 @@ body{
 }
 
 
+.menu-bottom a {
+    text-decoration: none;
+    color: white;
+}
+.menu-bottom a:hover {
+    text-decoration: none;
+    color: white;
+}
+
+
+
 .hover{
-    padding: 10px 0 2px 0;
+    height: 60px;
+
+    padding-top: 14px;
 
 }
 
 .hover p:hover{
     background-color: #132233;
     cursor: pointer;
-    margin-bottom: 10px;
+    height: 60px;
+
+
 }
 
 
@@ -250,7 +266,7 @@ body{
     width: 85%;
     float: right;
     background-color: white;
-    margin-bottom: 23px;
+    margin-bottom: 40px;
 
 }
 
@@ -281,13 +297,13 @@ body{
 }
 
 .notification{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     float: right;
-    border: 5px #D2D2D2 solid;
+    border: 3px #D2D2D2 solid;
     margin-top: 24px;
     margin-right: 110px;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .liste-client {
@@ -467,8 +483,97 @@ a.btn-add-client {
     background: url(../images/settings.png) no-repeat 60px 1px;
     color: white;
     font-family: lato;
+    padding-left: 25px;
     text-decoration: none;
 
 }
 
 
+
+.container-client-liste {
+    position: relative;
+    width: 85%;
+    background-color: white;
+    float: left;
+    height: 85vh;
+}
+
+
+.toolbar-client-liste{
+    background-color: white;
+    height: 9%;
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+    margin-left: 135px;
+    margin-top: 20px;
+}
+
+.new-client-liste{
+    display: flex;
+}
+
+
+.container-actionBar{
+    display: flex;
+    width: 55%;
+    justify-content: space-around;
+    padding-top: 10px;
+    font-size: 20px;
+    color: rgba(0,0,0,0.87);
+    letter-spacing: -1.76px;
+    margin-left: 55px;
+}
+.add-icon{
+    height: 35px;
+    width: 132px;
+    background: url(../images/add.png) no-repeat 76px;
+    padding-top: 4px;
+}
+
+.export-icon{
+    height: 35px;
+    width: 132px;
+    background: url(../images/export.png) no-repeat 76px;
+    padding-top: 4px;
+}
+
+.update-icon{
+     height: 35px;
+     width: 132px;
+     background: url(../images/update.png) no-repeat 76px;
+     padding-top: 4px;
+ }
+.delete-icon{
+    height: 35px;
+    width: 132px;
+    background: url(../images/Delete-2.png) no-repeat 95px;
+    padding-top: 4px;
+}
+
+.container-marques{
+    display: flex;
+    padding-top: 10px;
+}
+
+.container-marques p{
+    font-family: AvenirNext-DemiBold;
+    font-size: 36px;
+    color: rgba(0,0,0,0.87);
+    letter-spacing: -3.16px;
+    padding-left: 18px;
+}
+
+.container-actionBar-top{
+    display: flex;
+}
+
+.container-delete {
+    padding-top: 15px;
+    margin-left: 10%;
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    color: rgba(0,0,0,0.87);
+    letter-spacing: -1.76px;
+}

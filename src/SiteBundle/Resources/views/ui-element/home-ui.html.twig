@@ -21,31 +21,3 @@
 </div>
 
 
-
-
-<script>
-
-    $('.title-ui').on('click', function (e) {
-
-        switch (e.currentTarget.innerText) {
-            case 'CRM':
-                console.log('crm');
-                window.location.replace("{{ path('crm_home') }}");
-                break;
-            case 'Stats':
-                window.location.replace("{{ path('index_auth') }}");
-                break;
-        }
-
-    });
-
-    $('.title-ui').hover(function () {
-        $(this).css( 'cursor', 'pointer' );
-
-    });
-
-
-
-
-
-</script>
