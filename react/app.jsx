@@ -18,7 +18,7 @@ class App extends React.Component {
         return (
             <div>
                 <ActionBar/>
-
+                <h1>coucou</h1>
                 {this.props.children}
             </div>
         );

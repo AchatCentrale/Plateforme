@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7169a55297e12a209a43"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "76f537f10bfa3f549f86"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotMainModule = true; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -12373,6 +12373,11 @@ var App = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement(_ActionBar2.default, null),
+                _react2.default.createElement(
+                    'h1',
+                    null,
+                    'coucou'
+                ),
                 this.props.children
             );
         }
