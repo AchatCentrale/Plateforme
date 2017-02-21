@@ -59,9 +59,6 @@ class BaseController extends Controller
                     'loIdentNum' => $id
                 ));
 
-        dump($log);
-
-
         return $this->render('@Site/Base/clientListe.html.twig', array(
             'client' => $client_users,
             'log' => $log
