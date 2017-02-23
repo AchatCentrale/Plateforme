@@ -566,6 +566,7 @@ a.btn-add-client {
 
 .container-actionBar-top{
     display: flex;
+    height: 85px;
 }
 
 .container-delete {
@@ -576,4 +577,101 @@ a.btn-add-client {
     font-size: 20px;
     color: rgba(0,0,0,0.87);
     letter-spacing: -1.76px;
+}
+
+.container-content {
+    display: flex;
+}
+
+
+.container-page {
+    width: 74%;
+    height: 70vh;
+    margin-left: 123px;
+    background-color: #ECECEC;
+    border-radius: 6px;
+}
+
+.container-sidebar {
+    width: 15%;
+    background-color: #CFCFCF;
+    margin-left: 12px;
+    border-radius: 5px;
+}
+
+.sidebar {
+    background-color: #1A2F47;
+    border-radius: 100px;
+    height: 61px;
+    padding-top: 13px;
+    color: white;
+    font-family: LucidaGrande;
+    font-size: 24px;
+    color: rgba(255,255,255,0.87);
+    letter-spacing: -2.11px;
+    width: 94%;
+    margin: 9px auto;
+    cursor: pointer;
+    text-align: center;
+
+}
+.current{
+    background-color: black;
+}
+
+
+.sidebar a{
+    color: white;
+    text-decoration: none;
+}
+
+.sidebar a:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.container-info{
+    display: flex;
+}
+.container-info-gauche{
+    display: flex;
+    width: 50%;
+    padding-left: 60px;
+    padding-top: 45px;
+}
+
+.container-info-droite{
+    display: flex;
+    width: 50%;
+    margin-top: 45px;
+}
+
+.col-droite-info{
+    text-align: center;
+    margin-left: 100px;
+}
+
+.col-droite-info p{
+    background: #D8D8D8;
+    border-radius: 2px;
+    font-size: 18px;
+    color: rgba(0,0,0,0.87);
+    padding: 1px 25px 0px 23px;
+}
+
+.col-gauche-info p{
+    padding: 2px 1px 1px 1px;
+}
+
+.container-contact-list{
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+.container-contact-list h3 {
+    text-decoration: underline;
+}
+
+.container-table-contact{
+
 }
