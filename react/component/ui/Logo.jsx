@@ -16,7 +16,7 @@ export default class Logo extends React.Component {
     render() {
         return(
             <div className="container-marques" >
-                <Avatar round="true" size="50" facebook-id="Jbbbbb" src="http://www.gravatar.com/avatar/a16a38cdfe8b2cbd38e8a56ab93238d3" />
+                <Avatar round="true" size="50" facebook-id="Jbbbbb" src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_51/oderis.png" />
                 <p>Marque client</p>
             </div>
         );
