@@ -14,7 +14,15 @@ body {
     padding: 0;
 }
 
-
+img {
+    border: 0;
+    width: auto;
+    max-width: 70%;
+    vertical-align: top;
+}
+.block-logo img {
+    width: 70%;
+}
 
 .form-login{
     width: 90%;
@@ -528,7 +536,7 @@ a.btn-add-client {
     display: flex;
     width: 55%;
     justify-content: space-around;
-    padding-top: 10px;
+    padding-top: 18px;
     font-size: 20px;
     color: rgba(0,0,0,0.87);
     letter-spacing: -1.76px;
@@ -564,14 +572,16 @@ a.btn-add-client {
 .container-marques{
     display: flex;
     padding-top: 10px;
+    width: 158%;
 }
 
 .container-marques p{
     font-family: AvenirNext-DemiBold;
-    font-size: 36px;
+    font-size: 157%;
     color: rgba(0,0,0,0.87);
     letter-spacing: -3.16px;
     padding-left: 18px;
+    padding-top: 7px;
 }
 
 .container-actionBar-top{
@@ -596,17 +606,17 @@ a.btn-add-client {
 
 .container-page {
     width: 74%;
-    height: 70vh;
-    margin-left: 123px;
+    min-height: 70vh;
     background-color: #ECECEC;
     border-radius: 6px;
+    margin: 0 auto;
 }
 
 .container-sidebar {
-    width: 15%;
+    width: 18%;
     background-color: #CFCFCF;
-    margin-left: 12px;
     border-radius: 5px;
+    margin: 0 auto;
 }
 
 .sidebar {
@@ -645,20 +655,20 @@ a.btn-add-client {
 }
 .container-info-gauche{
     display: flex;
-    width: 50%;
-    padding-left: 60px;
+    padding-left: 5%;
     padding-top: 45px;
 }
 
 .container-info-droite{
     display: flex;
-    width: 50%;
+    width: 40%;
     margin-top: 45px;
+    margin-left: 6%;
 }
 
 .col-droite-info{
     text-align: center;
-    margin-left: 100px;
+    margin-left: 10%;
 }
 
 .col-droite-info p{
