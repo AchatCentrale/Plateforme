@@ -5,6 +5,14 @@
     margin-bottom: 55px;
 }
 
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
 
 
@@ -169,7 +177,7 @@ footer{
 .nav-bar{
     width: 15%;
     background-color: #1A2E46;
-    height: 100vh;
+    min-height: 100vh;
     text-align: center;
 }
 
@@ -676,4 +684,9 @@ a.btn-add-client {
 
 .container-table-contact{
 
+}
+
+
+.login-container {
+    margin-top: 15%;
 }
