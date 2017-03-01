@@ -201,22 +201,22 @@ body{
 }
 
 .menu-home p{
-    background: url("../images/Home.png") no-repeat 60px 1px;
+    background: url("../images/Home.png") no-repeat 18% 1px;
     padding-right: 13px;
 }
 
 .menu-client p{
-    background: url("../images/client.png") no-repeat 60px 1px;
+    background: url("../images/client.png") no-repeat 18% 1px;
 }
 
 
 
 .menu-calendrier p{
-    background: url("../images/calendrier.png") no-repeat 60px 1px;
+    background: url("../images/calendrier.png") no-repeat 18% 1px;
 }
 
 .menu-supplier p{
-    background: url(../images/fournisseur.png) no-repeat 20%;
+    background: url(../images/fournisseur.png) no-repeat 20% 1px;
     background-size: 33px;
     text-align: center;
     padding-left: 40px;
@@ -262,26 +262,30 @@ body{
 
 
 .recherche{
-    height:100px;
+    height: 100px;
     width: 85%;
     float: right;
     background-color: white;
     margin-bottom: 40px;
+    display: flex;
 
 }
 
 .ajout {
     margin-top: 34px;
     margin-left: 12%;
-    float: left;
     width: 30%;
     border-bottom: 1px solid black;
+    display: flex;
+    height: 33px;
 }
 .ajout input[type="text"] {
     border: none;
     outline: none;
     float: right;
     width: 90%;
+    margin-left: 9%;
+    padding-bottom: 4%;
 }
 .boule-verte{
     width: 20px;
@@ -299,18 +303,16 @@ body{
 .notification{
     width: 40px;
     height: 40px;
-    float: right;
     border: 3px #D2D2D2 solid;
     margin-top: 24px;
-    margin-right: 110px;
+    margin-left: 5%;
     border-radius: 10px;
 }
 
 .liste-client {
     width: 82%;
     float: right;
-    margin-right: 30px;
-    margin-top: 70px;
+    margin-right: 2%;
 }
 
 .row-client{
@@ -463,7 +465,7 @@ a.btn-add-client {
 
 .menu-logout p{
 
-    background: url(../images/logoutt.png) no-repeat 60px 1px;
+    background: url(../images/logoutt.png) no-repeat 18% 1px;
     padding-left: 37px;
     color: white;
     font-family: lato;
@@ -480,7 +482,7 @@ a.btn-add-client {
 
 .menu-settings p{
 
-    background: url(../images/settings.png) no-repeat 60px 1px;
+    background: url(../images/settings.png) no-repeat 18% 1px;
     color: white;
     font-family: lato;
     padding-left: 25px;
