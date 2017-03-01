@@ -17,15 +17,6 @@ clientById:
     path:     /client/{id}
     defaults: { _controller: SiteBundle:Base:clientById }
 
-homepage:
-    path:     /react
-
-homepage2:
-    path:     /react/{slug}
-
-
-
-
 sendClientDetailMail:
     path:     /send/client/{clientId}
     defaults: {_controller: SiteBundle:Base:sendClientDetailMail}
