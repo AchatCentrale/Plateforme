@@ -7,11 +7,12 @@ achat_centrale_crm:
     prefix:   /crm
 
 
-#users:
-#    type:   rest
-#    resource: "@AchatCentraleCrmBundle/Controller/UserController.php"
-#
-#
-#clients:
-#    type:   rest
-#    resource: "@AchatCentraleCrmBundle/Controller/ClientController.php"
+Api:
+    resource: "@AchatCentraleCrmBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+
+clients:
+    type:   rest
+    resource: "@AchatCentraleCrmBundle/Controller/ClientsController.php"
