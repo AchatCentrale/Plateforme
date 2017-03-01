@@ -51,12 +51,18 @@ doctrine:
                 user:           "%database_user%"
                 password:       "%database_password%"
                 dbname:         "CENTRALE_ACHAT_JB"
+                charset:  UTF8
+                options:
+                    1002:  "SET NAMES 'UTF8'"
             centrale_produits:
                 driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
                 host:           "185.29.149.32"
                 user:           "AC_JBAGOSTIN"
                 password:       "35H7Hjvy"
                 dbname:         "CENTRALE_PRODUITS_JB"
+                charset:  UTF8
+                options:
+                    1002:  "SET NAMES 'UTF8'"
 
 
     orm:
