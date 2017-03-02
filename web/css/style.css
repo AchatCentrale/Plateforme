@@ -700,3 +700,10 @@ a.btn-add-client {
 .login-container {
     margin-top: 15%;
 }
+
+.container-info-gauche {
+    display: flex;
+    padding-left: 5%;
+    padding-top: 45px;
+    width: 50%;
+}

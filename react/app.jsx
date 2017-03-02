@@ -21,10 +21,17 @@ import {
 
 
 class App extends React.Component {
+
+
+
+
+
+
+
+
     render() {
 
         let currentLocation = this.props;
-        console.log(currentLocation);
 
 
         return (
@@ -58,7 +65,7 @@ render((
     <Router history={browserHistory}>
         <Route name="app" path="/client/:id" component={App}>
             <IndexRoute component={General}/>
-            <Route path="General" component={General} />
+            <Route path="General" clients="test" component={General} />
             <Route path="Adresse" component={Adresse} />
             <Route path="Status" component={EtatClient} />
             <Route path="Dépenses" component={Depenses} />
