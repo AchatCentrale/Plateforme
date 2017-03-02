@@ -4,9 +4,20 @@ import React from 'react';
 export default class Info extends React.Component {
 
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props);
+
+
+
+
     }
+
+
+    componentWillMount(){
+
+
+    }
+
 
 
     render() {
@@ -14,6 +25,11 @@ export default class Info extends React.Component {
             backgroundColor : "#60C06C",
             color: "white"
         };
+
+        let styleStatutFail ={
+            backgroundColor : "#801515",
+            color: "white"
+        }
 
 
         return(
@@ -23,17 +39,14 @@ export default class Info extends React.Component {
                       <p>Réference</p>
                       <p>Raison social</p>
                       <p>Siret</p>
-                      <p>Secteur</p>
                       <p>Téléphone</p>
-                      <p>Catégorie</p>
                   </div>
                   <div className="col-droite-info">
-                      <p>FUN_FRA051_0002</p>
-                      <p>OrviF</p>
-                      <p>184681484848615</p>
-                      <p>Assurance</p>
-                      <p>06658953</p>
-                      <p>∂</p>
+                      <p>{this.props.clients.clRef}</p>
+                      <p>{this.props.clients.clRaisonsoc}</p>
+                      <p>{this.props.clients.clSiret}</p>
+                      <p>{this.props.clients.clTel}</p>
+
                   </div>
               </div>
               <div className="container-info-droite">
@@ -44,7 +57,13 @@ export default class Info extends React.Component {
                   </div>
                   <div className="col-droite-info">
                       <p>500-1000</p>
-                      <p style={ styleStatut }>Actif</p>
+                      <p
+                          style={
+                            (this.props.clients.clStatus === 1)
+                                  ? styleStatut
+                                  : styleStatutFail
+                                }
+                      >Actif</p>
                       <p>Morgane</p>
 
                   </div>
