@@ -707,3 +707,56 @@ a.btn-add-client {
     padding-top: 45px;
     width: 50%;
 }
+
+
+
+.loader {
+    border: 16px solid white; /* Light grey */
+    border-top: 16px solid #1A2F47; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.container-loader {
+    width: 80%;
+    height: 100%;
+    margin: 17% 44%;
+}
+
+
+.table-client-user-header{
+    border: 2px solid gray;
+}
+
+.table-client-user-body{
+    border: 1px solid gray;
+}
+
+
+
+.table-client-user{
+    width: 100%;
+    text-align: center;
+}
+
+.table-client-user-body tr {
+    border: solid 1px black;
+}
+
+.mail-user{
+    cursor: pointer;
+}
+
+
+
+
+
+

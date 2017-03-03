@@ -15,7 +15,6 @@ export default class Info extends React.Component {
 
     componentWillMount(){
 
-
     }
 
 
@@ -29,7 +28,7 @@ export default class Info extends React.Component {
         let styleStatutFail ={
             backgroundColor : "#801515",
             color: "white"
-        }
+        };
 
 
         return(
@@ -65,7 +64,6 @@ export default class Info extends React.Component {
                                 }
                       >Actif</p>
                       <p>Morgane</p>
-
                   </div>
               </div>
           </div>
