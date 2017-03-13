@@ -1,5 +1,6 @@
 import React from 'react';
 import ActionBar from './component/ActionBar.jsx';
+import ClientListe from './component/page/ClientListe.jsx'
 import General from './component/page/client/General.jsx'
 import Depenses from './component/page/client/Depenses.jsx'
 import EtatClient from './component/page/client/EtatClient.jsx'
@@ -18,14 +19,11 @@ import {
     IndexRedirect
 } from 'react-router';
 
+import { Table } from 'semantic-ui-react'
+
 
 
 class App extends React.Component {
-
-
-
-
-
 
 
 
@@ -35,13 +33,18 @@ class App extends React.Component {
 
 
         return (
+
             <div>
-                <ActionBar/>
+
 
                 <div className="container-content">
+
+                    <ActionBar/>
                     <div className="container-page" >
                         {this.props.children}
                     </div>
+
+
 
                     <div className="container-sidebar">
                        <Sidebar content="General" context={currentLocation} />
@@ -51,8 +54,9 @@ class App extends React.Component {
                        <Sidebar content="Actions" context={currentLocation} />
                        <Sidebar content="Hierarchie" context={currentLocation} />
                     </div>
-                </div>
 
+
+                </div>
             </div>
         );
     }
@@ -61,9 +65,13 @@ class App extends React.Component {
 
 
 render((
-
     <Router history={browserHistory}>
-        <Route name="app" path="/client/:id" component={App}>
+
+
+        <Route name="client_home" path="/client" component={ClientListe} />
+
+
+        <Route name="Client_detail" path="/client/:id" component={App}>
             <IndexRoute component={General}/>
             <Route path="General" clients="test" component={General} />
             <Route path="Adresse" component={Adresse} />

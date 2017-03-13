@@ -164,4 +164,21 @@ class ClientsController extends FOSRestController
         return $restresult;
     }
 
+
+    /**
+     * @Rest\Get("/Agence/{id}/logs")
+     */
+    public function getLogsAgenceAction($id)
+    {
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
+
+
+
+
+        if ($restresult === null) {
+            return new View("there are no users exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
+
 }

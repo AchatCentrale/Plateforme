@@ -2,12 +2,6 @@ $( function() {
 
 
 
-    //accordeon liste user
-    $( "#accordion" ).accordion({
-        active: false,
-        collapsible: true,
-    });
-
     //envoie de mail ajax
     $('.mail-send').on('click', function (e) {
 

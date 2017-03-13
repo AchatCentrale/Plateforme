@@ -731,6 +731,13 @@ a.btn-add-client {
     margin: 17% 44%;
 }
 
+.table-client {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+
+
 
 .table-client-user-header{
     border: 2px solid gray;
