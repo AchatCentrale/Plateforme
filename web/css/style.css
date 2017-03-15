@@ -1,3 +1,51 @@
+/**
+ * http://applemusic.tumblr.com/
+ * https://jsfiddle.net/xq56dmrh/
+ */
+
+/** Ultra Light */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 100;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff");
+}
+
+/** Thin */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 200;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff");
+}
+
+/** Regular */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 400;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
+/** Medium */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 500;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff");
+}
+
+/** Semi Bold */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 600;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff");
+}
+
+/** Bold */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 700;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
+}
+
+
 .img-home{
 
     width: 14%;
@@ -143,7 +191,7 @@ a:hover {
     color: black;
     margin-top: 30px;
     margin-left: 37px;
-    font-family: avenir;
+    font-family: "San Francisco";
     font-weight: 500;
 }
 .gestion-btn-group{
@@ -278,6 +326,13 @@ body{
 
 }
 
+.add-action{
+    width: 40%;
+    padding-left: 15%;
+    padding-top: 2%;
+}
+
+
 .ajout {
     margin-top: 34px;
     margin-left: 12%;
@@ -294,14 +349,7 @@ body{
     margin-left: 9%;
     padding-bottom: 4%;
 }
-.boule-verte{
-    width: 20px;
-    height: 20px;
-    float: left;
-    background-color: #46EBC6;
-    border-radius: 51%;
-    margin-left: 13px;
-}
+
 
 .loupe {
     float: left;
@@ -449,7 +497,7 @@ a.btn-add-client {
 
 .block-logo p {
     color: white;
-    font-family: SanFranciscoText-Bold;
+    font-family: "San Francisco";
     font-size: 13px;
     color: rgba(255,255,255,0.87);
     letter-spacing: 0.86px;
@@ -464,7 +512,7 @@ a.btn-add-client {
 
 
 .block-profile p {
-    font-family: Lato;
+    font-family: "San Francisco";
     font-size: 16px;
     color: rgba(255,255,255,0.87);
 }
@@ -476,7 +524,7 @@ a.btn-add-client {
     background: url(../images/logoutt.png) no-repeat 18% 1px;
     padding-left: 37px;
     color: white;
-    font-family: lato;
+    font-family: "San Francisco";
     text-decoration: none;
 
 }
@@ -496,7 +544,7 @@ a.btn-add-client {
 
     background: url(../images/settings.png) no-repeat 18% 1px;
     color: white;
-    font-family: lato;
+    font-family: "San Francisco";
     padding-left: 25px;
     text-decoration: none;
 
@@ -572,7 +620,7 @@ a.btn-add-client {
 }
 
 .container-marques p{
-    font-family: AvenirNext-DemiBold;
+    font-family: "San Francisco";
     font-size: 157%;
     color: rgba(0,0,0,0.87);
     letter-spacing: -3.16px;
@@ -641,7 +689,7 @@ a.btn-add-client {
     height: 61px;
     padding-top: 13px;
     color: white;
-    font-family: LucidaGrande;
+    font-family: "San Francisco";
     font-size: 24px;
     color: rgba(255,255,255,0.87);
     letter-spacing: -2.11px;
@@ -796,6 +844,9 @@ form.ink-form.form-login {
     padding-top: 20px;
 }
 
-
+.interlocuteur {
+    display: flex;
+    justify-content: space-around;
+}
 
 

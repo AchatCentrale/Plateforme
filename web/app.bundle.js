@@ -41096,13 +41096,40 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var App = function (_React$Component) {
     _inherits(App, _React$Component);
 
-    function App() {
+    _createClass(App, [{
+        key: 'getTheUser',
+        value: function getTheUser() {
+            var _this2 = this;
+
+            var url = "http://localhost:8000/who";
+
+            $.getJSON(url, function (data) {
+                console.log(data);
+                _this2.setState({
+                    user: data
+
+                });
+            });
+        }
+    }]);
+
+    function App(props) {
         _classCallCheck(this, App);
 
-        return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+        _this.state = {
+            user: ''
+        };
+        return _this;
     }
 
     _createClass(App, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.getTheUser.call(this);
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -51109,8 +51136,8 @@ var ClientListe = function (_React$Component) {
     }
 
     _createClass(ClientListe, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
             this.getClient.call(this);
         }
     }, {
@@ -52533,6 +52560,12 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _semanticUiReact = __webpack_require__(278);
+
+var _ModalAction = __webpack_require__(1103);
+
+var _ModalAction2 = _interopRequireDefault(_ModalAction);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52544,38 +52577,70 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var TopBar = function (_React$Component) {
     _inherits(TopBar, _React$Component);
 
-    function TopBar() {
+    function TopBar(props) {
         _classCallCheck(this, TopBar);
 
-        return _possibleConstructorReturn(this, (TopBar.__proto__ || Object.getPrototypeOf(TopBar)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (TopBar.__proto__ || Object.getPrototypeOf(TopBar)).call(this, props));
+
+        _this.state = { open: false };
+        _this.show = function () {
+            return _this.setState({ open: true });
+        };
+        _this.close = function () {
+            return _this.setState({ open: false });
+        };
+
+        return _this;
     }
 
     _createClass(TopBar, [{
-        key: "render",
+        key: 'render',
         value: function render() {
+            var open = this.state.open;
+
+
             return _react2.default.createElement(
-                "div",
+                'div',
                 null,
                 _react2.default.createElement(
-                    "div",
-                    { className: "recherche" },
+                    'div',
+                    { className: 'recherche' },
                     _react2.default.createElement(
-                        "div",
-                        { className: "ajout" },
-                        _react2.default.createElement("div", { className: "boule-verte" }),
-                        _react2.default.createElement("input", { type: "text", placeholder: "Recherche" })
+                        'div',
+                        { onClick: this.show, className: 'add-action' },
+                        _react2.default.createElement('img', { src: '/images/add_action.png', className: 'cursor', alt: '' })
                     ),
                     _react2.default.createElement(
-                        "div",
-                        { className: "ajout" },
+                        'div',
+                        { className: 'ajout' },
                         _react2.default.createElement(
-                            "div",
-                            { className: "loupe" },
-                            "\uD83D\uDD0D"
+                            'div',
+                            { className: 'loupe' },
+                            '\uD83D\uDD0D'
                         ),
-                        _react2.default.createElement("input", { type: "text", placeholder: "Recherche" })
+                        _react2.default.createElement('input', { type: 'text', placeholder: 'Recherche' })
                     ),
-                    _react2.default.createElement("div", { className: "notification" })
+                    _react2.default.createElement('div', { className: 'notification' })
+                ),
+                _react2.default.createElement(
+                    _semanticUiReact.Modal,
+                    { open: open, onClose: this.close, closeIcon: 'close' },
+                    _react2.default.createElement(_semanticUiReact.Header, { icon: 'tasks', content: 'Nouvel action' }),
+                    _react2.default.createElement(
+                        _semanticUiReact.Modal.Content,
+                        null,
+                        _react2.default.createElement(_ModalAction2.default, null)
+                    ),
+                    _react2.default.createElement(
+                        _semanticUiReact.Modal.Actions,
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Button,
+                            { color: 'green' },
+                            _react2.default.createElement(_semanticUiReact.Icon, { name: 'save' }),
+                            ' Enregistrer'
+                        )
+                    )
                 )
             );
         }
@@ -93619,6 +93684,159 @@ module.exports = g;
 
 module.exports = __webpack_require__(547);
 
+
+/***/ }),
+/* 1103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = __webpack_require__(278);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ModalAction = function (_React$Component) {
+    _inherits(ModalAction, _React$Component);
+
+    function ModalAction(props) {
+        _classCallCheck(this, ModalAction);
+
+        return _possibleConstructorReturn(this, (ModalAction.__proto__ || Object.getPrototypeOf(ModalAction)).call(this));
+    }
+
+    _createClass(ModalAction, [{
+        key: 'render',
+        value: function render() {
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                    _semanticUiReact.Grid,
+                    { columns: 'equal' },
+                    _react2.default.createElement(
+                        _semanticUiReact.Grid.Row,
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'interlocuteur' },
+                                _react2.default.createElement(
+                                    'div',
+                                    null,
+                                    _react2.default.createElement(
+                                        'p',
+                                        null,
+                                        'Interlocuteur'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    null,
+                                    _react2.default.createElement(_semanticUiReact.Input, { icon: 'users', iconPosition: 'left', placeholder: 'Utilisateur ..' })
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'interlocuteur' },
+                                _react2.default.createElement(
+                                    'div',
+                                    null,
+                                    _react2.default.createElement(
+                                        'p',
+                                        null,
+                                        'Entreprise'
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    'div',
+                                    null,
+                                    _react2.default.createElement(_semanticUiReact.Input, { icon: 'briefcase', iconPosition: 'left', placeholder: 'Nom entreprise ..' })
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Date : 15 mars 2017'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _semanticUiReact.Grid.Row,
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(_semanticUiReact.Select, { placeholder: 'Selectionnez le type d\'action' })
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Segment,
+                                null,
+                                '2'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Segment,
+                                null,
+                                '3'
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _semanticUiReact.Grid.Row,
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Form,
+                                null,
+                                _react2.default.createElement(_semanticUiReact.TextArea, { placeholder: 'Votre commentaire ...' })
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return ModalAction;
+}(_react2.default.Component);
+
+exports.default = ModalAction;
 
 /***/ })
 /******/ ]);

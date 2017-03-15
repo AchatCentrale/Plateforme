@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -34,6 +35,23 @@ class BaseController extends Controller
         return $this->render('@Site/Base/home.html.twig', array(
 
         ));
+
+    }
+
+    public function whoAreAction(Request $request)
+    {
+
+        $user = $this->getUser();
+
+        $arrUser = (array) $user;
+
+
+        dump($arrUser);
+
+
+
+        return new JsonResponse($arrUser, 200);
+
 
     }
 

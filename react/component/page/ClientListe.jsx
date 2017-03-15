@@ -21,7 +21,7 @@ export default class ClientListe extends React.Component {
     }
 
 
-    handleClickGoto(e : Event){
+    handleClickGoto(e){
         e.persist();
         console.log(e.target)
     }
@@ -47,7 +47,7 @@ export default class ClientListe extends React.Component {
     }
 
 
-    componentWillMount(){
+    componentDidMount(){
         this.getClient.call(this);
 
     }

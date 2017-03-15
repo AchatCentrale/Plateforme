@@ -31,6 +31,36 @@ class App extends React.Component {
 
 
 
+    getTheUser(){
+        let url = "http://localhost:8000/who";
+
+        $.getJSON(url, (data)=>{
+            console.log(data );
+            this.setState({
+                user:  data,
+
+            });
+        })
+
+
+    }
+
+
+    constructor(props){
+
+        super(props);
+        this.state = {
+            user : ''
+        }
+    }
+
+
+    componentDidMount(){
+        this.getTheUser.call(this);
+
+    }
+
+
     render() {
 
 
