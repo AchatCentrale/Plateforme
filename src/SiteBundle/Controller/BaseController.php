@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -37,16 +38,24 @@ class BaseController extends Controller
 
     }
 
-    public function clientAction(Request $request)
+    public function whoAreAction(Request $request)
     {
 
-        $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
+        $user = $this->getUser();
+
+        $arrUser = (array) $user;
 
 
-        return $this->render('@Site/Base/client.html.twig', array(
-            "client" => $client
-        ));
+        dump($arrUser);
+
+
+
+        return new JsonResponse($arrUser, 200);
+
+
     }
+
+
 
     public function clientByIdAction(Request $request, $id)
     {
@@ -151,7 +160,9 @@ class BaseController extends Controller
 
         $userActual = $this->get('security.token_storage')->getToken()->getUser();
 
-        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array("usMail" => $userActual));
+
+
+        dump($userActual);
         $form = $this->get('form.factory')->create(UsersType::class, $user[0]);
 
 
@@ -209,6 +220,7 @@ class BaseController extends Controller
     public function testWithParamAction(Request $request, $id)
     {
         $panier = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
+
         return $this->render('@Site/test.html.twig', array(
             'panier' => $panier
         ));

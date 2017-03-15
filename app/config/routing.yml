@@ -2,9 +2,7 @@ site:
     resource: "@SiteBundle/Resources/config/routing.yml"
     prefix:   /
 
-achat_centrale_crm:
-    resource: "@AchatCentraleCrmBundle/Resources/config/crm_routing/routing.yml"
-    prefix:   /crm
+
 
 
 Api:

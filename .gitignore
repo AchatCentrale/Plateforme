@@ -19,3 +19,4 @@
 composer.lock
 node_modules/
 web/app.bundle.js
+.DS_Store
