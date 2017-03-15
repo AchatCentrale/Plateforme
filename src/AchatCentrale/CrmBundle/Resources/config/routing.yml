@@ -1,5 +1,0 @@
-#all gestion
-gestion_all:
-          resource: "crm_routing/routing.yml"
-          prefix:   /gestion
-

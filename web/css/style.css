@@ -5,8 +5,24 @@
     margin-bottom: 55px;
 }
 
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
-
+img {
+    border: 0;
+    width: auto;
+    max-width: 70%;
+    vertical-align: top;
+}
+.block-logo img {
+    width: 70%;
+}
 
 .form-login{
     width: 90%;
@@ -169,7 +185,7 @@ footer{
 .nav-bar{
     width: 15%;
     background-color: #1A2E46;
-    height: 100vh;
+    min-height: 100vh;
     text-align: center;
 }
 
@@ -201,25 +217,18 @@ body{
 }
 
 .menu-home p{
-    background: url("../images/Home.png") no-repeat 60px 1px;
     padding-right: 13px;
 }
 
 .menu-client p{
-    background: url("../images/client.png") no-repeat 60px 1px;
 }
 
 
 
 .menu-calendrier p{
-    background: url("../images/calendrier.png") no-repeat 60px 1px;
 }
 
-.menu-supplier p{
-    background: url(../images/fournisseur.png) no-repeat 20%;
-    background-size: 33px;
-    text-align: center;
-    padding-left: 40px;
+.menu-supplier p {
 }
 
 
@@ -253,35 +262,37 @@ body{
 }
 
 .hover p:hover{
-    background-color: #132233;
-    cursor: pointer;
-    height: 60px;
+
 
 
 }
 
 
 .recherche{
-    height:100px;
+    height: 100px;
     width: 85%;
     float: right;
     background-color: white;
     margin-bottom: 40px;
+    display: flex;
 
 }
 
 .ajout {
     margin-top: 34px;
     margin-left: 12%;
-    float: left;
     width: 30%;
     border-bottom: 1px solid black;
+    display: flex;
+    height: 33px;
 }
 .ajout input[type="text"] {
     border: none;
     outline: none;
     float: right;
     width: 90%;
+    margin-left: 9%;
+    padding-bottom: 4%;
 }
 .boule-verte{
     width: 20px;
@@ -299,18 +310,16 @@ body{
 .notification{
     width: 40px;
     height: 40px;
-    float: right;
     border: 3px #D2D2D2 solid;
     margin-top: 24px;
-    margin-right: 110px;
+    margin-left: 5%;
     border-radius: 10px;
 }
 
 .liste-client {
     width: 82%;
     float: right;
-    margin-right: 30px;
-    margin-top: 70px;
+    margin-right: 2%;
 }
 
 .row-client{
@@ -435,6 +444,7 @@ a.btn-add-client {
 .block-logo {
     position: relative;
     margin-top: 45px;
+    margin-bottom: 45px;
 }
 
 .block-logo p {
@@ -463,12 +473,16 @@ a.btn-add-client {
 
 .menu-logout p{
 
-    background: url(../images/logoutt.png) no-repeat 60px 1px;
+    background: url(../images/logoutt.png) no-repeat 18% 1px;
     padding-left: 37px;
     color: white;
     font-family: lato;
     text-decoration: none;
 
+}
+.block-profile h1 {
+    color: white;
+    padding: 20px;
 }
 
 
@@ -480,7 +494,7 @@ a.btn-add-client {
 
 .menu-settings p{
 
-    background: url(../images/settings.png) no-repeat 60px 1px;
+    background: url(../images/settings.png) no-repeat 18% 1px;
     color: white;
     font-family: lato;
     padding-left: 25px;
@@ -490,13 +504,13 @@ a.btn-add-client {
 
 
 
-.container-client-liste {
-    position: relative;
-    width: 85%;
+.container-react-app {
+
     background-color: white;
-    float: left;
-    height: 85vh;
+    width: 100%;
+    height: 100vh;
 }
+
 
 
 .toolbar-client-liste{
@@ -518,7 +532,7 @@ a.btn-add-client {
     display: flex;
     width: 55%;
     justify-content: space-around;
-    padding-top: 10px;
+    padding-top: 18px;
     font-size: 20px;
     color: rgba(0,0,0,0.87);
     letter-spacing: -1.76px;
@@ -554,14 +568,16 @@ a.btn-add-client {
 .container-marques{
     display: flex;
     padding-top: 10px;
+    width: 158%;
 }
 
 .container-marques p{
     font-family: AvenirNext-DemiBold;
-    font-size: 36px;
+    font-size: 157%;
     color: rgba(0,0,0,0.87);
     letter-spacing: -3.16px;
     padding-left: 18px;
+    padding-top: 7px;
 }
 
 .container-actionBar-top{
@@ -581,22 +597,42 @@ a.btn-add-client {
 
 .container-content {
     display: flex;
+    height: 80vh;
+    width: 85%;
 }
 
 
 .container-page {
-    width: 74%;
-    height: 70vh;
-    margin-left: 123px;
+    width: 100%;
+    min-height: 70vh;
     background-color: #ECECEC;
     border-radius: 6px;
+    margin: 0 auto;
 }
 
 .container-sidebar {
-    width: 15%;
+    width: 18%;
     background-color: #CFCFCF;
-    margin-left: 12px;
     border-radius: 5px;
+    margin: 0 auto;
+}
+
+.container-dashboard {
+    width: 90%;
+    margin: 23px auto;
+    background: white;
+    height: 75vh;
+    border-radius: 8px;
+}
+
+.avatar-dashboard{
+    margin: 10px 10px 10px 26px;
+}
+
+.dashboard-content{
+    width: 97%;
+    height: 90%;
+    margin: 0 auto;
 }
 
 .sidebar {
@@ -635,20 +671,20 @@ a.btn-add-client {
 }
 .container-info-gauche{
     display: flex;
-    width: 50%;
-    padding-left: 60px;
+    padding-left: 5%;
     padding-top: 45px;
 }
 
 .container-info-droite{
     display: flex;
-    width: 50%;
+    width: 40%;
     margin-top: 45px;
+    margin-left: 6%;
 }
 
 .col-droite-info{
     text-align: center;
-    margin-left: 100px;
+    margin-left: 10%;
 }
 
 .col-droite-info p{
@@ -675,3 +711,91 @@ a.btn-add-client {
 .container-table-contact{
 
 }
+
+
+.login-container {
+    margin-top: 10%;
+}
+form.ink-form.form-login {
+    padding-top: 25px;
+}
+
+.container-info-gauche {
+    display: flex;
+    padding-left: 5%;
+    padding-top: 45px;
+    width: 50%;
+}
+
+
+.table-client {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 45px;
+    height: 58vh;
+    overflow: scroll;
+}
+
+
+.loader {
+    border: 16px solid white; /* Light grey */
+    border-top: 16px solid #1A2F47; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.container-loader {
+    width: 80%;
+    height: 100%;
+    margin: 17% 44%;
+}
+
+.table-client {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 45px;
+}
+
+
+
+.table-client-user-header{
+    border: 2px solid gray;
+}
+
+.table-client-user-body{
+    border: 1px solid gray;
+}
+
+
+
+.table-client-user{
+    width: 100%;
+    text-align: center;
+}
+
+.table-client-user-body tr {
+    border: solid 1px black;
+}
+
+.mail-user{
+    cursor: pointer;
+}
+
+
+.table-control{
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+
+
+

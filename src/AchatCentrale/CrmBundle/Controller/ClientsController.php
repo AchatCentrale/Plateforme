@@ -137,6 +137,7 @@ class ClientsController extends FOSRestController
 
 
 
+
         if (empty($clients)) {
             return new View("user not found", Response::HTTP_NOT_FOUND);
         }
@@ -147,5 +148,37 @@ class ClientsController extends FOSRestController
         return new View("deleted successfully", Response::HTTP_OK);
     }
 
+
+
+    /**
+     * @Rest\Get("/Agence/{id}/users")
+     */
+    public function getUserAgenceAction($id)
+    {
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('cl' => $id));
+
+
+        if ($restresult === null) {
+            return new View("there are no users exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
+
+
+    /**
+     * @Rest\Get("/Agence/{id}/logs")
+     */
+    public function getLogsAgenceAction($id)
+    {
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
+
+
+
+
+        if ($restresult === null) {
+            return new View("there are no users exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
 
 }

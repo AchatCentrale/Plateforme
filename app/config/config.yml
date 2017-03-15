@@ -51,12 +51,18 @@ doctrine:
                 user:           "%database_user%"
                 password:       "%database_password%"
                 dbname:         "CENTRALE_ACHAT_JB"
+                charset:  UTF8
+                options:
+                    1002:  "SET NAMES 'UTF8'"
             centrale_produits:
                 driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
                 host:           "185.29.149.32"
                 user:           "AC_JBAGOSTIN"
                 password:       "35H7Hjvy"
                 dbname:         "CENTRALE_PRODUITS_JB"
+                charset:  UTF8
+                options:
+                    1002:  "SET NAMES 'UTF8'"
 
 
     orm:
@@ -92,13 +98,16 @@ assetic:
 
 
 fos_rest:
-    body_listener: true
+    body_listener:
+        array_normalizer: fos_rest.normalizer.camel_keys
     format_listener:
         rules:
-            - { path: '^/Agence', priorities: [ json, '*/*'], fallback_format: html , prefer_extension: false }
+            - { path: '^/Agence', priorities: [ json, '*/*'], fallback_format: html , prefer_extension: true }
             - { path: ^/, priorities: ['html', '*/*'], fallback_format: html, prefer_extension: true }
     param_fetcher_listener: true
     view:
+        mime_types:
+            json: ['application/json; charset=UTF-8', 'application/json']
         view_response_listener: 'force'
         formats:
             json: true
@@ -108,6 +117,11 @@ fos_rest:
             html: true
         failed_validation: HTTP_BAD_REQUEST
         default_engine: twig
+    exception:
+            enabled: true
+            messages:
+                Symfony\Component\HttpKernel\Exception\BadRequestHttpException: true
+
 
 
 web_profiler:

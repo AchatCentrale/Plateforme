@@ -8,10 +8,43 @@
 
 
 
-    {#include element interface#}
-    {{ include('SiteBundle:ui-element:home-ui.html.twig') }}
 
 
+    <div class="container-react-app">
+
+
+            <div id="app">
+
+            </div>
+
+
+
+
+        {% block javascripts %}
+
+            <script async src={{ asset('app.bundle.js') }} type="text/javascript"></script>
+
+        {% endblock %}
+    </div>
+
+    <script>
+        $(document).ready(function() {
+
+
+
+            $('.row-client').on('click', function (e) {
+                var id = $(this).data('client');
+
+                var uurl = "/client/"+id;
+
+
+                window.location.href = uurl;
+
+            })
+
+
+        } );
+    </script>
 
 
 {% endblock %}

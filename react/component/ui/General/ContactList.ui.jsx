@@ -1,89 +1,61 @@
 import React from 'react';
+import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 
+const cellEditProp = {
+    mode: 'click'
+};
+
+const data = ["<div></div>"];
 
 export default class ContactList extends React.Component {
 
 
-    constructor(){
-        super()
+    constructor(props) {
+        super(props);
+
+
+    }
+
+
+    componentWillMount() {
+
     }
 
 
     render() {
-        return(
-          <div className="container-contact-list">
-              <h3>Liste des contacts</h3>
-              <div className="container-table-contact">
-                  <table>
-                      <thead>
-                      <tr>
-                          <th>Nom</th>
-                          <th>Prénom</th>
-                          <th>Téléphone</th>
-                          <th>Mail</th>
-                          <th>Mot de passe</th>
-                          <th>Options</th>
-                      </tr>
-                      </thead>
+        console.log(this.props.clientsUser);
+        return (
+            <div className="container-contact-list">
+                <h3>Liste des contacts</h3>
+                <div className="container-table-contact">
+                    <table className="table-client-user">
+                        <thead className="table-client-user-header">
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Mail</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody className="table-client-user-body">
+                        {
+                            this.props.clientsUser.map(function (x) {
+                                return (<tr>
+                                        <td>{x.ccNom}</td>
+                                        <td>{x.ccPrenom}</td>
+                                        <td>{x.ccMail}</td>
+                                        <td><i className="fa fa-envelope mail-user" aria-hidden="true"></i></td>
+                                    </tr>
 
 
+                                )
+                            })
+                        }
+                        </tbody>
+                    </table>
+                </div>
 
-                      <tbody>
-                      <tr>
-                          <td>Carmen</td>
-                          <td>33 ans</td>
-                          <td>Espagne</td>
-                          <td>Espagne</td>
-                          <td>Espagne</td>
-                          <td>Espagne</td>
-                      </tr>
-                      <tr>
-                          <td>Michelle</td>
-                          <td>26 ans</td>
-                          <td>États-Unis</td>
-                          <td>États-Unis</td>
-                          <td>États-Unis</td>
-                          <td>États-Unis</td>
-                      </tr>
-                      <tr>
-                          <td>François</td>
-                          <td>43 ans</td>
-                          <td>France</td>
-                          <td>France</td>
-                          <td>France</td>
-                          <td>France</td>
-                      </tr>
-                      <tr>
-                          <td>Martine</td>
-                          <td>34 ans</td>
-                          <td>France</td>
-                          <td>France</td>
-                          <td>France</td>
-                          <td>France</td>
-                          <td>France</td>
-                      </tr>
-                      <tr>
-                          <td>Jonathan</td>
-                          <td>13 ans</td>
-                          <td>Australie</td>
-                          <td>Australie</td>
-                          <td>Australie</td>
-                          <td>Australie</td>
-                          <td>Australie</td>
-                      </tr>
-                      <tr>
-                          <td>Xu</td>
-                          <td>19 ans</td>
-                          <td>Chine</td>
-                          <td>Chine</td>
-                          <td>Chine</td>
-                          <td>Chine</td>
-                          <td>Chine</td>
-                      </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
+            </div>
         );
     }
 

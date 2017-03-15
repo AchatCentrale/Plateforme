@@ -37,16 +37,7 @@ class BaseController extends Controller
 
     }
 
-    public function clientAction(Request $request)
-    {
 
-        $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
-
-
-        return $this->render('@Site/Base/client.html.twig', array(
-            "client" => $client
-        ));
-    }
 
     public function clientByIdAction(Request $request, $id)
     {
@@ -151,7 +142,9 @@ class BaseController extends Controller
 
         $userActual = $this->get('security.token_storage')->getToken()->getUser();
 
-        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy(array("usMail" => $userActual));
+
+
+        dump($userActual);
         $form = $this->get('form.factory')->create(UsersType::class, $user[0]);
 
 
@@ -209,6 +202,7 @@ class BaseController extends Controller
     public function testWithParamAction(Request $request, $id)
     {
         $panier = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
+
         return $this->render('@Site/test.html.twig', array(
             'panier' => $panier
         ));

@@ -1,51 +1,5 @@
 <header>
-    <div class="nav-bar">
 
-
-        <!-- Presentation -->
-        <div class="presentation">
-            <div class="block-logo">
-                <img src="{{ asset('images/logo-achatcentrale.png') }}" alt="logo_crm">
-                <p>CRM v1.0</p>
-            </div>
-            <div class="block-profile">
-                <img src="{{ asset('images/profile.png') }}" alt="profile">
-                <p>{{ app.user}}</p>
-            </div>
-        </div>
-
-
-        <!-- menu -->
-        <div class="menu">
-            <div class="menu-home hover">
-                <a href="{{ path('index_auth') }}"><p>Home</p></a>
-            </div>
-            <div class="menu-client hover">
-                <a href="{{ path('client') }}"><p>Clients</p></a>
-            </div>
-            <div class="menu-supplier hover">
-                <a href=""><p>Fournisseur</p></a>
-            </div>
-
-            <div class="menu-calendrier hover">
-                <a href=""><p>TODO</p></a>
-            </div>
-        </div>
-
-
-        <div class="menu-bottom">
-            <div class="menu-logout hover">
-                <a href="{{ logout_path() }}"><p>Déconnexion</p></a>
-            </div>
-
-            <div class="menu-settings hover">
-                <a href=""><p>Préférences</p></a>
-            </div>
-        </div>
-
-
-
-    </div>
 </header>
 
 
@@ -56,18 +10,3 @@
 
 
 
-
-
-<script>
-    var settings_btn = document.querySelector('.picture-settings1');
-    var logout_btn = document.querySelector('.picture-settings2');
-
-    settings_btn.addEventListener('click', function (e) {
-        window.location.replace("{{ path('settings') }}");
-    });
-
-    logout_btn.addEventListener('click', function (e) {
-        window.location.replace("{{ path('logout') }}");
-    });
-
-</script>
