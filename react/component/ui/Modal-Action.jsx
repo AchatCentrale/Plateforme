@@ -16,6 +16,7 @@ export default class ModalAction extends React.Component {
     render() {
 
 
+
         return (
 
             <div>
@@ -44,7 +45,7 @@ export default class ModalAction extends React.Component {
                             </div>
                         </Grid.Column>
                         <Grid.Column>
-                            <p>Date : 15 mars 2017</p>
+                            <p>Date : { moment().format("E MMMM GGGG" ) }</p>
                         </Grid.Column>
 
                     </Grid.Row>
@@ -53,10 +54,10 @@ export default class ModalAction extends React.Component {
                             <Select placeholder="Selectionnez le type d'action"  />
                         </Grid.Column>
                         <Grid.Column>
-                            <Segment>2</Segment>
+                            <Select placeholder="Assigné à"  />
                         </Grid.Column>
                         <Grid.Column>
-                            <Segment>3</Segment>
+                            <Select placeholder="Priorité"  />
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row>

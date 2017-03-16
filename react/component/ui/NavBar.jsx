@@ -27,7 +27,7 @@ export default class NavBar extends React.Component {
                                 <p>CRM v1.0</p>
                         </div>
                         <div className="block-profile">
-                            <h1>user</h1>
+                            <h1>{this.props.user}</h1>
                         </div>
                     </div>
 
@@ -51,12 +51,9 @@ export default class NavBar extends React.Component {
 
                     <div className="menu-bottom">
                         <div className="menu-logout hover">
-                            <a href="{{ logout_path() }}"><p>Déconnexion</p></a>
+                            <a href="/logout"><p>Déconnexion</p></a>
                         </div>
 
-                        <div className="menu-settings hover">
-                            <a href=""><p>Préférences</p></a>
-                        </div>
                     </div>
 
 

@@ -15,6 +15,15 @@ class Groupe
     /**
      * @var integer
      *
+     * @ORM\Column(name="GR_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $grId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
@@ -26,15 +35,63 @@ class Groupe
      */
     private $grDescr;
 
+
+
     /**
-     * @var integer
+     * Get grId
      *
-     * @ORM\Column(name="GR_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $grId;
+    public function getGrId()
+    {
+        return $this->grId;
+    }
 
+    /**
+     * Set soId
+     *
+     * @param integer $soId
+     *
+     * @return Groupe
+     */
+    public function setSoId($soId)
+    {
+        $this->soId = $soId;
 
+        return $this;
+    }
+
+    /**
+     * Get soId
+     *
+     * @return integer
+     */
+    public function getSoId()
+    {
+        return $this->soId;
+    }
+
+    /**
+     * Set grDescr
+     *
+     * @param string $grDescr
+     *
+     * @return Groupe
+     */
+    public function setGrDescr($grDescr)
+    {
+        $this->grDescr = $grDescr;
+
+        return $this;
+    }
+
+    /**
+     * Get grDescr
+     *
+     * @return string
+     */
+    public function getGrDescr()
+    {
+        return $this->grDescr;
+    }
 }
-

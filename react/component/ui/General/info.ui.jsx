@@ -1,6 +1,9 @@
 import React from 'react';
 
 
+import { Label, Icon } from 'semantic-ui-react'
+
+
 export default class Info extends React.Component {
 
 
@@ -41,10 +44,18 @@ export default class Info extends React.Component {
                       <p>Téléphone</p>
                   </div>
                   <div className="col-droite-info">
-                      <p>{this.props.clients.clRef}</p>
-                      <p>{this.props.clients.clRaisonsoc}</p>
-                      <p>{this.props.clients.clSiret}</p>
-                      <p>{this.props.clients.clTel}</p>
+                      <p><Label>
+                          <Label.Detail>{this.props.clients.clRef}</Label.Detail>
+                      </Label></p>
+                      <p><Label>
+                          <Label.Detail>{this.props.clients.clRaisonsoc}</Label.Detail>
+                      </Label></p>
+                      <p> <Label>
+                          <Label.Detail>{this.props.clients.clSiret}</Label.Detail>
+                      </Label></p>
+                      <p><Label>
+                          <Label.Detail><Icon name='call' />{this.props.clients.clTel}</Label.Detail>
+                      </Label></p>
 
                   </div>
               </div>
@@ -55,7 +66,9 @@ export default class Info extends React.Component {
                       <p>Responsable</p>
                   </div>
                   <div className="col-droite-info">
-                      <p>500-1000</p>
+                      <p><Label>
+                          <Label.Detail>500-1000</Label.Detail>
+                      </Label></p>
                       <p
                           style={
                             (this.props.clients.clStatus === 1)
@@ -63,7 +76,9 @@ export default class Info extends React.Component {
                                   : styleStatutFail
                                 }
                       >Actif</p>
-                      <p>Morgane</p>
+                      <p><Label>
+                          <Label.Detail><Icon name="user circle outline"/>Morgane</Label.Detail>
+                      </Label></p>
                   </div>
               </div>
           </div>

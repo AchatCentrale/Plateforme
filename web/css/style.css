@@ -1,7 +1,4 @@
-/**
- * http://applemusic.tumblr.com/
- * https://jsfiddle.net/xq56dmrh/
- */
+
 
 /** Ultra Light */
 @font-face {
@@ -60,6 +57,7 @@ body {
     min-height: 100%;
     margin: 0;
     padding: 0;
+    font-family: "San Francisco";
 }
 
 img {
@@ -261,6 +259,8 @@ body{
 
 .menu{
     position: relative;
+    margin-top: 42%;
+    padding-bottom: 20%;
 
 }
 
@@ -630,7 +630,7 @@ a.btn-add-client {
 
 .container-actionBar-top{
     display: flex;
-    height: 85px;
+    height: 70px;
 }
 
 .container-delete {
@@ -659,10 +659,8 @@ a.btn-add-client {
 }
 
 .container-sidebar {
-    width: 18%;
-    background-color: #CFCFCF;
-    border-radius: 5px;
-    margin: 0 auto;
+    margin-top: 45px;
+    margin-right: 81px;
 }
 
 .container-dashboard {
@@ -682,6 +680,12 @@ a.btn-add-client {
     height: 90%;
     margin: 0 auto;
 }
+
+
+.container-info-client {
+    width: 60%;
+}
+
 
 .sidebar {
     background-color: #1A2F47;
@@ -735,16 +739,10 @@ a.btn-add-client {
     margin-left: 10%;
 }
 
-.col-droite-info p{
-    background: #D8D8D8;
-    border-radius: 2px;
-    font-size: 18px;
-    color: rgba(0,0,0,0.87);
-    padding: 1px 25px 0px 23px;
-}
+
 
 .col-gauche-info p{
-    padding: 2px 1px 1px 1px;
+    padding: 5px 1px 1px 1px;
 }
 
 .container-contact-list{
@@ -849,4 +847,14 @@ form.ink-form.form-login {
     justify-content: space-around;
 }
 
+.container-general {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    height: 80vh;
+}
 
+.icon-mail-client-user{
+    margin-left: 40px;
+    margin-top: 11px;
+}

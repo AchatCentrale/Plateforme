@@ -1,5 +1,6 @@
 AchatCentrale\CrmBundle\Entity\Clients:
     type: entity
+    repositoryClass: AchatCentrale\CrmBundle\Repository\ClientsRepository
     table: CLIENTS
     id:
         clId:

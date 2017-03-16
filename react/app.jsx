@@ -32,10 +32,13 @@ class App extends React.Component {
 
 
     getTheUser(){
-        let url = "http://localhost:8000/who";
+        let url = "http://localhost:8000/who/username";
 
-        $.getJSON(url, (data)=>{
-            console.log(data );
+
+        $.getJSON(url, (data) =>{
+
+            console.log(data);
+
             this.setState({
                 user:  data,
 
@@ -46,11 +49,17 @@ class App extends React.Component {
     }
 
 
+
+
+
     constructor(props){
 
         super(props);
+
+        moment.locale("fr");
         this.state = {
             user : ''
+
         }
     }
 
@@ -58,24 +67,25 @@ class App extends React.Component {
     componentDidMount(){
         this.getTheUser.call(this);
 
+
     }
 
 
     render() {
 
-
-
+        let context = this.props;
         return (
 
             <div>
                 <TopBar />
 
                 <div className="continer-nav-bar">
-                    <NavBar />
+                    <NavBar user={this.state.user} />
                 </div>
-                <div className="container-content">
 
+                <div className="container-content">
                     <div className="container-page" >
+
                         {this.props.children}
                     </div>
                 </div>
@@ -91,7 +101,7 @@ render((
     <Router history={browserHistory}>
 
         <Route path="/" component={App}>
-            <IndexRoute component={Dashboard} />
+            <IndexRoute component={Dashboard}  />
             <Route path="/client" component={ClientListe}/>
             <Route path="/client/:id" component={General}/>
         </Route>
