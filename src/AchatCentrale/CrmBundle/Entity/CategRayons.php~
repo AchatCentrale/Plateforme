@@ -15,6 +15,15 @@ class CategRayons
     /**
      * @var integer
      *
+     * @ORM\Column(name="CR_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $crId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="RA_ID", type="integer", nullable=true)
      */
     private $raId;
@@ -26,15 +35,63 @@ class CategRayons
      */
     private $catid;
 
+
+
     /**
-     * @var integer
+     * Get crId
      *
-     * @ORM\Column(name="CR_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return integer
      */
-    private $crId;
+    public function getCrId()
+    {
+        return $this->crId;
+    }
 
+    /**
+     * Set raId
+     *
+     * @param integer $raId
+     *
+     * @return CategRayons
+     */
+    public function setRaId($raId)
+    {
+        $this->raId = $raId;
 
+        return $this;
+    }
+
+    /**
+     * Get raId
+     *
+     * @return integer
+     */
+    public function getRaId()
+    {
+        return $this->raId;
+    }
+
+    /**
+     * Set catid
+     *
+     * @param integer $catid
+     *
+     * @return CategRayons
+     */
+    public function setCatid($catid)
+    {
+        $this->catid = $catid;
+
+        return $this;
+    }
+
+    /**
+     * Get catid
+     *
+     * @return integer
+     */
+    public function getCatid()
+    {
+        return $this->catid;
+    }
 }
-

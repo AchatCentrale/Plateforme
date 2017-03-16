@@ -38,19 +38,27 @@ class BaseController extends Controller
 
     }
 
-    public function whoAreAction(Request $request)
+    public function whoAreAction(Request $request, $type)
     {
 
         $user = $this->getUser();
 
-        $arrUser = (array) $user;
 
 
-        dump($arrUser);
+        switch ($type) {
+            case "username":
+                return new JsonResponse($user->getUsername(), 200);
+                break;
+
+        }
 
 
 
-        return new JsonResponse($arrUser, 200);
+
+
+
+
+
 
 
     }

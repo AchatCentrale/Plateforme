@@ -181,6 +181,25 @@ class ClientsController extends FOSRestController
         return $restresult;
     }
 
+    /**
+     * @Rest\Get("/Agence/count")
+     */
+    public function getNumberAgenceAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $clientRepo = $em->getRepository('AchatCentraleCrmBundle:Clients');
+        $restresult = $clientRepo->getNb();
+
+
+
+
+        if ($restresult === null) {
+            return new View("there are no users exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
+
 
 
 

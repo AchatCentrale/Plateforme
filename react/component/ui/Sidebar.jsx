@@ -1,4 +1,7 @@
 import React from 'react';
+import { Input, Label, Menu } from 'semantic-ui-react'
+
+
 import {
     Router,
     Route,
@@ -10,19 +13,38 @@ import {
 } from 'react-router';
 
 export default class Sidebar extends React.Component {
-    constructor(){
-        super()
+
+
+
+
+
+
+    constructor(props){
+        super(props);
+        console.log(this);
+    }
+
+    handleItemClick(){
+        let id = this.props.context.params.id;
+
+        let path = "/client/"+ id + "/" + this.props.content;
+
+    }
+
+
+    componentWillMount(){
+        this.handleItemClick.call(this);
     }
 
 
     render() {
 
-        let id = this.props.context.params.id;
 
 
         return(
-            <div className="sidebar">
-                <Link to={"/client/"+ id + "/" + this.props.content} activeClassName="current">{this.props.content}</Link>
+            <div className="">
+                <Menu.Item name={this.props.content} onClick={this.handleItemClick} />
+
             </div>
         );
     }

@@ -10,7 +10,7 @@ index_auth:
     defaults: { _controller: SiteBundle:Base:indexAuth }
 
 Who-Are-The-User:
-    path:     /who
+    path:     /who/{type}
     defaults: { _controller: SiteBundle:Base:whoAre }
 
 

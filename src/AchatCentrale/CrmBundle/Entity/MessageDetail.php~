@@ -15,6 +15,15 @@ class MessageDetail
     /**
      * @var integer
      *
+     * @ORM\Column(name="MD_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $mdId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="CC_ID", type="integer", nullable=true)
      */
     private $ccId;
@@ -31,7 +40,7 @@ class MessageDetail
      *
      * @ORM\Column(name="US_ID", type="integer", nullable=true)
      */
-    private $usId;
+    private $usId = '0';
 
     /**
      * @var \DateTime
@@ -69,15 +78,6 @@ class MessageDetail
     private $insUser;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="MD_ID", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $mdId;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\MessageEntete
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\MessageEntete")
@@ -88,5 +88,230 @@ class MessageDetail
     private $me;
 
 
-}
 
+    /**
+     * Get mdId
+     *
+     * @return integer
+     */
+    public function getMdId()
+    {
+        return $this->mdId;
+    }
+
+    /**
+     * Set ccId
+     *
+     * @param integer $ccId
+     *
+     * @return MessageDetail
+     */
+    public function setCcId($ccId)
+    {
+        $this->ccId = $ccId;
+
+        return $this;
+    }
+
+    /**
+     * Get ccId
+     *
+     * @return integer
+     */
+    public function getCcId()
+    {
+        return $this->ccId;
+    }
+
+    /**
+     * Set fcId
+     *
+     * @param integer $fcId
+     *
+     * @return MessageDetail
+     */
+    public function setFcId($fcId)
+    {
+        $this->fcId = $fcId;
+
+        return $this;
+    }
+
+    /**
+     * Get fcId
+     *
+     * @return integer
+     */
+    public function getFcId()
+    {
+        return $this->fcId;
+    }
+
+    /**
+     * Set usId
+     *
+     * @param integer $usId
+     *
+     * @return MessageDetail
+     */
+    public function setUsId($usId)
+    {
+        $this->usId = $usId;
+
+        return $this;
+    }
+
+    /**
+     * Get usId
+     *
+     * @return integer
+     */
+    public function getUsId()
+    {
+        return $this->usId;
+    }
+
+    /**
+     * Set mdDate
+     *
+     * @param \DateTime $mdDate
+     *
+     * @return MessageDetail
+     */
+    public function setMdDate($mdDate)
+    {
+        $this->mdDate = $mdDate;
+
+        return $this;
+    }
+
+    /**
+     * Get mdDate
+     *
+     * @return \DateTime
+     */
+    public function getMdDate()
+    {
+        return $this->mdDate;
+    }
+
+    /**
+     * Set mdCorps
+     *
+     * @param string $mdCorps
+     *
+     * @return MessageDetail
+     */
+    public function setMdCorps($mdCorps)
+    {
+        $this->mdCorps = $mdCorps;
+
+        return $this;
+    }
+
+    /**
+     * Get mdCorps
+     *
+     * @return string
+     */
+    public function getMdCorps()
+    {
+        return $this->mdCorps;
+    }
+
+    /**
+     * Set mdTempo
+     *
+     * @param string $mdTempo
+     *
+     * @return MessageDetail
+     */
+    public function setMdTempo($mdTempo)
+    {
+        $this->mdTempo = $mdTempo;
+
+        return $this;
+    }
+
+    /**
+     * Get mdTempo
+     *
+     * @return string
+     */
+    public function getMdTempo()
+    {
+        return $this->mdTempo;
+    }
+
+    /**
+     * Set insDate
+     *
+     * @param \DateTime $insDate
+     *
+     * @return MessageDetail
+     */
+    public function setInsDate($insDate)
+    {
+        $this->insDate = $insDate;
+
+        return $this;
+    }
+
+    /**
+     * Get insDate
+     *
+     * @return \DateTime
+     */
+    public function getInsDate()
+    {
+        return $this->insDate;
+    }
+
+    /**
+     * Set insUser
+     *
+     * @param string $insUser
+     *
+     * @return MessageDetail
+     */
+    public function setInsUser($insUser)
+    {
+        $this->insUser = $insUser;
+
+        return $this;
+    }
+
+    /**
+     * Get insUser
+     *
+     * @return string
+     */
+    public function getInsUser()
+    {
+        return $this->insUser;
+    }
+
+    /**
+     * Set me
+     *
+     * @param \AchatCentrale\CrmBundle\Entity\MessageEntete $me
+     *
+     * @return MessageDetail
+     */
+    public function setMe(\AchatCentrale\CrmBundle\Entity\MessageEntete $me = null)
+    {
+        $this->me = $me;
+
+        return $this;
+    }
+
+    /**
+     * Get me
+     *
+     * @return \AchatCentrale\CrmBundle\Entity\MessageEntete
+     */
+    public function getMe()
+    {
+        return $this->me;
+    }
+}

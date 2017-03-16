@@ -3,7 +3,6 @@
 namespace AchatCentrale\CrmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Entity\User as BaseUser;
 
 
 /**
@@ -12,15 +11,10 @@ use FOS\UserBundle\Entity\User as BaseUser;
  * @ORM\Table(name="USERS")
  * @ORM\Entity
  */
-class Users extends BaseUser
+class Users
 {
 
 
-    public function __construct()
-    {
-        parent::__construct();
-        // your own logic
-    }
 
     /**
      * @var integer
