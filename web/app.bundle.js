@@ -28473,7 +28473,8 @@ var ClientListe = function (_React$Component) {
             $.getJSON(url, function (data) {
 
                 _this2.setState({
-                    clients: data
+                    clients: data,
+                    loading: false
 
                 });
             });
@@ -28503,7 +28504,8 @@ var ClientListe = function (_React$Component) {
             clients: [],
             page: 1,
             LimitPerPage: 10,
-            DebutPagination: 0
+            DebutPagination: 0,
+            loading: true
 
         };
 
@@ -28524,7 +28526,8 @@ var ClientListe = function (_React$Component) {
 
                 return _react2.default.createElement(
                     _semanticUiReact.Table.Row,
-                    { 'data-index': client.clId, className: 'cursor', onClick: _this3.handleClickGoto.bind(_this3, client.clId) },
+                    { 'data-index': client.clId, className: 'cursor',
+                        onClick: _this3.handleClickGoto.bind(_this3, client.clId) },
                     _react2.default.createElement(
                         _semanticUiReact.Table.Cell,
                         null,
@@ -28548,12 +28551,31 @@ var ClientListe = function (_React$Component) {
                 );
             });
 
+            var loading = function loading() {
+
+                if (_this3.state.loading) {
+                    return _react2.default.createElement(
+                        _semanticUiReact.Loader,
+                        { active: true, size: 'large' },
+                        'Loading'
+                    );
+                } else {
+
+                    return _react2.default.createElement(
+                        _semanticUiReact.Loader,
+                        { size: 'large' },
+                        'Loading'
+                    );
+                }
+            };
+
             return _react2.default.createElement(
                 'div',
                 null,
                 _react2.default.createElement(
                     'div',
                     { className: 'table-client' },
+                    loading(),
                     _react2.default.createElement(
                         _semanticUiReact.Table,
                         { id: 'table-client', selectable: true },

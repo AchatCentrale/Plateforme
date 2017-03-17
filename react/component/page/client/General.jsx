@@ -8,7 +8,7 @@ import ActionBar from '../../../component/ActionBar.jsx';
 import Loader from '../../ui/Loader.jsx';
 
 
-import { Input, Label, Menu } from 'semantic-ui-react'
+import { Input, Label, Menu} from 'semantic-ui-react'
 
 import {
     Router,
