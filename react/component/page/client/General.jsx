@@ -7,7 +7,7 @@ import ActionBar from '../../../component/ActionBar.jsx';
 
 
 
-import { Input, Label, Menu, Loader} from 'semantic-ui-react'
+import { Input, Label, Menu, Loader, Table} from 'semantic-ui-react'
 
 import {
     Router,
@@ -88,6 +88,27 @@ export default class General extends React.Component {
                    <div className="container-info-client">
                        <Info clients={this.state.clients}   />
                        <ContactList clientsUser={this.state.clientsUser} />
+                        <div className="container-contact-list">
+
+                                <h3>Dernières actions effectué</h3>
+
+                                <Table singleLine selectable celled>
+                                    <Table.Header>
+                                        <Table.Row>
+                                            <Table.HeaderCell>Type</Table.HeaderCell>
+                                            <Table.HeaderCell>Description courte</Table.HeaderCell>
+                                            <Table.HeaderCell>Priorité</Table.HeaderCell>
+                                            <Table.HeaderCell>Date</Table.HeaderCell>
+                                        </Table.Row>
+                                    </Table.Header>
+
+                                    <Table.Body>
+
+
+                                    </Table.Body>
+                                </Table>
+                        </div>
+
                    </div>
                     <div className="container-sidebar">
 

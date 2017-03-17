@@ -2,10 +2,11 @@ import React from 'react';
 import Sidebar from '../../ui/Sidebar.jsx';
 import ActionBar from '../../../component/ActionBar.jsx';
 
+import { Feed, Icon } from 'semantic-ui-react'
 
 
 
-import { Input, Label, Menu, Loader} from 'semantic-ui-react'
+import { Input, Label, Menu, Loader, Segment} from 'semantic-ui-react'
 
 import {
     Router,
@@ -48,7 +49,94 @@ export default class Actions extends React.Component {
                 <ActionBar context={this.props} />
                 <div className="container-general" >
                     <div className="container-info-client">
-                        <h1>Actions</h1>
+
+                        <div className="container-client-action">
+                            <h1>Historiques des actions</h1>
+                            <Segment.Group horizontal>
+                                <Segment>
+                                    Terminés
+                                </Segment>
+                                <Segment>
+                                    A faire</Segment>
+                            </Segment.Group>
+                            <Segment>
+                                <Feed>
+                                    <Feed.Event>
+                                        <Feed.Label>
+                                            <img src='http://react.semantic-ui.com//assets/images/avatar/small/elliot.jpg' />
+                                        </Feed.Label>
+                                        <Feed.Content>
+                                            <Feed.Summary>
+                                                <Feed.User>Jibé</Feed.User> a effectué un appel téléphonique
+                                                <Feed.Date>Il y a 1 heure</Feed.Date>
+                                            </Feed.Summary>
+                                            <Feed.Meta>
+                                                <Feed.Extra text>
+                                                    Filet mignon chuck short ribs cupim prosciutto t-bone landjaeger pastrami. Doner fatback
+                                                </Feed.Extra>
+                                            </Feed.Meta>
+                                        </Feed.Content>
+                                    </Feed.Event>
+                                    <Feed.Event>
+                                        <Feed.Label>
+                                            <img src='http://react.semantic-ui.com//assets/images/avatar/small/laura.jpg' />
+                                        </Feed.Label>
+                                        <Feed.Content>
+                                            <Feed.Summary>
+                                                <Feed.User>Morgane</Feed.User> a envoyer un email
+                                                <Feed.Date>Il y a 7 heures</Feed.Date>
+                                            </Feed.Summary>
+                                            <Feed.Meta>
+                                                <Feed.Extra text>
+                                                    Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground
+                                                </Feed.Extra>
+                                            </Feed.Meta>
+                                        </Feed.Content>
+                                    </Feed.Event>
+
+                                    <Feed.Event>
+                                        <Feed.Label>
+                                            <img src='http://react.semantic-ui.com//assets/images/avatar/small/elliot.jpg' />
+                                        </Feed.Label>
+                                        <Feed.Content>
+                                            <Feed.Summary>
+                                                <Feed.User>Jibé</Feed.User> a effectué une relance
+                                                <Feed.Date>Il y a 18 heures</Feed.Date>
+                                            </Feed.Summary>
+                                            <Feed.Meta>
+                                                <Feed.Extra text>
+                                                    Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground
+                                                </Feed.Extra>
+                                            </Feed.Meta>
+                                        </Feed.Content>
+                                    </Feed.Event>
+
+                                    <Feed.Event>
+                                        <Feed.Label>
+                                            <img src='http://react.semantic-ui.com//assets/images/avatar/small/helen.jpg' />
+                                        </Feed.Label>
+                                        <Feed.Content>
+                                            <Feed.Summary>
+                                                <Feed.User>Evelyne</Feed.User> a effectué un audit
+                                                <Feed.Date>Il y a 2 jour</Feed.Date>
+                                            </Feed.Summary>
+                                            <Feed.Meta>
+                                                <Feed.Extra text>
+                                                    Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground
+                                                </Feed.Extra>
+                                            </Feed.Meta>
+                                        </Feed.Content>
+                                    </Feed.Event>
+
+
+                                </Feed>
+                            </Segment>
+                        </div>
+
+
+
+
+
                     </div>
                     <div className="container-sidebar">
 

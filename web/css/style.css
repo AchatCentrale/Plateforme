@@ -846,3 +846,9 @@ form.ink-form.form-login {
     margin-left: 40px;
     margin-top: 11px;
 }
+
+
+.container-client-action {
+    text-align: center;
+    padding-top: 14px;
+}

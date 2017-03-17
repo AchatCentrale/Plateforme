@@ -28756,9 +28756,183 @@ var Actions = function (_React$Component) {
                         'div',
                         { className: 'container-info-client' },
                         _react2.default.createElement(
-                            'h1',
-                            null,
-                            'Actions'
+                            'div',
+                            { className: 'container-client-action' },
+                            _react2.default.createElement(
+                                'h1',
+                                null,
+                                'Historiques des actions'
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Segment.Group,
+                                { horizontal: true },
+                                _react2.default.createElement(
+                                    _semanticUiReact.Segment,
+                                    null,
+                                    'Termin\xE9s'
+                                ),
+                                _react2.default.createElement(
+                                    _semanticUiReact.Segment,
+                                    null,
+                                    'A faire'
+                                )
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Segment,
+                                null,
+                                _react2.default.createElement(
+                                    _semanticUiReact.Feed,
+                                    null,
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Feed.Event,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Feed.Label,
+                                            null,
+                                            _react2.default.createElement('img', { src: 'http://react.semantic-ui.com//assets/images/avatar/small/elliot.jpg' })
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Feed.Content,
+                                            null,
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Feed.Summary,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.User,
+                                                    null,
+                                                    'Jib\xE9'
+                                                ),
+                                                ' a effectu\xE9 un appel t\xE9l\xE9phonique',
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.Date,
+                                                    null,
+                                                    'Il y a 1 heure'
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Feed.Meta,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.Extra,
+                                                    { text: true },
+                                                    'Filet mignon chuck short ribs cupim prosciutto t-bone landjaeger pastrami. Doner fatback'
+                                                )
+                                            )
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Feed.Event,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Feed.Label,
+                                            null,
+                                            _react2.default.createElement('img', { src: 'http://react.semantic-ui.com//assets/images/avatar/small/laura.jpg' })
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Feed.Content,
+                                            null,
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Feed.Summary,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.User,
+                                                    null,
+                                                    'Morgane'
+                                                ),
+                                                ' a envoyer un email',
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.Date,
+                                                    null,
+                                                    'Il y a 7 heures'
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Feed.Meta,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.Extra,
+                                                    { text: true },
+                                                    'Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground'
+                                                )
+                                            )
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Feed.Event,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Feed.Label,
+                                            null,
+                                            _react2.default.createElement('img', { src: 'http://react.semantic-ui.com//assets/images/avatar/small/elliot.jpg' })
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Feed.Content,
+                                            null,
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Feed.Summary,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.User,
+                                                    null,
+                                                    'Jib\xE9'
+                                                ),
+                                                ' a effectu\xE9 une relance',
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.Date,
+                                                    null,
+                                                    'Il y a 18 heures'
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Feed.Meta,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.Extra,
+                                                    { text: true },
+                                                    'Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground'
+                                                )
+                                            )
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Feed.Event,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Feed.Label,
+                                            null,
+                                            _react2.default.createElement('img', { src: 'http://react.semantic-ui.com//assets/images/avatar/small/helen.jpg' })
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Feed.Content,
+                                            null,
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Feed.Summary,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.User,
+                                                    null,
+                                                    'Evelyne'
+                                                ),
+                                                ' a effectu\xE9 un audit',
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.Date,
+                                                    null,
+                                                    'Il y a 2 jour'
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Feed.Meta,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Feed.Extra,
+                                                    { text: true },
+                                                    'Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground'
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
                         )
                     ),
                     _react2.default.createElement(
@@ -29120,7 +29294,49 @@ var General = function (_React$Component) {
                             'div',
                             { className: 'container-info-client' },
                             _react2.default.createElement(_infoUi2.default, { clients: this.state.clients }),
-                            _react2.default.createElement(_ContactListUi2.default, { clientsUser: this.state.clientsUser })
+                            _react2.default.createElement(_ContactListUi2.default, { clientsUser: this.state.clientsUser }),
+                            _react2.default.createElement(
+                                'div',
+                                { className: 'container-contact-list' },
+                                _react2.default.createElement(
+                                    'h3',
+                                    null,
+                                    'Derni\xE8res actions effectu\xE9'
+                                ),
+                                _react2.default.createElement(
+                                    _semanticUiReact.Table,
+                                    { singleLine: true, selectable: true, celled: true },
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Table.Header,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Table.Row,
+                                            null,
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                'Type'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                'Description courte'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                'Priorit\xE9'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                'Date'
+                                            )
+                                        )
+                                    ),
+                                    _react2.default.createElement(_semanticUiReact.Table.Body, null)
+                                )
+                            )
                         ),
                         _react2.default.createElement(
                             'div',
@@ -29515,6 +29731,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ContactList = function (_React$Component) {
     _inherits(ContactList, _React$Component);
 
+    _createClass(ContactList, [{
+        key: 'handleClick',
+        value: function handleClick(e) {
+            console.log(e);
+        }
+    }]);
+
     function ContactList(props) {
         _classCallCheck(this, ContactList);
 
@@ -29588,7 +29811,11 @@ var ContactList = function (_React$Component) {
                                     null,
                                     x.ccMail
                                 ),
-                                _react2.default.createElement(_semanticUiReact.Icon, { className: 'icon-mail-client-user', fitted: true, bordered: true, link: true, name: ' mail outline' })
+                                _react2.default.createElement(
+                                    _semanticUiReact.Table.Cell,
+                                    null,
+                                    _react2.default.createElement(_semanticUiReact.Icon, { onclick: console.log(this), className: 'icon-mail-client-user', fitted: true, bordered: true, link: true, name: ' mail outline' })
+                                )
                             );
                         })
                     )
