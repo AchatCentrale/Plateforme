@@ -1,12 +1,18 @@
 import React from 'react';
 import { Icon, Label, Menu, Table, Input } from 'semantic-ui-react'
 
+import { browserHistory } from 'react-router'
 
 
 
 
 export default class ClientListe extends React.Component {
 
+
+
+    contextTypes: {
+        router: React.PropTypes.object
+    }
 
     getClient() {
 
@@ -21,13 +27,17 @@ export default class ClientListe extends React.Component {
     }
 
 
-    handleClickGoto(e){
-        e.persist();
-        console.log(e.target)
+    handleClickGoto(e, index){
+
+        console.log( e)
+        let path = `/client/${e}`;
+
+        browserHistory.push(path)
+
     }
 
     handleLimitRow(e) {
-        console.log(e.target)
+        console.log(e)
     }
 
 
@@ -50,6 +60,7 @@ export default class ClientListe extends React.Component {
     componentDidMount(){
         this.getClient.call(this);
 
+
     }
 
 
@@ -64,7 +75,7 @@ export default class ClientListe extends React.Component {
 
 
                 return(
-                    <Table.Row data-tag={index} className="cursor" onClick={this.handleClickGoto} >
+                    <Table.Row data-index={client.clId} className="cursor" onClick={this.handleClickGoto.bind(this, client.clId)} >
                         <Table.Cell>{ client.clId}</Table.Cell>
                         <Table.Cell>{ client.clRaisonsoc}</Table.Cell>
                         <Table.Cell>{ client.clMail}</Table.Cell>

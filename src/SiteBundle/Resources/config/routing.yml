@@ -16,9 +16,7 @@ Who-Are-The-User:
 
 
 
-clientById:
-    path:     /client/{id}
-    defaults: { _controller: SiteBundle:Base:clientById }
+
 
 sendClientDetailMail:
     path:     /send/client/{clientId}

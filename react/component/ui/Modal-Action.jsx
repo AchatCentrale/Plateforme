@@ -45,7 +45,7 @@ export default class ModalAction extends React.Component {
                             </div>
                         </Grid.Column>
                         <Grid.Column>
-                            <p>Date : { moment().format("E MMMM GGGG" ) }</p>
+                            <p>Date : { moment().format("D MMMM GGGG" ) }</p>
                         </Grid.Column>
 
                     </Grid.Row>
