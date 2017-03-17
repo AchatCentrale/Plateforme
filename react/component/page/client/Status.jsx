@@ -20,7 +20,7 @@ import {
 
 
 
-export default class Hierarchie extends React.Component {
+export default class Status extends React.Component {
 
 
 
@@ -48,7 +48,7 @@ export default class Hierarchie extends React.Component {
                 <ActionBar context={this.props} />
                 <div className="container-general" >
                     <div className="container-info-client">
-                        <h1>Hierarchie</h1>
+                        <h1>Status</h1>
                     </div>
                     <div className="container-sidebar">
 

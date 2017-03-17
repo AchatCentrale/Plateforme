@@ -615,8 +615,9 @@ a.btn-add-client {
 
 .container-marques{
     display: flex;
-    padding-top: 10px;
+    padding-top: 24px;
     width: 158%;
+    letter-spacing: 2px;
 }
 
 .container-marques p{

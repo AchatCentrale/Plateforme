@@ -15004,32 +15004,32 @@ var Sidebar = function (_React$Component) {
     function Sidebar(props) {
         _classCallCheck(this, Sidebar);
 
-        var _this = _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
-
-        console.log(_this);
-        return _this;
+        return _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).call(this, props));
     }
 
     _createClass(Sidebar, [{
         key: 'handleItemClick',
         value: function handleItemClick() {
-            var id = this.props.context.params.id;
 
-            var path = "/client/" + id + "/" + this.props.content;
+            var id = this.props.context.params.id;
+            if (this.props.content === 'General') {
+                _reactRouter.browserHistory.push("/client/" + id);
+            } else {
+                var path = "/client/" + id + "/" + this.props.content;
+                _reactRouter.browserHistory.push(path);
+            }
         }
     }, {
         key: 'componentWillMount',
-        value: function componentWillMount() {
-            this.handleItemClick.call(this);
-        }
+        value: function componentWillMount() {}
     }, {
         key: 'render',
         value: function render() {
 
             return _react2.default.createElement(
                 'div',
-                { className: '' },
-                _react2.default.createElement(_semanticUiReact.Menu.Item, { name: this.props.content, onClick: this.handleItemClick })
+                null,
+                _react2.default.createElement(_semanticUiReact.Menu.Item, { name: this.props.content, onClick: this.handleItemClick.bind(this) })
             );
         }
     }]);
@@ -28308,9 +28308,9 @@ var _Depenses = __webpack_require__(450);
 
 var _Depenses2 = _interopRequireDefault(_Depenses);
 
-var _EtatClient = __webpack_require__(451);
+var _Status = __webpack_require__(885);
 
-var _EtatClient2 = _interopRequireDefault(_EtatClient);
+var _Status2 = _interopRequireDefault(_Status);
 
 var _Adresse = __webpack_require__(449);
 
@@ -28428,7 +28428,12 @@ var App = function (_React$Component) {
         { path: '/', component: App },
         _react2.default.createElement(_reactRouter.IndexRoute, { component: _Dashboard2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: '/client', component: _ClientListe2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/client/:id', component: _General2.default })
+        _react2.default.createElement(_reactRouter.Route, { path: '/client/:id', component: _General2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/D\xE9penses', component: _Depenses2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/status', component: _Status2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/adresse', component: _Adresse2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/Actions', component: _Actions2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/hierarchie', component: _Hierarchie2.default })
     )
 ), document.getElementById('app'));
 
@@ -28695,6 +28700,16 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Sidebar = __webpack_require__(242);
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+var _ActionBar = __webpack_require__(241);
+
+var _ActionBar2 = _interopRequireDefault(_ActionBar);
+
+var _semanticUiReact = __webpack_require__(34);
+
 var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -28708,23 +28723,58 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Actions = function (_React$Component) {
     _inherits(Actions, _React$Component);
 
-    function Actions() {
+    function Actions(props) {
         _classCallCheck(this, Actions);
 
-        return _possibleConstructorReturn(this, (Actions.__proto__ || Object.getPrototypeOf(Actions)).call(this));
+        var _this = _possibleConstructorReturn(this, (Actions.__proto__ || Object.getPrototypeOf(Actions)).call(this, props));
+
+        _this.state = {
+            clients: [],
+            clientsUser: []
+
+        };
+        return _this;
     }
 
     _createClass(Actions, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {}
+    }, {
         key: 'render',
         value: function render() {
+
+            var currentLocation = this.props;
 
             return _react2.default.createElement(
                 'div',
                 null,
+                _react2.default.createElement(_ActionBar2.default, { context: this.props }),
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    'action'
+                    'div',
+                    { className: 'container-general' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-info-client' },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            'Actions'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-sidebar' },
+                        _react2.default.createElement(
+                            _semanticUiReact.Menu,
+                            { pointing: true, vertical: true },
+                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                        )
+                    )
                 )
             );
         }
@@ -28752,6 +28802,16 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Sidebar = __webpack_require__(242);
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+var _ActionBar = __webpack_require__(241);
+
+var _ActionBar2 = _interopRequireDefault(_ActionBar);
+
+var _semanticUiReact = __webpack_require__(34);
+
 var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -28765,22 +28825,58 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Adresse = function (_React$Component) {
     _inherits(Adresse, _React$Component);
 
-    function Adresse() {
+    function Adresse(props) {
         _classCallCheck(this, Adresse);
 
-        return _possibleConstructorReturn(this, (Adresse.__proto__ || Object.getPrototypeOf(Adresse)).call(this));
+        var _this = _possibleConstructorReturn(this, (Adresse.__proto__ || Object.getPrototypeOf(Adresse)).call(this, props));
+
+        _this.state = {
+            clients: [],
+            clientsUser: []
+
+        };
+        return _this;
     }
 
     _createClass(Adresse, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {}
+    }, {
         key: 'render',
         value: function render() {
+
+            var currentLocation = this.props;
+
             return _react2.default.createElement(
                 'div',
                 null,
+                _react2.default.createElement(_ActionBar2.default, { context: this.props }),
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    'adresse'
+                    'div',
+                    { className: 'container-general' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-info-client' },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            'Adresse'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-sidebar' },
+                        _react2.default.createElement(
+                            _semanticUiReact.Menu,
+                            { pointing: true, vertical: true },
+                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                        )
+                    )
                 )
             );
         }
@@ -28808,62 +28904,15 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = __webpack_require__(20);
+var _Sidebar = __webpack_require__(242);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _ActionBar = __webpack_require__(241);
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Dépenses = function (_React$Component) {
-    _inherits(Dépenses, _React$Component);
-
-    function Dépenses() {
-        _classCallCheck(this, Dépenses);
-
-        return _possibleConstructorReturn(this, (Dépenses.__proto__ || Object.getPrototypeOf(Dépenses)).call(this));
-    }
-
-    _createClass(Dépenses, [{
-        key: 'render',
-        value: function render() {
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                    'h1',
-                    null,
-                    'D\xE9penses'
-                )
-            );
-        }
-    }]);
-
-    return Dépenses;
-}(_react2.default.Component);
-
-exports.default = Dépenses;
-
-/***/ }),
-/* 451 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
+var _semanticUiReact = __webpack_require__(34);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -28875,37 +28924,73 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var EtatClient = function (_React$Component) {
-    _inherits(EtatClient, _React$Component);
+var Depenses = function (_React$Component) {
+    _inherits(Depenses, _React$Component);
 
-    function EtatClient() {
-        _classCallCheck(this, EtatClient);
+    function Depenses(props) {
+        _classCallCheck(this, Depenses);
 
-        return _possibleConstructorReturn(this, (EtatClient.__proto__ || Object.getPrototypeOf(EtatClient)).call(this));
+        var _this = _possibleConstructorReturn(this, (Depenses.__proto__ || Object.getPrototypeOf(Depenses)).call(this, props));
+
+        _this.state = {
+            clients: [],
+            clientsUser: []
+
+        };
+        return _this;
     }
 
-    _createClass(EtatClient, [{
+    _createClass(Depenses, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {}
+    }, {
         key: 'render',
         value: function render() {
+
+            var currentLocation = this.props;
 
             return _react2.default.createElement(
                 'div',
                 null,
+                _react2.default.createElement(_ActionBar2.default, { context: this.props }),
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    'Etat du client'
+                    'div',
+                    { className: 'container-general' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-info-client' },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            'Depense'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-sidebar' },
+                        _react2.default.createElement(
+                            _semanticUiReact.Menu,
+                            { pointing: true, vertical: true },
+                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                        )
+                    )
                 )
             );
         }
     }]);
 
-    return EtatClient;
+    return Depenses;
 }(_react2.default.Component);
 
-exports.default = EtatClient;
+exports.default = Depenses;
 
 /***/ }),
+/* 451 */,
 /* 452 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -28937,10 +29022,6 @@ var _Sidebar2 = _interopRequireDefault(_Sidebar);
 var _ActionBar = __webpack_require__(241);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
-
-var _Loader = __webpack_require__(460);
-
-var _Loader2 = _interopRequireDefault(_Loader);
 
 var _semanticUiReact = __webpack_require__(34);
 
@@ -29021,7 +29102,11 @@ var General = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_Loader2.default, { isActive: true })
+                    _react2.default.createElement(
+                        _semanticUiReact.Loader,
+                        { active: true, size: 'large' },
+                        'Loading'
+                    )
                 );
             } else {
                 return _react2.default.createElement(
@@ -29079,6 +29164,16 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _Sidebar = __webpack_require__(242);
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+var _ActionBar = __webpack_require__(241);
+
+var _ActionBar2 = _interopRequireDefault(_ActionBar);
+
+var _semanticUiReact = __webpack_require__(34);
+
 var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -29092,23 +29187,58 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Hierarchie = function (_React$Component) {
     _inherits(Hierarchie, _React$Component);
 
-    function Hierarchie() {
+    function Hierarchie(props) {
         _classCallCheck(this, Hierarchie);
 
-        return _possibleConstructorReturn(this, (Hierarchie.__proto__ || Object.getPrototypeOf(Hierarchie)).call(this));
+        var _this = _possibleConstructorReturn(this, (Hierarchie.__proto__ || Object.getPrototypeOf(Hierarchie)).call(this, props));
+
+        _this.state = {
+            clients: [],
+            clientsUser: []
+
+        };
+        return _this;
     }
 
     _createClass(Hierarchie, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {}
+    }, {
         key: 'render',
         value: function render() {
+
+            var currentLocation = this.props;
 
             return _react2.default.createElement(
                 'div',
                 null,
+                _react2.default.createElement(_ActionBar2.default, { context: this.props }),
                 _react2.default.createElement(
-                    'h1',
-                    null,
-                    'Hierarchie'
+                    'div',
+                    { className: 'container-general' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-info-client' },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            'Hierarchie'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-sidebar' },
+                        _react2.default.createElement(
+                            _semanticUiReact.Menu,
+                            { pointing: true, vertical: true },
+                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                        )
+                    )
                 )
             );
         }
@@ -29175,8 +29305,7 @@ var Dashboard = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'dashboard-stat' },
-                        _react2.default.createElement(_semanticUiReact.Statistic, { value: '137', label: 'Agences' }),
-                        _react2.default.createElement(_semanticUiReact.Statistic, { value: '3', label: 'Centrale' })
+                        _react2.default.createElement(_semanticUiReact.Statistic, { value: '137', label: 'Agences' })
                     )
                 )
             );
@@ -29685,65 +29814,7 @@ var Info = function (_React$Component) {
 exports.default = Info;
 
 /***/ }),
-/* 460 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Loader = function (_React$Component) {
-    _inherits(Loader, _React$Component);
-
-    function Loader() {
-        _classCallCheck(this, Loader);
-
-        return _possibleConstructorReturn(this, (Loader.__proto__ || Object.getPrototypeOf(Loader)).apply(this, arguments));
-    }
-
-    _createClass(Loader, [{
-        key: "render",
-        value: function render() {
-            return _react2.default.createElement(
-                "div",
-                null,
-                _react2.default.createElement(
-                    "div",
-                    { className: "container-loader" },
-                    _react2.default.createElement(
-                        "p",
-                        null,
-                        "Chargement.."
-                    ),
-                    _react2.default.createElement("div", { className: "loader" })
-                )
-            );
-        }
-    }]);
-
-    return Loader;
-}(_react2.default.Component);
-
-exports.default = Loader;
-
-/***/ }),
+/* 460 */,
 /* 461 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -61672,6 +61743,109 @@ module.exports = g;
 
 module.exports = __webpack_require__(445);
 
+
+/***/ }),
+/* 884 */,
+/* 885 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Sidebar = __webpack_require__(242);
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+var _ActionBar = __webpack_require__(241);
+
+var _ActionBar2 = _interopRequireDefault(_ActionBar);
+
+var _semanticUiReact = __webpack_require__(34);
+
+var _reactRouter = __webpack_require__(20);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Status = function (_React$Component) {
+    _inherits(Status, _React$Component);
+
+    function Status(props) {
+        _classCallCheck(this, Status);
+
+        var _this = _possibleConstructorReturn(this, (Status.__proto__ || Object.getPrototypeOf(Status)).call(this, props));
+
+        _this.state = {
+            clients: [],
+            clientsUser: []
+
+        };
+        return _this;
+    }
+
+    _createClass(Status, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {}
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var currentLocation = this.props;
+
+            return _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(_ActionBar2.default, { context: this.props }),
+                _react2.default.createElement(
+                    'div',
+                    { className: 'container-general' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-info-client' },
+                        _react2.default.createElement(
+                            'h1',
+                            null,
+                            'Status'
+                        )
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'container-sidebar' },
+                        _react2.default.createElement(
+                            _semanticUiReact.Menu,
+                            { pointing: true, vertical: true },
+                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Status;
+}(_react2.default.Component);
+
+exports.default = Status;
 
 /***/ })
 /******/ ]);

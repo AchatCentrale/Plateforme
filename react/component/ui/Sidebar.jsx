@@ -21,19 +21,25 @@ export default class Sidebar extends React.Component {
 
     constructor(props){
         super(props);
-        console.log(this);
     }
 
     handleItemClick(){
-        let id = this.props.context.params.id;
 
-        let path = "/client/"+ id + "/" + this.props.content;
+        let id = this.props.context.params.id;
+        if(this.props.content === 'General'){
+            browserHistory.push("/client/"+ id );
+        }else{
+            let path = "/client/"+ id + "/" + this.props.content;
+            browserHistory.push(path);
+        }
+
+
+
 
     }
 
 
     componentWillMount(){
-        this.handleItemClick.call(this);
     }
 
 
@@ -42,8 +48,8 @@ export default class Sidebar extends React.Component {
 
 
         return(
-            <div className="">
-                <Menu.Item name={this.props.content} onClick={this.handleItemClick} />
+            <div>
+                <Menu.Item name={this.props.content} onClick={this.handleItemClick.bind(this)} />
 
             </div>
         );

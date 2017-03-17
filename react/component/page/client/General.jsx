@@ -5,10 +5,9 @@ import Sidebar from '../../ui/Sidebar.jsx';
 import ActionBar from '../../../component/ActionBar.jsx';
 
 
-import Loader from '../../ui/Loader.jsx';
 
 
-import { Input, Label, Menu} from 'semantic-ui-react'
+import { Input, Label, Menu, Loader} from 'semantic-ui-react'
 
 import {
     Router,
@@ -78,7 +77,7 @@ export default class General extends React.Component {
         if(this.state.loading){
             return(
                 <div>
-                    <Loader isActive={true}/>
+                    <Loader active size='large'>Loading</Loader>
                 </div>
             )
         }else{

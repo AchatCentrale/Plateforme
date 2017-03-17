@@ -21,7 +21,6 @@ export default class Dashboard extends React.Component {
                 <div className="dashboard-content">
                     <div className="dashboard-stat">
                         <Statistic value='137' label='Agences' />
-                        <Statistic value='3' label='Centrale' />
                     </div>
                 </div>
             </div>

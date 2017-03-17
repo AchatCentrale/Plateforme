@@ -10,9 +10,6 @@ export default class ClientListe extends React.Component {
 
 
 
-    contextTypes: {
-        router: React.PropTypes.object
-    };
 
     getClient() {
 
@@ -90,11 +87,11 @@ export default class ClientListe extends React.Component {
             if (this.state.loading) {
                 return <Loader active size='large'>Loading</Loader>
             }
-             else
+            else
             {
 
                 return <Loader size='large'>Loading</Loader>
-             }
+            }
         };
 
 
@@ -109,23 +106,23 @@ export default class ClientListe extends React.Component {
 
 
 
-                        <Table id="table-client"  selectable >
+                    <Table id="table-client"  selectable >
 
-                            <Table.Header>
-                                <Table.Row >
-                                    <Table.HeaderCell>ID</Table.HeaderCell>
-                                    <Table.HeaderCell>Raison sociale</Table.HeaderCell>
-                                    <Table.HeaderCell>Adresse mail</Table.HeaderCell>
-                                    <Table.HeaderCell>Membre depuis</Table.HeaderCell>
-                                </Table.Row>
-                            </Table.Header>
+                        <Table.Header>
+                            <Table.Row >
+                                <Table.HeaderCell>ID</Table.HeaderCell>
+                                <Table.HeaderCell>Raison sociale</Table.HeaderCell>
+                                <Table.HeaderCell>Adresse mail</Table.HeaderCell>
+                                <Table.HeaderCell>Membre depuis</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
 
-                            <Table.Body>
+                        <Table.Body>
 
-                                {dataDelaTable}
+                            {dataDelaTable}
 
-                            </Table.Body>
-                        </Table>
+                        </Table.Body>
+                    </Table>
 
 
 
@@ -135,6 +132,6 @@ export default class ClientListe extends React.Component {
             </div>
         );
 
-        }
+    }
 }
 
