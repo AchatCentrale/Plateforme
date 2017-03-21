@@ -25,6 +25,44 @@ export default class Info extends React.Component {
     render() {
 
 
+        const siret = (siret) => {
+
+
+            let result = [];
+
+            console.log(siret);
+            console.log(siret.substring(0, 3));
+            console.log(siret.substring(3, 6));
+            console.log(siret.substring(6, 9));
+            console.log(siret.substring(9));
+
+            for(let i = 0; i <= siret.length;i++){
+
+                if(i === 3){
+                    result.push(siret.substring(0, 3), " ")
+                }else if(i === 6){
+                    result.push(siret.substring(3, 6), " ")
+
+                }else if(i === 6){
+                    result.push(siret.substring(6, 9), " ")
+
+                }else if (i > 9 && i < 14){
+                    result.push(siret.substring(9), " ")
+                    return result
+
+                }
+
+            }
+
+
+
+            console.log(result);
+
+
+            return siret
+        };
+
+
 
         return(
           <div className="container-info">
@@ -43,7 +81,7 @@ export default class Info extends React.Component {
                           {this.props.clients.clRaisonsoc}
                       </Label></p>
                       <p> <Label>
-                          {this.props.clients.clSiret}
+                          {siret(this.props.clients.clSiret)}
                       </Label></p>
                       <p><Label>
                           <Icon name='call' />{this.props.clients.clTel}

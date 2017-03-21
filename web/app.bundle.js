@@ -29973,6 +29973,35 @@ var Info = function (_React$Component) {
         key: 'render',
         value: function render() {
 
+            var siret = function siret(_siret) {
+
+                var result = [];
+
+                console.log(_siret);
+                console.log(_siret.substring(0, 3));
+                console.log(_siret.substring(3, 6));
+                console.log(_siret.substring(6, 9));
+                console.log(_siret.substring(9));
+
+                for (var i = 0; i <= _siret.length; i++) {
+
+                    if (i === 3) {
+                        result.push(_siret.substring(0, 3), " ");
+                    } else if (i === 6) {
+                        result.push(_siret.substring(3, 6), " ");
+                    } else if (i === 6) {
+                        result.push(_siret.substring(6, 9), " ");
+                    } else if (i > 9 && i < 14) {
+                        result.push(_siret.substring(9), " ");
+                        return result;
+                    }
+                }
+
+                console.log(result);
+
+                return _siret;
+            };
+
             return _react2.default.createElement(
                 'div',
                 { className: 'container-info' },
@@ -30031,7 +30060,7 @@ var Info = function (_React$Component) {
                             _react2.default.createElement(
                                 _semanticUiReact.Label,
                                 null,
-                                this.props.clients.clSiret
+                                siret(this.props.clients.clSiret)
                             )
                         ),
                         _react2.default.createElement(
