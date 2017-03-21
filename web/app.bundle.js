@@ -3473,11 +3473,6 @@ var ActionBar = function (_React$Component) {
                     'div',
                     { className: 'container-groupe' },
                     _react2.default.createElement(_Logo2.default, { client: this.state.clients })
-                ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'container-delete' },
-                    _react2.default.createElement(_Delete2.default, null)
                 )
             );
         }
@@ -29895,6 +29890,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ContactList = function (_React$Component) {
     _inherits(ContactList, _React$Component);
 
+    _createClass(ContactList, [{
+        key: 'sendMail',
+        value: function sendMail(id, e) {
+
+            var url = "http://localhost:8000/send/client/" + id;
+
+            $.getJSON(url, function (data) {
+                console.log(data, e);
+            });
+        }
+    }]);
+
     function ContactList(props) {
         _classCallCheck(this, ContactList);
 
@@ -29971,10 +29978,10 @@ var ContactList = function (_React$Component) {
                                 _react2.default.createElement(
                                     _semanticUiReact.Table.Cell,
                                     null,
-                                    _react2.default.createElement(_semanticUiReact.Icon, { className: 'icon-mail-client-user', fitted: true, bordered: true, link: true, name: ' mail outline' })
+                                    _react2.default.createElement(_semanticUiReact.Icon, { onClick: this.sendMail.bind(this, x.ccId), data: true, className: 'icon-mail-client-user', fitted: true, bordered: true, link: true, name: ' mail outline' })
                                 )
                             );
-                        })
+                        }.bind(this))
                     )
                 )
             );

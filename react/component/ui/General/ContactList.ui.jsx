@@ -11,6 +11,15 @@ export default class ContactList extends React.Component {
 
 
 
+    sendMail(id, e){
+
+        let url = "http://localhost:8000/send/client/"+ id;
+
+        $.getJSON(url, (data)=>{
+            console.log(data, e);
+        })
+    }
+
 
 
     constructor(props) {
@@ -48,13 +57,15 @@ export default class ContactList extends React.Component {
                                         <Table.Cell>{x.ccNom}</Table.Cell>
                                         <Table.Cell>{x.ccPrenom}</Table.Cell>
                                         <Table.Cell>{x.ccMail}</Table.Cell>
-                                        <Table.Cell><Icon className="icon-mail-client-user" fitted bordered link name=' mail outline' /></Table.Cell>
+                                        <Table.Cell>
+                                            <Icon onClick={this.sendMail.bind(this, x.ccId)} data className="icon-mail-client-user" fitted bordered link name=' mail outline' />
+                                        </Table.Cell>
 
                                     </Table.Row>
 
 
                                 )
-                            })
+                            }.bind(this))
                         }
 
                     </Table.Body>

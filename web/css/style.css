@@ -629,6 +629,7 @@ a.btn-add-client {
 .container-actionBar-top{
     display: flex;
     height: 70px;
+    justify-content: space-around;
 }
 
 .container-delete {

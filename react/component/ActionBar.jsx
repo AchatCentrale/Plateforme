@@ -78,9 +78,7 @@ export default class ActionBar extends React.Component {
             <div className="container-groupe">
                 <Logo client={this.state.clients} />
             </div>
-            <div className="container-delete">
-                <Delete />
-            </div>
+
         </div>
         );
     }
