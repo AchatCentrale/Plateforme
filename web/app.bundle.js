@@ -30006,6 +30006,31 @@ var Info = function (_React$Component) {
                 return _tel;
             };
 
+            var status = function status(_status) {
+
+                if (_status === 1) {
+                    return _react2.default.createElement(
+                        'p',
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Label,
+                            { color: 'green' },
+                            'actif'
+                        )
+                    );
+                } else {
+                    return _react2.default.createElement(
+                        'p',
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Label,
+                            { color: 'red' },
+                            'Inactif'
+                        )
+                    );
+                }
+            };
+
             return _react2.default.createElement(
                 'div',
                 { className: 'container-info' },
@@ -30110,18 +30135,10 @@ var Info = function (_React$Component) {
                             _react2.default.createElement(
                                 _semanticUiReact.Label,
                                 null,
-                                '500-1000'
+                                this.props.clients.clRaisonsoc
                             )
                         ),
-                        _react2.default.createElement(
-                            'p',
-                            null,
-                            _react2.default.createElement(
-                                _semanticUiReact.Label,
-                                { color: 'green' },
-                                'actif'
-                            )
-                        ),
+                        status(this.props.clients.clStatus),
                         _react2.default.createElement(
                             'p',
                             null,

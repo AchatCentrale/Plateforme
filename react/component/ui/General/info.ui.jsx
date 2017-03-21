@@ -67,6 +67,21 @@ export default class Info extends React.Component {
         };
 
 
+        const status = (status) => {
+
+            if(status === 1){
+                return(<p><Label color='green' >
+                    actif
+                </Label></p>)
+            }else {
+                return(<p><Label color='red' >
+                    Inactif
+                </Label></p>)
+
+            }
+
+        };
+
 
 
 
@@ -104,11 +119,9 @@ export default class Info extends React.Component {
                   </div>
                   <div className="col-droite-info">
                       <p><Label>
-                          500-1000
+                          {this.props.clients.clRaisonsoc}
                       </Label></p>
-                      <p><Label color='green' >
-                          actif
-                      </Label></p>
+                      {status(this.props.clients.clStatus)}
                       <p><Label>
                           <Icon name="user"/>Morgane
                       </Label></p>
