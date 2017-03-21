@@ -261,6 +261,8 @@ body{
     position: relative;
     margin-top: 42%;
     padding-bottom: 20%;
+    text-align: left;
+    margin-left: 50px;
 
 }
 
@@ -736,7 +738,7 @@ a.btn-add-client {
 }
 
 .col-droite-info{
-    text-align: center;
+    text-align: left;
     margin-left: 10%;
 }
 

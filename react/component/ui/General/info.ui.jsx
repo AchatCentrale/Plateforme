@@ -23,15 +23,7 @@ export default class Info extends React.Component {
 
 
     render() {
-        let styleStatut = {
-            backgroundColor : "#60C06C",
-            color: "white"
-        };
 
-        let styleStatutFail ={
-            backgroundColor : "#801515",
-            color: "white"
-        };
 
 
         return(
@@ -45,16 +37,16 @@ export default class Info extends React.Component {
                   </div>
                   <div className="col-droite-info">
                       <p><Label>
-                          <Label.Detail>{this.props.clients.clRef}</Label.Detail>
+                          {this.props.clients.clRef}
                       </Label></p>
                       <p><Label>
-                          <Label.Detail>{this.props.clients.clRaisonsoc}</Label.Detail>
+                          {this.props.clients.clRaisonsoc}
                       </Label></p>
                       <p> <Label>
-                          <Label.Detail>{this.props.clients.clSiret}</Label.Detail>
+                          {this.props.clients.clSiret}
                       </Label></p>
                       <p><Label>
-                          <Label.Detail><Icon name='call' />{this.props.clients.clTel}</Label.Detail>
+                          <Icon name='call' />{this.props.clients.clTel}
                       </Label></p>
 
                   </div>
@@ -67,17 +59,13 @@ export default class Info extends React.Component {
                   </div>
                   <div className="col-droite-info">
                       <p><Label>
-                          <Label.Detail>500-1000</Label.Detail>
+                          500-1000
                       </Label></p>
-                      <p
-                          style={
-                            (this.props.clients.clStatus === 1)
-                                  ? styleStatut
-                                  : styleStatutFail
-                                }
-                      >Actif</p>
+                      <p><Label color='green' >
+                          actif
+                      </Label></p>
                       <p><Label>
-                          <Label.Detail><Icon name="user circle outline"/>Morgane</Label.Detail>
+                          <Icon name="user"/>Morgane
                       </Label></p>
                   </div>
               </div>
