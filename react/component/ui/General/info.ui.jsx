@@ -47,6 +47,29 @@ export default class Info extends React.Component {
         };
 
 
+        const tel = (tel) => {
+
+           let result = [];
+           let len = tel.length;
+
+
+
+           for(let i = 10; i > 0; i -= 2){
+              result.push(tel.substring(i - 2 , i));
+
+           }
+
+            result.reverse();
+            tel = result.join(' ');
+
+            return tel
+
+        };
+
+
+
+
+
 
         return(
           <div className="container-info">
@@ -68,7 +91,7 @@ export default class Info extends React.Component {
                           {siret(this.props.clients.clSiret)}
                       </Label></p>
                       <p><Label>
-                          <Icon name='call' />{this.props.clients.clTel}
+                          <Icon name='call' />{tel(this.props.clients.clTel)}
                       </Label></p>
 
                   </div>

@@ -29991,6 +29991,23 @@ var Info = function (_React$Component) {
                 }
             };
 
+            var tel = function tel(_tel) {
+
+                var result = [];
+                var len = _tel.length;
+
+                console.log(_tel.substring(8, 10));
+
+                for (var i = 10; i > 0; i -= 2) {
+                    result.push(_tel.substring(i - 2, i));
+                }
+
+                result.reverse();
+                _tel = result.join(' ');
+
+                return _tel;
+            };
+
             return _react2.default.createElement(
                 'div',
                 { className: 'container-info' },
@@ -30059,7 +30076,7 @@ var Info = function (_React$Component) {
                                 _semanticUiReact.Label,
                                 null,
                                 _react2.default.createElement(_semanticUiReact.Icon, { name: 'call' }),
-                                this.props.clients.clTel
+                                tel(this.props.clients.clTel)
                             )
                         )
                     )
