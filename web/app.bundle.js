@@ -29996,8 +29996,6 @@ var Info = function (_React$Component) {
                 var result = [];
                 var len = _tel.length;
 
-                console.log(_tel.substring(8, 10));
-
                 for (var i = 10; i > 0; i -= 2) {
                     result.push(_tel.substring(i - 2, i));
                 }
