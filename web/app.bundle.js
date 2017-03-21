@@ -29976,13 +29976,6 @@ var Info = function (_React$Component) {
             var siret = function siret(_siret) {
 
                 var result = [];
-
-                console.log(_siret);
-                console.log(_siret.substring(0, 3));
-                console.log(_siret.substring(3, 6));
-                console.log(_siret.substring(6, 9));
-                console.log(_siret.substring(9));
-
                 for (var i = 0; i <= _siret.length; i++) {
 
                     if (i === 3) {
@@ -29996,10 +29989,6 @@ var Info = function (_React$Component) {
                         return result;
                     }
                 }
-
-                console.log(result);
-
-                return _siret;
             };
 
             return _react2.default.createElement(

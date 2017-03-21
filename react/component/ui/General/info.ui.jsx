@@ -29,13 +29,6 @@ export default class Info extends React.Component {
 
 
             let result = [];
-
-            console.log(siret);
-            console.log(siret.substring(0, 3));
-            console.log(siret.substring(3, 6));
-            console.log(siret.substring(6, 9));
-            console.log(siret.substring(9));
-
             for(let i = 0; i <= siret.length;i++){
 
                 if(i === 3){
@@ -49,17 +42,8 @@ export default class Info extends React.Component {
                 }else if (i > 9 && i < 14){
                     result.push(siret.substring(9), " ")
                     return result
-
                 }
-
             }
-
-
-
-            console.log(result);
-
-
-            return siret
         };
 
 
