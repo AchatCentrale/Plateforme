@@ -133,12 +133,7 @@ a:hover {
     font-weight: bold;
 }
 
-.card{
-    width: 68%;
-    height: 300px;
-    margin-left: 100px;
-    margin-top: 92px;
-}
+
 
 
 .logo-crm{
@@ -853,4 +848,13 @@ form.ink-form.form-login {
 .container-client-action {
     text-align: center;
     padding-top: 14px;
+}
+
+.container-adresse-general {
+    margin-top: 43px;
+}
+
+
+.adresse-agence h3 {
+    text-decoration: underline;
 }

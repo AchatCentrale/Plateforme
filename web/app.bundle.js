@@ -28984,6 +28984,10 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
+var _AgenceAdresse = __webpack_require__(883);
+
+var _AgenceAdresse2 = _interopRequireDefault(_AgenceAdresse);
+
 var _semanticUiReact = __webpack_require__(21);
 
 var _reactRouter = __webpack_require__(19);
@@ -28999,6 +29003,51 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Adresse = function (_React$Component) {
     _inherits(Adresse, _React$Component);
 
+    _createClass(Adresse, [{
+        key: 'getClients',
+        value: function getClients() {
+            var _this2 = this;
+
+            var url = "http://localhost:8000/Agence/" + this.props.params.id;
+            $.getJSON(url, function (data) {
+
+                _this2.setState({
+                    clients: data[0],
+                    loading: false
+
+                });
+            });
+        }
+    }, {
+        key: 'getAdresseLivraison',
+        value: function getAdresseLivraison() {
+            var _this3 = this;
+
+            var url = "http://localhost:8000/Agence/" + this.props.params.id + "/adresse/L";
+            $.getJSON(url, function (data) {
+
+                _this3.setState({
+                    AdresseLivraison: data[0]
+
+                });
+            });
+        }
+    }, {
+        key: 'getAdresseFacturation',
+        value: function getAdresseFacturation() {
+            var _this4 = this;
+
+            var url = "http://localhost:8000/Agence/" + this.props.params.id + "/adresse/F";
+            $.getJSON(url, function (data) {
+
+                _this4.setState({
+                    AdresseFacturation: data[0]
+
+                });
+            });
+        }
+    }]);
+
     function Adresse(props) {
         _classCallCheck(this, Adresse);
 
@@ -29006,53 +29055,67 @@ var Adresse = function (_React$Component) {
 
         _this.state = {
             clients: [],
-            clientsUser: []
-
+            AdresseLivraison: [],
+            AdresseFacturation: [],
+            loading: true
         };
+
         return _this;
     }
 
     _createClass(Adresse, [{
         key: 'componentWillMount',
-        value: function componentWillMount() {}
+        value: function componentWillMount() {
+            this.getClients.call(this);
+            this.getAdresseLivraison.call(this);
+            this.getAdresseFacturation.call(this);
+        }
     }, {
         key: 'render',
         value: function render() {
 
             var currentLocation = this.props;
 
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(_ActionBar2.default, { context: this.props }),
-                _react2.default.createElement(
+            if (this.state.loading) {
+                return _react2.default.createElement(
                     'div',
-                    { className: 'container-general' },
+                    null,
+                    _react2.default.createElement(
+                        _semanticUiReact.Loader,
+                        { active: true, size: 'large' },
+                        'Loading'
+                    )
+                );
+            } else {
+                return _react2.default.createElement(
+                    'div',
+                    null,
+                    _react2.default.createElement(_ActionBar2.default, { context: this.props }),
                     _react2.default.createElement(
                         'div',
-                        { className: 'container-info-client' },
+                        { className: 'container-general' },
                         _react2.default.createElement(
-                            'h1',
-                            null,
-                            'Adresse'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'container-sidebar' },
+                            'div',
+                            { className: 'container-info-client' },
+                            _react2.default.createElement(_AgenceAdresse2.default, { adresseF: this.state.AdresseFacturation, adresseL: this.state.AdresseLivraison, client: this.state.clients, context: currentLocation })
+                        ),
                         _react2.default.createElement(
-                            _semanticUiReact.Menu,
-                            { pointing: true, vertical: true },
-                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                            'div',
+                            { className: 'container-sidebar' },
+                            _react2.default.createElement(
+                                _semanticUiReact.Menu,
+                                { pointing: true, vertical: true },
+                                _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
+                                _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
+                                _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
+                                _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
+                                _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
+                                _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                            )
                         )
                     )
-                )
-            );
+                );
+            }
         }
     }]);
 
@@ -29832,13 +29895,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var ContactList = function (_React$Component) {
     _inherits(ContactList, _React$Component);
 
-    _createClass(ContactList, [{
-        key: 'handleClick',
-        value: function handleClick(e) {
-            console.log(e);
-        }
-    }]);
-
     function ContactList(props) {
         _classCallCheck(this, ContactList);
 
@@ -29915,7 +29971,7 @@ var ContactList = function (_React$Component) {
                                 _react2.default.createElement(
                                     _semanticUiReact.Table.Cell,
                                     null,
-                                    _react2.default.createElement(_semanticUiReact.Icon, { onclick: console.log(this), className: 'icon-mail-client-user', fitted: true, bordered: true, link: true, name: ' mail outline' })
+                                    _react2.default.createElement(_semanticUiReact.Icon, { className: 'icon-mail-client-user', fitted: true, bordered: true, link: true, name: ' mail outline' })
                                 )
                             );
                         })
@@ -30204,7 +30260,7 @@ var Logo = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'container-marques' },
-                _react2.default.createElement(_semanticUiReact.Image, { src: 'http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_' + this.props.client.clId + '/' + this.props.client.clLogo, avatar: true }),
+                _react2.default.createElement(_semanticUiReact.Image, { src: 'http://www.centrale-roc-eclerc.fr//UploadFichiers/Uploads/CLIENT_' + this.props.client.clId + '/' + this.props.client.clLogo, avatar: true }),
                 _react2.default.createElement(
                     'span',
                     null,
@@ -62089,6 +62145,203 @@ module.exports = g;
 
 module.exports = __webpack_require__(445);
 
+
+/***/ }),
+/* 883 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = __webpack_require__(21);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AgenceAdresse = function (_React$Component) {
+    _inherits(AgenceAdresse, _React$Component);
+
+    function AgenceAdresse(props) {
+        _classCallCheck(this, AgenceAdresse);
+
+        var _this = _possibleConstructorReturn(this, (AgenceAdresse.__proto__ || Object.getPrototypeOf(AgenceAdresse)).call(this, props));
+
+        console.log(_this.props);
+
+        return _this;
+    }
+
+    _createClass(AgenceAdresse, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {}
+    }, {
+        key: 'render',
+        value: function render() {
+
+            var currentLocation = this.props;
+
+            return _react2.default.createElement(
+                'div',
+                { className: 'container-adresse-general' },
+                _react2.default.createElement(
+                    'div',
+                    { className: 'adresse-agence' },
+                    _react2.default.createElement(
+                        _semanticUiReact.Grid,
+                        { columns: 3, divided: true },
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Row,
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid.Column,
+                                null,
+                                _react2.default.createElement(
+                                    _semanticUiReact.Card,
+                                    null,
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Content,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Header,
+                                            null,
+                                            'Adresse de l\'agence'
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Meta,
+                                            null,
+                                            "        "
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Description,
+                                            null,
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.client.clAdresse1
+                                            ),
+                                            _react2.default.createElement('br', null),
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.client.clCp + "  " + this.props.client.clVille
+                                            )
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Content,
+                                        { extra: true },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'ui center' },
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Button,
+                                                { basic: true, color: 'green' },
+                                                'Rendre principale'
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid.Column,
+                                null,
+                                _react2.default.createElement(
+                                    _semanticUiReact.Card,
+                                    null,
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Content,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Header,
+                                            null,
+                                            'Adresse de livraison'
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Meta,
+                                            null,
+                                            this.props.adresseL.caPrincipale === 1 ? "Adresse principale" : " "
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Description,
+                                            null,
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.adresseL.caAdresse1
+                                            ),
+                                            _react2.default.createElement('br', null),
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.adresseL.caCp + "  " + this.props.adresseL.caVille
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid.Column,
+                                null,
+                                _react2.default.createElement(
+                                    _semanticUiReact.Card,
+                                    null,
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Content,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Header,
+                                            null,
+                                            'Adresse de Facturation'
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Meta,
+                                            null,
+                                            this.props.adresseF.caPrincipale === 1 ? "Adresse principale" : " "
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Description,
+                                            null,
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.adresseF.caAdresse1
+                                            ),
+                                            _react2.default.createElement('br', null),
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.adresseF.caCp + "  " + this.props.adresseF.caVille
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return AgenceAdresse;
+}(_react2.default.Component);
+
+exports.default = AgenceAdresse;
 
 /***/ })
 /******/ ]);

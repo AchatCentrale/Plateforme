@@ -1,6 +1,8 @@
 import React from 'react';
 import Sidebar from '../../ui/Sidebar.jsx';
 import ActionBar from '../../../component/ActionBar.jsx';
+import AgenceAdresse from '../../ui/Adresse/AgenceAdresse.jsx';
+
 
 
 
@@ -24,16 +26,70 @@ export default class Adresse extends React.Component {
 
 
 
+
+
+
+    getClients(){
+        let url =  "http://localhost:8000/Agence/"+this.props.params.id;
+        $.getJSON(url, (data)=>{
+
+            this.setState({
+                clients:  data[0],
+                loading: false
+
+            });
+        })
+    }
+
+
+    getAdresseLivraison(){
+
+        let url =  "http://localhost:8000/Agence/"+this.props.params.id+ "/adresse/L";
+        $.getJSON(url, (data)=>{
+
+            this.setState({
+                AdresseLivraison:  data[0],
+
+
+            });
+        })
+
+
+    }
+    getAdresseFacturation(){
+
+        let url =  "http://localhost:8000/Agence/"+this.props.params.id+ "/adresse/F";
+        $.getJSON(url, (data)=>{
+
+            this.setState({
+                AdresseFacturation:  data[0],
+
+
+            });
+        })
+
+
+    }
+
+
+
     constructor(props) {
         super(props);
 
+
         this.state = {
             clients: [],
-            clientsUser: [],
-
+            AdresseLivraison : [],
+            AdresseFacturation : [],
+            loading: true
         };
+
+
     }
     componentWillMount(){
+        this.getClients.call(this);
+        this.getAdresseLivraison.call(this);
+        this.getAdresseFacturation.call(this);
 
     }
 
@@ -42,13 +98,19 @@ export default class Adresse extends React.Component {
 
         let currentLocation = this.props;
 
-
+        if(this.state.loading){
+            return(
+                <div>
+                    <Loader active size='large'>Loading</Loader>
+                </div>
+            )
+        }else{
             return(
                 <div>
                     <ActionBar context={this.props} />
                     <div className="container-general" >
                         <div className="container-info-client">
-                           <h1>Adresse</h1>
+                            <AgenceAdresse adresseF={this.state.AdresseFacturation}  adresseL={this.state.AdresseLivraison} client={this.state.clients} context={currentLocation} />
                         </div>
                         <div className="container-sidebar">
 
@@ -68,6 +130,7 @@ export default class Adresse extends React.Component {
             );
         }
 
+    }
 }
 
 

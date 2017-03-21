@@ -182,14 +182,14 @@ class ClientsController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/Agence/count")
+     * @Rest\Get("/Agence/{id}/adresse/{type}")
      */
-    public function getNumberAgenceAction()
+    public function getAdresseAction($id, $type)
     {
-
-        $em = $this->getDoctrine()->getManager();
-        $clientRepo = $em->getRepository('AchatCentraleCrmBundle:Clients');
-        $restresult = $clientRepo->getNb();
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(array(
+            "clId" => $id,
+            "caType" => $type
+        ));
 
 
 
@@ -199,6 +199,7 @@ class ClientsController extends FOSRestController
         }
         return $restresult;
     }
+
 
 
 

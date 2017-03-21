@@ -13,10 +13,6 @@ export default class ContactList extends React.Component {
 
 
 
-    handleClick(e){
-        console.log(e)
-    }
-
     constructor(props) {
         super(props);
 
@@ -52,7 +48,7 @@ export default class ContactList extends React.Component {
                                         <Table.Cell>{x.ccNom}</Table.Cell>
                                         <Table.Cell>{x.ccPrenom}</Table.Cell>
                                         <Table.Cell>{x.ccMail}</Table.Cell>
-                                        <Table.Cell><Icon onclick={console.log(this)} className="icon-mail-client-user" fitted bordered link name=' mail outline' /></Table.Cell>
+                                        <Table.Cell><Icon className="icon-mail-client-user" fitted bordered link name=' mail outline' /></Table.Cell>
 
                                     </Table.Row>
 
