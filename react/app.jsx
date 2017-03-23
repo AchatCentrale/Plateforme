@@ -5,7 +5,7 @@ import Exemple from './component/page/Exemple.jsx';
 import ClientListe from './component/page/ClientListe.jsx';
 import General from './component/page/client/General.jsx';
 import Depenses from './component/page/client/Depenses.jsx';
-import EtatClient from './component/page/client/EtatClient.jsx';
+import Status from './component/page/client/Status.jsx';
 import Adresse from './component/page/client/Adresse.jsx';
 import Hierarchie from './component/page/client/Hierarchie.jsx';
 import Actions from './component/page/client/Actions.jsx';
@@ -23,24 +23,22 @@ import {
     IndexRedirect
 } from 'react-router';
 
-import { Table } from 'semantic-ui-react'
-
+import {Table} from 'semantic-ui-react'
 
 
 class App extends React.Component {
 
 
-
-    getTheUser(){
+    getTheUser() {
         let url = "http://localhost:8000/who/username";
 
 
-        $.getJSON(url, (data) =>{
+        $.getJSON(url, (data) => {
 
             console.log(data);
 
             this.setState({
-                user:  data,
+                user: data,
 
             });
         })
@@ -49,22 +47,19 @@ class App extends React.Component {
     }
 
 
-
-
-
-    constructor(props){
+    constructor(props) {
 
         super(props);
 
         moment.locale("fr");
         this.state = {
-            user : ''
+            user: ''
 
         }
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
         this.getTheUser.call(this);
 
 
@@ -77,14 +72,14 @@ class App extends React.Component {
         return (
 
             <div>
-                <TopBar />
+                <TopBar user={this.state.user}/>
 
                 <div className="continer-nav-bar">
-                    <NavBar user={this.state.user} />
+                    <NavBar user={this.state.user}/>
                 </div>
 
                 <div className="container-content">
-                    <div className="container-page" >
+                    <div className="container-page">
 
                         {this.props.children}
                     </div>
@@ -96,14 +91,18 @@ class App extends React.Component {
 }
 
 
-
 render((
     <Router history={browserHistory}>
 
         <Route path="/" component={App}>
-            <IndexRoute component={Dashboard}  />
+            <IndexRoute component={Dashboard}/>
             <Route path="/client" component={ClientListe}/>
             <Route path="/client/:id" component={General}/>
+            <Route path="/client/:id/Dépenses" component={Depenses}/>
+            <Route path="/client/:id/status" component={Status}/>
+            <Route path="/client/:id/adresse" component={Adresse}/>
+            <Route path="/client/:id/Actions" component={Actions}/>
+            <Route path="/client/:id/hierarchie" component={Hierarchie}/>
         </Route>
     </Router>
 ), document.getElementById('app'));

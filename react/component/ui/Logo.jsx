@@ -16,7 +16,7 @@ export default class Logo extends React.Component {
     render() {
         return(
             <div className="container-marques" >
-                <Image src={'http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_' +  this.props.client.clId  +'/' + this.props.client.clLogo } avatar />
+                <Image src={'http://www.centrale-roc-eclerc.fr//UploadFichiers/Uploads/CLIENT_' +  this.props.client.clId  +'/' + this.props.client.clLogo } avatar />
                 <span>{this.props.client.clRaisonsoc}</span>
 
             </div>

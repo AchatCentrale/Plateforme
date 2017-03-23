@@ -1,4 +1,7 @@
 import React from 'react';
+
+import {Icon} from 'semantic-ui-react'
+
 import {
     Router,
     Route,
@@ -10,12 +13,11 @@ import {
 } from 'react-router';
 
 
-
 export default class Update extends React.Component {
     render() {
-        return(
-            <div>
-                <p className="update-icon" >Modifier</p>
+        return (
+            <div className='update-icon cursor' >
+                Modifier <Icon  name='edit'/>
             </div>
         );
     }

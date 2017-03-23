@@ -1,5 +1,3 @@
-
-
 /** Ultra Light */
 @font-face {
     font-family: "San Francisco";
@@ -42,8 +40,7 @@
     src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
 }
 
-
-.img-home{
+.img-home {
 
     width: 14%;
     margin-left: 42%;
@@ -53,6 +50,7 @@
 html {
     height: 100%;
 }
+
 body {
     min-height: 100%;
     margin: 0;
@@ -66,48 +64,45 @@ img {
     max-width: 70%;
     vertical-align: top;
 }
+
 .block-logo img {
     width: 70%;
 }
 
-.form-login{
+.form-login {
     width: 90%;
     margin: 0 auto;
 }
-.login-group-input{
+
+.login-group-input {
     width: 45%;
     margin: 0 auto;
     padding: 41px 1px 1px 1px;
 }
 
-.login-group{
+.login-group {
     background: #FFFFFF;
-    box-shadow: 0 2px 8px 1px rgba(120,120,120,0.50);
+    box-shadow: 0 2px 8px 1px rgba(120, 120, 120, 0.50);
     border-radius: 8px;
     width: 30%;
     height: 300px;
     margin: 0 auto;
 }
 
-
-
 .ink-navigation ul.menu.blue {
     background: #1b75ce;
     height: 88px;
 }
 
-
-.menu-header-name{
+.menu-header-name {
     margin-top: 20px;
 }
 
-
-
-.cursor{
+.cursor {
     cursor: pointer;
 }
 
-#title-welcome{
+#title-welcome {
     color: white;
     text-decoration: none;
     cursor: pointer;
@@ -119,80 +114,66 @@ a:hover {
     cursor: pointer;
 }
 
-.icons-settings{
+.icons-settings {
     margin-top: 16px;
     margin-right: 2px;
     color: steelblue;
 }
 
-
-
-.icons-poweroff{
+.icons-poweroff {
     margin-top: 16px;
     color: steelblue;
     font-weight: bold;
 }
 
-.card{
-    width: 68%;
-    height: 300px;
-    margin-left: 100px;
-    margin-top: 92px;
-}
-
-
-.logo-crm{
+.logo-crm {
     width: 50%;
     margin: 8% 0 0 24%;
 }
 
-.icon-online{
+.icon-online {
     color: green;
 }
 
-
-.float-group{
+.float-group {
     margin: 14% 7% 1% 1%;
     position: absolute;
     left: 92%;
 }
-
 
 .float-group i {
     margin-top: 16px;
     font-weight: bold;
 }
 
-
-
-
-.container{
+.container {
     width: 95%;
     border: solid 2px;
     margin: 0 auto;
-    height:500px;
+    height: 500px;
     overflow: scroll;
 }
 
-.header-gestion{
+.header-gestion {
     width: 95%;
     margin: 0 auto;
     height: 200px;
     padding: 10px;
 }
 
-.header-gestion h1{
+.header-gestion h1 {
     margin: 10px;
 }
 
-.title-ui div{
+.title-ui div {
     color: black;
     margin-top: 30px;
     margin-left: 37px;
     font-family: "San Francisco";
     font-weight: 500;
 }
-.gestion-btn-group{
+
+.gestion-btn-group {
 
 }
 
@@ -203,16 +184,16 @@ a:hover {
     margin-left: 28%;
 }
 
-td img{
+td img {
     width: 5%;
 }
 
-.btn-login{
+.btn-login {
     width: 100%;
     margin: 0 auto;
 }
 
-.error-login p{
+.error-login p {
     margin: 10px;
 }
 
@@ -222,101 +203,83 @@ td img{
     padding-top: 33px;
 }
 
-footer{
+footer {
     position: fixed;
     top: 92%;
     background-color: #6998C9;
     width: 100%;
 }
-.nav-bar{
+
+.nav-bar {
     width: 15%;
     background-color: #1A2E46;
     min-height: 100vh;
     text-align: center;
 }
 
-
-
-
-
-
-
-
-
-body{
-     background-color: #F4F4F4 !important;
+body {
+    background-color: #F4F4F4 !important;
 
 }
 
-
-
-
-.nav-bar{
+.nav-bar {
     float: left;
 }
 
-
-
-.menu{
+.menu {
     position: relative;
     margin-top: 42%;
-    padding-bottom: 20%;
+    padding-bottom: 65%;
+    text-align: left;
+    margin-left: 50px;
 
 }
 
-.menu-home p{
+.menu-home p {
     padding-right: 13px;
 }
 
-.menu-client p{
+.menu-client p {
 }
 
-
-
-.menu-calendrier p{
+.menu-calendrier p {
 }
 
 .menu-supplier p {
 }
 
-
-
 .menu a {
     text-decoration: none;
     color: white;
 }
+
 .menu a:hover {
     text-decoration: none;
     color: white;
 }
 
-
 .menu-bottom a {
     text-decoration: none;
     color: white;
 }
+
 .menu-bottom a:hover {
     text-decoration: none;
     color: white;
 }
 
-
-
-.hover{
+.hover {
     height: 60px;
 
     padding-top: 14px;
 
 }
 
-.hover p:hover{
-
-
+.hover p:hover {
 
 }
 
-
-.recherche{
+.recherche {
     height: 100px;
     width: 85%;
     float: right;
@@ -326,12 +289,11 @@ body{
 
 }
 
-.add-action{
-    width: 40%;
-    padding-left: 15%;
+.add-action {
+    width: 20%;
+    padding-left: 6%;
     padding-top: 2%;
 }
-
 
 .ajout {
     margin-top: 34px;
@@ -341,6 +303,7 @@ body{
     display: flex;
     height: 33px;
 }
+
 .ajout input[type="text"] {
     border: none;
     outline: none;
@@ -350,12 +313,11 @@ body{
     padding-bottom: 4%;
 }
 
-
 .loupe {
     float: left;
 }
 
-.notification{
+.notification {
     width: 40px;
     height: 40px;
     border: 3px #D2D2D2 solid;
@@ -370,13 +332,13 @@ body{
     margin-right: 2%;
 }
 
-.row-client{
+.row-client {
     cursor: pointer;
 }
 
-.client-liste{
+.client-liste {
     width: 75%;
-    height:100%;
+    height: 100%;
     background-color: white;
     margin: 16px auto 0;
     display: flex;
@@ -395,8 +357,6 @@ body{
     margin-left: 45px;
 }
 
-
-
 .top-client-liste {
     width: 56%;
     background-color: white;
@@ -404,40 +364,39 @@ body{
     border-radius: 4px;
     margin-top: 20px;
     margin-left: 40px;
-    order:1;
+    order: 1;
     padding: 1px 1px 15px 6px;
 }
-
 
 .photo-client-liste {
     width: 40%;
     margin-top: 32px;
     height: 500px;
     text-align: center;
-    order:1;
+    order: 1;
 }
 
-.user-client-liste{
+.user-client-liste {
     width: 75%;
-    height:100%;
+    height: 100%;
     background-color: white;
     margin: 16px auto 0;
     display: flex;
     flex-wrap: wrap;
 }
 
-#accordion h3{
+#accordion h3 {
     margin-left: 73px;
     margin-top: 10px;
     cursor: pointer;
     outline: none;
 }
 
-#accordion p{
+#accordion p {
     margin-left: 73px;
 }
 
-.block-list-user{
+.block-list-user {
     display: flex;
     text-align: center;
 }
@@ -448,8 +407,7 @@ td img {
     margin-left: 110px;
 }
 
-
-.mail-send{
+.mail-send {
     margin-left: 40px;
     cursor: pointer;
 }
@@ -458,25 +416,28 @@ td img {
     width: 70%;
 }
 
-.pencil-update{
+.pencil-update {
     cursor: pointer;
     margin-left: 30px;
 
 }
+
 a.btn-add-client {
     margin-left: 341px !important;
 }
 
-.client-add-block{
+.client-add-block {
 
 }
 
 .client-add-block h1 {
     text-align: center;
 }
-.row-img{
+
+.row-img {
     width: 24%;
 }
+
 .photo-client-liste img {
     width: 21%;
     margin: 5%;
@@ -485,9 +446,6 @@ a.btn-add-client {
 .block-logs {
     margin-top: 45px;
 }
-
-
-
 
 .block-logo {
     position: relative;
@@ -499,27 +457,22 @@ a.btn-add-client {
     color: white;
     font-family: "San Francisco";
     font-size: 13px;
-    color: rgba(255,255,255,0.87);
+    color: rgba(255, 255, 255, 0.87);
     letter-spacing: 0.86px;
 }
-
-
 
 .block-profile img {
     margin-top: 30px;
     padding-bottom: 20px;
 }
 
-
 .block-profile p {
     font-family: "San Francisco";
     font-size: 16px;
-    color: rgba(255,255,255,0.87);
+    color: rgba(255, 255, 255, 0.87);
 }
 
-
-
-.menu-logout p{
+.menu-logout p {
 
     background: url(../images/logoutt.png) no-repeat 18% 1px;
     padding-left: 37px;
@@ -528,19 +481,18 @@ a.btn-add-client {
     text-decoration: none;
 
 }
+
 .block-profile h1 {
     color: white;
     padding: 20px;
 }
-
 
 .menu-bottom {
     position: relative;
     margin-top: 50px;
 }
 
-
-.menu-settings p{
+.menu-settings p {
 
     background: url(../images/settings.png) no-repeat 18% 1px;
     color: white;
@@ -550,8 +502,6 @@ a.btn-add-client {
 
 }
 
-
-
 .container-react-app {
 
     background-color: white;
@@ -559,9 +509,7 @@ a.btn-add-client {
     height: 100vh;
 }
 
-
-
-.toolbar-client-liste{
+.toolbar-client-liste {
     background-color: white;
     height: 9%;
     display: flex;
@@ -571,66 +519,67 @@ a.btn-add-client {
     margin-top: 20px;
 }
 
-.new-client-liste{
+.new-client-liste {
     display: flex;
 }
 
-
-.container-actionBar{
+.container-actionBar {
     display: flex;
     width: 55%;
     justify-content: space-around;
     padding-top: 18px;
     font-size: 20px;
-    color: rgba(0,0,0,0.87);
+    color: rgba(0, 0, 0, 0.87);
     letter-spacing: -1.76px;
     margin-left: 55px;
 }
-.add-icon{
+
+.add-icon {
     height: 35px;
     width: 132px;
     background: url(../images/add.png) no-repeat 76px;
     padding-top: 4px;
 }
 
-.export-icon{
+.export-icon {
     height: 35px;
     width: 132px;
     background: url(../images/export.png) no-repeat 76px;
     padding-top: 4px;
 }
 
-.update-icon{
-     height: 35px;
-     width: 132px;
-     background: url(../images/update.png) no-repeat 76px;
-     padding-top: 4px;
- }
-.delete-icon{
+.update-icon {
+    padding-top: 7px;
+    font-size: 19pt;
+}
+
+.delete-icon {
     height: 35px;
     width: 132px;
     background: url(../images/Delete-2.png) no-repeat 95px;
     padding-top: 4px;
 }
 
-.container-marques{
+.container-marques {
     display: flex;
-    padding-top: 10px;
+    padding-top: 24px;
     width: 158%;
+    letter-spacing: 2px;
 }
 
-.container-marques p{
+.container-marques p {
     font-family: "San Francisco";
     font-size: 157%;
-    color: rgba(0,0,0,0.87);
+    color: rgba(0, 0, 0, 0.87);
     letter-spacing: -3.16px;
     padding-left: 18px;
     padding-top: 7px;
 }
 
-.container-actionBar-top{
+.container-actionBar-top {
     display: flex;
     height: 70px;
+    justify-content: space-around;
 }
 
 .container-delete {
@@ -639,7 +588,7 @@ a.btn-add-client {
     display: flex;
     justify-content: space-around;
     font-size: 20px;
-    color: rgba(0,0,0,0.87);
+    color: rgba(0, 0, 0, 0.87);
     letter-spacing: -1.76px;
 }
 
@@ -649,6 +598,10 @@ a.btn-add-client {
     width: 85%;
 }
 
+.avatar-topBar {
+    width: 25%;
+    padding-top: 25px;
+}
 
 .container-page {
     width: 100%;
@@ -671,21 +624,19 @@ a.btn-add-client {
     border-radius: 8px;
 }
 
-.avatar-dashboard{
+.avatar-dashboard {
     margin: 10px 10px 10px 26px;
 }
 
-.dashboard-content{
+.dashboard-content {
     width: 97%;
     height: 90%;
     margin: 0 auto;
 }
 
-
 .container-info-client {
     width: 60%;
 }
-
 
 .sidebar {
     background-color: #1A2F47;
@@ -695,7 +646,7 @@ a.btn-add-client {
     color: white;
     font-family: "San Francisco";
     font-size: 24px;
-    color: rgba(255,255,255,0.87);
+    color: rgba(255, 255, 255, 0.87);
     letter-spacing: -2.11px;
     width: 94%;
     margin: 9px auto;
@@ -703,65 +654,65 @@ a.btn-add-client {
     text-align: center;
 
 }
-.current{
+
+.current {
     background-color: black;
 }
 
-
-.sidebar a{
+.sidebar a {
     color: white;
     text-decoration: none;
 }
 
-.sidebar a:hover{
+.sidebar a:hover {
     color: white;
     text-decoration: none;
 }
 
-.container-info{
+.container-info {
     display: flex;
 }
-.container-info-gauche{
+
+.container-info-gauche {
     display: flex;
     padding-left: 5%;
     padding-top: 45px;
 }
 
-.container-info-droite{
+.container-info-droite {
     display: flex;
     width: 40%;
     margin-top: 45px;
     margin-left: 6%;
 }
 
-.col-droite-info{
-    text-align: center;
+.col-droite-info {
+    text-align: left;
     margin-left: 10%;
 }
 
-
-
-.col-gauche-info p{
+.col-gauche-info p {
     padding: 5px 1px 1px 1px;
 }
 
-.container-contact-list{
+.container-contact-list {
     width: 90%;
     margin: 0 auto;
     padding-top: 30px;
 }
+
 .container-contact-list h3 {
     text-decoration: underline;
 }
 
-.container-table-contact{
+.container-table-contact {
 
 }
-
 
 .login-container {
     margin-top: 10%;
 }
+
 form.ink-form.form-login {
     padding-top: 25px;
 }
@@ -773,7 +724,6 @@ form.ink-form.form-login {
     width: 50%;
 }
 
-
 .table-client {
     width: 80%;
     margin: 0 auto;
@@ -781,22 +731,6 @@ form.ink-form.form-login {
     height: 58vh;
     overflow: scroll;
 }
-
-
-.loader {
-    border: 16px solid white; /* Light grey */
-    border-top: 16px solid #1A2F47; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 3s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 
 .container-loader {
     width: 80%;
@@ -810,19 +744,15 @@ form.ink-form.form-login {
     margin-top: 45px;
 }
 
-
-
-.table-client-user-header{
+.table-client-user-header {
     border: 2px solid gray;
 }
 
-.table-client-user-body{
+.table-client-user-body {
     border: 1px solid gray;
 }
 
-
-
-.table-client-user{
+.table-client-user {
     width: 100%;
     text-align: center;
 }
@@ -831,12 +761,11 @@ form.ink-form.form-login {
     border: solid 1px black;
 }
 
-.mail-user{
+.mail-user {
     cursor: pointer;
 }
 
-
-.table-control{
+.table-control {
     width: 80%;
     margin: 0 auto;
     padding-top: 20px;
@@ -854,7 +783,20 @@ form.ink-form.form-login {
     height: 80vh;
 }
 
-.icon-mail-client-user{
+.icon-mail-client-user {
     margin-left: 40px;
     margin-top: 11px;
+}
+
+.container-client-action {
+    text-align: center;
+    padding-top: 14px;
+}
+
+.container-adresse-general {
+    margin-top: 43px;
+}
+
+.adresse-agence h3 {
+    text-decoration: underline;
 }

@@ -23,15 +23,67 @@ export default class Info extends React.Component {
 
 
     render() {
-        let styleStatut = {
-            backgroundColor : "#60C06C",
-            color: "white"
+
+
+        const siret = (siret) => {
+
+
+            let result = [];
+            for(let i = 0; i <= siret.length;i++){
+
+                if(i === 3){
+                    result.push(siret.substring(0, 3), " ")
+                }else if(i === 6){
+                    result.push(siret.substring(3, 6), " ")
+
+                }else if(i === 6){
+                    result.push(siret.substring(6, 9), " ")
+
+                }else if (i > 9 && i < 14){
+                    result.push(siret.substring(9), " ")
+                    return result
+                }
+            }
         };
 
-        let styleStatutFail ={
-            backgroundColor : "#801515",
-            color: "white"
+
+        const tel = (tel) => {
+
+           let result = [];
+           let len = tel.length;
+
+
+
+           for(let i = 10; i > 0; i -= 2){
+              result.push(tel.substring(i - 2 , i));
+
+           }
+
+            result.reverse();
+            tel = result.join(' ');
+
+            return tel
+
         };
+
+
+        const status = (status) => {
+
+            if(status === 1){
+                return(<p><Label color='green' >
+                    actif
+                </Label></p>)
+            }else {
+                return(<p><Label color='red' >
+                    Inactif
+                </Label></p>)
+
+            }
+
+        };
+
+
+
 
 
         return(
@@ -45,16 +97,16 @@ export default class Info extends React.Component {
                   </div>
                   <div className="col-droite-info">
                       <p><Label>
-                          <Label.Detail>{this.props.clients.clRef}</Label.Detail>
+                          {this.props.clients.clRef}
                       </Label></p>
                       <p><Label>
-                          <Label.Detail>{this.props.clients.clRaisonsoc}</Label.Detail>
+                          {this.props.clients.clRaisonsoc}
                       </Label></p>
                       <p> <Label>
-                          <Label.Detail>{this.props.clients.clSiret}</Label.Detail>
+                          {siret(this.props.clients.clSiret)}
                       </Label></p>
                       <p><Label>
-                          <Label.Detail><Icon name='call' />{this.props.clients.clTel}</Label.Detail>
+                          <Icon name='call' />{tel(this.props.clients.clTel)}
                       </Label></p>
 
                   </div>
@@ -67,17 +119,11 @@ export default class Info extends React.Component {
                   </div>
                   <div className="col-droite-info">
                       <p><Label>
-                          <Label.Detail>500-1000</Label.Detail>
+                          {this.props.clients.clEffectif}
                       </Label></p>
-                      <p
-                          style={
-                            (this.props.clients.clStatus === 1)
-                                  ? styleStatut
-                                  : styleStatutFail
-                                }
-                      >Actif</p>
+                      {status(this.props.clients.clStatus)}
                       <p><Label>
-                          <Label.Detail><Icon name="user circle outline"/>Morgane</Label.Detail>
+                          <Icon name="user"/>Morgane
                       </Label></p>
                   </div>
               </div>
