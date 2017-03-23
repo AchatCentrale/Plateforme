@@ -35,7 +35,6 @@ class App extends React.Component {
 
         $.getJSON(url, (data) => {
 
-            console.log(data);
 
             this.setState({
                 user: data,
@@ -73,7 +72,6 @@ class App extends React.Component {
 
             <div>
                 <TopBar user={this.state.user}/>
-
                 <div className="continer-nav-bar">
                     <NavBar user={this.state.user}/>
                 </div>

@@ -21,10 +21,6 @@ import {
 export default class General extends React.Component {
 
 
-
-
-
-
     updateClick(e){
         console.log(e)
     }
@@ -88,7 +84,7 @@ export default class General extends React.Component {
         } else {
             return (
                 <div>
-                    <ActionBar context={this.props}  updateClick={this.updateClick.bind(this)} />
+                    <ActionBar context={this.props}  updateClick={this.updateClick} />
                     <div className="container-general">
                         <div className="container-info-client">
                             <Info clients={this.state.clients}/>

@@ -71,7 +71,7 @@ export default class ActionBar extends React.Component {
                 <div className="container-actionBar">
                     <Add />
                     <Export />
-                    <Update className="cursor" onClick={this.props.updateClick.call(this)}/>
+                    <Update className="cursor" onClick={(e)=>{console.log(e)}}/>
                 </div>
                 <div className="container-groupe">
                     <Logo client={this.state.clients}/>

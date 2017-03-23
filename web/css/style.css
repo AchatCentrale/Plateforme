@@ -678,6 +678,24 @@ a.btn-add-client {
     padding-left: 5%;
     padding-top: 45px;
 }
+.container-info-gauche-status{
+    display: flex;
+    padding-left: 5%;
+    padding-top: 45px;
+}
+
+.container-info-gauche-progress {
+    margin-top: 45px;
+}
+
+.container-info-action {
+    margin-top: 35px;
+}
+
+.container-info-action-table {
+    margin-top: 37px;
+    margin-left: 55px;
+}
 
 .container-info-droite {
     display: flex;
