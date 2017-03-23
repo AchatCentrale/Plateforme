@@ -3463,7 +3463,9 @@ var ActionBar = function (_React$Component) {
                     { className: 'container-actionBar' },
                     _react2.default.createElement(_AddUi2.default, null),
                     _react2.default.createElement(_ExportUi2.default, null),
-                    _react2.default.createElement(_UpdateUi2.default, { className: 'cursor', onClick: this.props.updateClick.call(this) })
+                    _react2.default.createElement(_UpdateUi2.default, { className: 'cursor', onClick: function onClick(e) {
+                            console.log(e);
+                        } })
                 ),
                 _react2.default.createElement(
                     'div',
@@ -28353,8 +28355,6 @@ var App = function (_React$Component) {
 
             $.getJSON(url, function (data) {
 
-                console.log(data);
-
                 _this2.setState({
                     user: data
 
@@ -28439,8 +28439,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -28481,16 +28479,13 @@ var ClientListe = function (_React$Component) {
         key: 'handleClickGoto',
         value: function handleClickGoto(e, index) {
 
-            console.log(e);
             var path = '/client/' + e;
 
             _reactRouter.browserHistory.push(path);
         }
     }, {
         key: 'handleLimitRow',
-        value: function handleLimitRow(e) {
-            console.log(e);
-        }
+        value: function handleLimitRow(e) {}
     }]);
 
     function ClientListe(props) {
@@ -28521,7 +28516,6 @@ var ClientListe = function (_React$Component) {
             var _this3 = this;
 
             var dataDelaTable = this.state.clients.map(function (client, index) {
-                console.log(_typeof(client.insDate));
 
                 return _react2.default.createElement(
                     _semanticUiReact.Table.Row,
@@ -29347,7 +29341,7 @@ var General = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_ActionBar2.default, { context: this.props, updateClick: this.updateClick.bind(this) }),
+                    _react2.default.createElement(_ActionBar2.default, { context: this.props, updateClick: this.updateClick }),
                     _react2.default.createElement(
                         'div',
                         { className: 'container-general' },
@@ -29569,53 +29563,341 @@ var Status = function (_React$Component) {
     function Status(props) {
         _classCallCheck(this, Status);
 
-        var _this = _possibleConstructorReturn(this, (Status.__proto__ || Object.getPrototypeOf(Status)).call(this, props));
-
-        _this.state = {
-            clients: [],
-            clientsUser: []
-
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (Status.__proto__ || Object.getPrototypeOf(Status)).call(this, props));
     }
 
     _createClass(Status, [{
-        key: 'componentWillMount',
+        key: "componentWillMount",
         value: function componentWillMount() {}
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
 
             var currentLocation = this.props;
 
             return _react2.default.createElement(
-                'div',
+                "div",
                 null,
                 _react2.default.createElement(_ActionBar2.default, { context: this.props }),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'container-general' },
+                    "div",
+                    { className: "container-general" },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'container-info-client' },
+                        "div",
+                        { className: "container-info-client" },
                         _react2.default.createElement(
-                            'h1',
-                            null,
-                            'Status'
+                            "div",
+                            { className: "container-info-progression" },
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid,
+                                { divided: "vertically" },
+                                _react2.default.createElement(
+                                    _semanticUiReact.Grid.Row,
+                                    { columns: 2 },
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Grid.Column,
+                                        null,
+                                        _react2.default.createElement(
+                                            "div",
+                                            { className: "container-info-gauche-status" },
+                                            _react2.default.createElement(
+                                                "div",
+                                                { className: "col-gauche-info" },
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    "Etat"
+                                                ),
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    "Date d'inscription"
+                                                ),
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    "Date d'adh\xE9sion"
+                                                ),
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    "Anciennet\xE9"
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                "div",
+                                                { className: "col-droite-info" },
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        { color: "green" },
+                                                        "actif"
+                                                    )
+                                                ),
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        null,
+                                                        "26/12/2016"
+                                                    )
+                                                ),
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        null,
+                                                        "02/01/2016"
+                                                    )
+                                                ),
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        null,
+                                                        "2 mois"
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Grid.Column,
+                                        null,
+                                        _react2.default.createElement(
+                                            "div",
+                                            { className: "container-info-gauche-progress" },
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Grid,
+                                                { divided: "vertically" },
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Grid.Row,
+                                                    { columns: 2 },
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Grid.Column,
+                                                        null,
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            "Numero d'adh\xE9sion"
+                                                        )
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Grid.Column,
+                                                        null,
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Label,
+                                                                { color: "grey" },
+                                                                "15618-1681"
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            ),
+                                            _react2.default.createElement(_semanticUiReact.Progress, { percent: 60, color: "olive", warning: true, progress: true })
+                                        )
+                                    )
+                                )
+                            )
+                        ),
+                        _react2.default.createElement(
+                            "div",
+                            { className: "container-info-action" },
+                            _react2.default.createElement(
+                                _semanticUiReact.Header,
+                                { as: "h2" },
+                                _react2.default.createElement(_semanticUiReact.Icon, { name: "history" }),
+                                _react2.default.createElement(
+                                    _semanticUiReact.Header.Content,
+                                    null,
+                                    "Historique des actions"
+                                )
+                            ),
+                            _react2.default.createElement(
+                                "div",
+                                { className: "container-info-action-table" },
+                                _react2.default.createElement(
+                                    _semanticUiReact.Table,
+                                    { definition: true },
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Table.Header,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Table.Row,
+                                            null,
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                "Nom de l'action"
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                "Status"
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                "Responsable"
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                "Action"
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                "Autre"
+                                            )
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Table.Body,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Table.Row,
+                                            null,
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                "Audit"
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(_semanticUiReact.Icon, { name: "checkmark" })
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        null,
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "user" }),
+                                                        "Morgane"
+                                                    )
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                "12/09/1998"
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "file pdf outline" })
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Table.Row,
+                                            null,
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                "Envoie code d'acces"
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(_semanticUiReact.Icon, { name: "checkmark" })
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        null,
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "user" }),
+                                                        "Morgane"
+                                                    )
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                "12/09/1998"
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "file pdf outline" })
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Table.Row,
+                                            { error: true },
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                "Envoie code promo"
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(_semanticUiReact.Icon, { name: "remove" })
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(
+                                                    "p",
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        null,
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "user" }),
+                                                        "Morgane"
+                                                    )
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Button,
+                                                    { positive: true },
+                                                    "Action effectu\xE9"
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "file pdf outline" })
+                                            )
+                                        )
+                                    )
+                                )
+                            )
                         )
                     ),
                     _react2.default.createElement(
-                        'div',
-                        { className: 'container-sidebar' },
+                        "div",
+                        { className: "container-sidebar" },
                         _react2.default.createElement(
                             _semanticUiReact.Menu,
                             { pointing: true, vertical: true },
-                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                            _react2.default.createElement(_Sidebar2.default, { content: "General", context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: "Adresse", context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: "Status", context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: "D\xE9penses", context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: "Actions", context: currentLocation }),
+                            _react2.default.createElement(_Sidebar2.default, { content: "Hierarchie", context: currentLocation })
                         )
                     )
                 )
@@ -30317,7 +30599,6 @@ var Info = function (_React$Component) {
                         _react2.default.createElement(
                             'p',
                             null,
-                            ' ',
                             _react2.default.createElement(
                                 _semanticUiReact.Label,
                                 null,
@@ -30779,25 +31060,25 @@ var TopBar = function (_React$Component) {
     }
 
     _createClass(TopBar, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             var open = this.state.open;
 
 
             return _react2.default.createElement(
-                'div',
+                "div",
                 null,
                 _react2.default.createElement(
-                    'div',
-                    { className: 'recherche' },
+                    "div",
+                    { className: "recherche" },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'add-action' },
-                        _react2.default.createElement('img', { onClick: this.show, src: '/images/add_action.png', className: 'cursor', alt: '' })
+                        "div",
+                        { className: "add-action" },
+                        _react2.default.createElement("img", { onClick: this.show, src: "/images/add_action.png", className: "cursor", alt: "" })
                     ),
                     _react2.default.createElement(
-                        'div',
-                        { className: 'avatar-topBar' },
+                        "div",
+                        { className: "avatar-topBar" },
                         _react2.default.createElement(
                             _semanticUiReact.Segment,
                             null,
@@ -30806,39 +31087,39 @@ var TopBar = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(
                                     _semanticUiReact.Grid.Column,
-                                    { floated: 'left', width: 3 },
-                                    _react2.default.createElement(_semanticUiReact.Icon, { name: 'user circle ' }),
+                                    { floated: "left", width: 4 },
+                                    _react2.default.createElement(_semanticUiReact.Icon, { name: "user circle " }),
                                     this.props.user
                                 ),
                                 _react2.default.createElement(
                                     _semanticUiReact.Grid.Column,
-                                    { floated: 'right', width: 7 },
+                                    { floated: "right", width: 7 },
                                     _react2.default.createElement(
-                                        'a',
-                                        { href: '' },
-                                        _react2.default.createElement(_semanticUiReact.Icon, { name: 'setting' }),
-                                        'Modifier mon profil'
+                                        "a",
+                                        { href: "" },
+                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "setting" }),
+                                        "Modifier mon profil"
                                     )
                                 )
                             )
                         )
                     ),
                     _react2.default.createElement(
-                        'div',
-                        { className: 'ajout' },
+                        "div",
+                        { className: "ajout" },
                         _react2.default.createElement(
-                            'div',
-                            { className: 'loupe' },
-                            '\uD83D\uDD0D'
+                            "div",
+                            { className: "loupe" },
+                            "\uD83D\uDD0D"
                         ),
-                        _react2.default.createElement('input', { type: 'text', placeholder: 'Recherche' })
+                        _react2.default.createElement("input", { type: "text", placeholder: "Recherche" })
                     ),
-                    _react2.default.createElement('div', { className: 'notification' })
+                    _react2.default.createElement("div", { className: "notification" })
                 ),
                 _react2.default.createElement(
                     _semanticUiReact.Modal,
-                    { open: open, onClose: this.close, closeIcon: 'close' },
-                    _react2.default.createElement(_semanticUiReact.Header, { icon: 'tasks', content: 'Nouvel action' }),
+                    { open: open, onClose: this.close, closeIcon: "close" },
+                    _react2.default.createElement(_semanticUiReact.Header, { icon: "tasks", content: "Nouvel action" }),
                     _react2.default.createElement(
                         _semanticUiReact.Modal.Content,
                         null,
@@ -30849,9 +31130,9 @@ var TopBar = function (_React$Component) {
                         null,
                         _react2.default.createElement(
                             _semanticUiReact.Button,
-                            { color: 'green' },
-                            _react2.default.createElement(_semanticUiReact.Icon, { name: 'save' }),
-                            ' Enregistrer'
+                            { color: "green" },
+                            _react2.default.createElement(_semanticUiReact.Icon, { name: "save" }),
+                            " Enregistrer"
                         )
                     )
                 )

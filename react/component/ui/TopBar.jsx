@@ -1,8 +1,8 @@
-import React from 'react';
-import {Button, Header, Icon, Modal, Selec, Segment, Grid} from 'semantic-ui-react'
+import React from "react";
+import {Button, Grid, Header, Icon, Modal, Segment, Select} from "semantic-ui-react";
 
 
-import ModalAction from '../ui/Modal-Action.jsx'
+import ModalAction from "../ui/Modal-Action.jsx";
 
 
 export default class TopBar extends React.Component {
@@ -32,11 +32,11 @@ export default class TopBar extends React.Component {
                     <div className="avatar-topBar">
                         <Segment>
                             <Grid>
-                                <Grid.Column floated='left' width={3}>
+                                <Grid.Column floated='left' width={4}>
                                     <Icon name='user circle '/>{this.props.user}
                                 </Grid.Column>
                                 <Grid.Column floated='right' width={7}>
-                                    <a href=""><Icon name='setting'  />Modifier mon profil</a>
+                                    <a href=""><Icon name='setting'/>Modifier mon profil</a>
                                 </Grid.Column>
                             </Grid>
 

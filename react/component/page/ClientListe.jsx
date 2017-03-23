@@ -1,23 +1,19 @@
 import React from 'react';
-import { Icon, Label, Menu, Table, Input, Dimmer, Loader, Image, Segment  } from 'semantic-ui-react'
+import {Icon, Label, Menu, Table, Input, Dimmer, Loader, Image, Segment} from 'semantic-ui-react'
 
-import { browserHistory } from 'react-router'
-
-
+import {browserHistory} from 'react-router'
 
 
 export default class ClientListe extends React.Component {
 
 
-
-
     getClient() {
 
-        let url =  "http://localhost:8000/Agence";
-        $.getJSON(url, (data)=>{
+        let url = "http://localhost:8000/Agence";
+        $.getJSON(url, (data) => {
 
             this.setState({
-                clients:  data,
+                clients: data,
                 loading: false
 
             });
@@ -26,9 +22,9 @@ export default class ClientListe extends React.Component {
     }
 
 
-    handleClickGoto(e, index){
+    handleClickGoto(e, index) {
 
-        console.log( e);
+
         let path = `/client/${e}`;
 
         browserHistory.push(path)
@@ -36,7 +32,7 @@ export default class ClientListe extends React.Component {
     }
 
     handleLimitRow(e) {
-        console.log(e)
+
     }
 
 
@@ -46,8 +42,8 @@ export default class ClientListe extends React.Component {
         this.state = {
             clients: [],
             page: 1,
-            LimitPerPage : 10,
-            DebutPagination : 0,
+            LimitPerPage: 10,
+            DebutPagination: 0,
             loading: true
 
 
@@ -57,7 +53,7 @@ export default class ClientListe extends React.Component {
     }
 
 
-    componentDidMount(){
+    componentDidMount() {
         this.getClient.call(this);
 
 
@@ -68,7 +64,7 @@ export default class ClientListe extends React.Component {
 
 
         const dataDelaTable = this.state.clients.map((client, index) => {
-            console.log(typeof client.insDate)
+
 
             return (
                 <Table.Row data-index={client.clId} className="cursor"
@@ -87,16 +83,14 @@ export default class ClientListe extends React.Component {
             if (this.state.loading) {
                 return <Loader active size='large'>Loading</Loader>
             }
-            else
-            {
+            else {
 
                 return <Loader size='large'>Loading</Loader>
             }
         };
 
 
-
-        return(
+        return (
 
             <div>
                 <div className="table-client">
@@ -105,8 +99,7 @@ export default class ClientListe extends React.Component {
                     {loading()}
 
 
-
-                    <Table id="table-client"  selectable >
+                    <Table id="table-client" selectable>
 
                         <Table.Header>
                             <Table.Row >
@@ -123,8 +116,6 @@ export default class ClientListe extends React.Component {
 
                         </Table.Body>
                     </Table>
-
-
 
 
                 </div>
