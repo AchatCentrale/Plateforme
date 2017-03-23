@@ -26,9 +26,6 @@ export default class NavBar extends React.Component {
                             <img src="/images/logo-achatcentrale.png" alt="logo_crm"  />
                                 <p>CRM v1.0</p>
                         </div>
-                        <div className="block-profile">
-                            <h1>{this.props.user}</h1>
-                        </div>
                     </div>
 
 

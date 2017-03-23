@@ -956,164 +956,6 @@ module.exports = ReactDOMComponentTree;
 
 /***/ }),
 /* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayMap = __webpack_require__(35),
-    baseIteratee = __webpack_require__(29),
-    baseMap = __webpack_require__(273),
-    isArray = __webpack_require__(12);
-
-/**
- * Creates an array of values by running each element in `collection` thru
- * `iteratee`. The iteratee is invoked with three arguments:
- * (value, index|key, collection).
- *
- * Many lodash methods are guarded to work as iteratees for methods like
- * `_.every`, `_.filter`, `_.map`, `_.mapValues`, `_.reject`, and `_.some`.
- *
- * The guarded methods are:
- * `ary`, `chunk`, `curry`, `curryRight`, `drop`, `dropRight`, `every`,
- * `fill`, `invert`, `parseInt`, `random`, `range`, `rangeRight`, `repeat`,
- * `sampleSize`, `slice`, `some`, `sortBy`, `split`, `take`, `takeRight`,
- * `template`, `trim`, `trimEnd`, `trimStart`, and `words`
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Collection
- * @param {Array|Object} collection The collection to iterate over.
- * @param {Function} [iteratee=_.identity] The function invoked per iteration.
- * @returns {Array} Returns the new mapped array.
- * @example
- *
- * function square(n) {
- *   return n * n;
- * }
- *
- * _.map([4, 8], square);
- * // => [16, 64]
- *
- * _.map({ 'a': 4, 'b': 8 }, square);
- * // => [16, 64] (iteration order is not guaranteed)
- *
- * var users = [
- *   { 'user': 'barney' },
- *   { 'user': 'fred' }
- * ];
- *
- * // The `_.property` iteratee shorthand.
- * _.map(users, 'user');
- * // => ['barney', 'fred']
- */
-function map(collection, iteratee) {
-  var func = isArray(collection) ? arrayMap : baseMap;
-  return func(collection, baseIteratee(iteratee, 3));
-}
-
-module.exports = map;
-
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Router__ = __webpack_require__(784);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_0__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Link__ = __webpack_require__(346);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_1__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__IndexLink__ = __webpack_require__(780);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexLink", function() { return __WEBPACK_IMPORTED_MODULE_2__IndexLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__withRouter__ = __webpack_require__(795);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__withRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__IndexRedirect__ = __webpack_require__(781);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexRedirect", function() { return __WEBPACK_IMPORTED_MODULE_4__IndexRedirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__IndexRoute__ = __webpack_require__(782);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexRoute", function() { return __WEBPACK_IMPORTED_MODULE_5__IndexRoute__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(348);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(783);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__RouteUtils__ = __webpack_require__(52);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createRoutes", function() { return __WEBPACK_IMPORTED_MODULE_8__RouteUtils__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__RouterContext__ = __webpack_require__(213);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "RouterContext", function() { return __WEBPACK_IMPORTED_MODULE_9__RouterContext__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__PropTypes__ = __webpack_require__(212);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "locationShape", function() { return __WEBPACK_IMPORTED_MODULE_10__PropTypes__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "routerShape", function() { return __WEBPACK_IMPORTED_MODULE_10__PropTypes__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__match__ = __webpack_require__(793);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "match", function() { return __WEBPACK_IMPORTED_MODULE_11__match__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__useRouterHistory__ = __webpack_require__(353);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "useRouterHistory", function() { return __WEBPACK_IMPORTED_MODULE_12__useRouterHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__PatternUtils__ = __webpack_require__(75);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "formatPattern", function() { return __WEBPACK_IMPORTED_MODULE_13__PatternUtils__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__applyRouterMiddleware__ = __webpack_require__(786);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "applyRouterMiddleware", function() { return __WEBPACK_IMPORTED_MODULE_14__applyRouterMiddleware__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__browserHistory__ = __webpack_require__(787);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "browserHistory", function() { return __WEBPACK_IMPORTED_MODULE_15__browserHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__hashHistory__ = __webpack_require__(791);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "hashHistory", function() { return __WEBPACK_IMPORTED_MODULE_16__hashHistory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__createMemoryHistory__ = __webpack_require__(350);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createMemoryHistory", function() { return __WEBPACK_IMPORTED_MODULE_17__createMemoryHistory__["a"]; });
-/* components */
-
-
-
-
-
-
-
-
-
-/* components (configuration) */
-
-
-
-
-
-
-
-
-
-
-/* utils */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* histories */
-
-
-
-
-
-
-
-
-/***/ }),
-/* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Icon__ = __webpack_require__(141);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__Icon__["a"]; });
-
-
-
-/***/ }),
-/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1573,6 +1415,164 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+
+
+
+
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayMap = __webpack_require__(35),
+    baseIteratee = __webpack_require__(29),
+    baseMap = __webpack_require__(273),
+    isArray = __webpack_require__(12);
+
+/**
+ * Creates an array of values by running each element in `collection` thru
+ * `iteratee`. The iteratee is invoked with three arguments:
+ * (value, index|key, collection).
+ *
+ * Many lodash methods are guarded to work as iteratees for methods like
+ * `_.every`, `_.filter`, `_.map`, `_.mapValues`, `_.reject`, and `_.some`.
+ *
+ * The guarded methods are:
+ * `ary`, `chunk`, `curry`, `curryRight`, `drop`, `dropRight`, `every`,
+ * `fill`, `invert`, `parseInt`, `random`, `range`, `rangeRight`, `repeat`,
+ * `sampleSize`, `slice`, `some`, `sortBy`, `split`, `take`, `takeRight`,
+ * `template`, `trim`, `trimEnd`, `trimStart`, and `words`
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Collection
+ * @param {Array|Object} collection The collection to iterate over.
+ * @param {Function} [iteratee=_.identity] The function invoked per iteration.
+ * @returns {Array} Returns the new mapped array.
+ * @example
+ *
+ * function square(n) {
+ *   return n * n;
+ * }
+ *
+ * _.map([4, 8], square);
+ * // => [16, 64]
+ *
+ * _.map({ 'a': 4, 'b': 8 }, square);
+ * // => [16, 64] (iteration order is not guaranteed)
+ *
+ * var users = [
+ *   { 'user': 'barney' },
+ *   { 'user': 'fred' }
+ * ];
+ *
+ * // The `_.property` iteratee shorthand.
+ * _.map(users, 'user');
+ * // => ['barney', 'fred']
+ */
+function map(collection, iteratee) {
+  var func = isArray(collection) ? arrayMap : baseMap;
+  return func(collection, baseIteratee(iteratee, 3));
+}
+
+module.exports = map;
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Icon__ = __webpack_require__(141);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__Icon__["a"]; });
+
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Router__ = __webpack_require__(784);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_0__Router__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Link__ = __webpack_require__(346);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_1__Link__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__IndexLink__ = __webpack_require__(780);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexLink", function() { return __WEBPACK_IMPORTED_MODULE_2__IndexLink__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__withRouter__ = __webpack_require__(795);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__withRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__IndexRedirect__ = __webpack_require__(781);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexRedirect", function() { return __WEBPACK_IMPORTED_MODULE_4__IndexRedirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__IndexRoute__ = __webpack_require__(782);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IndexRoute", function() { return __WEBPACK_IMPORTED_MODULE_5__IndexRoute__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(348);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(783);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__RouteUtils__ = __webpack_require__(52);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createRoutes", function() { return __WEBPACK_IMPORTED_MODULE_8__RouteUtils__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__RouterContext__ = __webpack_require__(213);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "RouterContext", function() { return __WEBPACK_IMPORTED_MODULE_9__RouterContext__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__PropTypes__ = __webpack_require__(212);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "locationShape", function() { return __WEBPACK_IMPORTED_MODULE_10__PropTypes__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "routerShape", function() { return __WEBPACK_IMPORTED_MODULE_10__PropTypes__["b"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__match__ = __webpack_require__(793);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "match", function() { return __WEBPACK_IMPORTED_MODULE_11__match__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__useRouterHistory__ = __webpack_require__(353);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "useRouterHistory", function() { return __WEBPACK_IMPORTED_MODULE_12__useRouterHistory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__PatternUtils__ = __webpack_require__(75);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "formatPattern", function() { return __WEBPACK_IMPORTED_MODULE_13__PatternUtils__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__applyRouterMiddleware__ = __webpack_require__(786);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "applyRouterMiddleware", function() { return __WEBPACK_IMPORTED_MODULE_14__applyRouterMiddleware__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__browserHistory__ = __webpack_require__(787);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "browserHistory", function() { return __WEBPACK_IMPORTED_MODULE_15__browserHistory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__hashHistory__ = __webpack_require__(791);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "hashHistory", function() { return __WEBPACK_IMPORTED_MODULE_16__hashHistory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__createMemoryHistory__ = __webpack_require__(350);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createMemoryHistory", function() { return __WEBPACK_IMPORTED_MODULE_17__createMemoryHistory__["a"]; });
+/* components */
+
+
+
+
+
+
+
+
+
+/* components (configuration) */
+
+
+
+
+
+
+
+
+
+
+/* utils */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* histories */
 
 
 
@@ -3387,11 +3387,7 @@ var _Logo = __webpack_require__(460);
 
 var _Logo2 = _interopRequireDefault(_Logo);
 
-var _Delete = __webpack_require__(456);
-
-var _Delete2 = _interopRequireDefault(_Delete);
-
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3467,7 +3463,7 @@ var ActionBar = function (_React$Component) {
                     { className: 'container-actionBar' },
                     _react2.default.createElement(_AddUi2.default, null),
                     _react2.default.createElement(_ExportUi2.default, null),
-                    _react2.default.createElement(_UpdateUi2.default, null)
+                    _react2.default.createElement(_UpdateUi2.default, { className: 'cursor', onClick: this.props.updateClick.call(this) })
                 ),
                 _react2.default.createElement(
                     'div',
@@ -3500,9 +3496,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -14240,7 +14236,7 @@ FeedContent._meta = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_isNil__);
@@ -22694,7 +22690,7 @@ MessageHeader.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__lib__[
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_isNil__);
@@ -22922,7 +22918,7 @@ TableHeaderCell.defaultProps = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash_isNil__);
@@ -24796,7 +24792,7 @@ StepContent._meta = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash_isNil__);
@@ -26875,7 +26871,7 @@ CardContent._meta = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_isNil__);
@@ -27779,7 +27775,7 @@ ItemContent._meta = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_objectWithoutProperties__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash_isNil__);
@@ -28039,7 +28035,7 @@ Statistic.Value = __WEBPACK_IMPORTED_MODULE_8__StatisticValue__["a" /* default *
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash_isNil__);
@@ -28333,9 +28329,9 @@ var _NavBar2 = _interopRequireDefault(_NavBar);
 
 var _reactDom = __webpack_require__(325);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28393,7 +28389,7 @@ var App = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                _react2.default.createElement(_TopBar2.default, null),
+                _react2.default.createElement(_TopBar2.default, { user: this.state.user }),
                 _react2.default.createElement(
                     'div',
                     { className: 'continer-nav-bar' },
@@ -28443,15 +28439,17 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28523,6 +28521,7 @@ var ClientListe = function (_React$Component) {
             var _this3 = this;
 
             var dataDelaTable = this.state.clients.map(function (client, index) {
+                console.log(_typeof(client.insDate));
 
                 return _react2.default.createElement(
                     _semanticUiReact.Table.Row,
@@ -28703,9 +28702,9 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28979,13 +28978,13 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _AgenceAdresse = __webpack_require__(883);
+var _AgenceAdresse = __webpack_require__(456);
 
 var _AgenceAdresse2 = _interopRequireDefault(_AgenceAdresse);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29144,9 +29143,9 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29254,9 +29253,9 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29270,6 +29269,11 @@ var General = function (_React$Component) {
     _inherits(General, _React$Component);
 
     _createClass(General, [{
+        key: 'updateClick',
+        value: function updateClick(e) {
+            console.log(e);
+        }
+    }, {
         key: 'getClients',
         value: function getClients() {
             var _this2 = this;
@@ -29343,7 +29347,7 @@ var General = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_ActionBar2.default, { context: this.props }),
+                    _react2.default.createElement(_ActionBar2.default, { context: this.props, updateClick: this.updateClick.bind(this) }),
                     _react2.default.createElement(
                         'div',
                         { className: 'container-general' },
@@ -29445,9 +29449,9 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29547,9 +29551,9 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29641,7 +29645,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29654,20 +29658,46 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Dashboard = function (_React$Component) {
     _inherits(Dashboard, _React$Component);
 
-    function Dashboard() {
+    _createClass(Dashboard, [{
+        key: 'getTheCount',
+        value: function getTheCount() {
+            var _this2 = this;
+
+            var url = 'http://localhost:8000/Agence/count';
+            $.getJSON(url, function (data) {
+
+                _this2.setState({
+                    count: data
+                });
+            });
+        }
+    }]);
+
+    function Dashboard(props) {
         _classCallCheck(this, Dashboard);
 
-        return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+
+        _this.state = {
+            count: ''
+        };
+        return _this;
     }
 
     _createClass(Dashboard, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+            this.getTheCount.call(this);
+        }
+    }, {
         key: 'render',
         value: function render() {
 
             return _react2.default.createElement(
                 'div',
                 { className: 'container-dashboard' },
-                _react2.default.createElement(_semanticUiReact.Image, { className: 'avatar-dashboard', src: 'http://react.semantic-ui.com/assets/images/wireframe/square-image.png', avatar: true }),
+                _react2.default.createElement(_semanticUiReact.Image, { className: 'avatar-dashboard',
+                    src: 'http://react.semantic-ui.com/assets/images/wireframe/square-image.png', avatar: true }),
                 _react2.default.createElement(
                     'span',
                     null,
@@ -29680,7 +29710,7 @@ var Dashboard = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'dashboard-stat' },
-                        _react2.default.createElement(_semanticUiReact.Statistic, { value: '137', label: 'Agences' })
+                        _react2.default.createElement(_semanticUiReact.Statistic, { value: this.state.count, label: 'Agences Roc-Eclerc' })
                     )
                 )
             );
@@ -29709,7 +29739,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = __webpack_require__(19);
+var _semanticUiReact = __webpack_require__(18);
+
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29733,12 +29765,9 @@ var Add = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
-                _react2.default.createElement(
-                    'p',
-                    { className: 'add-icon' },
-                    'Nouveau'
-                )
+                { className: 'update-icon cursor' },
+                'Ajouter ',
+                _react2.default.createElement(_semanticUiReact.Icon, { name: 'add' })
             );
         }
     }]);
@@ -29765,7 +29794,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = __webpack_require__(19);
+var _semanticUiReact = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29775,34 +29804,175 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Logo = function (_React$Component) {
-    _inherits(Logo, _React$Component);
+var AgenceAdresse = function (_React$Component) {
+    _inherits(AgenceAdresse, _React$Component);
 
-    function Logo() {
-        _classCallCheck(this, Logo);
+    function AgenceAdresse(props) {
+        _classCallCheck(this, AgenceAdresse);
 
-        return _possibleConstructorReturn(this, (Logo.__proto__ || Object.getPrototypeOf(Logo)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (AgenceAdresse.__proto__ || Object.getPrototypeOf(AgenceAdresse)).call(this, props));
+
+        console.log(_this.props);
+
+        return _this;
     }
 
-    _createClass(Logo, [{
+    _createClass(AgenceAdresse, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {}
+    }, {
         key: 'render',
         value: function render() {
+
+            var currentLocation = this.props;
+
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'container-adresse-general' },
                 _react2.default.createElement(
-                    'p',
-                    { className: 'delete-icon' },
-                    'Supprimer'
+                    'div',
+                    { className: 'adresse-agence' },
+                    _react2.default.createElement(
+                        _semanticUiReact.Grid,
+                        { columns: 3, divided: true },
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Row,
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid.Column,
+                                null,
+                                _react2.default.createElement(
+                                    _semanticUiReact.Card,
+                                    null,
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Content,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Header,
+                                            null,
+                                            'Adresse de l\'agence'
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Meta,
+                                            null,
+                                            "        "
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Description,
+                                            null,
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.client.clAdresse1
+                                            ),
+                                            _react2.default.createElement('br', null),
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.client.clCp + "  " + this.props.client.clVille
+                                            )
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Content,
+                                        { extra: true },
+                                        _react2.default.createElement(
+                                            'div',
+                                            { className: 'ui center' },
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Button,
+                                                { basic: true, color: 'green' },
+                                                'Rendre principale'
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid.Column,
+                                null,
+                                _react2.default.createElement(
+                                    _semanticUiReact.Card,
+                                    null,
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Content,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Header,
+                                            null,
+                                            'Adresse de livraison'
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Meta,
+                                            null,
+                                            this.props.adresseL.caPrincipale === 1 ? "Adresse principale" : " "
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Description,
+                                            null,
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.adresseL.caAdresse1
+                                            ),
+                                            _react2.default.createElement('br', null),
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.adresseL.caCp + "  " + this.props.adresseL.caVille
+                                            )
+                                        )
+                                    )
+                                )
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid.Column,
+                                null,
+                                _react2.default.createElement(
+                                    _semanticUiReact.Card,
+                                    null,
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Content,
+                                        null,
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Header,
+                                            null,
+                                            'Adresse de Facturation'
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Meta,
+                                            null,
+                                            this.props.adresseF.caPrincipale === 1 ? "Adresse principale" : " "
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Card.Description,
+                                            null,
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.adresseF.caAdresse1
+                                            ),
+                                            _react2.default.createElement('br', null),
+                                            _react2.default.createElement(
+                                                'p',
+                                                null,
+                                                this.props.adresseF.caCp + "  " + this.props.adresseF.caVille
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
                 )
             );
         }
     }]);
 
-    return Logo;
+    return AgenceAdresse;
 }(_react2.default.Component);
 
-exports.default = Logo;
+exports.default = AgenceAdresse;
 
 /***/ }),
 /* 457 */
@@ -29821,7 +29991,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = __webpack_require__(19);
+var _semanticUiReact = __webpack_require__(18);
+
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29845,12 +30017,9 @@ var Export = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
-                _react2.default.createElement(
-                    'p',
-                    { className: 'export-icon' },
-                    'Exporter'
-                )
+                { className: 'update-icon cursor' },
+                'Exporter ',
+                _react2.default.createElement(_semanticUiReact.Icon, { name: 'external share' })
             );
         }
     }]);
@@ -29877,7 +30046,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30010,7 +30179,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30198,7 +30367,7 @@ var Info = function (_React$Component) {
                             _react2.default.createElement(
                                 _semanticUiReact.Label,
                                 null,
-                                this.props.clients.clRaisonsoc
+                                this.props.clients.clEffectif
                             )
                         ),
                         status(this.props.clients.clStatus),
@@ -30240,9 +30409,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30299,7 +30468,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30445,7 +30614,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = __webpack_require__(19);
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30485,15 +30654,6 @@ var NavBar = function (_React$Component) {
                                 'p',
                                 null,
                                 'CRM v1.0'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'block-profile' },
-                            _react2.default.createElement(
-                                'h1',
-                                null,
-                                this.props.user
                             )
                         )
                     ),
@@ -30585,7 +30745,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(21);
+var _semanticUiReact = __webpack_require__(18);
 
 var _ModalAction = __webpack_require__(461);
 
@@ -30632,8 +30792,36 @@ var TopBar = function (_React$Component) {
                     { className: 'recherche' },
                     _react2.default.createElement(
                         'div',
-                        { onClick: this.show, className: 'add-action' },
-                        _react2.default.createElement('img', { src: '/images/add_action.png', className: 'cursor', alt: '' })
+                        { className: 'add-action' },
+                        _react2.default.createElement('img', { onClick: this.show, src: '/images/add_action.png', className: 'cursor', alt: '' })
+                    ),
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'avatar-topBar' },
+                        _react2.default.createElement(
+                            _semanticUiReact.Segment,
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid,
+                                null,
+                                _react2.default.createElement(
+                                    _semanticUiReact.Grid.Column,
+                                    { floated: 'left', width: 3 },
+                                    _react2.default.createElement(_semanticUiReact.Icon, { name: 'user circle ' }),
+                                    this.props.user
+                                ),
+                                _react2.default.createElement(
+                                    _semanticUiReact.Grid.Column,
+                                    { floated: 'right', width: 7 },
+                                    _react2.default.createElement(
+                                        'a',
+                                        { href: '' },
+                                        _react2.default.createElement(_semanticUiReact.Icon, { name: 'setting' }),
+                                        'Modifier mon profil'
+                                    )
+                                )
+                            )
+                        )
                     ),
                     _react2.default.createElement(
                         'div',
@@ -30693,7 +30881,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = __webpack_require__(19);
+var _semanticUiReact = __webpack_require__(18);
+
+var _reactRouter = __webpack_require__(21);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30717,12 +30907,9 @@ var Update = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
-                _react2.default.createElement(
-                    'p',
-                    { className: 'update-icon' },
-                    'Modifier'
-                )
+                { className: 'update-icon cursor' },
+                'Modifier ',
+                _react2.default.createElement(_semanticUiReact.Icon, { name: 'edit' })
             );
         }
     }]);
@@ -39183,7 +39370,7 @@ module.exports = func;
 /***/ (function(module, exports, __webpack_require__) {
 
 var convert = __webpack_require__(16),
-    func = convert('map', __webpack_require__(18));
+    func = convert('map', __webpack_require__(19));
 
 func.placeholder = __webpack_require__(15);
 module.exports = func;
@@ -53489,7 +53676,7 @@ TextArea.handledProps = ['as', 'autoHeight', 'onChange', 'value'];
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_each__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_each___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash_each__);
@@ -53931,7 +54118,7 @@ Grid._meta = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash_isNil__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_get__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_get___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_lodash_get__);
@@ -54393,7 +54580,7 @@ Message.handledProps = ['as', 'attached', 'children', 'className', 'color', 'com
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash_isNil__);
@@ -55021,7 +55208,7 @@ Header.Subheader = __WEBPACK_IMPORTED_MODULE_8__HeaderSubheader__["a" /* default
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_includes__ = __webpack_require__(92);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_lodash_includes___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_lodash_includes__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_lodash_isNil__);
@@ -55306,7 +55493,7 @@ Input.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_13__lib__["g" /* 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_extends__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_isNil__);
@@ -58243,7 +58430,7 @@ Dimmer.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__lib__["g" /* 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_babel_runtime_helpers_inherits__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_compact__ = __webpack_require__(304);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_lodash_compact___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_lodash_compact__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_lodash_isNil__);
@@ -61005,7 +61192,7 @@ Rating.handledProps = ['as', 'className', 'clearable', 'defaultRating', 'disable
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_lodash_partialRight___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_lodash_partialRight__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_lodash_inRange__ = __webpack_require__(693);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_lodash_inRange___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_lodash_inRange__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_lodash_get__ = __webpack_require__(70);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_lodash_get___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11_lodash_get__);
@@ -61957,7 +62144,7 @@ Comment.Text = __WEBPACK_IMPORTED_MODULE_11__CommentText__["a" /* default */];
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_babel_runtime_helpers_extends__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_without__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash_without___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash_without__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_map__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_map__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_isNil__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash_isNil___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash_isNil__);
@@ -62152,203 +62339,6 @@ module.exports = g;
 
 module.exports = __webpack_require__(445);
 
-
-/***/ }),
-/* 883 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _semanticUiReact = __webpack_require__(21);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var AgenceAdresse = function (_React$Component) {
-    _inherits(AgenceAdresse, _React$Component);
-
-    function AgenceAdresse(props) {
-        _classCallCheck(this, AgenceAdresse);
-
-        var _this = _possibleConstructorReturn(this, (AgenceAdresse.__proto__ || Object.getPrototypeOf(AgenceAdresse)).call(this, props));
-
-        console.log(_this.props);
-
-        return _this;
-    }
-
-    _createClass(AgenceAdresse, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {}
-    }, {
-        key: 'render',
-        value: function render() {
-
-            var currentLocation = this.props;
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'container-adresse-general' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'adresse-agence' },
-                    _react2.default.createElement(
-                        _semanticUiReact.Grid,
-                        { columns: 3, divided: true },
-                        _react2.default.createElement(
-                            _semanticUiReact.Grid.Row,
-                            null,
-                            _react2.default.createElement(
-                                _semanticUiReact.Grid.Column,
-                                null,
-                                _react2.default.createElement(
-                                    _semanticUiReact.Card,
-                                    null,
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Card.Content,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Header,
-                                            null,
-                                            'Adresse de l\'agence'
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Meta,
-                                            null,
-                                            "        "
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Description,
-                                            null,
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.client.clAdresse1
-                                            ),
-                                            _react2.default.createElement('br', null),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.client.clCp + "  " + this.props.client.clVille
-                                            )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Card.Content,
-                                        { extra: true },
-                                        _react2.default.createElement(
-                                            'div',
-                                            { className: 'ui center' },
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Button,
-                                                { basic: true, color: 'green' },
-                                                'Rendre principale'
-                                            )
-                                        )
-                                    )
-                                )
-                            ),
-                            _react2.default.createElement(
-                                _semanticUiReact.Grid.Column,
-                                null,
-                                _react2.default.createElement(
-                                    _semanticUiReact.Card,
-                                    null,
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Card.Content,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Header,
-                                            null,
-                                            'Adresse de livraison'
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Meta,
-                                            null,
-                                            this.props.adresseL.caPrincipale === 1 ? "Adresse principale" : " "
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Description,
-                                            null,
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.adresseL.caAdresse1
-                                            ),
-                                            _react2.default.createElement('br', null),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.adresseL.caCp + "  " + this.props.adresseL.caVille
-                                            )
-                                        )
-                                    )
-                                )
-                            ),
-                            _react2.default.createElement(
-                                _semanticUiReact.Grid.Column,
-                                null,
-                                _react2.default.createElement(
-                                    _semanticUiReact.Card,
-                                    null,
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Card.Content,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Header,
-                                            null,
-                                            'Adresse de Facturation'
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Meta,
-                                            null,
-                                            this.props.adresseF.caPrincipale === 1 ? "Adresse principale" : " "
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Description,
-                                            null,
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.adresseF.caAdresse1
-                                            ),
-                                            _react2.default.createElement('br', null),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.adresseF.caCp + "  " + this.props.adresseF.caVille
-                                            )
-                                        )
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
-    return AgenceAdresse;
-}(_react2.default.Component);
-
-exports.default = AgenceAdresse;
 
 /***/ })
 /******/ ]);

@@ -5,9 +5,7 @@ import Sidebar from '../../ui/Sidebar.jsx';
 import ActionBar from '../../../component/ActionBar.jsx';
 
 
-
-
-import { Input, Label, Menu, Loader, Table} from 'semantic-ui-react'
+import {Input, Label, Menu, Loader, Table} from 'semantic-ui-react'
 
 import {
     Router,
@@ -20,25 +18,31 @@ import {
 } from 'react-router';
 
 
-
-
 export default class General extends React.Component {
 
 
-    getClients(){
-        let url =  "http://localhost:8000/Agence/"+this.props.params.id;
-        $.getJSON(url, (data)=>{
+
+
+
+
+    updateClick(e){
+        console.log(e)
+    }
+
+    getClients() {
+        let url = "http://localhost:8000/Agence/" + this.props.params.id;
+        $.getJSON(url, (data) => {
 
             this.setState({
-                clients:  data[0],
+                clients: data[0],
                 loading: false
             });
         })
     }
 
-    getClientsUser(){
-        let url =  "http://localhost:8000/Agence/"+this.props.params.id + "/users";
-        $.getJSON(url, (data)=>{
+    getClientsUser() {
+        let url = "http://localhost:8000/Agence/" + this.props.params.id + "/users";
+        $.getJSON(url, (data) => {
 
             let array = [];
             for (let i = 0; i < data.length; i++) {
@@ -63,7 +67,8 @@ export default class General extends React.Component {
             loading: true
         };
     }
-    componentWillMount(){
+
+    componentWillMount() {
         this.getClientsUser.call(this);
         this.getClients.call(this);
     }
@@ -74,21 +79,21 @@ export default class General extends React.Component {
         let currentLocation = this.props;
 
 
-        if(this.state.loading){
-            return(
+        if (this.state.loading) {
+            return (
                 <div>
                     <Loader active size='large'>Loading</Loader>
                 </div>
             )
-        }else{
-            return(
+        } else {
+            return (
                 <div>
-                    <ActionBar context={this.props} />
-                <div className="container-general" >
-                   <div className="container-info-client">
-                       <Info clients={this.state.clients}   />
-                       <ContactList clientsUser={this.state.clientsUser} />
-                        <div className="container-contact-list">
+                    <ActionBar context={this.props}  updateClick={this.updateClick.bind(this)} />
+                    <div className="container-general">
+                        <div className="container-info-client">
+                            <Info clients={this.state.clients}/>
+                            <ContactList clientsUser={this.state.clientsUser}/>
+                            <div className="container-contact-list">
 
                                 <h3>Dernières actions effectué</h3>
 
@@ -107,23 +112,23 @@ export default class General extends React.Component {
 
                                     </Table.Body>
                                 </Table>
+                            </div>
+
                         </div>
+                        <div className="container-sidebar">
 
-                   </div>
-                    <div className="container-sidebar">
-
-                        <Menu pointing vertical>
-                            <Sidebar content="General" context={currentLocation} />
-                            <Sidebar content="Adresse" context={currentLocation} />
-                            <Sidebar content="Status" context={currentLocation} />
-                            <Sidebar content="Dépenses" context={currentLocation} />
-                            <Sidebar content="Actions" context={currentLocation} />
-                            <Sidebar content="Hierarchie" context={currentLocation} />
-                        </Menu>
+                            <Menu pointing vertical>
+                                <Sidebar content="General" context={currentLocation}/>
+                                <Sidebar content="Adresse" context={currentLocation}/>
+                                <Sidebar content="Status" context={currentLocation}/>
+                                <Sidebar content="Dépenses" context={currentLocation}/>
+                                <Sidebar content="Actions" context={currentLocation}/>
+                                <Sidebar content="Hierarchie" context={currentLocation}/>
+                            </Menu>
 
 
+                        </div>
                     </div>
-                </div>
                 </div>
             );
         }

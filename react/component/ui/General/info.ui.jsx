@@ -119,7 +119,7 @@ export default class Info extends React.Component {
                   </div>
                   <div className="col-droite-info">
                       <p><Label>
-                          {this.props.clients.clRaisonsoc}
+                          {this.props.clients.clEffectif}
                       </Label></p>
                       {status(this.props.clients.clStatus)}
                       <p><Label>

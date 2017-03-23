@@ -13,6 +13,10 @@ Who-Are-The-User:
     path:     /who/{type}
     defaults: { _controller: SiteBundle:Base:whoAre }
 
+Count:
+    path:     /Agence/count
+    defaults: { _controller: SiteBundle:Base:countAgence }
+
 
 
 

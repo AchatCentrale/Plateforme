@@ -68,7 +68,7 @@ export default class ClientListe extends React.Component {
 
 
         const dataDelaTable = this.state.clients.map((client, index) => {
-
+            console.log(typeof client.insDate)
 
             return (
                 <Table.Row data-index={client.clId} className="cursor"

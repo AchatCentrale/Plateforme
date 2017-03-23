@@ -23,7 +23,6 @@ class BaseController extends Controller
 {
 
 
-
     public function indexAuthAction(Request $request)
     {
 
@@ -32,9 +31,7 @@ class BaseController extends Controller
         }
 
 
-        return $this->render('@Site/Base/home.html.twig', array(
-
-        ));
+        return $this->render('@Site/Base/home.html.twig', array());
 
     }
 
@@ -44,7 +41,6 @@ class BaseController extends Controller
         $user = $this->getUser();
 
 
-
         switch ($type) {
             case "username":
                 return new JsonResponse($user->getUsername(), 200);
@@ -52,46 +48,7 @@ class BaseController extends Controller
 
         }
 
-
-
-
-
-
-
-
-
-
     }
-
-
-
-    public function clientByIdAction(Request $request, $id)
-    {
-
-
-        $client_users = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('cl' => $id));
-        $log = $this->getDoctrine()
-            ->getRepository('AchatCentraleCrmBundle:Logs')
-            ->findBy(
-                array(
-                    'loIdent' => 'CL_ID',
-                    'loIdentNum' => $id
-                ));
-
-        return $this->render('@Site/Base/clientListe.html.twig', array(
-            'client' => $client_users,
-            'log' => $log,
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR
-        ));
-    }
-
-
-
-
-
-
-
-
 
     public function sendClientDetailMailAction(Request $request, $clientId)
     {
@@ -103,7 +60,7 @@ class BaseController extends Controller
          */
         $message = \Swift_Message::newInstance()
             ->setSubject('Vos codes pour la centrale')
-            ->setFrom(array('contact@achatcentrale.fr'=> "Votre centrale" ))
+            ->setFrom(array('contact@achatcentrale.fr' => "Votre centrale"))
             ->setTo('jb@achatcentrale.fr')
             ->setBody($this->renderView('SiteBundle:mail:mailDetailClient.html.twig', array(
                 'client' => $client_info
@@ -118,111 +75,39 @@ class BaseController extends Controller
     }
 
 
-    public function AddClientAction(Request $request)
+    public function countAgenceAction()
     {
-        $clients = new Clients();
-
-        $form = $this->get('form.factory')->create(ClientsType::class, $clients);
-
-        // le formulaire est recuperer dans la request
-        $form->handleRequest($request);
+        $repository = $this->getDoctrine()
+            ->getRepository('AchatCentraleCrmBundle:Clients');
 
 
-        //traitement du formulaire
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($data);
-            $em->flush();
-        }
+        $count = $repository->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->getQuery()
+            ->getSingleScalarResult();
 
-
-       return $this->render('SiteBundle:Base:add.client.html.twig', array(
-           'form' => $form->createView()
-       ));
+        return $count;
 
     }
-
-
-
-    public function removeClientAction(Request $request, $id)
-    {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')
-            ->findBy(array('clId' => $id));
-
-        if ($client) {
-            $em->remove($client);
-            $em->flush();
-        }
-
-        return new Response('jb tes trop fort');
-
-    }
-
-
-
-
-    public function settingsAction(Request $request)
-    {
-
-        $userActual = $this->get('security.token_storage')->getToken()->getUser();
-
-
-
-        dump($userActual);
-        $form = $this->get('form.factory')->create(UsersType::class, $user[0]);
-
-
-        // le formulaire est recuperer dans la request
-        $form->handleRequest($request);
-
-
-        //traitement du formulaire
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-           dump($data);
-        }
-
-        return $this->render('@Site/Base/settings.html.twig', array(
-            'form' => $form->createView()
-        ));
-
-
-
-    }
-
-
 
 
     public function testAction()
     {
-        /**
-         * @var \Swift_Mime_Message $message
-         */
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('Jbagostin@gmail.com')
-            ->setTo('Jbagostin@gmail.com')
-            ->setBody($this->renderView('SiteBundle:mail:mail.html.twig'), 'text/html')
+        $repository = $this->getDoctrine()
+            ->getRepository('AchatCentraleCrmBundle:Clients');
 
-        ;
 
-        $mailer = $this->get('mailer');
+        $count = $repository->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->getQuery()
+            ->getSingleScalarResult();
 
-        $mailer->send($message);
 
-        $spool = $mailer->getTransport()->getSpool();
+        dump($count);
 
-        $transport = $this->get('swiftmailer.transport.real');
-
-        $spool->flushQueue($transport);
-
-        return $this->render('@Site/test.html.twig');
+        return $this->render('@AchatCentraleCrm/testView.html.twig');
 
     }
-
 
 
     public function testWithParamAction(Request $request, $id)
@@ -234,8 +119,6 @@ class BaseController extends Controller
         ));
 
     }
-
-
 
 
 }

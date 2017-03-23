@@ -1,4 +1,8 @@
 import React from 'react';
+
+
+import {Icon} from 'semantic-ui-react'
+
 import {
     Router,
     Route,
@@ -14,8 +18,8 @@ import {
 export default class Add extends React.Component {
     render() {
         return(
-            <div>
-                <p className="add-icon" >Nouveau</p>
+            <div className='update-icon cursor' >
+                Ajouter <Icon  name='add'/>
             </div>
         );
     }

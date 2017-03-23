@@ -26,7 +26,6 @@ class ClientsController extends FOSRestController
     }
 
 
-
     /**
      * @Rest\Get("/Agence/{id}")
      */
@@ -38,8 +37,6 @@ class ClientsController extends FOSRestController
         }
         return $restresult;
     }
-
-
 
 
     /**
@@ -56,13 +53,9 @@ class ClientsController extends FOSRestController
         $adresse1 = $request->get('adresse1');
 
 
-
-        if(empty($ref) || empty($raison_sociale) || empty($siret) || empty($adresse1))
-        {
+        if (empty($ref) || empty($raison_sociale) || empty($siret) || empty($adresse1)) {
             return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
         }
-
-
 
 
         $data->setClRef($ref);
@@ -79,13 +72,12 @@ class ClientsController extends FOSRestController
     /**
      * @Rest\Put("/Agence/{id}")
      */
-    public function updateAction($id,Request $request)
+    public function updateAction($id, Request $request)
     {
         $ref = $request->get('ref');
         $raison_sociale = $request->get('raison_sociale');
         $siret = $request->get('siret');
         $adresse1 = $request->get('adresse1');
-
 
 
         $sn = $this->getDoctrine()->getManager();
@@ -97,8 +89,7 @@ class ClientsController extends FOSRestController
 
         if (empty($clients)) {
             return new View("user not found", Response::HTTP_NOT_FOUND);
-        }
-        elseif(!empty($ref) && !empty($raison_sociale) && !empty($siret) && !empty($adresse1)){
+        } elseif (!empty($ref) && !empty($raison_sociale) && !empty($siret) && !empty($adresse1)) {
 
             $clients->setClRef($ref)
                 ->setClRaisonsoc($raison_sociale)
@@ -107,14 +98,10 @@ class ClientsController extends FOSRestController
 
             $sn->flush();
             return new View("User Updated Successfully", Response::HTTP_OK);
-        }
-        else return new View("Impossible de mettre a jour les données", Response::HTTP_NOT_ACCEPTABLE);
-
-
+        } else return new View("Impossible de mettre a jour les données", Response::HTTP_NOT_ACCEPTABLE);
 
 
     }
-
 
 
     /**
@@ -124,10 +111,6 @@ class ClientsController extends FOSRestController
     {
 
 
-
-
-
-
         $sn = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients');
 
@@ -136,18 +119,14 @@ class ClientsController extends FOSRestController
         $clients = $repository->find($id);
 
 
-
-
         if (empty($clients)) {
             return new View("user not found", Response::HTTP_NOT_FOUND);
-        }
-        else {
+        } else {
             $sn->remove($clients);
             $sn->flush();
         }
         return new View("deleted successfully", Response::HTTP_OK);
     }
-
 
 
     /**
@@ -173,8 +152,6 @@ class ClientsController extends FOSRestController
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
 
 
-
-
         if ($restresult === null) {
             return new View("there are no users exist", Response::HTTP_NOT_FOUND);
         }
@@ -192,16 +169,31 @@ class ClientsController extends FOSRestController
         ));
 
 
-
-
         if ($restresult === null) {
             return new View("there are no users exist", Response::HTTP_NOT_FOUND);
         }
         return $restresult;
     }
 
+    /**
+     * @Rest\Get("/Agence/count")
+     */
+    public function getCountAction($id, $type)
+    {
 
 
+        $repository = $this->getDoctrine()
+            ->getRepository('AchatCentraleCrmBundle:Clients');
+
+
+        $count = $repository->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+        return $count;
+    }
 
 
 }
