@@ -697,6 +697,11 @@ a.btn-add-client {
     margin-left: 55px;
 }
 
+
+.depense-container {
+    margin: 105px 1px 1px 26px;
+}
+
 .container-info-droite {
     display: flex;
     width: 40%;

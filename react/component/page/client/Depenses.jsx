@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from '../../ui/Sidebar.jsx';
 import ActionBar from '../../../component/ActionBar.jsx';
+import DepenseContainer from '../../ui/Depenses/DepenseContainer.jsx';
 
 
 
@@ -24,16 +25,16 @@ export default class Depenses extends React.Component {
 
 
 
+
+
+
     constructor(props) {
         super(props);
 
-        this.state = {
-            clients: [],
-            clientsUser: [],
 
-        };
     }
     componentWillMount(){
+
 
     }
 
@@ -48,7 +49,9 @@ export default class Depenses extends React.Component {
                 <ActionBar context={this.props} />
                 <div className="container-general" >
                     <div className="container-info-client">
-                        <h1>Depense</h1>
+
+
+                        <DepenseContainer context={this.props} />
                     </div>
                     <div className="container-sidebar">
 

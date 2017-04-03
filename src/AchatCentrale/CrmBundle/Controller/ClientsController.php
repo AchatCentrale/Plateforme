@@ -152,6 +152,22 @@ class ClientsController extends FOSRestController
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
 
 
+        $dsn = $this->get('database_connection');
+
+        $restresult = $dsn->fetchAll('
+            SELECT TOP
+              501 t.*
+            FROM
+              CENTRALE_ACHAT_JB.dbo.LOGS t
+            WHERE
+              t.LO_IDENT = \'CL_ID\'
+            AND
+                t.LO_IDENT_NUM = '.$id . '
+          ');
+
+
+
+
         if ($restresult === null) {
             return new View("there are no users exist", Response::HTTP_NOT_FOUND);
         }
@@ -174,6 +190,10 @@ class ClientsController extends FOSRestController
         }
         return $restresult;
     }
+
+
+
+
 
     /**
      * @Rest\Get("/Agence/count")
