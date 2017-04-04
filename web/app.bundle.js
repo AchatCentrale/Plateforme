@@ -28758,170 +28758,174 @@ var Actions = function (_React$Component) {
                                 'Historiques des actions'
                             ),
                             _react2.default.createElement(
-                                _semanticUiReact.Segment.Group,
-                                { horizontal: true },
-                                _react2.default.createElement(
-                                    _semanticUiReact.Segment,
-                                    null,
-                                    'Termin\xE9s'
-                                ),
-                                _react2.default.createElement(
-                                    _semanticUiReact.Segment,
-                                    null,
-                                    'A faire'
-                                )
-                            ),
-                            _react2.default.createElement(
                                 _semanticUiReact.Segment,
                                 null,
                                 _react2.default.createElement(
-                                    _semanticUiReact.Feed,
+                                    _semanticUiReact.Menu,
                                     null,
+                                    _react2.default.createElement(_semanticUiReact.Menu.Item, { className: 'cursor', name: 'En cours', onClick: this.handleItemClick }),
+                                    _react2.default.createElement(_semanticUiReact.Menu.Item, { className: 'cursor', name: 'Termin\xE9', onClick: this.handleItemClick }),
+                                    _react2.default.createElement(_semanticUiReact.Menu.Item, { className: 'cursor', name: 'D\xE9l\xE9gu\xE9es', onClick: this.handleItemClick })
+                                ),
+                                _react2.default.createElement(
+                                    _semanticUiReact.Table,
+                                    { celled: true },
                                     _react2.default.createElement(
-                                        _semanticUiReact.Feed.Event,
+                                        _semanticUiReact.Table.Header,
                                         null,
                                         _react2.default.createElement(
-                                            _semanticUiReact.Feed.Label,
-                                            null,
-                                            _react2.default.createElement('img', { src: 'http://react.semantic-ui.com//assets/images/avatar/small/elliot.jpg' })
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Feed.Content,
+                                            _semanticUiReact.Table.Row,
                                             null,
                                             _react2.default.createElement(
-                                                _semanticUiReact.Feed.Summary,
+                                                _semanticUiReact.Table.HeaderCell,
                                                 null,
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Feed.User,
-                                                    null,
-                                                    'Jib\xE9'
-                                                ),
-                                                ' a effectu\xE9 un appel t\xE9l\xE9phonique',
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Feed.Date,
-                                                    null,
-                                                    'Il y a 1 heure'
-                                                )
+                                                'Date'
                                             ),
                                             _react2.default.createElement(
-                                                _semanticUiReact.Feed.Meta,
+                                                _semanticUiReact.Table.HeaderCell,
                                                 null,
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Feed.Extra,
-                                                    { text: true },
-                                                    'Filet mignon chuck short ribs cupim prosciutto t-bone landjaeger pastrami. Doner fatback'
-                                                )
+                                                'Type'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                'Description'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                'Priorit\xE9'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                'Nom Agence'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.HeaderCell,
+                                                null,
+                                                'Action'
                                             )
                                         )
                                     ),
                                     _react2.default.createElement(
-                                        _semanticUiReact.Feed.Event,
+                                        _semanticUiReact.Table.Body,
                                         null,
                                         _react2.default.createElement(
-                                            _semanticUiReact.Feed.Label,
-                                            null,
-                                            _react2.default.createElement('img', { src: 'http://react.semantic-ui.com//assets/images/avatar/small/laura.jpg' })
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Feed.Content,
+                                            _semanticUiReact.Table.Row,
                                             null,
                                             _react2.default.createElement(
-                                                _semanticUiReact.Feed.Summary,
+                                                _semanticUiReact.Table.Cell,
                                                 null,
+                                                '28-10-2016'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                'Relance'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                'Relancer suite devis envoy\xE9'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                ' ',
                                                 _react2.default.createElement(
-                                                    _semanticUiReact.Feed.User,
-                                                    null,
-                                                    'Morgane'
-                                                ),
-                                                ' a envoyer un email',
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Feed.Date,
-                                                    null,
-                                                    'Il y a 7 heures'
+                                                    _semanticUiReact.Label,
+                                                    { color: 'red', as: 'a' },
+                                                    '1'
                                                 )
                                             ),
                                             _react2.default.createElement(
-                                                _semanticUiReact.Feed.Meta,
+                                                _semanticUiReact.Table.Cell,
                                                 null,
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Feed.Extra,
-                                                    { text: true },
-                                                    'Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground'
-                                                )
+                                                'ROC ECLERC PARIS ORDENER'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                'None'
                                             )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Feed.Event,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Feed.Label,
-                                            null,
-                                            _react2.default.createElement('img', { src: 'http://react.semantic-ui.com//assets/images/avatar/small/elliot.jpg' })
                                         ),
                                         _react2.default.createElement(
-                                            _semanticUiReact.Feed.Content,
+                                            _semanticUiReact.Table.Row,
                                             null,
                                             _react2.default.createElement(
-                                                _semanticUiReact.Feed.Summary,
+                                                _semanticUiReact.Table.Cell,
                                                 null,
+                                                '28-10-2016'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                'Relance'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                'Relancer suite devis envoy\xE9'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                ' ',
                                                 _react2.default.createElement(
-                                                    _semanticUiReact.Feed.User,
-                                                    null,
-                                                    'Jib\xE9'
-                                                ),
-                                                ' a effectu\xE9 une relance',
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Feed.Date,
-                                                    null,
-                                                    'Il y a 18 heures'
+                                                    _semanticUiReact.Label,
+                                                    { color: 'red', as: 'a' },
+                                                    '1'
                                                 )
                                             ),
                                             _react2.default.createElement(
-                                                _semanticUiReact.Feed.Meta,
+                                                _semanticUiReact.Table.Cell,
                                                 null,
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Feed.Extra,
-                                                    { text: true },
-                                                    'Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground'
-                                                )
+                                                'ROC ECLERC PARIS ORDENER'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                'None'
                                             )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Feed.Event,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Feed.Label,
-                                            null,
-                                            _react2.default.createElement('img', { src: 'http://react.semantic-ui.com//assets/images/avatar/small/helen.jpg' })
                                         ),
                                         _react2.default.createElement(
-                                            _semanticUiReact.Feed.Content,
+                                            _semanticUiReact.Table.Row,
                                             null,
                                             _react2.default.createElement(
-                                                _semanticUiReact.Feed.Summary,
+                                                _semanticUiReact.Table.Cell,
                                                 null,
+                                                '28-10-2016'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                'Relance'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                'Relancer suite devis envoy\xE9'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                ' ',
                                                 _react2.default.createElement(
-                                                    _semanticUiReact.Feed.User,
-                                                    null,
-                                                    'Evelyne'
-                                                ),
-                                                ' a effectu\xE9 un audit',
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Feed.Date,
-                                                    null,
-                                                    'Il y a 2 jour'
+                                                    _semanticUiReact.Label,
+                                                    { color: 'red', as: 'a' },
+                                                    '1'
                                                 )
                                             ),
                                             _react2.default.createElement(
-                                                _semanticUiReact.Feed.Meta,
+                                                _semanticUiReact.Table.Cell,
                                                 null,
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Feed.Extra,
-                                                    { text: true },
-                                                    'Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground'
-                                                )
+                                                'ROC ECLERC PARIS ORDENER'
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Cell,
+                                                null,
+                                                'None'
                                             )
                                         )
                                     )
@@ -29348,49 +29352,7 @@ var General = function (_React$Component) {
                             'div',
                             { className: 'container-info-client' },
                             _react2.default.createElement(_infoUi2.default, { clients: this.state.clients }),
-                            _react2.default.createElement(_ContactListUi2.default, { clientsUser: this.state.clientsUser }),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'container-contact-list' },
-                                _react2.default.createElement(
-                                    'h3',
-                                    null,
-                                    'Derni\xE8res actions effectu\xE9'
-                                ),
-                                _react2.default.createElement(
-                                    _semanticUiReact.Table,
-                                    { singleLine: true, selectable: true, celled: true },
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Header,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Table.Row,
-                                            null,
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Type'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Description courte'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Priorit\xE9'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Date'
-                                            )
-                                        )
-                                    ),
-                                    _react2.default.createElement(_semanticUiReact.Table.Body, null)
-                                )
-                            )
+                            _react2.default.createElement(_ContactListUi2.default, { clientsUser: this.state.clientsUser })
                         ),
                         _react2.default.createElement(
                             'div',
@@ -29806,7 +29768,7 @@ var Status = function (_React$Component) {
                                             _react2.default.createElement(
                                                 _semanticUiReact.Table.Cell,
                                                 null,
-                                                "Envoie code d'acces"
+                                                "Envoi code d'acces"
                                             ),
                                             _react2.default.createElement(
                                                 _semanticUiReact.Table.Cell,
@@ -29844,7 +29806,7 @@ var Status = function (_React$Component) {
                                             _react2.default.createElement(
                                                 _semanticUiReact.Table.Cell,
                                                 null,
-                                                "Envoie code promo"
+                                                "Envoi code promo"
                                             ),
                                             _react2.default.createElement(
                                                 _semanticUiReact.Table.Cell,
@@ -31300,7 +31262,7 @@ var NavBar = function (_React$Component) {
                     ),
                     _react2.default.createElement(
                         'div',
-                        { className: 'menu' },
+                        { className: 'menu-nav' },
                         _react2.default.createElement(
                             'div',
                             { className: 'menu-home hover' },

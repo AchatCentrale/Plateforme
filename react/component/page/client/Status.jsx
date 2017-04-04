@@ -133,7 +133,7 @@ export default class Status extends React.Component {
                                             </Table.Cell>
                                         </Table.Row>
                                         <Table.Row>
-                                            <Table.Cell>Envoie code d'acces</Table.Cell>
+                                            <Table.Cell>Envoi code d'acces</Table.Cell>
                                             <Table.Cell><Icon name='checkmark'/></Table.Cell>
                                             <Table.Cell>
                                                 <p>
@@ -148,7 +148,7 @@ export default class Status extends React.Component {
                                             </Table.Cell>
                                         </Table.Row>
                                         <Table.Row error>
-                                            <Table.Cell>Envoie code promo</Table.Cell>
+                                            <Table.Cell>Envoi code promo</Table.Cell>
                                             <Table.Cell><Icon name='remove'/></Table.Cell>
                                             <Table.Cell>
                                                 <p>

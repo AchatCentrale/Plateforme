@@ -2,11 +2,12 @@ import React from 'react';
 import Sidebar from '../../ui/Sidebar.jsx';
 import ActionBar from '../../../component/ActionBar.jsx';
 
-import { Feed, Icon } from 'semantic-ui-react'
 
 
 
-import { Input, Label, Menu, Loader, Segment} from 'semantic-ui-react'
+
+
+import {Input, Label, Menu, Loader, Segment, Button, Image, Table,Icon} from 'semantic-ui-react'
 
 import {
     Router,
@@ -19,10 +20,7 @@ import {
 } from 'react-router';
 
 
-
-
 export default class Actions extends React.Component {
-
 
 
     constructor(props) {
@@ -34,7 +32,8 @@ export default class Actions extends React.Component {
 
         };
     }
-    componentWillMount(){
+
+    componentWillMount() {
 
     }
 
@@ -44,109 +43,83 @@ export default class Actions extends React.Component {
         let currentLocation = this.props;
 
 
-        return(
+        return (
             <div>
-                <ActionBar context={this.props} />
-                <div className="container-general" >
+                <ActionBar context={this.props}/>
+                <div className="container-general">
                     <div className="container-info-client">
+
 
                         <div className="container-client-action">
                             <h1>Historiques des actions</h1>
-                            <Segment.Group horizontal>
-                                <Segment>
-                                    Terminés
-                                </Segment>
-                                <Segment>
-                                    A faire</Segment>
-                            </Segment.Group>
+
                             <Segment>
-                                <Feed>
-                                    <Feed.Event>
-                                        <Feed.Label>
-                                            <img src='http://react.semantic-ui.com//assets/images/avatar/small/elliot.jpg' />
-                                        </Feed.Label>
-                                        <Feed.Content>
-                                            <Feed.Summary>
-                                                <Feed.User>Jibé</Feed.User> a effectué un appel téléphonique
-                                                <Feed.Date>Il y a 1 heure</Feed.Date>
-                                            </Feed.Summary>
-                                            <Feed.Meta>
-                                                <Feed.Extra text>
-                                                    Filet mignon chuck short ribs cupim prosciutto t-bone landjaeger pastrami. Doner fatback
-                                                </Feed.Extra>
-                                            </Feed.Meta>
-                                        </Feed.Content>
-                                    </Feed.Event>
-                                    <Feed.Event>
-                                        <Feed.Label>
-                                            <img src='http://react.semantic-ui.com//assets/images/avatar/small/laura.jpg' />
-                                        </Feed.Label>
-                                        <Feed.Content>
-                                            <Feed.Summary>
-                                                <Feed.User>Morgane</Feed.User> a envoyer un email
-                                                <Feed.Date>Il y a 7 heures</Feed.Date>
-                                            </Feed.Summary>
-                                            <Feed.Meta>
-                                                <Feed.Extra text>
-                                                    Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground
-                                                </Feed.Extra>
-                                            </Feed.Meta>
-                                        </Feed.Content>
-                                    </Feed.Event>
 
-                                    <Feed.Event>
-                                        <Feed.Label>
-                                            <img src='http://react.semantic-ui.com//assets/images/avatar/small/elliot.jpg' />
-                                        </Feed.Label>
-                                        <Feed.Content>
-                                            <Feed.Summary>
-                                                <Feed.User>Jibé</Feed.User> a effectué une relance
-                                                <Feed.Date>Il y a 18 heures</Feed.Date>
-                                            </Feed.Summary>
-                                            <Feed.Meta>
-                                                <Feed.Extra text>
-                                                    Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground
-                                                </Feed.Extra>
-                                            </Feed.Meta>
-                                        </Feed.Content>
-                                    </Feed.Event>
+                                <Menu>
+                                    <Menu.Item className="cursor" name='En cours'  onClick={this.handleItemClick} />
+                                    <Menu.Item className="cursor" name='Terminé' onClick={this.handleItemClick} />
+                                    <Menu.Item className="cursor" name='Déléguées'  onClick={this.handleItemClick} />
+                                </Menu>
+                                <Table celled>
+                                    <Table.Header>
+                                        <Table.Row>
+                                            <Table.HeaderCell>Date</Table.HeaderCell>
+                                            <Table.HeaderCell>Type</Table.HeaderCell>
+                                            <Table.HeaderCell>Description</Table.HeaderCell>
+                                            <Table.HeaderCell>Priorité</Table.HeaderCell>
+                                            <Table.HeaderCell>Nom Agence</Table.HeaderCell>
+                                            <Table.HeaderCell>Action</Table.HeaderCell>
+                                        </Table.Row>
+                                    </Table.Header>
 
-                                    <Feed.Event>
-                                        <Feed.Label>
-                                            <img src='http://react.semantic-ui.com//assets/images/avatar/small/helen.jpg' />
-                                        </Feed.Label>
-                                        <Feed.Content>
-                                            <Feed.Summary>
-                                                <Feed.User>Evelyne</Feed.User> a effectué un audit
-                                                <Feed.Date>Il y a 2 jour</Feed.Date>
-                                            </Feed.Summary>
-                                            <Feed.Meta>
-                                                <Feed.Extra text>
-                                                    Swine t-bone frankfurter turkey, brisket shoulder pork. Spare ribs pork cupim ground
-                                                </Feed.Extra>
-                                            </Feed.Meta>
-                                        </Feed.Content>
-                                    </Feed.Event>
+                                    <Table.Body>
+                                        <Table.Row>
+                                            <Table.Cell>28-10-2016</Table.Cell>
+                                            <Table.Cell>Relance</Table.Cell>
+                                            <Table.Cell >Relancer suite devis envoyé</Table.Cell>
+                                            <Table.Cell > <Label color='red' as='a'>1</Label></Table.Cell>
+                                            <Table.Cell >ROC ECLERC PARIS ORDENER</Table.Cell>
+                                            <Table.Cell >None</Table.Cell>
+                                        </Table.Row>
+
+                                        <Table.Row>
+                                            <Table.Cell>28-10-2016</Table.Cell>
+                                            <Table.Cell>Relance</Table.Cell>
+                                            <Table.Cell >Relancer suite devis envoyé</Table.Cell>
+                                            <Table.Cell > <Label color='red' as='a'>1</Label></Table.Cell>
+                                            <Table.Cell >ROC ECLERC PARIS ORDENER</Table.Cell>
+                                            <Table.Cell >None</Table.Cell>
+                                        </Table.Row>
+                                        <Table.Row>
+                                            <Table.Cell>28-10-2016</Table.Cell>
+                                            <Table.Cell>Relance</Table.Cell>
+                                            <Table.Cell >Relancer suite devis envoyé</Table.Cell>
+                                            <Table.Cell > <Label color='red' as='a'>1</Label></Table.Cell>
+                                            <Table.Cell >ROC ECLERC PARIS ORDENER</Table.Cell>
+                                            <Table.Cell >None</Table.Cell>
+                                        </Table.Row>
 
 
-                                </Feed>
+
+
+                                    </Table.Body>
+                                </Table>
+
+
                             </Segment>
                         </div>
-
-
-
 
 
                     </div>
                     <div className="container-sidebar">
 
                         <Menu pointing vertical>
-                            <Sidebar content="General" context={currentLocation} />
-                            <Sidebar content="Adresse" context={currentLocation} />
-                            <Sidebar content="Status" context={currentLocation} />
-                            <Sidebar content="Dépenses" context={currentLocation} />
-                            <Sidebar content="Actions" context={currentLocation} />
-                            <Sidebar content="Hierarchie" context={currentLocation} />
+                            <Sidebar content="General" context={currentLocation}/>
+                            <Sidebar content="Adresse" context={currentLocation}/>
+                            <Sidebar content="Status" context={currentLocation}/>
+                            <Sidebar content="Dépenses" context={currentLocation}/>
+                            <Sidebar content="Actions" context={currentLocation}/>
+                            <Sidebar content="Hierarchie" context={currentLocation}/>
                         </Menu>
 
 

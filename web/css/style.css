@@ -216,7 +216,7 @@ body {
     float: left;
 }
 
-.menu {
+.menu-nav {
     position: relative;
     margin-top: 42%;
     padding-bottom: 65%;
@@ -238,12 +238,12 @@ body {
 .menu-supplier p {
 }
 
-.menu a {
+.menu-nav a {
     text-decoration: none;
     color: white;
 }
 
-.menu a:hover {
+.menu-nav a:hover {
     text-decoration: none;
     color: white;
 }
@@ -802,7 +802,6 @@ form.ink-form.form-login {
 }
 
 .container-client-action {
-    text-align: center;
     padding-top: 14px;
 }
 

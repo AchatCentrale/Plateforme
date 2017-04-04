@@ -29,7 +29,7 @@ export default class NavBar extends React.Component {
                     </div>
 
 
-                    <div className="menu">
+                    <div className="menu-nav">
                         <div className="menu-home hover">
                             <Link to="/" activeClassName="active">Home</Link>
                         </div>
