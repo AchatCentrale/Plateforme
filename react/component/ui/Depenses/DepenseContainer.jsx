@@ -9,50 +9,44 @@ export default class DepenseContainer extends React.Component {
 
 
 
-
-
     getLogs(){
 
-
-        let url = 'http://localhost:8000/Agence/'+this.props.params.id +'/logs';
-
-        $.getJSON(url, (data) => {
+        let url = "http://localhost:8000/Agence/"+ this.props.context.params.id +"/logs";
 
 
-            console.log(data)
+        $.getJSON(url,(data) => {
+            console.log(this)
 
-
-            if(!data){
-                this.setState({
-                    logs : []
-                });
-            }
-            else{
-                this.setState({
-                    logs : data
-                });
-            }
-
+            this.setState({
+                logs: data,
+            });
         })
 
+    }
+
+
+    constructor(props){
+        super(props)
+
+
+        this.state = {
+            logs: [],
+        };
 
     }
+
+
+
 
 
 
     componentWillMount(){
 
-
         this.getLogs.call(this);
+
     }
 
-    constructor(props){
-        super(props)
 
-        this.state = {
-            logs: [],
-        };
-    }
 
 
 
@@ -65,6 +59,7 @@ export default class DepenseContainer extends React.Component {
 
 
         return(
+
             <div className="depense-container">
 
                 <h2>Liste des logs de l'agence </h2>
@@ -76,12 +71,17 @@ export default class DepenseContainer extends React.Component {
                     <Grid.Column width='7' floated='left'>
                         <List relaxed='very'>
                             <List.Item>
-                                <List.Content>
-                                    <List.Header as='a'>Fabiola GONZALES</List.Header>
-                                    <List.Description>Navigation vers la page <a><b> Photos porcelaine </b></a> le  28/03/2017 à 17:21:37 </List.Description>
-                                </List.Content>
-                            </List.Item>
 
+
+                            {this.state.logs.map((data)=>{
+                                return (
+                                    <List.Content>
+                                    <List.Header as='a'>Fabiola GONZALES</List.Header>
+                                    <List.Description>{data.LO_DESCR}</List.Description>
+                                </List.Content>
+                                )
+                            })}
+                            </List.Item>
 
                         </List>
                     </Grid.Column>
@@ -89,7 +89,7 @@ export default class DepenseContainer extends React.Component {
 
 
 
-                    <Grid.Column width='4' floated='right'>
+                    <Grid.Column width='6' floated='right'>
 
                         <Table basic='very' celled collapsing>
                             <Table.Header>
@@ -162,6 +162,7 @@ export default class DepenseContainer extends React.Component {
             </div>
         );
     }
+
 
 }
 

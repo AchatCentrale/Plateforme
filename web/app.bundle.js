@@ -30284,28 +30284,15 @@ var DepenseContainer = function (_React$Component) {
         value: function getLogs() {
             var _this2 = this;
 
-            var url = 'http://localhost:8000/Agence/' + this.props.params.id + '/logs';
+            var url = "http://localhost:8000/Agence/" + this.props.context.params.id + "/logs";
 
             $.getJSON(url, function (data) {
+                console.log(_this2);
 
-                console.log(data);
-
-                if (!data) {
-                    _this2.setState({
-                        logs: []
-                    });
-                } else {
-                    _this2.setState({
-                        logs: data
-                    });
-                }
+                _this2.setState({
+                    logs: data
+                });
             });
-        }
-    }, {
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-
-            this.getLogs.call(this);
         }
     }]);
 
@@ -30317,10 +30304,17 @@ var DepenseContainer = function (_React$Component) {
         _this.state = {
             logs: []
         };
+
         return _this;
     }
 
     _createClass(DepenseContainer, [{
+        key: 'componentWillMount',
+        value: function componentWillMount() {
+
+            this.getLogs.call(this);
+        }
+    }, {
         key: 'render',
         value: function render() {
 
@@ -30344,36 +30338,28 @@ var DepenseContainer = function (_React$Component) {
                             _react2.default.createElement(
                                 _semanticUiReact.List.Item,
                                 null,
-                                _react2.default.createElement(
-                                    _semanticUiReact.List.Content,
-                                    null,
-                                    _react2.default.createElement(
-                                        _semanticUiReact.List.Header,
-                                        { as: 'a' },
-                                        'Fabiola GONZALES'
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.List.Description,
+                                this.state.logs.map(function (data) {
+                                    return _react2.default.createElement(
+                                        _semanticUiReact.List.Content,
                                         null,
-                                        'Navigation vers la page ',
                                         _react2.default.createElement(
-                                            'a',
-                                            null,
-                                            _react2.default.createElement(
-                                                'b',
-                                                null,
-                                                ' Photos porcelaine '
-                                            )
+                                            _semanticUiReact.List.Header,
+                                            { as: 'a' },
+                                            'Fabiola GONZALES'
                                         ),
-                                        ' le  28/03/2017 \xE0 17:21:37 '
-                                    )
-                                )
+                                        _react2.default.createElement(
+                                            _semanticUiReact.List.Description,
+                                            null,
+                                            data.LO_DESCR
+                                        )
+                                    );
+                                })
                             )
                         )
                     ),
                     _react2.default.createElement(
                         _semanticUiReact.Grid.Column,
-                        { width: '4', floated: 'right' },
+                        { width: '6', floated: 'right' },
                         _react2.default.createElement(
                             _semanticUiReact.Table,
                             { basic: 'very', celled: true, collapsing: true },
