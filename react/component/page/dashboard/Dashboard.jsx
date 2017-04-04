@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {Image, Statistic, Divider} from 'semantic-ui-react'
 
 
@@ -20,6 +21,7 @@ export default class Dashboard extends React.Component {
     constructor(props) {
         super(props);
 
+
         this.state = {
             count: ''
         };
@@ -33,6 +35,7 @@ export default class Dashboard extends React.Component {
     render() {
 
 
+
         return (
             <div className="container-dashboard">
                 <Image className="avatar-dashboard"
@@ -43,8 +46,12 @@ export default class Dashboard extends React.Component {
 
                 <div className="dashboard-content">
                     <div className="dashboard-stat">
-
                         <Statistic value={this.state.count} label='Agences Roc-Eclerc'/>
+                    </div>
+                    <div className="container-calendrier">
+
+
+
                     </div>
                 </div>
             </div>

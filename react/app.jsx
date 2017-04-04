@@ -6,12 +6,16 @@ import ClientListe from './component/page/ClientListe.jsx';
 import General from './component/page/client/General.jsx';
 import Depenses from './component/page/client/Depenses.jsx';
 import Status from './component/page/client/Status.jsx';
+import Profile from './component/page/profile/Profile.jsx';
 import Adresse from './component/page/client/Adresse.jsx';
 import Hierarchie from './component/page/client/Hierarchie.jsx';
 import Actions from './component/page/client/Actions.jsx';
 import Sidebar from './component/ui/Sidebar.jsx';
 import TopBar from './component/ui/TopBar.jsx';
 import NavBar from './component/ui/NavBar.jsx';
+
+
+
 import {render} from 'react-dom';
 import {
     Router,
@@ -68,8 +72,9 @@ class App extends React.Component {
     render() {
 
         let context = this.props;
-        return (
 
+
+        return (
             <div>
                 <TopBar user={this.state.user}/>
                 <div className="continer-nav-bar">
@@ -101,6 +106,7 @@ render((
             <Route path="/client/:id/adresse" component={Adresse}/>
             <Route path="/client/:id/Actions" component={Actions}/>
             <Route path="/client/:id/hierarchie" component={Hierarchie}/>
+            <Route path="/profile" component={Profile} />
         </Route>
     </Router>
 ), document.getElementById('app'));

@@ -1,6 +1,9 @@
 import React from "react";
 import {Button, Grid, Header, Icon, Modal, Segment, Select} from "semantic-ui-react";
 
+import { Link } from 'react-router'
+
+
 
 import ModalAction from "../ui/Modal-Action.jsx";
 
@@ -36,7 +39,10 @@ export default class TopBar extends React.Component {
                                     <Icon name='user circle '/>{this.props.user}
                                 </Grid.Column>
                                 <Grid.Column floated='right' width={7}>
-                                    <a href=""><Icon name='setting'/>Modifier mon profil</a>
+
+                                    <Link to="/profile">
+                                        <Icon name='setting'/>Modifier mon profil
+                                    </Link>
                                 </Grid.Column>
                             </Grid>
 
