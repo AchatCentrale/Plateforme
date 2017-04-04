@@ -30959,6 +30959,11 @@ var Info = function (_React$Component) {
                             'p',
                             null,
                             'Responsable'
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            'Groupe'
                         )
                     ),
                     _react2.default.createElement(
@@ -30982,6 +30987,15 @@ var Info = function (_React$Component) {
                                 null,
                                 _react2.default.createElement(_semanticUiReact.Icon, { name: 'user' }),
                                 'Morgane'
+                            )
+                        ),
+                        _react2.default.createElement(
+                            'p',
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Label,
+                                { color: 'blue' },
+                                'V.IP'
                             )
                         )
                     )

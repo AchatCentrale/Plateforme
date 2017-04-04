@@ -4,7 +4,12 @@ import React from 'react';
 import {Label, Icon} from 'semantic-ui-react'
 
 
-export default class Info extends React.Component {
+export default class
+
+
+
+
+Info extends React.Component {
 
 
     constructor(props) {
@@ -98,9 +103,11 @@ export default class Info extends React.Component {
                         <p><Label>
                             {siret(this.props.clients.clSiret)}
                         </Label></p>
-                        <p><Label>
-                            <Icon name='call'/>{tel(this.props.clients.clTel)}
-                        </Label></p>
+                        <p>
+                            <Label>
+                                <Icon name='call'/>{tel(this.props.clients.clTel)}
+                            </Label>
+                        </p>
 
                     </div>
                 </div>
@@ -109,15 +116,23 @@ export default class Info extends React.Component {
                         <p>Nombre de salariés</p>
                         <p>Statut</p>
                         <p>Responsable</p>
+                        <p>Groupe</p>
                     </div>
                     <div className="col-droite-info">
                         <p><Label>
                             {this.props.clients.clEffectif}
                         </Label></p>
                         {status(this.props.clients.clStatus)}
-                        <p><Label>
-                            <Icon name="user"/>Morgane
-                        </Label></p>
+                        <p>
+                            <Label>
+                                <Icon name="user"/>Morgane
+                            </Label>
+                        </p>
+                        <p>
+                            <Label color='blue'>
+                               V.IP
+                            </Label>
+                        </p>
                     </div>
                 </div>
             </div>
