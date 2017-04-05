@@ -5,7 +5,7 @@ import Sidebar from '../../ui/Sidebar.jsx';
 import ActionBar from '../../../component/ActionBar.jsx';
 
 
-import {Input, Label, Menu, Loader, Table} from 'semantic-ui-react'
+import {Input, Label, Menu, Loader, Table, Grid} from 'semantic-ui-react'
 
 import {
     Router,
@@ -84,27 +84,57 @@ export default class General extends React.Component {
         } else {
             return (
                 <div>
-                    <ActionBar context={this.props}  updateClick={this.updateClick} />
+
+
+
                     <div className="container-general">
-                        <div className="container-info-client">
-                            <Info clients={this.state.clients}/>
-                            <ContactList clientsUser={this.state.clientsUser}/>
 
 
-                        </div>
-                        <div className="container-sidebar">
-
-                            <Menu pointing vertical>
-                                <Sidebar content="General" context={currentLocation}/>
-                                <Sidebar content="Adresse" context={currentLocation}/>
-                                <Sidebar content="Status" context={currentLocation}/>
-                                <Sidebar content="Dépenses" context={currentLocation}/>
-                                <Sidebar content="Actions" context={currentLocation}/>
-                                <Sidebar content="Hierarchie" context={currentLocation}/>
-                            </Menu>
+                        <Grid columns='equal'>
+                            <Grid.Column width={12}>
 
 
-                        </div>
+
+                                    <div className="container-info-client">
+                                        <Info clients={this.state.clients}/>
+                                        <ContactList clientsUser={this.state.clientsUser}/>
+                                    </div>
+
+
+
+                                </Grid.Column>
+                                <Grid.Column>
+
+
+
+
+
+                                    <div className="container-sidebar">
+                                        <Menu pointing vertical>
+                                            <Sidebar content="General" context={currentLocation}/>
+                                            <Sidebar content="Adresse" context={currentLocation}/>
+                                            <Sidebar content="Status" context={currentLocation}/>
+                                            <Sidebar content="Dépenses" context={currentLocation}/>
+                                            <Sidebar content="Actions" context={currentLocation}/>
+                                            <Sidebar content="Hierarchie" context={currentLocation}/>
+                                        </Menu>
+                                    </div>
+
+
+
+
+
+                                </Grid.Column>
+                        </Grid>
+
+
+
+
+
+
+
+
+
                     </div>
                 </div>
             );

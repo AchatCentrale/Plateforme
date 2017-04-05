@@ -7,7 +7,7 @@ import AgenceAdresse from '../../ui/Adresse/AgenceAdresse.jsx';
 
 
 
-import { Input, Label, Menu, Loader} from 'semantic-ui-react'
+import { Input, Label, Menu, Loader, Grid} from 'semantic-ui-react'
 
 import {
     Router,
@@ -108,11 +108,28 @@ export default class Adresse extends React.Component {
             return(
                 <div>
                     <ActionBar context={this.props} />
+
+
                     <div className="container-general" >
-                        <div className="container-info-client">
+
+                        <Grid columns='equal'>
+                            <Grid.Column width={12}>
+
+
+                            <div className="container-info-client">
                             <AgenceAdresse adresseF={this.state.AdresseFacturation}  adresseL={this.state.AdresseLivraison} client={this.state.clients} context={currentLocation} />
                         </div>
-                        <div className="container-sidebar">
+
+
+
+                            </Grid.Column>
+                            <Grid.Column>
+
+
+
+
+
+                            <div className="container-sidebar">
 
                             <Menu pointing vertical>
                                 <Sidebar content="General" context={currentLocation} />
@@ -125,6 +142,13 @@ export default class Adresse extends React.Component {
 
 
                         </div>
+
+
+
+
+                            </Grid.Column>
+                        </Grid>
+
                     </div>
                 </div>
             );

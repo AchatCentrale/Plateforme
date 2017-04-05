@@ -1,57 +1,97 @@
-import React from 'react';
+import React from "react";
 
-import {Image, Statistic, Divider} from 'semantic-ui-react'
+import {Divider,Button,Container, Header,  Grid, Image, Statistic, List} from "semantic-ui-react";
 
 
 export default class Dashboard extends React.Component {
-
-
-    getTheCount() {
-        let url = 'http://localhost:8000/Agence/count';
-        $.getJSON(url, (data) => {
-
-            this.setState({
-                count: data
-            });
-        })
-
-    }
 
 
     constructor(props) {
         super(props);
 
 
-        this.state = {
-            count: ''
-        };
-    }
-
-    componentWillMount() {
-        this.getTheCount.call(this);
     }
 
 
     render() {
 
-
+        let now = moment().format('LLLL');
 
         return (
             <div className="container-dashboard">
-                <Image className="avatar-dashboard"
-                       src='http://react.semantic-ui.com/assets/images/wireframe/square-image.png' avatar/>
-                <span>Jibé</span>
+
+                <div className="container-intro-dashboard">
+
+                    <Grid>
+                        <Grid.Column floated='left' width={5}>
+                            <h3>Bonjour Jean-baptiste</h3>
+                        </Grid.Column>
+                        <Grid.Column floated='right' width={5}>
+                            <h3>{now}</h3>
+                        </Grid.Column>
+                    </Grid>
+
+                </div>
 
                 <Divider />
 
+                <Container text>
+                    <Button positive>
+                       Ajouter un nouveau client
+                    </Button>
+                    <Button content='Exporter en .pdf' icon='file pdf outline' labelPosition='right' />
+                </Container>
+
+
+
                 <div className="dashboard-content">
-                    <div className="dashboard-stat">
-                        <Statistic value={this.state.count} label='Agences Roc-Eclerc'/>
-                    </div>
-                    <div className="container-calendrier">
+
+                    <div className="container-dashboard-detail">
+                        <Grid>
+                            <Grid.Row columns={3}>
+                                <Grid.Column>
+                                    <h2>Tâches a effectuer</h2>
+                                    <List divided relaxed>
 
 
 
+                                        <List.Item>
+                                            <List.Icon name='tasks' size='large' verticalAlign='middle' />
+                                            <List.Content>
+                                                <List.Header as='a'>Completer l'audit ( ROC-ECLERC )</List.Header>
+                                                <List.Description as='a'>Dans 2 jours</List.Description>
+                                            </List.Content>
+                                        </List.Item>
+
+
+                                        <List.Item>
+                                            <List.Icon name='phone' size='large' verticalAlign='middle' />
+                                            <List.Content>
+                                                <List.Header as='a'>Rappeler le fournisseur ( ELIS )</List.Header>
+                                                <List.Description as='a'>Dans 2 jours</List.Description>
+                                            </List.Content>
+                                        </List.Item>
+
+
+                                        <List.Item>
+                                            <List.Icon name='tasks' size='large' verticalAlign='middle' />
+                                            <List.Content>
+                                                <List.Header as='a'>Completer l'audit ( ROC-ECLERC )</List.Header>
+                                                <List.Description as='a'>Dans 2 jours</List.Description>
+                                            </List.Content>
+                                        </List.Item>
+
+
+                                    </List>
+                                </Grid.Column>
+                                <Grid.Column>
+                                    <h2>Dernieres actions effectué</h2>
+                                </Grid.Column>
+                                <Grid.Column>
+                                    <h2>Liste des groupes</h2>
+                                </Grid.Column>
+                            </Grid.Row>
+                        </Grid>
                     </div>
                 </div>
             </div>

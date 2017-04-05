@@ -1,6 +1,8 @@
 import React from 'react';
 import ActionBar from './component/ActionBar.jsx';
 import Dashboard from './component/page/dashboard/Dashboard.jsx';
+
+
 import Exemple from './component/page/Exemple.jsx';
 import ClientListe from './component/page/ClientListe.jsx';
 import General from './component/page/client/General.jsx';
@@ -11,6 +13,10 @@ import Adresse from './component/page/client/Adresse.jsx';
 import Hierarchie from './component/page/client/Hierarchie.jsx';
 import Actions from './component/page/client/Actions.jsx';
 import Sidebar from './component/ui/Sidebar.jsx';
+
+
+
+
 import TopBar from './component/ui/TopBar.jsx';
 import NavBar from './component/ui/NavBar.jsx';
 
@@ -83,7 +89,6 @@ class App extends React.Component {
 
                 <div className="container-content">
                     <div className="container-page">
-
                         {this.props.children}
                     </div>
                 </div>
@@ -96,7 +101,6 @@ class App extends React.Component {
 
 render((
     <Router history={browserHistory}>
-
         <Route path="/" component={App}>
             <IndexRoute component={Dashboard}/>
             <Route path="/client" component={ClientListe}/>

@@ -608,10 +608,11 @@ a.btn-add-client {
 
 .container-dashboard {
     width: 90%;
-    margin: 23px auto;
+    margin: 0 auto;
     background: white;
     height: 75vh;
     border-radius: 8px;
+    margin-top: 40px;
 }
 
 .avatar-dashboard {
@@ -624,9 +625,6 @@ a.btn-add-client {
     margin: 0 auto;
 }
 
-.container-info-client {
-    width: 60%;
-}
 
 .sidebar {
     background-color: #1A2F47;
@@ -790,10 +788,11 @@ form.ink-form.form-login {
 }
 
 .container-general {
-    display: flex;
-    justify-content: space-around;
     background: white;
     height: 80vh;
+    width: 100%;
+    margin: 18px auto;
+    padding-left: 6%;
 }
 
 .icon-mail-client-user {
@@ -822,4 +821,21 @@ form.ink-form.form-login {
 
 .container-form {
     padding: 145px 10px 10px 10px;
+}
+
+.container-intro-dashboard {
+    width: 100%;
+    padding-left: 65px;
+}
+
+
+.container-dashboard-detail {
+    margin-left: 47px;
+    margin-right: 54px;
+    margin-top: 74px;
+}
+
+
+i.teal.icon {
+    color: white!important;
 }

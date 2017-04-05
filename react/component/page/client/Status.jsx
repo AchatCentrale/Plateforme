@@ -31,161 +31,178 @@ export default class Status extends React.Component {
             <div>
                 <ActionBar context={this.props}/>
                 <div className="container-general">
-                    <div className="container-info-client">
 
 
-                        <div className="container-info-progression">
-                            <Grid divided='vertically'>
-                                <Grid.Row columns={2}>
-                                    <Grid.Column>
-                                        <div className="container-info-gauche-status">
-                                            <div className="col-gauche-info">
-                                                <p>Etat</p>
-                                                <p>Date d'inscription</p>
-                                                <p>Date d'adhésion</p>
-                                                <p>Ancienneté</p>
-                                            </div>
+                    <Grid columns='equal'>
+                        <Grid.Column width={12}>
 
-                                            <div className="col-droite-info">
-                                                <p>
-                                                    <Label color='green'>
-                                                        actif
-                                                    </Label>
-                                                </p>
-                                                <p>
-                                                    <Label>
-                                                        26/12/2016
-                                                    </Label>
-                                                </p>
-                                                <p>
-                                                    <Label>
-                                                        02/01/2016
-                                                    </Label>
-                                                </p>
-                                                <p>
-                                                    <Label>
-                                                        2 mois
-                                                    </Label>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </Grid.Column>
-                                    <Grid.Column>
-                                        <div className="container-info-gauche-progress">
-                                            <Grid divided='vertically'>
-                                                <Grid.Row columns={2}>
-                                                    <Grid.Column>
-                                                        <p>Numero d'adhésion</p>
-                                                    </Grid.Column>
-                                                    <Grid.Column>
+
+                            <div className="container-info-client">
+
+
+                                <div className="container-info-progression">
+                                    <Grid divided='vertically'>
+                                        <Grid.Row columns={2}>
+                                            <Grid.Column>
+                                                <div className="container-info-gauche-status">
+                                                    <div className="col-gauche-info">
+                                                        <p>Etat</p>
+                                                        <p>Date d'inscription</p>
+                                                        <p>Date d'adhésion</p>
+                                                        <p>Ancienneté</p>
+                                                    </div>
+
+                                                    <div className="col-droite-info">
                                                         <p>
-                                                            <Label color='grey'>
-                                                                15618-1681
+                                                            <Label color='green'>
+                                                                actif
                                                             </Label>
                                                         </p>
-                                                    </Grid.Column>
-                                                </Grid.Row>
+                                                        <p>
+                                                            <Label>
+                                                                26/12/2016
+                                                            </Label>
+                                                        </p>
+                                                        <p>
+                                                            <Label>
+                                                                02/01/2016
+                                                            </Label>
+                                                        </p>
+                                                        <p>
+                                                            <Label>
+                                                                2 mois
+                                                            </Label>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </Grid.Column>
+                                            <Grid.Column>
+                                                <div className="container-info-gauche-progress">
+                                                    <Grid divided='vertically'>
+                                                        <Grid.Row columns={2}>
+                                                            <Grid.Column>
+                                                                <p>Numero d'adhésion</p>
+                                                            </Grid.Column>
+                                                            <Grid.Column>
+                                                                <p>
+                                                                    <Label color='grey'>
+                                                                        15618-1681
+                                                                    </Label>
+                                                                </p>
+                                                            </Grid.Column>
+                                                        </Grid.Row>
 
-                                            </Grid>
+                                                    </Grid>
 
-                                            <Progress percent={60} color="olive" warning progress/>
-                                        </div>
-                                    </Grid.Column>
-                                </Grid.Row>
+                                                    <Progress percent={60} color="olive" warning progress/>
+                                                </div>
+                                            </Grid.Column>
+                                        </Grid.Row>
 
-                            </Grid>
-                        </div>
+                                    </Grid>
+                                </div>
 
-                        <div className="container-info-action">
-                            <Header as='h2'>
-                                <Icon name='history'/>
-                                <Header.Content>
-                                    Historique des actions
-                                </Header.Content>
-                            </Header>
+                                <div className="container-info-action">
+                                    <Header as='h2'>
+                                        <Icon name='history'/>
+                                        <Header.Content>
+                                            Historique des actions
+                                        </Header.Content>
+                                    </Header>
 
-                            <div className="container-info-action-table">
-                                <Table definition>
-                                    <Table.Header>
-                                        <Table.Row>
-                                            <Table.HeaderCell>Nom de l'action</Table.HeaderCell>
-                                            <Table.HeaderCell>Status</Table.HeaderCell>
-                                            <Table.HeaderCell>Responsable</Table.HeaderCell>
-                                            <Table.HeaderCell>Action</Table.HeaderCell>
-                                            <Table.HeaderCell>Autre</Table.HeaderCell>
-                                        </Table.Row>
-                                    </Table.Header>
+                                    <div className="container-info-action-table">
+                                        <Table definition>
+                                            <Table.Header>
+                                                <Table.Row>
+                                                    <Table.HeaderCell>Nom de l'action</Table.HeaderCell>
+                                                    <Table.HeaderCell>Status</Table.HeaderCell>
+                                                    <Table.HeaderCell>Responsable</Table.HeaderCell>
+                                                    <Table.HeaderCell>Action</Table.HeaderCell>
+                                                    <Table.HeaderCell>Autre</Table.HeaderCell>
+                                                </Table.Row>
+                                            </Table.Header>
 
-                                    <Table.Body>
-                                        <Table.Row>
-                                            <Table.Cell>Audit</Table.Cell>
-                                            <Table.Cell><Icon name='checkmark'/></Table.Cell>
-                                            <Table.Cell>
-                                                <p>
-                                                    <Label>
-                                                        <Icon name="user"/>Morgane
-                                                    </Label>
-                                                </p>
-                                            </Table.Cell>
-                                            <Table.Cell>12/09/1998</Table.Cell>
-                                            <Table.Cell>
-                                                <Icon className='cursor'  name='file pdf outline' />
-                                            </Table.Cell>
-                                        </Table.Row>
-                                        <Table.Row>
-                                            <Table.Cell>Envoi code d'acces</Table.Cell>
-                                            <Table.Cell><Icon name='checkmark'/></Table.Cell>
-                                            <Table.Cell>
-                                                <p>
-                                                    <Label>
-                                                        <Icon name="user"/>Morgane
-                                                    </Label>
-                                                </p>
-                                            </Table.Cell>
-                                            <Table.Cell>12/09/1998</Table.Cell>
-                                            <Table.Cell>
-                                                <Icon className='cursor'  name='file pdf outline' />
-                                            </Table.Cell>
-                                        </Table.Row>
-                                        <Table.Row error>
-                                            <Table.Cell>Envoi code promo</Table.Cell>
-                                            <Table.Cell><Icon name='remove'/></Table.Cell>
-                                            <Table.Cell>
-                                                <p>
-                                                    <Label>
-                                                        <Icon name="user"/>Morgane
-                                                    </Label>
-                                                </p>
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                <Button positive>Action effectué</Button>
-                                            </Table.Cell>
-                                            <Table.Cell>
-                                                <Icon className='cursor'  name='file pdf outline' />
-                                            </Table.Cell>
-                                        </Table.Row>
-                                    </Table.Body>
-                                </Table>
+                                            <Table.Body>
+                                                <Table.Row>
+                                                    <Table.Cell>Audit</Table.Cell>
+                                                    <Table.Cell><Icon name='checkmark'/></Table.Cell>
+                                                    <Table.Cell>
+                                                        <p>
+                                                            <Label>
+                                                                <Icon name="user"/>Morgane
+                                                            </Label>
+                                                        </p>
+                                                    </Table.Cell>
+                                                    <Table.Cell>12/09/1998</Table.Cell>
+                                                    <Table.Cell>
+                                                        <Icon className='cursor' name='file pdf outline'/>
+                                                    </Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row>
+                                                    <Table.Cell>Envoi code d'acces</Table.Cell>
+                                                    <Table.Cell><Icon name='checkmark'/></Table.Cell>
+                                                    <Table.Cell>
+                                                        <p>
+                                                            <Label>
+                                                                <Icon name="user"/>Morgane
+                                                            </Label>
+                                                        </p>
+                                                    </Table.Cell>
+                                                    <Table.Cell>12/09/1998</Table.Cell>
+                                                    <Table.Cell>
+                                                        <Icon className='cursor' name='file pdf outline'/>
+                                                    </Table.Cell>
+                                                </Table.Row>
+                                                <Table.Row error>
+                                                    <Table.Cell>Envoi code promo</Table.Cell>
+                                                    <Table.Cell><Icon name='remove'/></Table.Cell>
+                                                    <Table.Cell>
+                                                        <p>
+                                                            <Label>
+                                                                <Icon name="user"/>Morgane
+                                                            </Label>
+                                                        </p>
+                                                    </Table.Cell>
+                                                    <Table.Cell>
+                                                        <Button positive>Action effectué</Button>
+                                                    </Table.Cell>
+                                                    <Table.Cell>
+                                                        <Icon className='cursor' name='file pdf outline'/>
+                                                    </Table.Cell>
+                                                </Table.Row>
+                                            </Table.Body>
+                                        </Table>
+                                    </div>
+
+
+                                </div>
+
+
                             </div>
 
 
-                        </div>
+                        </Grid.Column>
+                        <Grid.Column>
 
 
-                    </div>
-                    <div className="container-sidebar">
+                            <div className="container-sidebar">
 
-                        <Menu pointing vertical>
-                            <Sidebar content="General" context={currentLocation}/>
-                            <Sidebar content="Adresse" context={currentLocation}/>
-                            <Sidebar content="Status" context={currentLocation}/>
-                            <Sidebar content="Dépenses" context={currentLocation}/>
-                            <Sidebar content="Actions" context={currentLocation}/>
-                            <Sidebar content="Hierarchie" context={currentLocation}/>
-                        </Menu>
+                                <Menu pointing vertical>
+                                    <Sidebar content="General" context={currentLocation}/>
+                                    <Sidebar content="Adresse" context={currentLocation}/>
+                                    <Sidebar content="Status" context={currentLocation}/>
+                                    <Sidebar content="Dépenses" context={currentLocation}/>
+                                    <Sidebar content="Actions" context={currentLocation}/>
+                                    <Sidebar content="Hierarchie" context={currentLocation}/>
+                                </Menu>
 
 
-                    </div>
+                            </div>
+
+
+                        </Grid.Column>
+                    </Grid>
+
                 </div>
             </div>
         );

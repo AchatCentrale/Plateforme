@@ -732,230 +732,6 @@ module.exports = {};
 
 /***/ }),
 /* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var baseConvert = __webpack_require__(675),
-    util = __webpack_require__(677);
-
-/**
- * Converts `func` of `name` to an immutable auto-curried iteratee-first data-last
- * version with conversion `options` applied. If `name` is an object its methods
- * will be converted.
- *
- * @param {string} name The name of the function to wrap.
- * @param {Function} [func] The function to wrap.
- * @param {Object} [options] The options object. See `baseConvert` for more details.
- * @returns {Function|Object} Returns the converted function or object.
- */
-function convert(name, func, options) {
-  return baseConvert(util, name, func, options);
-}
-
-module.exports = convert;
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright 2013-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- */
-
-
-
-var _prodInvariant = __webpack_require__(11);
-
-var DOMProperty = __webpack_require__(73);
-var ReactDOMComponentFlags = __webpack_require__(329);
-
-var invariant = __webpack_require__(5);
-
-var ATTR_NAME = DOMProperty.ID_ATTRIBUTE_NAME;
-var Flags = ReactDOMComponentFlags;
-
-var internalInstanceKey = '__reactInternalInstance$' + Math.random().toString(36).slice(2);
-
-/**
- * Check if a given node should be cached.
- */
-function shouldPrecacheNode(node, nodeID) {
-  return node.nodeType === 1 && node.getAttribute(ATTR_NAME) === String(nodeID) || node.nodeType === 8 && node.nodeValue === ' react-text: ' + nodeID + ' ' || node.nodeType === 8 && node.nodeValue === ' react-empty: ' + nodeID + ' ';
-}
-
-/**
- * Drill down (through composites and empty components) until we get a host or
- * host text component.
- *
- * This is pretty polymorphic but unavoidable with the current structure we have
- * for `_renderedChildren`.
- */
-function getRenderedHostOrTextFromComponent(component) {
-  var rendered;
-  while (rendered = component._renderedComponent) {
-    component = rendered;
-  }
-  return component;
-}
-
-/**
- * Populate `_hostNode` on the rendered host/text component with the given
- * DOM node. The passed `inst` can be a composite.
- */
-function precacheNode(inst, node) {
-  var hostInst = getRenderedHostOrTextFromComponent(inst);
-  hostInst._hostNode = node;
-  node[internalInstanceKey] = hostInst;
-}
-
-function uncacheNode(inst) {
-  var node = inst._hostNode;
-  if (node) {
-    delete node[internalInstanceKey];
-    inst._hostNode = null;
-  }
-}
-
-/**
- * Populate `_hostNode` on each child of `inst`, assuming that the children
- * match up with the DOM (element) children of `node`.
- *
- * We cache entire levels at once to avoid an n^2 problem where we access the
- * children of a node sequentially and have to walk from the start to our target
- * node every time.
- *
- * Since we update `_renderedChildren` and the actual DOM at (slightly)
- * different times, we could race here and see a newer `_renderedChildren` than
- * the DOM nodes we see. To avoid this, ReactMultiChild calls
- * `prepareToManageChildren` before we change `_renderedChildren`, at which
- * time the container's child nodes are always cached (until it unmounts).
- */
-function precacheChildNodes(inst, node) {
-  if (inst._flags & Flags.hasCachedChildNodes) {
-    return;
-  }
-  var children = inst._renderedChildren;
-  var childNode = node.firstChild;
-  outer: for (var name in children) {
-    if (!children.hasOwnProperty(name)) {
-      continue;
-    }
-    var childInst = children[name];
-    var childID = getRenderedHostOrTextFromComponent(childInst)._domID;
-    if (childID === 0) {
-      // We're currently unmounting this child in ReactMultiChild; skip it.
-      continue;
-    }
-    // We assume the child nodes are in the same order as the child instances.
-    for (; childNode !== null; childNode = childNode.nextSibling) {
-      if (shouldPrecacheNode(childNode, childID)) {
-        precacheNode(childInst, childNode);
-        continue outer;
-      }
-    }
-    // We reached the end of the DOM children without finding an ID match.
-     true ?  false ? invariant(false, 'Unable to find element with ID %s.', childID) : _prodInvariant('32', childID) : void 0;
-  }
-  inst._flags |= Flags.hasCachedChildNodes;
-}
-
-/**
- * Given a DOM node, return the closest ReactDOMComponent or
- * ReactDOMTextComponent instance ancestor.
- */
-function getClosestInstanceFromNode(node) {
-  if (node[internalInstanceKey]) {
-    return node[internalInstanceKey];
-  }
-
-  // Walk up the tree until we find an ancestor whose instance we have cached.
-  var parents = [];
-  while (!node[internalInstanceKey]) {
-    parents.push(node);
-    if (node.parentNode) {
-      node = node.parentNode;
-    } else {
-      // Top of the tree. This node must not be part of a React tree (or is
-      // unmounted, potentially).
-      return null;
-    }
-  }
-
-  var closest;
-  var inst;
-  for (; node && (inst = node[internalInstanceKey]); node = parents.pop()) {
-    closest = inst;
-    if (parents.length) {
-      precacheChildNodes(inst, node);
-    }
-  }
-
-  return closest;
-}
-
-/**
- * Given a DOM node, return the ReactDOMComponent or ReactDOMTextComponent
- * instance, or null if the node was not rendered by this React.
- */
-function getInstanceFromNode(node) {
-  var inst = getClosestInstanceFromNode(node);
-  if (inst != null && inst._hostNode === node) {
-    return inst;
-  } else {
-    return null;
-  }
-}
-
-/**
- * Given a ReactDOMComponent or ReactDOMTextComponent, return the corresponding
- * DOM node.
- */
-function getNodeFromInstance(inst) {
-  // Without this first invariant, passing a non-DOM-component triggers the next
-  // invariant for a missing parent, which is super confusing.
-  !(inst._hostNode !== undefined) ?  false ? invariant(false, 'getNodeFromInstance: Invalid argument.') : _prodInvariant('33') : void 0;
-
-  if (inst._hostNode) {
-    return inst._hostNode;
-  }
-
-  // Walk up the tree until we find an ancestor whose DOM node we have cached.
-  var parents = [];
-  while (!inst._hostNode) {
-    parents.push(inst);
-    !inst._hostParent ?  false ? invariant(false, 'React DOM tree root should always have a node reference.') : _prodInvariant('34') : void 0;
-    inst = inst._hostParent;
-  }
-
-  // Now parents contains each ancestor that does *not* have a cached native
-  // node, and `inst` is the deepest ancestor that does.
-  for (; parents.length; inst = parents.pop()) {
-    precacheChildNodes(inst, inst._hostNode);
-  }
-
-  return inst._hostNode;
-}
-
-var ReactDOMComponentTree = {
-  getClosestInstanceFromNode: getClosestInstanceFromNode,
-  getInstanceFromNode: getInstanceFromNode,
-  getNodeFromInstance: getNodeFromInstance,
-  precacheChildNodes: precacheChildNodes,
-  precacheNode: precacheNode,
-  uncacheNode: uncacheNode
-};
-
-module.exports = ReactDOMComponentTree;
-
-/***/ }),
-/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1054,7 +830,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderContent", function() { return __WEBPACK_IMPORTED_MODULE_45__elements_Header_HeaderContent__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__elements_Header_HeaderSubheader__ = __webpack_require__(389);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HeaderSubheader", function() { return __WEBPACK_IMPORTED_MODULE_46__elements_Header_HeaderSubheader__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__elements_Icon__ = __webpack_require__(21);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Icon", function() { return __WEBPACK_IMPORTED_MODULE_47__elements_Icon__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_48__elements_Icon_IconGroup__ = __webpack_require__(390);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "IconGroup", function() { return __WEBPACK_IMPORTED_MODULE_48__elements_Icon_IconGroup__["a"]; });
@@ -1424,6 +1200,230 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseConvert = __webpack_require__(675),
+    util = __webpack_require__(677);
+
+/**
+ * Converts `func` of `name` to an immutable auto-curried iteratee-first data-last
+ * version with conversion `options` applied. If `name` is an object its methods
+ * will be converted.
+ *
+ * @param {string} name The name of the function to wrap.
+ * @param {Function} [func] The function to wrap.
+ * @param {Object} [options] The options object. See `baseConvert` for more details.
+ * @returns {Function|Object} Returns the converted function or object.
+ */
+function convert(name, func, options) {
+  return baseConvert(util, name, func, options);
+}
+
+module.exports = convert;
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright 2013-present, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+
+
+var _prodInvariant = __webpack_require__(11);
+
+var DOMProperty = __webpack_require__(73);
+var ReactDOMComponentFlags = __webpack_require__(329);
+
+var invariant = __webpack_require__(5);
+
+var ATTR_NAME = DOMProperty.ID_ATTRIBUTE_NAME;
+var Flags = ReactDOMComponentFlags;
+
+var internalInstanceKey = '__reactInternalInstance$' + Math.random().toString(36).slice(2);
+
+/**
+ * Check if a given node should be cached.
+ */
+function shouldPrecacheNode(node, nodeID) {
+  return node.nodeType === 1 && node.getAttribute(ATTR_NAME) === String(nodeID) || node.nodeType === 8 && node.nodeValue === ' react-text: ' + nodeID + ' ' || node.nodeType === 8 && node.nodeValue === ' react-empty: ' + nodeID + ' ';
+}
+
+/**
+ * Drill down (through composites and empty components) until we get a host or
+ * host text component.
+ *
+ * This is pretty polymorphic but unavoidable with the current structure we have
+ * for `_renderedChildren`.
+ */
+function getRenderedHostOrTextFromComponent(component) {
+  var rendered;
+  while (rendered = component._renderedComponent) {
+    component = rendered;
+  }
+  return component;
+}
+
+/**
+ * Populate `_hostNode` on the rendered host/text component with the given
+ * DOM node. The passed `inst` can be a composite.
+ */
+function precacheNode(inst, node) {
+  var hostInst = getRenderedHostOrTextFromComponent(inst);
+  hostInst._hostNode = node;
+  node[internalInstanceKey] = hostInst;
+}
+
+function uncacheNode(inst) {
+  var node = inst._hostNode;
+  if (node) {
+    delete node[internalInstanceKey];
+    inst._hostNode = null;
+  }
+}
+
+/**
+ * Populate `_hostNode` on each child of `inst`, assuming that the children
+ * match up with the DOM (element) children of `node`.
+ *
+ * We cache entire levels at once to avoid an n^2 problem where we access the
+ * children of a node sequentially and have to walk from the start to our target
+ * node every time.
+ *
+ * Since we update `_renderedChildren` and the actual DOM at (slightly)
+ * different times, we could race here and see a newer `_renderedChildren` than
+ * the DOM nodes we see. To avoid this, ReactMultiChild calls
+ * `prepareToManageChildren` before we change `_renderedChildren`, at which
+ * time the container's child nodes are always cached (until it unmounts).
+ */
+function precacheChildNodes(inst, node) {
+  if (inst._flags & Flags.hasCachedChildNodes) {
+    return;
+  }
+  var children = inst._renderedChildren;
+  var childNode = node.firstChild;
+  outer: for (var name in children) {
+    if (!children.hasOwnProperty(name)) {
+      continue;
+    }
+    var childInst = children[name];
+    var childID = getRenderedHostOrTextFromComponent(childInst)._domID;
+    if (childID === 0) {
+      // We're currently unmounting this child in ReactMultiChild; skip it.
+      continue;
+    }
+    // We assume the child nodes are in the same order as the child instances.
+    for (; childNode !== null; childNode = childNode.nextSibling) {
+      if (shouldPrecacheNode(childNode, childID)) {
+        precacheNode(childInst, childNode);
+        continue outer;
+      }
+    }
+    // We reached the end of the DOM children without finding an ID match.
+     true ?  false ? invariant(false, 'Unable to find element with ID %s.', childID) : _prodInvariant('32', childID) : void 0;
+  }
+  inst._flags |= Flags.hasCachedChildNodes;
+}
+
+/**
+ * Given a DOM node, return the closest ReactDOMComponent or
+ * ReactDOMTextComponent instance ancestor.
+ */
+function getClosestInstanceFromNode(node) {
+  if (node[internalInstanceKey]) {
+    return node[internalInstanceKey];
+  }
+
+  // Walk up the tree until we find an ancestor whose instance we have cached.
+  var parents = [];
+  while (!node[internalInstanceKey]) {
+    parents.push(node);
+    if (node.parentNode) {
+      node = node.parentNode;
+    } else {
+      // Top of the tree. This node must not be part of a React tree (or is
+      // unmounted, potentially).
+      return null;
+    }
+  }
+
+  var closest;
+  var inst;
+  for (; node && (inst = node[internalInstanceKey]); node = parents.pop()) {
+    closest = inst;
+    if (parents.length) {
+      precacheChildNodes(inst, node);
+    }
+  }
+
+  return closest;
+}
+
+/**
+ * Given a DOM node, return the ReactDOMComponent or ReactDOMTextComponent
+ * instance, or null if the node was not rendered by this React.
+ */
+function getInstanceFromNode(node) {
+  var inst = getClosestInstanceFromNode(node);
+  if (inst != null && inst._hostNode === node) {
+    return inst;
+  } else {
+    return null;
+  }
+}
+
+/**
+ * Given a ReactDOMComponent or ReactDOMTextComponent, return the corresponding
+ * DOM node.
+ */
+function getNodeFromInstance(inst) {
+  // Without this first invariant, passing a non-DOM-component triggers the next
+  // invariant for a missing parent, which is super confusing.
+  !(inst._hostNode !== undefined) ?  false ? invariant(false, 'getNodeFromInstance: Invalid argument.') : _prodInvariant('33') : void 0;
+
+  if (inst._hostNode) {
+    return inst._hostNode;
+  }
+
+  // Walk up the tree until we find an ancestor whose DOM node we have cached.
+  var parents = [];
+  while (!inst._hostNode) {
+    parents.push(inst);
+    !inst._hostParent ?  false ? invariant(false, 'React DOM tree root should always have a node reference.') : _prodInvariant('34') : void 0;
+    inst = inst._hostParent;
+  }
+
+  // Now parents contains each ancestor that does *not* have a cached native
+  // node, and `inst` is the deepest ancestor that does.
+  for (; parents.length; inst = parents.pop()) {
+    precacheChildNodes(inst, inst._hostNode);
+  }
+
+  return inst._hostNode;
+}
+
+var ReactDOMComponentTree = {
+  getClosestInstanceFromNode: getClosestInstanceFromNode,
+  getInstanceFromNode: getInstanceFromNode,
+  getNodeFromInstance: getNodeFromInstance,
+  precacheChildNodes: precacheChildNodes,
+  precacheNode: precacheNode,
+  uncacheNode: uncacheNode
+};
+
+module.exports = ReactDOMComponentTree;
+
+/***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1484,16 +1484,6 @@ module.exports = map;
 
 /***/ }),
 /* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Icon__ = __webpack_require__(141);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__Icon__["a"]; });
-
-
-
-/***/ }),
-/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1578,6 +1568,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Icon__ = __webpack_require__(141);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__Icon__["a"]; });
 
 
 
@@ -3387,7 +3387,7 @@ var _Logo = __webpack_require__(462);
 
 var _Logo2 = _interopRequireDefault(_Logo);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3414,64 +3414,68 @@ var ActionBar = function (_React$Component) {
     }
 
     _createClass(ActionBar, [{
-        key: 'getClients',
+        key: "getClients",
         value: function getClients() {
             var _this2 = this;
 
-            var url = "http://localhost:8000/Agence/" + this.props.context.params.id;
-            $.getJSON(url, function (data) {
+            if (this.props.context) {
+                var url = "http://localhost:8000/Agence/" + this.props.context.params.id;
+                $.getJSON(url, function (data) {
 
-                _this2.setState({
-                    clients: data[0],
-                    loading: false
+                    _this2.setState({
+                        clients: data[0],
+                        loading: false
+                    });
                 });
-            });
+            } else {
+                return;
+            }
         }
     }, {
-        key: 'getClientsUser',
+        key: "getClientsUser",
         value: function getClientsUser() {
             var _this3 = this;
 
-            var url = "http://localhost:8000/Agence/" + this.props.context.params.id + "/users";
-            $.getJSON(url, function (data) {
+            if (this.props.context) {
+                var url = "http://localhost:8000/Agence/" + this.props.context.params.id + "/users";
+                $.getJSON(url, function (data) {
 
-                var array = [];
-                for (var i = 0; i < data.length; i++) {
-                    array.push(data[i]);
-                }
+                    var array = [];
+                    for (var i = 0; i < data.length; i++) {
+                        array.push(data[i]);
+                    }
 
-                _this3.state = {
-                    clientsUser: array,
-                    loading: false
-                };
-            });
+                    _this3.state = {
+                        clientsUser: array,
+                        loading: false
+                    };
+                });
+            } else {
+                return;
+            }
         }
     }, {
-        key: 'componentWillMount',
+        key: "componentWillMount",
         value: function componentWillMount() {
             this.getClientsUser.call(this);
             this.getClients.call(this);
         }
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                { className: 'container-actionBar-top' },
+                "div",
+                { className: "container-actionBar-top" },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'container-actionBar' },
+                    "div",
+                    { className: "container-actionBar" },
                     _react2.default.createElement(_AddUi2.default, null),
                     _react2.default.createElement(_ExportUi2.default, null),
-                    _react2.default.createElement(_UpdateUi2.default, { className: 'cursor', onClick: function onClick(e) {
+                    _react2.default.createElement(_UpdateUi2.default, { className: "cursor", onClick: function onClick(e) {
                             console.log(e);
                         } })
                 ),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'container-groupe' },
-                    _react2.default.createElement(_Logo2.default, { client: this.state.clients })
-                )
+                _react2.default.createElement("div", { className: "container-groupe" })
             );
         }
     }]);
@@ -3498,9 +3502,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8392,7 +8396,7 @@ module.exports = setInnerHTML;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__elements_Icon__ = __webpack_require__(21);
 
 
 
@@ -10618,7 +10622,7 @@ process.umask = function() { return 0; };
 
 var DOMLazyTree = __webpack_require__(72);
 var Danger = __webpack_require__(723);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactInstrumentation = __webpack_require__(30);
 
 var createMicrosoftUnsafeLocalFunction = __webpack_require__(203);
@@ -14336,7 +14340,7 @@ FeedExtra._meta = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__elements_Icon__ = __webpack_require__(21);
 
 
 
@@ -14421,7 +14425,7 @@ FeedLabel._meta = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__elements_Icon__ = __webpack_require__(21);
 
 
 
@@ -17472,7 +17476,7 @@ module.exports = findIndex;
 /* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('flow', __webpack_require__(673));
 
 func.placeholder = __webpack_require__(15);
@@ -17483,7 +17487,7 @@ module.exports = func;
 /* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('includes', __webpack_require__(92));
 
 func.placeholder = __webpack_require__(15);
@@ -17494,7 +17498,7 @@ module.exports = func;
 /* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('isNil', __webpack_require__(4), __webpack_require__(36));
 
 func.placeholder = __webpack_require__(15);
@@ -18336,7 +18340,7 @@ module.exports = PooledClass.addPoolingTo(CallbackQueue);
 
 
 var DOMProperty = __webpack_require__(73);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactInstrumentation = __webpack_require__(30);
 
 var quoteAttributeValueForBrowser = __webpack_require__(780);
@@ -18603,7 +18607,7 @@ module.exports = ReactDOMComponentFlags;
 var _assign = __webpack_require__(14);
 
 var LinkedValueUtils = __webpack_require__(199);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactUpdates = __webpack_require__(34);
 
 var warning = __webpack_require__(6);
@@ -19076,7 +19080,7 @@ var DOMProperty = __webpack_require__(73);
 var React = __webpack_require__(77);
 var ReactBrowserEventEmitter = __webpack_require__(134);
 var ReactCurrentOwner = __webpack_require__(39);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactDOMContainerInfo = __webpack_require__(733);
 var ReactDOMFeatureFlags = __webpack_require__(735);
 var ReactFeatureFlags = __webpack_require__(332);
@@ -21401,7 +21405,7 @@ module.exports = getIteratorFn;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__elements_Icon__ = __webpack_require__(21);
 
 
 
@@ -22349,7 +22353,7 @@ MenuHeader._meta = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__elements_Icon__ = __webpack_require__(21);
 
 
 
@@ -24551,7 +24555,7 @@ SegmentGroup._meta = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__elements_Icon__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__StepContent__ = __webpack_require__(400);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__StepDescription__ = __webpack_require__(224);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__StepGroup__ = __webpack_require__(401);
@@ -25053,7 +25057,7 @@ AccordionContent.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__lib
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__elements_Icon__ = __webpack_require__(21);
 
 
 
@@ -25302,7 +25306,7 @@ DropdownDivider._meta = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__elements_Icon__ = __webpack_require__(21);
 
 
 
@@ -25391,7 +25395,7 @@ DropdownHeader._meta = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__lib__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__elements_Flag__ = __webpack_require__(387);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__elements_Icon__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__elements_Image__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__elements_Label__ = __webpack_require__(142);
 
@@ -28335,9 +28339,9 @@ var _NavBar2 = _interopRequireDefault(_NavBar);
 
 var _reactDom = __webpack_require__(325);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28451,9 +28455,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28702,9 +28706,9 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28731,220 +28735,228 @@ var Actions = function (_React$Component) {
     }
 
     _createClass(Actions, [{
-        key: 'componentWillMount',
+        key: "componentWillMount",
         value: function componentWillMount() {}
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
 
             var currentLocation = this.props;
 
             return _react2.default.createElement(
-                'div',
+                "div",
                 null,
                 _react2.default.createElement(_ActionBar2.default, { context: this.props }),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'container-general' },
+                    "div",
+                    { className: "container-general" },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'container-info-client' },
+                        _semanticUiReact.Grid,
+                        { columns: "equal" },
                         _react2.default.createElement(
-                            'div',
-                            { className: 'container-client-action' },
+                            _semanticUiReact.Grid.Column,
+                            { width: 12 },
                             _react2.default.createElement(
-                                'h1',
-                                null,
-                                'Historiques des actions'
-                            ),
-                            _react2.default.createElement(
-                                _semanticUiReact.Segment,
-                                null,
+                                "div",
+                                { className: "container-client-action" },
                                 _react2.default.createElement(
-                                    _semanticUiReact.Menu,
+                                    "h1",
                                     null,
-                                    _react2.default.createElement(_semanticUiReact.Menu.Item, { className: 'cursor', name: 'En cours', onClick: this.handleItemClick }),
-                                    _react2.default.createElement(_semanticUiReact.Menu.Item, { className: 'cursor', name: 'Termin\xE9', onClick: this.handleItemClick }),
-                                    _react2.default.createElement(_semanticUiReact.Menu.Item, { className: 'cursor', name: 'D\xE9l\xE9gu\xE9es', onClick: this.handleItemClick })
+                                    "Historiques des actions"
                                 ),
                                 _react2.default.createElement(
-                                    _semanticUiReact.Table,
-                                    { celled: true },
+                                    _semanticUiReact.Segment,
+                                    null,
                                     _react2.default.createElement(
-                                        _semanticUiReact.Table.Header,
+                                        _semanticUiReact.Menu,
                                         null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Table.Row,
-                                            null,
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Date'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Type'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Description'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Priorit\xE9'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Nom Agence'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                'Action'
-                                            )
-                                        )
+                                        _react2.default.createElement(_semanticUiReact.Menu.Item, { className: "cursor", name: "En cours", onClick: this.handleItemClick }),
+                                        _react2.default.createElement(_semanticUiReact.Menu.Item, { className: "cursor", name: "Termin\xE9", onClick: this.handleItemClick }),
+                                        _react2.default.createElement(_semanticUiReact.Menu.Item, { className: "cursor", name: "D\xE9l\xE9gu\xE9es", onClick: this.handleItemClick })
                                     ),
                                     _react2.default.createElement(
-                                        _semanticUiReact.Table.Body,
-                                        null,
+                                        _semanticUiReact.Table,
+                                        { celled: true },
                                         _react2.default.createElement(
-                                            _semanticUiReact.Table.Row,
+                                            _semanticUiReact.Table.Header,
                                             null,
                                             _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
+                                                _semanticUiReact.Table.Row,
                                                 null,
-                                                '28-10-2016'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'Relance'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'Relancer suite devis envoy\xE9'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                ' ',
                                                 _react2.default.createElement(
-                                                    _semanticUiReact.Label,
-                                                    { color: 'red', as: 'a' },
-                                                    '1'
+                                                    _semanticUiReact.Table.HeaderCell,
+                                                    null,
+                                                    "Date"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.HeaderCell,
+                                                    null,
+                                                    "Type"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.HeaderCell,
+                                                    null,
+                                                    "Description"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.HeaderCell,
+                                                    null,
+                                                    "Priorit\xE9"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.HeaderCell,
+                                                    null,
+                                                    "Nom Agence"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.HeaderCell,
+                                                    null,
+                                                    "Action"
                                                 )
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'ROC ECLERC PARIS ORDENER'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'None'
                                             )
                                         ),
                                         _react2.default.createElement(
-                                            _semanticUiReact.Table.Row,
+                                            _semanticUiReact.Table.Body,
                                             null,
                                             _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
+                                                _semanticUiReact.Table.Row,
                                                 null,
-                                                '28-10-2016'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'Relance'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'Relancer suite devis envoy\xE9'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                ' ',
                                                 _react2.default.createElement(
-                                                    _semanticUiReact.Label,
-                                                    { color: 'red', as: 'a' },
-                                                    '1'
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "28-10-2016"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "Relance"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "Relancer suite devis envoy\xE9"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    " ",
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        { color: "red", as: "a" },
+                                                        "1"
+                                                    )
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "ROC ECLERC PARIS ORDENER"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "None"
                                                 )
                                             ),
                                             _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
+                                                _semanticUiReact.Table.Row,
                                                 null,
-                                                'ROC ECLERC PARIS ORDENER'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'None'
-                                            )
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Table.Row,
-                                            null,
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                '28-10-2016'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'Relance'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'Relancer suite devis envoy\xE9'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                ' ',
                                                 _react2.default.createElement(
-                                                    _semanticUiReact.Label,
-                                                    { color: 'red', as: 'a' },
-                                                    '1'
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "28-10-2016"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "Relance"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "Relancer suite devis envoy\xE9"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    " ",
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        { color: "red", as: "a" },
+                                                        "1"
+                                                    )
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "ROC ECLERC PARIS ORDENER"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "None"
                                                 )
                                             ),
                                             _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
+                                                _semanticUiReact.Table.Row,
                                                 null,
-                                                'ROC ECLERC PARIS ORDENER'
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                'None'
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "28-10-2016"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "Relance"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "Relancer suite devis envoy\xE9"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    " ",
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Label,
+                                                        { color: "red", as: "a" },
+                                                        "1"
+                                                    )
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "ROC ECLERC PARIS ORDENER"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Cell,
+                                                    null,
+                                                    "None"
+                                                )
                                             )
                                         )
                                     )
                                 )
                             )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'container-sidebar' },
+                        ),
                         _react2.default.createElement(
-                            _semanticUiReact.Menu,
-                            { pointing: true, vertical: true },
-                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                "div",
+                                { className: "container-sidebar" },
+                                _react2.default.createElement(
+                                    _semanticUiReact.Menu,
+                                    { pointing: true, vertical: true },
+                                    _react2.default.createElement(_Sidebar2.default, { content: "General", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Adresse", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Status", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "D\xE9penses", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Actions", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Hierarchie", context: currentLocation })
+                                )
+                            )
                         )
                     )
                 )
@@ -28986,9 +28998,9 @@ var _AgenceAdresse = __webpack_require__(457);
 
 var _AgenceAdresse2 = _interopRequireDefault(_AgenceAdresse);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29093,22 +29105,34 @@ var Adresse = function (_React$Component) {
                         'div',
                         { className: 'container-general' },
                         _react2.default.createElement(
-                            'div',
-                            { className: 'container-info-client' },
-                            _react2.default.createElement(_AgenceAdresse2.default, { adresseF: this.state.AdresseFacturation, adresseL: this.state.AdresseLivraison, client: this.state.clients, context: currentLocation })
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container-sidebar' },
+                            _semanticUiReact.Grid,
+                            { columns: 'equal' },
                             _react2.default.createElement(
-                                _semanticUiReact.Menu,
-                                { pointing: true, vertical: true },
-                                _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                                _semanticUiReact.Grid.Column,
+                                { width: 12 },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'container-info-client' },
+                                    _react2.default.createElement(_AgenceAdresse2.default, { adresseF: this.state.AdresseFacturation, adresseL: this.state.AdresseLivraison, client: this.state.clients, context: currentLocation })
+                                )
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid.Column,
+                                null,
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'container-sidebar' },
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Menu,
+                                        { pointing: true, vertical: true },
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                                    )
+                                )
                             )
                         )
                     )
@@ -29151,9 +29175,9 @@ var _DepenseContainer = __webpack_require__(458);
 
 var _DepenseContainer2 = _interopRequireDefault(_DepenseContainer);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29173,38 +29197,50 @@ var Depenses = function (_React$Component) {
     }
 
     _createClass(Depenses, [{
-        key: 'componentWillMount',
+        key: "componentWillMount",
         value: function componentWillMount() {}
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
 
             var currentLocation = this.props;
 
             return _react2.default.createElement(
-                'div',
+                "div",
                 null,
                 _react2.default.createElement(_ActionBar2.default, { context: this.props }),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'container-general' },
+                    "div",
+                    { className: "container-general" },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'container-info-client' },
-                        _react2.default.createElement(_DepenseContainer2.default, { context: this.props })
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'container-sidebar' },
+                        _semanticUiReact.Grid,
+                        { columns: "equal" },
                         _react2.default.createElement(
-                            _semanticUiReact.Menu,
-                            { pointing: true, vertical: true },
-                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                            _semanticUiReact.Grid.Column,
+                            { width: 12 },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "container-info-client" },
+                                _react2.default.createElement(_DepenseContainer2.default, { context: this.props })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                "div",
+                                { className: "container-sidebar" },
+                                _react2.default.createElement(
+                                    _semanticUiReact.Menu,
+                                    { pointing: true, vertical: true },
+                                    _react2.default.createElement(_Sidebar2.default, { content: "General", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Adresse", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Status", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "D\xE9penses", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Actions", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Hierarchie", context: currentLocation })
+                                )
+                            )
                         )
                     )
                 )
@@ -29250,9 +29286,9 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29344,28 +29380,39 @@ var General = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
-                    _react2.default.createElement(_ActionBar2.default, { context: this.props, updateClick: this.updateClick }),
                     _react2.default.createElement(
                         'div',
                         { className: 'container-general' },
                         _react2.default.createElement(
-                            'div',
-                            { className: 'container-info-client' },
-                            _react2.default.createElement(_infoUi2.default, { clients: this.state.clients }),
-                            _react2.default.createElement(_ContactListUi2.default, { clientsUser: this.state.clientsUser })
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'container-sidebar' },
+                            _semanticUiReact.Grid,
+                            { columns: 'equal' },
                             _react2.default.createElement(
-                                _semanticUiReact.Menu,
-                                { pointing: true, vertical: true },
-                                _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
-                                _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                                _semanticUiReact.Grid.Column,
+                                { width: 12 },
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'container-info-client' },
+                                    _react2.default.createElement(_infoUi2.default, { clients: this.state.clients }),
+                                    _react2.default.createElement(_ContactListUi2.default, { clientsUser: this.state.clientsUser })
+                                )
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid.Column,
+                                null,
+                                _react2.default.createElement(
+                                    'div',
+                                    { className: 'container-sidebar' },
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Menu,
+                                        { pointing: true, vertical: true },
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                                    )
+                                )
                             )
                         )
                     )
@@ -29404,9 +29451,9 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29506,9 +29553,9 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29544,321 +29591,333 @@ var Status = function (_React$Component) {
                     "div",
                     { className: "container-general" },
                     _react2.default.createElement(
-                        "div",
-                        { className: "container-info-client" },
+                        _semanticUiReact.Grid,
+                        { columns: "equal" },
                         _react2.default.createElement(
-                            "div",
-                            { className: "container-info-progression" },
+                            _semanticUiReact.Grid.Column,
+                            { width: 12 },
                             _react2.default.createElement(
-                                _semanticUiReact.Grid,
-                                { divided: "vertically" },
+                                "div",
+                                { className: "container-info-client" },
                                 _react2.default.createElement(
-                                    _semanticUiReact.Grid.Row,
-                                    { columns: 2 },
+                                    "div",
+                                    { className: "container-info-progression" },
                                     _react2.default.createElement(
-                                        _semanticUiReact.Grid.Column,
-                                        null,
+                                        _semanticUiReact.Grid,
+                                        { divided: "vertically" },
                                         _react2.default.createElement(
-                                            "div",
-                                            { className: "container-info-gauche-status" },
+                                            _semanticUiReact.Grid.Row,
+                                            { columns: 2 },
                                             _react2.default.createElement(
-                                                "div",
-                                                { className: "col-gauche-info" },
+                                                _semanticUiReact.Grid.Column,
+                                                null,
                                                 _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    "Etat"
-                                                ),
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    "Date d'inscription"
-                                                ),
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    "Date d'adh\xE9sion"
-                                                ),
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    "Anciennet\xE9"
-                                                )
-                                            ),
-                                            _react2.default.createElement(
-                                                "div",
-                                                { className: "col-droite-info" },
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
+                                                    "div",
+                                                    { className: "container-info-gauche-status" },
                                                     _react2.default.createElement(
-                                                        _semanticUiReact.Label,
-                                                        { color: "green" },
-                                                        "actif"
-                                                    )
-                                                ),
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        _semanticUiReact.Label,
-                                                        null,
-                                                        "26/12/2016"
-                                                    )
-                                                ),
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        _semanticUiReact.Label,
-                                                        null,
-                                                        "02/01/2016"
-                                                    )
-                                                ),
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        _semanticUiReact.Label,
-                                                        null,
-                                                        "2 mois"
-                                                    )
-                                                )
-                                            )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Grid.Column,
-                                        null,
-                                        _react2.default.createElement(
-                                            "div",
-                                            { className: "container-info-gauche-progress" },
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Grid,
-                                                { divided: "vertically" },
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Grid.Row,
-                                                    { columns: 2 },
-                                                    _react2.default.createElement(
-                                                        _semanticUiReact.Grid.Column,
-                                                        null,
+                                                        "div",
+                                                        { className: "col-gauche-info" },
                                                         _react2.default.createElement(
                                                             "p",
                                                             null,
-                                                            "Numero d'adh\xE9sion"
+                                                            "Etat"
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            "Date d'inscription"
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            "Date d'adh\xE9sion"
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            "Anciennet\xE9"
                                                         )
                                                     ),
                                                     _react2.default.createElement(
-                                                        _semanticUiReact.Grid.Column,
+                                                        "div",
+                                                        { className: "col-droite-info" },
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Label,
+                                                                { color: "green" },
+                                                                "actif"
+                                                            )
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Label,
+                                                                null,
+                                                                "26/12/2016"
+                                                            )
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Label,
+                                                                null,
+                                                                "02/01/2016"
+                                                            )
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Label,
+                                                                null,
+                                                                "2 mois"
+                                                            )
+                                                        )
+                                                    )
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Grid.Column,
+                                                null,
+                                                _react2.default.createElement(
+                                                    "div",
+                                                    { className: "container-info-gauche-progress" },
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Grid,
+                                                        { divided: "vertically" },
+                                                        _react2.default.createElement(
+                                                            _semanticUiReact.Grid.Row,
+                                                            { columns: 2 },
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Grid.Column,
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    "p",
+                                                                    null,
+                                                                    "Numero d'adh\xE9sion"
+                                                                )
+                                                            ),
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Grid.Column,
+                                                                null,
+                                                                _react2.default.createElement(
+                                                                    "p",
+                                                                    null,
+                                                                    _react2.default.createElement(
+                                                                        _semanticUiReact.Label,
+                                                                        { color: "grey" },
+                                                                        "15618-1681"
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
+                                                    ),
+                                                    _react2.default.createElement(_semanticUiReact.Progress, { percent: 60, color: "olive", warning: true, progress: true })
+                                                )
+                                            )
+                                        )
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    "div",
+                                    { className: "container-info-action" },
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Header,
+                                        { as: "h2" },
+                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "history" }),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Header.Content,
+                                            null,
+                                            "Historique des actions"
+                                        )
+                                    ),
+                                    _react2.default.createElement(
+                                        "div",
+                                        { className: "container-info-action-table" },
+                                        _react2.default.createElement(
+                                            _semanticUiReact.Table,
+                                            { definition: true },
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Header,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Row,
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.HeaderCell,
+                                                        null,
+                                                        "Nom de l'action"
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.HeaderCell,
+                                                        null,
+                                                        "Status"
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.HeaderCell,
+                                                        null,
+                                                        "Responsable"
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.HeaderCell,
+                                                        null,
+                                                        "Action"
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.HeaderCell,
+                                                        null,
+                                                        "Autre"
+                                                    )
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.Table.Body,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Row,
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        "Audit"
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "checkmark" })
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
                                                         null,
                                                         _react2.default.createElement(
                                                             "p",
                                                             null,
                                                             _react2.default.createElement(
                                                                 _semanticUiReact.Label,
-                                                                { color: "grey" },
-                                                                "15618-1681"
+                                                                null,
+                                                                _react2.default.createElement(_semanticUiReact.Icon, { name: "user" }),
+                                                                "Morgane"
                                                             )
                                                         )
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        "12/09/1998"
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "file pdf outline" })
+                                                    )
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Row,
+                                                    null,
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        "Envoi code d'acces"
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "checkmark" })
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Label,
+                                                                null,
+                                                                _react2.default.createElement(_semanticUiReact.Icon, { name: "user" }),
+                                                                "Morgane"
+                                                            )
+                                                        )
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        "12/09/1998"
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "file pdf outline" })
+                                                    )
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.Table.Row,
+                                                    { error: true },
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        "Envoi code promo"
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "remove" })
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Label,
+                                                                null,
+                                                                _react2.default.createElement(_semanticUiReact.Icon, { name: "user" }),
+                                                                "Morgane"
+                                                            )
+                                                        )
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        _react2.default.createElement(
+                                                            _semanticUiReact.Button,
+                                                            { positive: true },
+                                                            "Action effectu\xE9"
+                                                        )
+                                                    ),
+                                                    _react2.default.createElement(
+                                                        _semanticUiReact.Table.Cell,
+                                                        null,
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "file pdf outline" })
                                                     )
                                                 )
-                                            ),
-                                            _react2.default.createElement(_semanticUiReact.Progress, { percent: 60, color: "olive", warning: true, progress: true })
+                                            )
                                         )
                                     )
                                 )
                             )
                         ),
                         _react2.default.createElement(
-                            "div",
-                            { className: "container-info-action" },
-                            _react2.default.createElement(
-                                _semanticUiReact.Header,
-                                { as: "h2" },
-                                _react2.default.createElement(_semanticUiReact.Icon, { name: "history" }),
-                                _react2.default.createElement(
-                                    _semanticUiReact.Header.Content,
-                                    null,
-                                    "Historique des actions"
-                                )
-                            ),
+                            _semanticUiReact.Grid.Column,
+                            null,
                             _react2.default.createElement(
                                 "div",
-                                { className: "container-info-action-table" },
+                                { className: "container-sidebar" },
                                 _react2.default.createElement(
-                                    _semanticUiReact.Table,
-                                    { definition: true },
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Header,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Table.Row,
-                                            null,
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                "Nom de l'action"
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                "Status"
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                "Responsable"
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                "Action"
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.HeaderCell,
-                                                null,
-                                                "Autre"
-                                            )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Body,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Table.Row,
-                                            null,
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                "Audit"
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(_semanticUiReact.Icon, { name: "checkmark" })
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        _semanticUiReact.Label,
-                                                        null,
-                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "user" }),
-                                                        "Morgane"
-                                                    )
-                                                )
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                "12/09/1998"
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "file pdf outline" })
-                                            )
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Table.Row,
-                                            null,
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                "Envoi code d'acces"
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(_semanticUiReact.Icon, { name: "checkmark" })
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        _semanticUiReact.Label,
-                                                        null,
-                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "user" }),
-                                                        "Morgane"
-                                                    )
-                                                )
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                "12/09/1998"
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "file pdf outline" })
-                                            )
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Table.Row,
-                                            { error: true },
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                "Envoi code promo"
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(_semanticUiReact.Icon, { name: "remove" })
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(
-                                                    "p",
-                                                    null,
-                                                    _react2.default.createElement(
-                                                        _semanticUiReact.Label,
-                                                        null,
-                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "user" }),
-                                                        "Morgane"
-                                                    )
-                                                )
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Button,
-                                                    { positive: true },
-                                                    "Action effectu\xE9"
-                                                )
-                                            ),
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Table.Cell,
-                                                null,
-                                                _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "file pdf outline" })
-                                            )
-                                        )
-                                    )
+                                    _semanticUiReact.Menu,
+                                    { pointing: true, vertical: true },
+                                    _react2.default.createElement(_Sidebar2.default, { content: "General", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Adresse", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Status", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "D\xE9penses", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Actions", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Hierarchie", context: currentLocation })
                                 )
                             )
-                        )
-                    ),
-                    _react2.default.createElement(
-                        "div",
-                        { className: "container-sidebar" },
-                        _react2.default.createElement(
-                            _semanticUiReact.Menu,
-                            { pointing: true, vertical: true },
-                            _react2.default.createElement(_Sidebar2.default, { content: "General", context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: "Adresse", context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: "Status", context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: "D\xE9penses", context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: "Actions", context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: "Hierarchie", context: currentLocation })
                         )
                     )
                 )
@@ -29888,7 +29947,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29901,61 +29960,161 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Dashboard = function (_React$Component) {
     _inherits(Dashboard, _React$Component);
 
-    _createClass(Dashboard, [{
-        key: 'getTheCount',
-        value: function getTheCount() {
-            var _this2 = this;
-
-            var url = 'http://localhost:8000/Agence/count';
-            $.getJSON(url, function (data) {
-
-                _this2.setState({
-                    count: data
-                });
-            });
-        }
-    }]);
-
     function Dashboard(props) {
         _classCallCheck(this, Dashboard);
 
-        var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
-
-        _this.state = {
-            count: ''
-        };
-        return _this;
+        return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
     }
 
     _createClass(Dashboard, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {
-            this.getTheCount.call(this);
-        }
-    }, {
-        key: 'render',
+        key: "render",
         value: function render() {
 
+            var now = moment().format('LLLL');
+
             return _react2.default.createElement(
-                'div',
-                { className: 'container-dashboard' },
-                _react2.default.createElement(_semanticUiReact.Image, { className: 'avatar-dashboard',
-                    src: 'http://react.semantic-ui.com/assets/images/wireframe/square-image.png', avatar: true }),
+                "div",
+                { className: "container-dashboard" },
                 _react2.default.createElement(
-                    'span',
-                    null,
-                    'Jib\xE9'
+                    "div",
+                    { className: "container-intro-dashboard" },
+                    _react2.default.createElement(
+                        _semanticUiReact.Grid,
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            { floated: "left", width: 5 },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                "Bonjour Jean-baptiste"
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            { floated: "right", width: 5 },
+                            _react2.default.createElement(
+                                "h3",
+                                null,
+                                now
+                            )
+                        )
+                    )
                 ),
                 _react2.default.createElement(_semanticUiReact.Divider, null),
                 _react2.default.createElement(
-                    'div',
-                    { className: 'dashboard-content' },
+                    _semanticUiReact.Container,
+                    { text: true },
                     _react2.default.createElement(
-                        'div',
-                        { className: 'dashboard-stat' },
-                        _react2.default.createElement(_semanticUiReact.Statistic, { value: this.state.count, label: 'Agences Roc-Eclerc' })
+                        _semanticUiReact.Button,
+                        { positive: true },
+                        "Ajouter un nouveau client"
                     ),
-                    _react2.default.createElement('div', { className: 'container-calendrier' })
+                    _react2.default.createElement(_semanticUiReact.Button, { content: "Exporter en .pdf", icon: "file pdf outline", labelPosition: "right" })
+                ),
+                _react2.default.createElement(
+                    "div",
+                    { className: "dashboard-content" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "container-dashboard-detail" },
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid,
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Grid.Row,
+                                { columns: 3 },
+                                _react2.default.createElement(
+                                    _semanticUiReact.Grid.Column,
+                                    null,
+                                    _react2.default.createElement(
+                                        "h2",
+                                        null,
+                                        "T\xE2ches a effectuer"
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.List,
+                                        { divided: true, relaxed: true },
+                                        _react2.default.createElement(
+                                            _semanticUiReact.List.Item,
+                                            null,
+                                            _react2.default.createElement(_semanticUiReact.List.Icon, { name: "tasks", size: "large", verticalAlign: "middle" }),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.List.Content,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.List.Header,
+                                                    { as: "a" },
+                                                    "Completer l'audit ( ROC-ECLERC )"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.List.Description,
+                                                    { as: "a" },
+                                                    "Dans 2 jours"
+                                                )
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.List.Item,
+                                            null,
+                                            _react2.default.createElement(_semanticUiReact.List.Icon, { name: "phone", size: "large", verticalAlign: "middle" }),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.List.Content,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.List.Header,
+                                                    { as: "a" },
+                                                    "Rappeler le fournisseur ( ELIS )"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.List.Description,
+                                                    { as: "a" },
+                                                    "Dans 2 jours"
+                                                )
+                                            )
+                                        ),
+                                        _react2.default.createElement(
+                                            _semanticUiReact.List.Item,
+                                            null,
+                                            _react2.default.createElement(_semanticUiReact.List.Icon, { name: "tasks", size: "large", verticalAlign: "middle" }),
+                                            _react2.default.createElement(
+                                                _semanticUiReact.List.Content,
+                                                null,
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.List.Header,
+                                                    { as: "a" },
+                                                    "Completer l'audit ( ROC-ECLERC )"
+                                                ),
+                                                _react2.default.createElement(
+                                                    _semanticUiReact.List.Description,
+                                                    { as: "a" },
+                                                    "Dans 2 jours"
+                                                )
+                                            )
+                                        )
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    _semanticUiReact.Grid.Column,
+                                    null,
+                                    _react2.default.createElement(
+                                        "h2",
+                                        null,
+                                        "Dernieres actions effectu\xE9"
+                                    )
+                                ),
+                                _react2.default.createElement(
+                                    _semanticUiReact.Grid.Column,
+                                    null,
+                                    _react2.default.createElement(
+                                        "h2",
+                                        null,
+                                        "Liste des groupes"
+                                    )
+                                )
+                            )
+                        )
+                    )
                 )
             );
         }
@@ -29983,7 +30142,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30087,9 +30246,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30102,20 +30261,93 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Add = function (_React$Component) {
     _inherits(Add, _React$Component);
 
-    function Add() {
+    function Add(props) {
         _classCallCheck(this, Add);
 
-        return _possibleConstructorReturn(this, (Add.__proto__ || Object.getPrototypeOf(Add)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Add.__proto__ || Object.getPrototypeOf(Add)).call(this, props));
+
+        _this.state = { open: false };
+        _this.show = function () {
+            return _this.setState({ open: true });
+        };
+        _this.close = function () {
+            return _this.setState({ open: false });
+        };
+
+        return _this;
     }
 
     _createClass(Add, [{
-        key: 'render',
+        key: "render",
         value: function render() {
+            var open = this.state.open;
+
+
             return _react2.default.createElement(
-                'div',
-                { className: 'update-icon cursor' },
-                'Ajouter ',
-                _react2.default.createElement(_semanticUiReact.Icon, { name: 'add' })
+                "div",
+                { className: "update-icon cursor" },
+                _react2.default.createElement(
+                    "div",
+                    { onClick: this.show },
+                    "Ajouter ",
+                    _react2.default.createElement(_semanticUiReact.Icon, { name: "add" })
+                ),
+                _react2.default.createElement(
+                    _semanticUiReact.Modal,
+                    { open: open, onClose: this.close, closeIcon: "close" },
+                    _react2.default.createElement(_semanticUiReact.Header, { icon: "add user", content: "Ajouter un nouveau client" }),
+                    _react2.default.createElement(
+                        _semanticUiReact.Modal.Content,
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Form,
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Form.Group,
+                                { widths: "equal" },
+                                _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: "Raison sociale",
+                                    placeholder: "Raison sociale de l'entreprise" }),
+                                _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: "Siret",
+                                    placeholder: "Numero de siret de l'entreprise" }),
+                                _react2.default.createElement(
+                                    _semanticUiReact.Label,
+                                    null,
+                                    _react2.default.createElement(_semanticUiReact.Icon, { name: "id card outline" }),
+                                    " RERD-RZERZ"
+                                )
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Form.Group,
+                                { widths: "equal" },
+                                _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: "Adresse",
+                                    placeholder: "Adresse de l'entreprise" }),
+                                _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: "Ville",
+                                    placeholder: "Ville de l'entreprise" }),
+                                _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: "Code postal",
+                                    placeholder: "Code postal de l'entreprise" })
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Form.Group,
+                                { widths: "equal" },
+                                _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: "T\xE9l\xE9phone",
+                                    placeholder: "Numero de t\xE9l\xE9phone de l'entreprise" }),
+                                _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Input, label: "Mail",
+                                    placeholder: "Adresse mail de l'entreprise" })
+                            ),
+                            _react2.default.createElement(_semanticUiReact.Form.Field, { control: _semanticUiReact.Checkbox, label: "Cet utilisateur est-il Adh\xE9rent ?" })
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _semanticUiReact.Modal.Actions,
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Button,
+                            { color: "green" },
+                            _react2.default.createElement(_semanticUiReact.Icon, { name: "save" }),
+                            " Enregistrer"
+                        )
+                    )
+                )
             );
         }
     }]);
@@ -30142,7 +30374,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30339,7 +30571,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30595,9 +30827,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30650,7 +30882,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30783,7 +31015,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31026,9 +31258,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31085,7 +31317,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31231,7 +31463,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
+
+var _semanticUiReact = __webpack_require__(16);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31280,6 +31514,7 @@ var NavBar = function (_React$Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'menu-home hover' },
+                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', name: 'home' }),
                             _react2.default.createElement(
                                 _reactRouter.Link,
                                 { to: '/', activeClassName: 'active' },
@@ -31289,6 +31524,7 @@ var NavBar = function (_React$Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'menu-client hover' },
+                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', name: 'group' }),
                             _react2.default.createElement(
                                 _reactRouter.Link,
                                 { to: '/client', activeClassName: 'active' },
@@ -31298,23 +31534,11 @@ var NavBar = function (_React$Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'menu-supplier hover' },
+                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', name: 'drivers license outline' }),
                             _react2.default.createElement(
                                 _reactRouter.Link,
                                 { to: '/fournisseur', activeClassName: 'active' },
                                 'Fournisseur'
-                            )
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'menu-calendrier hover' },
-                            _react2.default.createElement(
-                                'a',
-                                { href: '' },
-                                _react2.default.createElement(
-                                    'p',
-                                    null,
-                                    'TODO'
-                                )
                             )
                         )
                     ),
@@ -31362,9 +31586,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 var _ModalAction = __webpack_require__(463);
 
@@ -31500,9 +31724,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(18);
+var _semanticUiReact = __webpack_require__(16);
 
-var _reactRouter = __webpack_require__(21);
+var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39889,7 +40113,7 @@ module.exports = {
 /* 678 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('compact', __webpack_require__(304), __webpack_require__(36));
 
 func.placeholder = __webpack_require__(15);
@@ -39900,7 +40124,7 @@ module.exports = func;
 /* 679 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('curry', __webpack_require__(305));
 
 func.placeholder = __webpack_require__(15);
@@ -39911,7 +40135,7 @@ module.exports = func;
 /* 680 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('eq', __webpack_require__(91));
 
 func.placeholder = __webpack_require__(15);
@@ -39922,7 +40146,7 @@ module.exports = func;
 /* 681 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('get', __webpack_require__(70));
 
 func.placeholder = __webpack_require__(15);
@@ -39933,7 +40157,7 @@ module.exports = func;
 /* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('has', __webpack_require__(71));
 
 func.placeholder = __webpack_require__(15);
@@ -39944,7 +40168,7 @@ module.exports = func;
 /* 683 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('isFunction', __webpack_require__(50), __webpack_require__(36));
 
 func.placeholder = __webpack_require__(15);
@@ -39955,7 +40179,7 @@ module.exports = func;
 /* 684 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('isObject', __webpack_require__(25), __webpack_require__(36));
 
 func.placeholder = __webpack_require__(15);
@@ -39966,7 +40190,7 @@ module.exports = func;
 /* 685 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('isPlainObject', __webpack_require__(128), __webpack_require__(36));
 
 func.placeholder = __webpack_require__(15);
@@ -39977,7 +40201,7 @@ module.exports = func;
 /* 686 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('keys', __webpack_require__(27), __webpack_require__(36));
 
 func.placeholder = __webpack_require__(15);
@@ -39988,7 +40212,7 @@ module.exports = func;
 /* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('map', __webpack_require__(19));
 
 func.placeholder = __webpack_require__(15);
@@ -39999,7 +40223,7 @@ module.exports = func;
 /* 688 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('min', __webpack_require__(700), __webpack_require__(36));
 
 func.placeholder = __webpack_require__(15);
@@ -40010,7 +40234,7 @@ module.exports = func;
 /* 689 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('pick', __webpack_require__(132));
 
 func.placeholder = __webpack_require__(15);
@@ -40021,7 +40245,7 @@ module.exports = func;
 /* 690 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('sortBy', __webpack_require__(705));
 
 func.placeholder = __webpack_require__(15);
@@ -40032,7 +40256,7 @@ module.exports = func;
 /* 691 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('startsWith', __webpack_require__(321));
 
 func.placeholder = __webpack_require__(15);
@@ -40043,7 +40267,7 @@ module.exports = func;
 /* 692 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('sum', __webpack_require__(708), __webpack_require__(36));
 
 func.placeholder = __webpack_require__(15);
@@ -40054,7 +40278,7 @@ module.exports = func;
 /* 693 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('take', __webpack_require__(709));
 
 func.placeholder = __webpack_require__(15);
@@ -40065,7 +40289,7 @@ module.exports = func;
 /* 694 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var convert = __webpack_require__(16),
+var convert = __webpack_require__(17),
     func = convert('values', __webpack_require__(192), __webpack_require__(36));
 
 func.placeholder = __webpack_require__(15);
@@ -41566,7 +41790,7 @@ module.exports = ARIADOMPropertyConfig;
 
 
 
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 
 var focusNode = __webpack_require__(256);
 
@@ -42202,7 +42426,7 @@ module.exports = CSSPropertyOperations;
 var EventPluginHub = __webpack_require__(94);
 var EventPropagators = __webpack_require__(95);
 var ExecutionEnvironment = __webpack_require__(22);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactUpdates = __webpack_require__(34);
 var SyntheticEvent = __webpack_require__(38);
 
@@ -42610,7 +42834,7 @@ module.exports = DefaultEventPluginOrder;
 
 
 var EventPropagators = __webpack_require__(95);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var SyntheticMouseEvent = __webpack_require__(135);
 
 var eventTypes = {
@@ -44135,7 +44359,7 @@ module.exports = ReactCompositeComponent;
 
 
 
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactDefaultInjection = __webpack_require__(744);
 var ReactMount = __webpack_require__(335);
 var ReactReconciler = __webpack_require__(74);
@@ -44264,7 +44488,7 @@ var EventPluginHub = __webpack_require__(94);
 var EventPluginRegistry = __webpack_require__(196);
 var ReactBrowserEventEmitter = __webpack_require__(134);
 var ReactDOMComponentFlags = __webpack_require__(329);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactDOMInput = __webpack_require__(737);
 var ReactDOMOption = __webpack_require__(738);
 var ReactDOMSelect = __webpack_require__(330);
@@ -45296,7 +45520,7 @@ module.exports = ReactDOMContainerInfo;
 var _assign = __webpack_require__(14);
 
 var DOMLazyTree = __webpack_require__(72);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 
 var ReactDOMEmptyComponent = function (instantiate) {
   // ReactCompositeComponent uses this:
@@ -45383,7 +45607,7 @@ module.exports = ReactDOMFeatureFlags;
 
 
 var DOMChildrenOperations = __webpack_require__(194);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 
 /**
  * Operations used to process updates to DOM nodes.
@@ -45426,7 +45650,7 @@ var _prodInvariant = __webpack_require__(11),
 
 var DOMPropertyOperations = __webpack_require__(328);
 var LinkedValueUtils = __webpack_require__(199);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactUpdates = __webpack_require__(34);
 
 var invariant = __webpack_require__(5);
@@ -45707,7 +45931,7 @@ module.exports = ReactDOMInput;
 var _assign = __webpack_require__(14);
 
 var React = __webpack_require__(77);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactDOMSelect = __webpack_require__(330);
 
 var warning = __webpack_require__(6);
@@ -46054,7 +46278,7 @@ var _prodInvariant = __webpack_require__(11),
 
 var DOMChildrenOperations = __webpack_require__(194);
 var DOMLazyTree = __webpack_require__(72);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 
 var escapeTextContentForBrowser = __webpack_require__(137);
 var invariant = __webpack_require__(5);
@@ -46222,7 +46446,7 @@ var _prodInvariant = __webpack_require__(11),
     _assign = __webpack_require__(14);
 
 var LinkedValueUtils = __webpack_require__(199);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactUpdates = __webpack_require__(34);
 
 var invariant = __webpack_require__(5);
@@ -46605,7 +46829,7 @@ var EnterLeaveEventPlugin = __webpack_require__(725);
 var HTMLDOMPropertyConfig = __webpack_require__(727);
 var ReactComponentBrowserEnvironment = __webpack_require__(729);
 var ReactDOMComponent = __webpack_require__(732);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactDOMEmptyComponent = __webpack_require__(734);
 var ReactDOMTreeTraversal = __webpack_require__(742);
 var ReactDOMTextComponent = __webpack_require__(740);
@@ -46756,7 +46980,7 @@ var _assign = __webpack_require__(14);
 var EventListener = __webpack_require__(255);
 var ExecutionEnvironment = __webpack_require__(22);
 var PooledClass = __webpack_require__(62);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactUpdates = __webpack_require__(34);
 
 var getEventTarget = __webpack_require__(206);
@@ -48425,7 +48649,7 @@ module.exports = SVGDOMPropertyConfig;
 
 var EventPropagators = __webpack_require__(95);
 var ExecutionEnvironment = __webpack_require__(22);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactInputSelection = __webpack_require__(334);
 var SyntheticEvent = __webpack_require__(38);
 
@@ -48624,7 +48848,7 @@ var _prodInvariant = __webpack_require__(11);
 
 var EventListener = __webpack_require__(255);
 var EventPropagators = __webpack_require__(95);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var SyntheticAnimationEvent = __webpack_require__(761);
 var SyntheticClipboardEvent = __webpack_require__(762);
 var SyntheticEvent = __webpack_require__(38);
@@ -49482,7 +49706,7 @@ module.exports = dangerousStyleValue;
 var _prodInvariant = __webpack_require__(11);
 
 var ReactCurrentOwner = __webpack_require__(39);
-var ReactDOMComponentTree = __webpack_require__(17);
+var ReactDOMComponentTree = __webpack_require__(18);
 var ReactInstanceMap = __webpack_require__(96);
 
 var getHostComponentFromComposite = __webpack_require__(340);
@@ -54987,7 +55211,7 @@ Menu.handledProps = ['activeIndex', 'as', 'attached', 'borderless', 'children', 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__elements_Icon__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__MessageContent__ = __webpack_require__(376);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__MessageHeader__ = __webpack_require__(377);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__MessageList__ = __webpack_require__(378);
@@ -55658,7 +55882,7 @@ Flag.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__lib__["g" /* cr
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__elements_Icon__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__elements_Image__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__HeaderSubheader__ = __webpack_require__(389);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__HeaderContent__ = __webpack_require__(388);
@@ -55843,7 +56067,7 @@ Header.Subheader = __WEBPACK_IMPORTED_MODULE_8__HeaderSubheader__["a" /* default
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_classnames__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__lib__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__elements_Button__ = __webpack_require__(219);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__elements_Icon__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__elements_Label__ = __webpack_require__(142);
 /* unused harmony export htmlInputPropNames */
 
@@ -59092,7 +59316,7 @@ Dimmer.create = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__lib__["g" /* 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__elements_Icon__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__elements_Label__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_31__DropdownDivider__ = __webpack_require__(408);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_32__DropdownItem__ = __webpack_require__(410);
@@ -60347,7 +60571,7 @@ Dropdown.handledProps = ['additionLabel', 'additionPosition', 'allowAdditions', 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__elements_Icon__ = __webpack_require__(21);
 
 
 
@@ -60570,7 +60794,7 @@ Embed.handledProps = ['active', 'as', 'aspectRatio', 'autoplay', 'brandedUI', 'c
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__lib__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__elements_Icon__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__elements_Icon__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__addons_Portal__ = __webpack_require__(139);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ModalHeader__ = __webpack_require__(415);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ModalContent__ = __webpack_require__(413);
