@@ -993,4 +993,62 @@ class Clients
     {
         return $this->majUser;
     }
+    /**
+     * @var float
+     */
+    private $clMasqHa = '0';
+
+    /**
+     * @var float
+     */
+    private $clMasqVt = '0';
+
+
+    /**
+     * Set clMasqHa
+     *
+     * @param float $clMasqHa
+     *
+     * @return Clients
+     */
+    public function setClMasqHa($clMasqHa)
+    {
+        $this->clMasqHa = $clMasqHa;
+
+        return $this;
+    }
+
+    /**
+     * Get clMasqHa
+     *
+     * @return float
+     */
+    public function getClMasqHa()
+    {
+        return $this->clMasqHa;
+    }
+
+    /**
+     * Set clMasqVt
+     *
+     * @param float $clMasqVt
+     *
+     * @return Clients
+     */
+    public function setClMasqVt($clMasqVt)
+    {
+        $this->clMasqVt = $clMasqVt;
+
+        return $this;
+    }
+
+    /**
+     * Get clMasqVt
+     *
+     * @return float
+     */
+    public function getClMasqVt()
+    {
+        return $this->clMasqVt;
+    }
 }

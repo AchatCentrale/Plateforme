@@ -1,6 +1,5 @@
 AchatCentrale\CrmBundle\Entity\Clients:
     type: entity
-    repositoryClass: AchatCentrale\CrmBundle\Repository\ClientsRepository
     table: CLIENTS
     id:
         clId:
@@ -190,6 +189,22 @@ AchatCentrale\CrmBundle\Entity\Clients:
             options:
                 default: '0'
             column: CL_CA
+        clMasqHa:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            options:
+                default: '0'
+            column: CL_MASQ_HA
+        clMasqVt:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            options:
+                default: '0'
+            column: CL_MASQ_VT
         clTempo:
             type: string
             nullable: true
