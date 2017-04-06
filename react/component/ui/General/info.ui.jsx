@@ -30,22 +30,28 @@ Info extends React.Component {
         const siret = (siret) => {
 
 
+            console.log(siret);
             let result = [];
             for (let i = 0; i <= siret.length; i++) {
 
                 if (i === 3) {
                     result.push(siret.substring(0, 3), " ")
+
                 } else if (i === 6) {
                     result.push(siret.substring(3, 6), " ")
 
-                } else if (i === 6) {
+                } else if (i === 9) {
                     result.push(siret.substring(6, 9), " ")
 
                 } else if (i > 9 && i < 14) {
                     result.push(siret.substring(9), " ")
+                    console.log(result)
                     return result
+
                 }
             }
+
+
         };
 
 
@@ -88,7 +94,7 @@ Info extends React.Component {
             <div className="container-info">
                 <div className="container-info-gauche">
                     <div className="col-gauche-info">
-                        <p>Réference</p>
+                        <p>Référence</p>
                         <p>Raison social</p>
                         <p>Siret</p>
                         <p>Téléphone</p>

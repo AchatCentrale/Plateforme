@@ -219,24 +219,15 @@ body {
 .menu-nav {
     position: relative;
     margin-top: 42%;
-    padding-bottom: 65%;
+    padding-bottom: 56px;
     text-align: left;
     margin-left: 50px;
-
 }
 
 .menu-home p {
     padding-right: 13px;
 }
 
-.menu-client p {
-}
-
-.menu-calendrier p {
-}
-
-.menu-supplier p {
-}
 
 .menu-nav a {
     text-decoration: none;
@@ -836,6 +827,6 @@ form.ink-form.form-login {
 }
 
 
-i.teal.icon {
-    color: white!important;
+i.teal.large.icon {
+    color: white !important;
 }

@@ -63,6 +63,8 @@ export default class ClientListe extends React.Component {
     render() {
 
 
+
+
         const dataDelaTable = this.state.clients.map((client, index) => {
 
 
@@ -72,7 +74,7 @@ export default class ClientListe extends React.Component {
                     <Table.Cell>{ client.clId}</Table.Cell>
                     <Table.Cell>{ client.clRaisonsoc}</Table.Cell>
                     <Table.Cell>{ client.clMail}</Table.Cell>
-                    <Table.Cell>{ client.insDate}</Table.Cell>
+                    <Table.Cell>{ moment(client.insDate).fromNow()}</Table.Cell>
                 </Table.Row>)
 
 
