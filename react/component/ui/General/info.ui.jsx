@@ -30,7 +30,6 @@ Info extends React.Component {
         const siret = (siret) => {
 
 
-            console.log(siret);
             let result = [];
             for (let i = 0; i <= siret.length; i++) {
 
@@ -45,7 +44,6 @@ Info extends React.Component {
 
                 } else if (i > 9 && i < 14) {
                     result.push(siret.substring(9), " ")
-                    console.log(result)
                     return result
 
                 }
@@ -57,13 +55,15 @@ Info extends React.Component {
 
         const tel = (tel) => {
 
+
+            tel.replace(/\s/g,'');
+
             let result = [];
             let len = tel.length;
 
 
             for (let i = 10; i > 0; i -= 2) {
                 result.push(tel.substring(i - 2, i));
-
             }
 
             result.reverse();

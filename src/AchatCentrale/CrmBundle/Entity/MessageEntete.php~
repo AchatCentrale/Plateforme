@@ -652,4 +652,33 @@ class MessageEntete
     {
         return $this->majUser;
     }
+    /**
+     * @var integer
+     */
+    private $meCmde = '0';
+
+
+    /**
+     * Set meCmde
+     *
+     * @param integer $meCmde
+     *
+     * @return MessageEntete
+     */
+    public function setMeCmde($meCmde)
+    {
+        $this->meCmde = $meCmde;
+
+        return $this;
+    }
+
+    /**
+     * Get meCmde
+     *
+     * @return integer
+     */
+    public function getMeCmde()
+    {
+        return $this->meCmde;
+    }
 }

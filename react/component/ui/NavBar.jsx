@@ -42,7 +42,7 @@ export default class NavBar extends React.Component {
                             <Link to="/client" activeClassName="active">Clients</Link>
                         </div>
                         <div className="menu-supplier hover">
-                            <Icon size="large" color="teal" name="drivers license outline" />
+                            <Icon size="large" color="teal" name="address book" />
                             <Link to="/fournisseur" activeClassName="active">Fournisseur</Link>
                         </div>
 

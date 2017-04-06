@@ -200,19 +200,17 @@ footer {
     width: 100%;
 }
 
-.nav-bar {
-    width: 15%;
-    background-color: #1A2E46;
-    min-height: 100vh;
-    text-align: center;
-}
-
 body {
     background-color: #F4F4F4 !important;
 
 }
 
 .nav-bar {
+    width: 15%;
+    background-color: #1A2E46;
+
+    text-align: center;
+    height: 135vh;
     float: left;
 }
 
@@ -780,7 +778,7 @@ form.ink-form.form-login {
 
 .container-general {
     background: white;
-    height: 80vh;
+
     width: 100%;
     margin: 18px auto;
     padding-left: 6%;

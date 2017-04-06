@@ -28335,9 +28335,9 @@ var _Adresse = __webpack_require__(449);
 
 var _Adresse2 = _interopRequireDefault(_Adresse);
 
-var _Hierarchie = __webpack_require__(452);
+var _Historique = __webpack_require__(887);
 
-var _Hierarchie2 = _interopRequireDefault(_Hierarchie);
+var _Historique2 = _interopRequireDefault(_Historique);
 
 var _Actions = __webpack_require__(448);
 
@@ -28451,7 +28451,7 @@ var App = function (_React$Component) {
         _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/status', component: _Status2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/adresse', component: _Adresse2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/Actions', component: _Actions2.default }),
-        _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/hierarchie', component: _Hierarchie2.default }),
+        _react2.default.createElement(_reactRouter.Route, { path: '/client/:id/Historique', component: _Historique2.default }),
         _react2.default.createElement(_reactRouter.Route, { path: '/profile', component: _Profile2.default })
     )
 ), document.getElementById('app'));
@@ -28726,8 +28726,6 @@ var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
 var _semanticUiReact = __webpack_require__(15);
 
-var _reactRouter = __webpack_require__(20);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28790,8 +28788,9 @@ var Actions = function (_React$Component) {
                                         null,
                                         _react2.default.createElement(_semanticUiReact.Menu.Item, { className: "cursor", name: "En cours", onClick: this.handleItemClick }),
                                         _react2.default.createElement(_semanticUiReact.Menu.Item, { className: "cursor", name: "Termin\xE9", onClick: this.handleItemClick }),
-                                        _react2.default.createElement(_semanticUiReact.Menu.Item, { className: "cursor", name: "D\xE9l\xE9gu\xE9es", onClick: this.handleItemClick })
+                                        _react2.default.createElement(_semanticUiReact.Menu.Item, { className: "cursor", name: "D\xE9l\xE9gu\xE9s", onClick: this.handleItemClick })
                                     ),
+                                    _react2.default.createElement("br", null),
                                     _react2.default.createElement(
                                         _semanticUiReact.Table,
                                         { celled: true },
@@ -28804,7 +28803,7 @@ var Actions = function (_React$Component) {
                                                 _react2.default.createElement(
                                                     _semanticUiReact.Table.HeaderCell,
                                                     null,
-                                                    "Date"
+                                                    "Date d'\xE9ch\xE9ance"
                                                 ),
                                                 _react2.default.createElement(
                                                     _semanticUiReact.Table.HeaderCell,
@@ -28829,7 +28828,7 @@ var Actions = function (_React$Component) {
                                                 _react2.default.createElement(
                                                     _semanticUiReact.Table.HeaderCell,
                                                     null,
-                                                    "Action"
+                                                    "Action achev\xE9 ?"
                                                 )
                                             )
                                         ),
@@ -28872,7 +28871,7 @@ var Actions = function (_React$Component) {
                                                 _react2.default.createElement(
                                                     _semanticUiReact.Table.Cell,
                                                     null,
-                                                    "None"
+                                                    _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "checkmark", circular: true })
                                                 )
                                             ),
                                             _react2.default.createElement(
@@ -28911,7 +28910,7 @@ var Actions = function (_React$Component) {
                                                 _react2.default.createElement(
                                                     _semanticUiReact.Table.Cell,
                                                     null,
-                                                    "None"
+                                                    _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "checkmark", circular: true })
                                                 )
                                             ),
                                             _react2.default.createElement(
@@ -28950,7 +28949,7 @@ var Actions = function (_React$Component) {
                                                 _react2.default.createElement(
                                                     _semanticUiReact.Table.Cell,
                                                     null,
-                                                    "None"
+                                                    _react2.default.createElement(_semanticUiReact.Icon, { className: "cursor", name: "checkmark", circular: true })
                                                 )
                                             )
                                         )
@@ -28972,7 +28971,7 @@ var Actions = function (_React$Component) {
                                     _react2.default.createElement(_Sidebar2.default, { content: "Status", context: currentLocation }),
                                     _react2.default.createElement(_Sidebar2.default, { content: "D\xE9penses", context: currentLocation }),
                                     _react2.default.createElement(_Sidebar2.default, { content: "Actions", context: currentLocation }),
-                                    _react2.default.createElement(_Sidebar2.default, { content: "Hierarchie", context: currentLocation })
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Historique", context: currentLocation })
                                 )
                             )
                         )
@@ -29131,7 +29130,9 @@ var Adresse = function (_React$Component) {
                                 _react2.default.createElement(
                                     'div',
                                     { className: 'container-info-client' },
-                                    _react2.default.createElement(_AgenceAdresse2.default, { adresseF: this.state.AdresseFacturation, adresseL: this.state.AdresseLivraison, client: this.state.clients, context: currentLocation })
+                                    _react2.default.createElement(_AgenceAdresse2.default, { adresseF: this.state.AdresseFacturation,
+                                        adresseL: this.state.AdresseLivraison, client: this.state.clients,
+                                        context: currentLocation })
                                 )
                             ),
                             _react2.default.createElement(
@@ -29148,7 +29149,7 @@ var Adresse = function (_React$Component) {
                                         _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
                                         _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
                                         _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
-                                        _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Historique', context: currentLocation })
                                     )
                                 )
                             )
@@ -29194,8 +29195,6 @@ var _DepenseContainer = __webpack_require__(458);
 var _DepenseContainer2 = _interopRequireDefault(_DepenseContainer);
 
 var _semanticUiReact = __webpack_require__(15);
-
-var _reactRouter = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -29256,7 +29255,7 @@ var Depenses = function (_React$Component) {
                                     _react2.default.createElement(_Sidebar2.default, { content: "Status", context: currentLocation }),
                                     _react2.default.createElement(_Sidebar2.default, { content: "D\xE9penses", context: currentLocation }),
                                     _react2.default.createElement(_Sidebar2.default, { content: "Actions", context: currentLocation }),
-                                    _react2.default.createElement(_Sidebar2.default, { content: "Hierarchie", context: currentLocation })
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Historique", context: currentLocation })
                                 )
                             )
                         )
@@ -29429,7 +29428,7 @@ var General = function (_React$Component) {
                                         _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
                                         _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9pense', context: currentLocation }),
                                         _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
-                                        _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
+                                        _react2.default.createElement(_Sidebar2.default, { content: 'Historique', context: currentLocation })
                                     )
                                 )
                             )
@@ -29446,108 +29445,7 @@ var General = function (_React$Component) {
 exports.default = General;
 
 /***/ }),
-/* 452 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Sidebar = __webpack_require__(55);
-
-var _Sidebar2 = _interopRequireDefault(_Sidebar);
-
-var _ActionBar = __webpack_require__(54);
-
-var _ActionBar2 = _interopRequireDefault(_ActionBar);
-
-var _semanticUiReact = __webpack_require__(15);
-
-var _reactRouter = __webpack_require__(20);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Hierarchie = function (_React$Component) {
-    _inherits(Hierarchie, _React$Component);
-
-    function Hierarchie(props) {
-        _classCallCheck(this, Hierarchie);
-
-        var _this = _possibleConstructorReturn(this, (Hierarchie.__proto__ || Object.getPrototypeOf(Hierarchie)).call(this, props));
-
-        _this.state = {
-            clients: [],
-            clientsUser: []
-
-        };
-        return _this;
-    }
-
-    _createClass(Hierarchie, [{
-        key: 'componentWillMount',
-        value: function componentWillMount() {}
-    }, {
-        key: 'render',
-        value: function render() {
-
-            var currentLocation = this.props;
-
-            return _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(_ActionBar2.default, { context: this.props }),
-                _react2.default.createElement(
-                    'div',
-                    { className: 'container-general' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'container-info-client' },
-                        _react2.default.createElement(
-                            'h1',
-                            null,
-                            'Hierarchie'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'container-sidebar' },
-                        _react2.default.createElement(
-                            _semanticUiReact.Menu,
-                            { pointing: true, vertical: true },
-                            _react2.default.createElement(_Sidebar2.default, { content: 'General', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Adresse', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Status', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'D\xE9penses', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Actions', context: currentLocation }),
-                            _react2.default.createElement(_Sidebar2.default, { content: 'Hierarchie', context: currentLocation })
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Hierarchie;
-}(_react2.default.Component);
-
-exports.default = Hierarchie;
-
-/***/ }),
+/* 452 */,
 /* 453 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29639,7 +29537,7 @@ var Status = function (_React$Component) {
                                                         _react2.default.createElement(
                                                             "p",
                                                             null,
-                                                            "Etat"
+                                                            "Status"
                                                         ),
                                                         _react2.default.createElement(
                                                             "p",
@@ -29650,6 +29548,11 @@ var Status = function (_React$Component) {
                                                             "p",
                                                             null,
                                                             "Date d'adh\xE9sion"
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            "Date d'echeance"
                                                         ),
                                                         _react2.default.createElement(
                                                             "p",
@@ -29665,8 +29568,8 @@ var Status = function (_React$Component) {
                                                             null,
                                                             _react2.default.createElement(
                                                                 _semanticUiReact.Label,
-                                                                { color: "green" },
-                                                                "actif"
+                                                                { color: "orange" },
+                                                                "Prospect"
                                                             )
                                                         ),
                                                         _react2.default.createElement(
@@ -29684,7 +29587,7 @@ var Status = function (_React$Component) {
                                                             _react2.default.createElement(
                                                                 _semanticUiReact.Label,
                                                                 null,
-                                                                "02/01/2016"
+                                                                "02/01/2017"
                                                             )
                                                         ),
                                                         _react2.default.createElement(
@@ -29694,6 +29597,15 @@ var Status = function (_React$Component) {
                                                                 _semanticUiReact.Label,
                                                                 null,
                                                                 "2 mois"
+                                                            )
+                                                        ),
+                                                        _react2.default.createElement(
+                                                            "p",
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Label,
+                                                                null,
+                                                                "02/01/2017"
                                                             )
                                                         )
                                                     )
@@ -29826,7 +29738,21 @@ var Status = function (_React$Component) {
                                                     _react2.default.createElement(
                                                         _semanticUiReact.Table.Cell,
                                                         null,
-                                                        "12/09/1998"
+                                                        _react2.default.createElement(
+                                                            _semanticUiReact.Button.Group,
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Button,
+                                                                { positive: true },
+                                                                "Action effectu\xE9"
+                                                            ),
+                                                            _react2.default.createElement(_semanticUiReact.Button.Or, { text: "ou" }),
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Button,
+                                                                null,
+                                                                "Mettre en attente"
+                                                            )
+                                                        )
                                                     ),
                                                     _react2.default.createElement(
                                                         _semanticUiReact.Table.Cell,
@@ -29845,7 +29771,7 @@ var Status = function (_React$Component) {
                                                     _react2.default.createElement(
                                                         _semanticUiReact.Table.Cell,
                                                         null,
-                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "checkmark" })
+                                                        _react2.default.createElement(_semanticUiReact.Icon, { name: "wait" })
                                                     ),
                                                     _react2.default.createElement(
                                                         _semanticUiReact.Table.Cell,
@@ -29864,7 +29790,21 @@ var Status = function (_React$Component) {
                                                     _react2.default.createElement(
                                                         _semanticUiReact.Table.Cell,
                                                         null,
-                                                        "12/09/1998"
+                                                        _react2.default.createElement(
+                                                            _semanticUiReact.Button.Group,
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Button,
+                                                                { positive: true },
+                                                                "Action effectu\xE9"
+                                                            ),
+                                                            _react2.default.createElement(_semanticUiReact.Button.Or, { text: "ou" }),
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Button,
+                                                                null,
+                                                                "Mettre en attente"
+                                                            )
+                                                        )
                                                     ),
                                                     _react2.default.createElement(
                                                         _semanticUiReact.Table.Cell,
@@ -29903,9 +29843,19 @@ var Status = function (_React$Component) {
                                                         _semanticUiReact.Table.Cell,
                                                         null,
                                                         _react2.default.createElement(
-                                                            _semanticUiReact.Button,
-                                                            { positive: true },
-                                                            "Action effectu\xE9"
+                                                            _semanticUiReact.Button.Group,
+                                                            null,
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Button,
+                                                                { positive: true },
+                                                                "Action effectu\xE9"
+                                                            ),
+                                                            _react2.default.createElement(_semanticUiReact.Button.Or, { text: "ou" }),
+                                                            _react2.default.createElement(
+                                                                _semanticUiReact.Button,
+                                                                null,
+                                                                "Mettre en attente"
+                                                            )
                                                         )
                                                     ),
                                                     _react2.default.createElement(
@@ -29934,7 +29884,7 @@ var Status = function (_React$Component) {
                                     _react2.default.createElement(_Sidebar2.default, { content: "Status", context: currentLocation }),
                                     _react2.default.createElement(_Sidebar2.default, { content: "D\xE9penses", context: currentLocation }),
                                     _react2.default.createElement(_Sidebar2.default, { content: "Actions", context: currentLocation }),
-                                    _react2.default.createElement(_Sidebar2.default, { content: "Hierarchie", context: currentLocation })
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Historique", context: currentLocation })
                                 )
                             )
                         )
@@ -30432,131 +30382,120 @@ var AgenceAdresse = function (_React$Component) {
                     'div',
                     { className: 'adresse-agence' },
                     _react2.default.createElement(
-                        _semanticUiReact.Grid,
-                        { columns: 3, divided: true },
+                        _semanticUiReact.Segment,
+                        { textAlign: 'left' },
                         _react2.default.createElement(
-                            _semanticUiReact.Grid.Row,
+                            _semanticUiReact.Header,
+                            { as: 'h2' },
+                            'Adresse de l\'agence'
+                        ),
+                        _react2.default.createElement(_semanticUiReact.Icon, { className: 'cursor', circular: true, name: 'edit' }),
+                        ' Modifier',
+                        _react2.default.createElement('br', null),
+                        _react2.default.createElement(
+                            _semanticUiReact.Card.Content,
                             null,
                             _react2.default.createElement(
-                                _semanticUiReact.Grid.Column,
+                                _semanticUiReact.Card.Header,
+                                null,
+                                'Adresse de l\'agence'
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Card.Meta,
+                                null,
+                                "        "
+                            ),
+                            _react2.default.createElement(
+                                _semanticUiReact.Card.Description,
                                 null,
                                 _react2.default.createElement(
-                                    _semanticUiReact.Card,
+                                    'p',
+                                    null,
+                                    this.props.client.clAdresse1
+                                ),
+                                _react2.default.createElement('br', null),
+                                _react2.default.createElement(
+                                    'p',
+                                    null,
+                                    this.props.client.clCp + "  " + this.props.client.clVille
+                                )
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _semanticUiReact.Grid,
+                        { columns: 2 },
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                _semanticUiReact.Card,
+                                null,
+                                _react2.default.createElement(
+                                    _semanticUiReact.Card.Content,
                                     null,
                                     _react2.default.createElement(
-                                        _semanticUiReact.Card.Content,
+                                        _semanticUiReact.Card.Header,
                                         null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Header,
-                                            null,
-                                            'Adresse de l\'agence'
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Meta,
-                                            null,
-                                            "        "
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Description,
-                                            null,
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.client.clAdresse1
-                                            ),
-                                            _react2.default.createElement('br', null),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.client.clCp + "  " + this.props.client.clVille
-                                            )
-                                        )
+                                        'Adresse de livraison',
+                                        _react2.default.createElement(_semanticUiReact.Icon, { className: 'cursor', circular: true, name: 'edit' })
                                     ),
                                     _react2.default.createElement(
-                                        _semanticUiReact.Card.Content,
-                                        { extra: true },
+                                        _semanticUiReact.Card.Meta,
+                                        null,
+                                        this.props.adresseL.caPrincipale === 1 ? "Adresse principale" : _react2.default.createElement('br', null)
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Description,
+                                        null,
                                         _react2.default.createElement(
-                                            'div',
-                                            { className: 'ui center' },
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Button,
-                                                { basic: true, color: 'green' },
-                                                'Rendre principale'
-                                            )
+                                            'p',
+                                            null,
+                                            this.props.adresseL.caAdresse1
+                                        ),
+                                        _react2.default.createElement('br', null),
+                                        _react2.default.createElement(
+                                            'p',
+                                            null,
+                                            this.props.adresseL.caCp + "  " + this.props.adresseL.caVille
                                         )
                                     )
                                 )
-                            ),
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
                             _react2.default.createElement(
-                                _semanticUiReact.Grid.Column,
+                                _semanticUiReact.Card,
                                 null,
                                 _react2.default.createElement(
-                                    _semanticUiReact.Card,
+                                    _semanticUiReact.Card.Content,
                                     null,
                                     _react2.default.createElement(
-                                        _semanticUiReact.Card.Content,
+                                        _semanticUiReact.Card.Header,
                                         null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Header,
-                                            null,
-                                            'Adresse de livraison'
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Meta,
-                                            null,
-                                            this.props.adresseL.caPrincipale === 1 ? "Adresse principale" : " "
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Description,
-                                            null,
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.adresseL.caAdresse1
-                                            ),
-                                            _react2.default.createElement('br', null),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.adresseL.caCp + "  " + this.props.adresseL.caVille
-                                            )
-                                        )
-                                    )
-                                )
-                            ),
-                            _react2.default.createElement(
-                                _semanticUiReact.Grid.Column,
-                                null,
-                                _react2.default.createElement(
-                                    _semanticUiReact.Card,
-                                    null,
+                                        'Adresse de Facturation',
+                                        _react2.default.createElement(_semanticUiReact.Icon, { className: 'cursor', circular: true, name: 'edit' })
+                                    ),
                                     _react2.default.createElement(
-                                        _semanticUiReact.Card.Content,
+                                        _semanticUiReact.Card.Meta,
+                                        null,
+                                        this.props.adresseF.caPrincipale === 1 ? "Adresse principale" : _react2.default.createElement('br', null)
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Card.Description,
                                         null,
                                         _react2.default.createElement(
-                                            _semanticUiReact.Card.Header,
+                                            'p',
                                             null,
-                                            'Adresse de Facturation'
+                                            this.props.adresseF.caAdresse1
                                         ),
+                                        _react2.default.createElement('br', null),
                                         _react2.default.createElement(
-                                            _semanticUiReact.Card.Meta,
+                                            'p',
                                             null,
-                                            this.props.adresseF.caPrincipale === 1 ? "Adresse principale" : " "
-                                        ),
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Card.Description,
-                                            null,
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.adresseF.caAdresse1
-                                            ),
-                                            _react2.default.createElement('br', null),
-                                            _react2.default.createElement(
-                                                'p',
-                                                null,
-                                                this.props.adresseF.caCp + "  " + this.props.adresseF.caVille
-                                            )
+                                            this.props.adresseF.caCp + "  " + this.props.adresseF.caVille
                                         )
                                     )
                                 )
@@ -31062,7 +31001,6 @@ var Info = function (_React$Component) {
 
             var siret = function siret(_siret) {
 
-                console.log(_siret);
                 var result = [];
                 for (var i = 0; i <= _siret.length; i++) {
 
@@ -31074,13 +31012,14 @@ var Info = function (_React$Component) {
                         result.push(_siret.substring(6, 9), " ");
                     } else if (i > 9 && i < 14) {
                         result.push(_siret.substring(9), " ");
-                        console.log(result);
                         return result;
                     }
                 }
             };
 
             var tel = function tel(_tel) {
+
+                _tel.replace(/\s/g, '');
 
                 var result = [];
                 var len = _tel.length;
@@ -31555,7 +31494,7 @@ var NavBar = function (_React$Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'menu-supplier hover' },
-                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', name: 'drivers license outline' }),
+                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', name: 'address book' }),
                             _react2.default.createElement(
                                 _reactRouter.Link,
                                 { to: '/fournisseur', activeClassName: 'active' },
@@ -63291,6 +63230,108 @@ module.exports = g;
 
 module.exports = __webpack_require__(445);
 
+
+/***/ }),
+/* 887 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Sidebar = __webpack_require__(55);
+
+var _Sidebar2 = _interopRequireDefault(_Sidebar);
+
+var _ActionBar = __webpack_require__(54);
+
+var _ActionBar2 = _interopRequireDefault(_ActionBar);
+
+var _DepenseContainer = __webpack_require__(458);
+
+var _DepenseContainer2 = _interopRequireDefault(_DepenseContainer);
+
+var _semanticUiReact = __webpack_require__(15);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Historique = function (_React$Component) {
+    _inherits(Historique, _React$Component);
+
+    function Historique() {
+        _classCallCheck(this, Historique);
+
+        return _possibleConstructorReturn(this, (Historique.__proto__ || Object.getPrototypeOf(Historique)).apply(this, arguments));
+    }
+
+    _createClass(Historique, [{
+        key: "render",
+        value: function render() {
+
+            var currentLocation = this.props;
+
+            return _react2.default.createElement(
+                "div",
+                null,
+                _react2.default.createElement(_ActionBar2.default, { context: this.props }),
+                _react2.default.createElement(
+                    "div",
+                    { className: "container-general" },
+                    _react2.default.createElement(
+                        _semanticUiReact.Grid,
+                        { columns: "equal" },
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            { width: 12 },
+                            _react2.default.createElement(
+                                "div",
+                                { className: "container-info-client" },
+                                _react2.default.createElement(_DepenseContainer2.default, { context: this.props })
+                            )
+                        ),
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(
+                                "div",
+                                { className: "container-sidebar" },
+                                _react2.default.createElement(
+                                    _semanticUiReact.Menu,
+                                    { pointing: true, vertical: true },
+                                    _react2.default.createElement(_Sidebar2.default, { content: "General", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Adresse", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Status", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "D\xE9penses", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Actions", context: currentLocation }),
+                                    _react2.default.createElement(_Sidebar2.default, { content: "Historique", context: currentLocation })
+                                )
+                            )
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Historique;
+}(_react2.default.Component);
+
+exports.default = Historique;
 
 /***/ })
 /******/ ]);

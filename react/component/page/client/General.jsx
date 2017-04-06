@@ -116,7 +116,7 @@ export default class General extends React.Component {
                                             <Sidebar content="Status" context={currentLocation}/>
                                             <Sidebar content="Dépense" context={currentLocation}/>
                                             <Sidebar content="Actions" context={currentLocation}/>
-                                            <Sidebar content="Hierarchie" context={currentLocation}/>
+                                            <Sidebar content="Historique" context={currentLocation}/>
                                         </Menu>
                                     </div>
 
