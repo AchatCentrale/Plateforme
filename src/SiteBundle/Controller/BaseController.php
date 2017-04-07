@@ -93,17 +93,22 @@ class BaseController extends Controller
 
     public function testAction()
     {
-        $repository = $this->getDoctrine()
-            ->getRepository('AchatCentraleCrmBundle:Clients');
 
 
-        $count = $repository->createQueryBuilder('p')
-            ->select('COUNT(p)')
-            ->getQuery()
-            ->getSingleScalarResult();
+        $db = $this->get('doctrine.dbal.centrale_produits_connection');
+        $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
-        dump($count);
+
+        $result = 'SELECT FO_RAISONSOC, COUNT(CE_ID) AS NB_CMD, COUNT(MESSAGE_ENTETE.ME_ID) AS NB_TICKETS
+        FROM dbo.MESSAGE_ENTETE
+        INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON MESSAGE_ENTETE.FO_ID = FOURNISSEURS.FO_ID
+        LEFT JOIN dbo.COMMANDE_ENTETE ON MESSAGE_ENTETE.ME_ID = COMMANDE_ENTETE.ME_ID
+        WHERE MESSAGE_ENTETE.CL_ID = 1260
+        GROUP BY FO_RAISONSOC
+        ORDER BY FO_RAISONSOC';
+
+        dump($result);
 
         return $this->render('@AchatCentraleCrm/testView.html.twig');
 
@@ -112,10 +117,33 @@ class BaseController extends Controller
 
     public function testWithParamAction(Request $request, $id)
     {
-        $panier = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
+
+
+        $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+        $sql = "SELECT FO_RAISONSOC, COUNT(CE_ID) AS NB_CMD, COUNT(MESSAGE_ENTETE.ME_ID) AS NB_TICKETS
+                FROM dbo.MESSAGE_ENTETE
+                INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON MESSAGE_ENTETE.FO_ID = FOURNISSEURS.FO_ID
+                LEFT JOIN dbo.COMMANDE_ENTETE ON MESSAGE_ENTETE.ME_ID = COMMANDE_ENTETE.ME_ID
+                WHERE MESSAGE_ENTETE.CL_ID = :id
+                GROUP BY FO_RAISONSOC
+                ORDER BY FO_RAISONSOC                  
+        ";
+
+
+        $stmt = $db2->prepare($sql);
+
+        $stmt->bindValue("id", $id);
+        $stmt->execute();
+
+
+
+
+
 
         return $this->render('@Site/test.html.twig', array(
-            'panier' => $panier
+            'panier' => $stmt->fetchAll()
         ));
 
     }

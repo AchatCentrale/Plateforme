@@ -56,5 +56,110 @@ class ProduitsFiltres
     private $fi;
 
 
-}
 
+    /**
+     * Get pfId
+     *
+     * @return integer
+     */
+    public function getPfId()
+    {
+        return $this->pfId;
+    }
+
+    /**
+     * Set insDate
+     *
+     * @param \DateTime $insDate
+     *
+     * @return ProduitsFiltres
+     */
+    public function setInsDate($insDate)
+    {
+        $this->insDate = $insDate;
+
+        return $this;
+    }
+
+    /**
+     * Get insDate
+     *
+     * @return \DateTime
+     */
+    public function getInsDate()
+    {
+        return $this->insDate;
+    }
+
+    /**
+     * Set insUser
+     *
+     * @param string $insUser
+     *
+     * @return ProduitsFiltres
+     */
+    public function setInsUser($insUser)
+    {
+        $this->insUser = $insUser;
+
+        return $this;
+    }
+
+    /**
+     * Get insUser
+     *
+     * @return string
+     */
+    public function getInsUser()
+    {
+        return $this->insUser;
+    }
+
+    /**
+     * Set pr
+     *
+     * @param \SiteBundle\Entity\Produits $pr
+     *
+     * @return ProduitsFiltres
+     */
+    public function setPr(\SiteBundle\Entity\Produits $pr = null)
+    {
+        $this->pr = $pr;
+
+        return $this;
+    }
+
+    /**
+     * Get pr
+     *
+     * @return \SiteBundle\Entity\Produits
+     */
+    public function getPr()
+    {
+        return $this->pr;
+    }
+
+    /**
+     * Set fi
+     *
+     * @param \SiteBundle\Entity\Filtres $fi
+     *
+     * @return ProduitsFiltres
+     */
+    public function setFi(\SiteBundle\Entity\Filtres $fi = null)
+    {
+        $this->fi = $fi;
+
+        return $this;
+    }
+
+    /**
+     * Get fi
+     *
+     * @return \SiteBundle\Entity\Filtres
+     */
+    public function getFi()
+    {
+        return $this->fi;
+    }
+}

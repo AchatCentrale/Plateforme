@@ -30543,16 +30543,27 @@ var DepenseContainer = function (_React$Component) {
     _inherits(DepenseContainer, _React$Component);
 
     _createClass(DepenseContainer, [{
+        key: 'getCommande',
+        value: function getCommande() {
+            var _this2 = this;
+
+            var url = "http://localhost:8000/Agence/" + this.props.context.params.id + "/commande";
+
+            $.getJSON(url, function (data) {
+                _this2.setState({
+                    commande: data
+                });
+            });
+        }
+    }, {
         key: 'getLogs',
         value: function getLogs() {
-            var _this2 = this;
+            var _this3 = this;
 
             var url = "http://localhost:8000/Agence/" + this.props.context.params.id + "/logs";
 
             $.getJSON(url, function (data) {
-                console.log(_this2);
-
-                _this2.setState({
+                _this3.setState({
                     logs: data
                 });
             });
@@ -30565,7 +30576,8 @@ var DepenseContainer = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (DepenseContainer.__proto__ || Object.getPrototypeOf(DepenseContainer)).call(this, props));
 
         _this.state = {
-            logs: []
+            logs: [],
+            commande: []
         };
 
         return _this;
@@ -30576,14 +30588,47 @@ var DepenseContainer = function (_React$Component) {
         value: function componentWillMount() {
 
             this.getLogs.call(this);
+            this.getCommande.call(this);
         }
     }, {
         key: 'render',
         value: function render() {
 
+            var cmd = this.state.commande.map(function (commande, index) {
+                console.log(commande);
+
+                return _react2.default.createElement(
+                    _semanticUiReact.Table.Row,
+                    null,
+                    _react2.default.createElement(
+                        _semanticUiReact.Table.Cell,
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Header,
+                            { as: 'h4', image: true },
+                            _react2.default.createElement(
+                                _semanticUiReact.Header.Content,
+                                null,
+                                commande.FO_RAISONSOC
+                            )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _semanticUiReact.Table.Cell,
+                        null,
+                        commande.NB_CMD
+                    ),
+                    _react2.default.createElement(
+                        _semanticUiReact.Table.Cell,
+                        null,
+                        commande.NB_TICKETS
+                    )
+                );
+            });
+
             return _react2.default.createElement(
                 'div',
-                { className: 'depense-container' },
+                null,
                 _react2.default.createElement(
                     'h2',
                     null,
@@ -30641,120 +30686,18 @@ var DepenseContainer = function (_React$Component) {
                                         _semanticUiReact.Table.HeaderCell,
                                         null,
                                         'Nombre de tickets'
+                                    ),
+                                    _react2.default.createElement(
+                                        _semanticUiReact.Table.HeaderCell,
+                                        null,
+                                        'Nombre de commandes'
                                     )
                                 )
                             ),
                             _react2.default.createElement(
                                 _semanticUiReact.Table.Body,
                                 null,
-                                _react2.default.createElement(
-                                    _semanticUiReact.Table.Row,
-                                    null,
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Cell,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Header,
-                                            { as: 'h4', image: true },
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Header.Content,
-                                                null,
-                                                'Cesar fleurs',
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Header.Subheader,
-                                                    null,
-                                                    'Human Resources'
-                                                )
-                                            )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Cell,
-                                        null,
-                                        '22'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    _semanticUiReact.Table.Row,
-                                    null,
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Cell,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Header,
-                                            { as: 'h4', image: true },
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Header.Content,
-                                                null,
-                                                'Matthew',
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Header.Subheader,
-                                                    null,
-                                                    'Fabric Design'
-                                                )
-                                            )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Cell,
-                                        null,
-                                        '15'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    _semanticUiReact.Table.Row,
-                                    null,
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Cell,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Header,
-                                            { as: 'h4', image: true },
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Header.Content,
-                                                null,
-                                                'Lindsay',
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Header.Subheader,
-                                                    null,
-                                                    'Entertainment'
-                                                )
-                                            )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Cell,
-                                        null,
-                                        '12'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    _semanticUiReact.Table.Row,
-                                    null,
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Cell,
-                                        null,
-                                        _react2.default.createElement(
-                                            _semanticUiReact.Header,
-                                            { as: 'h4', image: true },
-                                            _react2.default.createElement(
-                                                _semanticUiReact.Header.Content,
-                                                null,
-                                                'Mark',
-                                                _react2.default.createElement(
-                                                    _semanticUiReact.Header.Subheader,
-                                                    null,
-                                                    'Executive'
-                                                )
-                                            )
-                                        )
-                                    ),
-                                    _react2.default.createElement(
-                                        _semanticUiReact.Table.Cell,
-                                        null,
-                                        '11'
-                                    )
-                                )
+                                cmd
                             )
                         )
                     )
@@ -31019,7 +30962,7 @@ var Info = function (_React$Component) {
 
             var tel = function tel(_tel) {
 
-                _tel.replace(/\s/g, '');
+                /*tel.replace(/\s/g,'');*/
 
                 var result = [];
                 var len = _tel.length;
@@ -31361,7 +31304,22 @@ var ModalAction = function (_React$Component) {
                                 null,
                                 'Date : ',
                                 moment().format("D MMMM GGGG")
+                            ),
+                            _react2.default.createElement(
+                                'p',
+                                null,
+                                'Date d\'echance : ',
+                                moment().format("D MMMM GGGG")
                             )
+                        )
+                    ),
+                    _react2.default.createElement(
+                        _semanticUiReact.Grid.Row,
+                        null,
+                        _react2.default.createElement(
+                            _semanticUiReact.Grid.Column,
+                            null,
+                            _react2.default.createElement(_semanticUiReact.Checkbox, { label: 'Notifier le r\xE9f\xE9rent' })
                         )
                     ),
                     _react2.default.createElement(

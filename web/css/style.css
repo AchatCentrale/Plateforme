@@ -828,3 +828,9 @@ form.ink-form.form-login {
 i.teal.large.icon {
     color: white !important;
 }
+
+
+.interlocuteur p {
+    padding-top: 10px;
+    padding-right: 15px;
+}

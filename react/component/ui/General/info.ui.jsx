@@ -56,7 +56,7 @@ Info extends React.Component {
         const tel = (tel) => {
 
 
-            tel.replace(/\s/g,'');
+            /*tel.replace(/\s/g,'');*/
 
             let result = [];
             let len = tel.length;

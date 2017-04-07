@@ -175,6 +175,45 @@ class ClientsController extends FOSRestController
     }
 
 
+
+
+
+
+
+
+    /**
+     * @Rest\Get("/Agence/{id}/commande")
+     */
+    public function getTicketCmdAgenceAction($id)
+    {
+        $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+        $sql = "SELECT FO_RAISONSOC, COUNT(CE_ID) AS NB_CMD, COUNT(MESSAGE_ENTETE.ME_ID) AS NB_TICKETS
+                FROM dbo.MESSAGE_ENTETE
+                INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON MESSAGE_ENTETE.FO_ID = FOURNISSEURS.FO_ID
+                LEFT JOIN dbo.COMMANDE_ENTETE ON MESSAGE_ENTETE.ME_ID = COMMANDE_ENTETE.ME_ID
+                WHERE MESSAGE_ENTETE.CL_ID = :id
+                GROUP BY FO_RAISONSOC
+                ORDER BY NB_TICKETS DESC
+        ";
+
+
+        $stmt = $db2->prepare($sql);
+
+        $stmt->bindValue("id", $id);
+        $stmt->execute();
+
+        $restresult = $stmt->fetchAll();
+
+
+        if ($restresult === null) {
+            return new View("there are no users exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
+
+
     /**
      * @Rest\Get("/Agence/{id}/ticket")
      */
