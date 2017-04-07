@@ -1,10 +1,3 @@
-login:
-    path:   /login
-    defaults: {_controller: SiteBundle:Security:login}
-
-logout:
-    path:   /logout
-
 index_auth:
     path:     /
     defaults: { _controller: SiteBundle:Base:indexAuth }
@@ -25,20 +18,6 @@ Count:
 sendClientDetailMail:
     path:     /send/client/{clientId}
     defaults: {_controller: SiteBundle:Base:sendClientDetailMail}
-
-DeleteClientAction:
-    path: /delete/client/{id}
-    defaults:  {_controller: SiteBundle:Base:removeClient}
-
-AddClientAction:
-    path: /add/client/
-    defaults:  {_controller: SiteBundle:Base:AddClient}
-
-
-settings:
-    path:     /settings
-    defaults: {_controller: SiteBundle:Base:settings}
-
 
 test:
     path:    /test
