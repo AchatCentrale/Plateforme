@@ -63,4 +63,3 @@ class ClientsGroupe
         return $this->nom;
     }
 }
-

@@ -2,9 +2,6 @@ site:
     resource: "@SiteBundle/Resources/config/routing.yml"
     prefix:   /
 
-
-
-
 Api:
     resource: "@AchatCentraleCrmBundle/Controller/"
     type:     annotation
@@ -14,3 +11,7 @@ Api:
 clients:
     type:   rest
     resource: "@AchatCentraleCrmBundle/Controller/ClientsController.php"
+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new SiteBundle\SiteBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
 
         ];

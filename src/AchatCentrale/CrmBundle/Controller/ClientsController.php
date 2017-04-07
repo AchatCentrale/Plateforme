@@ -65,7 +65,7 @@ class ClientsController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($data);
         $em->flush();
-        return new View("User Added Successfully", Response::HTTP_OK);
+        return new View("Utilisateur Added Successfully", Response::HTTP_OK);
     }
 
 
@@ -97,7 +97,7 @@ class ClientsController extends FOSRestController
                 ->setClAdresse1($adresse1);
 
             $sn->flush();
-            return new View("User Updated Successfully", Response::HTTP_OK);
+            return new View("Utilisateur Updated Successfully", Response::HTTP_OK);
         } else return new View("Impossible de mettre a jour les données", Response::HTTP_NOT_ACCEPTABLE);
 
 
