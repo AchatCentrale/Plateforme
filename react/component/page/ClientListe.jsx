@@ -63,6 +63,8 @@ export default class ClientListe extends React.Component {
     render() {
 
 
+
+
         const dataDelaTable = this.state.clients.map((client, index) => {
 
             let datetime = client.insDate;
@@ -75,6 +77,7 @@ export default class ClientListe extends React.Component {
                     <Table.Cell>{ client.clRaisonsoc}</Table.Cell>
                     <Table.Cell>{ client.clMail}</Table.Cell>
                     <Table.Cell>{ datetime_format }</Table.Cell>
+
                 </Table.Row>)
 
 

@@ -8,6 +8,20 @@ import { List, Grid, Header, Table } from 'semantic-ui-react'
 export default class DepenseContainer extends React.Component {
 
 
+    getCommande(){
+
+        let url = "http://localhost:8000/Agence/"+ this.props.context.params.id +"/commande";
+
+
+        $.getJSON(url,(data) => {
+            this.setState({
+                commande: data,
+            });
+        })
+
+
+    }
+
 
     getLogs(){
 
@@ -15,8 +29,6 @@ export default class DepenseContainer extends React.Component {
 
 
         $.getJSON(url,(data) => {
-            console.log(this)
-
             this.setState({
                 logs: data,
             });
@@ -31,6 +43,7 @@ export default class DepenseContainer extends React.Component {
 
         this.state = {
             logs: [],
+            commande: [],
         };
 
     }
@@ -43,6 +56,7 @@ export default class DepenseContainer extends React.Component {
     componentWillMount(){
 
         this.getLogs.call(this);
+        this.getCommande.call(this);
 
     }
 
@@ -56,11 +70,34 @@ export default class DepenseContainer extends React.Component {
 
 
 
+        const cmd = this.state.commande.map((commande, index) => {
+            console.log(commande);
+
+
+            return (
+                <Table.Row>
+                    <Table.Cell>
+                        <Header as='h4' image>
+                            <Header.Content>
+                                {commande.FO_RAISONSOC}
+                            </Header.Content>
+                        </Header>
+                    </Table.Cell>
+                    <Table.Cell>
+                        {commande.NB_CMD}
+                    </Table.Cell>
+                    <Table.Cell>
+                        {commande.NB_TICKETS}
+                    </Table.Cell>
+                </Table.Row>)
+
+
+        });
 
 
         return(
 
-            <div className="depense-container">
+            <div>
 
                 <h2>Liste des logs de l'agence </h2>
 
@@ -96,62 +133,14 @@ export default class DepenseContainer extends React.Component {
                                 <Table.Row>
                                     <Table.HeaderCell>Fournisseurs</Table.HeaderCell>
                                     <Table.HeaderCell>Nombre de tickets</Table.HeaderCell>
+                                    <Table.HeaderCell>Nombre de commandes</Table.HeaderCell>
                                 </Table.Row>
                             </Table.Header>
 
                             <Table.Body>
-                                <Table.Row>
-                                    <Table.Cell>
-                                        <Header as='h4' image>
-                                            <Header.Content>
-                                                Cesar fleurs
-                                                <Header.Subheader>Human Resources</Header.Subheader>
-                                            </Header.Content>
-                                        </Header>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        22
-                                    </Table.Cell>
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell>
-                                        <Header as='h4' image>
-                                            <Header.Content>
-                                                Matthew
-                                                <Header.Subheader>Fabric Design</Header.Subheader>
-                                            </Header.Content>
-                                        </Header>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        15
-                                    </Table.Cell>
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell>
-                                        <Header as='h4' image>
-                                            <Header.Content>
-                                                Lindsay
-                                                <Header.Subheader>Entertainment</Header.Subheader>
-                                            </Header.Content>
-                                        </Header>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        12
-                                    </Table.Cell>
-                                </Table.Row>
-                                <Table.Row>
-                                    <Table.Cell>
-                                        <Header as='h4' image>
-                                            <Header.Content>
-                                                Mark
-                                                <Header.Subheader>Executive</Header.Subheader>
-                                            </Header.Content>
-                                        </Header>
-                                    </Table.Cell>
-                                    <Table.Cell>
-                                        11
-                                    </Table.Cell>
-                                </Table.Row>
+
+                                {cmd}
+
                             </Table.Body>
                         </Table>
 

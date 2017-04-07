@@ -10,7 +10,7 @@ import Depenses from './component/page/client/Depenses.jsx';
 import Status from './component/page/client/Status.jsx';
 import Profile from './component/page/profile/Profile.jsx';
 import Adresse from './component/page/client/Adresse.jsx';
-import Hierarchie from './component/page/client/Hierarchie.jsx';
+import Historique from './component/page/client/Historique.jsx';
 import Actions from './component/page/client/Actions.jsx';
 import Sidebar from './component/ui/Sidebar.jsx';
 
@@ -109,7 +109,7 @@ render((
             <Route path="/client/:id/status" component={Status}/>
             <Route path="/client/:id/adresse" component={Adresse}/>
             <Route path="/client/:id/Actions" component={Actions}/>
-            <Route path="/client/:id/hierarchie" component={Hierarchie}/>
+            <Route path="/client/:id/Historique" component={Historique}/>
             <Route path="/profile" component={Profile} />
         </Route>
     </Router>

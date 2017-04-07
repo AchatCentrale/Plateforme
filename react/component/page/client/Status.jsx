@@ -46,16 +46,17 @@ export default class Status extends React.Component {
                                             <Grid.Column>
                                                 <div className="container-info-gauche-status">
                                                     <div className="col-gauche-info">
-                                                        <p>Etat</p>
+                                                        <p>Status</p>
                                                         <p>Date d'inscription</p>
                                                         <p>Date d'adhésion</p>
+                                                        <p>Date d'echeance</p>
                                                         <p>Ancienneté</p>
                                                     </div>
 
                                                     <div className="col-droite-info">
                                                         <p>
-                                                            <Label color='green'>
-                                                                actif
+                                                            <Label color='orange'>
+                                                                Prospect
                                                             </Label>
                                                         </p>
                                                         <p>
@@ -65,12 +66,17 @@ export default class Status extends React.Component {
                                                         </p>
                                                         <p>
                                                             <Label>
-                                                                02/01/2016
+                                                                02/01/2017
                                                             </Label>
                                                         </p>
                                                         <p>
                                                             <Label>
                                                                 2 mois
+                                                            </Label>
+                                                        </p>
+                                                        <p>
+                                                            <Label>
+                                                                02/01/2017
                                                             </Label>
                                                         </p>
                                                     </div>
@@ -123,9 +129,14 @@ export default class Status extends React.Component {
                                             </Table.Header>
 
                                             <Table.Body>
+
+
+
                                                 <Table.Row>
                                                     <Table.Cell>Audit</Table.Cell>
-                                                    <Table.Cell><Icon name='checkmark'/></Table.Cell>
+                                                    <Table.Cell>
+                                                        <Icon name='checkmark'/>
+                                                    </Table.Cell>
                                                     <Table.Cell>
                                                         <p>
                                                             <Label>
@@ -133,14 +144,25 @@ export default class Status extends React.Component {
                                                             </Label>
                                                         </p>
                                                     </Table.Cell>
-                                                    <Table.Cell>12/09/1998</Table.Cell>
+                                                    <Table.Cell>
+                                                        <Button.Group>
+                                                            <Button positive>Action effectué</Button>
+                                                            <Button.Or text='ou' />
+                                                            <Button >Mettre en attente</Button>
+                                                        </Button.Group>
+                                                    </Table.Cell>
                                                     <Table.Cell>
                                                         <Icon className='cursor' name='file pdf outline'/>
                                                     </Table.Cell>
                                                 </Table.Row>
+
+
+
                                                 <Table.Row>
                                                     <Table.Cell>Envoi code d'acces</Table.Cell>
-                                                    <Table.Cell><Icon name='checkmark'/></Table.Cell>
+                                                    <Table.Cell>
+                                                        <Icon name='wait'/>
+                                                    </Table.Cell>
                                                     <Table.Cell>
                                                         <p>
                                                             <Label>
@@ -148,11 +170,21 @@ export default class Status extends React.Component {
                                                             </Label>
                                                         </p>
                                                     </Table.Cell>
-                                                    <Table.Cell>12/09/1998</Table.Cell>
+                                                    <Table.Cell>
+                                                        <Button.Group>
+                                                            <Button positive>Action effectué</Button>
+                                                            <Button.Or text='ou' />
+                                                            <Button >Mettre en attente</Button>
+                                                        </Button.Group>
+                                                    </Table.Cell>
                                                     <Table.Cell>
                                                         <Icon className='cursor' name='file pdf outline'/>
                                                     </Table.Cell>
                                                 </Table.Row>
+
+
+
+
                                                 <Table.Row error>
                                                     <Table.Cell>Envoi code promo</Table.Cell>
                                                     <Table.Cell><Icon name='remove'/></Table.Cell>
@@ -164,12 +196,19 @@ export default class Status extends React.Component {
                                                         </p>
                                                     </Table.Cell>
                                                     <Table.Cell>
-                                                        <Button positive>Action effectué</Button>
+                                                        <Button.Group>
+                                                            <Button positive>Action effectué</Button>
+                                                            <Button.Or text='ou' />
+                                                            <Button >Mettre en attente</Button>
+                                                        </Button.Group>
                                                     </Table.Cell>
                                                     <Table.Cell>
                                                         <Icon className='cursor' name='file pdf outline'/>
                                                     </Table.Cell>
                                                 </Table.Row>
+
+
+
                                             </Table.Body>
                                         </Table>
                                     </div>
@@ -193,7 +232,7 @@ export default class Status extends React.Component {
                                     <Sidebar content="Status" context={currentLocation}/>
                                     <Sidebar content="Dépenses" context={currentLocation}/>
                                     <Sidebar content="Actions" context={currentLocation}/>
-                                    <Sidebar content="Hierarchie" context={currentLocation}/>
+                                    <Sidebar content="Historique" context={currentLocation}/>
                                 </Menu>
 
 

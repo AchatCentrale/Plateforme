@@ -88,7 +88,7 @@ export default class General extends React.Component {
 
                     <ActionBar context={this.props} />
                     <div className="container-general">
-
+                    <ActionBar />
 
                         <Grid columns='equal'>
                             <Grid.Column width={12}>
@@ -114,9 +114,9 @@ export default class General extends React.Component {
                                             <Sidebar content="General" context={currentLocation}/>
                                             <Sidebar content="Adresse" context={currentLocation}/>
                                             <Sidebar content="Status" context={currentLocation}/>
-                                            <Sidebar content="Dépenses" context={currentLocation}/>
+                                            <Sidebar content="Dépense" context={currentLocation}/>
                                             <Sidebar content="Actions" context={currentLocation}/>
-                                            <Sidebar content="Hierarchie" context={currentLocation}/>
+                                            <Sidebar content="Historique" context={currentLocation}/>
                                         </Menu>
                                     </div>
 

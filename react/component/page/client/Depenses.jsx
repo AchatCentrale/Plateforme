@@ -6,7 +6,7 @@ import DepenseContainer from "../../ui/Depenses/DepenseContainer.jsx";
 
 import {Grid, Input, Label, Loader, Menu} from "semantic-ui-react";
 
-import {browserHistory, IndexRedirect, IndexRoute, Link, Redirect, Route, Router} from "react-router";
+
 
 
 export default class Depenses extends React.Component {
@@ -55,7 +55,7 @@ export default class Depenses extends React.Component {
                                     <Sidebar content="Status" context={currentLocation}/>
                                     <Sidebar content="Dépenses" context={currentLocation}/>
                                     <Sidebar content="Actions" context={currentLocation}/>
-                                    <Sidebar content="Hierarchie" context={currentLocation}/>
+                                    <Sidebar content="Historique" context={currentLocation}/>
                                 </Menu>
                             </div>
 

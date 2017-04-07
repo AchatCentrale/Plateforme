@@ -45,6 +45,7 @@ export default class NavBar extends React.Component {
                         </div>
                         <div className="menu-supplier hover">
                             <Icon size="large" color="teal" className="icon-menu" name="suitcase"  />
+
                             <Link to="/fournisseur" activeClassName="active">Fournisseur</Link>
                         </div>
 

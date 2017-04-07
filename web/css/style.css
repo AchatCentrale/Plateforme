@@ -200,43 +200,32 @@ footer {
     width: 100%;
 }
 
-.nav-bar {
-    width: 15%;
-    background-color: #1A2E46;
-    min-height: 100vh;
-    text-align: center;
-}
-
 body {
     background-color: #F4F4F4 !important;
 
 }
 
 .nav-bar {
+    width: 15%;
+    background-color: #1A2E46;
+
+    text-align: center;
+    height: 135vh;
     float: left;
 }
 
 .menu-nav {
     position: relative;
     margin-top: 42%;
-    padding-bottom: 65%;
+    padding-bottom: 56px;
     text-align: left;
     margin-left: 50px;
-
 }
 
 .menu-home p {
     padding-right: 13px;
 }
 
-.menu-client p {
-}
-
-.menu-calendrier p {
-}
-
-.menu-supplier p {
-}
 
 .menu-nav a {
     text-decoration: none;
@@ -790,7 +779,7 @@ form.ink-form.form-login {
 
 .container-general {
     background: white;
-    height: 80vh;
+
     width: 100%;
     margin: 18px auto;
     padding-left: 6%;
@@ -836,7 +825,6 @@ form.ink-form.form-login {
     margin-top: 74px;
 }
 
-
 i.teal.large.icon.icon-menu{
     margin-right: 25px;
     margin-bottom: 5px;
@@ -847,4 +835,14 @@ i.teal.large.icon.icon-menu{
 
     margin-left: 10%;
     padding-top: 3%;
+}
+i.teal.large.icon
+{
+    color: white !important;
+}
+
+
+.interlocuteur p {
+    padding-top: 10px;
+    padding-right: 15px;
 }
