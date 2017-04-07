@@ -39,7 +39,7 @@ export default class Dashboard extends React.Component {
                     <Button positive>
                        Ajouter un nouveau client
                     </Button>
-                    <Button content='Exporter en .pdf' icon='file pdf outline' labelPosition='right' />
+                    <Button content='Exporter la liste des clients en .pdf' icon='file pdf outline' labelPosition='right' />
                 </Container>
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router'
 
-import {Icon} from 'semantic-ui-react'
+import {Icon, Grid} from 'semantic-ui-react'
 
 
 
@@ -33,16 +33,18 @@ export default class NavBar extends React.Component {
 
 
                     <div className="menu-nav">
+
+
                         <div className="menu-home hover">
-                            <Icon size="large" color="teal" name="home" />
+                            <Icon size="large" color="teal" className="icon-menu" name="home" />
                             <Link to="/" activeClassName="active">Home</Link>
                         </div>
                         <div className="menu-client hover">
-                            <Icon size="large" color="teal" name="group" />
+                            <Icon size="large" color="teal" className="icon-menu" name="group" />
                             <Link to="/client" activeClassName="active">Clients</Link>
                         </div>
                         <div className="menu-supplier hover">
-                            <Icon size="large" color="teal" name="drivers license outline" />
+                            <Icon size="large" color="teal" className="icon-menu" name="suitcase"  />
                             <Link to="/fournisseur" activeClassName="active">Fournisseur</Link>
                         </div>
 
@@ -51,9 +53,8 @@ export default class NavBar extends React.Component {
 
 
                     <div className="menu-bottom">
-                        <div className="menu-logout hover">
-                            <a href="/logout"><p>Déconnexion</p></a>
-                        </div>
+                        <Icon size="large" color="teal" className="icon-menu" name="log out"  />
+                        <a href="/logout"> Déconnection</a>
 
                     </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon, Label, Menu, Table, Input, Dimmer, Loader, Image, Segment} from 'semantic-ui-react'
+import {Icon, Label,Grid , Menu, Table, Input,Button, Dimmer, Loader, Image, Segment} from 'semantic-ui-react'
 
 import {browserHistory} from 'react-router'
 
@@ -65,6 +65,8 @@ export default class ClientListe extends React.Component {
 
         const dataDelaTable = this.state.clients.map((client, index) => {
 
+            let datetime = client.insDate;
+            let datetime_format = moment(datetime).fromNow();
 
             return (
                 <Table.Row data-index={client.clId} className="cursor"
@@ -72,7 +74,7 @@ export default class ClientListe extends React.Component {
                     <Table.Cell>{ client.clId}</Table.Cell>
                     <Table.Cell>{ client.clRaisonsoc}</Table.Cell>
                     <Table.Cell>{ client.clMail}</Table.Cell>
-                    <Table.Cell>{ client.insDate}</Table.Cell>
+                    <Table.Cell>{ datetime_format }</Table.Cell>
                 </Table.Row>)
 
 
@@ -93,6 +95,19 @@ export default class ClientListe extends React.Component {
         return (
 
             <div>
+
+                <div className="action-client-liste">
+
+                    <Button.Group labeled>
+                        <Button icon='add square' content='Ajoute un nouveau client' />
+                        <Button icon='file excel outline' content='Exporter en .csv' />
+                        <Button icon='print' content='imprimer' />
+                    </Button.Group>
+
+                </div>
+
+
+
                 <div className="table-client">
 
 

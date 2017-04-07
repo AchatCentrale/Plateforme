@@ -720,18 +720,6 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 /***/ }),
 /* 15 */
-/***/ (function(module, exports) {
-
-/**
- * The default argument placeholder value for methods.
- *
- * @type {Object}
- */
-module.exports = {};
-
-
-/***/ }),
-/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1197,6 +1185,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+/**
+ * The default argument placeholder value for methods.
+ *
+ * @type {Object}
+ */
+module.exports = {};
 
 
 /***/ }),
@@ -3502,7 +3502,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -17479,7 +17479,7 @@ module.exports = findIndex;
 var convert = __webpack_require__(17),
     func = convert('flow', __webpack_require__(673));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -17490,7 +17490,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('includes', __webpack_require__(92));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -17501,7 +17501,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('isNil', __webpack_require__(4), __webpack_require__(36));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -28341,7 +28341,7 @@ var _reactDom = __webpack_require__(325);
 
 var _reactRouter = __webpack_require__(20);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -28455,7 +28455,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -28527,6 +28527,9 @@ var ClientListe = function (_React$Component) {
 
             var dataDelaTable = this.state.clients.map(function (client, index) {
 
+                var datetime = client.insDate;
+                var datetime_format = moment(datetime).fromNow();
+
                 return _react2.default.createElement(
                     _semanticUiReact.Table.Row,
                     { 'data-index': client.clId, className: 'cursor',
@@ -28549,7 +28552,7 @@ var ClientListe = function (_React$Component) {
                     _react2.default.createElement(
                         _semanticUiReact.Table.Cell,
                         null,
-                        client.insDate
+                        datetime_format
                     )
                 );
             });
@@ -28575,6 +28578,17 @@ var ClientListe = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
+                _react2.default.createElement(
+                    'div',
+                    { className: 'action-client-liste' },
+                    _react2.default.createElement(
+                        _semanticUiReact.Button.Group,
+                        { labeled: true },
+                        _react2.default.createElement(_semanticUiReact.Button, { icon: 'add square', content: 'Ajoute un nouveau client' }),
+                        _react2.default.createElement(_semanticUiReact.Button, { icon: 'file excel outline', content: 'Exporter en .csv' }),
+                        _react2.default.createElement(_semanticUiReact.Button, { icon: 'print', content: 'imprimer' })
+                    )
+                ),
                 _react2.default.createElement(
                     'div',
                     { className: 'table-client' },
@@ -28706,7 +28720,7 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -28998,7 +29012,7 @@ var _AgenceAdresse = __webpack_require__(457);
 
 var _AgenceAdresse2 = _interopRequireDefault(_AgenceAdresse);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -29175,7 +29189,7 @@ var _DepenseContainer = __webpack_require__(458);
 
 var _DepenseContainer2 = _interopRequireDefault(_DepenseContainer);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -29286,7 +29300,7 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -29380,6 +29394,7 @@ var General = function (_React$Component) {
                 return _react2.default.createElement(
                     'div',
                     null,
+                    _react2.default.createElement(_ActionBar2.default, { context: this.props }),
                     _react2.default.createElement(
                         'div',
                         { className: 'container-general' },
@@ -29451,7 +29466,7 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -29553,7 +29568,7 @@ var _ActionBar = __webpack_require__(54);
 
 var _ActionBar2 = _interopRequireDefault(_ActionBar);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -29947,7 +29962,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30010,7 +30025,7 @@ var Dashboard = function (_React$Component) {
                         { positive: true },
                         "Ajouter un nouveau client"
                     ),
-                    _react2.default.createElement(_semanticUiReact.Button, { content: "Exporter en .pdf", icon: "file pdf outline", labelPosition: "right" })
+                    _react2.default.createElement(_semanticUiReact.Button, { content: "Exporter la liste des clients en .pdf", icon: "file pdf outline", labelPosition: "right" })
                 ),
                 _react2.default.createElement(
                     "div",
@@ -30142,7 +30157,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30246,7 +30261,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -30374,7 +30389,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30571,7 +30586,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30827,7 +30842,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -30882,7 +30897,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31015,7 +31030,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31258,7 +31273,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -31317,7 +31332,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31465,7 +31480,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouter = __webpack_require__(20);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31514,7 +31529,7 @@ var NavBar = function (_React$Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'menu-home hover' },
-                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', name: 'home' }),
+                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', className: 'icon-menu', name: 'home' }),
                             _react2.default.createElement(
                                 _reactRouter.Link,
                                 { to: '/', activeClassName: 'active' },
@@ -31524,7 +31539,7 @@ var NavBar = function (_React$Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'menu-client hover' },
-                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', name: 'group' }),
+                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', className: 'icon-menu', name: 'group' }),
                             _react2.default.createElement(
                                 _reactRouter.Link,
                                 { to: '/client', activeClassName: 'active' },
@@ -31534,7 +31549,7 @@ var NavBar = function (_React$Component) {
                         _react2.default.createElement(
                             'div',
                             { className: 'menu-supplier hover' },
-                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', name: 'drivers license outline' }),
+                            _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', className: 'icon-menu', name: 'suitcase' }),
                             _react2.default.createElement(
                                 _reactRouter.Link,
                                 { to: '/fournisseur', activeClassName: 'active' },
@@ -31545,18 +31560,11 @@ var NavBar = function (_React$Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'menu-bottom' },
+                        _react2.default.createElement(_semanticUiReact.Icon, { size: 'large', color: 'teal', className: 'icon-menu', name: 'log out' }),
                         _react2.default.createElement(
-                            'div',
-                            { className: 'menu-logout hover' },
-                            _react2.default.createElement(
-                                'a',
-                                { href: '/logout' },
-                                _react2.default.createElement(
-                                    'p',
-                                    null,
-                                    'D\xE9connexion'
-                                )
-                            )
+                            'a',
+                            { href: '/logout' },
+                            ' D\xE9connection'
                         )
                     )
                 )
@@ -31586,7 +31594,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -31724,7 +31732,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _semanticUiReact = __webpack_require__(16);
+var _semanticUiReact = __webpack_require__(15);
 
 var _reactRouter = __webpack_require__(20);
 
@@ -39146,7 +39154,7 @@ module.exports = forEach;
 /***/ (function(module, exports, __webpack_require__) {
 
 var mapping = __webpack_require__(676),
-    fallbackHolder = __webpack_require__(15);
+    fallbackHolder = __webpack_require__(16);
 
 /** Built-in value reference. */
 var push = Array.prototype.push;
@@ -40116,7 +40124,7 @@ module.exports = {
 var convert = __webpack_require__(17),
     func = convert('compact', __webpack_require__(304), __webpack_require__(36));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40127,7 +40135,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('curry', __webpack_require__(305));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40138,7 +40146,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('eq', __webpack_require__(91));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40149,7 +40157,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('get', __webpack_require__(70));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40160,7 +40168,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('has', __webpack_require__(71));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40171,7 +40179,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('isFunction', __webpack_require__(50), __webpack_require__(36));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40182,7 +40190,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('isObject', __webpack_require__(25), __webpack_require__(36));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40193,7 +40201,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('isPlainObject', __webpack_require__(128), __webpack_require__(36));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40204,7 +40212,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('keys', __webpack_require__(27), __webpack_require__(36));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40215,7 +40223,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('map', __webpack_require__(19));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40226,7 +40234,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('min', __webpack_require__(700), __webpack_require__(36));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40237,7 +40245,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('pick', __webpack_require__(132));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40248,7 +40256,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('sortBy', __webpack_require__(705));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40259,7 +40267,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('startsWith', __webpack_require__(321));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40270,7 +40278,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('sum', __webpack_require__(708), __webpack_require__(36));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40281,7 +40289,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('take', __webpack_require__(709));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 
@@ -40292,7 +40300,7 @@ module.exports = func;
 var convert = __webpack_require__(17),
     func = convert('values', __webpack_require__(192), __webpack_require__(36));
 
-func.placeholder = __webpack_require__(15);
+func.placeholder = __webpack_require__(16);
 module.exports = func;
 
 

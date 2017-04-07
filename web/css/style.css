@@ -480,6 +480,7 @@ a.btn-add-client {
 .menu-bottom {
     position: relative;
     margin-top: 50px;
+    margin-right: 47px;
 }
 
 .menu-settings p {
@@ -836,6 +837,14 @@ form.ink-form.form-login {
 }
 
 
-i.teal.icon {
-    color: white!important;
+i.teal.large.icon.icon-menu{
+    margin-right: 25px;
+    margin-bottom: 5px;
+    color: white !important;
+}
+
+.action-client-liste {
+
+    margin-left: 10%;
+    padding-top: 3%;
 }

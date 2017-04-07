@@ -86,7 +86,7 @@ export default class General extends React.Component {
                 <div>
 
 
-
+                    <ActionBar context={this.props} />
                     <div className="container-general">
 
 
