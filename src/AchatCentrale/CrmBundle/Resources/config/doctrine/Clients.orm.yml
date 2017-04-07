@@ -189,6 +189,22 @@ AchatCentrale\CrmBundle\Entity\Clients:
             options:
                 default: '0'
             column: CL_CA
+        clMasqHa:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            options:
+                default: '0'
+            column: CL_MASQ_HA
+        clMasqVt:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            options:
+                default: '0'
+            column: CL_MASQ_VT
         clTempo:
             type: string
             nullable: true
@@ -196,6 +212,13 @@ AchatCentrale\CrmBundle\Entity\Clients:
             options:
                 fixed: false
             column: CL_TEMPO
+        clNivAction:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: CL_NIV_ACTION
         insDate:
             type: datetime
             nullable: true

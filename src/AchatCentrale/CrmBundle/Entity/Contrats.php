@@ -782,4 +782,33 @@ class Contrats
     {
         return $this->cl;
     }
+    /**
+     * @var integer
+     */
+    private $clId;
+
+
+    /**
+     * Set clId
+     *
+     * @param integer $clId
+     *
+     * @return Contrats
+     */
+    public function setClId($clId)
+    {
+        $this->clId = $clId;
+
+        return $this;
+    }
+
+    /**
+     * Get clId
+     *
+     * @return integer
+     */
+    public function getClId()
+    {
+        return $this->clId;
+    }
 }

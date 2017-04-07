@@ -111,6 +111,13 @@ AchatCentrale\CrmBundle\Entity\MessageEntete:
                 unsigned: false
                 default: '0'
             column: ME_ADR_LIV
+        meCmde:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: ME_CMDE
         meTempo:
             type: string
             nullable: true

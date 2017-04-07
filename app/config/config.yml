@@ -34,6 +34,7 @@ framework:
     fragments:       ~
     http_method_override: true
     assets: ~
+    translator: ~
 
 # Twig Configuration
 twig:
@@ -95,6 +96,16 @@ assetic:
     bundles:        [ SiteBundle ]
     filters:
         cssrewrite: ~
+
+
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: AchatCentrale\CrmBundle\Entity\Utilisateur
+    from_email:
+        address: "%mailer_user%"
+        sender_name: "%mailer_user%"
 
 
 fos_rest:

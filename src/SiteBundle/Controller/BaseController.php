@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -22,7 +23,6 @@ class BaseController extends Controller
 {
 
 
-
     public function indexAuthAction(Request $request)
     {
 
@@ -31,41 +31,24 @@ class BaseController extends Controller
         }
 
 
-        return $this->render('@Site/Base/home.html.twig', array(
-
-        ));
+        return $this->render('@Site/Base/home.html.twig', array());
 
     }
 
-
-
-    public function clientByIdAction(Request $request, $id)
+    public function whoAreAction(Request $request, $type)
     {
 
+        $user = $this->getUser();
 
-        $client_users = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('cl' => $id));
-        $log = $this->getDoctrine()
-            ->getRepository('AchatCentraleCrmBundle:Logs')
-            ->findBy(
-                array(
-                    'loIdent' => 'CL_ID',
-                    'loIdentNum' => $id
-                ));
 
-        return $this->render('@Site/Base/clientListe.html.twig', array(
-            'client' => $client_users,
-            'log' => $log,
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR
-        ));
+        switch ($type) {
+            case "username":
+                return new JsonResponse($user->getUsername(), 200);
+                break;
+
+        }
+
     }
-
-
-
-
-
-
-
-
 
     public function sendClientDetailMailAction(Request $request, $clientId)
     {
@@ -77,7 +60,7 @@ class BaseController extends Controller
          */
         $message = \Swift_Message::newInstance()
             ->setSubject('Vos codes pour la centrale')
-            ->setFrom(array('contact@achatcentrale.fr'=> "Votre centrale" ))
+            ->setFrom(array('contact@achatcentrale.fr' => "Votre centrale"))
             ->setTo('jb@achatcentrale.fr')
             ->setBody($this->renderView('SiteBundle:mail:mailDetailClient.html.twig', array(
                 'client' => $client_info
@@ -92,124 +75,78 @@ class BaseController extends Controller
     }
 
 
-    public function AddClientAction(Request $request)
+    public function countAgenceAction()
     {
-        $clients = new Clients();
-
-        $form = $this->get('form.factory')->create(ClientsType::class, $clients);
-
-        // le formulaire est recuperer dans la request
-        $form->handleRequest($request);
+        $repository = $this->getDoctrine()
+            ->getRepository('AchatCentraleCrmBundle:Clients');
 
 
-        //traitement du formulaire
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($data);
-            $em->flush();
-        }
+        $count = $repository->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->getQuery()
+            ->getSingleScalarResult();
 
-
-       return $this->render('SiteBundle:Base:add.client.html.twig', array(
-           'form' => $form->createView()
-       ));
+        return $count;
 
     }
-
-
-
-    public function removeClientAction(Request $request, $id)
-    {
-        $em = $this->get('doctrine.orm.entity_manager');
-        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')
-            ->findBy(array('clId' => $id));
-
-        if ($client) {
-            $em->remove($client);
-            $em->flush();
-        }
-
-        return new Response('jb tes trop fort');
-
-    }
-
-
-
-
-    public function settingsAction(Request $request)
-    {
-
-        $userActual = $this->get('security.token_storage')->getToken()->getUser();
-
-
-
-        dump($userActual);
-        $form = $this->get('form.factory')->create(UsersType::class, $user[0]);
-
-
-        // le formulaire est recuperer dans la request
-        $form->handleRequest($request);
-
-
-        //traitement du formulaire
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-           dump($data);
-        }
-
-        return $this->render('@Site/Base/settings.html.twig', array(
-            'form' => $form->createView()
-        ));
-
-
-
-    }
-
-
 
 
     public function testAction()
     {
-        /**
-         * @var \Swift_Mime_Message $message
-         */
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setFrom('Jbagostin@gmail.com')
-            ->setTo('Jbagostin@gmail.com')
-            ->setBody($this->renderView('SiteBundle:mail:mail.html.twig'), 'text/html')
 
-        ;
 
-        $mailer = $this->get('mailer');
+        $db = $this->get('doctrine.dbal.centrale_produits_connection');
+        $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $mailer->send($message);
 
-        $spool = $mailer->getTransport()->getSpool();
 
-        $transport = $this->get('swiftmailer.transport.real');
+        $result = 'SELECT FO_RAISONSOC, COUNT(CE_ID) AS NB_CMD, COUNT(MESSAGE_ENTETE.ME_ID) AS NB_TICKETS
+        FROM dbo.MESSAGE_ENTETE
+        INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON MESSAGE_ENTETE.FO_ID = FOURNISSEURS.FO_ID
+        LEFT JOIN dbo.COMMANDE_ENTETE ON MESSAGE_ENTETE.ME_ID = COMMANDE_ENTETE.ME_ID
+        WHERE MESSAGE_ENTETE.CL_ID = 1260
+        GROUP BY FO_RAISONSOC
+        ORDER BY FO_RAISONSOC';
 
-        $spool->flushQueue($transport);
+        dump($result);
 
-        return $this->render('@Site/test.html.twig');
+        return $this->render('@AchatCentraleCrm/testView.html.twig');
 
     }
-
 
 
     public function testWithParamAction(Request $request, $id)
     {
-        $panier = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
+
+
+        $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+        $sql = "SELECT FO_RAISONSOC, COUNT(CE_ID) AS NB_CMD, COUNT(MESSAGE_ENTETE.ME_ID) AS NB_TICKETS
+                FROM dbo.MESSAGE_ENTETE
+                INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON MESSAGE_ENTETE.FO_ID = FOURNISSEURS.FO_ID
+                LEFT JOIN dbo.COMMANDE_ENTETE ON MESSAGE_ENTETE.ME_ID = COMMANDE_ENTETE.ME_ID
+                WHERE MESSAGE_ENTETE.CL_ID = :id
+                GROUP BY FO_RAISONSOC
+                ORDER BY FO_RAISONSOC                  
+        ";
+
+
+        $stmt = $db2->prepare($sql);
+
+        $stmt->bindValue("id", $id);
+        $stmt->execute();
+
+
+
+
+
 
         return $this->render('@Site/test.html.twig', array(
-            'panier' => $panier
+            'panier' => $stmt->fetchAll()
         ));
 
     }
-
-
 
 
 }

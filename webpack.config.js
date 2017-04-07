@@ -5,9 +5,6 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
-
-
-
 var BUILD_DIR = path.resolve(__dirname, 'web');
 
 var APP_DIR = path.resolve(__dirname, 'react');
@@ -68,7 +65,6 @@ var config = {
     ]
 
 };
-
 
 
 module.exports = config;

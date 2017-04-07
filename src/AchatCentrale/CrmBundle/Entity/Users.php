@@ -4,6 +4,7 @@ namespace AchatCentrale\CrmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * Users
  *
@@ -12,6 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Users
 {
+
+
+
     /**
      * @var integer
      *

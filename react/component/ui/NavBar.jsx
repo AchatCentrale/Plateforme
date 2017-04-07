@@ -2,6 +2,9 @@ import React from 'react';
 
 import { Link } from 'react-router'
 
+import {Icon, Grid} from 'semantic-ui-react'
+
+
 
 
 export default class NavBar extends React.Component {
@@ -26,37 +29,34 @@ export default class NavBar extends React.Component {
                             <img src="/images/logo-achatcentrale.png" alt="logo_crm"  />
                                 <p>CRM v1.0</p>
                         </div>
-                        <div className="block-profile">
-                            <h1>user</h1>
-                        </div>
                     </div>
 
 
-                    <div className="menu">
+                    <div className="menu-nav">
+
+
                         <div className="menu-home hover">
+                            <Icon size="large" color="teal" className="icon-menu" name="home" />
                             <Link to="/" activeClassName="active">Home</Link>
                         </div>
                         <div className="menu-client hover">
+                            <Icon size="large" color="teal" className="icon-menu" name="group" />
                             <Link to="/client" activeClassName="active">Clients</Link>
                         </div>
                         <div className="menu-supplier hover">
+                            <Icon size="large" color="teal" className="icon-menu" name="suitcase"  />
+
                             <Link to="/fournisseur" activeClassName="active">Fournisseur</Link>
                         </div>
 
-                        <div className="menu-calendrier hover">
-                            <a href=""><p>TODO</p></a>
-                        </div>
+
                     </div>
 
 
                     <div className="menu-bottom">
-                        <div className="menu-logout hover">
-                            <a href="{{ logout_path() }}"><p>Déconnexion</p></a>
-                        </div>
+                        <Icon size="large" color="teal" className="icon-menu" name="log out"  />
+                        <a href="/logout"> Déconnection</a>
 
-                        <div className="menu-settings hover">
-                            <a href=""><p>Préférences</p></a>
-                        </div>
                     </div>
 
 

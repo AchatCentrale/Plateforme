@@ -26,7 +26,6 @@ class ClientsController extends FOSRestController
     }
 
 
-
     /**
      * @Rest\Get("/Agence/{id}")
      */
@@ -38,8 +37,6 @@ class ClientsController extends FOSRestController
         }
         return $restresult;
     }
-
-
 
 
     /**
@@ -56,13 +53,9 @@ class ClientsController extends FOSRestController
         $adresse1 = $request->get('adresse1');
 
 
-
-        if(empty($ref) || empty($raison_sociale) || empty($siret) || empty($adresse1))
-        {
+        if (empty($ref) || empty($raison_sociale) || empty($siret) || empty($adresse1)) {
             return new View("NULL VALUES ARE NOT ALLOWED", Response::HTTP_NOT_ACCEPTABLE);
         }
-
-
 
 
         $data->setClRef($ref);
@@ -72,20 +65,19 @@ class ClientsController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($data);
         $em->flush();
-        return new View("User Added Successfully", Response::HTTP_OK);
+        return new View("Utilisateur Added Successfully", Response::HTTP_OK);
     }
 
 
     /**
      * @Rest\Put("/Agence/{id}")
      */
-    public function updateAction($id,Request $request)
+    public function updateAction($id, Request $request)
     {
         $ref = $request->get('ref');
         $raison_sociale = $request->get('raison_sociale');
         $siret = $request->get('siret');
         $adresse1 = $request->get('adresse1');
-
 
 
         $sn = $this->getDoctrine()->getManager();
@@ -97,8 +89,7 @@ class ClientsController extends FOSRestController
 
         if (empty($clients)) {
             return new View("user not found", Response::HTTP_NOT_FOUND);
-        }
-        elseif(!empty($ref) && !empty($raison_sociale) && !empty($siret) && !empty($adresse1)){
+        } elseif (!empty($ref) && !empty($raison_sociale) && !empty($siret) && !empty($adresse1)) {
 
             $clients->setClRef($ref)
                 ->setClRaisonsoc($raison_sociale)
@@ -106,15 +97,11 @@ class ClientsController extends FOSRestController
                 ->setClAdresse1($adresse1);
 
             $sn->flush();
-            return new View("User Updated Successfully", Response::HTTP_OK);
-        }
-        else return new View("Impossible de mettre a jour les données", Response::HTTP_NOT_ACCEPTABLE);
-
-
+            return new View("Utilisateur Updated Successfully", Response::HTTP_OK);
+        } else return new View("Impossible de mettre a jour les données", Response::HTTP_NOT_ACCEPTABLE);
 
 
     }
-
 
 
     /**
@@ -124,10 +111,6 @@ class ClientsController extends FOSRestController
     {
 
 
-
-
-
-
         $sn = $this->getDoctrine()->getManager();
         $repository = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients');
 
@@ -136,18 +119,14 @@ class ClientsController extends FOSRestController
         $clients = $repository->find($id);
 
 
-
-
         if (empty($clients)) {
             return new View("user not found", Response::HTTP_NOT_FOUND);
-        }
-        else {
+        } else {
             $sn->remove($clients);
             $sn->flush();
         }
         return new View("deleted successfully", Response::HTTP_OK);
     }
-
 
 
     /**
@@ -173,6 +152,20 @@ class ClientsController extends FOSRestController
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
 
 
+        $dsn = $this->get('database_connection');
+
+        $restresult = $dsn->fetchAll('
+            SELECT TOP
+              501 t.*
+            FROM
+              CENTRALE_ACHAT_JB.dbo.LOGS t
+            WHERE
+              t.LO_IDENT = \'CL_ID\'
+            AND
+                t.LO_IDENT_NUM = '.$id . '
+          ');
+
+
 
 
         if ($restresult === null) {
@@ -181,4 +174,108 @@ class ClientsController extends FOSRestController
         return $restresult;
     }
 
+
+
+
+
+
+
+
+    /**
+     * @Rest\Get("/Agence/{id}/commande")
+     */
+    public function getTicketCmdAgenceAction($id)
+    {
+        $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+        $sql = "SELECT FO_RAISONSOC, COUNT(CE_ID) AS NB_CMD, COUNT(MESSAGE_ENTETE.ME_ID) AS NB_TICKETS
+                FROM dbo.MESSAGE_ENTETE
+                INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON MESSAGE_ENTETE.FO_ID = FOURNISSEURS.FO_ID
+                LEFT JOIN dbo.COMMANDE_ENTETE ON MESSAGE_ENTETE.ME_ID = COMMANDE_ENTETE.ME_ID
+                WHERE MESSAGE_ENTETE.CL_ID = :id
+                GROUP BY FO_RAISONSOC
+                ORDER BY NB_TICKETS DESC
+        ";
+
+
+        $stmt = $db2->prepare($sql);
+
+        $stmt->bindValue("id", $id);
+        $stmt->execute();
+
+        $restresult = $stmt->fetchAll();
+
+
+        if ($restresult === null) {
+            return new View("there are no users exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
+
+
+    /**
+     * @Rest\Get("/Agence/{id}/ticket")
+     */
+    public function getTicketAgenceAction($id)
+    {
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Panier')->findAll();
+
+
+        $dsn = $this->get('database_connection');
+
+        $restresult = $dsn->fetchAll('SELECT TOP 501 t.* FROM dbo.Vue_All_Tickets t');
+
+
+
+
+        if ($restresult === null) {
+            return new View("there are no users exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
+
+    /**
+     * @Rest\Get("/Agence/{id}/adresse/{type}")
+     */
+    public function getAdresseAction($id, $type)
+    {
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(array(
+            "clId" => $id,
+            "caType" => $type
+        ));
+
+
+        if ($restresult === null) {
+            return new View("there are no users exist", Response::HTTP_NOT_FOUND);
+        }
+        return $restresult;
+    }
+
+
+
+
+
+    /**
+     * @Rest\Get("/Agence/count")
+     */
+    public function getCountAction($id, $type)
+    {
+
+
+        $repository = $this->getDoctrine()
+            ->getRepository('AchatCentraleCrmBundle:Clients');
+
+
+        $count = $repository->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+        return $count;
+    }
+
+
 }
+

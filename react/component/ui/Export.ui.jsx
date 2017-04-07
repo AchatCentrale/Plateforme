@@ -1,4 +1,7 @@
 import React from 'react';
+
+import {Icon} from 'semantic-ui-react'
+
 import {
     Router,
     Route,
@@ -14,8 +17,8 @@ import {
 export default class Export extends React.Component {
     render() {
         return(
-            <div>
-                <p className="export-icon" >Exporter</p>
+            <div className='update-icon cursor' >
+                Exporter <Icon  name='external share'/>
             </div>
         );
     }

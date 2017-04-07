@@ -1,0 +1,94 @@
+AchatCentrale\CrmBundle\Entity\ClientsTaches:
+    type: entity
+    table: CLIENTS_TACHES
+    indexes:
+        IDX_1AB05ADE3F592A49:
+            columns:
+                - CL_ID
+    id:
+        claId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: CLA_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        usId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: US_ID
+        claType:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CLA_TYPE
+        claNom:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: CLA_NOM
+        claDescr:
+            type: string
+            nullable: true
+            length: 5000
+            options:
+                fixed: false
+            column: CLA_DESCR
+        claEcheance:
+            type: datetime
+            nullable: true
+            column: CLA_ECHEANCE
+        claPriorite:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CLA_PRIORITE
+        claNotifRef:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CLA_NOTIF_REF
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    manyToOne:
+        cl:
+            targetEntity: Clients
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                CL_ID:
+                    referencedColumnName: CL_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

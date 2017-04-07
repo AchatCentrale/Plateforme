@@ -1,72 +1,147 @@
 import React from 'react';
 
 
-export default class Info extends React.Component {
+import {Label, Icon} from 'semantic-ui-react'
 
 
-    constructor(props){
+export default class
+
+
+
+
+Info extends React.Component {
+
+
+    constructor(props) {
         super(props);
 
 
-
-
     }
 
 
-    componentWillMount(){
+    componentWillMount() {
 
     }
-
 
 
     render() {
-        let styleStatut = {
-            backgroundColor : "#60C06C",
-            color: "white"
+
+
+        const siret = (siret) => {
+
+
+            let result = [];
+            for (let i = 0; i <= siret.length; i++) {
+
+                if (i === 3) {
+                    result.push(siret.substring(0, 3), " ")
+
+                } else if (i === 6) {
+                    result.push(siret.substring(3, 6), " ")
+
+                } else if (i === 9) {
+                    result.push(siret.substring(6, 9), " ")
+
+                } else if (i > 9 && i < 14) {
+                    result.push(siret.substring(9), " ")
+                    return result
+
+                }
+            }
+
+
         };
 
-        let styleStatutFail ={
-            backgroundColor : "#801515",
-            color: "white"
+
+        const tel = (tel) => {
+
+
+            /*tel.replace(/\s/g,'');*/
+
+            let result = [];
+            let len = tel.length;
+
+
+            for (let i = 10; i > 0; i -= 2) {
+                result.push(tel.substring(i - 2, i));
+            }
+
+            result.reverse();
+            tel = result.join(' ');
+
+            return tel
+
         };
 
 
-        return(
-          <div className="container-info">
-              <div className="container-info-gauche">
-                  <div className="col-gauche-info">
-                      <p>Réference</p>
-                      <p>Raison social</p>
-                      <p>Siret</p>
-                      <p>Téléphone</p>
-                  </div>
-                  <div className="col-droite-info">
-                      <p>{this.props.clients.clRef}</p>
-                      <p>{this.props.clients.clRaisonsoc}</p>
-                      <p>{this.props.clients.clSiret}</p>
-                      <p>{this.props.clients.clTel}</p>
+        const status = (status) => {
 
-                  </div>
-              </div>
-              <div className="container-info-droite">
-                  <div className="col-gauche-info">
-                      <p>Nombre de salariés</p>
-                      <p>Statut</p>
-                      <p>Responsable</p>
-                  </div>
-                  <div className="col-droite-info">
-                      <p>500-1000</p>
-                      <p
-                          style={
-                            (this.props.clients.clStatus === 1)
-                                  ? styleStatut
-                                  : styleStatutFail
-                                }
-                      >Actif</p>
-                      <p>Morgane</p>
-                  </div>
-              </div>
-          </div>
+            if (status === 1) {
+                return (<p><Label color='green'>
+                    actif
+                </Label></p>)
+            } else {
+                return (<p><Label color='red'>
+                    Inactif
+                </Label></p>)
+
+            }
+
+        };
+
+
+        return (
+            <div className="container-info">
+                <div className="container-info-gauche">
+                    <div className="col-gauche-info">
+                        <p>Référence</p>
+                        <p>Raison social</p>
+                        <p>Siret</p>
+                        <p>Téléphone</p>
+                    </div>
+                    <div className="col-droite-info">
+                        <p><Label>
+                            {this.props.clients.clRef}
+                        </Label></p>
+                        <p><Label>
+                            {this.props.clients.clRaisonsoc}
+                        </Label></p>
+                        <p><Label>
+                            {siret(this.props.clients.clSiret)}
+                        </Label></p>
+                        <p>
+                            <Label>
+                                <Icon name='call'/>{tel(this.props.clients.clTel)}
+                            </Label>
+                        </p>
+
+                    </div>
+                </div>
+                <div className="container-info-droite">
+                    <div className="col-gauche-info">
+                        <p>Nombre de salariés</p>
+                        <p>Statut</p>
+                        <p>Responsable</p>
+                        <p>Groupe</p>
+                    </div>
+                    <div className="col-droite-info">
+                        <p><Label>
+                            {this.props.clients.clEffectif}
+                        </Label></p>
+                        {status(this.props.clients.clStatus)}
+                        <p>
+                            <Label>
+                                <Icon name="user"/>Morgane
+                            </Label>
+                        </p>
+                        <p>
+                            <Label color='blue'>
+                               V.IP
+                            </Label>
+                        </p>
+                    </div>
+                </div>
+            </div>
         );
     }
 

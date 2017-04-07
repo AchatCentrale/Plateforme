@@ -1,38 +1,23 @@
-login:
-    path:   /login
-    defaults: {_controller: SiteBundle:Security:login}
-
-logout:
-    path:   /logout
-
 index_auth:
     path:     /
     defaults: { _controller: SiteBundle:Base:indexAuth }
 
+Who-Are-The-User:
+    path:     /who/{type}
+    defaults: { _controller: SiteBundle:Base:whoAre }
+
+Count:
+    path:     /Agence/count
+    defaults: { _controller: SiteBundle:Base:countAgence }
 
 
 
-clientById:
-    path:     /client/{id}
-    defaults: { _controller: SiteBundle:Base:clientById }
+
+
 
 sendClientDetailMail:
     path:     /send/client/{clientId}
     defaults: {_controller: SiteBundle:Base:sendClientDetailMail}
-
-DeleteClientAction:
-    path: /delete/client/{id}
-    defaults:  {_controller: SiteBundle:Base:removeClient}
-
-AddClientAction:
-    path: /add/client/
-    defaults:  {_controller: SiteBundle:Base:AddClient}
-
-
-settings:
-    path:     /settings
-    defaults: {_controller: SiteBundle:Base:settings}
-
 
 test:
     path:    /test

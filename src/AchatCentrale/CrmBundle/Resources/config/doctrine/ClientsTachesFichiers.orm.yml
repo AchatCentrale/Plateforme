@@ -1,0 +1,41 @@
+AchatCentrale\CrmBundle\Entity\ClientsTachesFichiers:
+    type: entity
+    table: CLIENTS_TACHES_FICHIERS
+    indexes:
+        IDX_E475767FB14F4B39:
+            columns:
+                - CLA_ID
+    id:
+        ctfId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: CTF_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        ctfFichier:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+            column: CTF_FICHIER
+        ctfDate:
+            type: datetime
+            nullable: true
+            column: CTF_DATE
+    manyToOne:
+        cla:
+            targetEntity: ClientsTaches
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                CLA_ID:
+                    referencedColumnName: CLA_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
