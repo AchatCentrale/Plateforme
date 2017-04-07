@@ -113,6 +113,10 @@ AchatCentrale\CrmBundle\Entity\Clients:
             type: datetime
             nullable: true
             column: CL_DT_ADHESION
+        clDtRenouv:
+            type: date
+            nullable: true
+            column: CL_DT_RENOUV
         clLogo:
             type: string
             nullable: true
@@ -212,6 +216,13 @@ AchatCentrale\CrmBundle\Entity\Clients:
             options:
                 fixed: false
             column: CL_TEMPO
+        clNivAction:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: CL_NIV_ACTION
         insDate:
             type: datetime
             nullable: true

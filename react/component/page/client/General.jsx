@@ -88,7 +88,6 @@ export default class General extends React.Component {
 
                     <ActionBar context={this.props} />
                     <div className="container-general">
-                    <ActionBar />
 
                         <Grid columns='equal'>
                             <Grid.Column width={12}>

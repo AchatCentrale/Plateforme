@@ -1052,4 +1052,62 @@ class Clients
     {
         return $this->clMasqVt;
     }
+    /**
+     * @var \DateTime
+     */
+    private $clDtRenouv;
+
+    /**
+     * @var integer
+     */
+    private $clNivAction = '0';
+
+
+    /**
+     * Set clDtRenouv
+     *
+     * @param \DateTime $clDtRenouv
+     *
+     * @return Clients
+     */
+    public function setClDtRenouv($clDtRenouv)
+    {
+        $this->clDtRenouv = $clDtRenouv;
+
+        return $this;
+    }
+
+    /**
+     * Get clDtRenouv
+     *
+     * @return \DateTime
+     */
+    public function getClDtRenouv()
+    {
+        return $this->clDtRenouv;
+    }
+
+    /**
+     * Set clNivAction
+     *
+     * @param integer $clNivAction
+     *
+     * @return Clients
+     */
+    public function setClNivAction($clNivAction)
+    {
+        $this->clNivAction = $clNivAction;
+
+        return $this;
+    }
+
+    /**
+     * Get clNivAction
+     *
+     * @return integer
+     */
+    public function getClNivAction()
+    {
+        return $this->clNivAction;
+    }
 }
