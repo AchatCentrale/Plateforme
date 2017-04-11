@@ -26,9 +26,9 @@ class BaseController extends Controller
     public function indexAuthAction(Request $request)
     {
 
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+       /* if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
-        }
+        }*/
 
 
         return $this->render('@Site/Base/home.html.twig', array());

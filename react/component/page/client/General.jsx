@@ -21,10 +21,6 @@ import {
 export default class General extends React.Component {
 
 
-    updateClick(e){
-        console.log(e)
-    }
-
     getClients() {
         let url = "http://localhost:8000/Agence/" + this.props.params.id;
         $.getJSON(url, (data) => {

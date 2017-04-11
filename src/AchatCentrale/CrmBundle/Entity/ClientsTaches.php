@@ -7,6 +7,13 @@ namespace AchatCentrale\CrmBundle\Entity;
  */
 class ClientsTaches
 {
+
+
+    function __construct()
+    {
+        $this->setInsDate();
+    }
+
     /**
      * @var integer
      */
@@ -254,13 +261,12 @@ class ClientsTaches
     /**
      * Set insDate
      *
-     * @param \DateTime $insDate
      *
      * @return ClientsTaches
      */
-    public function setInsDate($insDate)
+    public function setInsDate()
     {
-        $this->insDate = $insDate;
+        $this->insDate = new \DateTime("now");
 
         return $this;
     }
@@ -354,11 +360,10 @@ class ClientsTaches
      *
      * @return ClientsTaches
      */
-    public function setCl(\AchatCentrale\CrmBundle\Entity\Clients $cl = null)
+    public function setCl(Clients $cl = null)
     {
         $this->cl = $cl;
 
-        return $this;
     }
 
     /**

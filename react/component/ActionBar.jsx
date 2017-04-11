@@ -14,57 +14,13 @@ export default class ActionBar extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            clients: [],
-            clientsUser: [],
-
-        };
-    }
-
-    getClients() {
-
-        if (this.props.context) {
-            let url = "http://localhost:8000/Agence/" + this.props.context.params.id;
-            $.getJSON(url, (data) => {
-
-                this.setState({
-                    clients: data[0],
-                    loading: false
-                });
-            })
-        } else {
-            return;
-        }
-    }
-
-    getClientsUser() {
-
-        if (this.props.context) {
-            let url = "http://localhost:8000/Agence/" + this.props.context.params.id + "/users";
-            $.getJSON(url, (data) => {
-
-                let array = [];
-                for (let i = 0; i < data.length; i++) {
-                    array.push(data[i]);
-                }
 
 
-                this.state = {
-                    clientsUser: array,
-                    loading: false
-                };
 
-            })
-        } else {
-            return;
-        }
     }
 
 
-    componentWillMount() {
-        this.getClientsUser.call(this);
-        this.getClients.call(this);
-    }
+
 
 
     render() {
@@ -73,9 +29,7 @@ export default class ActionBar extends React.Component {
                 <div className="container-actionBar">
                     <Add />
                     <Export />
-                    <Update className="cursor" onClick={(e) => {
-                        console.log(e)
-                    }}/>
+                    <Update className="cursor"  />
                 </div>
                 <div className="container-groupe">
                     { /*<Logo client={this.state.clients}/>*/}

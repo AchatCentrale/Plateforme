@@ -14,8 +14,8 @@ export default class TopBar extends React.Component {
         super(props);
 
         this.state = {open: false};
-        this.show = () => this.setState({open: true})
-        this.close = () => this.setState({open: false})
+        this.show = () => this.setState({open: true});
+        this.close = () => this.setState({open: false});
 
     }
 
@@ -32,6 +32,7 @@ export default class TopBar extends React.Component {
                     <div className="add-action">
                         <img onClick={this.show} src="/images/add_action.png" className="cursor" alt=""/>
                     </div>
+
                     <div className="avatar-topBar">
                         <Segment>
                             <Grid>
@@ -70,11 +71,7 @@ export default class TopBar extends React.Component {
                     <Modal.Content>
                         <ModalAction />
                     </Modal.Content>
-                    <Modal.Actions>
-                        <Button color='green'>
-                            <Icon name='save'/> Enregistrer
-                        </Button>
-                    </Modal.Actions>
+
                 </Modal>
 
 

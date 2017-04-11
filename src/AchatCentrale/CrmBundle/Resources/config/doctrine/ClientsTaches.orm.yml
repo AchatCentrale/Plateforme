@@ -89,6 +89,7 @@ AchatCentrale\CrmBundle\Entity\ClientsTaches:
             inversedBy: null
             joinColumns:
                 CL_ID:
+
                     referencedColumnName: CL_ID
             orphanRemoval: false
     lifecycleCallbacks: {  }

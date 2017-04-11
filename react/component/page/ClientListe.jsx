@@ -1,7 +1,7 @@
-import React from 'react';
-import {Icon, Label,Grid , Menu, Table, Input,Button, Dimmer, Loader, Image, Segment} from 'semantic-ui-react'
+import React from "react";
+import {Button, Dimmer, Grid, Icon, Image, Input, Label, Loader, Menu, Segment, Table} from "semantic-ui-react";
 
-import {browserHistory} from 'react-router'
+import {browserHistory} from "react-router";
 
 
 export default class ClientListe extends React.Component {
@@ -23,8 +23,6 @@ export default class ClientListe extends React.Component {
 
 
     handleClickGoto(e, index) {
-
-
         let path = `/client/${e}`;
 
         browserHistory.push(path)
@@ -45,24 +43,16 @@ export default class ClientListe extends React.Component {
             LimitPerPage: 10,
             DebutPagination: 0,
             loading: true
-
-
         };
-
-
     }
 
 
     componentDidMount() {
         this.getClient.call(this);
-
-
     }
 
 
     render() {
-
-
 
 
         const dataDelaTable = this.state.clients.map((client, index) => {
@@ -102,13 +92,12 @@ export default class ClientListe extends React.Component {
                 <div className="action-client-liste">
 
                     <Button.Group labeled>
-                        <Button icon='add square' content='Ajoute un nouveau client' />
-                        <Button icon='file excel outline' content='Exporter en .csv' />
-                        <Button icon='print' content='imprimer' />
+                        <Button icon='add square' content='Ajouter un nouveau client'/>
+                        <Button icon='file excel outline' content='Exporter en .csv'/>
+                        <Button icon='print' content='imprimer'/>
                     </Button.Group>
 
                 </div>
-
 
 
                 <div className="table-client">

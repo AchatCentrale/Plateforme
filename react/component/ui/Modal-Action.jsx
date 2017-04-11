@@ -1,13 +1,28 @@
-import React from 'react';
-
-import {Grid, Checkbox, Input, Form, TextArea, Select} from 'semantic-ui-react'
-
+import React, { PropTypes } from 'react'
+import {Checkbox, Form, Grid, Input, Select, TextArea, Label, Button,Icon} from "semantic-ui-react";
+import Priorite from './Priorite.jsx'
 
 export default class ModalAction extends React.Component {
 
     constructor(props) {
         super();
+        $( function() {
+            $( ".datepicker" ).datepicker();
+        } );
     }
+
+
+    handleClickSave(e){
+
+        console.log(e.target.value);
+
+    }
+
+    componentWillMount() {
+
+
+    }
+
 
 
     render() {
@@ -19,7 +34,6 @@ export default class ModalAction extends React.Component {
                 <Grid columns='equal'>
 
 
-
                     <Grid.Row>
                         <Grid.Column>
                             <div className="interlocuteur">
@@ -27,7 +41,7 @@ export default class ModalAction extends React.Component {
                                     <p>Interlocuteur</p>
                                 </div>
                                 <div>
-                                    <Input icon='users' iconPosition='left' placeholder='Utilisateur ..'/>
+                                    <Input id="utilisateur-action" onChange={e => this.handleClickSave(e)}  icon='users' iconPosition='left' placeholder='Utilisateur ..'/>
                                 </div>
                             </div>
                         </Grid.Column>
@@ -37,47 +51,55 @@ export default class ModalAction extends React.Component {
                                     <p>Entreprise</p>
                                 </div>
                                 <div>
-                                    <Input icon='briefcase' iconPosition='left' placeholder='Nom entreprise ..'/>
+                                    <Input id="raisonsoc-action"  icon='briefcase' iconPosition='left' placeholder='Nom entreprise ..'/>
                                 </div>
                             </div>
                         </Grid.Column>
+                    </Grid.Row>
+
+
+                    <Grid.Row>
+                        <Grid.Column>
+                            <Checkbox id="referent-action"  label='Notifier le référent ?'/>
+                        </Grid.Column>
                         <Grid.Column>
                             <p>Date : { moment().format("D MMMM GGGG") }</p>
-                            <p>Date d'echance : { moment().format("D MMMM GGGG") }</p>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <p>Date d'échéance : <input  id="echeance-action"  type="text" className="datepicker"/>
+                            </p>
                         </Grid.Column>
                     </Grid.Row>
-
-
 
 
                     <Grid.Row>
                         <Grid.Column>
-                            <Checkbox label='Notifier le référent' />
+                            <Select  id="type-action"   placeholder="Selectionnez le type d'action"/>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Select  id="contact-action"   placeholder="Assigné à"/>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Priorite />
                         </Grid.Column>
                     </Grid.Row>
-
-
-
-                    <Grid.Row>
-                        <Grid.Column>
-                            <Select placeholder="Selectionnez le type d'action"/>
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Select placeholder="Assigné à"/>
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Select placeholder="Priorité"/>
-                        </Grid.Column>
-                    </Grid.Row>
-
-
 
 
                     <Grid.Row>
                         <Grid.Column>
                             <Form>
-                                <TextArea placeholder='Votre commentaire ...'/>
+                                <TextArea id="desc-action" className="action-for-save"  placeholder='Votre commentaire ...'/>
                             </Form>
+                        </Grid.Column>
+                    </Grid.Row>
+
+
+
+                    <Grid.Row textAlign='center'>
+                        <Grid.Column>
+                            <Button fluid onClick={this.handleClickSave.bind(this)} color='green'>
+                                <Icon name='save'/> Enregistrer
+                            </Button>
                         </Grid.Column>
                     </Grid.Row>
 

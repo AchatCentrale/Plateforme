@@ -1,15 +1,10 @@
-import React from 'react';
+import React from "react";
 
 
-import {Label, Icon} from 'semantic-ui-react'
+import {Icon, Label} from "semantic-ui-react";
 
 
-export default class
-
-
-
-
-Info extends React.Component {
+export default class Info extends React.Component {
 
 
     constructor(props) {
@@ -77,13 +72,17 @@ Info extends React.Component {
         const status = (status) => {
 
             if (status === 1) {
-                return (<p><Label color='green'>
-                    actif
-                </Label></p>)
+                return (<p>
+                    <Label  color='green'>
+                        actif
+                    </Label>
+                </p>)
             } else {
-                return (<p><Label color='red'>
-                    Inactif
-                </Label></p>)
+                return (<p>
+                    <Label  color='red'>
+                        Inactif
+                    </Label>
+                </p>)
 
             }
 
@@ -100,17 +99,23 @@ Info extends React.Component {
                         <p>Téléphone</p>
                     </div>
                     <div className="col-droite-info">
-                        <p><Label>
-                            {this.props.clients.clRef}
-                        </Label></p>
-                        <p><Label>
-                            {this.props.clients.clRaisonsoc}
-                        </Label></p>
-                        <p><Label>
-                            {siret(this.props.clients.clSiret)}
-                        </Label></p>
                         <p>
-                            <Label>
+                            <Label className="edit-client-element">
+                                {this.props.clients.clRef}
+                            </Label>
+                        </p>
+                        <p>
+                            <Label className="edit-client-element">
+                                {this.props.clients.clRaisonsoc}
+                            </Label>
+                        </p>
+                        <p>
+                            <Label className="edit-client-element">
+                                {siret(this.props.clients.clSiret)}
+                            </Label>
+                        </p>
+                        <p>
+                            <Label className="edit-client-element">
                                 <Icon name='call'/>{tel(this.props.clients.clTel)}
                             </Label>
                         </p>
@@ -125,18 +130,20 @@ Info extends React.Component {
                         <p>Groupe</p>
                     </div>
                     <div className="col-droite-info">
-                        <p><Label>
-                            {this.props.clients.clEffectif}
-                        </Label></p>
+                        <p>
+                            <Label className="edit-client-element">
+                                {this.props.clients.clEffectif}
+                            </Label>
+                        </p>
                         {status(this.props.clients.clStatus)}
                         <p>
-                            <Label>
+                            <Label className="edit-client-element">
                                 <Icon name="user"/>Morgane
                             </Label>
                         </p>
                         <p>
-                            <Label color='blue'>
-                               V.IP
+                            <Label  color='blue'>
+                                V.IP
                             </Label>
                         </p>
                     </div>

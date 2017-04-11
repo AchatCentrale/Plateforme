@@ -2,40 +2,41 @@
 
 namespace AchatCentrale\CrmBundle\Entity;
 
+
+
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * @ORM\Table(name="utilisateur")
- * @ORM\Entity(repositoryClass="AchatCentrale\CrmBundle\Repository\UtilisateurRepository")
+ * @ORM\Entity
+ * @ORM\Table(name="Utilisateur")
+ * @ExclusionPolicy(all)
  */
 class Utilisateur extends BaseUser
 {
-
-
-    public function __construct()
-    {
-        parent::__construct();
-
-    }
-
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
 
-    /**
-     * Get enabled
-     *
-     * @return boolean
-     */
-    public function getEnabled()
+    public function __construct()
     {
-        return $this->enabled;
+        parent::__construct();
+        // your own logic
+    }
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }
+
