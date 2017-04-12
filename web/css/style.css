@@ -108,7 +108,7 @@ img {
     cursor: pointer;
 }
 
-a:hover {
+.menu-nav a:hover {
     color: white;
     text-decoration: none;
     cursor: pointer;
@@ -218,14 +218,31 @@ body {
     position: relative;
     margin-top: 42%;
     padding-bottom: 56px;
-    text-align: left;
-    margin-left: 50px;
+}
+
+
+.extra-nav li a {
+    color: black;
+    list-style-type: none;
+    margin: 10px 0px 10px 0px;
+}
+.extra-nav li a:hover {
+    color: black;
+
+}
+
+
+.extra-nav li {
+    list-style-type: none;
 }
 
 .menu-home p {
     padding-right: 13px;
 }
 
+.extra-nav{
+    background-color: white;
+}
 
 .menu-nav a {
     text-decoration: none;
@@ -674,7 +691,9 @@ a.btn-add-client {
     margin-top: 37px;
     margin-left: 55px;
 }
-
+.active {
+    background-color: #103f77;
+}
 
 .depense-container {
     margin: 105px 1px 1px 26px;
@@ -791,10 +810,6 @@ form.ink-form.form-login {
 
 .container-client-action {
     padding-top: 14px;
-}
-
-.container-adresse-general {
-    margin-top: 43px;
 }
 
 .adresse-agence h3 {

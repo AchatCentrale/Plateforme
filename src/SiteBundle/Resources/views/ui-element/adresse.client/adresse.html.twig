@@ -1,0 +1,59 @@
+<div class="container-adresse-general">
+    <div class="adresse-agence">
+
+
+
+
+        <div class="ui raised very padded text container segment">
+            <h2 class="ui center aligned icon header"> Adresse de l'agence </h2>
+            <p></p>
+            <p></p>
+        </div>
+
+
+        <Grid columns={2}>
+            <Grid.Column>
+                <Card>
+
+                    <Card.Content>
+                        <Card.Header>
+                            Adresse de livraison
+                            <Icon class="cursor" circular  name="edit" />
+                        </Card.Header>
+                        <Card.Meta>
+                            {this.props.adresseL.caPrincipale === 1 ? "Adresse principale" : <br/>}
+                        </Card.Meta>
+                        <Card.Description>
+                            <p>{this.props.adresseL.caAdresse1}</p>
+                            <br/>
+                            <p>{this.props.adresseL.caCp + "  " + this.props.adresseL.caVille}</p>
+                        </Card.Description>
+                    </Card.Content>
+
+                </Card>
+            </Grid.Column>
+            <Grid.Column>
+                <Card>
+                    <Card.Content>
+                        <Card.Header>
+                            Adresse de Facturation
+                            <Icon class="cursor" circular  name="edit" />
+                        </Card.Header>
+                        <Card.Meta>
+                            {this.props.adresseF.caPrincipale === 1 ? "Adresse principale" : <br/>}
+                        </Card.Meta>
+                        <Card.Description>
+                            <p>{this.props.adresseF.caAdresse1}</p>
+                            <br/>
+                            <p>{this.props.adresseF.caCp + "  " + this.props.adresseF.caVille}</p>
+                        </Card.Description>
+                    </Card.Content>
+
+                </Card>
+            </Grid.Column>
+
+        </Grid>
+
+
+    </div>
+</div>

@@ -60,7 +60,19 @@ class BaseController extends Controller
 
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy(array('clId' => $id));
 
-        return $this->render('@Site/Base/client.detail.html.twig', [
+        return $this->render('@Site/Base/client.general.html.twig', [
+            "client" => $restresult
+        ]);
+
+    }
+
+    public function ClientAdresseAction($id)
+    {
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(array(
+            "clId" => $id,
+        ));
+
+        return $this->render('@Site/Base/client.adresse.html.twig', [
             "client" => $restresult
         ]);
 

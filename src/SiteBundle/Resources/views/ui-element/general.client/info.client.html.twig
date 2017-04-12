@@ -1,0 +1,28 @@
+{% for clients in client %}
+    <div class="ui equal width grid">
+    <div class="equal width row">
+        <div class="column">
+            <h1>{{ clients.clRaisonSoc }}</h1>
+            <h3>Centrale Roc-Eclerc</h3>
+            <div class="ui equal width grid">
+                <div class="equal width row">
+                    <div class="column">
+                        <div class="ui label blue">VIP</div>
+                        <div class="ui label green">ACTIF</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="column">
+            <div class="ui segment">
+
+                <h2>{{ clients.clAdresse1 }}</h2>
+                <h3>{{ clients.clVille }} {{ clients.clCp }}</h3>
+                <h3>Numero de téléphone : {{ clients.clTel }}</h3>
+                <h3>Adresse mail : {{ clients.clMail }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

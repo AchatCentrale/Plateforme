@@ -32,7 +32,7 @@
 
 
 
-                <div class="ui modal">
+                <div class="ui modal action">
                     <i class="close icon"></i>
                     <div class="header">
                         <i class="tasks teal large icon"></i>
@@ -79,16 +79,27 @@
 
 
                         <div class="menu-nav">
-
-
-                            <div class="menu-home hover">
+                            <div class="{% if app.request.attributes.get('_route') == 'index_auth' %}active {% endif %}menu-home hover">
                                 <i class="home teal large icon"></i>
                                 <a href="{{ path('index_auth') }}">Home</a>
                             </div>
-                            <div class="menu-client hover">
+                            <div class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' %}active {% endif %}menu-client hover">
                                 <i class="group teal large icon"></i>
                                 <a href="{{ path('client') }}">Clients</a>
                             </div>
+                           {% if app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' %}
+                            <div class="extra-nav">
+
+                                    <li><a href="{{ path('client-general', {'id': app.request.attributes.get('id')}) }}">Général</a></li>
+                                    <li><a href="{{ path('client-adresse', {'id': app.request.attributes.get('id')}) }}">Adresse</a></li>
+                                    <li><a href="#contact">Status</a></li>
+                                    <li><a href="#about">Actions</a></li>
+
+
+
+                            </div>
+                            {% endif %}
+
                             <div class="menu-supplier hover">
                                 <i class="suitcase teal large icon"></i>
                                 <a href="/fournisseur">Fournisseur</a>
@@ -96,6 +107,7 @@
 
 
                         </div>
+
 
 
                         <div class="menu-bottom">
@@ -122,10 +134,18 @@
     <script>
         $(document).ready(function(){
             $("#mymodalg").click(function(){
-                $('.ui.modal')
+                $('.ui.modal.action')
                     .modal('show')
                 ;
             });
+
+            $("#add-modal-client").click(function(){
+                $('.ui.modal.add')
+                    .modal('show')
+                ;
+            });
+
+
         });
     </script>
 

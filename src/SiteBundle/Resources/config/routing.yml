@@ -14,6 +14,11 @@ client-general:
     defaults: { _controller: SiteBundle:Base:ClientGeneral }
 
 
+client-adresse:
+    path:     /client/{id}/adresse
+    defaults: { _controller: SiteBundle:Base:ClientAdresse }
+
+
 Who-Are-The-User:
     path:     /who/{type}
     defaults: { _controller: SiteBundle:Base:whoAre }
