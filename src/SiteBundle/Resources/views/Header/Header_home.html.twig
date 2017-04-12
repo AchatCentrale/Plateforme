@@ -15,7 +15,7 @@
                                     <i class="user circle  teal  icon"></i>{{ app.user }}
                                 </div>
                                 <div class="column right floated">
-                                    <i class="setting icon"></i>>Modifier mon profil
+                                    <i class="setting icon"> </i> Modifier mon profil
                                 </div>
                             </div>
                         </div>
@@ -36,19 +36,12 @@
                     <i class="close icon"></i>
                     <div class="header">
                         <i class="tasks teal large icon"></i>
-                        Nouvel action
+                        Nouvelle action
                     </div>
                     <div class="content">
-                        <div class="description">
-                            <div class="ui header">We've auto-chosen a profile image for you.</div>
-                            <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
-                            <p>Is it okay to use this photo?</p>
-                        </div>
+                        {{ render('/task/new') }}
                     </div>
                     <div class="actions">
-                        <div class="ui black deny button">
-                            Nope
-                        </div>
                         <div class="ui positive right labeled icon button">
                             Yep, that's me
                             <i class="checkmark icon"></i>

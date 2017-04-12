@@ -94,13 +94,6 @@ swiftmailer:
     spool:     { type: memory }
 
 
-assetic:
-    debug:          '%kernel.debug%'
-    use_controller: '%kernel.debug%'
-    bundles:        [ SiteBundle ]
-    filters:
-        cssrewrite: ~
-
 
 
 fos_user:

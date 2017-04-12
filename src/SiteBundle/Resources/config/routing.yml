@@ -23,6 +23,11 @@ client-status:
     defaults: { _controller: SiteBundle:Base:ClientStatut }
 
 
+new-task:
+    path:     /task/new
+    defaults: { _controller: SiteBundle:Base:NewTask }
+
+
 Who-Are-The-User:
     path:     /who/{type}
     defaults: { _controller: SiteBundle:Base:whoAre }
