@@ -6,9 +6,13 @@ index_auth:
 
 client:
     path:     /client
-    defaults: { client: null }
-    requirements:
-            client: ".+"
+    defaults: { _controller: SiteBundle:Base:Client }
+
+
+client-general:
+    path:     /client/{id}/general
+    defaults: { _controller: SiteBundle:Base:ClientGeneral }
+
 
 Who-Are-The-User:
     path:     /who/{type}

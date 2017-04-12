@@ -1,19 +1,55 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 
 {% block body %}
 
-    {#include bandeau header#}
-    {{ include ('SiteBundle:Header:Header_home.html.twig') }}
+    <div class="action-client-liste">
 
+        <div class="ui icon buttons">
+            <button class="ui button"><i class="add square icon"></i>Ajouter un nouveau client</button>
+            <button class="ui button"><i class="file excel outline icon"></i>Exporter en .csv</button>
+            <button class="ui button"><i class="print icon"></i>imprimer</button>
 
+        </div>
+    </div>
 
-    {#include element interface#}
-    {{ include('SiteBundle:ui-element:home-ui.html.twig') }}
+    <div class="table-client">
+    <table class="ui selectable striped table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Raison sociale</th>
+            <th>Adresse mail</th>
+            <th>Membre depuis</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for clients in client %}
+        <tr data-href="{{ path('client-general', { 'id' : clients.clId}) }}">
+            <td>{{ clients.clId }}</td>
+            <td>{{ clients.clRaisonsoc }}</td>
+            <td>{{ clients.clMail }}</td>
+            <td>{{ clients.clDtAdhesion | date('d/m/Y') }}</td>
+        </tr>
+        {% endfor %}
 
+        </tbody>
+    </table>
 
-
-
-
+</div>
 {% endblock %}
+
+
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function(){
+            $('table tr').click(function(){
+                window.location = $(this).data('href');
+                return false;
+            });
+        });
+
+    </script>
+{% endblock  %}
 

@@ -1,6 +1,136 @@
 <header>
+    <div>
+        <div class="top-bar">
+            <div>
+                <div class="recherche">
+                    <div class="add-action" id="mymodalg">
+                        <img src="/images/add_action.png" class="cursor" alt=""/>
+                    </div>
+
+                    <div class="avatar-topBar">
+                        <div class="ui segment">
+                        <div class="ui equal width grid">
+                            <div class="equal width row">
+                                <div class="column left floated">
+                                    <i class="user circle  teal  icon"></i>{{ app.user }}
+                                </div>
+                                <div class="column right floated">
+                                    <i class="setting icon"></i>>Modifier mon profil
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="ui modal">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        <i class="tasks teal large icon"></i>
+                        Nouvel action
+                    </div>
+                    <div class="content">
+                        <div class="description">
+                            <div class="ui header">We've auto-chosen a profile image for you.</div>
+                            <p>We've grabbed the following image from the <a href="https://www.gravatar.com" target="_blank">gravatar</a> image associated with your registered e-mail address.</p>
+                            <p>Is it okay to use this photo?</p>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <div class="ui black deny button">
+                            Nope
+                        </div>
+                        <div class="ui positive right labeled icon button">
+                            Yep, that's me
+                            <i class="checkmark icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+            <div class="continer-nav-bar">
+                <div>
+
+
+                    <div class="nav-bar">
+
+
+
+                        <div class="presentation">
+                            <div class="block-logo">
+                                <img src="/images/logo-achatcentrale.png" alt="logo_crm"  />
+                                <p>CRM v1.0</p>
+                            </div>
+                        </div>
+
+
+                        <div class="menu-nav">
+
+
+                            <div class="menu-home hover">
+                                <i class="home teal large icon"></i>
+                                <a href="/">Home</a>
+                            </div>
+                            <div class="menu-client hover">
+                                <i class="group teal large icon"></i>
+                                <a href="/client">Clients</a>
+                            </div>
+                            <div class="menu-supplier hover">
+                                <i class="suitcase teal large icon"></i>
+                                <a href="/fournisseur">Fournisseur</a>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="menu-bottom">
+                            <i class="log out teal large icon"></i>
+                            <a href="/logout"> Déconnection</a>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+            </div>
+
+    </div>
 
 </header>
+
+
+
+{% block javascripts %}
+
+    <script>
+        $(document).ready(function(){
+            $("#mymodalg").click(function(){
+                $('.ui.modal')
+                    .modal('show')
+                ;
+            });
+        });
+    </script>
+
+{% endblock %}
+
 
 
 

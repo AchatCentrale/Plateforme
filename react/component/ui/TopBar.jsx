@@ -27,13 +27,12 @@ export default class TopBar extends React.Component {
         return (
 
             <div>
-                <div className="recherche">
-
-                    <div className="add-action">
-                        <img onClick={this.show} src="/images/add_action.png" className="cursor" alt=""/>
+                <div class="recherche">
+                    <div class="add-action">
+                        <img onClick={this.show} src="/images/add_action.png" class="cursor" alt=""/>
                     </div>
 
-                    <div className="avatar-topBar">
+                    <div class="avatar-topBar">
                         <Segment>
                             <Grid>
                                 <Grid.Column floated='left' width={4}>
@@ -52,14 +51,14 @@ export default class TopBar extends React.Component {
 
                     </div>
 
-                    <div className="ajout">
-                        <div className="loupe">
+                    <div class="ajout">
+                        <div class="loupe">
                             🔍
                         </div>
                         <input type="text" placeholder="Recherche"/>
                     </div>
 
-                    <div className="notification">
+                    <div class="notification">
 
                     </div>
 

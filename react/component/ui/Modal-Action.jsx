@@ -51,7 +51,7 @@ export default class ModalAction extends React.Component {
                                     <p>Entreprise</p>
                                 </div>
                                 <div>
-                                    <Input id="raisonsoc-action"  icon='briefcase' iconPosition='left' placeholder='Nom entreprise ..'/>
+                                    <Input id="raisonsoc-action" onChange={e => this.handleClickSave(e)} icon='briefcase' iconPosition='left' placeholder='Nom entreprise ..'/>
                                 </div>
                             </div>
                         </Grid.Column>
@@ -60,7 +60,7 @@ export default class ModalAction extends React.Component {
 
                     <Grid.Row>
                         <Grid.Column>
-                            <Checkbox id="referent-action"  label='Notifier le référent ?'/>
+                            <Checkbox onChange={e => this.handleClickSave(e)} id="referent-action"  label='Notifier le référent ?'/>
                         </Grid.Column>
                         <Grid.Column>
                             <p>Date : { moment().format("D MMMM GGGG") }</p>
@@ -74,13 +74,13 @@ export default class ModalAction extends React.Component {
 
                     <Grid.Row>
                         <Grid.Column>
-                            <Select  id="type-action"   placeholder="Selectionnez le type d'action"/>
+                            <Select  id="type-action" onChange={e => this.handleClickSave(e)}   placeholder="Selectionnez le type d'action"/>
                         </Grid.Column>
                         <Grid.Column>
-                            <Select  id="contact-action"   placeholder="Assigné à"/>
+                            <Select  id="contact-action" onChange={e => this.handleClickSave(e)}   placeholder="Assigné à"/>
                         </Grid.Column>
                         <Grid.Column>
-                            <Priorite />
+                            <Priorite onChange={e => this.handleClickSave(e)} />
                         </Grid.Column>
                     </Grid.Row>
 
@@ -88,7 +88,7 @@ export default class ModalAction extends React.Component {
                     <Grid.Row>
                         <Grid.Column>
                             <Form>
-                                <TextArea id="desc-action" className="action-for-save"  placeholder='Votre commentaire ...'/>
+                                <TextArea id="desc-action" onChange={e => this.handleClickSave(e)} className="action-for-save"  placeholder='Votre commentaire ...'/>
                             </Form>
                         </Grid.Column>
                     </Grid.Row>

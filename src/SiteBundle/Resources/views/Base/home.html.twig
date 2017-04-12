@@ -1,14 +1,91 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 
 {% block body %}
 
-    {#include bandeau header#}
-    {{ include ('SiteBundle:Header:Header_home.html.twig') }}
+    <div class="container-dashboard">
+
+        <div class="container-intro-dashboard">
+
+            <div class="ui grid">
+                    <div class="left floated five wide column">
+                        <h3>Bonjour Jean-baptiste</h3>
+                    </div>
+                <div class="five wide column right floated">
+                    <h3>{{ "now"|date("d/m/Y") }}</h3>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="ui divider"></div>
+
+        <div class="ui container">
+            <button class="positive ui button"> Ajouter un nouveau client</button>
+            <button class="ui right labeled icon button">
+                <i class="file pdf outline icon"></i>
+                Exporter la liste des clients en .pdf'
+            </button>
+        </div>
 
 
 
+        <div class="dashboard-content">
 
+            <div class="container-dashboard-detail">
+
+                <div class="ui grid">
+                    <div class="three column row">
+                        <div class="column">
+                            <h2>Tâches a effectuer</h2>
+                            <div class="ui list">
+                                <div class="item">
+                                    <i class="map marker icon"></i>
+                                    <div class="content">
+                                        <a class="header">Krolewskie Jadlo</a>
+                                        <div class="description">An excellent polish restaurant, quick delivery and hearty, filling meals.</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="map marker icon"></i>
+                                    <div class="content">
+                                        <a class="header">Xian Famous Foods</a>
+                                        <div class="description">A taste of Shaanxi's delicious culinary traditions, with delights like spicy cold noodles and lamb burgers.</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="map marker icon"></i>
+                                    <div class="content">
+                                        <a class="header">Sapporo Haru</a>
+                                        <div class="description">Greenpoint's best choice for quick and delicious sushi.</div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <i class="map marker icon"></i>
+                                    <div class="content">
+                                        <a class="header">Enid's</a>
+                                        <div class="description">At night a bar, during the day a delicious brunch spot.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <h2>Dernieres actions effectué</h2>
+                        </div>
+                        <div class="column">
+                            <h2>Liste des groupes</h2>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+
+
+
+{#
 
     <div class="container-react-app">
 
@@ -27,7 +104,7 @@
         {% endblock %}
     </div>
 
-
+#}
 
 {% endblock %}
 

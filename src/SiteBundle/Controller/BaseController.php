@@ -35,6 +35,42 @@ class BaseController extends Controller
 
     }
 
+
+    public function ClientAction(Request $request)
+    {
+
+        /* if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+             throw $this->createAccessDeniedException();
+         }*/
+
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
+
+        return $this->render('@Site/Base/client.html.twig', [
+            "client" => $restresult
+        ]);
+
+    }
+
+    public function ClientGeneralAction($id)
+    {
+
+        /* if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+             throw $this->createAccessDeniedException();
+         }*/
+
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy(array('clId' => $id));
+
+        return $this->render('@Site/Base/client.detail.html.twig', [
+            "client" => $restresult
+        ]);
+
+    }
+
+
+
+
+
+
     public function whoAreAction(Request $request, $type)
     {
 

@@ -845,3 +845,7 @@ i.teal.large.icon
     padding-top: 10px;
     padding-right: 15px;
 }
+
+table tr[data-href] {
+    cursor: pointer;
+}

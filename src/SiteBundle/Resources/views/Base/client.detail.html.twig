@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div>
+
+
+        <ActionBar context={this.props} />
+        <div class="container-general">
+
+            <Grid columns='equal'>
+                <Grid.Column width={12}>
+
+
+
+                    <div class="container-info-client">
+                        <Info clients={this.state.clients}/>
+                            <ContactList clientsUser={this.state.clientsUser}/>
+                    </div>
+
+
+
+                </Grid.Column>
+                <Grid.Column>
+
+
+
+
+
+                    <div class="container-sidebar">
+                        <Menu pointing vertical>
+                            <Sidebar content="General" context={currentLocation}/>
+                                <Sidebar content="Adresse" context={currentLocation}/>
+                                    <Sidebar content="Status" context={currentLocation}/>
+                                        <Sidebar content="Dépense" context={currentLocation}/>
+                                            <Sidebar content="Actions" context={currentLocation}/>
+                                                <Sidebar content="Historique" context={currentLocation}/>
+                        </Menu>
+                    </div>
+
+
+
+
+
+                </Grid.Column>
+            </Grid>
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+{% endblock %}
