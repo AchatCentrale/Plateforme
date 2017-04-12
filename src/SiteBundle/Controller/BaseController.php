@@ -78,6 +78,19 @@ class BaseController extends Controller
 
     }
 
+    public function ClientStatutAction($id)
+    {
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(array(
+            "clId" => $id,
+        ));
+
+        return $this->render('@Site/Base/client.status.html.twig', [
+            "client" => $restresult
+        ]);
+
+    }
+
+
 
 
 

@@ -92,7 +92,7 @@
 
                                     <li><a href="{{ path('client-general', {'id': app.request.attributes.get('id')}) }}">Général</a></li>
                                     <li><a href="{{ path('client-adresse', {'id': app.request.attributes.get('id')}) }}">Adresse</a></li>
-                                    <li><a href="#contact">Status</a></li>
+                                    <li><a href="{{ path('client-status', {'id': app.request.attributes.get('id')}) }}">Status</a></li>
                                     <li><a href="#about">Actions</a></li>
 
 
@@ -145,6 +145,9 @@
                 ;
             });
 
+            $('#example2').progress({
+                percent: 22
+            });
 
         });
     </script>

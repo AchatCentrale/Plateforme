@@ -18,6 +18,10 @@ client-adresse:
     path:     /client/{id}/adresse
     defaults: { _controller: SiteBundle:Base:ClientAdresse }
 
+client-status:
+    path:     /client/{id}/status
+    defaults: { _controller: SiteBundle:Base:ClientStatut }
+
 
 Who-Are-The-User:
     path:     /who/{type}

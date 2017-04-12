@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div>
+
+        {% include '@Site/ui-element/action.bar.html.twig' %}
+
+        <div class="container-general">
+            <div class="container-info-client">
+                {% include '@Site/ui-element/status.client/status.html.twig' with {'client': client } %}
+
+            </div>
+
+            {{ dump(app.request.attributes) }}
+
+        </div>
+    </div>
+{% endblock %}
