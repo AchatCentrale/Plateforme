@@ -1,47 +1,58 @@
-{% include 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Se connecter</title>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/css/ink.min.css" rel="stylesheet" type="text/css"/>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
 
 
-{% block body %}
+<div class="login-container">
+    <img class="img-home" src="{{ asset('images/logo-achatcentrale.png') }}" alt="Logo">
 
 
-    <div class="login-container">
-        <img class="img-home" src="{{ asset('images/logo-achatcentrale.png') }}" alt="Logo">
+    <div class="login-group">
 
 
-        <div class="login-group">
+        <form action="{{ path('login') }}" class="ink-form form-login" method="post">
 
+            <div class="control-group">
+                <label for="username">Nom d'utilisateur:</label>
+                <div class="control">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+                </div>
+            </div>
 
-
-            <form action="{{ path('login') }}" class="ink-form form-login" method="post">
-
-                <div class="control-group">
-                    <label for="username">Nom d'utilisateur:</label>
-                    <div class="control">
-                        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-                    </div>
+            <div class="control-group">
+                <label for="password">Mot de passe :</label>
+                <div class="control">
+                    <input type="password" id="password" name="_password"/>
                 </div>
 
-                <div class="control-group">
-                    <label for="password">Mot de passe :</label>
-                    <div class="control">
-                        <input type="password" id="password" name="_password" />
-                    </div>
 
+            </div>
 
-                </div>
+            <input type="checkbox" id="remember_me" name="_remember_me" checked>
+            <label for="remember_me">Maintenir ma session ouverte</label>
 
-                <input type="checkbox" id="remember_me" name="_remember_me"  checked >
-                <label for="remember_me">Maintenir ma session ouverte</label>
+            <button type="submit" class="ink-button green btn-login">Se connecter</button>
+        </form>
 
-                <button type="submit" class="ink-button green btn-login">Se connecter</button>
-            </form>
+        {% if error %}
+            <div>
+                <p class="align-center error-login">{{ error.message | replace({"Bad credentials." : "Identifiant incorrecte"}) }}</p>
+            </div>
+        {% endif %}
 
-            {% if error %}
-                <div ><p class="align-center error-login">{{ error.message | replace({"Bad credentials." : "Identifiant incorrecte"}) }}</p></div>
-            {% endif %}
-
-        </div>
     </div>
+</div>
 
 
-{% endblock %}
+</body>
+</html>

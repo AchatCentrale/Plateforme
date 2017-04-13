@@ -31,7 +31,6 @@
     "incenteev/composer-parameter-handler": "^2.0",
     "realestateconz/mssql-bundle": "dev-master",
     "friendsofsymfony/rest-bundle": "^2.1",
-    "friendsofsymfony/user-bundle": "~2.0",
     "bmatzner/fontawesome-bundle": "~4.3"
   },
   "require-dev": {
