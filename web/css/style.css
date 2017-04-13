@@ -212,19 +212,21 @@ body {
     text-align: center;
     height: 135vh;
     float: left;
+
 }
 
 .menu-nav {
     position: relative;
     margin-top: 42%;
     padding-bottom: 56px;
+    text-align: left;
 }
 
 
 .extra-nav li a {
     color: black;
     list-style-type: none;
-    margin: 10px 0px 10px 0px;
+    padding-left: 120px;
 }
 .extra-nav li a:hover {
     color: black;
@@ -234,6 +236,7 @@ body {
 
 .extra-nav li {
     list-style-type: none;
+    padding: 10px 10px 18px 0;
 }
 
 .menu-home p {
@@ -830,6 +833,13 @@ form.ink-form.form-login {
 .container-intro-dashboard {
     width: 100%;
     padding-left: 65px;
+}
+
+.hover a {
+    padding-left: 30px;
+}
+.hover i {
+    padding-left: 85px;
 }
 
 
