@@ -1,84 +1,17 @@
 <div class="container-adresse-general">
     <div class="adresse-agence">
 
-        <div class="ui grid container">
-            <div class="eight wide column">
-                <h3>Adresse de facturation</h3>
 
-
-                {% for clients in client %}
-
-                    {% if clients.caType == "F" %}
-
-                <div class="ui link card">
-                    <div class="content">
-                        <div class="header"> {{ clients.caRaisonsoc }}</div>
-                       {% if clients.caPrincipale == 1 %}
-                           <div class="meta">
-                               <span class="category">Adresse principale</span>
-                           </div>
-                           {% else %}
-                               <div class="meta">
-                                   <span class="category"></span>
-                               </div>
-                        {% endif %}
-                        <div class="description">
-                            <p>{{ clients.caAdresse1 }}</p>
-                            <p>{{ clients.caCp }} {{ clients.caVille }}</p>
-                        </div>
-                    </div>
+        <div class="ui equal width grid">
+            <div class="equal width row">
+                <div class="column">
+                    <h4>Adresse de livraison</h4>
                 </div>
-
-
-
-
-                    {% endif %}
-
-                    <br>
-                {% endfor %}
-
-
-
-
-            </div>
-            <div class="eight wide column">
-
-                <h3>Adresse de livraison</h3>
-
-
-                {% for clients in client %}
-
-                    {% if clients.caType == "L" %}
-
-                        <div class="ui link card">
-                            <div class="content">
-                                <div class="header"> {{ clients.caRaisonsoc }}</div>
-                                {% if clients.caPrincipale == 1 %}
-                                    <div class="meta">
-                                        <span class="category">Adresse principale</span>
-                                    </div>
-                                {% else %}
-                                    <div class="meta">
-                                        <span class="category"></span>
-                                    </div>
-                                {% endif %}
-                                <div class="description">
-                                    <p>{{ clients.caAdresse1 }}</p>
-                                    <p>{{ clients.caCp }} {{ clients.caVille }}</p>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                    {% endif %}
-
-                    <br>
-                {% endfor %}
+                <div class="column">
+                    <h4>Adresse de Facturation</h4>
+                </div>
             </div>
         </div>
-
 
 
 
