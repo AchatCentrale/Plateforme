@@ -806,6 +806,14 @@ form.ink-form.form-login {
     padding-right: 42px;
 }
 
+.container-data {
+    padding-top: 40px;
+}
+
+.adresse-client {
+    padding-top: 33px;
+}
+
 .icon-mail-client-user {
     margin-left: 40px;
     margin-top: 11px;
