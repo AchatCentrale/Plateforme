@@ -1,36 +1,90 @@
 <div class="container-adresse-general">
     <div class="adresse-agence">
 
+        <div class="ui grid container">
+            <div class="eight wide column">
+                <h3>Adresse de facturation</h3>
+
+
+                {% for clients in client %}
+
+                    {% if clients.caType == "F" %}
+
+                <div class="ui link card">
+                    <div class="content">
+                        <div class="header"> {{ clients.caRaisonsoc }}</div>
+                       {% if clients.caPrincipale == 1 %}
+                           <div class="meta">
+                               <span class="category">Adresse principale</span>
+                           </div>
+                           {% else %}
+                               <div class="meta">
+                                   <span class="category"></span>
+                               </div>
+                        {% endif %}
+                        <div class="description">
+                            <p>{{ clients.caAdresse1 }}</p>
+                            <p>{{ clients.caCp }} {{ clients.caVille }}</p>
+                        </div>
+                    </div>
+                </div>
 
 
 
-        <div class="ui raised very padded text container segment">
 
-            <h2 class="ui center aligned icon header"> Adresse de l'agence </h2>
-            {% for clients in client %}
+                    {% endif %}
 
-
-                {% if clients.caType == "L" %}
-                    {{ clients.caRaisonsoc }}
-
-                {% endif %}
-
-                <br>
-
-                {% if clients.caType == "F" %}
-                    {{ clients.caRaisonsoc }}
-
-                {% endif %}
-
-            {% endfor %}
+                    <br>
+                {% endfor %}
 
 
-{{ dump(client) }}
-            <p></p>
-            <p></p>
+
+
+            </div>
+            <div class="eight wide column">
+
+                <h3>Adresse de livraison</h3>
+
+
+                {% for clients in client %}
+
+                    {% if clients.caType == "L" %}
+
+                        <div class="ui link card">
+                            <div class="content">
+                                <div class="header"> {{ clients.caRaisonsoc }}</div>
+                                {% if clients.caPrincipale == 1 %}
+                                    <div class="meta">
+                                        <span class="category">Adresse principale</span>
+                                    </div>
+                                {% else %}
+                                    <div class="meta">
+                                        <span class="category"></span>
+                                    </div>
+                                {% endif %}
+                                <div class="description">
+                                    <p>{{ clients.caAdresse1 }}</p>
+                                    <p>{{ clients.caCp }} {{ clients.caVille }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                    {% endif %}
+
+                    <br>
+                {% endfor %}
+            </div>
         </div>
+
+
 
 
 
     </div>
 </div>
+
+
+

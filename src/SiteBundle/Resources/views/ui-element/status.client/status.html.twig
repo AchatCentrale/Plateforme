@@ -7,51 +7,71 @@
         <div class="container-info-progression">
 
 
-            <div class="ui equal width grid">
-                <div class="equal width row">
-                    <div class="column">
-                        <div class="container-info-gauche-status">
-                            <div class="col-gauche-info">
-                                <p>Status</p>
-                                <p>Date d'inscription</p>
-                                <p>Date d'adhésion</p>
-                                <p>Date d'echeance</p>
-                                <p>Ancienneté</p>
+            <div class="ui container grid">
+
+
+
+                <div class="eight wide column">
+
+                    <div class="ui equal width grid">
+                        <div class="equal width row">
+                            <div class="column">
+                                <div class="col-gauche-info">
+                                    <p>Status</p>
+                                    <p>Date d'inscription</p>
+                                    <p>Date d'adhésion</p>
+                                    <p>Date d'echeance</p>
+                                    <p>Ancienneté</p>
+                                </div>
+
                             </div>
+                            <div class="column">
+                                <div class="col-droite-info">
+                                    <p>
+                                    <div class="ui orange label">Prospect</div>
+                                    </p>
+                                    <p>
 
-                            <div class="col-droite-info">
-                                <p>
-                                <div class="ui label">Prospect</div>
-                                </p>
-                                <p>
-
-                                <div class="ui label">26/12/2016</div>
+                                    <div class="ui label">26/12/2016</div>
 
 
-                                <p>
-                                <div class="ui label">26/12/2017</div>
-                                </p>
-                                <p>
-                                <div class="ui label">2 mois</div>
-                                </p>
-                                <p>
-                                <div class="ui label">02/01/2017</div>
-                                </p>
+                                    <p>
+                                    <div class="ui label">26/12/2017</div>
+                                    </p>
+                                    <p>
+                                    <div class="ui label">2 mois</div>
+                                    </p>
+                                    <p>
+                                    <div class="ui label">02/01/2017</div>
+                                    </p>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="column">
 
-                        <div class="column">
-                            <p>Numero d'adhésion</p>
-                            <div class="ui label"> 15618-1681</div>
-                            <div class="ui teal progress" data-percent="60" id="example1">
-                                <div class="bar"></div>
+                </div>
+
+                <div class="eight wide column">
+
+                    <div class="ui equal width grid">
+                        <div class="equal width row">
+                            <div class="column">
+                                <p>Numero d'adhésion</p>
+                            </div>
+                            <div class="column">
+                                <div class="ui label"> 15618-1681</div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="ui divider"></div>
+                    <div class="ui teal progress" data-percent="60" id="example1">
+                        <div class="bar"></div>
                     </div>
                 </div>
+
+            </div>
+
 
 
             </div>
@@ -60,109 +80,44 @@
         </div>
 
 
-        <div class="container-info-action">
-            <Header as='h2'>
-                <Icon name='history'/>
-                <Header.Content>
-                    Historique des actions
-                </Header.Content>
-            </Header>
+        <div class="container segment container-info-action">
+
+            <h2 class="ui header">
+                <i class="history icon"></i>
+                <div class="content"> Historique des actions</div>
+            </h2>
 
             <div class="container-info-action-table">
-                <Table definition>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>Nom de l'action</Table.HeaderCell>
-                            <Table.HeaderCell>Status</Table.HeaderCell>
-                            <Table.HeaderCell>Responsable</Table.HeaderCell>
-                            <Table.HeaderCell>Action</Table.HeaderCell>
-                            <Table.HeaderCell>Autre</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-
-                    <Table.Body>
 
 
-                        <Table.Row>
-                            <Table.Cell>Audit</Table.Cell>
-                            <Table.Cell>
-                                <Icon name='checkmark'/>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <p>
-                                    <Label>
-                                        <Icon name="user"/>
-                                        Morgane
-                                    </Label>
-                                </p>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Button.Group>
-                                    <Button positive>Action effectué</Button>
-                                    <Button.Or text='ou'/>
-                                    <Button>Mettre en attente</Button>
-                                </Button.Group>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Icon class='cursor' name='file pdf outline'/>
-                            </Table.Cell>
-                        </Table.Row>
+                <table class="ui definition table">
+                    <thead>
+                    <tr><th></th>
+                        <th>Status</th>
+                        <th>Responsable</th>
+                        <th>Action</th>
+                        <th>Autre</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Audit</td>
+                        <td><i class="checkmark icon"></i></td>
+                        <td><i class="user icon"></i> Morgane</td>
+                        <td>
+                            <div class="ui buttons">
+                                <button class="ui button">Action terminé</button>
+                                <div class="or" data-text="ou"></div>
+                                <button class="ui positive button">Mettre en attente</button>
+                            </div>
+                        </td>
+                        <td>
+                            <i class="file pdf outline icon"></i>
+                        </td>
+                    </tr>
 
+                    </tbody></table>
 
-                        <Table.Row>
-                            <Table.Cell>Envoi code d'acces</Table.Cell>
-                            <Table.Cell>
-                                <Icon name='wait'/>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <p>
-                                    <Label>
-                                        <Icon name="user"/>
-                                        Morgane
-                                    </Label>
-                                </p>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Button.Group>
-                                    <Button positive>Action effectué</Button>
-                                    <Button.Or text='ou'/>
-                                    <Button>Mettre en attente</Button>
-                                </Button.Group>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Icon class='cursor' name='file pdf outline'/>
-                            </Table.Cell>
-                        </Table.Row>
-
-
-                        <Table.Row error>
-                            <Table.Cell>Envoi code promo</Table.Cell>
-                            <Table.Cell>
-                                <Icon name='remove'/>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <p>
-                                    <Label>
-                                        <Icon name="user"/>
-                                        Morgane
-                                    </Label>
-                                </p>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Button.Group>
-                                    <Button positive>Action effectué</Button>
-                                    <Button.Or text='ou'/>
-                                    <Button>Mettre en attente</Button>
-                                </Button.Group>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Icon class='cursor' name='file pdf outline'/>
-                            </Table.Cell>
-                        </Table.Row>
-
-
-                    </Table.Body>
-                </Table>
             </div>
 
 

@@ -692,7 +692,7 @@ a.btn-add-client {
 
 .container-info-action-table {
     margin-top: 37px;
-    margin-left: 55px;
+    width: 86%;
 }
 .active {
     background-color: #103f77;
@@ -715,7 +715,7 @@ a.btn-add-client {
 }
 
 .col-gauche-info p {
-    padding: 5px 1px 1px 1px;
+    padding: 9px 1px 1px 1px;
 }
 
 .container-contact-list {
