@@ -874,3 +874,12 @@ i.teal.large.icon
 table tr[data-href] {
     cursor: pointer;
 }
+
+.centrale-choix {
+    background-color: white;
+    margin-top: 20px;
+}
+
+.logo-centrale{
+    padding-top: 6px;
+}
