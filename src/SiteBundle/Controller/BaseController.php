@@ -110,7 +110,6 @@ class BaseController extends Controller
             return 'Action sauvegardé';
         }
 
-        dump($form->createView());
         return $this->render('SiteBundle:ui-element:action.form.html.twig', [
             'form' => $form->createView(),
          ]);
