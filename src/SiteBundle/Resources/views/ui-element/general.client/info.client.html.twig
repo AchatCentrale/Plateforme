@@ -1,28 +1,46 @@
 {% for clients in client %}
     <div class="ui equal width grid">
-    <div class="equal width row">
-        <div class="column">
-            <h1>{{ clients.clRaisonSoc }}</h1>
-            <h3>Centrale Roc-Eclerc</h3>
-            <div class="ui equal width grid">
-                <div class="equal width row">
-                    <div class="column">
-                        <div class="ui label blue">VIP</div>
-                        <div class="ui label green">ACTIF</div>
+        <div class="equal width row">
+            <div class="column">
+
+                <div class="ui items">
+                    <div class="item">
+                        <div class="ui tiny image">
+                            <img class="ui  tiny circular image"
+                                 src="http://www.centrale-roc-eclerc.fr/UploadFichiers/Uploads/CLIENT_{{ clients.clId }}/{{ clients.clLogo }}">
+                        </div>
+                        <div class="middle aligned content">
+                            <a class="header">{{ clients.clRaisonSoc }}</a>
+                        </div>
                     </div>
                 </div>
+
+
+                <h3>Centrale Roc-Eclerc</h3>
+                <div class="ui equal width grid">
+                    <div class="equal width row">
+                        <div class="column">
+                            <div class="ui label blue">VIP</div>
+                            <div class="ui label green">ACTIF</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+            <div class="column">
+                <div class="ui ">
 
-        </div>
-        <div class="column">
-            <div class="ui segment">
-
-                <h2>{{ clients.clAdresse1 }}</h2>
-                <h3>{{ clients.clVille }} {{ clients.clCp }}</h3>
-                <h3>Numero de téléphone : {{ clients.clTel | phone }}</h3>
-                <h3>Adresse mail : {{ clients.clMail }}</h3>
+                    <p>{{ clients.clAdresse1 }}</p>
+                    <p>{{ clients.clVille }} {{ clients.clCp }}</p>
+                    <p>Numero de téléphone : {{ clients.clTel | phone }}</p>
+                    <p>Adresse mail : <a href="mailto:{{ clients.clMail }}">{{ clients.clMail }}</a></p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="ui divider">
+
+    </div>
+
+
 {% endfor %}

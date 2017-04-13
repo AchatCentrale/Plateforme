@@ -800,10 +800,10 @@ form.ink-form.form-login {
 
 .container-general {
     background: white;
-
     width: 100%;
     margin: 18px auto;
-    padding-left: 6%;
+    padding-left: 38px;
+    padding-right: 42px;
 }
 
 .icon-mail-client-user {
