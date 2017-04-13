@@ -3,7 +3,8 @@
 namespace SiteBundle\Controller;
 
 use AchatCentrale\CrmBundle\Entity\Clients;
-use AchatCentrale\CrmBundle\Form\ClientsType;
+use AchatCentrale\CrmBundle\Entity\ClientsTaches;
+use SiteBundle\Form\ClientsTachesType;
 use AchatCentrale\CrmBundle\Form\UsersType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
@@ -87,6 +88,34 @@ class BaseController extends Controller
         return $this->render('@Site/Base/client.status.html.twig', [
             "client" => $restresult
         ]);
+
+    }
+
+    public function NewTaskAction(Request $request)
+    {
+
+        $task = new ClientsTaches();
+        $form = $this->createForm(ClientsTachesType::class, $task, [
+            'action' => $this->generateUrl('new-task'),
+            'method' => 'POST',
+        ]);
+
+
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+            return 'Action sauvegardé';
+        }
+
+        dump($form->createView());
+        return $this->render('SiteBundle:ui-element:action.form.html.twig', [
+            'form' => $form->createView(),
+         ]);
+
+
 
     }
 

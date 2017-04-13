@@ -15,7 +15,7 @@
                                     <i class="user circle  teal  icon"></i>{{ app.user }}
                                 </div>
                                 <div class="column right floated">
-                                    <i class="setting icon"></i>>Modifier mon profil
+                                    <i class="setting icon"> </i> Modifier mon profil
                                 </div>
                             </div>
                         </div>
@@ -36,83 +36,12 @@
                     <i class="close icon"></i>
                     <div class="header">
                         <i class="tasks teal large icon"></i>
-                        Nouvel action
+                        Nouvelle action
                     </div>
                     <div class="content">
 
+                        {{ render('/task/new') }}
 
-
-                        <div class="ui equal width grid">
-
-
-                            <div class="row">
-                                <div class="column">
-                                    <div className="interlocuteur">
-                                        <div>
-                                            <p>Interlocuteur</p>
-                                        </div>
-                                        <div>
-                                            <Input id="utilisateur-action"  icon='users' iconPosition='left' placeholder='Utilisateur ..'/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="column">
-                                    <div className="interlocuteur">
-                                        <div>
-                                            <p>Entreprise</p>
-                                        </div>
-                                        <div>
-                                            <Input id="raisonsoc-action" onChange={e => this.handleClickSave(e)} icon='briefcase' iconPosition='left' placeholder='Nom entreprise ..'/>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="row">
-                                <div class="column">
-                                    <Checkbox onChange={e => this.handleClickSave(e)} id="referent-action"  label='Notifier le référent ?'/>
-                                </div>
-                                <div class="column">
-                                    <p>Date : { moment().format("D MMMM GGGG") }</p>
-                                </div>
-                                <div class="column">
-                                    <p>Date d'échéance : <input  id="echeance-action"  type="text" className="datepicker"/></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="column">
-                                    <Select  id="type-action" onChange={e => this.handleClickSave(e)}   placeholder="Selectionnez le type d'action"/>
-                                </div>
-                                <div class="column">
-                                    <Select  id="contact-action" onChange={e => this.handleClickSave(e)}   placeholder="Assigné à"/>
-                                </div>
-                                <div class="column">
-                                    <Priorite onChange={e => this.handleClickSave(e)} />
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-                        <form action="{{ path('index_auth') }}" method="post">
-                            <label for="username">Username:</label>
-                            <input type="text" id="username" name="_username"  />
-
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="_password" />
-
-                            <input type="hidden" name="_target_path" value="account" />
-
-                            <input type="submit" name="login" />
-                        </form>
                     </div>
                     <div class="actions">
                         <div class="ui positive right labeled icon button">
