@@ -811,7 +811,11 @@ form.ink-form.form-login {
 }
 
 .adresse-client {
-    padding-top: 33px;
+    width: 50%;
+}
+
+.taches-container {
+    padding-top: 40px;
 }
 
 .icon-mail-client-user {

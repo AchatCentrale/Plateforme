@@ -7,10 +7,6 @@ Api:
     type:     annotation
     prefix:   /
 
-
-
-
-
 clients:
     type:   rest
     resource: "@AchatCentraleCrmBundle/Controller/ClientsController.php"

@@ -78,6 +78,10 @@
                                 <i class="home teal large icon"></i>
                                 <a href="{{ path('index_auth') }}">Home</a>
                             </div>
+                            <div class="{% if app.request.attributes.get('_route') == 'taches_home' %}active {% endif %}menu-home hover">
+                                <i class="tasks teal large icon"></i>
+                                <a href="{{ path('taches_home') }}">Tâches</a>
+                            </div>
                             <div class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}active {% endif %}menu-client hover">
                                 <i class="group teal large icon"></i>
                                 <a href="{{ path('client') }}">Clients</a>

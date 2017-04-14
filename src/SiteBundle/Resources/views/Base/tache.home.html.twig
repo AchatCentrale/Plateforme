@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+  <div class="ui container taches-container">
+
+
+    <h3 class="ui center aligned header" >Tâches</h3>
+
+
+    <div class="ui top attached tabular menu">
+      <a class="active item" data-tab="first">En cour</a>
+      <a class="item" data-tab="second">Terminées</a>
+      <a class="item" data-tab="third">Délégués</a>
+    </div>
+    <div class="ui bottom attached active tab segment" data-tab="first">
+
+      <table class="ui striped table">
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Priorité</th>
+          <th>Nom</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>28-03-2016</td>
+          <td><div class="ui label"> Relance</div></td>
+          <td>Le client a besoin de payer la facture</td>
+          <td><div class="ui orange label"> 3</div></td>
+          <td>Roc-Eclerc Ordener</td>
+          <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i class="trash red large icon cursor"></i></td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="second">
+        <table class="ui striped table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Priorité</th>
+                <th>Nom</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>28-03-2016</td>
+                <td><div class="ui label"> Relance</div></td>
+                <td>Le client a besoin de payer la facture</td>
+                <td><div class="ui orange label"> 3</div></td>
+                <td>Roc-Eclerc Ordener</td>
+                <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i class="trash red large icon cursor"></i></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="ui bottom attached tab segment" data-tab="third">
+
+        <table class="ui striped table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Priorité</th>
+                <th>Nom</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>28-03-2016</td>
+                <td><div class="ui label"> Relance</div></td>
+                <td>Le client a besoin de payer la facture</td>
+                <td><div class="ui orange label"> 3</div></td>
+                <td>Roc-Eclerc Ordener</td>
+                <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i class="trash red large icon cursor"></i></td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+  </div>
+{% endblock  %}
+
+{% block javascripts %}
+  <script>
+      $('.menu .item')
+          .tab()
+      ;
+  </script>
+
+{% endblock %}
