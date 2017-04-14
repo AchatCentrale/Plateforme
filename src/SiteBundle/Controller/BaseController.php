@@ -40,9 +40,6 @@ class BaseController extends Controller
     public function ClientAction(Request $request)
     {
 
-        /* if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-             throw $this->createAccessDeniedException();
-         }*/
 
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
 
@@ -55,9 +52,7 @@ class BaseController extends Controller
     public function ClientGeneralAction($id)
     {
 
-        /* if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-             throw $this->createAccessDeniedException();
-         }*/
+
 
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy(array('clId' => $id));
 
@@ -97,9 +92,12 @@ class BaseController extends Controller
         $task = new ClientsTaches();
         $form = $this->createForm(ClientsTachesType::class, $task, [
             'action' => $this->generateUrl('new-task'),
-            'method' => 'POST',
         ]);
 
+        $form->add('submit', SubmitType::class, array(
+            'label' => 'Enregistrer',
+            'attr'  => array('class' => 'positive ui button')
+        ));
 
 
         $form->handleRequest($request);
@@ -110,7 +108,7 @@ class BaseController extends Controller
             return 'Action sauvegardé';
         }
 
-        return $this->render('SiteBundle:ui-element:action.form.html.twig', [
+        return $this->render('SiteBundle:ui-element/taches:action.form.html.twig', [
             'form' => $form->createView(),
          ]);
 

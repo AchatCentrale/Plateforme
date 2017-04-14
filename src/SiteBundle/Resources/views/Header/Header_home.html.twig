@@ -44,7 +44,7 @@
 
                     </div>
                     <div class="actions">
-                        <div class="ui positive right labeled icon button">
+                        <div class="submit-action ui positive right labeled icon button">
                             Enregistrer
                             <i class="checkmark icon"></i>
                         </div>
@@ -92,7 +92,7 @@
                                     <li><a href="{{ path('client-general', {'id': app.request.attributes.get('id')}) }}">Général</a></li>
                                     <li><a href="{{ path('client-adresse', {'id': app.request.attributes.get('id')}) }}">Adresse</a></li>
                                     <li><a href="{{ path('client-status', {'id': app.request.attributes.get('id')}) }}">Status</a></li>
-                                    <li><a href="#about">Actions</a></li>
+                                    <li><a href="">Actions</a></li>
 
 
 
@@ -132,11 +132,15 @@
 
     <script>
         $(document).ready(function(){
-            $("#mymodalg").click(function(){
+
+
+
+            $("#mymodalg").click(function() {
                 $('.ui.modal.action')
                     .modal('show')
                 ;
             });
+
 
             $("#add-modal-client").click(function(){
                 $('.ui.modal.add')
@@ -148,6 +152,18 @@
                 percent: 22
             });
 
+            $('.submit-action').on('click', function (e) {
+                let all = $('.add-action');
+
+                all.map(function (i, value) {
+                    console.log(value,  value.value)
+                })
+
+
+            });
+
+
+            $(".date").datepicker();
         });
     </script>
 
