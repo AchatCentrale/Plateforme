@@ -9,19 +9,21 @@
 
 
             <div class="column">
-                <h4>Dernières actions pour le client</h4>
+                <h4>Dernières log pour le client</h4>
                 <table class="ui table">
                     <thead>
-                    <tr><th class="ten wide">Type action</th>
+                    <tr><th class="five wide">Type action</th>
                         <th class="ten wide">Etat</th>
-                        <th class="six wide">Date</th>
+                        <th class="ten wide">Date</th>
                     </tr></thead>
                     <tbody>
-                    <tr>
-                        <td><div class="ui label">Ticket</div></td>
-                        <td>En attente</td>
-                        <td>22/03/2017</td>
-                    </tr>
+                    {% for logs in log %}
+                        <tr>
+                            <td><div class="ui label">{{ logs.LO_CODE }}</div></td>
+                            <td>{{ logs.LO_DESCR | raw }}</td>
+                            <td>{{ logs.INS_DATE | date }}</td>
+                        </tr>
+                    {% endfor %}
 
                     </tbody>
 

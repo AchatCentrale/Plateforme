@@ -2,22 +2,9 @@
 
 namespace SiteBundle\Controller;
 
-use AchatCentrale\CrmBundle\Entity\Clients;
-use AchatCentrale\CrmBundle\Entity\ClientsTaches;
-use SiteBundle\Form\ClientsTachesType;
-use AchatCentrale\CrmBundle\Form\UsersType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
-use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Response;
 
 class BaseController extends Controller
@@ -27,9 +14,9 @@ class BaseController extends Controller
     public function indexAuthAction(Request $request)
     {
 
-       /* if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException();
-        }*/
+        /* if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+             throw $this->createAccessDeniedException();
+         }*/
 
 
         return $this->render('@Site/Base/home.html.twig', array());
@@ -43,6 +30,7 @@ class BaseController extends Controller
 
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
 
+
         return $this->render('@Site/Base/client.html.twig', [
             "client" => $restresult
         ]);
@@ -53,11 +41,30 @@ class BaseController extends Controller
     {
 
 
-
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy(array('clId' => $id));
 
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "SELECT
+                *
+                FROM LOGS
+WHERE
+  LOGS.LO_IDENT = 'CL_ID'
+AND
+    LO_IDENT_NUM = :id
+";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $log = $stmt->fetchAll();
+
         return $this->render('@Site/Base/client.general.html.twig', [
-            "client" => $restresult
+            "client" => $restresult,
+            "log" => $log
         ]);
 
     }
@@ -85,8 +92,6 @@ class BaseController extends Controller
         ]);
 
     }
-
-
 
 
     public function whoAreAction(Request $request, $type)
@@ -153,7 +158,6 @@ class BaseController extends Controller
         $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
-
         $result = 'SELECT FO_RAISONSOC, COUNT(CE_ID) AS NB_CMD, COUNT(MESSAGE_ENTETE.ME_ID) AS NB_TICKETS
         FROM dbo.MESSAGE_ENTETE
         INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON MESSAGE_ENTETE.FO_ID = FOURNISSEURS.FO_ID
@@ -190,10 +194,6 @@ class BaseController extends Controller
 
         $stmt->bindValue("id", $id);
         $stmt->execute();
-
-
-
-
 
 
         return $this->render('@Site/test.html.twig', array(
