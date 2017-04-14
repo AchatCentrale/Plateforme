@@ -6,6 +6,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -45,7 +46,7 @@ class ClientsTachesType extends AbstractType
                     'Faible' => 4,
                     'Un jour peut-être' => 5,
                 ]])
-            ->add('claEcheance', DateType::class, [
+            ->add('claEcheance', DateTimeType::class, [
                 'widget' => 'single_text',
                 'input' => 'datetime',
                 'format' => 'dd/MM/yyyy',
@@ -67,7 +68,7 @@ class ClientsTachesType extends AbstractType
                 'class' => 'AchatCentrale\CrmBundle\Entity\Clients',
                 'choice_label' => 'clRaisonsoc',
                 'label' => 'Entreprise (numéro/nom)',
-                "attr" => ["class" => " add-action"]
+                "attr" => ["class" => "ui dropdown add-action"]
 
             ])
 
@@ -81,7 +82,11 @@ class ClientsTachesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AchatCentrale\CrmBundle\Entity\ClientsTaches'
+            'data_class' => 'AchatCentrale\CrmBundle\Entity\ClientsTaches',
+            'allow_extra_fields' => true,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'task_item',
         ));
     }
 

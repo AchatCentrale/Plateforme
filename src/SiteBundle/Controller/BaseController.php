@@ -86,39 +86,6 @@ class BaseController extends Controller
 
     }
 
-    public function NewTaskAction(Request $request)
-    {
-
-        $task = new ClientsTaches();
-        $form = $this->createForm(ClientsTachesType::class, $task, [
-            'action' => $this->generateUrl('new-task'),
-        ]);
-
-        $form->add('submit', SubmitType::class, array(
-            'label' => 'Enregistrer',
-            'attr'  => array('class' => 'positive ui button')
-        ));
-
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($task);
-            $em->flush();
-            return 'Action sauvegardé';
-        }
-
-        return $this->render('SiteBundle:ui-element/taches:action.form.html.twig', [
-            'form' => $form->createView(),
-         ]);
-
-
-
-    }
-
-
-
-
 
 
 

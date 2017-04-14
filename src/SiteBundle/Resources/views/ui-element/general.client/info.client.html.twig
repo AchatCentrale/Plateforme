@@ -12,66 +12,61 @@
                                  src="http://www.centrale-roc-eclerc.fr/UploadFichiers/Uploads/CLIENT_{{ clients.clId }}/{{ clients.clLogo }}">
                         </div>
                         <div class="middle aligned content">
-                            <a class="header">{{ clients.clRaisonSoc }} <div class="ui label blue">VIP</div><div class="ui label green">ACTIF</div>
+                            <a class="header">{{ clients.clRaisonSoc }}
+                                <div class="ui label blue">VIP</div>
+                                <div class="ui label green">ACTIF</div>
                             </a>
                         </div>
                     </div>
 
                     <div class="adresse-client">
+                        <div class="ui equal width grid">
+                            <div class="equal width row">
+                                <div class="column">
+                                    <p>Adresse</p>
+                                    <p>Ville/code postal</p>
+                                    <p>VNuméro de téléphone</p>
+                                    <p>Adresse mail</p>
 
-                        <table class="ui very basic table">
-                            <tbody>
-                            <tr>
-                                <td class="collapsing">Adresse</td>
-                                <td><div class="ui label"> {{ clients.clAdresse1 }} </div></td>
-                            </tr>
-                            <tr>
-                                <td>Ville/code postal</td>
-                                <td><div class="ui label"> {{ clients.clVille }} {{ clients.clCp }} </div></td>
-                            </tr>
-                            <tr>
-                                <td>Numéro de téléphone </td>
-                                <td><div class="ui label"> {{ clients.clTel | phone }} </div></td>
-                            </tr>
-                            <tr>
-                                <td>Adresse mail</td>
-                                <td><div class="ui label"> <a href="mailto:{{ clients.clMail }}">{{ clients.clMail }} </div></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                </div>
+                                <div class="column">
+                                    <div class="label-info-client ui label"> {{ clients.clAdresse1 }} </div>
+                                    <div class="label-info-client ui label"> {{ clients.clVille }} {{ clients.clCp }} </div>
+                                    <div class="label-info-client ui label"> {{ clients.clTel | phone }} </div>
+                                    <div class="label-info-client ui label"><a href="mailto:{{ clients.clMail }}">{{ clients.clMail }}</a></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
 
-
-
-
-
             </div>
             <div class="column">
-                <h3>Informations complémentaires</h3>
-                <div class="equal width row">
 
+                <div class="info-client-comp">
+                    <h3>Informations complémentaires</h3>
 
-
-                    <div class="column">
-
-
-                        Siret : <div class="ui label">{{ client[0].clSiret }}</div>
-                        Secteur d'activité : <div class="ui label"> Non renseigné </div>
-                        Nombre de salariés : <div class="ui label"> {{ client[0].clEffectif }} </div>
-
-
+                    <div class="ui equal width grid">
+                        <div class="equal width row">
+                            <div class="column">
+                                <p>Siret</p>
+                                <p>Secteur d'activité</p>
+                                <p>Nombre de salariés</p>
+                                <p>Assigné à</p>
+                                <p>Site web</p>
+                            </div>
+                            <div class="column">
+                                <div class="label-info-client ui label"> {{ client[0].clSiret }} </div>
+                                <div class="label-info-client ui label"> Non renseigné </div>
+                                <div class="label-info-client ui label"> {{ clients.clTel | phone }} </div>
+                                <div class="label-info-client ui label">{{ client[0].clEffectif }} </div>
+                                <div class="ui label"><i class="user icon"></i> Morgane</div>
+                                <div class="ui label"><a href="{{ client[0].clWeb }}"></a></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="column">
-                        Assigné à: <div class="ui label"><i class="user icon"></i> Morgane </div>
-                        Site web: <div class="ui label"> <a href="{{ client[0].clWeb }}"></a> </div>
-
-                    </div>
-
-
-
-
                 </div>
 
 

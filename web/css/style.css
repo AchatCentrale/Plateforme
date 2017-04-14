@@ -814,8 +814,16 @@ form.ink-form.form-login {
     width: 50%;
 }
 
+.label-info-client{
+    margin-bottom: 6px !important;
+}
+
 .taches-container {
     padding-top: 40px;
+}
+
+.info-client-comp {
+    width: 50%;
 }
 
 .icon-mail-client-user {
@@ -829,6 +837,15 @@ form.ink-form.form-login {
 
 .adresse-agence h3 {
     text-decoration: underline;
+}
+
+.form-add-action {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+.btn-submit-action{
+    padding-top: 30px;
 }
 
 .container-profile {

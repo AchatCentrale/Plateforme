@@ -30,12 +30,6 @@ client-status:
     path:     /client/{id}/status
     defaults: { _controller: SiteBundle:Base:ClientStatut }
 
-
-new-task:
-    path:     /task/new
-    defaults: { _controller: SiteBundle:Base:NewTask }
-
-
 Who-Are-The-User:
     path:     /who/{type}
     defaults: { _controller: SiteBundle:Base:whoAre }
@@ -61,3 +55,7 @@ test_param:
 taches_home:
     path:    /taches
     defaults: {_controller: SiteBundle:Tache:Tache}
+
+new-task:
+    path:     /task/new
+    defaults: { _controller: SiteBundle:Tache:NewTask }

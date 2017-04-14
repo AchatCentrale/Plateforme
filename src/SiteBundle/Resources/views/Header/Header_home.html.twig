@@ -40,7 +40,7 @@
                     </div>
                     <div class="content">
 
-                        {{ render('/task/new') }}
+                        {#{{ render('/task/new') }}#}
 
                     </div>
                     <div class="actions">
@@ -163,7 +163,10 @@
             });
 
 
-            $(".date").datepicker();
+            $(".date").datepicker({
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1
+            });
         });
     </script>
 
