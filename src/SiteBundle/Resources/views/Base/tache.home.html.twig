@@ -6,7 +6,7 @@
   <div class="ui container taches-container">
 
 
-      <button class="positive ui button"><a href="{{ path('new-task') }}">Ajouter une tâche</a></button>
+      <button class=" ui button"><a href="{{ path('new-task') }}">Ajouter une tâche</a></button>
 
 
 
@@ -14,7 +14,7 @@
 
 
     <div class="ui top attached tabular menu">
-      <a class="active item" data-tab="first">En cour</a>
+      <a class="active item" data-tab="first">En cours</a>
       <a class="item" data-tab="second">Terminées</a>
       <a class="item" data-tab="third">Délégués</a>
     </div>
@@ -34,16 +34,18 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td>28-03-2016</td>
-          <td>28-03-2016</td>
-          <td><div class="ui label"> <i class="user icon"></i>Morgane</div></td>
-          <td><div class="ui label"> Relance</div></td>
-          <td>Le client a besoin de payer la facture</td>
-          <td><div class="ui orange label"> 3</div></td>
-          <td>Roc-Eclerc Ordener</td>
-          <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i class="trash red large icon cursor"></i></td>
-        </tr>
+       {% for tasks in task %}
+           <tr>
+               <td>{{ tasks.insDate | date }}</td>
+               <td>{{ tasks.claEcheance |date }}</td>
+               <td><div class="ui label"> <i class="user icon"></i>{{ user }}</div></td>
+               <td><div class="ui label"> {{ tasks.claType }}</div></td>
+               <td>{{ tasks.claDescr }}</td>
+               <td><div class="ui orange label"> {{ tasks.claPriorite }}</div></td>
+               <td>{{ tasks.cl.clRaisonsoc }}</td>
+               <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i id="{{ tasks.claId }}" class="trash red large icon cursor"></i></td>
+           </tr>
+        {% endfor %}
 
         </tbody>
       </table>
@@ -108,6 +110,10 @@
       $('.menu .item')
           .tab()
       ;
+
+      $('.trash').on('click', function (e) {
+          deleteTask(e.currentTarget.id);
+      })
   </script>
 
 {% endblock %}

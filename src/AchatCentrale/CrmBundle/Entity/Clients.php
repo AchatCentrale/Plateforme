@@ -204,11 +204,32 @@ class Clients
     private $clCa = '0';
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="CL_MASQ_HA", type="float", precision=53, scale=0, nullable=true)
+     */
+    private $clMasqHa = '0';
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="CL_MASQ_VT", type="float", precision=53, scale=0, nullable=true)
+     */
+    private $clMasqVt = '0';
+
+    /**
      * @var string
      *
      * @ORM\Column(name="CL_TEMPO", type="string", length=50, nullable=true)
      */
     private $clTempo;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CL_NIV_ACTION", type="integer", nullable=true)
+     */
+    private $clNivAction = '0';
 
     /**
      * @var \DateTime
@@ -237,7 +258,6 @@ class Clients
      * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
-
 
 
 
@@ -876,6 +896,54 @@ class Clients
     }
 
     /**
+     * Set clMasqHa
+     *
+     * @param float $clMasqHa
+     *
+     * @return Clients
+     */
+    public function setClMasqHa($clMasqHa)
+    {
+        $this->clMasqHa = $clMasqHa;
+
+        return $this;
+    }
+
+    /**
+     * Get clMasqHa
+     *
+     * @return float
+     */
+    public function getClMasqHa()
+    {
+        return $this->clMasqHa;
+    }
+
+    /**
+     * Set clMasqVt
+     *
+     * @param float $clMasqVt
+     *
+     * @return Clients
+     */
+    public function setClMasqVt($clMasqVt)
+    {
+        $this->clMasqVt = $clMasqVt;
+
+        return $this;
+    }
+
+    /**
+     * Get clMasqVt
+     *
+     * @return float
+     */
+    public function getClMasqVt()
+    {
+        return $this->clMasqVt;
+    }
+
+    /**
      * Set clTempo
      *
      * @param string $clTempo
@@ -897,6 +965,30 @@ class Clients
     public function getClTempo()
     {
         return $this->clTempo;
+    }
+
+    /**
+     * Set clNivAction
+     *
+     * @param integer $clNivAction
+     *
+     * @return Clients
+     */
+    public function setClNivAction($clNivAction)
+    {
+        $this->clNivAction = $clNivAction;
+
+        return $this;
+    }
+
+    /**
+     * Get clNivAction
+     *
+     * @return integer
+     */
+    public function getClNivAction()
+    {
+        return $this->clNivAction;
     }
 
     /**
@@ -993,121 +1085,5 @@ class Clients
     public function getMajUser()
     {
         return $this->majUser;
-    }
-    /**
-     * @var float
-     */
-    private $clMasqHa = '0';
-
-    /**
-     * @var float
-     */
-    private $clMasqVt = '0';
-
-
-    /**
-     * Set clMasqHa
-     *
-     * @param float $clMasqHa
-     *
-     * @return Clients
-     */
-    public function setClMasqHa($clMasqHa)
-    {
-        $this->clMasqHa = $clMasqHa;
-
-        return $this;
-    }
-
-    /**
-     * Get clMasqHa
-     *
-     * @return float
-     */
-    public function getClMasqHa()
-    {
-        return $this->clMasqHa;
-    }
-
-    /**
-     * Set clMasqVt
-     *
-     * @param float $clMasqVt
-     *
-     * @return Clients
-     */
-    public function setClMasqVt($clMasqVt)
-    {
-        $this->clMasqVt = $clMasqVt;
-
-        return $this;
-    }
-
-    /**
-     * Get clMasqVt
-     *
-     * @return float
-     */
-    public function getClMasqVt()
-    {
-        return $this->clMasqVt;
-    }
-    /**
-     * @var \DateTime
-     */
-    private $clDtRenouv;
-
-    /**
-     * @var integer
-     */
-    private $clNivAction = '0';
-
-
-    /**
-     * Set clDtRenouv
-     *
-     * @param \DateTime $clDtRenouv
-     *
-     * @return Clients
-     */
-    public function setClDtRenouv($clDtRenouv)
-    {
-        $this->clDtRenouv = $clDtRenouv;
-
-        return $this;
-    }
-
-    /**
-     * Get clDtRenouv
-     *
-     * @return \DateTime
-     */
-    public function getClDtRenouv()
-    {
-        return $this->clDtRenouv;
-    }
-
-    /**
-     * Set clNivAction
-     *
-     * @param integer $clNivAction
-     *
-     * @return Clients
-     */
-    public function setClNivAction($clNivAction)
-    {
-        $this->clNivAction = $clNivAction;
-
-        return $this;
-    }
-
-    /**
-     * Get clNivAction
-     *
-     * @return integer
-     */
-    public function getClNivAction()
-    {
-        return $this->clNivAction;
     }
 }

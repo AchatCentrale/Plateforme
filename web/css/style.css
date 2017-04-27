@@ -226,8 +226,10 @@ body {
 .extra-nav li a {
     color: black;
     list-style-type: none;
-    padding-left: 120px;
+    padding-left: 50%;
 }
+
+
 .extra-nav li a:hover {
     color: black;
 
@@ -842,7 +844,7 @@ form.ink-form.form-login {
 .form-add-action {
     width: 80%;
     margin: 0 auto;
-    padding-top: 30px;
+    padding-top: 15px;
 }
 .btn-submit-action{
     padding-top: 30px;
@@ -864,11 +866,13 @@ form.ink-form.form-login {
     padding-left: 65px;
 }
 
+
+
 .hover a {
     padding-left: 30px;
 }
 .hover i {
-    padding-left: 85px;
+    padding-left: 25%;
 }
 
 

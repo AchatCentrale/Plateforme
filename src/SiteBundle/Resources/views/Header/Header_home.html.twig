@@ -38,17 +38,81 @@
                         <i class="tasks teal large icon"></i>
                         Nouvelle action
                     </div>
-                    <div class="content">
+                    {#<div class="content">
 
-                        {#{{ render('/task/new') }}#}
 
-                    </div>
-                    <div class="actions">
-                        <div class="submit-action ui positive right labeled icon button">
-                            Enregistrer
-                            <i class="checkmark icon"></i>
-                        </div>
-                    </div>
+                            {{ form_start(form, { 'attr' : { 'class': 'ajaxNew' }, 'action': '/taches/new' }) }}
+                            {{ form_errors(form) }}
+
+                            <div class="ui equal width form">
+
+                                <div class="two fields">
+                                    <div class="field">
+                                        <label>{{ form_label(form.claType) }}</label>
+                                        <div class="field">
+                                            {{ form_widget(form.claType) }}
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label>{{ form_label(form.claNom) }}</label>
+                                        {{ form_errors(form.claNom) }}
+                                        {{ form_widget(form.claNom) }}
+                                    </div>
+                                </div>
+
+
+                                <div class="two fields">
+                                    <div class="field">
+                                        <label>{{ form_label(form.claEcheance) }}</label>
+                                        <div class="field">
+                                            {{ form_widget(form.claEcheance) }}
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label>{{ form_label(form.claPriorite) }}</label>
+                                        <div class="field">
+                                            {{ form_widget(form.claPriorite) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="two fields">
+                                    <div class="field">
+                                        <label>{{ form_label(form.usId) }}</label>
+                                        <div class="field">
+                                            {{ form_widget(form.usId) }}
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <label>{{ form_label(form.cl) }}</label>
+                                        <div class="field">
+                                            {{ form_widget(form.cl) }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label>{{ form_label(form.claDescr) }}</label>
+                                    {{ form_errors(form.claDescr) }}
+                                    {{ form_widget(form.claDescr) }}
+                                </div>
+
+                                <div class="btn-submit-action">
+                                    {{ form_label(form.submit) }}
+                                    {{ form_widget(form.submit) }}
+                                </div>
+
+                            </div>
+
+                            {{ form_end(form) }}
+
+
+
+
+                    </div>#}
+
+
+                </div>
+
                 </div>
 
 
@@ -76,7 +140,7 @@
                         <div class="menu-nav">
                             <div class="{% if app.request.attributes.get('_route') == 'index_auth' %}active {% endif %}menu-home hover">
                                 <i class="home teal large icon"></i>
-                                <a href="{{ path('index_auth') }}">Home</a>
+                                <a href="{{ path('index_auth') }}">Accueil</a>
                             </div>
                             <div class="{% if app.request.attributes.get('_route') == 'taches_home' %}active {% endif %}menu-home hover">
                                 <i class="tasks teal large icon"></i>
@@ -101,7 +165,7 @@
 
                             <div class="menu-supplier hover">
                                 <i class="suitcase teal large icon"></i>
-                                <a href="/fournisseur">Fournisseur</a>
+                                <a href="/fournisseur">Fournisseurs</a>
                             </div>
 
 
@@ -165,8 +229,21 @@
 
             $(".date").datepicker({
                 dateFormat: 'dd/mm/yy',
-                firstDay: 1
+                firstDay: 1,
+                closeText: 'Fermer',
+                prevText: 'Précédent',
+                nextText: 'Suivant',
+                currentText: 'Aujourd\'hui',
+                monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Sem.',
             });
+
+
+
         });
     </script>
 

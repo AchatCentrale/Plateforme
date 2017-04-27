@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Contrats
  *
- * @ORM\Table(name="CONTRATS", indexes={@ORM\Index(name="IDX_B45BA520DA314FF6", columns={"CO_CATEGORIE"}), @ORM\Index(name="IDX_B45BA5203F592A49", columns={"CL_ID"})})
+ * @ORM\Table(name="CONTRATS")
  * @ORM\Entity
  */
 class Contrats
@@ -24,9 +24,23 @@ class Contrats
     /**
      * @var integer
      *
+     * @ORM\Column(name="CL_ID", type="integer", nullable=true)
+     */
+    private $clId;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="CO_USER", type="integer", nullable=true)
      */
     private $coUser = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CO_CATEGORIE", type="integer", nullable=true)
+     */
+    private $coCategorie = '0';
 
     /**
      * @var string
@@ -175,26 +189,6 @@ class Contrats
      */
     private $majUser;
 
-    /**
-     * @var \AchatCentrale\CrmBundle\Entity\ContratsCat
-     *
-     * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\ContratsCat")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="CO_CATEGORIE", referencedColumnName="CC_ID")
-     * })
-     */
-    private $coCategorie;
-
-    /**
-     * @var \AchatCentrale\CrmBundle\Entity\Clients
-     *
-     * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
-     * })
-     */
-    private $cl;
-
 
 
     /**
@@ -205,6 +199,30 @@ class Contrats
     public function getCoId()
     {
         return $this->coId;
+    }
+
+    /**
+     * Set clId
+     *
+     * @param integer $clId
+     *
+     * @return Contrats
+     */
+    public function setClId($clId)
+    {
+        $this->clId = $clId;
+
+        return $this;
+    }
+
+    /**
+     * Get clId
+     *
+     * @return integer
+     */
+    public function getClId()
+    {
+        return $this->clId;
     }
 
     /**
@@ -229,6 +247,30 @@ class Contrats
     public function getCoUser()
     {
         return $this->coUser;
+    }
+
+    /**
+     * Set coCategorie
+     *
+     * @param integer $coCategorie
+     *
+     * @return Contrats
+     */
+    public function setCoCategorie($coCategorie)
+    {
+        $this->coCategorie = $coCategorie;
+
+        return $this;
+    }
+
+    /**
+     * Get coCategorie
+     *
+     * @return integer
+     */
+    public function getCoCategorie()
+    {
+        return $this->coCategorie;
     }
 
     /**
@@ -733,82 +775,5 @@ class Contrats
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Set coCategorie
-     *
-     * @param \AchatCentrale\CrmBundle\Entity\ContratsCat $coCategorie
-     *
-     * @return Contrats
-     */
-    public function setCoCategorie(\AchatCentrale\CrmBundle\Entity\ContratsCat $coCategorie = null)
-    {
-        $this->coCategorie = $coCategorie;
-
-        return $this;
-    }
-
-    /**
-     * Get coCategorie
-     *
-     * @return \AchatCentrale\CrmBundle\Entity\ContratsCat
-     */
-    public function getCoCategorie()
-    {
-        return $this->coCategorie;
-    }
-
-    /**
-     * Set cl
-     *
-     * @param \AchatCentrale\CrmBundle\Entity\Clients $cl
-     *
-     * @return Contrats
-     */
-    public function setCl(\AchatCentrale\CrmBundle\Entity\Clients $cl = null)
-    {
-        $this->cl = $cl;
-
-        return $this;
-    }
-
-    /**
-     * Get cl
-     *
-     * @return \AchatCentrale\CrmBundle\Entity\Clients
-     */
-    public function getCl()
-    {
-        return $this->cl;
-    }
-    /**
-     * @var integer
-     */
-    private $clId;
-
-
-    /**
-     * Set clId
-     *
-     * @param integer $clId
-     *
-     * @return Contrats
-     */
-    public function setClId($clId)
-    {
-        $this->clId = $clId;
-
-        return $this;
-    }
-
-    /**
-     * Get clId
-     *
-     * @return integer
-     */
-    public function getClId()
-    {
-        return $this->clId;
     }
 }

@@ -10,67 +10,67 @@
         {{ form_errors(form) }}
 
         <div class="ui equal width form">
-            <div class="ui form">
-                <label>{{ form_label(form.claType) }}</label>
+
+            <div class="two fields">
                 <div class="field">
-                    {{ form_widget(form.claType) }}
+                    <label>{{ form_label(form.claType) }}</label>
+                    <div class="field">
+                        {{ form_widget(form.claType) }}
+                    </div>
                 </div>
-            </div>
-            <div class="ui form">
                 <div class="field">
                     <label>{{ form_label(form.claNom) }}</label>
                     {{ form_errors(form.claNom) }}
                     {{ form_widget(form.claNom) }}
                 </div>
             </div>
-            <div class="ui form">
+
+
+            <div class="two fields">
                 <div class="field">
-                    <label>{{ form_label(form.claDescr) }}</label>
-                    {{ form_errors(form.claDescr) }}
-                    {{ form_widget(form.claDescr) }}
-                </div>
-            </div>
-
-            <div class="ui form">
-                <label>{{ form_label(form.claPriorite) }}</label>
-                <div class="field">
-                    {{ form_widget(form.claPriorite) }}
-                </div>
-            </div>
-
-            <div class="ui form">
-                <label>{{ form_label(form.claEcheance) }}</label>
-                <div class="field">
-                    {{ form_widget(form.claEcheance) }}
-                </div>
-            </div>
-
-            <div class="ui form">
-                <label>{{ form_label(form.usId) }}</label>
-                <div class="field">
-                    {{ form_widget(form.usId) }}
-                </div>
-            </div>
-
-            <div class="ui form">
-                <label>{{ form_label(form.cl) }}</label>
-                <div class="field">
-                    {{ form_widget(form.cl) }}
-                </div>
-            </div>
-
-
-
-                    <div class="btn-submit-action">
-                        {{ form_label(form.submit) }}
-                        {{ form_widget(form.submit) }}
+                    <label>{{ form_label(form.claEcheance) }}</label>
+                    <div class="field">
+                        {{ form_widget(form.claEcheance) }}
                     </div>
-
+                </div>
+                <div class="field">
+                    <label>{{ form_label(form.claPriorite) }}</label>
+                    <div class="field">
+                        {{ form_widget(form.claPriorite) }}
+                    </div>
+                </div>
+            </div>
+            <div class="two fields">
+                <div class="field">
+                    <label>{{ form_label(form.usId) }}</label>
+                    <div class="field">
+                        {{ form_widget(form.usId) }}
+                    </div>
+                </div>
+                <div class="field">
+                    <label>{{ form_label(form.cl) }}</label>
+                    <div class="field">
+                        {{ form_widget(form.cl) }}
+                    </div>
+                </div>
             </div>
 
-            {{ form_end(form) }}
+            <div class="field">
+                <label>{{ form_label(form.claDescr) }}</label>
+                {{ form_errors(form.claDescr) }}
+                {{ form_widget(form.claDescr) }}
+            </div>
+
+            <div class="btn-submit-action">
+                {{ form_label(form.submit) }}
+                {{ form_widget(form.submit) }}
+            </div>
 
         </div>
+
+        {{ form_end(form) }}
+
+
 
 
     </div>

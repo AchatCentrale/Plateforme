@@ -57,5 +57,8 @@ taches_home:
     defaults: {_controller: SiteBundle:Tache:Tache}
 
 new-task:
-    path:     /task/new
-    defaults: { _controller: SiteBundle:Tache:NewTask }
+    path:   /taches/new
+    defaults: {_controller: SiteBundle:Tache:NewTask}
+delete-task:
+    path:   /taches/delete/{id}
+    defaults: {_controller: SiteBundle:Tache:Delete}

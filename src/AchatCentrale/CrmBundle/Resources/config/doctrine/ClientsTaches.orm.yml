@@ -36,9 +36,9 @@ AchatCentrale\CrmBundle\Entity\ClientsTaches:
                 fixed: false
             column: CLA_NOM
         claDescr:
-            type: string
+            type: text
             nullable: true
-            length: 5000
+            length: -1
             options:
                 fixed: false
             column: CLA_DESCR
@@ -89,7 +89,6 @@ AchatCentrale\CrmBundle\Entity\ClientsTaches:
             inversedBy: null
             joinColumns:
                 CL_ID:
-
                     referencedColumnName: CL_ID
             orphanRemoval: false
     lifecycleCallbacks: {  }
