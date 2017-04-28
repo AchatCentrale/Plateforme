@@ -2,7 +2,10 @@
 
 namespace SiteBundle\Controller;
 
+use AchatCentrale\CrmBundle\Entity\ClientsTaches;
+use SiteBundle\Form\ClientsTachesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +22,9 @@ class BaseController extends Controller
          }*/
 
 
-        return $this->render('@Site/Base/home.html.twig', array());
+
+        return $this->render('@Site/Base/home.html.twig', [
+        ]);
 
     }
 
@@ -50,11 +55,11 @@ class BaseController extends Controller
         $sql = "SELECT
                 *
                 FROM LOGS
-WHERE
-  LOGS.LO_IDENT = 'CL_ID'
-AND
-    LO_IDENT_NUM = :id
-";
+                WHERE
+                  LOGS.LO_IDENT = 'CL_ID'
+                AND
+                    LO_IDENT_NUM = :id
+                ";
 
         $stmt = $conn->prepare($sql);
 

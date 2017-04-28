@@ -3,3 +3,5 @@ services:
         class: SiteBundle\Twig\CrmFilter
         tags:
             - { name: twig.extension}
+    site.service.taches_utils:
+        class: SiteBundle\Service\TachesUtils

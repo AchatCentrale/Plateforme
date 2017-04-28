@@ -50,7 +50,7 @@ class ClientsTachesType extends AbstractType
                 'widget' => 'single_text',
                 'input' => 'datetime',
                 'format' => 'dd/MM/yyyy',
-                'label' => "Date Echeance",
+                'label' => "Date échéance",
                 'attr' => [ 'class' => 'date add-action'],
 
             ])
