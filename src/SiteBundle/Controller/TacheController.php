@@ -24,9 +24,39 @@ class TacheController extends Controller
     {
 
         $task = new ClientsTaches();
+        $em = $this->getDoctrine()->getManager();
+
+
+        if($request->get('achatcentrale_crmbundle_clientstaches')){
+
+            dump($request->get('achatcentrale_crmbundle_clientstaches')['claEcheance']);
+            $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+                'clId' =>  $request->get('achatcentrale_crmbundle_clientstaches')['cl']
+            ]);
+
+            $task
+                ->setClaType($request->get('achatcentrale_crmbundle_clientstaches')['claType'])
+                ->setClaNom($request->get('achatcentrale_crmbundle_clientstaches')['claNom'])
+                ->setClaDescr($request->get('achatcentrale_crmbundle_clientstaches')['claDescr'])
+                ->setClaPriorite($request->get('achatcentrale_crmbundle_clientstaches')['claPriorite'])
+                ->setUsId($request->get('achatcentrale_crmbundle_clientstaches')['usId'])
+                ->setInsUser($this->getUser());
+                ;
+
+            $em->persist($task);
+            $em->flush();
+        }
+
+
+
+
+
         $form = $this->createForm(ClientsTachesType::class, $task, [
             'action' => $this->generateUrl('new-task'),
         ]);
+
+
+
 
         $form->add('submit', SubmitType::class, array(
             'label' => 'Enregistrer',

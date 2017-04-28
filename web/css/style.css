@@ -839,6 +839,11 @@ form.ink-form.form-login {
     text-decoration: underline;
 }
 
+
+button a {
+    color:white;
+}
+
 .form-add-action {
     width: 80%;
     margin: 0 auto;
