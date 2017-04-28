@@ -158,22 +158,21 @@ class BaseController extends Controller
     public function testAction()
     {
 
+        $repository = $this->getDoctrine()
+            ->getRepository('AchatCentraleCrmBundle:Clients');
 
-        $db = $this->get('doctrine.dbal.centrale_produits_connection');
-        $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $count = $repository->createQueryBuilder('p')
+            ->select('COUNT(p)')
+            ->getQuery()
+            ->getSingleScalarResult();
 
 
-        $result = 'SELECT FO_RAISONSOC, COUNT(CE_ID) AS NB_CMD, COUNT(MESSAGE_ENTETE.ME_ID) AS NB_TICKETS
-        FROM dbo.MESSAGE_ENTETE
-        INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON MESSAGE_ENTETE.FO_ID = FOURNISSEURS.FO_ID
-        LEFT JOIN dbo.COMMANDE_ENTETE ON MESSAGE_ENTETE.ME_ID = COMMANDE_ENTETE.ME_ID
-        WHERE MESSAGE_ENTETE.CL_ID = 1260
-        GROUP BY FO_RAISONSOC
-        ORDER BY FO_RAISONSOC';
 
-        dump($result);
 
-        return $this->render('@AchatCentraleCrm/testView.html.twig');
+        return $this->render('@AchatCentraleCrm/testView.html.twig', [
+            'count' => $count
+        ]);
 
     }
 
