@@ -12,6 +12,7 @@ class CrmFilter extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFilter('phone', [$this, 'phoneFilter']),
+            new \Twig_SimpleFilter('Time', [$this, 'dateFilter']),
         );
     }
 
@@ -23,6 +24,19 @@ class CrmFilter extends \Twig_Extension
         }else{
             return $number;
         }
+    }
+
+    public function dateFilter(\DateTime $date)
+    {
+
+
+
+        \Moment\Moment::setLocale('fr_FR');
+
+        $m = new \Moment\Moment($date->format('Y-m-d H:i:s'), 'UTC');
+
+
+        return $m->format('l dS F Y ');
     }
 
 

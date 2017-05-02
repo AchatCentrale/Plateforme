@@ -3,10 +3,11 @@
 
 {% block body %}
 
+    {{ dump(task) }}
+
   <div class="ui container taches-container">
 
-
-      <button class=" ui button"><a href="{{ path('new-task') }}">Ajouter une tâche</a></button>
+          <button class=" ui button"><a href="{{ path('new-task') }}">Ajouter une tâche</a></button>
 
 
 
@@ -36,8 +37,8 @@
         <tbody>
        {% for tasks in task %}
            <tr>
-               <td>{{ tasks.insDate | date }}</td>
-               <td>{{ tasks.claEcheance |date }}</td>
+               <td>{{ tasks.insDate | Time  }}</td>
+               <td>{{ tasks.claEcheance | Time }}</td>
                <td><div class="ui label"> <i class="user icon"></i>{{ user }}</div></td>
                <td><div class="ui label"> {{ tasks.claType }}</div></td>
                <td>{{ tasks.claDescr }}</td>
@@ -106,10 +107,13 @@
 {% endblock  %}
 
 {% block javascripts %}
-  <script>
+  <script type="application/javascript" >
       $('.menu .item')
           .tab()
       ;
+
+
+
 
       $('.trash').on('click', function (e) {
           deleteTask(e.currentTarget.id);

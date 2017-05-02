@@ -12,6 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ClientsTaches
 {
+
+
+    public function __construct()
+    {
+        $this->insDate = new \DateTime('now');
+    }
+    
+    
     /**
      * @var integer
      *
