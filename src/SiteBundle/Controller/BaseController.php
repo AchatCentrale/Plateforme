@@ -17,13 +17,20 @@ class BaseController extends Controller
     public function indexAuthAction(Request $request)
     {
 
-        /* if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
              throw $this->createAccessDeniedException();
-         }*/
+         }
+
+        $user = $this->getUser();
+
+        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
+            'usId' => $user->getUsId(),
+        ]);
 
 
 
         return $this->render('@Site/Base/home.html.twig', [
+            'task' => $task
         ]);
 
     }
@@ -66,6 +73,8 @@ class BaseController extends Controller
         $stmt->bindValue(':id', $id);
         $stmt->execute();
         $log = $stmt->fetchAll();
+
+        dump($restresult);
 
         return $this->render('@Site/Base/client.general.html.twig', [
             "client" => $restresult,
@@ -158,18 +167,11 @@ class BaseController extends Controller
     public function testAction()
     {
 
-        $repository = $this->getDoctrine()
-            ->getRepository('AchatCentraleCrmBundle:Clients');
+        $con = $this->getDoctrine()->getManager()->getConnection();
+        $stmt = $con->executeQuery('SELECT * FROM Vue_Clients');
+        $count = $stmt->fetchAll();
 
-
-        $count = $repository->createQueryBuilder('p')
-            ->select('COUNT(p)')
-            ->getQuery()
-            ->getSingleScalarResult();
-
-
-
-
+        dump($count);
         return $this->render('@AchatCentraleCrm/testView.html.twig', [
             'count' => $count
         ]);

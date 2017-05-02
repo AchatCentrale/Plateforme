@@ -3,8 +3,12 @@
         <div class="equal width row">
             <div class="column">
 
-                <h3>Centrale Roc-Eclerc</h3>
 
+
+
+
+            </div>
+            <div class="column">
                 <div class="ui items">
                     <div class="item">
                         <div class="ui tiny image">
@@ -18,31 +22,13 @@
                             </a>
                         </div>
                     </div>
-
-                    <div class="adresse-client">
-                        <div class="ui equal width grid">
-                            <div class="equal width row">
-                                <div class="column">
-                                    <p>Adresse</p>
-                                    <p>Ville/code postal</p>
-                                    <p>VNuméro de téléphone</p>
-                                    <p>Adresse mail</p>
-
-                                </div>
-                                <div class="column">
-                                    <div class="label-info-client ui label"> {{ clients.clAdresse1 }} </div>
-                                    <div class="label-info-client ui label"> {{ clients.clVille }} {{ clients.clCp }} </div>
-                                    <div class="label-info-client ui label"> {{ clients.clTel | phone }} </div>
-                                    <div class="label-info-client ui label"><a href="mailto:{{ clients.clMail }}">{{ clients.clMail }}</a></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
 
-
             </div>
+        </div>
+
+
+        <div class="equal width row">
             <div class="column">
 
                 <div class="info-client-comp">
@@ -59,18 +45,48 @@
                             </div>
                             <div class="column">
                                 <div class="label-info-client ui label"> {{ client[0].clSiret }} </div>
+                                <br>
                                 <div class="label-info-client ui label"> Non renseigné </div>
-                                <div class="label-info-client ui label"> {{ clients.clTel | phone }} </div>
+                                <br>
                                 <div class="label-info-client ui label">{{ client[0].clEffectif }} </div>
-                                <div class="ui label"><i class="user icon"></i> Morgane</div>
-                                <div class="ui label"><a href="{{ client[0].clWeb }}"></a></div>
+                                <br>
+                                <div class="label-info-client ui label"><i class="user icon"></i> Morgane</div>
+                                <br>
+                                <div class="label-info-client ui label"><a href="{{ client[0].clWeb ? " " : "Pas de site web.. " }}"></a></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
 
+
             </div>
+            <div class="column">
+                <div class="adresse-client">
+                    <div class="ui equal width grid">
+                        <div class="equal width row">
+                            <div class="column">
+                                <p>Adresse</p>
+                                <p>Ville/code postal</p>
+                                <p>Numéro de téléphone</p>
+                                <p>Adresse mail</p>
+
+                            </div>
+                            <div class="column">
+                                <div class="label-info-client ui label"> {{ clients.clAdresse1 }} </div>
+                                <div class="label-info-client ui label">{{ clients.clCp }} {{ clients.clVille }} </div>
+                                <div class="label-info-client ui label"> {{ clients.clTel | phone }} </div>
+                                <div class="label-info-client ui label"><a href="mailto:{{ clients.clMail }}">{{ clients.clMail }}</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
         </div>
     </div>
 
