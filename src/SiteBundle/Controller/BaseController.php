@@ -54,8 +54,7 @@ class BaseController extends Controller
 
 
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy(array('clId' => $id));
-
-
+        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(array('cl' => $id));
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
@@ -74,11 +73,12 @@ class BaseController extends Controller
         $stmt->execute();
         $log = $stmt->fetchAll();
 
-        dump($restresult);
+        dump($task);
 
         return $this->render('@Site/Base/client.general.html.twig', [
             "client" => $restresult,
-            "log" => $log
+            "log" => $log,
+            "tache" => $task,
         ]);
 
     }

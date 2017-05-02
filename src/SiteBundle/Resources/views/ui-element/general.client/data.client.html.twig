@@ -30,24 +30,38 @@
                 </table>
             </div>
             <div class="column">
-                <h4>Consommation du client</h4>
-                <table class="ui table">
-                    <thead>
-                    <tr><th class="six wide">Produits</th>
-                        <th class="six wide">Fournisseur</th>
-                        <th class="three wide">Date</th>
-                    </tr></thead>
-                    <tbody>
-                    <tr>
-                        <td>Gomme</td>
-                        <td>Bruneau</td>
-                        <td>12-02-2017</td>
-                    </tr>
 
-                    </tbody>
 
-                </table>
-            </div>
+                <div class="ui pointing secondary menu profile-client ">
+                    <a class="active item" data-tab="first">Actions</a>
+                    <a class="item" data-tab="second">Notes</a>
+
+                </div>
+                <div class="ui tab segment active" data-tab="first">
+                    <table class="ui compact table">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Type</th>
+                            <th>Écheance</th>
+                            <th>Priorité</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                       {% for tasks in task %}
+                            <tr>
+                                <td>{{ tasks.claNom }}</td>
+                                <td>{{ tasks.claType | type }}</td>
+                                <td>{{ tasks.claEcheance | Time }}</td>
+                                <td>{{ tasks.claPriorite }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ui tab segment" data-tab="second">Second </div>
+
 
 
 
@@ -55,3 +69,6 @@
         </div>
     </div>
 </div>
+</div>
+
+

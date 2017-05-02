@@ -40,7 +40,7 @@
                <td>{{ tasks.insDate | Time  }}</td>
                <td>{{ tasks.claEcheance | Time }}</td>
                <td><div class="ui label"> <i class="user icon"></i>{{ user }}</div></td>
-               <td><div class="ui label"> {{ tasks.claType }}</div></td>
+               <td><div class="ui label"> {{ tasks.claType | type }}</div></td>
                <td>{{ tasks.claDescr }}</td>
                <td><div class="ui orange label"> {{ tasks.claPriorite }}</div></td>
                <td>{{ tasks.cl.clRaisonsoc }}</td>
@@ -108,9 +108,7 @@
 
 {% block javascripts %}
   <script type="application/javascript" >
-      $('.menu .item')
-          .tab()
-      ;
+      $('.menu .item').tab();
 
 
 

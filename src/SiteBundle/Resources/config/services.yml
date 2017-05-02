@@ -1,6 +1,8 @@
 services:
     site.twig.crm_filter:
         class: SiteBundle\Twig\CrmFilter
+        arguments:
+            doctrine: '@doctrine'
         tags:
             - { name: twig.extension}
     site.service.taches_utils:
