@@ -73,7 +73,7 @@ class BaseController extends Controller
         $stmt->execute();
         $log = $stmt->fetchAll();
 
-        dump($task);
+
 
         return $this->render('@Site/Base/client.general.html.twig', [
             "client" => $restresult,

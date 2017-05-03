@@ -25,7 +25,7 @@
                 <table class="ui striped table">
                     <thead>
                     <tr>
-                        <th>Date de création</th>
+                        <th>Nom de l'action</th>
                         <th>Échéances</th>
                         <th>Assigné à</th>
                         <th>Type</th>
@@ -38,7 +38,7 @@
                     <tbody>
                     {% for tasks in task %}
                         <tr id="{{ tasks.claId }}" >
-                            <td>{{ tasks.insDate | Time }}</td>
+                            <td><h3>{{ tasks.claNom }}</h3></td>
                             <td>{{ tasks.claEcheance | timeFromNow }}</td>
                             <td>
                                 <div class="ui label"><i class="user icon"></i>{{ user }}</div>
@@ -58,7 +58,7 @@
                 </table>
             {% endif %}
 
-            <p>Aucune taches pour le moment</p>
+
 
         </div>
         <div class="ui bottom attached tab segment" data-tab="second">

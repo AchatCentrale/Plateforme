@@ -64,7 +64,6 @@ class CrmFilter extends \Twig_Extension
             'acId' => $type
         ]);
 
-        dump($typee);
         return $typee[0]->getAcNom();
     }
 

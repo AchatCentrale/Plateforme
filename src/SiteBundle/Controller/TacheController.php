@@ -54,24 +54,16 @@ class TacheController extends Controller
 
         $req = $request->request->get('achatcentrale_crmbundle_clientstaches');
 
-        dump($req);
-
-
         $task = new ClientsTaches();
         $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
                 'clId' => $req['cl'],
             ]);
-
-
         $form = $this->createForm(ClientsTachesType::class, $task, [
                 'action' => $this->generateUrl('new-task'),
             ]);
-
-
-        $form->add('submit', SubmitType::class, array(
+        $form->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',
-                'attr' => array('class' => 'fluid positive ui button'),
-            )
+                'attr' => array('class' => 'fluid positive ui button'),]
         );
 
         if ($request->getMethod() == "POST") {
@@ -94,6 +86,10 @@ class TacheController extends Controller
             $em->persist($task);
             $em->flush();
 
+
+            return $this->redirectToRoute('taches_home', [
+
+            ], 301);
 
         }
 

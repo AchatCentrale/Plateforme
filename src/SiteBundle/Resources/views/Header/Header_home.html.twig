@@ -9,27 +9,25 @@
 
                     <div class="avatar-topBar">
                         <div class="ui segment">
-                        <div class="ui equal width grid">
-                            <div class="equal width row">
-                                <div class="column left floated">
-                                    <i class="user circle  teal  icon"></i>{{ app.user.usPrenom }} {{ app.user.usNom }}
-                                </div>
-                                <div class="column right floated">
-                                    <i class="setting icon"> </i> Modifier mon profil
+                            <div class="ui equal width grid">
+                                <div class="equal width row">
+                                    <div class="column left floated">
+                                        <i class="user circle  teal  icon"></i>{{ app.user.usPrenom }} {{ app.user.usNom }}
+                                    </div>
+                                    <div class="column right floated">
+                                        <i class="setting icon"> </i> Modifier mon profil
+                                    </div>
                                 </div>
                             </div>
+
+
                         </div>
 
 
                     </div>
 
 
-
-                    </div>
-
-
                 </div>
-
 
 
                 <div class="ui modal action">
@@ -38,175 +36,365 @@
                         <i class="tasks teal large icon"></i>
                         Nouvelle action
                     </div>
-                    {#<div class="content">
+                    <div class="content">
 
 
-                            {{ form_start(form, { 'attr' : { 'class': 'ajaxNew' }, 'action': '/taches/new' }) }}
-                            {{ form_errors(form) }}
+                        <form id="task-ajax" name="achatcentrale_crmbundle_clientstaches" method="post"
+                              action="/taches/new">
+
 
                             <div class="ui equal width form">
 
                                 <div class="two fields">
                                     <div class="field">
-                                        <label>{{ form_label(form.claType) }}</label>
+                                        <label><label for="achatcentrale_crmbundle_clientstaches_claType"
+                                                      class="required">Type d'action</label></label>
                                         <div class="field">
-                                            {{ form_widget(form.claType) }}
+                                            <select id="achatcentrale_crmbundle_clientstaches_claType"
+                                                    name="achatcentrale_crmbundle_clientstaches[claType]"
+                                                    class="ui dropdown add-action">
+                                                <option value="1">Relance</option>
+                                                <option value="2">Appel</option>
+                                                <option value="3">Administratif</option>
+                                                <option value="4">Envoi devis</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>{{ form_label(form.claNom) }}</label>
-                                        {{ form_errors(form.claNom) }}
-                                        {{ form_widget(form.claNom) }}
+                                        <label><label for="achatcentrale_crmbundle_clientstaches_claNom"
+                                                      class="required">Nom de l'action</label></label>
+
+                                        <input type="text" id="achatcentrale_crmbundle_clientstaches_claNom"
+                                               name="achatcentrale_crmbundle_clientstaches[claNom]" required="required"
+                                               class="add-action">
                                     </div>
                                 </div>
 
 
                                 <div class="two fields">
                                     <div class="field">
-                                        <label>{{ form_label(form.claEcheance) }}</label>
+                                        <label><label for="achatcentrale_crmbundle_clientstaches_claEcheance"
+                                                      class="required">Date échéance</label></label>
                                         <div class="field">
-                                            {{ form_widget(form.claEcheance) }}
+                                            <input type="text" id="achatcentrale_crmbundle_clientstaches_claEcheance"
+                                                   name="achatcentrale_crmbundle_clientstaches[claEcheance]"
+                                                   required="required"
+                                                   class="date-task-picker date add-action hasDatepicker">
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>{{ form_label(form.claPriorite) }}</label>
+                                        <label><label for="achatcentrale_crmbundle_clientstaches_claPriorite"
+                                                      class="required">Priorité</label></label>
                                         <div class="field">
-                                            {{ form_widget(form.claPriorite) }}
+                                            <select id="achatcentrale_crmbundle_clientstaches_claPriorite"
+                                                    name="achatcentrale_crmbundle_clientstaches[claPriorite]"
+                                                    class="ui dropdown add-action">
+                                                <option value="1">A faire au plus vite</option>
+                                                <option value="2">Important</option>
+                                                <option value="3">Moyen</option>
+                                                <option value="4">Faible</option>
+                                                <option value="5">Un jour peut-être</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="two fields">
                                     <div class="field">
-                                        <label>{{ form_label(form.usId) }}</label>
+                                        <label><label for="achatcentrale_crmbundle_clientstaches_usId" class="required">Affectation</label></label>
                                         <div class="field">
-                                            {{ form_widget(form.usId) }}
+                                            <select id="achatcentrale_crmbundle_clientstaches_usId"
+                                                    name="achatcentrale_crmbundle_clientstaches[usId]"
+                                                    class="ui dropdown add-action">
+                                                <option value="1">Laurent</option>
+                                                <option value="2">Alexis</option>
+                                                <option value="4">Jean Baptiste</option>
+                                                <option value="5">David</option>
+                                                <option value="7">Morgane</option>
+                                                <option value="8">Fréderic</option>
+                                                <option value="14">Martial</option>
+                                                <option value="17">Isabelle</option>
+                                                <option value="18">Stéphane</option>
+                                                <option value="20">Jean-Christophe</option>
+                                                <option value="22">Yvon</option>
+                                                <option value="23">Régis</option>
+                                                <option value="25">M</option>
+                                                <option value="26">Florence</option>
+                                                <option value="30">Sébastien</option>
+                                                <option value="36">Daphné</option>
+                                                <option value="37">Jean-Pierre</option>
+                                                <option value="39">Philipe</option>
+                                                <option value="40">Tania</option>
+                                                <option value="43">Yves</option>
+                                                <option value="44">Stéphane</option>
+                                                <option value="46">Patrick</option>
+                                                <option value="47">Gautier</option>
+                                                <option value="48">henri</option>
+                                                <option value="51">Chrystèle</option>
+                                                <option value="53">Christophe</option>
+                                                <option value="58">PF</option>
+                                                <option value="60">Paul</option>
+                                                <option value="62">Samia</option>
+                                                <option value="63">Guillaume</option>
+                                                <option value="64">Evelyne</option>
+                                                <option value="65">Christophe</option>
+                                                <option value="66">Christelle</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="field">
-                                        <label>{{ form_label(form.cl) }}</label>
+                                        <label><label for="achatcentrale_crmbundle_clientstaches_cl" class="required">Entreprise
+                                                (numéro/nom)</label></label>
                                         <div class="field">
-                                            {{ form_widget(form.cl) }}
+                                            <select id="achatcentrale_crmbundle_clientstaches_cl"
+                                                    name="achatcentrale_crmbundle_clientstaches[cl]"
+                                                    class="ui dropdown add-action">
+                                                <option value="2333">ROC ECLERC PARIS ORDENER</option>
+                                                <option value="2334">Roc Eclerc AVIGNON</option>
+                                                <option value="2335">Roc Eclerc RENNES</option>
+                                                <option value="2336">ROC ECLERC PARIS SAINT VINCENT DE PAUL</option>
+                                                <option value="2337">Roc Eclerc PALAISEAU</option>
+                                                <option value="2338">Roc Eclerc ATHIS-MONS</option>
+                                                <option value="2339">Roc Eclerc ROUBAIX</option>
+                                                <option value="2340">Roc Eclerc BILLERE</option>
+                                                <option value="2341">Roc Eclerc LILLE</option>
+                                                <option value="2342">Roc Eclerc LUNEL</option>
+                                                <option value="2343">Roc Eclerc LA TESTE-DE-BUCH</option>
+                                                <option value="2344">Roc Eclerc SAINT-GERMAIN-EN-LAYE</option>
+                                                <option value="2345">ROC ECLERC MARSEILLE</option>
+                                                <option value="2346">Roc Eclerc BRIVE-LA-GAILLARDE</option>
+                                                <option value="2347">ROC ECLERC BOURG-LES-VALENCE</option>
+                                                <option value="2348">Roc Eclerc VILLEPINTE</option>
+                                                <option value="2349">ROC ECLERC MONTMORILLON</option>
+                                                <option value="2350">Roc Eclerc CHÂTEAU-THIERRY</option>
+                                                <option value="2351">ROC ECLERC LIBOURNE</option>
+                                                <option value="2352">Roc Eclerc MONTAUBAN</option>
+                                                <option value="2353">Roc Eclerc MONTLUCON</option>
+                                                <option value="2354">Roc Eclerc BAR LE DUC</option>
+                                                <option value="2355">Roc Eclerc POLIGNY</option>
+                                                <option value="2356">Roc Eclerc FRONTIGNAN</option>
+                                                <option value="2357">Roc Eclerc MANTES-LA-JOLIE</option>
+                                                <option value="2358">Roc Eclerc BEAUVAIS</option>
+                                                <option value="2359">Roc Eclerc BARJOUVILLE</option>
+                                                <option value="2360">ROC ECLERC BRON</option>
+                                                <option value="2361">Roc Eclerc PIERREFITTE-SUR-SEINE</option>
+                                                <option value="2362">Roc Eclerc FOS-SUR-MER</option>
+                                                <option value="2363">Roc Eclerc THIONVILLE</option>
+                                                <option value="2364">Roc Eclerc TOULON</option>
+                                                <option value="2365">Roc Eclerc PONT-À-MOUSSON</option>
+                                                <option value="2366">Roc Eclerc SAINT-VICTORET</option>
+                                                <option value="2367">Roc Eclerc FLEURY-LES-AUBRAIS</option>
+                                                <option value="2368">Roc Eclerc CAYENNE</option>
+                                                <option value="2369">ROC ECLERC DESCARTES</option>
+                                                <option value="2370">ROC ECLERC LE HAVRE</option>
+                                                <option value="2371">Roc Eclerc LIMEIL-BREVANNES</option>
+                                                <option value="2372">Roc Eclerc SCHILTIGHEIM</option>
+                                                <option value="2373">Roc Eclerc MEAUX</option>
+                                                <option value="2374">Roc Eclerc CHÂTEAU-D OLONNE</option>
+                                                <option value="2375">ROC ECLERC BAYEUX</option>
+                                                <option value="2376">Roc Eclerc LAVAL</option>
+                                                <option value="2377">Roc Eclerc PONT-DE-METZ</option>
+                                                <option value="2378">Roc Eclerc GANGES</option>
+                                                <option value="2379">Roc Eclerc CHAMPIGNY-SUR-MARNE</option>
+                                                <option value="2380">Roc Eclerc FRESNES</option>
+                                                <option value="2381">Roc Eclerc SENS</option>
+                                                <option value="2382">Roc Eclerc CHAMBERY</option>
+                                                <option value="2383">Roc Eclerc DOUAI</option>
+                                                <option value="2384">Roc Eclerc LABENNE</option>
+                                                <option value="2385">Roc Eclerc VILLEFRANCHE-SUR-SAÔNE</option>
+                                                <option value="2386">Roc Eclerc LATTES</option>
+                                                <option value="2387">Roc Eclerc MEXIMIEUX</option>
+                                                <option value="2388">Roc Eclerc AUZEVILLE-TOLOSANE</option>
+                                                <option value="2389">Roc Eclerc QUIMPER</option>
+                                                <option value="2390">ROC ECLERC PARIS MURAT</option>
+                                                <option value="2391">Roc Eclerc COMPIEGNE</option>
+                                                <option value="2392">ROC ECLERC CARENTAN</option>
+                                                <option value="2393">Roc Eclerc CORBEIL-ESSONNES</option>
+                                                <option value="2395">Roc Eclerc CHALLANS</option>
+                                                <option value="2396">Roc Eclerc SOISSONS</option>
+                                                <option value="2397">ROC ECLERC NOGENT-SUR-OISE</option>
+                                                <option value="2398">Roc Eclerc FREJUS</option>
+                                                <option value="2399">Roc Eclerc HAGUENAU</option>
+                                                <option value="2400">ROC ECLERC STRASBOURG</option>
+                                                <option value="2401">Roc Eclerc EAUBONNE</option>
+                                                <option value="2402">Roc Eclerc AUXERRE</option>
+                                                <option value="2403">Roc Eclerc DAX</option>
+                                                <option value="2404">ROC ECLERC NIMES</option>
+                                                <option value="2405">Roc Eclerc SAINTE-GENEVIEVE-DES-BOIS</option>
+                                                <option value="2406">Roc Eclerc VIRY-CHATILLON</option>
+                                                <option value="2407">Roc Eclerc AUBENAS</option>
+                                                <option value="2408">Roc Eclerc CALAIS</option>
+                                                <option value="2410">Roc Eclerc MEULAN-EN-YVELINES</option>
+                                                <option value="2411">Roc Eclerc VILLENEUVE-SUR-LOT</option>
+                                                <option value="2412">Roc Eclerc PERPIGNAN</option>
+                                                <option value="2413">Roc Eclerc EXINCOURT</option>
+                                                <option value="2414">Roc Eclerc MONTREUIL</option>
+                                                <option value="2415">Roc Eclerc SAINT-MANDE</option>
+                                                <option value="2416">ROC.ECLERC</option>
+                                                <option value="2417">Roc Eclerc ANTONY</option>
+                                                <option value="2418">Roc Eclerc ASNIERES-SUR-SEINE</option>
+                                                <option value="2419">Roc Eclerc GUERET</option>
+                                                <option value="2420">Roc Eclerc LEVALLOIS-PERRET</option>
+                                                <option value="2421">Roc Eclerc CLICHY</option>
+                                                <option value="2422">Roc Eclerc EPERNAY</option>
+                                                <option value="2423">Roc Eclerc MACON</option>
+                                                <option value="2424">ROC ECLERC SAINT BRIEUC</option>
+                                                <option value="2425">Roc Eclerc BAGNEUX</option>
+                                                <option value="2426">Roc Eclerc YVETOT</option>
+                                                <option value="2427">Roc Eclerc BEDARIEUX</option>
+                                                <option value="2428">ROC ECLERC CHAUMONT</option>
+                                                <option value="2429">ROC ECLERC BERNAY</option>
+                                                <option value="2430">ROC ECLERC CAEN</option>
+                                                <option value="2431">Roc Eclerc ST ANDRE LES VERGES</option>
+                                                <option value="2432">Roc Eclerc MONTMORENCY</option>
+                                                <option value="2433">RO ECLERC ST JUNIEN</option>
+                                                <option value="2434">Roc Eclerc ST THEGONNEC</option>
+                                                <option value="2435">Roc Eclerc PLAN DE CUQUES</option>
+                                                <option value="2436">Roc Eclerc BORGO</option>
+                                                <option value="2437">Roc Eclerc CREUTZWALD</option>
+                                                <option value="2438">ROCFU64</option>
+                                                <option value="2439">Roc Eclerc SEYNOD</option>
+                                                <option value="2440">Roc Eclerc JOIGNY</option>
+                                                <option value="2441">Roc Eclerc CERET</option>
+                                                <option value="2442">ROC ECLERC ELNE</option>
+                                                <option value="2443">Roce Eclerc TARARE</option>
+                                                <option value="2444">ROC ECLERC PARTHENAY</option>
+                                                <option value="2446">ROC ECLERC SARREBOURG</option>
+                                                <option value="2447">ROC ECLERC RAMBOUILLET</option>
+                                                <option value="2448">ROC ECLERC AZUR FUNERAIRE 13012</option>
+                                                <option value="2449">ROC ECLERC AIX EN PROVENCE</option>
+                                                <option value="2450">ROC ECLERC TRETS</option>
+                                                <option value="2451">ROC ECLERC PFCM</option>
+                                                <option value="2452">ROC ECLERC VINEUIL AU DELA</option>
+                                                <option value="2453">ROC ECLERC POITIERS</option>
+                                                <option value="2454">ROC ECLERC ANGOULEME PFC</option>
+                                                <option value="2455">ROC ECLERC CONSTELLATION 4M</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="field">
-                                    <label>{{ form_label(form.claDescr) }}</label>
-                                    {{ form_errors(form.claDescr) }}
-                                    {{ form_widget(form.claDescr) }}
+                                    <label><label for="achatcentrale_crmbundle_clientstaches_claDescr" class="required">Description
+                                            de l'action</label></label>
+
+                                    <textarea id="achatcentrale_crmbundle_clientstaches_claDescr"
+                                              name="achatcentrale_crmbundle_clientstaches[claDescr]" required="required"
+                                              class="ui dropdown add-action"></textarea>
                                 </div>
 
                                 <div class="btn-submit-action">
-                                    {{ form_label(form.submit) }}
-                                    {{ form_widget(form.submit) }}
+
+                                    <button type="submit" id="achatcentrale_crmbundle_clientstaches_submit"
+                                            name="achatcentrale_crmbundle_clientstaches[submit]"
+                                            class="fluid positive ui button">Enregistrer
+                                    </button>
                                 </div>
 
                             </div>
 
-                            {{ form_end(form) }}
-
-
-
-
-                    </div>#}
-
-
-                </div>
-
-                </div>
-
-
-            </div>
-        </div>
-
-
-
-            <div class="continer-nav-bar">
-                <div>
-
-
-                    <div class="nav-bar">
-
-
-
-                        <div class="presentation">
-                            <div class="block-logo">
-                                <img src="/images/logo-achatcentrale.png" alt="logo_crm"  />
-                                <p>CRM v1.0</p>
-                            </div>
-                        </div>
-
-
-                        <div class="menu-nav">
-                            <div class="{% if app.request.attributes.get('_route') == 'index_auth' %}active {% endif %}menu-home hover">
-                                <i class="home teal large icon"></i>
-                                <a href="{{ path('index_auth') }}">Accueil</a>
-                            </div>
-                            <div class="{% if app.request.attributes.get('_route') == 'taches_home' %}active {% endif %}menu-home hover">
-                                <i class="tasks teal large icon"></i>
-                                <a href="{{ path('taches_home') }}">Tâches</a>
-                            </div>
-                            <div class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}active {% endif %}menu-client hover">
-                                <i class="group teal large icon"></i>
-                                <a href="{{ path('client') }}">Clients</a>
-                            </div>
-                           {% if app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}
-                            <div class="extra-nav">
-
-                                    <li><a href="{{ path('client-general', {'id': app.request.attributes.get('id')}) }}">Général</a></li>
-                                    <li><a href="{{ path('client-adresse', {'id': app.request.attributes.get('id')}) }}">Adresse</a></li>
-                                    <li><a href="{{ path('client-status', {'id': app.request.attributes.get('id')}) }}">Status</a></li>
-                                    <li><a href="">Actions</a></li>
-
-
-
-                            </div>
-                            {% endif %}
-
-                            <div class="menu-supplier hover">
-                                <i class="suitcase teal large icon"></i>
-                                <a href="/fournisseur">Fournisseurs</a>
-                            </div>
-
-
-                        </div>
-
-
-
-                        <div class="menu-bottom">
-                            <i class="log out teal large icon"></i>
-                            <a href="/logout"> Déconnexion</a>
-
-                        </div>
-
+                            <input type="hidden" id="achatcentrale_crmbundle_clientstaches__token"
+                                   name="achatcentrale_crmbundle_clientstaches[_token]"
+                                   value="RrqAl9oAEjEk7mGomCIiEIgoJLlgZclKnOJSY3k9KZg"></form>
 
 
                     </div>
 
+
                 </div>
+
             </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="continer-nav-bar">
+        <div>
+
+
+            <div class="nav-bar">
+
+
+                <div class="presentation">
+                    <div class="block-logo">
+                        <img src="{{ asset('images/logo-achatcentrale.png') }}" alt="logo_crm"/>
+                        <p>CRM v1.0</p>
+                    </div>
+                </div>
+
+
+                <div class="menu-nav">
+                    <div class="{% if app.request.attributes.get('_route') == 'index_auth' %}active {% endif %}menu-home hover">
+                        <i class="home teal large icon"></i>
+                        <a href="{{ path('index_auth') }}">Accueil</a>
+                    </div>
+                    <div class="{% if app.request.attributes.get('_route') == 'taches_home' %}active {% endif %}menu-home hover">
+                        <i class="tasks teal large icon"></i>
+                        <a href="{{ path('taches_home') }}">Tâches</a>
+                    </div>
+                    <div class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}active {% endif %}menu-client hover">
+                        <i class="group teal large icon"></i>
+                        <a href="{{ path('client') }}">Clients</a>
+                    </div>
+                    {% if app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}
+                        <div class="extra-nav">
+
+                            <li>
+                                <a href="{{ path('client-general', {'id': app.request.attributes.get('id')}) }}">Général</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('client-adresse', {'id': app.request.attributes.get('id')}) }}">Adresse</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('client-status', {'id': app.request.attributes.get('id')}) }}">Status</a>
+                            </li>
+                            <li><a href="">Actions</a></li>
+
+
+                        </div>
+                    {% endif %}
+
+                    <div class="menu-supplier hover">
+                        <i class="suitcase teal large icon"></i>
+                        <a href="/fournisseur">Fournisseurs</a>
+                    </div>
+
+
+                </div>
+
+
+                <div class="menu-bottom">
+                    <i class="log out teal large icon"></i>
+                    <a href="/logout"> Déconnexion</a>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
 
     </div>
 
 </header>
 
 
-
 {% block javascripts %}
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
 
 
-
-            $("#mymodalg").click(function() {
+            $("#mymodalg").click(function () {
                 $('.ui.modal.action')
                     .modal('show')
                 ;
             });
 
 
-            $("#add-modal-client").click(function(){
+            $("#add-modal-client").click(function () {
                 $('.ui.modal.add')
                     .modal('show')
                 ;
@@ -220,7 +408,7 @@
                 let all = $('.add-action');
 
                 all.map(function (i, value) {
-                    console.log(value,  value.value)
+                    console.log(value, value.value)
                 })
 
 
@@ -242,7 +430,44 @@
                 weekHeader: 'Sem.',
             });
 
+            $(".date-task-picker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                firstDay: 1,
+                closeText: 'Fermer',
+                prevText: 'Précédent',
+                nextText: 'Suivant',
+                currentText: 'Aujourd\'hui',
+                monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+                monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+                dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+                dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+                dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+                weekHeader: 'Sem.',
+            });
 
+
+            $("#task-ajax").on('submit', function (e) {
+                e.preventDefault();
+                console.log($(this).serialize());
+
+                $.ajax({
+                    type: "POST",
+                    data: $(this).serialize(),
+                    url: "/taches/new",
+                    success: function (data) {
+                        console.log('success');
+                        $('#mymodalg')
+                            .modal('hide')
+                        ;
+                    },
+                    error: function () {
+                        console.log('fail');
+                    }
+                });
+                return false;
+
+
+        })
 
         });
     </script>
