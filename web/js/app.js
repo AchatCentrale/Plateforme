@@ -23,7 +23,16 @@ function deleteTask(e) {
 
                 // La fonction à apeller si la requête aboutie
                 success: function (data) {
-                    swal("Action ");
+                    swal({
+                        title: "Suppression d'une action",
+                        text: "Action supprimé",
+                        type: "info",
+                        showCancelButton: true,
+                    });
+
+                    let id = e;
+
+                    $("#"+id).remove()
                 },
 
                 // La fonction à appeler si la requête n'a pas abouti

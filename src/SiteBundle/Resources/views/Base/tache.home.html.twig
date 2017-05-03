@@ -16,44 +16,50 @@
         <div class="ui top attached tabular menu">
             <a class="active item" data-tab="first">En cours</a>
             <a class="item" data-tab="second">Terminées</a>
-            <a class="item" data-tab="third">Délégués</a>
         </div>
+
+
         <div class="ui bottom attached active tab segment" data-tab="first">
 
-            <table class="ui striped table">
-                <thead>
-                <tr>
-                    <th>Date de création</th>
-                    <th>Échéances</th>
-                    <th>Assigné à</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Priorité</th>
-                    <th>Nom client</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for tasks in task %}
+            {% if task is defined %}
+                <table class="ui striped table">
+                    <thead>
                     <tr>
-                        <td>{{ tasks.insDate | Time }}</td>
-                        <td>{{ tasks.claEcheance | timeFromNow }}</td>
-                        <td>
-                            <div class="ui label"><i class="user icon"></i>{{ user }}</div>
-                        </td>
-                        <td>
-                            <div class="ui label"> {{ tasks.claType | type }}</div>
-                        </td>
-                        <td>{{ tasks.claDescr }}</td>
-                        <td>{{ tasks.claPriorite | priorite | raw }}</td>
-                        <td>{{ tasks.cl.clRaisonsoc }}</td>
-                        <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i
-                                    id="{{ tasks.claId }}" class="trash red large icon cursor"></i></td>
+                        <th>Date de création</th>
+                        <th>Échéances</th>
+                        <th>Assigné à</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Priorité</th>
+                        <th>Nom client</th>
+                        <th>Action</th>
                     </tr>
-                {% endfor %}
+                    </thead>
+                    <tbody>
+                    {% for tasks in task %}
+                        <tr id="{{ tasks.claId }}" >
+                            <td>{{ tasks.insDate | Time }}</td>
+                            <td>{{ tasks.claEcheance | timeFromNow }}</td>
+                            <td>
+                                <div class="ui label"><i class="user icon"></i>{{ user }}</div>
+                            </td>
+                            <td>
+                                <div class="ui label"> {{ tasks.claType | type }}</div>
+                            </td>
+                            <td>{{ tasks.claDescr }}</td>
+                            <td>{{ tasks.claPriorite | priorite | raw }}</td>
+                            <td>{{ tasks.cl.clRaisonsoc }}</td>
+                            <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i
+                                        id="{{ tasks.claId }}" class="trash red large icon cursor"></i></td>
+                        </tr>
+                    {% endfor %}
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            {% endif %}
+
+            <p>Aucune taches pour le moment</p>
+
         </div>
         <div class="ui bottom attached tab segment" data-tab="second">
             <table class="ui striped table">
