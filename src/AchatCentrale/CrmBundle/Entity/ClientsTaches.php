@@ -107,6 +107,15 @@ class ClientsTaches
     private $majUser;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="ETAT", type="integer")
+     */
+    private $etat;
+
+
+
+    /**
      * @var \AchatCentrale\CrmBundle\Entity\Clients
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")

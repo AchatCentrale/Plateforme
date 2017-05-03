@@ -7,6 +7,7 @@ use Doctrine\ORM\ORMException;
 use SiteBundle\Form\ClientsTachesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,6 +21,8 @@ class TacheController extends Controller
 
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
             'usId' => $user->getUsId(),
+        ], [
+            'insDate' => 'DESC'
         ]);
 
 
@@ -32,43 +35,17 @@ class TacheController extends Controller
 
     public function DeleteAction(Request $request, $id)
     {
+        $em = $this->getDoctrine()->getManager();
 
+        $task = $em->getRepository('AchatCentraleCrmBundle:ClientsTaches')->find($id);
 
-        $sql = 'DELETE FROM CENTRALE_ACHAT_JB.dbo.CLIENTS_TACHES
-                WHERE CLA_ID = ?';
-
-
-
-        try{
-
-
-        $conn = $this->get('database_connection');
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue('1', $id);
-        $result = $stmt->fetchAll();
-
-
-
-        return new Response('remove');
-        } catch (ORMException $e){
-            $this->get('session')->getFlashBag()->add('error', 'Your custom message');
-            // or some shortcut that need to be implemented
-            // $this->addFlash('error', 'Custom message');
-
-            // error logging - need customization
-            $this->get('logger')->error($e->getMessage());
-            //$this->get('logger')->error($e->getTraceAsString());
-            // or some shortcut that need to be implemented
-            // $this->logError($e);
-
-            // some redirection e. g. to referer
-            return $this->redirect($this->getRequest()->headers->get('referer'));
-        } catch(\Exception $e){
-            // other exceptions
-            // flash
-            // logger
-            // redirection
+        if(!$task){
+            throw $this->createNotFoundException('Pas de taches :(');
         }
+
+        $em->remove($task);
+        $em->flush();
+        return new JsonResponse('ok',200);
     }
 
 
