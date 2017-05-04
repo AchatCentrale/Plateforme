@@ -58,6 +58,13 @@ AchatCentrale\CrmBundle\Entity\ClientsTaches:
             options:
                 unsigned: false
             column: CLA_NOTIF_REF
+        claStatus:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: CLA_STATUS
         insDate:
             type: datetime
             nullable: true

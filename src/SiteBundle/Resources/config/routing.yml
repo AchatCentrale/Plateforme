@@ -16,6 +16,10 @@ client:
     path:     /client
     defaults: { _controller: SiteBundle:Base:Client }
 
+get-all-client:
+    path:     /client/All
+    defaults: {_controller: SiteBundle:Base:getAllClients}
+    methods: GET
 
 client-general:
     path:     /client/{id}/general

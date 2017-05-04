@@ -17,21 +17,25 @@ class BaseController extends Controller
     public function indexAuthAction(Request $request)
     {
 
-         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-             throw $this->createAccessDeniedException();
-         }
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
 
         $user = $this->getUser();
 
-        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
-            'usId' => $user->getUsId(),
-        ]);
+        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(
+            [
+                'usId' => $user->getUsId(),
+            ]
+        );
 
 
-
-        return $this->render('@Site/Base/home.html.twig', [
-            'task' => $task
-        ]);
+        return $this->render(
+            '@Site/Base/home.html.twig',
+            [
+                'task' => $task,
+            ]
+        );
 
     }
 
@@ -40,20 +44,124 @@ class BaseController extends Controller
     {
 
 
-        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
+        $con = $this->getDoctrine()->getManager()->getConnection();
+        $stmt = $con->executeQuery(
+            'SELECT DISTINCT
+             SO_RAISONSOC,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
+             CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION,
+              GR_DESCR, CL_DESCR, AC_DESCR
+              FROM Vue_All_Clients
+              INNER JOIN SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
 
+              '
+        );
+        $count = $stmt->fetchAll();
 
-        return $this->render('@Site/Base/client.html.twig', [
-            "client" => $restresult
-        ]);
+        return $this->render(
+            '@Site/Base/client.html.twig',
+            [
+                "client" => $count,
+            ]
+        );
 
     }
+
+    public function getAllClientsAction(Request $request)
+    {
+        $con = $this->getDoctrine()->getManager()->getConnection();
+
+        $sql = 'SELECT DISTINCT
+                SO_ID,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION,
+                CL_STATUS, CL_ADHESION, GR_DESCR, CL_DESCR, AC_DESCR
+
+
+                FROM Vue_All_Clients
+
+        ';
+
+
+        $stmt = $con->prepare($sql);
+        $stmt->execute();
+        $count = $stmt->fetchAll();
+
+
+
+        if ($request->query->get('query')) {
+            $con = $this->getDoctrine()->getManager()->getConnection();
+
+            $sql = 'SELECT DISTINCT
+                SO_RAISONSOC,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION,
+                CL_STATUS, CL_ADHESION, GR_DESCR, CL_DESCR, AC_DESCR
+                
+                FROM Vue_All_Clients
+                
+                INNER JOIN SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
+                
+                WHERE
+                  CL_RAISONSOC LIKE :query
+                OR CL_SIRET LIKE :query
+                OR CL_CP LIKE :query
+                OR CL_VILLE LIKE :query
+                OR CL_PAYS LIKE :query
+                OR CL_MAIL LIKE :query
+                OR CL_WEB LIKE :query
+                OR CL_ADHESION LIKE :query
+                OR GR_DESCR LIKE :query
+                OR CL_DESCR LIKE :query
+                OR AC_DESCR LIKE :query
+                OR CC_PRENOM LIKE :query
+                OR CC_NOM LIKE :query
+                OR CC_MAIL LIKE :query
+              
+                
+                
+                ';
+
+            $stmt = $con->prepare($sql);
+            $stmt->bindValue('query', '%'.$request->query->get('query').'%');
+            $stmt->execute();
+            $count = $stmt->fetchAll();
+
+
+            return new JsonResponse($count, 200);
+
+        }
+
+        if ($request->query->get('centrale')) {
+            $con = $this->getDoctrine()->getManager()->getConnection();
+
+            $sql = 'SELECT DISTINCT
+                SO_ID,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION,
+                CL_STATUS, CL_ADHESION, GR_DESCR, CL_DESCR, AC_DESCR
+                
+                FROM Vue_All_Clients
+                
+                WHERE
+                  SO_ID = 1
+                ';
+
+            $stmt = $con->prepare($sql);
+            $stmt->bindValue('query', '%'.$request->query->get('query').'%');
+            $stmt->execute();
+            $count = $stmt->fetchAll();
+
+
+            return new JsonResponse($count, 200);
+
+        }
+
+
+        return new JsonResponse($count, 200);
+    }
+
 
     public function ClientGeneralAction($id)
     {
 
 
-        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy(array('clId' => $id));
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy(
+            array('clId' => $id)
+        );
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(array('cl' => $id));
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -74,36 +182,48 @@ class BaseController extends Controller
         $log = $stmt->fetchAll();
 
 
-
-        return $this->render('@Site/Base/client.general.html.twig', [
-            "client" => $restresult,
-            "log" => $log,
-            "tache" => $task,
-        ]);
+        return $this->render(
+            '@Site/Base/client.general.html.twig',
+            [
+                "client" => $restresult,
+                "log" => $log,
+                "tache" => $task,
+            ]
+        );
 
     }
 
     public function ClientAdresseAction($id)
     {
-        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(array(
-            "clId" => $id,
-        ));
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(
+            array(
+                "clId" => $id,
+            )
+        );
 
-        return $this->render('@Site/Base/client.adresse.html.twig', [
-            "client" => $restresult
-        ]);
+        return $this->render(
+            '@Site/Base/client.adresse.html.twig',
+            [
+                "client" => $restresult,
+            ]
+        );
 
     }
 
     public function ClientStatutAction($id)
     {
-        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(array(
-            "clId" => $id,
-        ));
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(
+            array(
+                "clId" => $id,
+            )
+        );
 
-        return $this->render('@Site/Base/client.status.html.twig', [
-            "client" => $restresult
-        ]);
+        return $this->render(
+            '@Site/Base/client.status.html.twig',
+            [
+                "client" => $restresult,
+            ]
+        );
 
     }
 
@@ -126,7 +246,9 @@ class BaseController extends Controller
     public function sendClientDetailMailAction(Request $request, $clientId)
     {
 
-        $client_info = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(array('ccId' => $clientId));
+        $client_info = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(
+            array('ccId' => $clientId)
+        );
 
         /**
          * @var \Swift_Mime_Message $message
@@ -135,15 +257,22 @@ class BaseController extends Controller
             ->setSubject('Vos codes pour la centrale')
             ->setFrom(array('contact@achatcentrale.fr' => "Votre centrale"))
             ->setTo('jb@achatcentrale.fr')
-            ->setBody($this->renderView('SiteBundle:mail:mailDetailClient.html.twig', array(
-                'client' => $client_info
-            )), 'text/html');
+            ->setBody(
+                $this->renderView(
+                    'SiteBundle:mail:mailDetailClient.html.twig',
+                    array(
+                        'client' => $client_info,
+                    )
+                ),
+                'text/html'
+            );
 
         $mailer = $this->get('mailer');
         $mailer->send($message);
         $spool = $mailer->getTransport()->getSpool();
         $transport = $this->get('swiftmailer.transport.real');
         $spool->flushQueue($transport);
+
         return new Response('Mail envoyé');
     }
 
@@ -168,13 +297,17 @@ class BaseController extends Controller
     {
 
         $con = $this->getDoctrine()->getManager()->getConnection();
-        $stmt = $con->executeQuery('SELECT * FROM Vue_Clients');
+        $stmt = $con->executeQuery('SELECT * FROM Vue_All_Clients');
         $count = $stmt->fetchAll();
 
         dump($count);
-        return $this->render('@AchatCentraleCrm/testView.html.twig', [
-            'count' => $count
-        ]);
+
+        return $this->render(
+            '@AchatCentraleCrm/testView.html.twig',
+            [
+                'count' => $count,
+            ]
+        );
 
     }
 
@@ -202,9 +335,12 @@ class BaseController extends Controller
         $stmt->execute();
 
 
-        return $this->render('@Site/test.html.twig', array(
-            'panier' => $stmt->fetchAll()
-        ));
+        return $this->render(
+            '@Site/test.html.twig',
+            array(
+                'panier' => $stmt->fetchAll(),
+            )
+        );
 
     }
 

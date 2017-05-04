@@ -107,6 +107,15 @@ class ClientsTaches
     private $majUser;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="ETAT", type="integer")
+     */
+    private $etat;
+
+
+
+    /**
      * @var \AchatCentrale\CrmBundle\Entity\Clients
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")
@@ -414,34 +423,5 @@ class ClientsTaches
     public function getCl()
     {
         return $this->cl;
-    }
-    /**
-     * @var integer
-     */
-    private $claStatus = '0';
-
-
-    /**
-     * Set claStatus
-     *
-     * @param integer $claStatus
-     *
-     * @return ClientsTaches
-     */
-    public function setClaStatus($claStatus)
-    {
-        $this->claStatus = $claStatus;
-
-        return $this;
-    }
-
-    /**
-     * Get claStatus
-     *
-     * @return integer
-     */
-    public function getClaStatus()
-    {
-        return $this->claStatus;
     }
 }

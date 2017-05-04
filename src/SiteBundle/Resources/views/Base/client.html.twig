@@ -1,68 +1,134 @@
 {% extends 'base.html.twig' %}
 
-
+{#<div class="ui tiny images logo-centrale">
+    <div class="container-logo-centrale">
+        <a href="#" class="ui cursor medium image">
+            <img  src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+        </a>
+    </div>
+    <img class="ui cursor circular image" src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
+    <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
+    <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+    <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
+</div>#}
 {% block body %}
 
-   <div class="centrale-choix">
-       <div class="ui centered grid">
-           <div class="ui tiny images logo-centrale">
-               <a href="#" class="ui cursor medium image">
-                   <img  src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
-               </a>
-               <img class="ui cursor circular image" src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
-               <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
-               <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
-               <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
-           </div>
-       </div>
-   </div>
-    <div class="action-client-liste">
+    <div class="centrale-choix">
+        <div class="ui centered grid">
+            <div class="container-all-logo">
+                <div data-centrale="funecap" class="container-logo-centrale change-centrale">
+                    <img class="ui cursor medium image"
+                         src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+                </div>
+                <div data-centrale="achatCentrale" class="container-logo-centrale change-centrale">
+                    <img class="ui cursor circular image" src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
+                </div>
+                <div data-centrale="centraleGccp" class="container-logo-centrale change-centrale">
+                    <img class="ui cursor circular image"
+                         src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
+                </div>
+                <div data-centrale="centraleRoc" class="container-logo-centrale change-centrale">
+                    <img class="ui cursor circular image"
+                         src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+                </div>
+                <div data-centrale="centralePfpl" class="container-logo-centrale change-centrale">
+                    <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
 
-        <div class="ui icon buttons">
-            <button class="ui button"><i class="add square icon"></i>Ajouter un nouveau client</button>
-            <button class="ui button"><i class="file excel outline icon"></i>Exporter en .csv</button>
-            <button class="ui button"><i class="print icon"></i>Imprimer</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+
+    <div class=" search-input">
+        <div class="ui form">
+            <div class="field">
+                <label>Rechercher :</label>
+                <input class="input-for-search" type="text">
+            </div>
         </div>
     </div>
 
     <div class="table-client">
-    <table class="ui selectable striped table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Raison sociale</th>
-            <th>Adresse mail</th>
-            <th>Membre depuis</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for clients in client %}
-        <tr data-href="{{ path('client-general', { 'id' : clients.clId}) }}">
-            <td>{{ clients.clId }}</td>
-            <td>{{ clients.clRaisonsoc }}</td>
-            <td>{{ clients.clMail }}</td>
-            <td>{{ clients.clDtAdhesion | date('d/m/Y') }}</td>
-        </tr>
-        {% endfor %}
+        <table id="table-client-all" class="ui celled table" cellspacing="0" width="100%">
+            <thead>
+            <tr>
+                <th>Raison sociale</th>
+                <th>Référence client</th>
+                <th>Description groupe</th>
+                <th>Date d'adhesion</th>
+            </tr>
+            </thead>
+            <tbody class="table-client-all">
+            {% for clients in client %}
+                <tr data-href="{{ path('client-general', { 'id' : clients.CL_ID}) }}">
+                    <td>{{ clients.CL_RAISONSOC }}</td>
+                    <td>{{ clients.CL_REF }}</td>
+                    <td>{{ clients.SO_RAISONSOC}}</td>
+                    <td>{{ clients.CL_DT_ADHESION | date('d/m/Y') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th>Raison sociale</th>
+                <th>Référence client</th>
+                <th>Description groupe</th>
+                <th>Date d'adhesion</th>
+            </tr>
+            </tfoot>
+        </table>
 
-        </tbody>
-    </table>
-
-</div>
+    </div>
 {% endblock %}
 
 
 {% block javascripts %}
     <script>
 
-        $(document).ready(function(){
-            $('table tr').click(function(){
-                window.location = $(this).data('href');
-                return false;
+        $(document).ready(function () {
+            /*$('table tr').click(function () {
+             window.location = $(this).data('href');
+             return false;
+             });*/
+
+
+            $(".input-for-search").on('change', function (e) {
+                console.log($(this).val());
+
+
+                let url = "http://localhost:8000/client/All";
+
+                $.ajax({
+                    url: url,
+                    data : 'query='+ $(this).val(),
+
+                    success: function (data) {
+                        let tpl;
+                        for (let value in data) {
+
+                            tpl += `<tr>
+                                    <td>${data[value].CL_RAISONSOC}</td>
+                                    <td>${data[value].CL_REF}</td>
+                                    <td>${data[value].SO_RAISONSOC}</td>
+                                    <td>${data[value].CL_DT_ADHESION}</td>
+                                </tr>`;
+                        }
+
+                        $('.table-client-all').html(tpl)
+
+                    },
+                    error: function () {
+                        alert('La requête n\'a pas abouti');
+                    }
+                })
+
+
             });
+
+
         });
 
     </script>
-{% endblock  %}
+{% endblock %}
 
