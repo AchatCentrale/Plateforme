@@ -1,10 +1,10 @@
-function deleteTask(e) {
+function archiveTask(e) {
     console.log(e);
-    let url = 'http://localhost:8000/taches/delete/' + e;
+    let url = 'http://localhost:8000/taches/archive/' + e;
 
     swal({
-            title: "Suppression d'une action",
-            text: "Voulez-vous vraiment supprimer cet action ?",
+            title: "Achiver d'une action",
+            text: "Voulez-vous vraiment archiver cet action ?",
             type: "info",
             showCancelButton: true,
             closeOnConfirm: false,
@@ -24,8 +24,8 @@ function deleteTask(e) {
                 // La fonction à apeller si la requête aboutie
                 success: function (data) {
                     swal({
-                        title: "Suppression d'une action",
-                        text: "Action supprimé",
+                        title: "Archiver une action",
+                        text: "Action archivé",
                         type: "info",
                         showCancelButton: true,
                     });

@@ -146,7 +146,6 @@ class BaseController extends Controller
         return new JsonResponse($count, 200);
     }
 
-
     public function ClientGeneralAction($id)
     {
 

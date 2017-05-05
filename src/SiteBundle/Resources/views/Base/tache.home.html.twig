@@ -21,6 +21,51 @@
 
         <div class="ui bottom attached active tab segment" data-tab="first">
 
+            {% if task is defined  %}
+                <table class="ui striped table">
+                    <thead>
+                    <tr>
+                        <th>Nom de l'action</th>
+                        <th>Échéances</th>
+                        <th>Assigné à</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Priorité</th>
+                        <th>Nom client</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for tasks in task %}
+                    {% if tasks.claStatus == 0  %}
+                        <tr id="{{ tasks.claId }}" >
+                            <td><h3>{{ tasks.claNom }}</h3></td>
+                            <td>{{ tasks.claEcheance | timeFromNow }}</td>
+                            <td>
+                                <div class="ui label"><i class="user icon"></i>{{ user }}</div>
+                            </td>
+                            <td>
+                                <div class="ui label"> {{ tasks.claType | type }}</div>
+                            </td>
+                            <td>{{ tasks.claDescr }}</td>
+                            <td>{{ tasks.claPriorite | priorite | raw }}</td>
+                            <td>{{ tasks.cl.clRaisonsoc }}</td>
+                            <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i
+                                        id="{{ tasks.claId }}" class="trash red large icon cursor"></i></td>
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            {% endif %}
+
+
+
+        </div>
+
+
+        <div class="ui bottom attached tab segment" data-tab="second">
             {% if task is defined %}
                 <table class="ui striped table">
                     <thead>
@@ -37,59 +82,30 @@
                     </thead>
                     <tbody>
                     {% for tasks in task %}
-                        <tr id="{{ tasks.claId }}" >
-                            <td><h3>{{ tasks.claNom }}</h3></td>
-                            <td>{{ tasks.claEcheance | timeFromNow }}</td>
-                            <td>
-                                <div class="ui label"><i class="user icon"></i>{{ user }}</div>
-                            </td>
-                            <td>
-                                <div class="ui label"> {{ tasks.claType | type }}</div>
-                            </td>
-                            <td>{{ tasks.claDescr }}</td>
-                            <td>{{ tasks.claPriorite | priorite | raw }}</td>
-                            <td>{{ tasks.cl.clRaisonsoc }}</td>
-                            <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i
-                                        id="{{ tasks.claId }}" class="trash red large icon cursor"></i></td>
-                        </tr>
+
+                        {% if tasks.claStatus == 1 %}
+                            <tr id="{{ tasks.claId }}" >
+                                <td><h3>{{ tasks.claNom }}</h3></td>
+                                <td>{{ tasks.claEcheance | timeFromNow }}</td>
+                                <td>
+                                    <div class="ui label"><i class="user icon"></i>{{ user }}</div>
+                                </td>
+                                <td>
+                                    <div class="ui label"> {{ tasks.claType | type }}</div>
+                                </td>
+                                <td>{{ tasks.claDescr }}</td>
+                                <td>{{ tasks.claPriorite | priorite | raw }}</td>
+                                <td>{{ tasks.cl.clRaisonsoc }}</td>
+                                <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i
+                                            id="{{ tasks.claId }}" class="trash red large icon cursor"></i></td>
+                            </tr>
+                        {% endif %}
+
                     {% endfor %}
 
                     </tbody>
                 </table>
             {% endif %}
-
-
-
-        </div>
-        <div class="ui bottom attached tab segment" data-tab="second">
-            <table class="ui striped table">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Type</th>
-                    <th>Description</th>
-                    <th>Priorité</th>
-                    <th>Nom</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>28-03-2016</td>
-                    <td>
-                        <div class="ui label"> Relance</div>
-                    </td>
-                    <td>Le client a besoin de payer la facture</td>
-                    <td>
-                        <div class="ui orange label"> 3</div>
-                    </td>
-                    <td>Roc-Eclerc Ordener</td>
-                    <td><i class="checkmark large icon cursor"></i><i class="write large icon cursor"></i><i
-                                class="trash red large icon cursor"></i></td>
-                </tr>
-
-                </tbody>
-            </table>
         </div>
         <div class="ui bottom attached tab segment" data-tab="third">
 
@@ -132,7 +148,7 @@
 
 
         $('.trash').on('click', function (e) {
-            deleteTask(e.currentTarget.id);
+            archiveTask(e.currentTarget.id);
         })
     </script>
 

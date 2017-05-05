@@ -3,7 +3,6 @@
 namespace SiteBundle\Controller;
 
 use AchatCentrale\CrmBundle\Entity\ClientsTaches;
-use Doctrine\ORM\ORMException;
 use SiteBundle\Form\ClientsTachesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -39,13 +38,32 @@ class TacheController extends Controller
 
         $task = $em->getRepository('AchatCentraleCrmBundle:ClientsTaches')->find($id);
 
-        if(!$task){
+        if (!$task) {
             throw $this->createNotFoundException('Pas de taches :(');
         }
 
         $em->remove($task);
         $em->flush();
-        return new JsonResponse('ok',200);
+        return new JsonResponse('ok', 200);
+    }
+
+    public function ArchiveTaskAction($id)
+    {
+        /*
+        */
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "UPDATE CLIENTS_TACHES
+            SET CLA_STATUS = 1
+            WHERE CLA_ID = :id
+                ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        dump($result);
+        return new Response('ok');
     }
 
 
@@ -56,11 +74,11 @@ class TacheController extends Controller
 
         $task = new ClientsTaches();
         $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
-                'clId' => $req['cl'],
-            ]);
+            'clId' => $req['cl'],
+        ]);
         $form = $this->createForm(ClientsTachesType::class, $task, [
-                'action' => $this->generateUrl('new-task'),
-            ]);
+            'action' => $this->generateUrl('new-task'),
+        ]);
         $form->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',
                 'attr' => array('class' => 'fluid positive ui button'),]
@@ -79,7 +97,6 @@ class TacheController extends Controller
                 ->setUsId($req['usId'])
                 ->setInsUser($this->getUser()->getusId())
                 ->setCl($client[0]);
-
 
 
             $em = $this->getDoctrine()->getManager();
