@@ -52,7 +52,7 @@ class BaseController extends Controller
               GR_DESCR, CL_DESCR, AC_DESCR
               FROM Vue_All_Clients
               INNER JOIN SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
-
+              ORDER BY CL_DT_ADHESION DESC 
               '
         );
         $count = $stmt->fetchAll();
@@ -68,7 +68,7 @@ class BaseController extends Controller
 
     public function getAllClientsAction(Request $request)
     {
-        $con = $this->getDoctrine()->getManager()->getConnection();
+        $con = $this->get('database_connection');
 
         $sql = 'SELECT DISTINCT
                 SO_ID,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION,
@@ -128,22 +128,14 @@ class BaseController extends Controller
         }
 
         if ($request->query->get('centrale')) {
-            $con = $this->getDoctrine()->getManager()->getConnection();
 
-            $sql = 'SELECT DISTINCT
-                SO_ID,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION,
-                CL_STATUS, CL_ADHESION, GR_DESCR, CL_DESCR, AC_DESCR
-                
-                FROM Vue_All_Clients
-                
-                WHERE
-                  SO_ID = 1
-                ';
 
-            $stmt = $con->prepare($sql);
-            $stmt->bindValue('query', '%'.$request->query->get('query').'%');
+            $sqm = $this->get('site.service.client_services')->getTheSqlForCentrale($request->query->get('centrale'));
+
+            $stmt = $con->prepare($sqm);
             $stmt->execute();
             $count = $stmt->fetchAll();
+
 
 
             return new JsonResponse($count, 200);
@@ -176,7 +168,6 @@ class BaseController extends Controller
                 ";
 
         $stmt = $conn->prepare($sql);
-
         $stmt->bindValue(':id', $id);
         $stmt->execute();
         $log = $stmt->fetchAll();

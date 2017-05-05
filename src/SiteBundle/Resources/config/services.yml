@@ -7,3 +7,5 @@ services:
             - { name: twig.extension}
     site.service.taches_utils:
         class: SiteBundle\Service\TachesUtils
+    site.service.client_services:
+        class: SiteBundle\Service\ClientServices

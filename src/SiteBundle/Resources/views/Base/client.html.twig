@@ -1,16 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{#<div class="ui tiny images logo-centrale">
-    <div class="container-logo-centrale">
-        <a href="#" class="ui cursor medium image">
-            <img  src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
-        </a>
-    </div>
-    <img class="ui cursor circular image" src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
-    <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
-    <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
-    <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
-</div>#}
 {% block body %}
 
     <div class="centrale-choix">
@@ -51,7 +40,7 @@
 
     <div class="table-client">
         <table id="table-client-all" class="ui celled table" cellspacing="0" width="100%">
-            <thead>
+            <thead >
             <tr>
                 <th>Raison sociale</th>
                 <th>Référence client</th>
@@ -87,15 +76,19 @@
     <script>
 
         $(document).ready(function () {
-            /*$('table tr').click(function () {
-             window.location = $(this).data('href');
-             return false;
-             });*/
+
+
+            $('table tr').click(function () {
+                console.log('salut');
+                window.location = $(this).data('href');
+                return false;
+             });
 
 
             $(".input-for-search").on('change', function (e) {
                 console.log($(this).val());
 
+                $('.table-client-all').html("");
 
                 let url = "http://localhost:8000/client/All";
 
@@ -123,8 +116,43 @@
                     }
                 })
 
-
             });
+
+
+
+            $('.change-centrale').on('click', function (e) {
+                $('.table-client-all').html("");
+
+                let url = "http://localhost:8000/client/All";
+
+                let centrale =$(this).data("centrale");
+
+                $.ajax({
+                    url: url,
+                    data : 'centrale='+ centrale,
+
+                    success: function (data) {
+                        console.log(centrale);
+
+                       let tpl;
+                        for (let value in data) {
+
+                            tpl += `<tr>
+                                    <td>${data[value].CL_RAISONSOC}</td>
+                                    <td>${data[value].CL_REF}</td>
+                                    <td>${centrale}</td>
+                                    <td>${data[value].CL_DT_ADHESION}</td>
+                                </tr>`;
+                        }
+                        $('.table-client-all').html(tpl)
+
+
+                    },
+                    error: function () {
+                        alert('La requête n\'a pas abouti');
+                    }
+                })
+            })
 
 
         });
