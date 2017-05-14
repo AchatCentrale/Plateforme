@@ -1,3 +1,7 @@
+const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
+console.log(CURRENT_URL);
+
+
 function archiveTask(e) {
     console.log(e);
     let url = 'http://localhost:8000/taches/archive/' + e;
@@ -32,18 +36,16 @@ function archiveTask(e) {
 
                     let id = e;
 
-                    $("#"+id).remove()
+                    $("#" + id).remove()
                 },
 
                 // La fonction à appeler si la requête n'a pas abouti
-                error: function() {
+                error: function () {
                     console.log("error");
 
                 }
 
             });
-
-
 
 
         });
@@ -67,3 +69,63 @@ $('.mail-send').on('click', function (e) {
 });
 
 
+//sidebar
+$('#menu_toggle').on('click', function () {
+    console.log('clicked - menu toggle');
+
+    if ($('body').hasClass('nav-md')) {
+        $('#sidebar-menu').find('li.active ul').hide();
+        $('#sidebar-menu').find('li.active').addClass('active-sm').removeClass('active');
+    } else {
+        $('#sidebar-menu').find('li.active-sm ul').show();
+        $('#sidebar-menu').find('li.active-sm').addClass('active').removeClass('active-sm');
+    }
+
+    $('body').toggleClass('nav-md nav-sm');
+
+
+});
+
+
+//menu deroulant
+$('#sidebar-menu').find('a').on('click', function (ev) {
+    console.log('clicked - sidebar_menu');
+
+    var $li = $(this).parent();
+
+    if ($li.is('.active')) {
+        $li.removeClass('active active-sm');
+        $('ul:first', $li).slideUp(function () {
+
+        });
+    } else {
+        // prevent closing menu if we are on child menu
+        if (!$li.parent().is('.child_menu')) {
+            $('#sidebar-menu').find('li').removeClass('active active-sm');
+            $('#sidebar-menu').find('li ul').slideUp();
+        } else {
+            if ($('body').is(".nav-sm")) {
+                $('#sidebar-menu').find("li").removeClass("active active-sm");
+                $('#sidebar-menu').find("li ul").slideUp();
+            }
+        }
+        $li.addClass('active');
+
+        $('ul:first', $li).slideDown(function () {
+        });
+    }
+
+});
+
+
+// check active menu
+$('#sidebar-menu').find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
+
+$('#sidebar-menu').find('a').filter(function () {
+    return this.href == CURRENT_URL;
+}).parent('li').addClass('current-page').parents('ul').slideDown(function () {
+}).parent().addClass('active');
+
+// recompute content when resizing
+$(window).smartresize(function () {
+});

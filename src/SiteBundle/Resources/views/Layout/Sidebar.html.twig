@@ -1,0 +1,75 @@
+<div class="col-md-3 left_col">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <a href="{{ path('index_auth') }}" class="site_title"><i class="fa fa-paw"></i> <span>crm</span></a>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <!-- menu profile quick info -->
+        <div class="profile">
+            <div class="profile_pic">
+                <img src="{{ asset('assets/images/img.jpg') }}" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+                <span>Bonjour,</span>
+                <h2>{{ app.user.UsPrenom }}</h2>
+            </div>
+        </div>
+        <!-- /menu profile quick info -->
+
+        <div class="clearfix"></div>
+
+
+        <!-- sidebar menu -->
+
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section current-page">
+
+                <ul class="nav side-menu" style="">
+                    <li class="{% if app.request.attributes.get('_route') == 'index_auth' %}current-page {% endif %}"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'taches_home' %}current-page {% endif %}"><a  href="{{ path('taches_home') }}"><i class="fa fa-calendar"></i> Action</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}current-page {% endif %}"><a  href="{{ path('client') }}"><i class="fa fa-user"></i> Client
+                            {% if  app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}
+                            <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu" style="display: none;">
+
+                            <li><a href="{{ path('client-general', { id : app.request.attributes.get('id')}) }}">General</a></li>
+                            <li><a href="{{ path('client-adresse', { id : app.request.attributes.get('id')}) }}">Adresse</a></li>
+                            <li><a href="">Statut</a></li>
+                        </ul>
+                    </li>
+                            {% endif %}
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+
+
+        </div>
+
+        <!-- /sidebar menu -->
+
+
+
+
+        <!-- /menu footer buttons -->
+        <div class="sidebar-footer hidden-small">
+            <a href="#" data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ path('logout') }}">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+        </div>
+        <!-- /menu footer buttons -->
+    </div>
+</div>
