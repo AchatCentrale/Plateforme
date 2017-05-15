@@ -1,5 +1,5 @@
 const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
-console.log(CURRENT_URL);
+
 
 
 function archiveTask(e) {
@@ -126,6 +126,12 @@ $('#sidebar-menu').find('a').filter(function () {
 }).parent('li').addClass('current-page').parents('ul').slideDown(function () {
 }).parent().addClass('active');
 
-// recompute content when resizing
-$(window).smartresize(function () {
-});
+$('.menu .item')
+    .tab()
+;
+
+
+
+$('.trash').on('click', function (e) {
+    archiveTask(e.currentTarget.id);
+})

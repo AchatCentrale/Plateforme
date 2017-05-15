@@ -4,28 +4,14 @@
 
     <div>
 
-        {% include '@Site/ui-element/taches/action.bar.html.twig' %}
 
         <div class="container-general">
             <div class="container-info-client">
-                {% include '@Site/ui-element/general.client/info.client.html.twig' with {'client': client } %}
-                {% include '@Site/ui-element/general.client/data.client.html.twig' with {
-                'client': client,
-                'log': log,
-                'task' : tache,
-                } %}
+                {% include '@Site/ui-element/general.client/info.client.html.twig' with {'client': client,'log': log,
+                'task' : tache } %}
+
             </div>
-
-
-
         </div>
     </div>
 {% endblock %}
 
-{% block javascripts %}
-    <script>
-        $('.profile-client .item').tab();
-
-
-    </script>
-{% endblock %}

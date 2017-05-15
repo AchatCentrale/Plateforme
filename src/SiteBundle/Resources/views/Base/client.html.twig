@@ -2,32 +2,321 @@
 
 {% block body %}
 
-    <div class="centrale-choix">
-        <div class="ui centered grid">
-            <div class="container-all-logo">
-                <div data-centrale="funecap" class="container-logo-centrale change-centrale">
-                    <img class="ui cursor medium image"
-                         src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Clients</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
+                                </li>
+                                <li><a href="#">Settings 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
                 </div>
-                <div data-centrale="achatCentrale" class="container-logo-centrale change-centrale">
-                    <img class="ui cursor circular image" src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
+                <div class=" search-input">
+                    <div class="ui form">
+                        <div class="field">
+                            <label>Rechercher :</label>
+                            <input class="input-for-search" type="text">
+                        </div>
+                    </div>
                 </div>
-                <div data-centrale="centraleGccp" class="container-logo-centrale change-centrale">
-                    <img class="ui cursor circular image"
-                         src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
-                </div>
-                <div data-centrale="centraleRoc" class="container-logo-centrale change-centrale">
-                    <img class="ui cursor circular image"
-                         src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
-                </div>
-                <div data-centrale="centralePfpl" class="container-logo-centrale change-centrale">
-                    <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
 
+                <div class="x_content ">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center ">
+                            <ul class="pagination pagination-split">
+                                <li><a href="#">
+                                        <img
+                                                class=""
+                                                src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+                                    </a>
+                                </li>
+                                <li><a href="#">
+                                        <img
+                                                class=""
+                                                src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+                                    </a>
+                                </li>
+                                <li><a href="#">
+                                        <img
+                                                class=""
+                                                src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
+                                    </a></li>
+                                <li><a href="#"><img
+                                                class=""
+                                                src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}"></a>
+                                </li>
+                                <li><a href="#">
+                                        <img
+                                                class=""
+                                                src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
+
+                                    </a></li>
+                            </ul>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+
+                        {% for clients in client %}
+                            <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                                <div class="well profile_view">
+                                    <div class="col-sm-12">
+
+                                        <h4 class="brief"><i>{{ clients.SO_RAISONSOC }}</i></h4>
+                                        <div class="left col-xs-7">
+                                            <h2>{{ clients.CL_RAISONSOC }}</h2>
+                                            <p><strong>REF </strong> {{ clients.CL_REF }}
+                                            </p>
+                                            <ul class="list-unstyled">
+                                                <li><i class="fa fa-building"></i>
+                                                    Adresse: {{ clients.CL_CP }} {{ clients.CL_VILLE }}</li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="right col-xs-5 text-center">
+                                            <img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_1344/AAAJPDHHKNZW-C10001gif.png"
+                                                 alt="" class="img-circle img-responsive">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 bottom text-center">
+                                        <div class="col-xs-12 col-sm-6 emphasis">
+                                            <p class="ratings">
+                                                <span class="label label-primary">Status</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 emphasis">
+
+                                            <a href="{{ path('client-general', {'id' : clients.CL_ID}) }}"
+                                               class="btn btn-success" role="button"><i class="fa fa-user"> </i> Voir le
+                                                profil</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+
+
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- /page content -->
+{% endblock %}
+
+    {% block modals %}
+        <!-- calendar modal -->
+        <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel">New Calendar Entry</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="testmodal" style="padding: 5px 20px;">
+                            <form id="antoform" class="form-horizontal calender" role="form">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Title</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="title" name="title">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Description</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" style="height:55px;" id="descr"
+                                                  name="descr"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary antosubmit">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="myModalLabel2">Edit Calendar Entry</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div id="testmodal2" style="padding: 5px 20px;">
+                            <form id="antoform2" class="form-horizontal calender" role="form">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Title</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="title2" name="title2">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">Description</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" style="height:55px;" id="descr2"
+                                                  name="descr"></textarea>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
+        <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
+        <!-- /calendar modal -->
+    {% endblock modals %}
+
+
+
+
+
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function () {
+
+
+            $('table tr').click(function () {
+                console.log('salut');
+                window.location = $(this).data('href');
+                return false;
+            });
+
+
+            $(".input-for-search").on('change', function (e) {
+                console.log($(this).val());
+
+                $('.table-client-all').html("");
+
+                let url = "http://localhost:8000/client/All";
+
+                $.ajax({
+                    url: url,
+                    data: 'query=' + $(this).val(),
+
+                    success: function (data) {
+                        let tpl;
+                        for (let value in data) {
+
+                            tpl += `<tr>
+                                    <td>${data[value].CL_RAISONSOC}</td>
+                                    <td>${data[value].CL_REF}</td>
+                                    <td>${data[value].SO_RAISONSOC}</td>
+                                    <td>${data[value].CL_DT_ADHESION}</td>
+                                </tr>`;
+                        }
+
+                        $('.table-client-all').html(tpl)
+
+                    },
+                    error: function () {
+                        alert('La requête n\'a pas abouti');
+                    }
+                })
+
+            });
+
+
+            $('.change-centrale').on('click', function (e) {
+                $('.table-client-all').html("");
+
+                let url = "http://localhost:8000/client/All";
+
+                let centrale = $(this).data("centrale");
+
+                $.ajax({
+                    url: url,
+                    data: 'centrale=' + centrale,
+
+                    success: function (data) {
+                        console.log(centrale);
+
+                        let tpl;
+                        for (let value in data) {
+
+                            tpl += `<tr>
+                                    <td>${data[value].CL_RAISONSOC}</td>
+                                    <td>${data[value].CL_REF}</td>
+                                    <td>${centrale}</td>
+                                    <td>${data[value].CL_DT_ADHESION}</td>
+                                </tr>`;
+                        }
+                        $('.table-client-all').html(tpl)
+
+
+                    },
+                    error: function () {
+                        alert('La requête n\'a pas abouti');
+                    }
+                })
+            })
+
+
+        });
+
+    </script>
+{% endblock %}
+
+
+
+{#<div class="container-client-list">
+
+    <div class="container-all-logo">
+        <div data-centrale="funecap" class="container-logo-centrale change-centrale">
+            <img class="ui cursor medium image"
+                 src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+        </div>
+        <div data-centrale="achatCentrale" class="container-logo-centrale change-centrale">
+            <img class="ui cursor circular image" src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
+        </div>
+        <div data-centrale="centraleGccp" class="container-logo-centrale change-centrale">
+            <img class="ui cursor circular image"
+                 src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
+        </div>
+        <div data-centrale="centraleRoc" class="container-logo-centrale change-centrale">
+            <img class="ui cursor circular image"
+                 src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+        </div>
+        <div data-centrale="centralePfpl" class="container-logo-centrale change-centrale">
+            <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
+
+        </div>
+    </div>
 
     <div class=" search-input">
         <div class="ui form">
@@ -69,94 +358,5 @@
         </table>
 
     </div>
-{% endblock %}
-
-
-{% block javascripts %}
-    <script>
-
-        $(document).ready(function () {
-
-
-            $('table tr').click(function () {
-                console.log('salut');
-                window.location = $(this).data('href');
-                return false;
-             });
-
-
-            $(".input-for-search").on('change', function (e) {
-                console.log($(this).val());
-
-                $('.table-client-all').html("");
-
-                let url = "http://localhost:8000/client/All";
-
-                $.ajax({
-                    url: url,
-                    data : 'query='+ $(this).val(),
-
-                    success: function (data) {
-                        let tpl;
-                        for (let value in data) {
-
-                            tpl += `<tr>
-                                    <td>${data[value].CL_RAISONSOC}</td>
-                                    <td>${data[value].CL_REF}</td>
-                                    <td>${data[value].SO_RAISONSOC}</td>
-                                    <td>${data[value].CL_DT_ADHESION}</td>
-                                </tr>`;
-                        }
-
-                        $('.table-client-all').html(tpl)
-
-                    },
-                    error: function () {
-                        alert('La requête n\'a pas abouti');
-                    }
-                })
-
-            });
-
-
-
-            $('.change-centrale').on('click', function (e) {
-                $('.table-client-all').html("");
-
-                let url = "http://localhost:8000/client/All";
-
-                let centrale =$(this).data("centrale");
-
-                $.ajax({
-                    url: url,
-                    data : 'centrale='+ centrale,
-
-                    success: function (data) {
-                        console.log(centrale);
-
-                       let tpl;
-                        for (let value in data) {
-
-                            tpl += `<tr>
-                                    <td>${data[value].CL_RAISONSOC}</td>
-                                    <td>${data[value].CL_REF}</td>
-                                    <td>${centrale}</td>
-                                    <td>${data[value].CL_DT_ADHESION}</td>
-                                </tr>`;
-                        }
-                        $('.table-client-all').html(tpl)
-
-
-                    },
-                    error: function () {
-                        alert('La requête n\'a pas abouti');
-                    }
-                })
-            })
-
-
-        });
-
-    </script>
-{% endblock %}
+</div>#}
 
