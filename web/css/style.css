@@ -1,7 +1,3 @@
-.container-content-page{
-    width: 91%;
-    margin: 0 auto;
-}
 
 .donne-client{
     width: 100%;
@@ -15,4 +11,59 @@
 }
 .tab-tache{
     padding-bottom: 15px;
+}
+
+.container-taches-ID {
+    width: 100%;
+    height: 95vh;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    margin-top: 18px;
+}
+
+.wrapper-taches-ID {
+    background-color: #ededed;
+    height: 100%;
+}
+
+.titre-taches {
+    width: 100%;
+    height: 20%;
+    background-color: #dddddd;
+}
+
+
+.titre-taches h1 {
+    color: black;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.assigné_a {
+    margin-left: 7%;
+}
+
+.content-taches-ID {
+    width: 80%;
+    margin: 6% auto 0;
+}
+
+.descr-taches {
+    height: 100px;
+    border-radius: 4px;
+    padding: 13px;
+    background-color: #dddddd;
+}
+
+.action-tache {
+    margin-top: 65px;
+}
+
+.content-taches-ID h1 {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.img-centrale {
+    height: 75px;
 }

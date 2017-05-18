@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <div class="container-taches-ID">
+        <div class="wrapper-taches-ID">
+
+
+            <div class="titre-taches">
+                <h1>Taches #{{ tache['CLA_ID'] }}</h1>
+
+                <div class="assigné_a">
+                    <p>Assigné à : <strong>{{ tache['US_PRENOM'] }}</strong></p>
+                    <br>
+                    <p>Date d'échéance : {{ tache['CLA_ECHEANCE']  }}</p>
+                </div>
+
+            </div>
+
+
+            <div class="content-taches-ID">
+
+
+
+                <h1>Titre de la taches  : {{ tache['CLA_NOM'] }}</h1>
+
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Description de la taches :</h4>
+                        <br>
+                        <div class="descr-taches">
+                            {{ tache['CLA_DESCR'] }}
+                        </div></div>
+                    <div class="col-sm-4 action-tache">
+                        <!-- Indicates a successful or positive action -->
+                        <button type="button" class="btn btn-success"><i class="checkmark icon"></i>Terminé</button>
+                        <br>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="{{ tache['US_PRENOM'] }}" aria-describedby="basic-addon2">
+                            <span class="input-group-addon btn cursor white-text" id="basic-addon2">Changer d'utilisateur</span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+{% endblock %}

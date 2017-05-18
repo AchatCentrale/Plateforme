@@ -40,28 +40,34 @@
                             <ul class="pagination pagination-split">
                                 <li><a href="#">
                                         <img
-                                                class=""
+                                                data-centrale="CENTRALE_FUNECAP"
+                                                class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
                                     </a>
                                 </li>
                                 <li><a href="#">
                                         <img
-                                                class=""
+                                                data-centrale="CENTRALE_ROC_ECLERC"
+                                                class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
                                     </a>
                                 </li>
                                 <li><a href="#">
                                         <img
-                                                class=""
+                                                data-centrale="achat-centrale"
+                                                class="cursor img-centrale"
                                                 src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
                                     </a></li>
-                                <li><a href="#"><img
-                                                class=""
+                                <li><a href="#">
+                                        <img
+                                                data-centrale="centrale-gccp"
+                                                class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}"></a>
                                 </li>
                                 <li><a href="#">
                                         <img
-                                                class=""
+                                                data-centrale="centrale-pfpl"
+                                                class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
 
                                     </a></li>
@@ -69,47 +75,51 @@
                         </div>
 
                         <div class="clearfix"></div>
+                        <p id="count-client">Il y a {{ client | length }} clients</p>
+
+                        <div class="client-all">
+                            {% for clients in client %}
 
 
-                        {% for clients in client %}
-                            <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-                                <div class="well profile_view">
-                                    <div class="col-sm-12">
+                                <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                                    <div class="well profile_view">
+                                        <div class="col-sm-12">
 
-                                        <h4 class="brief"><i>{{ clients.SO_RAISONSOC }}</i></h4>
-                                        <div class="left col-xs-7">
-                                            <h2>{{ clients.CL_RAISONSOC }}</h2>
-                                            <p><strong>REF </strong> {{ clients.CL_REF }}
-                                            </p>
-                                            <ul class="list-unstyled">
-                                                <li><i class="fa fa-building"></i>
-                                                    Adresse: {{ clients.CL_CP }} {{ clients.CL_VILLE }}</li>
+                                            <h4 class="brief label label-warning"><i>{{ clients.SO_RAISONSOC }}</i></h4>
+                                            <div class="left col-xs-7">
+                                                <h2>{{ clients.CL_RAISONSOC }}</h2>
+                                                <p><strong>REF </strong> {{ clients.CL_REF }}
+                                                </p>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fa fa-building"></i>
+                                                        Adresse: {{ clients.CL_CP }} {{ clients.CL_VILLE }}</li>
 
-                                            </ul>
+                                                </ul>
+                                            </div>
+                                            <div class="right col-xs-5 text-center">
+                                                <img src="http://gentelella.herokuapp.com/assets/images/user.png"
+                                                     alt="" class="img-circle img-responsive">
+                                            </div>
                                         </div>
-                                        <div class="right col-xs-5 text-center">
-                                            <img src="http://www.achatcentrale.fr/UploadFichiers/Uploads/CLIENT_1344/AAAJPDHHKNZW-C10001gif.png"
-                                                 alt="" class="img-circle img-responsive">
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-12 bottom text-center">
-                                        <div class="col-xs-12 col-sm-6 emphasis">
-                                            <p class="ratings">
-                                                <span class="label label-primary">Status</span>
-                                            </p>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-6 emphasis">
+                                        <div class="col-xs-12 bottom text-center">
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+                                                <p class="ratings">
+                                                    <span class="label label-primary">Status</span>
+                                                </p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 emphasis">
 
-                                            <a href="{{ path('client-general', {'id' : clients.CL_ID}) }}"
-                                               class="btn btn-success" role="button"><i class="fa fa-user"> </i> Voir le
-                                                profil</a>
+                                                <a href="{{ path('client-general', {'id' : clients.CL_ID, 'centrale' : clients.SO_RAISONSOC}) }}"
+                                                   class="btn btn-success" role="button"><i class="fa fa-user"> </i>
+                                                    Voir le
+                                                    profil</a>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                        {% endfor %}
+                            {% endfor %}
+                        </div>
 
 
                     </div>
@@ -119,109 +129,22 @@
     </div>
 
     <!-- /page content -->
-{% endblock %}
-
-    {% block modals %}
-        <!-- calendar modal -->
-        <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">New Calendar Entry</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="testmodal" style="padding: 5px 20px;">
-                            <form id="antoform" class="form-horizontal calender" role="form">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Title</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="title" name="title">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Description</label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control" style="height:55px;" id="descr"
-                                                  name="descr"></textarea>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary antosubmit">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel2">Edit Calendar Entry</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div id="testmodal2" style="padding: 5px 20px;">
-                            <form id="antoform2" class="form-horizontal calender" role="form">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Title</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="title2" name="title2">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Description</label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control" style="height:55px;" id="descr2"
-                                                  name="descr"></textarea>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
-        <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
-        <!-- /calendar modal -->
-    {% endblock modals %}
 
 
 
 
 
-{% block javascripts %}
+
+
+
     <script>
 
         $(document).ready(function () {
 
 
-            $('table tr').click(function () {
-                console.log('salut');
-                window.location = $(this).data('href');
-                return false;
-            });
-
-
             $(".input-for-search").on('change', function (e) {
                 console.log($(this).val());
 
-                $('.table-client-all').html("");
 
                 let url = "http://localhost:8000/client/All";
 
@@ -230,18 +153,54 @@
                     data: 'query=' + $(this).val(),
 
                     success: function (data) {
-                        let tpl;
+                        console.log(data.length);
+                        let tpl = "";
                         for (let value in data) {
 
-                            tpl += `<tr>
-                                    <td>${data[value].CL_RAISONSOC}</td>
-                                    <td>${data[value].CL_REF}</td>
-                                    <td>${data[value].SO_RAISONSOC}</td>
-                                    <td>${data[value].CL_DT_ADHESION}</td>
-                                </tr>`;
+
+                            tpl += ` <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                                    <div class="well profile_view">
+                                        <div class="col-sm-12">
+
+                                            <h4 class="brief label label-warning"><i>${data[value].SO_RAISONSOC}</i></h4>
+                                            <div class="left col-xs-7">
+                                                <h2>${data[value].CL_RAISONSOC}</h2>
+                                                <p><strong>REF </strong> ${data[value].CL_REF}
+                                                </p>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fa fa-building"></i>
+                                                        Adresse: ${data[value].CL_CP} ${data[value].CL_VILLE}</li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="right col-xs-5 text-center">
+                                                <img src="http://gentelella.herokuapp.com/assets/images/user.png"
+                                                     alt="" class="img-circle img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 bottom text-center">
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+                                                <p class="ratings">
+                                                    <span class="label label-primary">Status</span>
+                                                </p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+
+                                                 <a href="http://localhost:8000/client/${data[value].CL_ID}/${data[value].SO_RAISONSOC}/general"
+                                                   class="btn btn-success" role="button"><i class="fa fa-user"> </i>
+                                                    Voir le
+                                                    profil</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
                         }
 
-                        $('.table-client-all').html(tpl)
+
+                        $('.client-all').html(tpl);
+                        $('#count-client').html(`Il y a ${data.length} clients`)
+
 
                     },
                     error: function () {
@@ -252,7 +211,7 @@
             });
 
 
-            $('.change-centrale').on('click', function (e) {
+            $('.img-centrale').on('click', function (e) {
                 $('.table-client-all').html("");
 
                 let url = "http://localhost:8000/client/All";
@@ -264,19 +223,56 @@
                     data: 'centrale=' + centrale,
 
                     success: function (data) {
-                        console.log(centrale);
+                        $('.client-all').html("");
 
-                        let tpl;
+                        console.log(data);
+                        let tpl = "";
                         for (let value in data) {
 
-                            tpl += `<tr>
-                                    <td>${data[value].CL_RAISONSOC}</td>
-                                    <td>${data[value].CL_REF}</td>
-                                    <td>${centrale}</td>
-                                    <td>${data[value].CL_DT_ADHESION}</td>
-                                </tr>`;
+
+                            tpl += ` <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+                                    <div class="well profile_view">
+                                        <div class="col-sm-12">
+
+                                            <h4 class="brief label label-warning"><i>${centrale}</i></h4>
+                                            <div class="left col-xs-7">
+                                                <h2>${data[value].CL_RAISONSOC}</h2>
+                                                <p><strong>REF </strong> ${data[value].CL_REF}
+                                                </p>
+                                                <ul class="list-unstyled">
+                                                    <li><i class="fa fa-building"></i>
+                                                        Adresse: ${data[value].CL_CP} ${data[value].CL_VILLE}</li>
+
+                                                </ul>
+                                            </div>
+                                            <div class="right col-xs-5 text-center">
+                                                <img src="http://gentelella.herokuapp.com/assets/images/user.png"
+                                                     alt="" class="img-circle img-responsive">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 bottom text-center">
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+                                                <p class="ratings">
+                                                    <span class="label label-primary">Status</span>
+                                                </p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 emphasis">
+
+                                                <a href="http://localhost:8000/client/${data[value].CL_ID}/${centrale}/general"
+                                                   class="btn btn-success" role="button"><i class="fa fa-user"> </i>
+                                                    Voir le
+                                                    profil</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`;
                         }
-                        $('.table-client-all').html(tpl)
+
+
+                        $('.client-all').html(tpl);
+                        $('#count-client').html(`Il y a ${data.length} clients`);
+
 
 
                     },
@@ -290,73 +286,6 @@
         });
 
     </script>
+
 {% endblock %}
-
-
-
-{#<div class="container-client-list">
-
-    <div class="container-all-logo">
-        <div data-centrale="funecap" class="container-logo-centrale change-centrale">
-            <img class="ui cursor medium image"
-                 src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
-        </div>
-        <div data-centrale="achatCentrale" class="container-logo-centrale change-centrale">
-            <img class="ui cursor circular image" src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
-        </div>
-        <div data-centrale="centraleGccp" class="container-logo-centrale change-centrale">
-            <img class="ui cursor circular image"
-                 src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
-        </div>
-        <div data-centrale="centraleRoc" class="container-logo-centrale change-centrale">
-            <img class="ui cursor circular image"
-                 src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
-        </div>
-        <div data-centrale="centralePfpl" class="container-logo-centrale change-centrale">
-            <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
-
-        </div>
-    </div>
-
-    <div class=" search-input">
-        <div class="ui form">
-            <div class="field">
-                <label>Rechercher :</label>
-                <input class="input-for-search" type="text">
-            </div>
-        </div>
-    </div>
-
-    <div class="table-client">
-        <table id="table-client-all" class="ui celled table" cellspacing="0" width="100%">
-            <thead >
-            <tr>
-                <th>Raison sociale</th>
-                <th>Référence client</th>
-                <th>Description groupe</th>
-                <th>Date d'adhesion</th>
-            </tr>
-            </thead>
-            <tbody class="table-client-all">
-            {% for clients in client %}
-                <tr data-href="{{ path('client-general', { 'id' : clients.CL_ID}) }}">
-                    <td>{{ clients.CL_RAISONSOC }}</td>
-                    <td>{{ clients.CL_REF }}</td>
-                    <td>{{ clients.SO_RAISONSOC}}</td>
-                    <td>{{ clients.CL_DT_ADHESION | date('d/m/Y') }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            <tfoot>
-            <tr>
-                <th>Raison sociale</th>
-                <th>Référence client</th>
-                <th>Description groupe</th>
-                <th>Date d'adhesion</th>
-            </tr>
-            </tfoot>
-        </table>
-
-    </div>
-</div>#}
 

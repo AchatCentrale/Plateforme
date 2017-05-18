@@ -2,7 +2,7 @@
 
 namespace SiteBundle\Controller;
 
-use AchatCentrale\CrmBundle\Entity\ClientsTaches;
+use  AchatCentrale\CrmBundle\Entity\ClientsTaches;
 use SiteBundle\Form\ClientsTachesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,6 +26,7 @@ class BaseController extends Controller
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(
             [
                 'usId' => $user->getUsId(),
+                'claStatus' => 0
             ]
         );
 
@@ -39,7 +40,6 @@ class BaseController extends Controller
 
     }
 
-
     public function ClientAction(Request $request)
     {
 
@@ -52,7 +52,7 @@ class BaseController extends Controller
               GR_DESCR, CL_DESCR, AC_DESCR
               FROM Vue_All_Clients
               INNER JOIN SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
-              ORDER BY CL_DT_ADHESION DESC 
+              ORDER BY SO_RAISONSOC DESC 
               '
         );
         $count = $stmt->fetchAll();
@@ -146,7 +146,7 @@ class BaseController extends Controller
         return new JsonResponse($count, 200);
     }
 
-    public function ClientGeneralAction($id)
+    public function ClientGeneralAction($id, $centrale)
     {
 
 
@@ -217,7 +217,6 @@ class BaseController extends Controller
 
     }
 
-
     public function whoAreAction(Request $request, $type)
     {
 
@@ -266,7 +265,6 @@ class BaseController extends Controller
         return new Response('Mail envoyé');
     }
 
-
     public function countAgenceAction()
     {
         $repository = $this->getDoctrine()
@@ -281,7 +279,6 @@ class BaseController extends Controller
         return $count;
 
     }
-
 
     public function testAction()
     {
@@ -300,7 +297,6 @@ class BaseController extends Controller
         );
 
     }
-
 
     public function testWithParamAction(Request $request, $id)
     {
@@ -333,6 +329,8 @@ class BaseController extends Controller
         );
 
     }
+
+
 
 
 }
