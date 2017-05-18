@@ -27,7 +27,14 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="ation-toolbox">
-                    <a href="{{ path('client-new') }}" class="ui button green" role="button">Ajouter un nouveau client</a>
+                    <div class="ui equal width grid">
+                        <div class="equal width row">
+                            <div class="column"><input type="text" class="form-control" placeholder="Nom de l'entreprise" id="usr"></div>
+                            <div class="column"><a href="{{ path('client-new') }}" class="ui button green" id="btn-new-cl" role="button">Ajouter un nouveau client</a></div>
+                        </div>
+                    </div>
+
+
                 </div>
                 <div class="ui divider"></div>
 

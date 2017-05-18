@@ -73,3 +73,31 @@
 .img-centrale {
     height: 75px;
 }
+
+.info-final {
+    width: 100%;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+}
+
+.info-base-new {
+
+    width: 150%;
+    margin: 0 auto;
+}
+.zone-submit-new {
+    margin-top: 30px;
+}
+
+.ation-toolbox {
+    width: 30%;
+}
+
+.form-client-new {
+    margin-top: 65px !important;
+}
+
+label{
+    font-size: 12pt;
+}

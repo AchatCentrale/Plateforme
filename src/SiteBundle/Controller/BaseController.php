@@ -43,6 +43,16 @@ class BaseController extends Controller
 
     public function ClientNewAction(Request $request)
     {
+      $raison_soc = $request->query->get('raison-soc');
+
+        $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
+        $activité = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findAll();
+        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findAll();
+        $classif = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Classif')->findAll();
+        $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findAll();
+        $centrale = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Societes')->findAll();
+
+
 
        if ($request->getMethod() == 'POST'){
 
@@ -50,70 +60,29 @@ class BaseController extends Controller
 
            dump($req);
 
-           $date_echeance = \DateTime::createFromFormat('d/mm/yy', $req['dtadh']);
-
-           $client = new Clients();
-
-           $client
-               ->setClRef($req['ref'])
-               ->setClRaisonsoc($req['raison-soc'])
-               ->setClRaisonsoc($req['raison-soc'])
-               ->setClSiret($req['siret'])
-               ->setClAdresse1($req['adresse'])
-               ->setClCp($req['cp'])
-               ->setClCa($req['ca'])
-               ->setClVille($req['ville'])
-               ->setClPays($req['pays'])
-               ->setClTel($req['tel'])
-               ->setClMail($req['mail'])
-               ->setClWeb($req['web'])
-               ->setClTarif($req['tarif'])
-               ->setClCodePromo($req['codePromo'])
-               ->setClDtAdhesion($date_echeance)
-               ->setClActivite($req['acti'])
-               ->setClGroupe($req['groupe'])
-               ->setClClassif($req['classif'])
-               ->setClAdhesion($req['status'])
-
-           ;
-
-
-        $em = $this->getDoctrine()->getManager();
-
-        // tells Doctrine you want to (eventually) save the Product (no queries yet)
-        $em->persist($client);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $em->flush();
 
         return $this->render('@Site/Base/client.new.html.twig', [
-            'state' => 'Client enregistrer'
-        ]);
-       }
-
-
-
-
-
-
-        $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
-        $activité = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findAll();
-        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findAll();
-        $classif = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Classif')->findAll();
-        $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findAll();
-
-
-        dump($region);
-
-        return $this->render('@Site/Base/client.new.html.twig', [
+            'state' => 'Client enregistrer',
             'pays' => $pays,
             'activite' => $activité,
             'groupe' => $groupe,
             'classif' => $classif,
             'region' => $region,
+            'centrale' => $centrale,
+        ]);
+       }
+
+
+        return $this->render('@Site/Base/client.new.html.twig', [
+            'raisonSoc' => $raison_soc,
+            'pays' => $pays,
+            'activite' => $activité,
+            'groupe' => $groupe,
+            'classif' => $classif,
+            'region' => $region,
+            'centrale' => $centrale,
         ]);
     }
-
 
     public function ClientAction(Request $request)
     {

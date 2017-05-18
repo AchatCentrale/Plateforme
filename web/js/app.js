@@ -1,7 +1,6 @@
 const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
 
 
-
 function archiveTask(e) {
     console.log(e);
     let url = 'http://localhost:8000/taches/archive/' + e;
@@ -131,7 +130,7 @@ $('.menu .item')
 ;
 
 
-$('#siret-client').mask('000 000 00000');
+$('#siret-client').mask('000 000 000 00000');
 $('#tel-client').mask('00 00 00 00 00 ');
 $('#dtadh-client').datepicker({
     altField: "#datepicker",
@@ -150,7 +149,29 @@ $('#dtadh-client').datepicker({
 });
 
 
-
 $('.trash').on('click', function (e) {
     archiveTask(e.currentTarget.id);
+});
+
+
+$('.zone-submit-new button').on('click', function () {
+
+    console.log($('.client-new').val());
+
+});
+
+
+$('#btn-new-cl').on('click', function (e) {
+
+    e.preventDefault();
+
+    let query = $('#usr').val();
+
+    let tpl = "/client/new?raison-soc=" + query;
+
+    let loc = window.location.origin + tpl;
+    console.log(loc);
+    window.location.replace(loc);
+
+
 });

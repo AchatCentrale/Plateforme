@@ -55,7 +55,7 @@
                                     </td>
                                     <td>{{ tasks.claDescr }}</td>
                                     <td>{{ tasks.claPriorite | priorite | raw }}</td>
-                                    <td><a href="{{ path('client-general', { 'id' : tasks.cl.clId}) }}">{{ tasks.cl.clRaisonsoc }}</a></td>
+                                    <td>{#<a href="{{ path('client-general', { 'id' : tasks.cl.clId, 'centrale' : tasks.cl.}, '') }}">{{ tasks.cl.clRaisonsoc }}</a>#}</td>
                                     <td><i class="checkmark large icon cursor"></i><i
                                                 id="{{ tasks.claId }}" class="trash red large icon cursor"></i></td>
                                 </tr>
@@ -99,7 +99,7 @@
                                     </td>
                                     <td>{{ tasks.claDescr }}</td>
                                     <td>{{ tasks.claPriorite | priorite | raw }}</td>
-                                    <td><a href="{{ path('client-general', { 'id' : tasks.cl.clId}) }}">{{ tasks.cl.clRaisonsoc }}</a></td>
+                                    <td>{#<a href="{{ path('client-general', { 'id' : tasks.cl.clId, 'centrale' : tasks.cl.}, '') }}">{{ tasks.cl.clRaisonsoc }}</a>#}</td>
                                     <td></td>
                                 </tr>
                             {% endif %}

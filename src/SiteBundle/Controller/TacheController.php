@@ -151,19 +151,12 @@ class TacheController extends Controller
          */
         $message = \Swift_Message::newInstance()
             ->setSubject('Some Subject')
-            ->setFrom('example@gmail.com')
+            ->setFrom('contact@gmail.com')
             ->setTo('jb@achatcentrale.fr')
             ->setBody('SiteBundle:mail:mailDetailClient.html.twig', 'text/html');
 
 
-        $mailer = $this->container->get('swiftmailer.mailer.default');
-        $mailer->send($message);
-
-        $spool = $mailer->getTransport()->getSpool();
-        $transport = $this->container->get('swiftmailer.transport.real');
-        if ($spool and $transport) $spool->flushQueue($transport);
-
-
+        $this->get('mailer')->send($message);
 
         return $this->render('@Site/test.html.twig');
 
