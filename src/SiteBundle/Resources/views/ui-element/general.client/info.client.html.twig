@@ -1,3 +1,101 @@
+{% for clients in client %}
+    <div class="row">
+        <div class="col-6">.col-6</div>
+        <div class="col-6">
+            <div class="ui items">
+                <div class="item">
+                    <div class="ui tiny image">
+                        <img class="ui  tiny circular image"
+                             src="http://www.centrale-roc-eclerc.fr/UploadFichiers/Uploads/CLIENT_{{ clients.clId }}/{{ clients.clLogo }}">
+                    </div>
+                    <div class="middle aligned content">
+                        <a class="header">{{ clients.clRaisonSoc }}
+                            <div class="ui label blue">VIP</div>
+                            <div class="ui label green">ACTIF</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-6">
+            <div class="info-client-comp">
+                <h3>Informations complémentaires</h3>
+
+                <div class="ui equal width grid">
+                    <div class="equal width row">
+                        <div class="column">
+                            <p>Siret</p>
+                            <p>Secteur d'activité</p>
+                            <p>Nombre de salariés</p>
+                            <p>Assigné à</p>
+                            <p>Site web</p>
+                        </div>
+                        <div class="column">
+                            <div class="label-info-client ui label"> {{ client[0].clSiret }} </div>
+                            <br>
+                            <div class="label-info-client ui label"> Non renseigné</div>
+                            <br>
+                            <div class="label-info-client ui label">{{ client[0].clEffectif }} </div>
+                            <br>
+                            <div class="label-info-client ui label"><i class="user icon"></i> Morgane</div>
+                            <br>
+                            <div class="label-info-client ui label"><a
+                                        href="{{ client[0].clWeb ? " " : "Pas de site web.. " }}"></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="adresse-client">
+                <div class="ui equal width grid">
+                    <div class="equal width row">
+                        <div class="column">
+                            <p>Adresse</p>
+                            <p>Ville/code postal</p>
+                            <p>Numéro de téléphone</p>
+                            <p>Adresse mail</p>
+
+                        </div>
+                        <div class="column">
+                            <div class="label-info-client ui label"> {{ clients.clAdresse1 }} </div>
+                            <div class="label-info-client ui label">{{ clients.clCp }} {{ clients.clVille }} </div>
+                            <div class="label-info-client ui label"> {{ clients.clTel | phone }} </div>
+                            <div class="label-info-client ui label"><a
+                                        href="mailto:{{ clients.clMail }}">{{ clients.clMail }}</a></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="equal width row">
+        <div class="column">
+
+
+        </div>
+
+
+    </div>
+    <div class="column">
+
+
+    </div>
+
+
+
+
+
+{% endfor %}
+>>>>>>> e6f0b14cbeb8f5995c76a8fa48f2e988efa510bb
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -22,8 +120,6 @@
                                  alt="Logo" style="width: 35%">
 
 
-                            <!-- Loading state -->
-                            <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
                         </div>
                         <!-- end of image cropping -->
 
@@ -50,6 +146,7 @@
                 <div class="col-md-9 col-sm-9 col-xs-12">
 
 
+<<<<<<< HEAD
                     <div class="profile_title">
                         <h2>Données du client </h2>
                     </div>
@@ -93,6 +190,29 @@
                     </div>
 
 
+=======
+                    <div>
+                        <h2 class="profile_title">Données du client </h2>
+                    </div>
+
+                    <div>
+
+
+                            <div class="donne-client">
+                                    <p>Siret : {{ client[0].clSiret }}</p>
+                                    <p>Mail : <a href="mailto:{{ client[0].clMail }}">{{ client[0].clMail }}</a></p>
+                                    <p>Téléphone : {{ client[0].clTel | phone }}</p>
+                                </div>
+
+
+
+                    </div>
+
+
+
+
+
+>>>>>>> e6f0b14cbeb8f5995c76a8fa48f2e988efa510bb
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
 
 
@@ -185,4 +305,5 @@
         </div>
     </div>
 </div>
+
 

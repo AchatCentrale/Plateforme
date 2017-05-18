@@ -45,7 +45,7 @@
                         {% for tasks in task %}
                             {% if tasks.claStatus == 0  %}
                                 <tr id="{{ tasks.claId }}" >
-                                    <td><h3>{{ tasks.claNom }}</h3></td>
+                                    <td><h3><a href="{{ path('taches-by-id', { "id" : tasks.claId}) }}">{{ tasks.claNom }}</a></h3></td>
                                     <td>{{ tasks.claEcheance | timeFromNow }}</td>
                                     <td>
                                         <div class="ui label"><i class="user icon"></i>{{ user }}</div>
@@ -89,7 +89,7 @@
 
                             {% if tasks.claStatus == 1 %}
                                 <tr id="{{ tasks.claId }}" >
-                                    <td><h3>{{ tasks.claNom }}</h3></td>
+                                    <td><h3><a href="{{ path('taches-by-id', { "id" : tasks.claId}) }}">{{ tasks.claNom }}</a></h3></td>
                                     <td>{{ tasks.claEcheance | timeFromNow }}</td>
                                     <td>
                                         <div class="ui label"><i class="user icon"></i>{{ user }}</div>

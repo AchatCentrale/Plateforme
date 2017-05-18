@@ -31,7 +31,6 @@ class TacheController extends Controller
         ]);
     }
 
-
     public function DeleteAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -49,8 +48,7 @@ class TacheController extends Controller
 
     public function ArchiveTaskAction($id)
     {
-        /*
-        */
+
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "UPDATE CLIENTS_TACHES
@@ -63,9 +61,8 @@ class TacheController extends Controller
         $stmt->execute();
         $result = $stmt->fetchAll();
         dump($result);
-        return new Response('ok');
+        return new Response('taches numero :  ' . $id . ' archivé');
     }
-
 
     public function NewTaskAction(Request $request)
     {
@@ -119,5 +116,59 @@ class TacheController extends Controller
 
 
     }
+
+    public function TaksByIdAction($id)
+    {
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "SELECT *
+        FROM CLIENTS_TACHES
+        INNER JOIN USERS ON CLIENTS_TACHES.US_ID = USERS.US_ID
+        WHERE CLA_ID = :id
+                ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        dump($result);
+
+
+        return $this->render('@Site/ui-element/taches/taches.by.id.html.twig', [
+            'tache' => $result[0]
+        ]);
+    }
+
+
+    public function sendMailTaskAction($id)
+    {
+
+
+
+        /**
+         * @var \Swift_Mime_Message $message
+         */
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Some Subject')
+            ->setFrom('example@gmail.com')
+            ->setTo('jb@achatcentrale.fr')
+            ->setBody('SiteBundle:mail:mailDetailClient.html.twig', 'text/html');
+
+
+        $mailer = $this->container->get('swiftmailer.mailer.default');
+        $mailer->send($message);
+
+        $spool = $mailer->getTransport()->getSpool();
+        $transport = $this->container->get('swiftmailer.transport.real');
+        if ($spool and $transport) $spool->flushQueue($transport);
+
+
+
+        return $this->render('@Site/test.html.twig');
+
+
+    }
+
 
 }

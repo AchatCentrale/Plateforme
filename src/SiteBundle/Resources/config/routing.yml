@@ -27,16 +27,17 @@ get-all-client:
     methods: GET
 
 client-general:
-    path:     /client/{id}/general
+    path:     /client/{id}/{centrale}/general
     defaults: { _controller: SiteBundle:Base:ClientGeneral }
+    methods: GET
 
 
 client-adresse:
-    path:     /client/{id}/adresse
+    path:     /client/{id}/{centrale}/adresse
     defaults: { _controller: SiteBundle:Base:ClientAdresse }
 
 client-status:
-    path:     /client/{id}/status
+    path:     /client/{id}/{centrale}/status
     defaults: { _controller: SiteBundle:Base:ClientStatut }
 
 Who-Are-The-User:
@@ -64,7 +65,9 @@ test_param:
 taches_home:
     path:    /taches
     defaults: {_controller: SiteBundle:Tache:Tache}
-
+taches-by-id:
+    path: /taches/{id}
+    defaults: {_controller: SiteBundle:Tache:TaksById}
 new-task:
     path:   /taches/new
     defaults: {_controller: SiteBundle:Tache:NewTask}
@@ -74,3 +77,7 @@ delete-task:
 archive-task:
     path: /taches/archive/{id}
     defaults: {_controller: SiteBundle:Tache:ArchiveTask}
+
+mail-task:
+    path: /taches/mail/{id}
+    defaults: {_controller: SiteBundle:Tache:sendMailTask}
