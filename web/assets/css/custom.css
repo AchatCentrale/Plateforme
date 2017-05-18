@@ -2962,8 +2962,7 @@ ul.user_data li .progress {
     background: #F5F7FA;
     border: 0;
     padding: 7px 0;
-    display: -ms-flexbox;
-    display: flex
+
 }
 ul.stats-overview {
     border-bottom: 1px solid #e8e8e8;

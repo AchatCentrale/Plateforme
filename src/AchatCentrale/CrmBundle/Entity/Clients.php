@@ -12,6 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Clients
 {
+
+    /**
+     * Clients constructor.
+     */
+    public function __construct()
+    {
+        $this->insDate = new \DateTime('now');
+    }
+
+
+
     /**
      * @var integer
      *
@@ -258,6 +269,7 @@ class Clients
      * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
+
 
 
 

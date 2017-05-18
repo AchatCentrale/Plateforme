@@ -16,6 +16,11 @@ client:
     path:     /client
     defaults: { _controller: SiteBundle:Base:Client }
 
+
+client-new:
+    path:     /client/new
+    defaults: { _controller: SiteBundle:Base:ClientNew }
+
 get-all-client:
     path:     /client/All
     defaults: {_controller: SiteBundle:Base:getAllClients}

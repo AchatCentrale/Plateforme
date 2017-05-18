@@ -1,10 +1,6 @@
-.container-content-page{
-    width: 91%;
-    margin: 0 auto;
-}
 
 .donne-client{
-    width: 100%;
+
     height: 170px;
     margin-left: 17px;
     padding-top: 15px;
@@ -15,4 +11,11 @@
 }
 .tab-tache{
     padding-bottom: 15px;
+}
+
+.recap-client {
+    margin-top: 12px;
+}
+.btn-new{
+    margin:10px;
 }

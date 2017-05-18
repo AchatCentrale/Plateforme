@@ -1,0 +1,162 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nouveau client</h1>
+
+    <form action="{{ path('client-new') }}" method="post">
+
+        <div class="ui equal width grid">
+            <div class="equal width row">
+                <div class="column">
+                    <div class="form-group">
+                        <label for="ref-client">Réference du client</label>
+                        <input name="client-new[ref]" type="text" class="form-control" id="ref-client"  placeholder="La réference du client">
+                    </div>
+                    <div class="form-group">
+                        <label for="siret-client">Numero SIRET</label>
+                        <input name="client-new[siret]" type="text" class="form-control" id="siret-client"  placeholder="Le numero siret de l'entreprise">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ville-client">Ville</label>
+                        <input name="client-new[ville]" type="text" class="form-control" id="ville-client"  placeholder="La ville  de l'entreprise">
+                    </div>
+                    <div class="form-group">
+                        <label for="tel-client">Téléphone</label>
+                        <input name="client-new[tel]" type="text" class="form-control" id="tel-client"  placeholder="Le télephone de l'entreprise">
+                    </div>
+                    <div class="form-group">
+                        <label for="web-client">Site web</label>
+                        <input name="client-new[web]" type="text" class="form-control" id="web-client"  placeholder="Le site web de l'entreprise">
+                    </div>
+                    <div class="form-group">
+                        <label for="dtadh-client">Date d'adhésion</label>
+                        <input name="client-new[dtadh]" type="text" class="form-control" id="dtadh-client"  placeholder="Date d'adhésion de l'entrperise">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="statut-client">Statut du client</label>
+                        <select class="form-control" id="statut-client" >
+                            <option value="Je regarde">Je regarde</option>
+                            <option value="J'adhère">J'adhère</option>
+                            <option value="J'ai payé">J'ai payé</option>
+                        </select>
+                    </div>
+
+
+                </div>
+                <div class="column">
+                    <div class="form-group">
+                        <label for="raison-soc-client">Raison social</label>
+                        <input name="client-new[raison-soc]" type="text" class="form-control" id="raison-soc-client"  placeholder="Raison sociale de l'entreprise">
+                    </div>
+                    <div class="form-group">
+                        <label for="adresse-client">Adresse</label>
+                        <input name="client-new[adresse]" type="text" class="form-control" id="adresse-client"  placeholder="L'adresse de l'entreprise">
+                    </div>
+                    <div class="form-group">
+                        <label for="cp-client">Code postal</label>
+                        <input name="client-new[cp]" type="text" class="form-control" id="cp-client"  placeholder="Le code postal de l'entreprise">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pays-client">Pays</label>
+                        <select name="client-new[pays]" class="form-control form-control-sm" id="pays-client"  placeholder="Le pays de l'entreprise">
+                            {% for country in pays  %}
+                                <option value="{{ country.paDescr }}">{{ country.paDescr }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="mail-client">Mail</label>
+                        <input name="client-new[mail]" type="text" class="form-control" id="mail-client"  placeholder="Le mail de l'entreprise">
+                    </div>
+                    <div class="form-group">
+                        <label for="cp-client">Code promo</label>
+                        <input name="client-new[codePromo]" type="text" class="form-control" id="cp-client"  placeholder="Le code promo pour l'entrperise">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status-client">Status</label>
+                        <select name="client-new[status]" class="form-control" id="status-client" >
+                            <option value="A valider">A valider</option>
+                            <option value="Bloqué">Bloqué</option>
+                            <option value="Validé">Validé</option>
+                        </select>
+                    </div>
+
+
+
+
+                </div>
+                <div class="column">
+                    <div class="form-group">
+                        <label for="acti-client">Activité</label>
+                        <select name="client-new[acti]" class="form-control form-control-sm" id="acti-client" >
+                            {% for acti in activite  %}
+                                <option value="{{ acti.acId}}">{{ acti.acDescr}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="groupe-client">Groupe</label>
+                        <select name="client-new[groupe]" class="form-control form-control-sm" id="groupe-client" >
+                            {% for gr in groupe  %}
+                                <option value="{{ gr.grId}}">{{ gr.grDescr}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="classif-client">Classifaction</label>
+                        <select name="client-new[classif]" class="form-control form-control-sm" id="classif-client" >
+                            {% for class in classif  %}
+                                <option value="{{ class.clId}}">{{ class.clDescr}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ca-client">Chiffre d'affaires</label>
+                        <input name="client-new[ca]" type="text" class="form-control" id="ca-client"  placeholder="Le chiffre d'affaires de l'entreprise">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="effectif-client">Effectif</label>
+                        <input name="client-new[effe]" type="text" class="form-control" id="effectif-client"  placeholder="Effectif de l'entreprise">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="region-client">Région</label>
+                        <select name="client-new[region]" class="form-control" id="region-client" >
+                            {% for reg in region  %}
+                                <option value="{{ reg.reId}}">{{ reg.reNom}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="radio-inline"><input type="radio" name="client-new[prixAchat]">Afficher les prix d'achat</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="radio-inline"><input type="radio" name="client-new[prixVente]">Afficher les prix de vente</label>
+                    </div>
+
+
+                </div>
+                <div class="column">
+
+                    <div class="form-group">
+                        <label for="tarif-client">Tarif</label>
+                        <input name="client-new[tarif]" type="text" class="form-control" id="tarif-client"  placeholder="Le tarif centrale pour l'entreprise">
+                    </div>
+
+                    <input type="submit" class="ui button green fluid" value="Enregistrer">
+                </div>
+            </div>
+        </div>
+
+
+    </form>
+
+{% endblock %}
+

@@ -2,6 +2,7 @@
 
 namespace SiteBundle\Controller;
 
+use AchatCentrale\CrmBundle\Entity\Clients;
 use AchatCentrale\CrmBundle\Entity\ClientsTaches;
 use SiteBundle\Form\ClientsTachesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,6 +27,7 @@ class BaseController extends Controller
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(
             [
                 'usId' => $user->getUsId(),
+                'claStatus' => 0
             ]
         );
 
@@ -37,6 +39,80 @@ class BaseController extends Controller
             ]
         );
 
+    }
+
+
+    public function ClientNewAction(Request $request)
+    {
+
+       if ($request->getMethod() == 'POST'){
+
+           $req = $request->request->get('client-new');
+
+           dump($req);
+
+           $date_echeance = \DateTime::createFromFormat('d/mm/yy', $req['dtadh']);
+
+           $client = new Clients();
+
+           $client
+               ->setClRef($req['ref'])
+               ->setClRaisonsoc($req['raison-soc'])
+               ->setClRaisonsoc($req['raison-soc'])
+               ->setClSiret($req['siret'])
+               ->setClAdresse1($req['adresse'])
+               ->setClCp($req['cp'])
+               ->setClCa($req['ca'])
+               ->setClVille($req['ville'])
+               ->setClPays($req['pays'])
+               ->setClTel($req['tel'])
+               ->setClMail($req['mail'])
+               ->setClWeb($req['web'])
+               ->setClTarif($req['tarif'])
+               ->setClCodePromo($req['codePromo'])
+               ->setClDtAdhesion($date_echeance)
+               ->setClActivite($req['acti'])
+               ->setClGroupe($req['groupe'])
+               ->setClClassif($req['classif'])
+               ->setClAdhesion($req['status'])
+
+           ;
+
+
+        $em = $this->getDoctrine()->getManager();
+
+        // tells Doctrine you want to (eventually) save the Product (no queries yet)
+        $em->persist($client);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $em->flush();
+
+        return $this->render('@Site/Base/client.new.html.twig', [
+            'state' => 'Client enregistrer'
+        ]);
+       }
+
+
+
+
+
+
+        $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
+        $activité = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findAll();
+        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findAll();
+        $classif = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Classif')->findAll();
+        $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findAll();
+
+
+        dump($region);
+
+        return $this->render('@Site/Base/client.new.html.twig', [
+            'pays' => $pays,
+            'activite' => $activité,
+            'groupe' => $groupe,
+            'classif' => $classif,
+            'region' => $region,
+        ]);
     }
 
 
@@ -153,30 +229,23 @@ class BaseController extends Controller
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy(
             array('clId' => $id)
         );
-        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(array('cl' => $id));
+        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
+            'cl' => $id
+        ]);
 
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy([
+            'cl' => $id
+        ]);
 
-        $sql = "SELECT
-                *
-                FROM LOGS
-                WHERE
-                  LOGS.LO_IDENT = 'CL_ID'
-                AND
-                    LO_IDENT_NUM = :id
-                ";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        $log = $stmt->fetchAll();
 
+        dump($user);
 
         return $this->render(
             '@Site/Base/client.general.html.twig',
             [
                 "client" => $restresult,
-                "log" => $log,
+                "user" => $user,
                 "tache" => $task,
             ]
         );

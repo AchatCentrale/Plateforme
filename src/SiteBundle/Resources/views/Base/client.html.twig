@@ -3,6 +3,7 @@
 {% block body %}
 
     <div class="row">
+
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
@@ -25,6 +26,11 @@
                     </ul>
                     <div class="clearfix"></div>
                 </div>
+                <div class="ation-toolbox">
+                    <a href="{{ path('client-new') }}" class="ui button green" role="button">Ajouter un nouveau client</a>
+                </div>
+                <div class="ui divider"></div>
+
                 <div class=" search-input">
                     <div class="ui form">
                         <div class="field">
@@ -121,85 +127,7 @@
     <!-- /page content -->
 {% endblock %}
 
-    {% block modals %}
-        <!-- calendar modal -->
-        <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
 
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel">New Calendar Entry</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="testmodal" style="padding: 5px 20px;">
-                            <form id="antoform" class="form-horizontal calender" role="form">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Title</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="title" name="title">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Description</label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control" style="height:55px;" id="descr"
-                                                  name="descr"></textarea>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary antosubmit">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title" id="myModalLabel2">Edit Calendar Entry</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div id="testmodal2" style="padding: 5px 20px;">
-                            <form id="antoform2" class="form-horizontal calender" role="form">
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Title</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="title2" name="title2">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-sm-3 control-label">Description</label>
-                                    <div class="col-sm-9">
-                                        <textarea class="form-control" style="height:55px;" id="descr2"
-                                                  name="descr"></textarea>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
-        <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
-        <!-- /calendar modal -->
-    {% endblock modals %}
 
 
 
@@ -292,71 +220,4 @@
     </script>
 {% endblock %}
 
-
-
-{#<div class="container-client-list">
-
-    <div class="container-all-logo">
-        <div data-centrale="funecap" class="container-logo-centrale change-centrale">
-            <img class="ui cursor medium image"
-                 src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
-        </div>
-        <div data-centrale="achatCentrale" class="container-logo-centrale change-centrale">
-            <img class="ui cursor circular image" src="{{ asset('images/Logo_AchatCentrale.jpg') }}">
-        </div>
-        <div data-centrale="centraleGccp" class="container-logo-centrale change-centrale">
-            <img class="ui cursor circular image"
-                 src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
-        </div>
-        <div data-centrale="centraleRoc" class="container-logo-centrale change-centrale">
-            <img class="ui cursor circular image"
-                 src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
-        </div>
-        <div data-centrale="centralePfpl" class="container-logo-centrale change-centrale">
-            <img class="ui cursor circular image" src="{{ asset('images/logo-centrale/logo-pfpl.png') }}">
-
-        </div>
-    </div>
-
-    <div class=" search-input">
-        <div class="ui form">
-            <div class="field">
-                <label>Rechercher :</label>
-                <input class="input-for-search" type="text">
-            </div>
-        </div>
-    </div>
-
-    <div class="table-client">
-        <table id="table-client-all" class="ui celled table" cellspacing="0" width="100%">
-            <thead >
-            <tr>
-                <th>Raison sociale</th>
-                <th>Référence client</th>
-                <th>Description groupe</th>
-                <th>Date d'adhesion</th>
-            </tr>
-            </thead>
-            <tbody class="table-client-all">
-            {% for clients in client %}
-                <tr data-href="{{ path('client-general', { 'id' : clients.CL_ID}) }}">
-                    <td>{{ clients.CL_RAISONSOC }}</td>
-                    <td>{{ clients.CL_REF }}</td>
-                    <td>{{ clients.SO_RAISONSOC}}</td>
-                    <td>{{ clients.CL_DT_ADHESION | date('d/m/Y') }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            <tfoot>
-            <tr>
-                <th>Raison sociale</th>
-                <th>Référence client</th>
-                <th>Description groupe</th>
-                <th>Date d'adhesion</th>
-            </tr>
-            </tfoot>
-        </table>
-
-    </div>
-</div>#}
 
