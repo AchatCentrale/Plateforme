@@ -65,9 +65,8 @@ test_param:
 taches_home:
     path:    /taches
     defaults: {_controller: SiteBundle:Tache:Tache}
-taches-by-id:
-    path: /taches/{id}
-    defaults: {_controller: SiteBundle:Tache:TaksById}
+
+
 new-task:
     path:   /taches/new
     defaults: {_controller: SiteBundle:Tache:NewTask}

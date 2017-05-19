@@ -130,6 +130,147 @@ $('.menu .item')
 ;
 
 
+// $(".input-for-search").on('change', function (e) {
+//     console.log($(this).val());
+//
+//
+//     let url = "http://localhost:8000/client/All";
+//
+//     $.ajax({
+//         url: url,
+//         data: 'query=' + $(this).val(),
+//
+//         success: function (data) {
+//             console.log(data.length);
+//             let tpl = "";
+//             for (let value in data) {
+//
+//
+//                 tpl += ` <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+//                                     <div class="well profile_view">
+//                                         <div class="col-sm-12">
+//
+//                                             <h4 class="brief label label-warning"><i>${data[value].SO_RAISONSOC}</i></h4>
+//                                             <div class="left col-xs-7">
+//                                                 <h2>${data[value].CL_RAISONSOC}</h2>
+//                                                 <p><strong>REF </strong> ${data[value].CL_REF}
+//                                                 </p>
+//                                                 <ul class="list-unstyled">
+//                                                     <li><i class="fa fa-building"></i>
+//                                                         Adresse: ${data[value].CL_CP} ${data[value].CL_VILLE}</li>
+//
+//                                                 </ul>
+//                                             </div>
+//                                             <div class="right col-xs-5 text-center">
+//                                                 <img src="http://gentelella.herokuapp.com/assets/images/user.png"
+//                                                      alt="" class="img-circle img-responsive">
+//                                             </div>
+//                                         </div>
+//                                         <div class="col-xs-12 bottom text-center">
+//                                             <div class="col-xs-12 col-sm-6 emphasis">
+//                                                 <p class="ratings">
+//                                                     <span class="label label-primary">Status</span>
+//                                                 </p>
+//                                             </div>
+//                                             <div class="col-xs-12 col-sm-6 emphasis">
+//
+//                                                  <a href="http://localhost:8000/client/${data[value].CL_ID}/${data[value].SO_RAISONSOC}/general"
+//                                                    class="btn btn-success" role="button"><i class="fa fa-user"> </i>
+//                                                     Voir le
+//                                                     profil</a>
+//
+//                                             </div>
+//                                         </div>
+//                                     </div>
+//                                 </div>`;
+//             }
+//
+//
+//             $('.client-all').html(tpl);
+//             $('#count-client').html(`Il y a ${data.length} clients`)
+//
+//
+//         },
+//         error: function () {
+//             alert('La requête n\'a pas abouti');
+//         }
+//     })
+//
+// });
+//
+//
+// // $('.img-centrale').on('click', function (e) {
+// //     $('.table-client-all').html("");
+// //
+// //     let url = "http://localhost:8000/client/All";
+// //
+// //     let centrale = $(this).data("centrale");
+// //
+// //     $.ajax({
+// //         url: url,
+// //         data: 'centrale=' + centrale,
+// //
+// //         success: function (data) {
+// //             $('.client-all').html("");
+// //
+// //             console.log(data);
+// //             let tpl = "";
+// //             for (let value in data) {
+// //
+// //
+// //                 tpl += ` <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
+// //                                     <div class="well profile_view">
+// //                                         <div class="col-sm-12">
+// //
+// //                                             <h4 class="brief label label-warning"><i>${centrale}</i></h4>
+// //                                             <div class="left col-xs-7">
+// //                                                 <h2>${data[value].CL_RAISONSOC}</h2>
+// //                                                 <p><strong>REF </strong> ${data[value].CL_REF}
+// //                                                 </p>
+// //                                                 <ul class="list-unstyled">
+// //                                                     <li><i class="fa fa-building"></i>
+// //                                                         Adresse: ${data[value].CL_CP} ${data[value].CL_VILLE}</li>
+// //
+// //                                                 </ul>
+// //                                             </div>
+// //                                             <div class="right col-xs-5 text-center">
+// //                                                 <img src="http://gentelella.herokuapp.com/assets/images/user.png"
+// //                                                      alt="" class="img-circle img-responsive">
+// //                                             </div>
+// //                                         </div>
+// //                                         <div class="col-xs-12 bottom text-center">
+// //                                             <div class="col-xs-12 col-sm-6 emphasis">
+// //                                                 <p class="ratings">
+// //                                                     <span class="label label-primary">Status</span>
+// //                                                 </p>
+// //                                             </div>
+// //                                             <div class="col-xs-12 col-sm-6 emphasis">
+// //
+// //                                                 <a href="http://localhost:8000/client/${data[value].CL_ID}/${centrale}/general"
+// //                                                    class="btn btn-success" role="button"><i class="fa fa-user"> </i>
+// //                                                     Voir le
+// //                                                     profil</a>
+// //
+// //                                             </div>
+// //                                         </div>
+// //                                     </div>
+// //                                 </div>`;
+// //             }
+// //
+// //
+// //             $('.client-all').html(tpl);
+// //             $('#count-client').html(`Il y a ${data.length} clients`);
+// //
+// //
+// //
+// //         },
+// //         error: function () {
+// //             alert('La requête n\'a pas abouti');
+// //         }
+// //     })
+// // })
+
+
 $('#siret-client').mask('000 000 000 00000');
 $('#tel-client').mask('00 00 00 00 00 ');
 $('#dtadh-client').datepicker({
@@ -175,3 +316,48 @@ $('#btn-new-cl').on('click', function (e) {
 
 
 });
+
+var table = $('#client-all').DataTable({
+    "colReorder": true,
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
+    }
+
+
+});
+
+
+$('.go-to-client').on('click', function () {
+   console.log(CURRENT_URL);
+
+   let centrale = $(this).data('centrale');
+   let id = $(this).data('id');
+
+    window.location.replace(CURRENT_URL+"/"+id+"/"+centrale+"/general");
+
+});
+
+
+
+$('.img-centrale').on('click', function (e) {
+
+    let centrale = $(this).data('centrale');
+
+
+    if ( centrale === "all" ){
+        table
+            .search( '' )
+            .columns().search( '' )
+            .draw();
+
+    }else{
+        table
+            .search(centrale)
+            .column(1)
+            .draw();
+    }
+
+
+
+});
+

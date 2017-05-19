@@ -207,7 +207,7 @@ class BaseController extends Controller
 
 
 
-        dump($user);
+        dump($restresult);
 
         return $this->render(
             '@Site/Base/client.general.html.twig',
