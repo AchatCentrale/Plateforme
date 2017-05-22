@@ -134,3 +134,9 @@ label{
     border-right: 1px solid #dddddd;
     padding-right: 20px;
 }
+
+.loader-tache {
+    height: 100px !important;
+    /* width: 80% !important; */
+    /* margin: 0 auto !important; */
+}

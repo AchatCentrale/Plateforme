@@ -21,7 +21,7 @@ class TacheController extends Controller
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
             'usId' => $user->getUsId(),
         ], [
-            'claEcheance' => 'ASC'
+            'insDate' => 'DESC'
         ]);
 
 
@@ -45,6 +45,31 @@ class TacheController extends Controller
         $em->remove($task);
         $em->flush();
         return new JsonResponse('ok', 200);
+    }
+
+    public function DetailTaskAction($id)
+    {
+
+
+        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches');
+
+        $result = $task->findOneBy([
+            'claId' => $id
+        ]);
+
+        if($result){
+            return new JsonResponse([
+                "id" => $result->getClaId(),
+                "nom" => $result->getclaNom(),
+                "descr" => $result->getclaDescr(),
+                "Echeance" => $result->getClaEcheance(),
+            ], 200);
+        }else{
+            return new JsonResponse('no taches', 200);
+        }
+
+
+
     }
 
     public function ArchiveTaskAction($id)

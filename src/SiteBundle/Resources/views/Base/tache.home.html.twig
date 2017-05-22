@@ -64,7 +64,7 @@
                                         <tr>
                                             <th class="one wide">Type</th>
                                             <th class="two wide">Nom de l'action</th>
-                                            <th class="one wide">Date</th>
+                                            <th class="one wide">Date de creation</th>
                                             <th class="one wide">Assigné à</th>
                                             <th class="six wide">Description</th>
                                             <th class="one wide">Priorité</th>
@@ -75,16 +75,16 @@
                                         <tbody>
                                         {% for tasks in task %}
                                             {% if tasks.claStatus == 0 %}
-                                                <tr id="{{ tasks.claId }}">
+                                                <tr class="task-id" data-task="{{ tasks.claId }}" id="{{ tasks.claId }}">
                                                     <td>
                                                         <div class="ui label"> {{ tasks.claType | type }}</div>
                                                     </td>
                                                     <td>
-                                                        <h5><a href="">{{ tasks.claNom }}</a></h5>
+                                                        <h5><a class="detail-tache cursor" >{{ tasks.claNom }}</a></h5>
                                                     </td>
                                                     <td>
                                                         <div class="ui label">
-                                                            {{ tasks.claEcheance | Time }}
+                                                            {{ tasks.insDate | Time }}
                                                         </div>
                                                     </td>
                                                     <td>
@@ -159,8 +159,35 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Détail Tâches</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li>
+                            <a class="collapse-link"><i class="fa-2x fa fa-chevron-left previous"></i></a>
+                        </li>
+
+                        <li>
+                            <a class="close-link"><i class="fa-2x fa large fa-chevron-right after"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <div class="detail-tache-data" >
+                    <h2>#{{ task[0].claId }}</h2>
+                    <p>Titre de la tache : {{ task[0].claNom }}</p>
+                    <p>description de la tache : {{ task[0].claDescr }}</p>
+{{ dump(task) }}
+                </div>
+
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
+
     <!-- /page content -->
 
 {% endblock %}

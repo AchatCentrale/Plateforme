@@ -344,15 +344,14 @@ $("form input.date").datepicker({
 });
 
 $('.go-to-client').on('click', function () {
-   console.log(CURRENT_URL);
+    console.log(CURRENT_URL);
 
-   let centrale = $(this).data('centrale');
-   let id = $(this).data('id');
+    let centrale = $(this).data('centrale');
+    let id = $(this).data('id');
 
-    window.location.replace(CURRENT_URL+"/"+id+"/"+centrale+"/general");
+    window.location.replace(CURRENT_URL + "/" + id + "/" + centrale + "/general");
 
 });
-
 
 
 $('.img-centrale').on('click', function (e) {
@@ -360,13 +359,13 @@ $('.img-centrale').on('click', function (e) {
     let centrale = $(this).data('centrale');
 
 
-    if ( centrale === "all" ){
+    if (centrale === "all") {
         table
-            .search( '' )
-            .columns().search( '' )
+            .search('')
+            .columns().search('')
             .draw();
 
-    }else{
+    } else {
         table
             .search(centrale)
             .column(1)
@@ -374,6 +373,53 @@ $('.img-centrale').on('click', function (e) {
     }
 
 
+});
+
+
+$('.detail-tache').on("click", function (e) {
+
+    let id = $(this).closest("tr").data('task');
+
+    let aidy = Number(id);
+
+
+    let url = CURRENT_URL + "/detail/" + aidy;
+    console.log(url);
+    let loading = `<div class="ui active centered inline loader"></div>`;
+
+
+    $('.detail-tache-data').html(loading);
+
+
+    $.ajax({
+
+        // Adresse à laquelle la requête est envoyée
+        url: url,
+
+        // Le délai maximun en millisecondes de traitement de la demande
+        timeout: 4000,
+
+        // La fonction à apeller si la requête aboutie
+        success: function (data) {
+            console.log(data);
+
+            let tpl = `  <h2>${data.id}</h2>
+                    <p>Titre de la tache : ${data.nom}</p>
+                    <p>description de la tache : ${data.descr} </p>`;
+
+
+
+            $('.detail-tache-data').html(tpl);
+
+
+        }
+
+
+    });
+
+
 
 });
+
+
 
