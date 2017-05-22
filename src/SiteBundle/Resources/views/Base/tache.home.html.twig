@@ -48,7 +48,7 @@
                                 <a href="#termine" id="home-tab"
                                    role="tab"
                                    data-toggle="tab" aria-expanded="true">
-                                    Terminée
+                                    Archivée
                                 </a>
                             </li>
 
@@ -164,23 +164,25 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Détail Tâches</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li>
-                            <a class="collapse-link"><i class="fa-2x fa fa-chevron-left previous"></i></a>
-                        </li>
 
-                        <li>
-                            <a class="close-link"><i class="fa-2x fa large fa-chevron-right after"></i></a>
-                        </li>
-                    </ul>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                 <div class="detail-tache-data" >
-                    <h2>#{{ task[0].claId }}</h2>
-                    <p>Titre de la tache : {{ task[0].claNom }}</p>
-                    <p>description de la tache : {{ task[0].claDescr }}</p>
-{{ dump(task) }}
+                    <div class="ui equal width grid">
+                        <div class="equal width row">
+                            <div class="column">
+                                <h2>Detail de la tache #{{ task[0].claId }}</h2>
+                                <p>Titre de la tache : {{ task[0].claNom }}</p>
+                                <p>description de la tache : {{ task[0].claDescr }}</p>
+                            </div>
+                            <div class="column">
+                                <button type="button" class="btn btn-primary btn-lg">Modifier la tâche</button>
+                                <button type="button" class="btn btn-primary btn-lg">Assigner une autre personne</button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 </div>

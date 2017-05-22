@@ -6,11 +6,15 @@ logout:
     path:      /logout
 
 
+profile-update:
+    path: /settings
+    defaults: {_controller: SiteBundle:Base:updateProfil}
+
+
 index_auth:
     path:     /
-    defaults: { _controller: SiteBundle:Base:indexAuth, reactRouting: null }
-    requirements:
-            reactRouting: ".+"
+    defaults: { _controller: SiteBundle:Base:indexAuth}
+
 
 client:
     path:     /client

@@ -220,6 +220,14 @@ class BaseController extends Controller
 
     }
 
+    public function updateProfilAction()
+    {
+
+
+
+        return $this->render('@Site/Base/settings.html.twig');
+    }
+
     public function ClientAdresseAction($id)
     {
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(

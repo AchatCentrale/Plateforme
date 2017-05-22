@@ -403,11 +403,19 @@ $('.detail-tache').on("click", function (e) {
         success: function (data) {
             console.log(data);
 
-            let tpl = `  <h2>${data.id}</h2>
-                    <p>Titre de la tache : ${data.nom}</p>
-                    <p>description de la tache : ${data.descr} </p>`;
-
-
+            let tpl = `<div class="ui equal width grid">
+                        <div class="equal width row">
+                            <div class="column">
+                                <h2>Detail de la tache #${data.id}</h2>
+                                <p>Titre de la tache : ${data.nom}</p>
+                                <p>description de la tache : ${data.descr}</p>
+                            </div>
+                            <div class="column">
+                                <button type="button" class="btn btn-primary btn-lg">Modifier la tâche</button>
+                                <button type="button" class="btn btn-primary btn-lg">Assigner une autre personne</button>
+                            </div>
+                        </div>
+                    </div>`
 
             $('.detail-tache-data').html(tpl);
 
