@@ -40,6 +40,12 @@
 
 
 
+
+
+
+
+
+
                 <div class="x_content ">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12 text-center ">
@@ -123,7 +129,7 @@
                                         <td>{{ cl.CL_RAISONSOC }}</td>
                                         <td>{{ cl.CL_CP }} {{ cl.CL_VILLE }}</td>
                                         <td>{{ random() }}</td>
-                                        <td>{{ cl.CL_SIRET }}</td>
+                                        <td>{{ cl.CL_SIRET | siret }}</td>
                                         <td>{{ cl.CL_ADHESION }}</td>
                                     </tr>
                                     {% endfor %}

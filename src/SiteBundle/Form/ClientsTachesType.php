@@ -2,6 +2,7 @@
 
 namespace SiteBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -61,12 +62,22 @@ class ClientsTachesType extends AbstractType
             ->add('usId', EntityType::class, [
                 'class' => "AchatCentrale\CrmBundle\Entity\Users",
                 'choice_label' => "usPrenom",
+
                 'label' => "Affectation",
-                "attr" => ["class" => "ui dropdown add-action"]
+                "attr" => ["class" => "ui dropdown add-action"],
             ])
             ->add('cl', EntityType::class, [
                 'class' => 'AchatCentrale\CrmBundle\Entity\Clients',
                 'choice_label' => 'clRaisonsoc',
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    if (isset($options['us'])){
+                        return $er->createQueryBuilder('u')
+                            ->where('u.clId = '. $options['us']);
+                    }
+                    return $er->createQueryBuilder('u');
+
+
+                },
                 'label' => 'Entreprise (numéro/nom)',
                 "attr" => ["class" => "ui dropdown add-action"]
 
@@ -87,6 +98,7 @@ class ClientsTachesType extends AbstractType
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id'   => 'task_item',
+            'us'   => 2333,
         ));
     }
 

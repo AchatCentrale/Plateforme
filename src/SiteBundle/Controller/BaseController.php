@@ -27,7 +27,8 @@ class BaseController extends Controller
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(
             [
                 'usId' => $user->getUsId(),
-                'claStatus' => 0
+                'claStatus' => 0,
+
             ]
         );
 
@@ -194,8 +195,9 @@ class BaseController extends Controller
     {
 
 
-        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy(
-            array('clId' => $id)
+        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+            'clId' => $id
+            ]
         );
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
             'cl' => $id
@@ -206,8 +208,6 @@ class BaseController extends Controller
         ]);
 
 
-
-        dump($restresult);
 
         return $this->render(
             '@Site/Base/client.general.html.twig',

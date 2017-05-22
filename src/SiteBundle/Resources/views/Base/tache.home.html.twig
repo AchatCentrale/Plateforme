@@ -4,141 +4,162 @@
 {% block body %}
 
 
-            <div class="row">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Tâches</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Tâches</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Settings 1</a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Settings 1</a>
-                                        </li>
-                                        <li><a href="#">Settings 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                <li><a href="#">Settings 2</a>
                                 </li>
                             </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
+                        </li>
+                        <li><a class="close-link"><i class="fa fa-close"></i></a>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
 
-                            <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter une tâche</a>
-
-
-
-
-                            <h3 class="ui center aligned header">Tâches</h3>
-
+                    <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter une tâche</a>
 
 
-
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-pills nav-fill tab-tache" role="tablist">
-                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">En cour</a></li>
-                                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Terminé</a></li>
-
-                            </ul>
-
-                            <!-- Tab panes -->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="home">
-                                    {% if task  %}
-                                        <table class="ui striped table">
-                                            <thead>
-                                            <tr>
-                                                <th>Nom de l'action</th>
-                                                <th>Échéances</th>
-                                                <th>Assigné à</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                                <th>Priorité</th>
-                                                <th>Nom client</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for tasks in task %}
-                                                {% if tasks.claStatus == 0  %}
-                                                    <tr id="{{ tasks.claId }}" >
-                                                        <td><h3><a href="">{{ tasks.claNom }}</a></h3></td>
-                                                        <td>{{ tasks.claEcheance | timeFromNow }}</td>
-                                                        <td>
-                                                            <div class="ui label"><i class="user icon"></i>{{ user }}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="ui label"> {{ tasks.claType | type }}</div>
-                                                        </td>
-                                                        <td>{{ tasks.claDescr }}</td>
-                                                        <td>{{ tasks.claPriorite | priorite | raw }}</td>
-                                                        <td>{#<a href="{{ path('client-general', { 'id' : tasks.cl.clId, 'centrale' : tasks.cl.}, '') }}">{{ tasks.cl.clRaisonsoc }}</a>#}</td>
-                                                        <td><i class="checkmark large icon cursor"></i><i
-                                                                    id="{{ tasks.claId }}" class="trash red large icon cursor"></i></td>
-                                                    </tr>
-                                                {% endif %}
-                                            {% endfor %}
-
-                                            </tbody>
-                                        </table>
-                                    {% endif %}
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
 
 
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="profile">
-                                    {% if task is defined %}
-                                        <table class="ui striped table">
-                                            <thead>
-                                            <tr>
-                                                <th>Nom de l'action</th>
-                                                <th>Échéances</th>
-                                                <th>Assigné à</th>
-                                                <th>Type</th>
-                                                <th>Description</th>
-                                                <th>Priorité</th>
-                                                <th>Nom client</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
 
-                                            {% for tasks in task %}
 
-                                                {% if tasks.claStatus == 1 %}
-                                                    <tr id="{{ tasks.claId }}" >
-                                                        <td><h3><a href="#">{{ tasks.claNom }}</a></h3></td>
-                                                        <td>{{ tasks.claEcheance | timeFromNow }}</td>
-                                                        <td>
-                                                            <div class="ui label"><i class="user icon"></i>{{ user }}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="ui label"> {{ tasks.claType | type }}</div>
-                                                        </td>
-                                                        <td>{{ tasks.claDescr }}</td>
-                                                        <td>{{ tasks.claPriorite | priorite | raw }}</td>
-                                                        <td>{#<a href="{{ path('client-general', { 'id' : tasks.cl.clId, 'centrale' : tasks.cl.}, '') }}">{{ tasks.cl.clRaisonsoc }}</a>#}</td>
-                                                        <td></td>
-                                                    </tr>
-                                                {% endif %}
+                            <li role="presentation" class="active">
+                                <a href="#en_cour" role="tab" id="profile-tab"
+                                   data-toggle="tab" aria-expanded="false">
+                                    En cours
+                                </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#termine" id="home-tab"
+                                   role="tab"
+                                   data-toggle="tab" aria-expanded="true">
+                                    Terminée
+                                </a>
+                            </li>
 
-                                            {% endfor %}
+                        </ul>
 
-                                            </tbody>
-                                        </table>
-                                    {% endif %}
-                                </div>
+
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="en_cour"
+                                 aria-labelledby="profile-tab">
+                                {% if task %}
+                                    <table class="ui striped table">
+                                        <thead>
+                                        <tr>
+                                            <th class="one wide">Type</th>
+                                            <th class="two wide">Nom de l'action</th>
+                                            <th class="one wide">Date</th>
+                                            <th class="one wide">Assigné à</th>
+                                            <th class="six wide">Description</th>
+                                            <th class="one wide">Priorité</th>
+                                            <th class="two wide">Nom client</th>
+                                            <th class="one wide">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for tasks in task %}
+                                            {% if tasks.claStatus == 0 %}
+                                                <tr id="{{ tasks.claId }}">
+                                                    <td>
+                                                        <div class="ui label"> {{ tasks.claType | type }}</div>
+                                                    </td>
+                                                    <td>
+                                                        <h5><a href="">{{ tasks.claNom }}</a></h5>
+                                                    </td>
+                                                    <td>
+                                                        <div class="ui label">
+                                                            {{ tasks.claEcheance | Time }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="ui label"><i class="user icon"></i>{{ user }}</div>
+                                                    </td>
+
+                                                    <td><h4>{{ tasks.claDescr }}</h4></td>
+                                                    <td>{{ tasks.claPriorite | priorite | raw }}</td>
+                                                    <td>{#<a href="{{ path('client-general', { 'id' : tasks.cl.clId, 'centrale' : tasks.cl.}, '') }}">{{ tasks.cl.clRaisonsoc }}</a>#}</td>
+                                                    <td><i id="{{ tasks.claId }}"
+                                                           class="trash red large icon cursor"></i></td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+
 
                             </div>
 
+                            <div role="tabpanel" class="tab-pane fade " id="termine"
+                                 aria-labelledby="home-tab">
+
+                                {% if task is defined %}
+                                    <table class="ui striped table">
+                                        <thead>
+                                        <tr>
+                                            <th>Nom de l'action</th>
+                                            <th>Échéances</th>
+                                            <th>Assigné à</th>
+                                            <th>Type</th>
+                                            <th>Description</th>
+                                            <th>Nom client</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for tasks in task %}
+
+                                            {% if tasks.claStatus == 1 %}
+                                                <tr id="{{ tasks.claId }}">
+                                                    <td><h3><a href="#">{{ tasks.claNom }}</a></h3></td>
+
+                                                    <td>
+                                                        <div class="ui label"><i class="user icon"></i>{{ user }}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="ui label"> {{ tasks.claType | type }}</div>
+                                                    </td>
+                                                    <td>{{ tasks.claDescr }}</td>
+                                                    <td>{{ tasks.claPriorite | priorite | raw }}</td>
+                                                    <td></td>
+                                                </tr>
+                                            {% endif %}
+
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+
+                            </div>
+
+
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <!-- /page content -->
 

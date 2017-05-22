@@ -21,8 +21,9 @@ class TacheController extends Controller
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
             'usId' => $user->getUsId(),
         ], [
-            'insDate' => 'DESC'
+            'claEcheance' => 'ASC'
         ]);
+
 
 
         return $this->render('@Site/Base/tache.home.html.twig', [
@@ -67,15 +68,28 @@ class TacheController extends Controller
     public function NewTaskAction(Request $request)
     {
 
+
+        $user = $request->query->get('u');
+        dump($user);
+
         $req = $request->request->get('achatcentrale_crmbundle_clientstaches');
 
         $task = new ClientsTaches();
+
+        if ($user){
+            $task->setUsId($user);
+        }
+
+
         $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
             'clId' => $req['cl'],
         ]);
+
         $form = $this->createForm(ClientsTachesType::class, $task, [
             'action' => $this->generateUrl('new-task'),
+            'us' => $user,
         ]);
+
         $form->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',
                 'attr' => array('class' => 'fluid positive ui button'),]

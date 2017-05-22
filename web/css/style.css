@@ -101,3 +101,36 @@
 label{
     font-size: 12pt;
 }
+
+.raison-soc {
+    padding: 26px 10px !important;
+}
+
+.detail-client {
+    margin-top: 50px;
+}
+
+
+.detail-client-liste p{
+    margin: 3px !important;
+}
+
+
+.detail-client-titre p {
+    margin: 13px !important;
+}
+.raison-soc h3 {
+    font-size: 19pt;
+
+}
+
+.user_data {
+    font-size: 14pt;
+    font-weight: 400;
+    padding-top: 25px;
+}
+
+.note-left {
+    border-right: 1px solid #dddddd;
+    padding-right: 20px;
+}

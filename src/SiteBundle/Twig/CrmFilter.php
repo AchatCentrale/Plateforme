@@ -29,6 +29,7 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('type', [$this, 'typeFilter']),
             new \Twig_SimpleFilter('priorite', [$this, 'priorityFilter']),
             new \Twig_SimpleFilter('timeFromNow', [$this, 'timeFromNowFilter']),
+            new \Twig_SimpleFilter('siret', [$this, 'siretFilter']),
         );
     }
 
@@ -40,6 +41,11 @@ class CrmFilter extends \Twig_Extension
         }else{
             return $number;
         }
+    }
+
+    public function siretFilter($siret)
+    {
+        return $siret;
     }
 
     public function dateFilter(\DateTime $date)

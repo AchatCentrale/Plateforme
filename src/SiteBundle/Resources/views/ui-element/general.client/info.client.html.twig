@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -11,7 +10,7 @@
             <div class="x_content">
 
 
-                <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                <div class="col-md-3 col-sm-3 col-xs-12  profile_left" align="center">
 
                     <div class="profile_img">
 
@@ -27,172 +26,296 @@
                         <!-- end of image cropping -->
 
                     </div>
-                    <h3> {{ client[0].clRaisonsoc }}</h3>
+
 
                     <ul class="list-unstyled user_data">
                         <li><i class="fa fa-map-marker user-profile-icon"></i>
-                            {{ client[0].clAdresse1 }},<br>
-                            {{ client[0].clVille }} {{ client[0].clCp }}
+                            {{ client[0].clAdresse1 }}<br>
+                            {{ client[0].clCp }} {{ client[0].clVille }}
                         </li>
                     </ul>
 
-                    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Modifier le profil</a>
-                    <br/>
                     {% if client[0].clWeb %}
                         <li class="m-top-xs">
                             <i class="fa fa-external-link user-profile-icon"></i>
                             <a href="{{ client[0].clWeb }}" target="_blank">{{ client[0].clWeb }}</a>
                         </li>
+                    {% else %}
+                        <p>Pas de site web</p>
                     {% endif %}
 
+                    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Modifier le profil</a>
+
                 </div>
+
+
                 <div class="col-md-9 col-sm-9 col-xs-12">
-
-                    <div class="profile_title">
-                        <h2>Données du client </h2>
-                    </div>
-
-                    <div class="ui grid">
-
-
-                        <div class="six wide column">
-
-                            <div class="donne-client">
-                                <h5>Informations du client</h5>
-
-                                <p>Siret : {{ client[0].clSiret }}</p>
-                                <p class="cursor">Mail : <a class="cursor"
-                                                            href="mailto:{{ client[0].clMail }}">{{ client[0].clMail }}</a>
-                                </p>
-                                <p>Téléphone : {{ client[0].clTel | phone }}</p>
-                            </div>
-                        </div>
-
-
-
-                        <div class="ten wide column recap-client">
-
-                            <h5>Suivi d'adhésion : </h5>
-                            <table class="ui very basic collapsing celled table">
-                                <thead>
-                                <tr>
-                                    <th>Periode d'adhésion</th>
-                                    <th>Creation du compte</th>
-                                    <th>Adhésion du compte</th>
-                                    <th>Payé ?</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        {{ client[0].insDate | Time }}
-                                    </td>
-                                    <td>
-                                        {{ client[0].insDate | Time }}
-                                    </td>
-                                    <td>
-                                        {{ client[0].clDtAdhesion |date_modify("+1 year") | timeFromNow }}
-                                    </td>
-                                    <td>
-                                        <a class="ui green label">Payé</a>
-                                    </td>
-                                </tr>
-                                <tr>
-
-                                </tbody>
-                            </table>
+                    <div class="ui equal width grid raison-soc">
+                        <div class="equal width row">
+                            <div class="column"><h3><i class="building icon"></i> {{ client[0].clRaisonsoc }}</h3></div>
+                            <div class="column"><h3><i class="square icon"></i>{{ client[0].clRef }}</h3></div>
                         </div>
                     </div>
 
 
+                    <div class="detail-client">
 
-                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
-
-
-                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#tab_content1" id="home-tab"
-                                   role="tab"
-                                   data-toggle="tab" aria-expanded="true">
-                                    Actions
-                                </a>
-                            </li>
-                            <li role="presentation" class="">
-                                <a href="#tab_content2" role="tab" id="profile-tab"
-                                   data-toggle="tab" aria-expanded="false">
-                                    Notes
-                                </a>
-                            </li>
-                            <li role="presentation" class="">
-                                <a href="#tab_content3" role="tab" id="profile-tab"
-                                   data-toggle="tab" aria-expanded="false">
-                                    Utilisateurs
-                                </a>
-                            </li>
-
-                        </ul>
+                        <div class="profile_title">
+                            <h2>Données du client </h2>
+                        </div>
 
 
-                        <div id="myTabContent" class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1"
-                                 aria-labelledby="home-tab">
-
-                                <!-- start recent activity -->
-                                <ul class="messages">
+                        <div class="ui grid">
 
 
-                                    {% for tasks in task %}
-                                        <li>
-                                            <div class="message_wrapper">
-                                                <h4 class="heading">{{ tasks.claNom }}</h4>
-                                                <blockquote class="message">
-                                                    {{ tasks.claDescr }}
-                                                </blockquote>
-                                                {{ tasks.claEcheance | timeFromNow }}
-                                                <br/>
+                            <div class="seven wide column">
+
+                                <div class="donne-client">
+                                    <h5>Informations du client</h5>
+
+                                    <div class="ui equal width grid">
+                                        <div class="equal width row">
+
+                                            <div class="column detail-client-titre">
+                                                <p>Siret</p>
+                                                <p>Mail</p>
+                                                <p>Téléphone</p>
+                                                <p>Effectif</p>
+                                                <p>Chiffre d'affaire</p>
                                             </div>
-                                        </li>
 
-                                    {% endfor %}
 
-                                </ul>
-                                <!-- end recent activity -->
+                                            <div class="column detail-client-liste">
+                                                <p class="ui label">{{ client[0].clSiret }}</p><br>
+                                                <p class="ui label"><a class="cursor"
+                                                                       href="mailto:{{ client[0].clMail }}">{{ client[0].clMail }}</a>
+                                                </p>
+                                                <br>
+                                                <p class="ui label">{{ client[0].clTel | phone }}</p><br>
+                                                <p class="ui label">{{ client[0].clEffectif }}</p><br>
+                                                <p class="ui label">{{ client[0].clCa }}</p><br>
+                                            </div>
+                                        </div>
+                                    </div>
 
+
+                                </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                                a
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                                <table class="ui celled padded table">
+
+
+                            <div class="eight wide column recap-client">
+
+                                <table class="ui very basic collapsing celled table">
                                     <thead>
                                     <tr>
-
-                                        <th>Prénom</th>
-                                        <th>Nom</th>
-                                        <th>Fonction</th>
-                                        <th>Tel</th>
-                                        <th>Mail</th>
-                                        <th>Password</th>
-
+                                        <th>Suivi d'adhésion</th>
+                                        <th>Detail</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for users in user %}
-                                        <tr>
-                                            <td><a href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom }}</a></td>
-                                            <td>{{ users.ccNom }}</td>
-                                            <td>{{ users.ccFonction }}</td>
-                                            <td>{{ users.ccTel }}</td>
-                                            <td>{{ users.ccMail  }} </td>
-                                            <td>{{ users.ccPass }}</td>
-                                        </tr>
-                                    {% endfor %}
+                                    <tr>
+                                        <td>
+                                            Periode d'adhésion
+                                        <td>
+                                            1 mois/3 mois/6 mois/1 an
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Numero de facture
+                                        <td>
+                                            {{ random() }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Date de facture
+                                        <td>
+                                            {{ client[0].clDtAdhesion | Time }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Montant facturé
+                                        <td>
+                                            5 000€
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Statut de la facture
+                                        <td>
+                                            <p class="ui green label">{{ client[0].clAdhesion }}</p>
+                                        </td>
+                                    </tr>
+
                                     </tbody>
                                 </table>
-                            </div>
 
+                                {#<h5>Suivi d'adhésion : </h5>#}
+                                {#<table class="ui very basic collapsing celled table">#}
+                                {#<thead>#}
+                                {#<tr>#}
+                                {#<th>Periode d'adhésion</th>#}
+                                {#<th>Creation du compte</th>#}
+                                {#<th>Adhésion du compte</th>#}
+                                {#<th>Payé ?</th>#}
+                                {#</tr>#}
+                                {#</thead>#}
+                                {#<tbody>#}
+                                {#<tr>#}
+                                {#<td>#}
+                                {#{{ client[0].insDate | Time }}#}
+                                {#</td>#}
+                                {#<td>#}
+                                {#{{ client[0].insDate | Time }}#}
+                                {#</td>#}
+                                {#<td>#}
+                                {#{{ client[0].clDtAdhesion |date_modify("+1 year") | timeFromNow }}#}
+                                {#</td>#}
+                                {#<td>#}
+                                {#<a class="ui green label">Payé</a>#}
+                                {#</td>#}
+                                {#</tr>#}
+                                {#<tr>#}
+
+                                {#</tbody>#}
+                                {#</table>#}
+                            </div>
+                        </div>
+
+
+                        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+
+
+                            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#tab_content3" role="tab" id="profile-tab"
+                                       data-toggle="tab" aria-expanded="false">
+                                        Utilisateurs
+                                    </a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a href="#tab_content1" id="home-tab"
+                                       role="tab"
+                                       data-toggle="tab" aria-expanded="true">
+                                        <span class="badge bg-green">{{ task | length }}</span> Actions
+                                    </a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a href="#tab_content2" role="tab" id="profile-tab"
+                                       data-toggle="tab" aria-expanded="true">
+                                        <span class="badge bg-green"> 0 </span> Notes
+                                    </a>
+                                </li>
+
+
+                            </ul>
+
+
+                            <div id="myTabContent" class="tab-content">
+
+
+                                {#User_client#}
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content3"
+                                     aria-labelledby="profile-tab">
+                                    <table class="ui celled padded table">
+                                        <thead>
+                                        <tr>
+
+                                            <th>Prénom</th>
+                                            <th>Nom</th>
+                                            <th>Fonction</th>
+                                            <th>Tel</th>
+                                            <th>Mail</th>
+                                            <th>Password</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for users in user %}
+                                            <tr>
+                                                <td>
+                                                    <a href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom }}</a>
+                                                </td>
+                                                <td>{{ users.ccNom }}</td>
+                                                <td>{{ users.ccFonction }}</td>
+                                                <td>{{ users.ccTel }}</td>
+                                                <td>{{ users.ccMail }} </td>
+                                                <td>{{ users.ccPass }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+                                {#Action_client#}
+                                <div role="tabpanel" class="tab-pane fade " id="tab_content1"
+                                     aria-labelledby="home-tab">
+
+                                    {% if task %}
+                                        <!-- start recent activity -->
+                                        <ul class="messages">
+
+
+                                            {% for tasks in task %}
+                                                <li>
+                                                    <div class="message_wrapper">
+                                                        <h4 class="heading">{{ tasks.claNom }}</h4>
+                                                        <blockquote class="message">
+                                                            {{ tasks.claDescr }}
+                                                        </blockquote>
+                                                        {{ tasks.claEcheance | timeFromNow }}
+                                                        <br/>
+                                                    </div>
+                                                </li>
+
+                                            {% endfor %}
+
+                                        </ul>
+                                        <!-- end recent activity -->
+                                        {% else %}
+                                        <p>Aucune action a deja été éfféctué avec ce client</p>
+                                    {% endif %}
+
+                                </div>
+
+                                {#Notes_client#}
+                                <div role="tabpanel" class="tab-pane fade" id="tab_content2"
+                                     aria-labelledby="profile-tab">
+                                    <div class="ui equal width grid">
+                                        <div class="equal width row">
+                                            <div class="column">
+                                              <div class="note-left">
+                                                  <div class="input-group">
+                                                      <input type="text" class="form-control" placeholder="Consigner une action pour le client {{ client[0].clRaisonsoc }}">
+                                                      <span class="input-group-btn">
+                                                        <button class="btn btn-secondar btn-success" type="button">Enregistrer</button>
+                                                    </span>
+                                                  </div>
+                                                  <br>
+
+                                                  <h5>Historique client: </h5>
+                                                  <ul>
+                                                      <li>12-03-2017 : Le client a été appelé suite la campagne mailchimp</li>
+                                                  </ul>
+
+                                              </div>
+                                            </div>
+                                            <div class="column">
+                                                <a href="{{ path('new-task', {'u' : client[0].clId }) }}" class="btn btn-success" role="button">Crée une action</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
