@@ -207,7 +207,17 @@ class BaseController extends Controller
             'cl' => $id
         ]);
 
+        $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findBy([
+            'reId' => $restresult[0]->getReId(),
+        ]);
 
+        $activite = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findBy([
+            'acId' => $restresult[0]->getClActivite(),
+        ]);
+
+        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findBy([
+            'grId' => $restresult[0]->getClGroupe(),
+        ]);
 
         return $this->render(
             '@Site/Base/client.general.html.twig',
@@ -215,6 +225,9 @@ class BaseController extends Controller
                 "client" => $restresult,
                 "user" => $user,
                 "tache" => $task,
+                "region" => $region,
+                "activite" => $activite,
+                "groupe" => $groupe,
             ]
         );
 
@@ -262,21 +275,6 @@ class BaseController extends Controller
 
     }
 
-    public function whoAreAction(Request $request, $type)
-    {
-
-        $user = $this->getUser();
-
-
-        switch ($type) {
-            case "username":
-                return new JsonResponse($user->getUsername(), 200);
-                break;
-
-        }
-
-    }
-
     public function sendClientDetailMailAction(Request $request, $clientId)
     {
 
@@ -308,21 +306,6 @@ class BaseController extends Controller
         $spool->flushQueue($transport);
 
         return new Response('Mail envoyé');
-    }
-
-    public function countAgenceAction()
-    {
-        $repository = $this->getDoctrine()
-            ->getRepository('AchatCentraleCrmBundle:Clients');
-
-
-        $count = $repository->createQueryBuilder('p')
-            ->select('COUNT(p)')
-            ->getQuery()
-            ->getSingleScalarResult();
-
-        return $count;
-
     }
 
     public function testAction()

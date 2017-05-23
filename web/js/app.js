@@ -290,7 +290,7 @@ $('#dtadh-client').datepicker({
 });
 
 
-$('.trash').on('click', function (e) {
+$('.check').on('click', function (e) {
     archiveTask(e.currentTarget.id);
 });
 
@@ -426,8 +426,36 @@ $('.detail-tache').on("click", function (e) {
     });
 
 
-
 });
+
+
+$('.hover-edit')
+    .mouseover(function (e) {
+
+
+
+    $(this).after('<i class="icon-edit hover-edit write link  circular icon"></i>');
+})
+    .mouseout(function (e) {
+
+
+        $(this).nextAll('i').remove();
+
+
+
+    })
+    .on('click', function (e) {
+        console.log(e)
+
+        let innerHtml = $(this).currentTarget;
+
+        console.log(innerHtml)
+
+    });
+
+
+
+
 
 
 

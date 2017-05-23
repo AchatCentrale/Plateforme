@@ -137,6 +137,13 @@ label{
 
 .loader-tache {
     height: 100px !important;
-    /* width: 80% !important; */
-    /* margin: 0 auto !important; */
+}
+
+
+.recap-client-suite {
+    margin-top: 40px;
+}
+
+.icon-edit {
+    margin-left: 10px !important;
 }

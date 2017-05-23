@@ -5,6 +5,7 @@
                 <h2>FICHE CLIENT
                 </h2>
 
+
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -55,6 +56,11 @@
                             <div class="column"><h3><i class="building icon"></i> {{ client[0].clRaisonsoc }}</h3></div>
                             <div class="column"><h3><i class="square icon"></i>{{ client[0].clRef }}</h3></div>
                         </div>
+                        {% if groupe %}
+                            <p class="ui label green">{{ groupe[0].grDescr }}</p><br>
+                            {% else %}
+                            <p></p>
+                        {% endif %}
                     </div>
 
 
@@ -77,6 +83,7 @@
                                         <div class="equal width row">
 
                                             <div class="column detail-client-titre">
+                                                <p>Région</p>
                                                 <p>Siret</p>
                                                 <p>Mail</p>
                                                 <p>Téléphone</p>
@@ -86,14 +93,16 @@
 
 
                                             <div class="column detail-client-liste">
-                                                <p class="ui label">{{ client[0].clSiret }}</p><br>
-                                                <p class="ui label"><a class="cursor"
+                                                <p class="cursor hover-edit ui label">{{ region[0].reNom }}</p>
+                                                <br>
+                                                <p class=" hover-edit ui label">{{ client[0].clSiret | siret }}</p><br>
+                                                <p class=" hover-edit ui label"><a class="cursor"
                                                                        href="mailto:{{ client[0].clMail }}">{{ client[0].clMail }}</a>
                                                 </p>
                                                 <br>
-                                                <p class="ui label">{{ client[0].clTel | phone }}</p><br>
-                                                <p class="ui label">{{ client[0].clEffectif }}</p><br>
-                                                <p class="ui label">{{ client[0].clCa }}</p><br>
+                                                <p class="cursor hover-edit ui label">{{ client[0].clTel | phone }}</p><br>
+                                                <p class="cursor hover-edit ui label">{{ client[0].clEffectif }}</p><br>
+                                                <p class="cursor hover-edit ui label">{{ client[0].clCa }}</p><br>
                                             </div>
                                         </div>
                                     </div>
@@ -102,8 +111,42 @@
                                 </div>
                             </div>
 
+                            <div class="five wide column recap-client-suite">
+                                <div class="ui equal width grid">
+                                    <div class="equal width row">
 
-                            <div class="eight wide column recap-client">
+                                        <div class="column detail-client-titre">
+                                            <p>Région</p>
+
+                                            <p>Activité</p>
+
+
+
+                                        </div>
+
+
+                                        <div class="column detail-client-liste">
+                                            <p class="ui label cursor hover-edit ">{{ region[0].reNom }}</p><br>
+                                            {% if activite %}
+                                                <p class="ui label cursor hover-edit ">{{ activite[0].acDescr }}</p><br>
+                                                {% else %}
+                                                <p></p>
+                                            {% endif %}
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+                            </div>
+
+
+                            <div class="four wide column recap-client">
 
                                 <table class="ui very basic collapsing celled table">
                                     <thead>
@@ -117,7 +160,7 @@
                                         <td>
                                             Periode d'adhésion
                                         <td>
-                                            1 mois/3 mois/6 mois/1 an
+                                            1 an
                                         </td>
                                     </tr>
                                     <tr>
@@ -152,36 +195,10 @@
                                     </tbody>
                                 </table>
 
-                                {#<h5>Suivi d'adhésion : </h5>#}
-                                {#<table class="ui very basic collapsing celled table">#}
-                                {#<thead>#}
-                                {#<tr>#}
-                                {#<th>Periode d'adhésion</th>#}
-                                {#<th>Creation du compte</th>#}
-                                {#<th>Adhésion du compte</th>#}
-                                {#<th>Payé ?</th>#}
-                                {#</tr>#}
-                                {#</thead>#}
-                                {#<tbody>#}
-                                {#<tr>#}
-                                {#<td>#}
-                                {#{{ client[0].insDate | Time }}#}
-                                {#</td>#}
-                                {#<td>#}
-                                {#{{ client[0].insDate | Time }}#}
-                                {#</td>#}
-                                {#<td>#}
-                                {#{{ client[0].clDtAdhesion |date_modify("+1 year") | timeFromNow }}#}
-                                {#</td>#}
-                                {#<td>#}
-                                {#<a class="ui green label">Payé</a>#}
-                                {#</td>#}
-                                {#</tr>#}
-                                {#<tr>#}
 
-                                {#</tbody>#}
-                                {#</table>#}
                             </div>
+
+
                         </div>
 
 
