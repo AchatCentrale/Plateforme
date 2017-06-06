@@ -63,7 +63,7 @@ class TacheController extends Controller
                 "id" => $result->getClaId(),
                 "nom" => $result->getclaNom(),
                 "descr" => $result->getclaDescr(),
-                "Echeance" => $result->getClaEcheance(),
+
             ];
 
             $response = new JsonResponse($data, JSON_UNESCAPED_UNICODE);
