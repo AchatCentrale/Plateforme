@@ -59,12 +59,14 @@ class TacheController extends Controller
 
         if($result){
 
-            $response = new Response(json_encode([
+            $data = [
                 "id" => $result->getClaId(),
                 "nom" => $result->getclaNom(),
                 "descr" => $result->getclaDescr(),
                 "Echeance" => $result->getClaEcheance(),
-                ], JSON_UNESCAPED_UNICODE));
+            ];
+
+            $response = new JsonResponse($data, JSON_UNESCAPED_UNICODE);
             $response->headers->set('Content-Type', 'application/json');
             $response->setStatusCode(200);
             return $response;
