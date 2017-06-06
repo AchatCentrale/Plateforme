@@ -58,12 +58,18 @@ class TacheController extends Controller
         ]);
 
         if($result){
-            return new JsonResponse([
+
+            $response = new Response(json_encode([
                 "id" => $result->getClaId(),
                 "nom" => $result->getclaNom(),
                 "descr" => $result->getclaDescr(),
                 "Echeance" => $result->getClaEcheance(),
-            ], 200);
+                ], JSON_UNESCAPED_UNICODE));
+            $response->headers->set('Content-Type', 'application/json');
+            $response->setStatusCode(200);
+            return $response;
+
+
         }else{
             return new JsonResponse('no taches', 200);
         }
@@ -95,7 +101,6 @@ class TacheController extends Controller
 
 
         $user = $request->query->get('u');
-        dump($user);
 
         $req = $request->request->get('achatcentrale_crmbundle_clientstaches');
 
@@ -200,6 +205,12 @@ class TacheController extends Controller
         return $this->render('@Site/test.html.twig');
 
 
+    }
+
+
+    public function updateTaskAction(Request $request, $id)
+    {
+        return new Response($id, 222);
     }
 
 

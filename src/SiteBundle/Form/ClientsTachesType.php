@@ -35,7 +35,10 @@ class ClientsTachesType extends AbstractType
             ])
             ->add('claDescr', TextareaType::class, [
                 "label" => "Description de l'action",
-                "attr" => ["class" => "ui dropdown add-action"]
+                "attr" => [
+                    "class" => "ui dropdown add-action",
+                    "maxlength" => 140,
+                ]
             ])
             ->add('claPriorite', ChoiceType::class, [
                 'label' => "Priorité",

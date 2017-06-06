@@ -429,29 +429,50 @@ $('.detail-tache').on("click", function (e) {
 });
 
 
-$('.hover-edit')
-    .mouseover(function (e) {
+$('.icon-edit').on('click', function (e) {
 
 
 
-    $(this).after('<i class="icon-edit hover-edit write link  circular icon"></i>');
-})
-    .mouseout(function (e) {
+    let normal = $(this).prev().html();
+
+    let tpl = `<input type="text" class="form-edit" id="usr" placeholder="${normal}">`;
+
+    let iconValid = `<i class="icon-edit  check link  circular icon"></i>`;
+
+    $(this).prev()
+        .empty()
+        .html(tpl);
+
+    $(this)
+        .toggleClass(' write')
+        .toggleClass('check')
+        .toggleClass('icon-edit')
+        .toggleClass('icon-save')
+        .unbind();
 
 
-        $(this).nextAll('i').remove();
+    $('.icon-save').on('click', function (e) {
 
+        $(this).prev()
+            .empty()
+            .html(normal);
 
+        $(this)
+            .toggleClass(' write')
+            .toggleClass('check')
+            .toggleClass('icon-edit')
+            .toggleClass('icon-save')
+            .unbind();
 
-    })
-    .on('click', function (e) {
-        console.log(e)
-
-        let innerHtml = $(this).currentTarget;
-
-        console.log(innerHtml)
 
     });
+
+
+    console.log(iconValid)
+});
+
+
+
 
 
 

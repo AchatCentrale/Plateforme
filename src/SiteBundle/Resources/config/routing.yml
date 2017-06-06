@@ -73,7 +73,6 @@ taches_home:
 detail-task:
     path:   /taches/detail/{id}
     defaults: {_controller: SiteBundle:Tache:DetailTask}
-
 new-task:
     path:   /taches/new
     defaults: {_controller: SiteBundle:Tache:NewTask}
@@ -87,3 +86,7 @@ archive-task:
 mail-task:
     path: /taches/mail/{id}
     defaults: {_controller: SiteBundle:Tache:sendMailTask}
+
+update-task:
+    path: /taches/update/{id}
+    defaults: {_controller: SiteBundle:Base:updateProfil}

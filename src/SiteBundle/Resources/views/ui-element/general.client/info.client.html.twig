@@ -83,7 +83,7 @@
                                         <div class="equal width row">
 
                                             <div class="column detail-client-titre">
-                                                <p>Région</p>
+
                                                 <p>Siret</p>
                                                 <p>Mail</p>
                                                 <p>Téléphone</p>
@@ -93,16 +93,14 @@
 
 
                                             <div class="column detail-client-liste">
-                                                <p class="cursor hover-edit ui label">{{ region[0].reNom }}</p>
-                                                <br>
-                                                <p class=" hover-edit ui label">{{ client[0].clSiret | siret }}</p><br>
-                                                <p class=" hover-edit ui label"><a class="cursor"
+                                                <p class="  ui label">{{ client[0].clSiret | siret }}</p><i class="icon-edit  write link  circular icon"></i><br>
+                                                <p class="  ui label"><a class="cursor"
                                                                        href="mailto:{{ client[0].clMail }}">{{ client[0].clMail }}</a>
-                                                </p>
+                                                </p><i class="icon-edit hover-edit write link  circular icon"></i>
                                                 <br>
-                                                <p class="cursor hover-edit ui label">{{ client[0].clTel | phone }}</p><br>
-                                                <p class="cursor hover-edit ui label">{{ client[0].clEffectif }}</p><br>
-                                                <p class="cursor hover-edit ui label">{{ client[0].clCa }}</p><br>
+                                                <p class="  ui label">{{ client[0].clTel | phone }}</p><i class="icon-edit  write link  circular icon"></i><br>
+                                                <p class="  ui label">{{ client[0].clEffectif }}</p><i class="icon-edit  write link  circular icon"></i><br>
+                                                <p class="  ui label">{{ client[0].clCa }}</p><i class="icon-edit  write link  circular icon"></i><br>
                                             </div>
                                         </div>
                                     </div>
@@ -271,30 +269,45 @@
                                 <div role="tabpanel" class="tab-pane fade " id="tab_content1"
                                      aria-labelledby="home-tab">
 
-                                    {% if task %}
-                                        <!-- start recent activity -->
-                                        <ul class="messages">
+                                    <div class="ui items">
+
+                                        {% if task %}
+                                            <!-- start recent activity -->
+                                        <div class="ui items">
 
 
-                                            {% for tasks in task %}
-                                                <li>
-                                                    <div class="message_wrapper">
-                                                        <h4 class="heading">{{ tasks.claNom }}</h4>
-                                                        <blockquote class="message">
-                                                            {{ tasks.claDescr }}
-                                                        </blockquote>
-                                                        {{ tasks.claEcheance | timeFromNow }}
-                                                        <br/>
+                                                {% for tasks in task %}
+
+                                                    <div class="item">
+                                                        <a class="ui tiny image">
+                                                            {% if tasks.claStatus == 0 %}
+                                                                <i class="warning red big sign icon"></i>
+                                                                {% else %}
+                                                                    <i class="check green big sign icon"></i>
+
+                                                            {% endif %}
+                                                        </a>
+                                                        <div class="content">
+                                                            <a class="header">{{ tasks.claNom }}</a>
+                                                            <div class="description">
+                                                                <p>{{ tasks.claDescr }}</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </li>
 
-                                            {% endfor %}
 
-                                        </ul>
-                                        <!-- end recent activity -->
+                                                {% endfor %}
+
+                                        </div>
+                                            <!-- end recent activity -->
                                         {% else %}
-                                        <p>Aucune action a deja été éfféctué avec ce client</p>
-                                    {% endif %}
+                                            <p>Aucune action a deja été éfféctué avec ce client</p>
+                                        {% endif %}
+
+
+                                    </div>
+
+
 
                                 </div>
 

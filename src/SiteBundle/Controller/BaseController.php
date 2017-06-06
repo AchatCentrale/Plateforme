@@ -3,10 +3,7 @@
 namespace SiteBundle\Controller;
 
 
-use  AchatCentrale\CrmBundle\Entity\ClientsTaches;
-use SiteBundle\Form\ClientsTachesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,7 +41,7 @@ class BaseController extends Controller
 
     public function ClientNewAction(Request $request)
     {
-      $raison_soc = $request->query->get('raison-soc');
+        $raison_soc = $request->query->get('raison-soc');
 
         $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
         $activité = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findAll();
@@ -54,24 +51,23 @@ class BaseController extends Controller
         $centrale = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Societes')->findAll();
 
 
+        if ($request->getMethod() == 'POST') {
 
-       if ($request->getMethod() == 'POST'){
+            $req = $request->request->get('client-new');
 
-           $req = $request->request->get('client-new');
-
-           dump($req);
+            dump($req);
 
 
-        return $this->render('@Site/Base/client.new.html.twig', [
-            'state' => 'Client enregistrer',
-            'pays' => $pays,
-            'activite' => $activité,
-            'groupe' => $groupe,
-            'classif' => $classif,
-            'region' => $region,
-            'centrale' => $centrale,
-        ]);
-       }
+            return $this->render('@Site/Base/client.new.html.twig', [
+                'state' => 'Client enregistrer',
+                'pays' => $pays,
+                'activite' => $activité,
+                'groupe' => $groupe,
+                'classif' => $classif,
+                'region' => $region,
+                'centrale' => $centrale,
+            ]);
+        }
 
 
         return $this->render('@Site/Base/client.new.html.twig', [
@@ -130,7 +126,6 @@ class BaseController extends Controller
         $count = $stmt->fetchAll();
 
 
-
         if ($request->query->get('query')) {
             $con = $this->getDoctrine()->getManager()->getConnection();
 
@@ -163,7 +158,7 @@ class BaseController extends Controller
                 ';
 
             $stmt = $con->prepare($sql);
-            $stmt->bindValue('query', '%'.$request->query->get('query').'%');
+            $stmt->bindValue('query', '%' . $request->query->get('query') . '%');
             $stmt->execute();
             $count = $stmt->fetchAll();
 
@@ -182,7 +177,6 @@ class BaseController extends Controller
             $count = $stmt->fetchAll();
 
 
-
             return new JsonResponse($count, 200);
 
         }
@@ -195,13 +189,26 @@ class BaseController extends Controller
     {
 
 
+        $conn = $this->get('database_connection');
+
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
-            'clId' => $id
+                'clId' => $id
             ]
         );
-        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
-            'cl' => $id
-        ]);
+
+        $sql = 'SELECT *
+                FROM CLIENTS_TACHES
+                  WHERE CL_ID = :id
+                ORDER BY INS_DATE DESC';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('id', $id);
+        $stmt->execute();
+
+        $task = $stmt->fetchAll();
+
+
+       dump($task);
 
         $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy([
             'cl' => $id
@@ -215,9 +222,7 @@ class BaseController extends Controller
             'acId' => $restresult[0]->getClActivite(),
         ]);
 
-        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findBy([
-            'grId' => $restresult[0]->getClGroupe(),
-        ]);
+//        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findBy([
 
         return $this->render(
             '@Site/Base/client.general.html.twig',
@@ -235,7 +240,6 @@ class BaseController extends Controller
 
     public function updateProfilAction()
     {
-
 
 
         return $this->render('@Site/Base/settings.html.twig');
@@ -357,8 +361,6 @@ class BaseController extends Controller
         );
 
     }
-
-
 
 
 }

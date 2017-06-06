@@ -147,3 +147,8 @@ label{
 .icon-edit {
     margin-left: 10px !important;
 }
+
+.form-edit{
+    border: 0;
+    border-radius: 4px;
+}

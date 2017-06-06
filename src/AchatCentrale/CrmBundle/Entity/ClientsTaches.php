@@ -3,6 +3,8 @@
 namespace AchatCentrale\CrmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * ClientsTaches
@@ -52,8 +54,14 @@ class ClientsTaches
 
     /**
      * @var string
+     * @Assert\Length(
+     *     min="0",
+     *     max="140",
+     *     minMessage="Vous devez rentrez une description"
+     *     maxMessage="Vous pouvez mettre au moins 140 caractères"
+     * )
      *
-     * @ORM\Column(name="CLA_DESCR", type="text", length=-1, nullable=true)
+     * @ORM\Column(name="CLA_DESCR", type="text", length=-140, nullable=true)
      */
     private $claDescr;
 
