@@ -222,7 +222,9 @@ class BaseController extends Controller
             'acId' => $restresult[0]->getClActivite(),
         ]);
 
-//        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findBy([
+        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findBy([
+            'grId' => $id
+        ]);
 
         return $this->render(
             '@Site/Base/client.general.html.twig',
