@@ -66,16 +66,10 @@ class TacheController extends Controller
                 "Echeance" => $result->getClaEcheance(),
             ];
 
-            foreach ($data as $datav){
-                dump();
-            }
-
-            return $this->render('@Site/test.html.twig');
-
-//            $response = new JsonResponse($data, JSON_UNESCAPED_UNICODE);
-//            $response->headers->set('Content-Type', 'application/json');
-//            $response->setStatusCode(200);
-//            return $response;
+            $response = new JsonResponse($data, JSON_UNESCAPED_UNICODE);
+            $response->headers->set('Content-Type', 'application/json');
+            $response->setStatusCode(200);
+            return $response;
 
 
         }else{
