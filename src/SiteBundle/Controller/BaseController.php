@@ -90,7 +90,7 @@ class BaseController extends Controller
             'SELECT DISTINCT
              SO_RAISONSOC,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION,
-              GR_DESCR, CL_DESCR, AC_DESCR
+              GR_DESCR, CL_DESCR, AC_DESCR, CL_TEL
               FROM Vue_All_Clients
               INNER JOIN SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
               ORDER BY SO_RAISONSOC DESC 
