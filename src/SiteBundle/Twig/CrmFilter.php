@@ -28,8 +28,27 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('priorite', [$this, 'priorityFilter']),
             new \Twig_SimpleFilter('timeFromNow', [$this, 'timeFromNowFilter']),
             new \Twig_SimpleFilter('siret', [$this, 'siretFilter']),
+            new \Twig_SimpleFilter('status', [$this, 'statusFilter']),
         );
     }
+
+    public function statusFilter($status){
+
+        switch ($status){
+            case 1:
+                return "<p class=\"ui green label\">Validé</p>";
+                break;
+            case 2:
+                return "<p class=\"ui red label\">Bloqué</p>";
+                break;
+            default:
+                break;
+        }
+
+        return $status;
+    }
+
+
 
     public function phoneFilter($number)
     {

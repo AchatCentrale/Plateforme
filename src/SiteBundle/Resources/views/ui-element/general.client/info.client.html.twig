@@ -37,15 +37,13 @@
                     </ul>
 
                     {% if client[0].clWeb %}
-                        <li class="m-top-xs">
-                            <i class="fa fa-external-link user-profile-icon"></i>
+                        <li class="m-top-xs web-li">
                             <a href="{{ client[0].clWeb }}" target="_blank">{{ client[0].clWeb }}</a>
                         </li>
                     {% else %}
                         <p>Pas de site web</p>
                     {% endif %}
 
-                    <a class="btn btn-success"><i class="fa fa-edit m-right-xs"></i>Modifier le profil</a>
 
                 </div>
 
@@ -109,7 +107,7 @@
                                 </div>
                             </div>
 
-                            <div class="five wide column recap-client-suite">
+                            <div class="four wide column recap-client-suite">
                                 <div class="ui equal width grid">
                                     <div class="equal width row">
 
@@ -186,7 +184,7 @@
                                         <td>
                                             Statut de la facture
                                         <td>
-                                            <p class="ui green label">{{ client[0].clAdhesion }}</p>
+                                            {{ client[0].clStatus | status | raw }}
                                         </td>
                                     </tr>
 

@@ -117,7 +117,7 @@ label{
 
 
 .detail-client-titre p {
-    margin: 13px !important;
+    margin: 9px !important;
 }
 .raison-soc h3 {
     font-size: 19pt;
@@ -152,4 +152,12 @@ label{
 .form-edit{
     border: 0;
     border-radius: 4px;
+}
+
+.web-li{
+    list-style:none;
+}
+
+.ui.labels .label, .ui.label {
+    font-size: 7.5pt;
 }
