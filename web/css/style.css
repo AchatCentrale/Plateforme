@@ -126,8 +126,9 @@ label{
 
 .user_data {
     font-size: 14pt;
-    font-weight: 400;
+    font-weight: 600;
     padding-top: 25px;
+    font-family: avenir;
 }
 
 .note-left {
