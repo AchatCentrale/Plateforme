@@ -173,3 +173,15 @@ label{
     font-family: ".SF NS Text";
 }
 
+.info-client-detail {
+    margin-left: 15px;
+    padding-top: 15px;
+}
+
+.title-detail-client {
+    font-size: 16pt;
+    margin: 0 !important;
+    color: black;
+    font-family: ".SF NS Text";
+}
+
