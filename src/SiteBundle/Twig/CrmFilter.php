@@ -11,7 +11,6 @@ class CrmFilter extends \Twig_Extension
 
     protected $doctrine;
 
-    // Retrieve doctrine from the constructor
 
     public function __construct(RegistryInterface $doctrine)
     {
@@ -29,6 +28,7 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('timeFromNow', [$this, 'timeFromNowFilter']),
             new \Twig_SimpleFilter('siret', [$this, 'siretFilter']),
             new \Twig_SimpleFilter('status', [$this, 'statusFilter']),
+            new \Twig_SimpleFilter('isEmpty', [$this, 'isEmpty']),
         );
     }
 
@@ -48,6 +48,17 @@ class CrmFilter extends \Twig_Extension
         return $status;
     }
 
+
+    public function isEmpty($input){
+
+
+        if(empty($input)){
+            return "<h2>à remplire</h2>";
+        }else{
+            return $input;
+        }
+
+    }
 
 
     public function phoneFilter($number)

@@ -435,7 +435,7 @@ $('.icon-edit').on('click', function (e) {
 
     let normal = $(this).prev().html();
 
-    let tpl = `<input type="text" class="form-edit" id="usr" placeholder="${normal}">`;
+    let tpl = `<input type="text" class="form-edit"  id="usr" placeholder="${normal}">`;
 
     let iconValid = `<i class="icon-edit  check link  circular icon"></i>`;
 
@@ -451,28 +451,37 @@ $('.icon-edit').on('click', function (e) {
         .unbind();
 
 
-    $('.icon-save').on('click', function (e) {
-
-        $(this).prev()
-            .empty()
-            .html(normal);
-
-        $(this)
-            .toggleClass(' write')
-            .toggleClass('check')
-            .toggleClass('icon-edit')
-            .toggleClass('icon-save')
-            .unbind();
 
 
-    });
-
-
-    console.log(iconValid)
 });
 
 
 
+
+$('.data-client').on('click', function (e) {
+    console.log(e);
+
+    let placeholder = $(this).html();
+
+    let tpl = `<input type="text" class="form-edit"  id="usr" placeholder=" ${placeholder} ">`;
+
+    let iconValid = `<i class="icon-save  check link  circular icon"></i>`;
+
+    let normal = `<p class=" cursor data-client ui label" data-index="siret" ></p><br>`;
+
+    $(this).empty().html(tpl + iconValid);
+
+
+    console.log();
+
+});
+
+$('.icon-save').on('click', function (e) {
+   console.log($(this));
+
+
+
+});
 
 
 

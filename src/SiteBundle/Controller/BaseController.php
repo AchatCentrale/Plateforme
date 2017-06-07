@@ -199,7 +199,7 @@ class BaseController extends Controller
         $sql = 'SELECT *
                 FROM CLIENTS_TACHES
                   WHERE CL_ID = :id
-                ORDER BY INS_DATE DESC';
+                ORDER BY CLA_STATUS ASC';
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue('id', $id);
@@ -246,6 +246,18 @@ class BaseController extends Controller
 
         return $this->render('@Site/Base/settings.html.twig');
     }
+
+    public function updateClientAction(Request $request,$id,$centrale)
+    {
+
+
+        $req = $request->request->get('siret');
+
+
+
+        return new JsonResponse($req, 200);
+    }
+
 
     public function ClientAdresseAction($id)
     {

@@ -72,75 +72,40 @@
                         <div class="ui grid">
 
 
-                            <div class="seven wide column">
-
-                                <div class="donne-client">
-                                    <h5>Informations du client</h5>
-
-                                    <div class="ui equal width grid">
-                                        <div class="equal width row">
-
-                                            <div class="column detail-client-titre">
-
-                                                <p>Siret</p>
-                                                <p>Mail</p>
-                                                <p>Téléphone</p>
-                                                <p>Effectif</p>
-                                                <p>Chiffre d'affaire</p>
-                                            </div>
-
-
-                                            <div class="column detail-client-liste">
-                                                <p class="  ui label">{{ client[0].clSiret | siret }}</p><i class="icon-edit  write link  circular icon"></i><br>
-                                                <p class="  ui label"><a class="cursor"
-                                                                       href="mailto:{{ client[0].clMail }}">{{ client[0].clMail }}</a>
-                                                </p><i class="icon-edit hover-edit write link  circular icon"></i>
-                                                <br>
-                                                <p class="  ui label">{{ client[0].clTel | phone }}</p><i class="icon-edit  write link  circular icon"></i><br>
-                                                <p class="  ui label">{{ client[0].clEffectif }}</p><i class="icon-edit  write link  circular icon"></i><br>
-                                                <p class="  ui label">{{ client[0].clCa }}</p><i class="icon-edit  write link  circular icon"></i><br>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
+                            <div class="four wide column">
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client " >Siret</p>
+                                    <p class="cursor" data-index="siret" >{{ client[0].clSiret | siret }}</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client " >Mail</p>
+                                    <p class="cursor" data-index="siret" ><a class="cursor data-client" data-index="mail"
+                                                                             href="mailto:{{ client[0].clMail }}"><i class="mail link  circular icon"></i></a>{{ client[0].clMail }}</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client " >Téléphone</p>
+                                    <p class="cursor" data-index="siret" >{{ client[0].clTel | phone }}</p>
                                 </div>
                             </div>
 
-                            <div class="four wide column recap-client-suite">
-                                <div class="ui equal width grid">
-                                    <div class="equal width row">
-
-                                        <div class="column detail-client-titre">
-                                            <p>Région</p>
-
-                                            <p>Activité</p>
-
-
-
-                                        </div>
-
-
-                                        <div class="column detail-client-liste">
-                                            <p class="ui label cursor hover-edit ">{{ region[0].reNom }}</p><br>
-                                            {% if activite %}
-                                                <p class="ui label cursor hover-edit ">{{ activite[0].acDescr }}</p><br>
-                                                {% else %}
-                                                <p></p>
-                                            {% endif %}
-
-
-                                        </div>
-                                    </div>
+                            <div class="four wide column">
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client " >Éffectif</p>
+                                    <p class="cursor" data-index="siret" >{{ client[0].clEffectif }}</p>
                                 </div>
-
-
-
-
-
-
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client " >Chiffre d'affaires</p>
+                                    <p class="cursor" data-index="siret" >{{ client[0].clCa }} €</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client " >Activité</p>
+                                    {% if activite %}
+                                        <p class="cursor" data-index="siret" >{{ activite[0].acDescr }}</p>
+                                    {% else %}
+                                        <p></p>
+                                    {% endif %}
+                                </div>
                             </div>
-
 
                             <div class="four wide column recap-client">
 
@@ -253,7 +218,7 @@
                                                 </td>
                                                 <td>{{ users.ccNom }}</td>
                                                 <td>{{ users.ccFonction }}</td>
-                                                <td>{{ users.ccTel }}</td>
+                                                <td>{{ users.ccTel | isEmpty | upper | raw }}</td>
                                                 <td>{{ users.ccMail }} </td>
                                                 <td>{{ users.ccPass }}</td>
                                             </tr>
@@ -278,7 +243,7 @@
 
                                                     <div class="item">
                                                         <a class="ui tiny image">
-                                                            {% if tasks.claStatus == 0 %}
+                                                            {% if tasks["CLA_STATUS"] == 0 %}
                                                                 <i class="warning red big sign icon"></i>
                                                                 {% else %}
                                                                     <i class="check green big sign icon"></i>
@@ -286,9 +251,9 @@
                                                             {% endif %}
                                                         </a>
                                                         <div class="content">
-                                                            <a class="header">{{ tasks.claNom }}</a>
+                                                            <a class="header">{{ tasks["CLA_NOM"] }}</a>
                                                             <div class="description">
-                                                                <p>{{ tasks.claDescr }}</p>
+                                                                <p>{{ tasks["CLA_DESCR"] }}</p>
                                                             </div>
                                                         </div>
                                                     </div>

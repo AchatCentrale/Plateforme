@@ -90,3 +90,8 @@ mail-task:
 update-task:
     path: /taches/update/{id}
     defaults: {_controller: SiteBundle:Base:updateProfil}
+
+update-client:
+    path: /client/{id}/{centrale}/update
+    defaults: {_controller: SiteBundle:Base:updateClient}
+    methods: POST
