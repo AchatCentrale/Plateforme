@@ -16,7 +16,7 @@ class TachesUtils
             $input = utf8_encode($input);
         } else if (is_array($input)) {
             foreach ($input as &$value) {
-                utf8_encode_deep($value);
+                utf8_encode($value);
             }
 
             unset($value);
@@ -24,7 +24,7 @@ class TachesUtils
             $vars = array_keys(get_object_vars($input));
 
             foreach ($vars as $var) {
-                utf8_encode_deep($input->$var);
+                utf8_encode($input->$var);
             }
         }
     }
