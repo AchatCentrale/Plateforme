@@ -44,6 +44,9 @@
                         <p>Pas de site web</p>
                     {% endif %}
 
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-edit edit-client m-right-xs"></i>Modifier le profil
+                    </button>
 
                 </div>
 
@@ -218,8 +221,8 @@
                                                 </td>
                                                 <td>{{ users.ccNom }}</td>
                                                 <td>{{ users.ccFonction }}</td>
-                                                <td>{{ users.ccTel | isEmpty | upper | raw }}</td>
-                                                <td>{{ users.ccMail }} </td>
+                                                <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
+                                                <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a> </td>
                                                 <td>{{ users.ccPass }}</td>
                                             </tr>
                                         {% endfor %}
@@ -314,5 +317,77 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modifier le client {{ client[0].clRaisonsoc }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ui centered grid">
+                    <div class="eight wide column">
 
 
+
+                        <div class="form-group">
+                            <label for="siret-update">Numero de siret</label>
+                            <input name="data-client[]" type="text" class="form-control data-update-client" id="siret-update" placeholder="{{ client[0].clSiret | siret }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Adresse mail</label>
+                            <input name="data-client[]" type="email" class="form-control data-update-client" id="email" placeholder="{{ client[0].clMail  }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="Téléphone-update">Téléphone</label>
+                            <input name="data-client[]" type="tel" class="form-control data-update-client" id="Téléphone-update" placeholder="{{ client[0].clTel | phone  }}">
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="eight wide column">
+
+
+                        <div class="form-group">
+                            <label for="effectif-update">Effectif de l'entrprise</label>
+                            <select name="data-client[]" class="form-control data-update-client">
+                                <option>0 à 5</option>
+                                <option>6 à 20</option>
+                                <option>21 à 30</option>
+                                <option>51 à 100</option>
+                                <option>101 à 200</option>
+                                <option>+ de 200</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ca-update">Chiffre d'affaires</label>
+                            <input name="data-client[]" type="text" class="form-control data-update-client" id="ca-update" placeholder="{{ client[0].clCa }}">
+                        </div>
+                        {#<div class="form-group">#}
+                            {#<label for="activite-update">Activité</label>#}
+                            {#<select class="form-control">#}
+                                {#{% for a in activite  %}#}
+                                   {##}
+                                    {#<option value="{{ a[0].acId }}">{{ a[0].acDescr }}</option>#}
+                                {#{% endfor %}#}
+                            {#</select>#}
+                        {#</div>#}
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success save-update-client">Enregistrer les modifications</button>
+            </div>
+        </div>
+    </div>
+</div>

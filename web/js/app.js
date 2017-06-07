@@ -272,7 +272,9 @@ $('.menu .item')
 
 
 $('#siret-client').mask('000 000 000 00000');
+$('#siret-update').mask('000 000 000 00000');
 $('#tel-client').mask('00 00 00 00 00 ');
+$('#Téléphone-update').mask('00 00 00 00 00 ');
 $('#dtadh-client').datepicker({
     altField: "#datepicker",
     closeText: 'Fermer',
@@ -476,10 +478,22 @@ $('.data-client').on('click', function (e) {
 
 });
 
-$('.icon-save').on('click', function (e) {
-   console.log($(this));
+$('.save-update-client').on('click', function (e) {
+
+    let values = $("input[name='data-client[]'], select[name='data-client[]']")
+        .map(function(){
 
 
+            return $(this).val();
+        }
+        ).get();
+
+   console.log(values);
+
+
+
+
+    $('#myModal').modal('hide')
 
 });
 
