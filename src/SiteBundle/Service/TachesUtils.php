@@ -11,7 +11,7 @@ class TachesUtils
 {
 
 
-    public function utf8_encode_deep(&$input){
+    public function utf8_encode_deep($input){
         if (is_string($input)) {
             $input = utf8_encode($input);
         } else if (is_array($input)) {
