@@ -11,22 +11,14 @@ class TachesUtils
 {
 
 
-    public function utf8_encode_deep($input){
-        if (is_string($input)) {
-            $input = utf8_encode($input);
-        } else if (is_array($input)) {
-            foreach ($input as &$value) {
-                utf8_encode($value);
-            }
 
-            unset($value);
-        } else if (is_object($input)) {
-            $vars = array_keys(get_object_vars($input));
 
-            foreach ($vars as $var) {
-                utf8_encode($input->$var);
-            }
-        }
+
+    public function utf8_encode_datetime($Datetime){
+
+
+        return utf8_encode(date_format($Datetime, 'd-m-Y H:i:s'));
+
     }
 
 

@@ -64,9 +64,10 @@ class TacheController extends Controller
                 "id" => utf8_encode($result->getClaId()),
                 "nom" => utf8_encode($result->getclaNom()),
                 "descr" => utf8_encode($result->getclaDescr()),
-                "echeance" => $tacheUtil->utf8_encode_deep($result->getclaDescr())
+                "echeance" => $tacheUtil->utf8_encode_datetime($result->getClaEcheance())
 
             ];
+
 
 
 
