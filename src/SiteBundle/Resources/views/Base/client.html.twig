@@ -130,7 +130,7 @@
                                         <td>{{ cl.CL_CP }} {{ cl.CL_VILLE }}</td>
                                         <td>{{ cl.CL_TEL | phone }}</td>
                                         <td>{{ cl.CL_SIRET | siret }}</td>
-                                        <td>{{ cl.CL_ADHESION }}</td>
+                                        <td>{{ cl.CL_STATUS | status | raw }}</td>
                                     </tr>
                                     {% endfor %}
                                     </tbody>
