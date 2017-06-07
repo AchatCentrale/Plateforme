@@ -60,21 +60,19 @@ class TacheController extends Controller
         if($result){
 
             $data = [
-                "id" => $result->getClaId(),
-                "nom" => $result->getclaNom(),
-                "descr" => $result->getclaDescr(),
-                "echeance" => $result->getClaEcheance(),
+                "id" => utf8_encode($result->getClaId()),
+                "nom" => utf8_encode($result->getclaNom()),
+                "descr" => utf8_encode($result->getclaDescr()),
+
 
             ];
 
-            dump(gettype($data['echeance']));
 
-            return $this->render('@Site/test.html.twig');
 
-//            $response = new JsonResponse($data);
-//            $response->headers->set('Content-Type', 'application/json');
-//            $response->setStatusCode(200);
-//            return $response;
+            $response = new JsonResponse($data);
+            $response->headers->set('Content-Type', 'application/json');
+            $response->setStatusCode(200);
+            return $response;
 
 
         }else{
