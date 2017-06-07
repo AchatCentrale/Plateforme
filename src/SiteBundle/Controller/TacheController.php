@@ -67,10 +67,14 @@ class TacheController extends Controller
 
             ];
 
-            $response = new JsonResponse($data, 200);
-            $response->headers->set('Content-Type', 'application/json');
-            $response->setStatusCode(200);
-            return $response;
+            dump(gettype($data['echeance']));
+
+            return $this->render('@Site/test.html.twig');
+
+//            $response = new JsonResponse($data);
+//            $response->headers->set('Content-Type', 'application/json');
+//            $response->setStatusCode(200);
+//            return $response;
 
 
         }else{
