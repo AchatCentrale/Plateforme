@@ -1,3 +1,99 @@
+/** Ultra Light */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 100;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff");
+}
+
+/** Thin */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 200;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff");
+}
+
+/** Regular */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 400;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
+/** Medium */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 500;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff");
+}
+
+/** Semi Bold */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 600;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff");
+}
+
+/** Bold */
+@font-face {
+    font-family: "San Francisco";
+    font-weight: 700;
+    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
+}
+
+.img-home {
+
+    width: 14%;
+    margin-left: 42%;
+    margin-bottom: 55px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "San Francisco";
+}
+
+img {
+    border: 0;
+    width: auto;
+    max-width: 70%;
+    vertical-align: top;
+}
+
+.block-logo img {
+    width: 70%;
+}
+
+.form-login {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.login-group-input {
+    width: 45%;
+    margin: 0 auto;
+    padding: 41px 1px 1px 1px;
+}
+
+.login-group {
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px 1px rgba(120, 120, 120, 0.50);
+    border-radius: 8px;
+    width: 30%;
+    height: 300px;
+    margin: 0 auto;
+}
+
+.ink-navigation ul.menu.blue {
+    background: #1b75ce;
+    height: 88px;
+}
+
 
 .donne-client{
 
@@ -182,4 +278,6 @@ label{
     color: black;
     font-family: ".SF NS Text";
 }
+
+
 
