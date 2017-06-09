@@ -447,7 +447,7 @@ $('.save-update-client').on('click', function (e) {
 
    console.log(values);
 
-    let url = CURRENT_URL.substring(0, 54) + "update";
+    let url = CURRENT_URL.substring(0, 60) + "update";
 
     $.ajax({
 
