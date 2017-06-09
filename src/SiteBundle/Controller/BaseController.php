@@ -208,7 +208,6 @@ class BaseController extends Controller
         $task = $stmt->fetchAll();
 
 
-       dump($restresult);
 
         $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy([
             'cl' => $id
