@@ -40,6 +40,11 @@
     src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
 }
 
+@font-face {
+    font-family: 'Titillium Web', sans-serif;
+
+}
+
 .img-home {
 
     width: 14%;
@@ -276,7 +281,7 @@ label{
     font-size: 16pt;
     margin: 0 !important;
     color: black;
-    font-family: ".SF NS Text";
+    font-family: "Titillium Web";
 }
 
 
@@ -289,5 +294,5 @@ label{
     font-size: 16pt;
     margin: 0 !important;
     color: black;
-    font-family: Avenir;
+    font-family: "Titillium Web";
 }
