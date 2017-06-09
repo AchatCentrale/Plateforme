@@ -430,12 +430,6 @@ $('.detail-tache').on("click", function (e) {
 
 });
 
-
-
-
-
-
-
 $('.save-update-client').on('click', function (e) {
 
     let values = $("input[name='data-client[]'], select[name='data-client[]']")
@@ -491,6 +485,49 @@ $('.save-update-client').on('click', function (e) {
 
 
     $('#myModal').modal('hide')
+
+});
+
+
+$('.add-note').on('click', function (e) {
+
+    let $input = $('#add-note').val();
+
+   console.log($input);
+
+    let url = CURRENT_URL.substring(0, 54) + "notes/add";
+
+    $.ajax({
+
+        // Adresse à laquelle la requête est envoyée
+        url: url,
+
+        type : 'POST',
+
+
+        data: {
+            content_note : $input
+
+        },
+        // Le délai maximun en millisecondes de traitement de la demande
+        timeout: 4000,
+
+        // La fonction à apeller si la requête aboutie
+        success: function (data) {
+
+            console.log(data);
+
+            window.location.reload();
+        },
+
+        // La fonction à appeler si la requête n'a pas abouti
+        error: function (e) {
+            console.log(e);
+
+        }
+
+    });
+
 
 });
 

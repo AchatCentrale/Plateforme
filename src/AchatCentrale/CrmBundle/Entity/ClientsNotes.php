@@ -130,11 +130,13 @@ class ClientsNotes
     /**
      * Get insUser
      *
-     * @return string
+     * @return ClientsNotes
      */
-    public function getInsUser()
+    public function getInsUser($id)
     {
-        return $this->insUser;
+        $this->insUser = $id;
+
+        return $this;
     }
 
     /**

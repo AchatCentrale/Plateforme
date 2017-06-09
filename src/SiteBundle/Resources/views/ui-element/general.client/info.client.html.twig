@@ -186,7 +186,7 @@
                                 <li role="presentation" class="">
                                     <a href="#tab_content2" role="tab" id="profile-tab"
                                        data-toggle="tab" aria-expanded="true">
-                                        <span class="badge bg-green"> 0 </span> Notes
+                                        <span class="badge bg-green"> {{  note | length }} </span> Notes
                                     </a>
                                 </li>
 
@@ -285,17 +285,21 @@
                                             <div class="column">
                                               <div class="note-left">
                                                   <div class="input-group">
-                                                      <input type="text" class="form-control" placeholder="Consigner une action pour le client {{ client[0].clRaisonsoc }}">
+                                                      <input type="text" class="form-control" id="add-note" placeholder="Consigner une action pour le client {{ client[0].clRaisonsoc }}">
                                                       <span class="input-group-btn">
-                                                        <button class="btn btn-secondar btn-success" type="button">Enregistrer</button>
+                                                        <button class="btn btn-secondar btn-success add-note" type="button">Enregistrer</button>
                                                     </span>
                                                   </div>
                                                   <br>
 
                                                   <h5>Historique client: </h5>
-                                                  <ul>
-                                                      <li>12-03-2017  : Le client a été appelé suite la campagne mailchimp</li>
-                                                  </ul>
+                                                  {% for n in note %}
+                                                      <ul>
+                                                          <li>{{ n.insDate | Time }} : {{ n.cnNote }}</li>
+                                                      </ul>
+                                                  {% endfor %}
+
+
 
                                               </div>
                                             </div>

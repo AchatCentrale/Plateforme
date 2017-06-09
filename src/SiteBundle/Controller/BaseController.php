@@ -3,6 +3,7 @@
 namespace SiteBundle\Controller;
 
 
+use AchatCentrale\CrmBundle\Entity\ClientsNotes;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -226,6 +227,14 @@ class BaseController extends Controller
             'grId' => $id
         ]);
 
+
+
+        $notes = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsNotes')->findBy([
+           'cl' => $id
+
+        ]);
+
+
         return $this->render(
             '@Site/Base/client.general.html.twig',
             [
@@ -235,6 +244,7 @@ class BaseController extends Controller
                 "region" => $region,
                 "activite" => $activite,
                 "groupe" => $groupe,
+                "note" => $notes,
             ]
         );
 
@@ -291,6 +301,33 @@ class BaseController extends Controller
 
 
         return new JsonResponse($res, 200);
+    }
+
+
+    public function newNotesClientAction(Request $request, $id, $centrale)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+            'clId' => $id
+        ]);
+
+        $content_notes = $request->request->get('content_note');
+        $user = $this->getUser()->getusId();
+
+        $notes = new ClientsNotes();
+
+        $notes
+            ->setCl($client[0])
+            ->setCnNote($content_notes)
+            ->getInsUser($user)
+            ;
+
+        $em->persist($notes);
+        $em->flush();
+
+        return new JsonResponse('Notes ajouté ', 200);
     }
 
 

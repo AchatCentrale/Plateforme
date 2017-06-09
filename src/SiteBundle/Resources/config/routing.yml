@@ -95,3 +95,8 @@ update-client:
     path: /client/{id}/{centrale}/update
     defaults: {_controller: SiteBundle:Base:updateClient}
     methods: POST
+
+add-notes:
+    path: /client/{id}/{centrale}/notes/add
+    defaults: {_controller: SiteBundle:Base:newNotesClient}
+    methods: POST
