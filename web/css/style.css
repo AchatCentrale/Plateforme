@@ -281,3 +281,13 @@ label{
 
 
 
+.info-client-detail p:last-child {
+    font-size: 11pt;
+    font-weight: 500;
+}
+.title-detail-client {
+    font-size: 16pt;
+    margin: 0 !important;
+    color: black;
+    font-family: Avenir;
+}

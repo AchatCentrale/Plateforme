@@ -220,7 +220,7 @@
                                                     <a href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom }}</a>
                                                 </td>
                                                 <td>{{ users.ccNom }}</td>
-                                                <td>{{ users.ccFonction | conv  }}</td>
+                                                <td>{{ users.ccFonction   }}</td>
                                                 <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
                                                 <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a> </td>
                                                 <td>{{ users.ccPass }}</td>
