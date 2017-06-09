@@ -3,6 +3,8 @@
 namespace AchatCentrale\CrmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * ClientsTaches
@@ -52,8 +54,14 @@ class ClientsTaches
 
     /**
      * @var string
+     * @Assert\Length(
+     *     min="0",
+     *     max="140",
+     *     minMessage="Vous devez rentrez une description"
+     *     maxMessage="Vous pouvez mettre au moins 140 caractères"
+     * )
      *
-     * @ORM\Column(name="CLA_DESCR", type="text", length=-1, nullable=true)
+     * @ORM\Column(name="CLA_DESCR", type="text", length=-140, nullable=true)
      */
     private $claDescr;
 
@@ -105,15 +113,6 @@ class ClientsTaches
      * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="ETAT", type="integer")
-     */
-    private $etat;
-
-
 
     /**
      * @var \AchatCentrale\CrmBundle\Entity\Clients
@@ -423,5 +422,34 @@ class ClientsTaches
     public function getCl()
     {
         return $this->cl;
+    }
+    /**
+     * @var integer
+     */
+    private $claStatus = '0';
+
+
+    /**
+     * Set claStatus
+     *
+     * @param integer $claStatus
+     *
+     * @return ClientsTaches
+     */
+    public function setClaStatus($claStatus)
+    {
+        $this->claStatus = $claStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get claStatus
+     *
+     * @return integer
+     */
+    public function getClaStatus()
+    {
+        return $this->claStatus;
     }
 }
