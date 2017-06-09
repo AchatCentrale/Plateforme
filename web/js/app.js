@@ -495,7 +495,7 @@ $('.add-note').on('click', function (e) {
 
    console.log($input);
 
-    let url = CURRENT_URL.substring(0, 54) + "notes/add";
+    let url = CURRENT_URL.substring(0, 60) + "notes/add";
 
     $.ajax({
 

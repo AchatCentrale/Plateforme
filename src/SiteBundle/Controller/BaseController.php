@@ -230,7 +230,7 @@ class BaseController extends Controller
 
 
         $notes = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsNotes')->findBy([
-           'cl' => $id
+           'cl' => $id,
 
         ]);
 
@@ -311,6 +311,7 @@ class BaseController extends Controller
 
         $client = $em->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
             'clId' => $id
+
         ]);
 
         $content_notes = $request->request->get('content_note');
