@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class BaseController extends Controller
 {
 
@@ -250,11 +251,46 @@ class BaseController extends Controller
     {
 
 
-        $req = $request->request->get('siret');
+        $em = $this->getDoctrine()->getManager();
+
+
+        $siret = $request->request->get('siret');
+        $mail = $request->request->get('mail');
+        $tel = $request->request->get('tel');
+        $cp = $request->request->get('cp');
+        $eff = $request->request->get('eff');
+        $ca = $request->request->get('ca');
+        $adresse = $request->request->get('adresse');
+        $ville = $request->request->get('ville');
+
+
+        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+            'clId' => $id
+        ]);
+
+        if (!$client) {
+            throw $this->createNotFoundException(
+                'Pas de client pour l\'id '.$id
+            );
+        }
+
+        $client[0]->setClSiret($siret);
+        $client[0]->setClMail($mail);
+        $client[0]->setClTel($tel);
+        $client[0]->setClCp($cp);
+        $client[0]->setClEffectif($eff);
+        $client[0]->setClCa($ca);
+        $client[0]->setClAdresse1($adresse);
+        $client[0]->setClVille($ville);
+
+
+        $em->flush();
+
+        $res = "client mise à jour";
 
 
 
-        return new JsonResponse($req, 200);
+        return new JsonResponse($res, 200);
     }
 
 

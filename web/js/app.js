@@ -431,64 +431,61 @@ $('.detail-tache').on("click", function (e) {
 });
 
 
-$('.icon-edit').on('click', function (e) {
-
-
-
-    let normal = $(this).prev().html();
-
-    let tpl = `<input type="text" class="form-edit"  id="usr" placeholder="${normal}">`;
-
-    let iconValid = `<i class="icon-edit  check link  circular icon"></i>`;
-
-    $(this).prev()
-        .empty()
-        .html(tpl);
-
-    $(this)
-        .toggleClass(' write')
-        .toggleClass('check')
-        .toggleClass('icon-edit')
-        .toggleClass('icon-save')
-        .unbind();
 
 
 
 
-});
-
-
-
-
-$('.data-client').on('click', function (e) {
-    console.log(e);
-
-    let placeholder = $(this).html();
-
-    let tpl = `<input type="text" class="form-edit"  id="usr" placeholder=" ${placeholder} ">`;
-
-    let iconValid = `<i class="icon-save  check link  circular icon"></i>`;
-
-    let normal = `<p class=" cursor data-client ui label" data-index="siret" ></p><br>`;
-
-    $(this).empty().html(tpl + iconValid);
-
-
-    console.log();
-
-});
 
 $('.save-update-client').on('click', function (e) {
 
     let values = $("input[name='data-client[]'], select[name='data-client[]']")
         .map(function(){
-
-
             return $(this).val();
         }
         ).get();
 
+
    console.log(values);
+
+    let url = CURRENT_URL.substring(0, 54) + "update";
+
+    $.ajax({
+
+        // Adresse à laquelle la requête est envoyée
+        url: url,
+
+        type : 'POST',
+
+
+        data: {
+            siret : values[0].replace(/\s/g,''),
+            mail : values[1],
+            tel : values[2].replace(/\s/g,''),
+            cp : values[3],
+            eff : values[4],
+            ca : values[5],
+            adresse : values[6],
+            ville : values[7],
+
+        },
+        // Le délai maximun en millisecondes de traitement de la demande
+        timeout: 4000,
+
+        // La fonction à apeller si la requête aboutie
+        success: function (data) {
+
+            console.log(data);
+
+            window.location.reload();
+        },
+
+        // La fonction à appeler si la requête n'a pas abouti
+        error: function (e) {
+            console.log(e);
+
+        }
+
+    });
 
 
 

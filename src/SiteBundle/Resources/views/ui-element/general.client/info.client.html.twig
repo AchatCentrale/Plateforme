@@ -44,7 +44,7 @@
                         <p>Pas de site web</p>
                     {% endif %}
 
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                    <button id="modifierProfil" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-edit edit-client m-right-xs"></i>Modifier le profil
                     </button>
 
@@ -294,7 +294,7 @@
 
                                                   <h5>Historique client: </h5>
                                                   <ul>
-                                                      <li>12-03-2017 : Le client a été appelé suite la campagne mailchimp</li>
+                                                      <li>12-03-2017  : Le client a été appelé suite la campagne mailchimp</li>
                                                   </ul>
 
                                               </div>
@@ -332,18 +332,22 @@
 
                         <div class="form-group">
                             <label for="siret-update">Numero de siret</label>
-                            <input name="data-client[]" type="text" class="form-control data-update-client" id="siret-update" placeholder="{{ client[0].clSiret | siret }}">
+                            <input name="data-client[]" type="text" class="form-control data-update-client" id="siret-update" value="{{client[0].clSiret | siret  }}" placeholder="{{ client[0].clSiret | siret }}">
                         </div>
 
                         <div class="form-group">
                             <label for="email">Adresse mail</label>
-                            <input name="data-client[]" type="email" class="form-control data-update-client" id="email" placeholder="{{ client[0].clMail  }}">
+                            <input name="data-client[]" type="email" class="form-control data-update-client" id="email" value="{{ client[0].clMail }}" placeholder="{{ client[0].clMail  }}">
                         </div>
                         <div class="form-group">
                             <label for="Téléphone-update">Téléphone</label>
-                            <input name="data-client[]" type="tel" class="form-control data-update-client" id="Téléphone-update" placeholder="{{ client[0].clTel | phone  }}">
+                            <input name="data-client[]" type="tel" class="form-control data-update-client" id="Téléphone-update" value="{{ client[0].clTel | phone }}" placeholder="{{ client[0].clTel | phone  }}">
                         </div>
 
+                        <div class="form-group">
+                            <label for="cp-update">Code postal</label>
+                            <input name="data-client[]" type="text" class="form-control" id="cp-update" value="{{ client[0].clCp }}" placeholder="{{ client[0].clCp }}">
+                        </div>
 
 
 
@@ -353,7 +357,8 @@
 
                         <div class="form-group">
                             <label for="effectif-update">Effectif de l'entrprise</label>
-                            <select name="data-client[]" class="form-control data-update-client">
+                            <select disabled name="data-client[]" class="form-control data-update-client">
+                                <option selected> {{client[0].clEffectif  }}</option>
                                 <option>0 à 5</option>
                                 <option>6 à 20</option>
                                 <option>21 à 30</option>
@@ -364,23 +369,23 @@
                         </div>
                         <div class="form-group">
                             <label for="ca-update">Chiffre d'affaires</label>
-                            <input name="data-client[]" type="text" class="form-control data-update-client" id="ca-update" placeholder="{{ client[0].clCa }}">
+                            <input name="data-client[]" type="text" class="form-control data-update-client" id="ca-update" value="{{client[0].clCa  }}" placeholder="{{ client[0].clCa }}">
                         </div>
-                        {#<div class="form-group">#}
-                            {#<label for="activite-update">Activité</label>#}
-                            {#<select class="form-control">#}
-                                {#{% for a in activite  %}#}
-                                   {##}
-                                    {#<option value="{{ a[0].acId }}">{{ a[0].acDescr }}</option>#}
-                                {#{% endfor %}#}
-                            {#</select>#}
-                        {#</div>#}
+                        <div class="form-group">
+                            <label for="adresse1-update">Adresse</label>
+                            <input name="data-client[]" type="text" class="form-control" id="dresse1-update" value="{{ client[0].clAdresse1 }}" placeholder="{{ client[0].clAdresse1 }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="ville-update">Ville</label>
+                            <input name="data-client[]" type="text" class="form-control" id="ville-update" value="{{ client[0].clVille }}" placeholder="{{ client[0].clVille }}">
+                        </div>
                     </div>
 
 
 
-
                 </div>
+
+
 
 
             </div>
