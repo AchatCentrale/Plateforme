@@ -111,7 +111,12 @@ img {
     cursor: pointer;
 }
 .tab-tache{
+
     padding-bottom: 15px;
+}
+
+.tab-task{
+    padding-top: 25px;
 }
 
 .recap-client {

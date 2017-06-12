@@ -17,7 +17,7 @@
                     <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter une tâche</a>
 
 
-                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                    <div class="tab-task" role="tabpanel" data-example-id="togglable-tabs">
 
 
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
@@ -41,7 +41,7 @@
 
 
                         <div id="myTabContent" class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade active in" id="en_cour"
+                            <div role="tabpanel" class="tab-pane fade active in " id="en_cour"
                                  aria-labelledby="profile-tab">
                                 {% if task %}
                                     <table class="ui striped table">
@@ -60,7 +60,7 @@
                                         <tbody>
                                         {% for tasks in task %}
                                             {% if tasks.claStatus == 0 %}
-                                                <tr class="task-id" data-task="{{ tasks.claId }}" id="{{ tasks.claId }}">
+                                                <tr class="task-id  " data-task="{{ tasks.claId }} " id="{{ tasks.claId }}">
                                                     <td>
                                                         <div class="ui label"> {{ tasks.claType | type }}</div>
                                                     </td>
@@ -76,7 +76,7 @@
                                                         <div class="ui label"><i class="user icon"></i>{{ user }}</div>
                                                     </td>
 
-                                                    <td><h4>{{ tasks.claDescr }}</h4></td>
+                                                    <td><h4>{{ tasks.claDescr | convert_encoding('UTF-8', 'Windows-1252') }}</h4></td>
                                                     <td>{{ tasks.claPriorite | priorite | raw }}</td>
                                                     <td>{#<a href="{{ path('client-general', { 'id' : tasks.cl.clId, 'centrale' : tasks.cl.}, '') }}">{{ tasks.cl.clRaisonsoc }}</a>#}</td>
                                                     <td><i id="{{ tasks.claId }}"
@@ -99,11 +99,10 @@
                                     <table class="ui striped table">
                                         <thead>
                                         <tr>
-                                            <th>Nom de l'action</th>
-                                            <th>Échéances</th>
+
+                                            <th>Crée le </th>
                                             <th>Assigné à</th>
-                                            <th>Type</th>
-                                            <th>Description</th>
+                                            <th>Nom de l'action</th>
                                             <th>Nom client</th>
                                         </tr>
                                         </thead>
@@ -113,17 +112,15 @@
 
                                             {% if tasks.claStatus == 1 %}
                                                 <tr id="{{ tasks.claId }}">
-                                                    <td><h3><a href="#">{{ tasks.claNom }}</a></h3></td>
+                                                    <td><h6>{{ tasks.insDate | Time }}</h6></td>
 
                                                     <td>
                                                         <div class="ui label"><i class="user icon"></i>{{ user }}</div>
                                                     </td>
-                                                    <td>
-                                                        <div class="ui label"> {{ tasks.claType | type }}</div>
-                                                    </td>
+
                                                     <td>{{ tasks.claDescr }}</td>
-                                                    <td>{{ tasks.claPriorite | priorite | raw }}</td>
                                                     <td></td>
+
                                                 </tr>
                                             {% endif %}
 
