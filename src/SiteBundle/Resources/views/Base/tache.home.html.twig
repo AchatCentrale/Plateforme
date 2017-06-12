@@ -101,9 +101,10 @@
                                         <tr>
 
                                             <th>Crée le </th>
+                                            <th>Modifié le </th>
                                             <th>Assigné à</th>
                                             <th>Nom de l'action</th>
-                                            <th>Nom client</th>
+                                            <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -113,6 +114,12 @@
                                             {% if tasks.claStatus == 1 %}
                                                 <tr id="{{ tasks.claId }}">
                                                     <td><h6>{{ tasks.insDate | Time }}</h6></td>
+                                                    {% if tasks.majDate %}
+                                                        <td><h6>{{ tasks.majDate | Time }}</h6></td>
+                                                        {% else %}
+                                                            <td><h6>Aucune date encore</h6></td>
+                                                    {% endif %}
+
 
                                                     <td>
                                                         <div class="ui label"><i class="user icon"></i>{{ user }}</div>

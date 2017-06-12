@@ -91,12 +91,15 @@ class TacheController extends Controller
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "UPDATE CLIENTS_TACHES
-            SET CLA_STATUS = 1
-            WHERE CLA_ID = :id
+                SET
+                  CLA_STATUS = 1,
+                  MAJ_DATE = GETUTCDATE()
+                WHERE CLA_ID = :id
                 ";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':', $id);
         $stmt->execute();
         $result = $stmt->fetchAll();
         dump($result);

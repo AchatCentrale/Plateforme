@@ -406,6 +406,7 @@ $('.detail-tache').on("click", function (e) {
 
 
             if($('.info').get().length > 0){
+
                $('.info[data-task]').toggleClass('info');
             }
 

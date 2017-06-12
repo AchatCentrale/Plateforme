@@ -87,9 +87,6 @@ mail-task:
     path: /taches/mail/{id}
     defaults: {_controller: SiteBundle:Tache:sendMailTask}
 
-update-task:
-    path: /taches/update/{id}
-    defaults: {_controller: SiteBundle:Base:updateProfil}
 
 update-client:
     path: /client/{id}/{centrale}/update

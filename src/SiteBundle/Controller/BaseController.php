@@ -250,12 +250,7 @@ class BaseController extends Controller
 
     }
 
-    public function updateProfilAction()
-    {
 
-
-        return $this->render('@Site/Base/settings.html.twig');
-    }
 
     public function updateClientAction(Request $request,$id,$centrale)
     {
