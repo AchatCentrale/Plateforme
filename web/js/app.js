@@ -403,6 +403,12 @@ $('.detail-tache').on("click", function (e) {
 
         // La fonction à apeller si la requête aboutie
         success: function (data) {
+
+
+            if($('.info').get().length > 0){
+               $('.info[data-task]').toggleClass('info');
+            }
+
             console.log(data);
 
             let tpl = `<div class="ui equal width grid">
@@ -417,9 +423,14 @@ $('.detail-tache').on("click", function (e) {
                                 <button type="button" class="btn btn-primary btn-lg">Assigner une autre personne</button>
                             </div>
                         </div>
-                    </div>`
+                    </div>`;
 
             $('.detail-tache-data').html(tpl);
+
+            $('*[data-task='+data.id+']').toggleClass('info');
+
+
+
 
 
         }
@@ -493,7 +504,6 @@ $('.add-note').on('click', function (e) {
 
     let $input = $('#add-note').val();
 
-   console.log($input);
 
     let url = CURRENT_URL.substring(0, 60) + "notes/add";
 
