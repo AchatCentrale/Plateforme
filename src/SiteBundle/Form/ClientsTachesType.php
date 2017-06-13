@@ -65,7 +65,7 @@ class ClientsTachesType extends AbstractType
             ->add('usId', EntityType::class, [
                 'class' => "AchatCentrale\CrmBundle\Entity\Users",
                 'choice_label' => "usPrenom",
-
+                'placeholder' => 'Utilisateur affecté a la tache',
                 'label' => "Affectation",
                 "attr" => ["class" => "ui dropdown add-action"],
             ])
@@ -78,9 +78,10 @@ class ClientsTachesType extends AbstractType
                             ->where('u.clId = '. $options['us']);
                     }
                     return $er->createQueryBuilder('u');
-
-
                 },
+                'disabled' => "true",
+                'placeholder' => 'Choisir l\'entreprise',
+
                 'label' => 'Entreprise (numéro/nom)',
                 "attr" => ["class" => "ui dropdown add-action"]
 

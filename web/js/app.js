@@ -540,3 +540,14 @@ $('.add-note').on('click', function (e) {
 });
 
 
+$('#isGenerique').on('click', function (e) {
+
+    $('#achatcentrale_crmbundle_clientstaches_cl').prop("disabled", false);
+
+
+
+
+});
+
+
+
