@@ -99,7 +99,7 @@ class TacheController extends Controller
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $id);
-        $stmt->bindValue(':', $id);
+
         $stmt->execute();
         $result = $stmt->fetchAll();
         dump($result);

@@ -330,17 +330,17 @@ label{
 
 #tab_content3{
     font-size: 12pt;
-    font-family: "Titillium Web";
+    font-family: "Titillium Web", serif;
 }
 
 #tab_content2{
     font-size: 12pt;
-    font-family: "Titillium Web";
+    font-family: "Titillium Web", serif;
 }
 
 #tab_content1{
     font-size: 12pt;
-    font-family: "Titillium Web";
+    font-family: "Titillium Web", serif;
 }
 
 .bar_tabs{
@@ -366,3 +366,7 @@ label{
     padding-left: 22px;
 }
 
+.historique-client {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

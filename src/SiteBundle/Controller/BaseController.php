@@ -376,13 +376,12 @@ class BaseController extends Controller
 
 
 
-// Disable the auto zoom flag (disabled by default)
             $map->setAutoZoom(false);
 
-// Sets the center
+
             $map->setCenter($here);
 
-// Sets the zoom
+
             $map->setMapOption('zoom', 12);
 
             $marker = new Marker(
@@ -507,13 +506,15 @@ class BaseController extends Controller
         $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
-        $sql = "SELECT FO_RAISONSOC, COUNT(CE_ID) AS NB_CMD, COUNT(MESSAGE_ENTETE.ME_ID) AS NB_TICKETS
-                FROM dbo.MESSAGE_ENTETE
-                INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON MESSAGE_ENTETE.FO_ID = FOURNISSEURS.FO_ID
-                LEFT JOIN dbo.COMMANDE_ENTETE ON MESSAGE_ENTETE.ME_ID = COMMANDE_ENTETE.ME_ID
-                WHERE MESSAGE_ENTETE.CL_ID = :id
-                GROUP BY FO_RAISONSOC
-                ORDER BY FO_RAISONSOC                  
+        $sql = "SELECT *
+FROM CLIENTS as C
+
+  JOIN CLIENTS_TACHES as CT on C.CL_ID = CT.CL_ID
+  LEFT OUTER JOIN CLIENTS_NOTES as CN ON C.CL_ID = CN.CL_ID
+  LEFT OUTER JOIN MESSAGE_ENTETE as ME ON C.CL_ID = ME.CL_ID
+  LEFT OUTER JOIN MESSAGE_DETAIL as MD on ME.ME_ID = MD.ME_ID
+WHERE C.CL_ID = :id
+ORDER BY CT.INS_DATE, CN.INS_DATE, ME.INS_DATE ASC               
         ";
 
 

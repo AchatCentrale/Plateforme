@@ -130,7 +130,8 @@
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Date de facture</p>
-                                    <p class="cursor label-background" data-index="adh-date">{{ client[0].clDtAdhesion | Time }}</p>
+                                    <p class="cursor label-background"
+                                       data-index="adh-date">{{ client[0].clDtAdhesion | Time }}</p>
 
                                 </div>
 
@@ -143,7 +144,8 @@
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Statut de la facture</p>
-                                    <p class="cursor label-background" data-index="fact-stat"> {{ client[0].clAdhesion  }}</p>
+                                    <p class="cursor label-background"
+                                       data-index="fact-stat"> {{ client[0].clAdhesion }}</p>
                                 </div>
 
 
@@ -152,6 +154,57 @@
 
                         </div>
 
+
+                        <div class="profile_title historique-client">
+                            <h2>Historique du client </h2>
+                        </div>
+                        <div class="historique-client-content">
+                            <div class="ui feed">
+                                <div class="event">
+                                    <div class="label">
+                                        <i class="pencil icon"></i>                                    </div>
+                                    <div class="content">
+                                        You added Elliot Fu to the group <a>Coworkers</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui feed">
+                                <div class="event">
+                                    <div class="label">
+                                        <i class="pencil icon"></i>                                    </div>
+                                    <div class="content">
+                                        You added Elliot Fu to the group <a>Coworkers</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui feed">
+                                <div class="event">
+                                    <div class="label">
+                                        <i class="pencil icon"></i>                                    </div>
+                                    <div class="content">
+                                        You added Elliot Fu to the group <a>Coworkers</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui feed">
+                                <div class="event">
+                                    <div class="label">
+                                        <i class="pencil icon"></i>                                    </div>
+                                    <div class="content">
+                                        You added Elliot Fu to the group <a>Coworkers</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ui feed">
+                                <div class="event">
+                                    <div class="label">
+                                        <i class="pencil icon"></i>                                    </div>
+                                    <div class="content">
+                                        You added Elliot Fu to the group <a>Coworkers</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="tab-detail-client" role="tabpanel" data-example-id="togglable-tabs">
 
@@ -187,38 +240,43 @@
                                 {#User_client#}
                                 <div role="tabpanel" class="tab-pane fade active in" id="tab_content3"
                                      aria-labelledby="profile-tab">
-                                    <table class="ui celled padded table">
-                                        <thead>
-                                        <tr>
-
-                                            <th>Prénom</th>
-                                            <th>Nom</th>
-                                            <th>Fonction</th>
-                                            <th>Tel</th>
-                                            <th>Mail</th>
-                                            <th>Password</th>
-
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for users in user %}
+                                    {% if user  %}
+                                        <table class="ui celled padded table">
+                                            <thead>
                                             <tr>
-                                                <td>
-                                                    <a target="_blank" href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom }}</a>
-                                                </td>
-                                                <td>
-                                                    <a target="_blank" href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccNom }}</a>
-                                                </td>
-                                                <td>{{ users.ccFonction }}</td>
-                                                <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
-                                                <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a></td>
-                                                <td>{{ users.ccPass }}</td>
-                                            </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
 
+                                                <th>Prénom</th>
+                                                <th>Nom</th>
+                                                <th>Fonction</th>
+                                                <th>Tel</th>
+                                                <th>Mail</th>
+                                                <th>Password</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for users in user %}
+                                                <tr>
+                                                    <td>
+                                                        <a target="_blank"
+                                                           href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom }}</a>
+                                                    </td>
+                                                    <td>
+                                                        <a target="_blank"
+                                                           href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccNom }}</a>
+                                                    </td>
+                                                    <td>{{ users.ccFonction }}</td>
+                                                    <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
+                                                    <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a></td>
+                                                    <td>{{ users.ccPass }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        {% else %}
+                                        <p>Il n'y aucun utilisateur pour ce client</p>
+                                    {% endif %}
+                                </div>
 
                                 {#Action_client#}
                                 <div role="tabpanel" class="tab-pane fade " id="tab_content1"
@@ -282,12 +340,17 @@
                                                     </div>
                                                     <br>
 
-                                                    <h5>Historique client: </h5>
-                                                    {% for n in note %}
-                                                        <ul>
-                                                            <li>{{ n.insDate | Time }} : {{ n.cnNote }}</li>
-                                                        </ul>
-                                                    {% endfor %}
+                                                    {% if note %}
+                                                        <h5>Historique client: </h5>
+                                                        {% for n in note %}
+                                                            <ul>
+                                                                <li>{{ n.insDate | Time }} : {{ n.cnNote }}</li>
+                                                            </ul>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                        <p>Il n'y aucune note pour le client</p>
+
+                                                    {% endif %}
 
 
                                                 </div>
