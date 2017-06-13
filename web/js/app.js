@@ -323,7 +323,14 @@ var table = $('#client-all').DataTable({
     "colReorder": true,
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
-    }
+    },
+    "dom": '<"el_top_tables"' +
+    '<l><f><p>' +
+    '>' +
+    't' +
+    '<"el_bottom_tables"' +
+    '<l><i><p>' +
+    '>'
 
 
 });
@@ -541,10 +548,4 @@ $('.add-note').on('click', function (e) {
 
 
 });
-
-
-
-
-
-
 

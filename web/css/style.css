@@ -305,3 +305,13 @@ label{
 #modifierProfil{
     margin-top: 15px;
 }
+
+.el_top_tables {
+    display: flex;
+    justify-content: space-between;
+}
+
+.el_bottom_tables {
+    display: flex;
+    justify-content: space-between;
+}

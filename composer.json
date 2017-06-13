@@ -32,7 +32,11 @@
     "realestateconz/mssql-bundle": "dev-master",
     "friendsofsymfony/rest-bundle": "^2.1",
     "bmatzner/fontawesome-bundle": "~4.3",
-    "fightbulc/moment": "^1.26"
+    "fightbulc/moment": "^1.26",
+    "egeloen/google-map-bundle": "^3.0",
+    "egeloen/serializer-bundle": "^1.0",
+    "php-http/guzzle6-adapter": "^1.1",
+    "php-http/httplug-bundle": "^1.6"
   },
   "require-dev": {
     "sensio/generator-bundle": "^3.0",

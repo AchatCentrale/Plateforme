@@ -21,6 +21,11 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new SiteBundle\SiteBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
+            new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
+
+
+            new Ivory\SerializerBundle\IvorySerializerBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
 
         ];
 

@@ -126,4 +126,20 @@ fos_rest:
             messages:
                 Symfony\Component\HttpKernel\Exception\BadRequestHttpException: true
 
+ivory_google_map:
+    map:
+        debug: "%kernel.debug%"
+        language: "%locale%"
+        api_key: AIzaSyDqTv8u6IGLtrKvwNIM6bwsBM_DLLHHHb8
+    geocoder:
+        client: httplug.client.default
+        message_factory: httplug.message_factory.default
+        format: json
 
+httplug:
+    classes:
+        client: Http\Adapter\Guzzle6\Client
+        message_factory: Http\Message\MessageFactory\GuzzleMessageFactory
+    clients:
+        acme:
+            factory: httplug.factory.guzzle6

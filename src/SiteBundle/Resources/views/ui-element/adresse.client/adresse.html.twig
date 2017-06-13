@@ -1,23 +1,82 @@
-<div class="container-adresse-general">
-    <div class="adresse-agence">
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Adresse</h2>
 
 
-        <div class="ui equal width grid">
-            <div class="equal width row">
-                <div class="column">
-                    <h4>Adresse de livraison</h4>
-                </div>
-                <div class="column">
-                    <h4>Adresse de Facturation</h4>
-                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content container-fluid">
+
+
+
+
+                {% if client is empty %}
+
+                    {% else %}
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="profile_title">
+                                    <h2>Adresse de facturation</h2>
+                                </div>
+
+
+                                <div class="ui card">
+                                    <div class="image">
+                                        {{ ivory_google_map(map) }}
+                                        {{ ivory_google_api([map]) }}
+                                    </div>
+                                    <div class="content">
+                                        <a class="header">Adresse postale</a>
+                                        <div class="description">
+
+                                            {% for clients in client  %}
+                                                {% if clients.caType == "F" %}
+
+
+                                                {% endif %}
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="profile_title">
+                                    <h2>Adresse de livraison</h2>
+                                </div>
+
+
+
+                                <div class="ui card">
+                                    <div class="image">
+
+                                    </div>
+                                    <div class="content">
+                                        <a class="header">Adresse postale</a>
+                                        <div class="description">
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                {% endif %}
+
             </div>
         </div>
-
-
-
-
     </div>
 </div>
-
-
 

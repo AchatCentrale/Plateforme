@@ -4,6 +4,22 @@ namespace SiteBundle\Controller;
 
 
 use AchatCentrale\CrmBundle\Entity\ClientsNotes;
+use Ivory\GoogleMap\Base\Bound;
+use Ivory\GoogleMap\Base\Coordinate;
+use Ivory\GoogleMap\Map;
+use Ivory\GoogleMap\Overlay\Animation;
+use Ivory\GoogleMap\Overlay\Icon;
+use Ivory\GoogleMap\Overlay\InfoWindow;
+use Ivory\GoogleMap\Overlay\InfoWindowType;
+use Ivory\GoogleMap\Overlay\Marker;
+use Ivory\GoogleMap\Overlay\MarkerShape;
+use Ivory\GoogleMap\Overlay\MarkerShapeType;
+use Ivory\GoogleMap\Overlay\Symbol;
+use Ivory\GoogleMap\Overlay\SymbolPath;
+use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
+use Http\Adapter\Guzzle6\Client;
+use Http\Message\MessageFactory\GuzzleMessageFactory;
+use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -329,16 +345,88 @@ class BaseController extends Controller
 
     public function ClientAdresseAction($id)
     {
+
+        $map = new Map();
+        $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
+
+
         $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(
             array(
                 "clId" => $id,
             )
         );
 
+
+
+
+
+
+
+        $request = new GeocoderAddressRequest($restresult['getCaAdresse1']);
+        $response = $geocoder->geocode($request);
+
+
+
+        foreach ($response->getResults() as $result) {
+
+
+
+            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(),$result->getGeometry()->getLocation()->getLongitude());
+
+
+
+
+// Disable the auto zoom flag (disabled by default)
+            $map->setAutoZoom(false);
+
+// Sets the center
+            $map->setCenter($here);
+
+// Sets the zoom
+            $map->setMapOption('zoom', 12);
+
+            $marker = new Marker(
+                new Coordinate(),
+                Animation::BOUNCE,
+                new Icon(),
+                new Symbol(SymbolPath::CIRCLE),
+                new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]),
+                ['clickable' => false]
+            );
+
+            $marker->setVariable('marker');
+            $marker->setAnimation(Animation::DROP);
+            $marker->setIcon(new Icon());
+            $marker->setSymbol(new Symbol(SymbolPath::CIRCLE));
+            $marker->setShape(new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]));
+
+            // TODO : mettre Marker sur l'adresse
+
+
+            $map->getOverlayManager()->addMarker($marker);
+
+
+        }
+
+        $client = [];
+
+        foreach ($restresult as $client){
+
+            if($client->getCaType() === "F"){
+
+
+            }
+
+        }
+
+
+        dump($client);
         return $this->render(
             '@Site/Base/client.adresse.html.twig',
             [
                 "client" => $restresult,
+                "map" => $map
+
             ]
         );
 
