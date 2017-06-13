@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * ClientsTaches
  *
  * @ORM\Table(name="CLIENTS_TACHES", indexes={@ORM\Index(name="IDX_1AB05ADE3F592A49", columns={"CL_ID"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AchatCentrale\CrmBundle\Repository\TachesRepository")
  */
 class ClientsTaches
 {

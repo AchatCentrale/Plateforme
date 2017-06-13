@@ -16,18 +16,21 @@ class TacheController extends Controller
 
     public function TacheAction()
     {
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
         $user = $this->getUser();
 
-        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
-            'usId' => $user->getUsId(),
-        ], [
-            'insDate' => 'DESC'
-        ]);
+        $tache_acheve = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->getActionTermine($user->getUsId());
+        $tache_en_cour = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->getActionEnCour($user->getUsId());
 
 
+
+        dump($tache_en_cour);
 
         return $this->render('@Site/Base/tache.home.html.twig', [
-            'task' => $task,
+            'task_acheve' => $tache_acheve,
+            'task_en_cour' => $tache_en_cour,
             'user' => $user->getUsPrenom(),
         ]);
     }
