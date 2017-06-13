@@ -26,7 +26,7 @@ class TacheController extends Controller
 
 
 
-        dump($tache_en_cour);
+
 
         return $this->render('@Site/Base/tache.home.html.twig', [
             'task_acheve' => $tache_acheve,
