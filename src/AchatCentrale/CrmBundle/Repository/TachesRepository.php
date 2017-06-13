@@ -26,7 +26,7 @@ class TachesRepository extends EntityRepository
             ->where("taches.usId = :id")
             ->andWhere('taches.claStatus = 0')
             ->setParameter('id', $id)
-            ->orderBy("taches.claEcheance", "DESC")
+            ->orderBy("taches.claEcheance", "ASC")
             ->getQuery()
             ->execute();
     }

@@ -105,8 +105,9 @@ class TacheController extends Controller
 
         $stmt->execute();
         $result = $stmt->fetchAll();
-        dump($result);
-        return new Response('taches numero :  ' . $id . ' archivé');
+        return new Response('taches numero :  ' . $id . ' archivé', 200, [
+            'Access-Control-Allow-Origin' => '*'
+        ]);
     }
 
     public function NewTaskAction(Request $request)
