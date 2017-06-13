@@ -394,11 +394,6 @@ $('.detail-tache').on("click", function (e) {
 
     let url = CURRENT_URL + "/detail/" + aidy;
     console.log(url);
-    let loading = `<div class="ui active centered inline loader"></div>`;
-
-
-    $('.detail-tache-data').html(loading);
-
 
     $.ajax({
 
@@ -411,40 +406,35 @@ $('.detail-tache').on("click", function (e) {
         // La fonction à apeller si la requête aboutie
         success: function (data) {
 
+            let el = $('.body-task-detail');
 
-            if($('.info').get().length > 0){
+            let title = `<p>tâche #${data.id}</p>`;
 
-               $('.info[data-task]').toggleClass('info');
-            }
-
-            console.log(data);
-
-            let tpl = `<div class="ui equal width grid">
-                        <div class="equal width row">
-                            <div class="column">
-                                <h2>Detail de la tache #${data.id}</h2>
-                                <p>Titre de la tache : ${data.nom}</p>
-                                <p>description de la tache : ${data.descr}</p>
-                            </div>
-                            <div class="column">
-                                <button type="button" class="btn btn-primary btn-lg">Modifier la tâche</button>
-                                <button type="button" class="btn btn-primary btn-lg">Assigner une autre personne</button>
-                            </div>
-                        </div>
-                    </div>`;
-
-            $('.detail-tache-data').html(tpl);
-
-            $('*[data-task='+data.id+']').toggleClass('info');
+            $('.modal-title-task').append( title );
 
 
 
 
+            let tpl = `<p>${data.id}</p>`;
 
+
+            el.append( tpl );
+
+
+            console.log(el);
+
+
+            $('#modal-task').modal('show')
+
+
+        },
+        error: function (e) {
+            console.error(e);
         }
 
 
     });
+
 
 
 });
@@ -548,4 +538,5 @@ $('.add-note').on('click', function (e) {
 
 
 });
+
 

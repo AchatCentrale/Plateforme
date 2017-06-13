@@ -14,7 +14,7 @@ class TachesRepository extends EntityRepository
             ->where("taches.usId = :id")
             ->andWhere('taches.claStatus = 1')
             ->setParameter('id', $id)
-            ->orderBy("taches.claEcheance", "ASC")
+            ->orderBy("taches.majDate", "ASC")
             ->getQuery()
             ->execute();
 
@@ -29,5 +29,10 @@ class TachesRepository extends EntityRepository
             ->orderBy("taches.claEcheance", "ASC")
             ->getQuery()
             ->execute();
+    }
+
+    public function getAuthorAction($idAction){
+
+
     }
 }
