@@ -119,9 +119,7 @@ img {
     padding-top: 25px;
 }
 
-.recap-client {
-    margin-top: 12px;
-}
+
 .btn-new {
     margin: 10px;
 }
@@ -272,7 +270,7 @@ label{
 }
 
 .title-detail-client {
-    font-size: 16pt;
+    font-size: 12pt;
     margin: 0 !important;
     color: black;
 }
@@ -315,3 +313,48 @@ label{
     display: flex;
     justify-content: space-between;
 }
+
+
+
+.vertical-divider{
+    border: 0.8px solid #ccc;
+    margin: 0;
+    padding: 0;
+    height: 203px;
+    margin-top: 24px;
+    background-color: #ccc;
+    padding-right: 0px !important;
+    padding-left: 0px!important;
+}
+
+
+#tab_content3{
+    font-size: 12pt;
+    font-family: "Titillium Web";
+}
+
+#tab_content2{
+    font-size: 12pt;
+    font-family: "Titillium Web";
+}
+
+#tab_content1{
+    font-size: 12pt;
+    font-family: "Titillium Web";
+}
+
+.bar_tabs{
+    font-size: 12pt;
+}
+
+.tab-detail-client {
+    padding-top: 55px;
+}
+
+.label-background{
+    background-color: #f0f5f9;
+    padding: 4px;
+    width: 74%;
+    border-radius: 4px;
+}
+

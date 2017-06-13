@@ -44,7 +44,8 @@
                         <p>Pas de site web</p>
                     {% endif %}
 
-                    <button id="modifierProfil" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                    <button id="modifierProfil" type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#myModal">
                         <i class="fa fa-edit edit-client m-right-xs"></i>Modifier le profil
                     </button>
 
@@ -59,7 +60,7 @@
                         </div>
                         {% if groupe %}
                             <p class="ui label green">{{ groupe[0].grDescr }}</p><br>
-                            {% else %}
+                        {% else %}
                             <p></p>
                         {% endif %}
                     </div>
@@ -77,87 +78,73 @@
 
                             <div class="four wide column">
                                 <div class="info-client-detail">
-                                    <p class="title-detail-client " >Siret</p>
-                                    <p class="cursor" data-index="siret" >{{ client[0].clSiret | siret }}</p>
+                                    <p class="title-detail-client ">Siret</p>
+                                    <p class="cursor label-background"
+                                       data-index="siret">{{ client[0].clSiret | siret }}</p>
                                 </div>
                                 <div class="info-client-detail">
-                                    <p class="title-detail-client " >Mail</p>
-                                    <p class="cursor" data-index="siret" ><a class="cursor data-client" data-index="mail"
-                                                                             href="mailto:{{ client[0].clMail }}"><i class="mail link  circular icon"></i></a>{{ client[0].clMail }}</p>
+                                    <p class="title-detail-client ">Mail</p>
+                                    <p class="cursor " data-index="siret">
+                                        <a class="cursor data-client " data-index="mail"
+                                           href="mailto:{{ client[0].clMail }}">
+                                            <i class="mail link  circular icon"></i></a>{{ client[0].clMail }}</p>
                                 </div>
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client " >Téléphone</p>
-                                    <p class="cursor" data-index="siret" >{{ client[0].clTel | phone }}</p>
+                                <div class="info-client-detail " id="detail-tel">
+                                    <p class="title-detail-client ">Téléphone</p>
+                                    <p class="cursor label-background"
+                                       data-index="siret">{{ client[0].clTel | phone }}</p>
                                 </div>
                             </div>
 
-                            <div class="four wide column">
+                            <div class="three wide column">
                                 <div class="info-client-detail">
-                                    <p class="title-detail-client " >Éffectif</p>
-                                    <p class="cursor" data-index="siret" >{{ client[0].clEffectif }}</p>
+                                    <p class="title-detail-client ">Éffectif</p>
+                                    <p class="cursor label-background" data-index="siret">{{ client[0].clEffectif }}</p>
                                 </div>
                                 <div class="info-client-detail">
-                                    <p class="title-detail-client " >Chiffre d'affaires</p>
-                                    <p class="cursor" data-index="siret" >{{ client[0].clCa }} €</p>
+                                    <p class="title-detail-client ">Chiffre d'affaires</p>
+                                    <p class="cursor label-background" data-index="siret">{{ client[0].clCa }} €</p>
                                 </div>
                                 <div class="info-client-detail">
-                                    <p class="title-detail-client " >Activité</p>
+                                    <p class="title-detail-client ">Activité</p>
                                     {% if activite %}
-                                        <p class="cursor" data-index="siret" >{{ activite[0].acDescr }}</p>
+                                        <p class="cursor label-background"
+                                           data-index="siret">{{ activite[0].acDescr }}</p>
                                     {% else %}
                                         <p></p>
                                     {% endif %}
                                 </div>
                             </div>
 
+
+                            <div class="vertical-divider"></div>
+
                             <div class="four wide column recap-client">
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Période d'adhésion</p>
+                                    <p class="cursor label-background" data-index="per-adh">1 an</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Numéro de facture</p>
+                                    <p class="cursor label-background" data-index="num-facture">{{ random() }}</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Date de facture</p>
+                                    <p class="cursor label-background" data-index="adh-date">{{ client[0].clDtAdhesion | Time }}</p>
 
-                                <table class="ui very basic collapsing celled table">
-                                    <thead>
-                                    <tr>
-                                        <th>Suivi d'adhésion</th>
-                                        <th>Detail</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            Periode d'adhésion
-                                        <td>
-                                            1 an
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Numero de facture
-                                        <td>
-                                            {{ random() }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Date de facture
-                                        <td>
-                                            {{ client[0].clDtAdhesion | Time }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Montant facturé
-                                        <td>
-                                            5 000€
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Statut de la facture
-                                        <td>
-                                            {{ client[0].clStatus | status | raw }}
-                                        </td>
-                                    </tr>
+                                </div>
 
-                                    </tbody>
-                                </table>
+
+                            </div>
+                            <div class="four wide column recap-client">
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Montant facturé</p>
+                                    <p class="cursor label-background" data-index="fact-val">5 000 €</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Statut de la facture</p>
+                                    <p class="cursor label-background" data-index="fact-stat"> {{ client[0].clAdhesion  }}</p>
+                                </div>
 
 
                             </div>
@@ -166,7 +153,7 @@
                         </div>
 
 
-                        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <div class="tab-detail-client" role="tabpanel" data-example-id="togglable-tabs">
 
 
                             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
@@ -186,7 +173,7 @@
                                 <li role="presentation" class="">
                                     <a href="#tab_content2" role="tab" id="profile-tab"
                                        data-toggle="tab" aria-expanded="true">
-                                        <span class="badge bg-green"> {{  note | length }} </span> Notes
+                                        <span class="badge bg-green"> {{ note | length }} </span> Notes
                                     </a>
                                 </li>
 
@@ -217,12 +204,14 @@
                                         {% for users in user %}
                                             <tr>
                                                 <td>
-                                                    <a href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom }}</a>
+                                                    <a target="_blank" href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom }}</a>
                                                 </td>
-                                                <td>{{ users.ccNom }}</td>
-                                                <td>{{ users.ccFonction   }}</td>
+                                                <td>
+                                                    <a target="_blank" href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccNom }}</a>
+                                                </td>
+                                                <td>{{ users.ccFonction }}</td>
                                                 <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
-                                                <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a> </td>
+                                                <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a></td>
                                                 <td>{{ users.ccPass }}</td>
                                             </tr>
                                         {% endfor %}
@@ -239,7 +228,7 @@
 
                                         {% if task %}
                                             <!-- start recent activity -->
-                                        <div class="ui items">
+                                            <div class="ui items">
 
 
                                                 {% for tasks in task %}
@@ -248,8 +237,8 @@
                                                         <a class="ui tiny image">
                                                             {% if tasks["CLA_STATUS"] == 0 %}
                                                                 <i class="warning red big sign icon"></i>
-                                                                {% else %}
-                                                                    <i class="check green big sign icon"></i>
+                                                            {% else %}
+                                                                <i class="check green big sign icon"></i>
 
                                                             {% endif %}
                                                         </a>
@@ -264,7 +253,7 @@
 
                                                 {% endfor %}
 
-                                        </div>
+                                            </div>
                                             <!-- end recent activity -->
                                         {% else %}
                                             <p>Aucune action a deja été éfféctué avec ce client</p>
@@ -272,7 +261,6 @@
 
 
                                     </div>
-
 
 
                                 </div>
@@ -283,28 +271,30 @@
                                     <div class="ui equal width grid" style="margin-top: 30px">
                                         <div class="equal width row">
                                             <div class="column">
-                                              <div class="note-left">
-                                                  <div class="input-group">
-                                                      <input type="text" class="form-control" id="add-note" placeholder="Consigner une action pour le client {{ client[0].clRaisonsoc }}">
-                                                      <span class="input-group-btn">
-                                                        <button class="btn btn-secondar btn-success add-note" type="button">Enregistrer</button>
+                                                <div class="note-left">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="add-note"
+                                                               placeholder="Consigner une action pour le client {{ client[0].clRaisonsoc }}">
+                                                        <span class="input-group-btn">
+                                                        <button class="btn btn-secondar btn-success add-note"
+                                                                type="button">Enregistrer</button>
                                                     </span>
-                                                  </div>
-                                                  <br>
+                                                    </div>
+                                                    <br>
 
-                                                  <h5>Historique client: </h5>
-                                                  {% for n in note %}
-                                                      <ul>
-                                                          <li>{{ n.insDate | Time }} : {{ n.cnNote }}</li>
-                                                      </ul>
-                                                  {% endfor %}
+                                                    <h5>Historique client: </h5>
+                                                    {% for n in note %}
+                                                        <ul>
+                                                            <li>{{ n.insDate | Time }} : {{ n.cnNote }}</li>
+                                                        </ul>
+                                                    {% endfor %}
 
 
-
-                                              </div>
+                                                </div>
                                             </div>
                                             <div class="column">
-                                                <a href="{{ path('new-task', {'u' : client[0].clId }) }}" class="btn btn-success" role="button">Crée une action</a>
+                                                <a href="{{ path('new-task', {'u' : client[0].clId }) }}"
+                                                   class="btn btn-success" role="button">Crée une action</a>
 
                                             </div>
                                         </div>
@@ -325,7 +315,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title" id="myModalLabel">Modifier le client {{ client[0].clRaisonsoc }}</h4>
             </div>
             <div class="modal-body">
@@ -333,26 +324,30 @@
                     <div class="eight wide column">
 
 
-
                         <div class="form-group">
                             <label for="siret-update">Numero de siret</label>
-                            <input name="data-client[]" type="text" class="form-control data-update-client" id="siret-update" value="{{client[0].clSiret | siret  }}" placeholder="{{ client[0].clSiret | siret }}">
+                            <input name="data-client[]" type="text" class="form-control data-update-client"
+                                   id="siret-update" value="{{ client[0].clSiret | siret }}"
+                                   placeholder="{{ client[0].clSiret | siret }}">
                         </div>
 
                         <div class="form-group">
                             <label for="email">Adresse mail</label>
-                            <input name="data-client[]" type="email" class="form-control data-update-client" id="email" value="{{ client[0].clMail }}" placeholder="{{ client[0].clMail  }}">
+                            <input name="data-client[]" type="email" class="form-control data-update-client" id="email"
+                                   value="{{ client[0].clMail }}" placeholder="{{ client[0].clMail }}">
                         </div>
                         <div class="form-group">
-                            <label for="Téléphone-update">Téléphone</label>
-                            <input name="data-client[]" type="tel" class="form-control data-update-client" id="Téléphone-update" value="{{ client[0].clTel | phone }}" placeholder="{{ client[0].clTel | phone  }}">
+                            <label for="Telephone-update">Téléphone</label>
+                            <input name="data-client[]" type="tel" class="form-control data-update-client"
+                                   id="Telephone-update" value="{{ client[0].clTel | phone }}"
+                                   placeholder="{{ client[0].clTel | phone }}">
                         </div>
 
                         <div class="form-group">
                             <label for="cp-update">Code postal</label>
-                            <input name="data-client[]" type="text" class="form-control" id="cp-update" value="{{ client[0].clCp }}" placeholder="{{ client[0].clCp }}">
+                            <input name="data-client[]" type="text" class="form-control" id="cp-update"
+                                   value="{{ client[0].clCp }}" placeholder="{{ client[0].clCp }}">
                         </div>
-
 
 
                     </div>
@@ -362,7 +357,7 @@
                         <div class="form-group">
                             <label for="effectif-update">Effectif de l'entrprise</label>
                             <select disabled name="data-client[]" class="form-control data-update-client">
-                                <option selected> {{client[0].clEffectif  }}</option>
+                                <option selected> {{ client[0].clEffectif }}</option>
                                 <option>0 à 5</option>
                                 <option>6 à 20</option>
                                 <option>21 à 30</option>
@@ -373,23 +368,23 @@
                         </div>
                         <div class="form-group">
                             <label for="ca-update">Chiffre d'affaires</label>
-                            <input name="data-client[]" type="text" class="form-control data-update-client" id="ca-update" value="{{client[0].clCa  }}" placeholder="{{ client[0].clCa }}">
+                            <input name="data-client[]" type="text" class="form-control data-update-client"
+                                   id="ca-update" value="{{ client[0].clCa }}" placeholder="{{ client[0].clCa }}">
                         </div>
                         <div class="form-group">
                             <label for="adresse1-update">Adresse</label>
-                            <input name="data-client[]" type="text" class="form-control" id="dresse1-update" value="{{ client[0].clAdresse1 }}" placeholder="{{ client[0].clAdresse1 }}">
+                            <input name="data-client[]" type="text" class="form-control" id="dresse1-update"
+                                   value="{{ client[0].clAdresse1 }}" placeholder="{{ client[0].clAdresse1 }}">
                         </div>
                         <div class="form-group">
                             <label for="ville-update">Ville</label>
-                            <input name="data-client[]" type="text" class="form-control" id="ville-update" value="{{ client[0].clVille }}" placeholder="{{ client[0].clVille }}">
+                            <input name="data-client[]" type="text" class="form-control" id="ville-update"
+                                   value="{{ client[0].clVille }}" placeholder="{{ client[0].clVille }}">
                         </div>
                     </div>
 
 
-
                 </div>
-
-
 
 
             </div>
