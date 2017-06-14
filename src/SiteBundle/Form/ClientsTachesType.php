@@ -79,7 +79,7 @@ class ClientsTachesType extends AbstractType
                     }
                     return $er->createQueryBuilder('u');
                 },
-                'disabled' => "true",
+
                 'placeholder' => 'Choisir l\'entreprise',
 
                 'label' => 'Entreprise (numéro/nom)',

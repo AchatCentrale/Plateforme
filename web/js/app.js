@@ -540,9 +540,19 @@ $('.add-note').on('click', function (e) {
 });
 
 
+
 $('#isGenerique').on('click', function (e) {
 
-    $('#achatcentrale_crmbundle_clientstaches_cl').prop("disabled", false);
+    if(document.getElementById("achatcentrale_crmbundle_clientstaches_cl").disabled === true){
+        $('#achatcentrale_crmbundle_clientstaches_cl').prop("disabled", false);
+
+    }else if(document.getElementById("achatcentrale_crmbundle_clientstaches_cl").disabled === false){
+        $('#achatcentrale_crmbundle_clientstaches_cl').prop("disabled", true);
+
+    }else{
+        alert('error');
+    }
+
 
 
 

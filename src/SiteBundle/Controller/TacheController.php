@@ -126,10 +126,12 @@ class TacheController extends Controller
             $task->setUsId($user);
         }
 
+        if (isset($req['cl'])){
+            $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+                'clId' => $req['cl'],
+            ]);
 
-        $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
-            'clId' => $req['cl'],
-        ]);
+        }
 
         $form = $this->createForm(ClientsTachesType::class, $task, [
             'action' => $this->generateUrl('new-task'),
@@ -152,8 +154,11 @@ class TacheController extends Controller
                 ->setClaPriorite($req['claPriorite'])
                 ->setClaEcheance($date_echeance2)
                 ->setUsId($req['usId'])
-                ->setInsUser($this->getUser()->getusId())
-                ->setCl($client[0]);
+                ->setInsUser($this->getUser()->getusId());
+
+            if(isset($client)){
+                $task->setCl($client[0]);
+            }
 
 
             $em = $this->getDoctrine()->getManager();
