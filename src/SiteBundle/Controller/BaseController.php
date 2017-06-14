@@ -88,10 +88,6 @@ class BaseController extends Controller
 
                    $clientNew = new Clients();
 
-                   $clientNew
-                       ->set
-
-
 
 
 
