@@ -61,45 +61,99 @@ class BaseController extends Controller
     {
         $raison_soc = $request->query->get('raison-soc');
         $centrale_ID = $request->query->get('centrale');
-
-        $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
-        $activite = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findBy([
-            'soId' => $centrale_ID
-        ]);
-        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findAll();
-        $classif = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Classif')->findAll();
-        $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findAll();
-
-
-        if ($request->getMethod() == 'POST') {
-
-            $req = $request->request->get('client-new');
-
-            dump($req);
-
-
-            return $this->render('@Site/Base/client.new.html.twig', [
-                'state' => 'Client enregistrer',
-                'pays' => $pays,
-                'activite' => $activite,
-                'groupe' => $groupe,
-                'classif' => $classif,
-                'region' => $region,
-                'centrale' => $centrale,
-                'raisonSoc' => $raison_soc,
+        $centrale = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Societes')
+            ->findBy([
+                'soId' => $centrale_ID
             ]);
-        }
 
-        dump($activite);
 
-        return $this->render('@Site/Base/client.new.html.twig', [
-            'raisonSoc' => $raison_soc,
-            'pays' => $pays,
-            'activite' => $activite,
-            'groupe' => $groupe,
-            'classif' => $classif,
-            'region' => $region,
-        ]);
+        dump($centrale);
+
+       switch ($centrale[0]->getSoRaisonsoc()){
+           case 'CENTRALE_ROC_ECLERC':
+               $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
+               $activite = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findBy([
+                   'soId' => $centrale_ID
+               ]);
+               $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findAll();
+               $classif = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Classif')->findAll();
+               $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findAll();
+
+
+               if ($request->getMethod() == 'POST') {
+
+                   $req = $request->request->get('client-new');
+
+                   dump($req);
+
+
+                   return $this->render('@Site/Base/client.new.html.twig', [
+                       'state' => 'Client enregistrer',
+                       'pays' => $pays,
+                       'activite' => $activite,
+                       'groupe' => $groupe,
+                       'classif' => $classif,
+                       'region' => $region,
+                       'centrale' => $centrale,
+                       'raisonSoc' => $raison_soc,
+                   ]);
+               }
+
+
+               dump($region);
+
+
+               return $this->render('@Site/Base/client.new.html.twig', [
+                   'raisonSoc' => $raison_soc,
+                   'pays' => $pays,
+                   'activite' => $activite,
+                   'groupe' => $groupe,
+                   'classif' => $classif,
+                   'region' => $region,
+               ]);
+               break;
+           case 'CENTRALE_FUNECAP':
+
+               $pays = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Pays')->findAll();
+               $activite = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Activites')->findAll();
+               $groupe = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Groupe')->findAll();
+               $classif = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Classif')->findAll();
+               $region = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Regions')->findAll();
+
+
+               if ($request->getMethod() == 'POST') {
+
+                   $req = $request->request->get('client-new');
+
+                   dump($req);
+
+
+                   return $this->render('@Site/Base/client.new.html.twig', [
+                       'state' => 'Client enregistrer',
+                       'pays' => $pays,
+                       'activite' => $activite,
+                       'groupe' => $groupe,
+                       'classif' => $classif,
+                       'region' => $region,
+                       'centrale' => $centrale,
+                       'raisonSoc' => $raison_soc,
+                   ]);
+               }
+
+
+               dump($region);
+
+
+               return $this->render('@Site/Base/client.new.html.twig', [
+                   'raisonSoc' => $raison_soc,
+                   'pays' => $pays,
+                   'activite' => $activite,
+                   'groupe' => $groupe,
+                   'classif' => $classif,
+                   'region' => $region,
+               ]);
+               break;
+       }
     }
 
     public function ClientAction(Request $request)
