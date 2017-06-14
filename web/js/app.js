@@ -356,7 +356,7 @@ $('.detail-tache').on("click", function (e) {
                         </div>
                         <div class="two column row">
                             <div class="column">
-                                <p>Crée le </p>
+                                <p>Crée le : ${data.creation} </p>
                             </div>
                             <div class="column">
                                 <p>${data.echeance}</p>

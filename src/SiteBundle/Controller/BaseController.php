@@ -4,6 +4,8 @@ namespace SiteBundle\Controller;
 
 
 use AchatCentrale\CrmBundle\Entity\ClientsNotes;
+use DateTime;
+use DateTimeZone;
 use FunecapBundle\Entity\Clients;
 use Ivory\GoogleMap\Base\Bound;
 use Ivory\GoogleMap\Base\Coordinate;
@@ -60,6 +62,9 @@ class BaseController extends Controller
 
     public function ClientNewAction(Request $request)
     {
+
+        $emFunecap = $this->getDoctrine()->getManager('centrale_funecap_jb');
+
         $raison_soc = $request->query->get('raison-soc');
         $centrale_ID = $request->query->get('centrale');
         $centrale = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Societes')
@@ -86,7 +91,7 @@ class BaseController extends Controller
 
                    dump($req);
 
-                   $clientNew = new Clients();
+
 
 
 
@@ -130,6 +135,36 @@ class BaseController extends Controller
                    $req = $request->request->get('client-new');
 
                    dump($req);
+
+                   $clientNew = new Clients();
+
+
+
+
+                   $clientNew
+                       ->setClRef($req["ref"])
+                       ->setClRaisonsoc($req["raison-soc"])
+                       ->setClSiret($req["siret"])
+                       ->setClAdresse1($req["adresse"])
+                       ->setClVille($req["ville"])
+                       ->setClCp($req["cp"])
+                       ->setClPays($req["pays"])
+                       ->setClMail($req["mail"])
+                       ->setClTel(trim($req["tel"]))
+                       ->setClWeb($req["web"])
+                       ->setClCa($req['ca'])
+                       ->setClEffectif($req["effe"])
+                       ->setReId($req["region"])
+                       ->setClActivite($req["acti"])
+                       ->setClGroupe($req["groupe"])
+                       ->setClStatus(1)
+                       ->setInsUser($this->getUser()->getusMail())
+                       ->setSoId(1)
+                   ;
+
+                   $emFunecap->persist($clientNew);
+                   $emFunecap->flush();
+
 
 
                    return $this->render('@Site/Base/client.new.html.twig', [
@@ -623,7 +658,11 @@ class BaseController extends Controller
         FROM CENTRALE_FUNECAP_JB.dbo.CLIENTS');
         $count = $stmt->fetchAll();
 
-        dump($count);
+        $datetime = new DateTime();
+        dump($datetime->format('Y-m-d H:i:s'));
+
+
+
 
         return $this->render(
             '@AchatCentraleCrm/testView.html.twig',

@@ -7,6 +7,8 @@ namespace FunecapBundle\Entity;
  */
 class Clients
 {
+
+
     /**
      * @var integer
      */
@@ -176,6 +178,15 @@ class Clients
      * @var string
      */
     private $majUser;
+
+    /**
+     * Clients constructor.
+     * @param \DateTime $insDate
+     */
+    public function __construct()
+    {
+        $this->insDate = new \DateTime();
+    }
 
 
     /**
