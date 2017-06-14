@@ -3,6 +3,7 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@SiteBundle/Resources/config/services.yml" }
+    - { resource: "@FunecapBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -68,6 +69,17 @@ doctrine:
                     1002:  "SET NAMES 'UTF8'"
                     ansi_nulls: on
                     ansi_warnings: on
+            centrale_funecap_jb:
+                 driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
+                 host:           "185.29.149.32"
+                 user:           "AC_JBAGOSTIN"
+                 password:       "35H7Hjvy"
+                 dbname:         "CENTRALE_FUNECAP_JB"
+                 charset:  UTF8
+                 options:
+                     1002:  "SET NAMES 'UTF8'"
+                     ansi_nulls: on
+                     ansi_warnings: on
 
 
     orm:
@@ -82,6 +94,10 @@ doctrine:
                 connection: centrale_produits
                 mappings:
                     SiteBundle : ~
+            centrale_funecap_jb:
+                connection: centrale_funecap_jb
+                mappings:
+                    FunecapBundle : ~
 
 # Swiftmailer Configuration
 swiftmailer:

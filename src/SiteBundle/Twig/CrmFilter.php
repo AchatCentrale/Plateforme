@@ -29,8 +29,23 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('siret', [$this, 'siretFilter']),
             new \Twig_SimpleFilter('status', [$this, 'statusFilter']),
             new \Twig_SimpleFilter('isEmpty', [$this, 'isEmpty']),
+            new \Twig_SimpleFilter('centrale', [$this, 'centraleFilter']),
         );
     }
+
+    public function centraleFilter($centrale)
+    {
+        switch ($centrale){
+            case "CENTRALE_FUNECAP":
+                return substr($centrale, 9);
+                break;
+            case 'CENTRALE_ROC_ECLERC':
+                return substr(str_replace("_","-", $centrale ), 9);
+                break;
+        }
+
+    }
+
 
     public function statusFilter($status){
 
@@ -122,10 +137,10 @@ class CrmFilter extends \Twig_Extension
         return $typee[0]->getAcNom();
     }
 
-    public function priorityFilter($priorité)
+    public function priorityFilter($priorite)
     {
 
-        switch ($priorité) {
+        switch ($priorite) {
             case 1:
                 $tpl = "<div class=\"ui red label\">A faire au plus vite</div>";
                 return $tpl;

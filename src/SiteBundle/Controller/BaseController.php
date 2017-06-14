@@ -60,13 +60,15 @@ class BaseController extends Controller
     public function ClientNewAction(Request $request)
     {
         $raison_soc = $request->query->get('raison-soc');
+        $centrale_ID = $request->query->get('centrale');
 
         $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
-        $activité = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findAll();
+        $activite = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findBy([
+            'soId' => $centrale_ID
+        ]);
         $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findAll();
         $classif = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Classif')->findAll();
         $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findAll();
-        $centrale = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Societes')->findAll();
 
 
         if ($request->getMethod() == 'POST') {
@@ -79,28 +81,33 @@ class BaseController extends Controller
             return $this->render('@Site/Base/client.new.html.twig', [
                 'state' => 'Client enregistrer',
                 'pays' => $pays,
-                'activite' => $activité,
+                'activite' => $activite,
                 'groupe' => $groupe,
                 'classif' => $classif,
                 'region' => $region,
                 'centrale' => $centrale,
+                'raisonSoc' => $raison_soc,
             ]);
         }
 
+        dump($activite);
 
         return $this->render('@Site/Base/client.new.html.twig', [
             'raisonSoc' => $raison_soc,
             'pays' => $pays,
-            'activite' => $activité,
+            'activite' => $activite,
             'groupe' => $groupe,
             'classif' => $classif,
             'region' => $region,
-            'centrale' => $centrale,
         ]);
     }
 
     public function ClientAction(Request $request)
     {
+
+
+        $centrale = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Societes')->findAll();
+
 
 
         $con = $this->getDoctrine()->getManager()->getConnection();
@@ -116,10 +123,12 @@ class BaseController extends Controller
         );
         $count = $stmt->fetchAll();
 
+
         return $this->render(
             '@Site/Base/client.html.twig',
             [
                 "client" => $count,
+                "centrale" => $centrale
             ]
         );
 
@@ -209,60 +218,128 @@ class BaseController extends Controller
 
         $conn = $this->get('database_connection');
 
-        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
-                'clId' => $id
-            ]
-        );
+        switch ($centrale){
+            case "CENTRALE_FUNECAP":
+                $restresult = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Clients')->findBy([
+                        'clId' => $id
+                    ]
+                );
 
-        $sql = 'SELECT *
+
+                $sql = 'SELECT *
+                  FROM CENTRALE_FUNECAP_JB.dbo.CLIENTS_TACHES
+                  WHERE CL_ID = :id';
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('id', $id);
+                $stmt->execute();
+
+                $task = $stmt->fetchAll();
+
+
+
+
+
+                $user = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsUsers')->findBy([
+                        'cl' => $id
+                    ]
+                );
+
+                $region = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Regions')->findBy([
+                    'reId' => $restresult[0]->getReId(),
+                ]);
+
+                $activite = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Activites')->findBy([
+                    'acId' => $restresult[0]->getClActivite(),
+                ]);
+
+                $groupe = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Groupe')->findBy([
+                    'grId' => $id
+                ]);
+
+
+
+                $notes = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsNotes')->findBy([
+                    'cl' => $id,
+
+                ]);
+
+
+
+                return $this->render(
+                    '@Site/Base/client.general.html.twig',
+                    [
+                        "client" => $restresult,
+                        "user" => $user,
+                        "tache" => $task,
+                        "region" => $region,
+                        "activite" => $activite,
+                        "groupe" => $groupe,
+                        "note" => $notes,
+                        "centrale" => $centrale,
+                    ]
+                );
+                break;
+            case "CENTRALE_ROC_ECLERC":
+                $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+                        'clId' => $id
+                    ]
+                );
+
+                $sql = 'SELECT *
                 FROM CLIENTS_TACHES
                   WHERE CL_ID = :id
                 ORDER BY CLA_STATUS ASC';
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue('id', $id);
-        $stmt->execute();
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('id', $id);
+                $stmt->execute();
 
-        $task = $stmt->fetchAll();
-
-
-
-        $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy([
-            'cl' => $id
-        ]);
-
-        $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findBy([
-            'reId' => $restresult[0]->getReId(),
-        ]);
-
-        $activite = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findBy([
-            'acId' => $restresult[0]->getClActivite(),
-        ]);
-
-        $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findBy([
-            'grId' => $id
-        ]);
+                $task = $stmt->fetchAll();
 
 
 
-        $notes = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsNotes')->findBy([
-           'cl' => $id,
+                $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy([
+                    'cl' => $id
+                ]);
 
-        ]);
+                $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findBy([
+                    'reId' => $restresult[0]->getReId(),
+                ]);
+
+                $activite = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findBy([
+                    'acId' => $restresult[0]->getClActivite(),
+                ]);
+
+                $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findBy([
+                    'grId' => $id
+                ]);
 
 
-        return $this->render(
-            '@Site/Base/client.general.html.twig',
-            [
-                "client" => $restresult,
-                "user" => $user,
-                "tache" => $task,
-                "region" => $region,
-                "activite" => $activite,
-                "groupe" => $groupe,
-                "note" => $notes,
-            ]
-        );
+
+                $notes = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsNotes')->findBy([
+                    'cl' => $id,
+
+                ]);
+
+
+                return $this->render(
+                    '@Site/Base/client.general.html.twig',
+                    [
+                        "client" => $restresult,
+                        "user" => $user,
+                        "tache" => $task,
+                        "region" => $region,
+                        "activite" => $activite,
+                        "groupe" => $groupe,
+                        "note" => $notes,
+                        "centrale" => $centrale,
+                    ]
+                );
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -485,7 +562,8 @@ class BaseController extends Controller
     {
 
         $con = $this->getDoctrine()->getManager()->getConnection();
-        $stmt = $con->executeQuery('SELECT * FROM Vue_All_Clients');
+        $stmt = $con->executeQuery('SELECT *
+        FROM CENTRALE_FUNECAP_JB.dbo.CLIENTS');
         $count = $stmt->fetchAll();
 
         dump($count);

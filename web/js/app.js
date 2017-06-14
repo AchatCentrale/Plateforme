@@ -308,9 +308,11 @@ $('#btn-new-cl').on('click', function (e) {
 
     e.preventDefault();
 
-    let query = $('#usr').val();
+    let query = $('#usr').val().trim();
 
-    let tpl = "/client/new?raison-soc=" + query;
+    let centrale = $('#centrale').val();
+
+    let tpl = "/client/new?raison-soc=" + query+ "&centrale=" + centrale ;
 
     let loc = window.location.origin + tpl;
     console.log(loc);

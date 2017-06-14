@@ -8,21 +8,7 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>Nouveau client</h2>
-                            <ul class="nav navbar-right panel_toolbox">
-                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Settings 1</a>
-                                        </li>
-                                        <li><a href="#">Settings 2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                </li>
-                            </ul>
+
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -108,8 +94,8 @@
                                                 <label class="col-sm-2 col-form-label col-form-label-lg" for="pays-client">Pays</label>
                                                 <div class="col-xs-5">
                                                     <select name="client-new[pays]" class="form-control form-control-sm client-new"
-                                                            id="pays-client"
-                                                            placeholder="Le pays de l'entreprise">
+                                                            id="pays-client">
+                                                        <option value="0" selected>Le pays de l'entreprise</option>
                                                         {% for country in pays %}
                                                             <option value="{{ country.paDescr }}">{{ country.paDescr }}</option>
                                                         {% endfor %}
@@ -174,27 +160,7 @@
                                     </div>
                                     <div class="column ">
                                         <div class="info-complementaire">
-                                            <div class="choix-centrale">
 
-
-                                                {#choix-centrale#}
-                                                <div class="form-group">
-                                                    <div class="ui form">
-                                                        <div class="field">
-                                                            <label>Choix de la centrale</label>
-                                                            <select class="ui search dropdown">
-                                                                <option value="">Choix de la centrale</option>
-                                                                {% for centr in centrale %}
-                                                                    <option value="{{ centr.soId }}">{{ centr.soRaisonsoc }}</option>
-
-                                                                {% endfor %}
-
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
 
                                             <div class="info-final">
 
@@ -215,7 +181,7 @@
                                                 {#acti#}
                                                 <div class="form-group">
                                                     <label for="acti-client">Activité</label>
-                                                    <select disabled name="client-new[acti]" class="form-control form-control-sm"
+                                                    <select  name="client-new[acti]" class="form-control form-control-sm"
                                                             id="acti-client">
                                                         <option value="">Selectionner l'activité de l'entreprise</option>
 

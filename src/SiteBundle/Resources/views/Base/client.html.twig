@@ -29,8 +29,29 @@
                 <div class="ation-toolbox">
                     <div class="ui equal width grid">
                         <div class="equal width row">
-                            <div class="column"><input type="text" class="form-control" placeholder="Nom de l'entreprise" id="usr"></div>
-                            <div class="column"><a href="{{ path('client-new') }}" class="ui button green" id="btn-new-cl" role="button">Ajouter un nouveau client</a></div>
+                            <div class="column">
+                                <input type="text" class="form-control" placeholder="Nom de l'entreprise" id="usr">
+                            </div>
+                            <div class="column">
+                                {#choix-centrale#}
+                                <div class="form-group">
+                                    <div class="ui form">
+                                        <div class="field">
+                                            <select id="centrale" class="ui search dropdown">
+                                                <option value="">Choix de la centrale</option>
+                                                {% for centr in centrale %}
+                                                    <option value="{{ centr.soId }}">{{ centr.soRaisonsoc }}</option>
+
+                                                {% endfor %}
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <a href="{{ path('client-new') }}" class="ui button green" id="btn-new-cl" role="button">Ajouter un nouveau client</a>
+                            </div>
                         </div>
                     </div>
 
