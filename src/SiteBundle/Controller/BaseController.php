@@ -4,6 +4,7 @@ namespace SiteBundle\Controller;
 
 
 use AchatCentrale\CrmBundle\Entity\ClientsNotes;
+use FunecapBundle\Entity\Clients;
 use Ivory\GoogleMap\Base\Bound;
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Map;
@@ -84,6 +85,14 @@ class BaseController extends Controller
                    $req = $request->request->get('client-new');
 
                    dump($req);
+
+                   $clientNew = new Clients();
+
+                   $clientNew
+                       ->set
+
+
+
 
 
                    return $this->render('@Site/Base/client.new.html.twig', [

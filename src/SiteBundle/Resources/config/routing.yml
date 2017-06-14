@@ -44,13 +44,6 @@ client-status:
     path:     /client/{id}/{centrale}/status
     defaults: { _controller: SiteBundle:Base:ClientStatut }
 
-Who-Are-The-User:
-    path:     /who/{type}
-    defaults: { _controller: SiteBundle:Base:whoAre }
-
-Count:
-    path:     /Agence/count
-    defaults: { _controller: SiteBundle:Base:countAgence }
 
 sendClientDetailMail:
     path:     /send/client/{clientId}

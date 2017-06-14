@@ -13,10 +13,7 @@
                         </div>
                         <div class="x_content">
 
-
-
-
-                            <form action="{{ path('client-new') }}" method="post">
+                            <form action="{{ path('client-new', {'centrale' : app.request.query.get('centrale') } ) }}" method="post">
 
                                 <div class="ui stackable two column grid form-client-new">
                                     <div class=" column  ">
