@@ -141,7 +141,6 @@ class BaseController extends Controller
                }
 
 
-               dump($region);
 
 
                return $this->render('@Site/Base/client.new.html.twig', [
