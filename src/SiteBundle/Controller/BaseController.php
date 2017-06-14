@@ -67,7 +67,6 @@ class BaseController extends Controller
             ]);
 
 
-        dump($centrale);
 
        switch ($centrale[0]->getSoRaisonsoc()){
            case 'CENTRALE_ROC_ECLERC':
