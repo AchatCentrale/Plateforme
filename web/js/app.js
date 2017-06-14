@@ -1,5 +1,6 @@
 const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
 
+moment.locale('fr');
 
 function archiveTask(e) {
     console.log(e);
@@ -50,6 +51,56 @@ function archiveTask(e) {
         });
 
 
+}
+
+
+function unArchiveTask(e) {
+    console.log(e);
+    let url = 'http://localhost:8000/taches/unarchive/' + e;
+
+    swal({
+            title: "Achiver d'une action",
+            text: "Voulez-vous vraiment désarchiver cet action ?",
+            type: "info",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+            allowOutsideClick: true,
+            confirmButtonColor: "#d65d5d"
+        },
+        function () {
+            $.ajax({
+
+                // Adresse à laquelle la requête est envoyée
+                url: url,
+
+                // Le délai maximun en millisecondes de traitement de la demande
+                timeout: 4000,
+
+                // La fonction à apeller si la requête aboutie
+                success: function (data) {
+                    swal({
+                        title: "Désarchiver une action",
+                        text: "Action désaarchivé",
+                        type: "info",
+                        showCancelButton: true,
+                    });
+
+                    let id = e;
+
+                    $("#" + id).remove()
+                },
+
+                // La fonction à appeler si la requête n'a pas abouti
+                error: function () {
+                    console.log("error");
+
+                }
+
+            });
+
+
+        });
 }
 
 
@@ -130,146 +181,6 @@ $('.menu .item')
 ;
 
 
-// $(".input-for-search").on('change', function (e) {
-//     console.log($(this).val());
-//
-//
-//     let url = "http://localhost:8000/client/All";
-//
-//     $.ajax({
-//         url: url,
-//         data: 'query=' + $(this).val(),
-//
-//         success: function (data) {
-//             console.log(data.length);
-//             let tpl = "";
-//             for (let value in data) {
-//
-//
-//                 tpl += ` <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-//                                     <div class="well profile_view">
-//                                         <div class="col-sm-12">
-//
-//                                             <h4 class="brief label label-warning"><i>${data[value].SO_RAISONSOC}</i></h4>
-//                                             <div class="left col-xs-7">
-//                                                 <h2>${data[value].CL_RAISONSOC}</h2>
-//                                                 <p><strong>REF </strong> ${data[value].CL_REF}
-//                                                 </p>
-//                                                 <ul class="list-unstyled">
-//                                                     <li><i class="fa fa-building"></i>
-//                                                         Adresse: ${data[value].CL_CP} ${data[value].CL_VILLE}</li>
-//
-//                                                 </ul>
-//                                             </div>
-//                                             <div class="right col-xs-5 text-center">
-//                                                 <img src="http://gentelella.herokuapp.com/assets/images/user.png"
-//                                                      alt="" class="img-circle img-responsive">
-//                                             </div>
-//                                         </div>
-//                                         <div class="col-xs-12 bottom text-center">
-//                                             <div class="col-xs-12 col-sm-6 emphasis">
-//                                                 <p class="ratings">
-//                                                     <span class="label label-primary">Status</span>
-//                                                 </p>
-//                                             </div>
-//                                             <div class="col-xs-12 col-sm-6 emphasis">
-//
-//                                                  <a href="http://localhost:8000/client/${data[value].CL_ID}/${data[value].SO_RAISONSOC}/general"
-//                                                    class="btn btn-success" role="button"><i class="fa fa-user"> </i>
-//                                                     Voir le
-//                                                     profil</a>
-//
-//                                             </div>
-//                                         </div>
-//                                     </div>
-//                                 </div>`;
-//             }
-//
-//
-//             $('.client-all').html(tpl);
-//             $('#count-client').html(`Il y a ${data.length} clients`)
-//
-//
-//         },
-//         error: function () {
-//             alert('La requête n\'a pas abouti');
-//         }
-//     })
-//
-// });
-//
-//
-// // $('.img-centrale').on('click', function (e) {
-// //     $('.table-client-all').html("");
-// //
-// //     let url = "http://localhost:8000/client/All";
-// //
-// //     let centrale = $(this).data("centrale");
-// //
-// //     $.ajax({
-// //         url: url,
-// //         data: 'centrale=' + centrale,
-// //
-// //         success: function (data) {
-// //             $('.client-all').html("");
-// //
-// //             console.log(data);
-// //             let tpl = "";
-// //             for (let value in data) {
-// //
-// //
-// //                 tpl += ` <div class="col-md-4 col-sm-4 col-xs-12 profile_details">
-// //                                     <div class="well profile_view">
-// //                                         <div class="col-sm-12">
-// //
-// //                                             <h4 class="brief label label-warning"><i>${centrale}</i></h4>
-// //                                             <div class="left col-xs-7">
-// //                                                 <h2>${data[value].CL_RAISONSOC}</h2>
-// //                                                 <p><strong>REF </strong> ${data[value].CL_REF}
-// //                                                 </p>
-// //                                                 <ul class="list-unstyled">
-// //                                                     <li><i class="fa fa-building"></i>
-// //                                                         Adresse: ${data[value].CL_CP} ${data[value].CL_VILLE}</li>
-// //
-// //                                                 </ul>
-// //                                             </div>
-// //                                             <div class="right col-xs-5 text-center">
-// //                                                 <img src="http://gentelella.herokuapp.com/assets/images/user.png"
-// //                                                      alt="" class="img-circle img-responsive">
-// //                                             </div>
-// //                                         </div>
-// //                                         <div class="col-xs-12 bottom text-center">
-// //                                             <div class="col-xs-12 col-sm-6 emphasis">
-// //                                                 <p class="ratings">
-// //                                                     <span class="label label-primary">Status</span>
-// //                                                 </p>
-// //                                             </div>
-// //                                             <div class="col-xs-12 col-sm-6 emphasis">
-// //
-// //                                                 <a href="http://localhost:8000/client/${data[value].CL_ID}/${centrale}/general"
-// //                                                    class="btn btn-success" role="button"><i class="fa fa-user"> </i>
-// //                                                     Voir le
-// //                                                     profil</a>
-// //
-// //                                             </div>
-// //                                         </div>
-// //                                     </div>
-// //                                 </div>`;
-// //             }
-// //
-// //
-// //             $('.client-all').html(tpl);
-// //             $('#count-client').html(`Il y a ${data.length} clients`);
-// //
-// //
-// //
-// //         },
-// //         error: function () {
-// //             alert('La requête n\'a pas abouti');
-// //         }
-// //     })
-// // })
-
 
 $('#siret-client').mask('000 000 000 00000');
 $('#siret-update').mask('000 000 000 00000');
@@ -294,6 +205,9 @@ $('#dtadh-client').datepicker({
 
 $('.check').on('click', function (e) {
     archiveTask(e.currentTarget.id);
+});
+$('.uncheck').on('click', function (e) {
+    unArchiveTask(e.currentTarget.id);
 });
 
 
@@ -409,6 +323,8 @@ $('.detail-tache').on("click", function (e) {
         success: function (data) {
 
             let el = $('.body-task-detail');
+            $('.modal-title-task').empty();
+            el.empty();
 
             let title = `<p>tâche #${data.id}</p>`;
 
@@ -416,8 +332,54 @@ $('.detail-tache').on("click", function (e) {
 
 
 
+            console.log();
 
-            let tpl = `<p>${data.id}</p>`;
+
+            let tpl = ` <div class="ui centered  grid">
+                        <div class="three column row">
+                            <div class="column">
+                                <p>${data.nom}</p>
+                            </div>
+
+                        </div>
+                        <div class="one column row">
+                            <div class="column">
+                                <p>Assigné à</p>
+                            </div>
+
+                        </div>
+                        <div class="one column row">
+                            <div class="column">
+                                <p>${data.descr}</p>
+                            </div>
+
+                        </div>
+                        <div class="two column row">
+                            <div class="column">
+                                <p>Crée le </p>
+                            </div>
+                            <div class="column">
+                                <p>${data.echeance}</p>
+                            </div>
+                        </div>
+                        <div class="three column row">
+                            <div class="column">
+                                <button class="ui button">
+                                    Modifié la tache
+                                </button>
+                            </div>
+                            <div class="column">
+                                <button class="ui button">
+                                    Archiver la tâche
+                                </button>
+                            </div>
+                            <div class="column">
+                                <button class="ui button">
+                                    Relancer le contact
+                                </button>
+                            </div>
+                        </div>
+                    </div>`;
 
 
             el.append( tpl );

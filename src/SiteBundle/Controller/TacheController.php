@@ -65,10 +65,17 @@ class TacheController extends Controller
 
         if($result){
 
+            $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy([
+                'usId' => $result->getInsUser()
+            ]);
+
+
             $data = [
                 "id" => utf8_encode($result->getClaId()),
                 "nom" => utf8_encode($result->getclaNom()),
                 "descr" => utf8_encode($result->getclaDescr()),
+                "user" => utf8_encode($user[0]->getUsPrenom()),
+                "creation" => $tacheUtil->utf8_encode_datetime($result->getInsDate()),
                 "echeance" => $tacheUtil->utf8_encode_datetime($result->getClaEcheance())
 
             ];
@@ -98,6 +105,25 @@ class TacheController extends Controller
         $sql = "UPDATE CLIENTS_TACHES
                 SET
                   CLA_STATUS = 1,
+                  MAJ_DATE = GETUTCDATE()
+                WHERE CLA_ID = :id
+                ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return new Response('taches numero :  ' . $id . ' archivé', 200, [
+            'Access-Control-Allow-Origin' => '*'
+        ]);
+    }
+    public function UnArchiveTaskAction($id){
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "UPDATE CLIENTS_TACHES
+                SET
+                  CLA_STATUS = 0,
                   MAJ_DATE = GETUTCDATE()
                 WHERE CLA_ID = :id
                 ";

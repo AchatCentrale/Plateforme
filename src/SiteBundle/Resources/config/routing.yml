@@ -76,6 +76,11 @@ archive-task:
     path: /taches/archive/{id}
     defaults: {_controller: SiteBundle:Tache:ArchiveTask}
 
+
+unarchive-task:
+    path: /taches/unarchive/{id}
+    defaults: {_controller: SiteBundle:Tache:UnArchiveTask}
+
 mail-task:
     path: /taches/mail/{id}
     defaults: {_controller: SiteBundle:Tache:sendMailTask}

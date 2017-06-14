@@ -119,6 +119,8 @@
                                             {% if tasks.claStatus == 1 %}
                                                 <tr id="{{ tasks.claId }}">
                                                     <td><h6>{{ tasks.insDate | Time }}</h6></td>
+
+
                                                     {% if tasks.majDate %}
                                                         <td><h6>{{ tasks.majDate | Time }}</h6></td>
                                                         {% else %}
@@ -131,7 +133,8 @@
                                                     </td>
 
                                                     <td>{{ tasks.claDescr }}</td>
-                                                    <td></td>
+                                                    <td><i id="{{ tasks.claId }}"
+                                                               class="check uncheck large icon cursor"></i></td>
 
                                                 </tr>
                                             {% endif %}
