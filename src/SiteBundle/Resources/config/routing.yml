@@ -86,6 +86,11 @@ mail-task:
     defaults: {_controller: SiteBundle:Tache:sendMailTask}
 
 
+update-client-statut:
+    path: /client/{id}/{centrale}/update/statut
+    defaults: {_controller: SiteBundle:Base:updateStatut}
+    methods: POST
+
 update-client:
     path: /client/{id}/{centrale}/update
     defaults: {_controller: SiteBundle:Base:updateClient}

@@ -43,6 +43,27 @@ class ClientServices
 
 
 
+    public function getTheIdForTheStatut($statut){
+
+
+        switch ($statut){
+            case "A valider":
+                return 0;
+                break;
+            case 'Validé':
+                return 1;
+                break;
+            case 'Bloqué':
+                return 2;
+                break;
+            default:
+                break;
+        }
+
+
+
+        return $statut;
+    }
 
 
 

@@ -447,6 +447,39 @@ class BaseController extends Controller
     }
 
 
+    public function updateStatutAction($id, $centrale, Request $request)
+    {
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $clientUtil = $this->get('site.service.client_services');
+
+
+        $sql = "UPDATE CLIENTS
+                SET
+                  CL_STATUS = :status,
+                  MAJ_DATE = GETUTCDATE()
+                WHERE CL_ID = :id
+                ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':status', $clientUtil->getTheIdForTheStatut($request->request->get('statut')));
+
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return new Response('Client numero :  ' . $id . ' modifié', 200, [
+            'Access-Control-Allow-Origin' => '*'
+        ]);
+
+
+
+
+
+
+        return new JsonResponse("Statut modifié", 200);
+    }
+
     public function updateClientAction(Request $request, $id, $centrale)
     {
 
@@ -650,13 +683,19 @@ class BaseController extends Controller
 
     public function testAction()
     {
-        $count = \Doctrine\DBAL\Types\Type::getTypesMap();
+        $clientUtil = $this->get('site.service.client_services');
+
+
+        $statut = "Bloqué";
+
+
+        $count = $clientUtil->getTheIdForTheStatut($statut);
 
 
         return $this->render(
             '@AchatCentraleCrm/testView.html.twig',
             [
-                'count' => $count,
+                'count' => $count
             ]
         );
 

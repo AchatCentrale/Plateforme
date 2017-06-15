@@ -520,3 +520,49 @@ $('.text-hover-edit').on('click', function () {
 });
 
 
+$('.statut-client-edit').on('click', function () {
+   $(this).hide();
+   $('#select-statut-edit-client').show();
+});
+
+
+$('#select-statut-edit-client').on('change', function (e) {
+
+
+    let url = CURRENT_URL.substring(0, 53) + "/update/statut";
+    console.log(url);
+
+    $.ajax({
+
+        // Adresse à laquelle la requête est envoyée
+        url: url,
+
+        type: 'POST',
+
+
+        data: {
+            statut: e.target.value,
+
+
+        },
+        // Le délai maximun en millisecondes de traitement de la demande
+        timeout: 4000,
+
+        // La fonction à apeller si la requête aboutie
+        success: function (data) {
+
+            console.log(data);
+
+            window.location.reload();
+        },
+
+        // La fonction à appeler si la requête n'a pas abouti
+        error: function (e) {
+            console.log(e);
+
+        }
+
+    });
+
+});
+

@@ -162,9 +162,14 @@
                                     <p class="cursor label-background" data-index="fact-val">5 000 €</p>
                                 </div>
                                 <div class="info-client-detail">
-                                    <p class="title-detail-client ">Statut de la facture</p>
-                                    <p class="cursor label-background"
-                                       data-index="fact-stat"> {{ client[0].clAdhesion }}</p>
+                                    <p class="title-detail-client ">Statut de l'adhésion</p>
+                                    <p class="cursor label-background statut-client-edit"
+                                       data-index="fact-stat"> {{ client[0].clStatus | status }}</p>
+                                    <select class="form-control" id="select-statut-edit-client" style="display: none">
+                                        <option>A valide</option>
+                                        <option>Validé</option>
+                                        <option>Bloqué</option>
+                                    </select>
                                 </div>
 
 

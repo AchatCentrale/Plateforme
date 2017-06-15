@@ -51,13 +51,13 @@ class CrmFilter extends \Twig_Extension
 
         switch ($status){
             case 0:
-                return "<p class=\"ui blue label\">A Validé</p>";
+                return "A Validé";
                 break;
             case 1:
-                return "<p class=\"ui green label\">Validé</p>";
+                return "Validé";
                 break;
             case 2:
-                return "<p class=\"ui red label\">Bloqué</p>";
+                return "Bloqué";
                 break;
             default:
                 break;
