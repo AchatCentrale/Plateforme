@@ -154,7 +154,7 @@ class BaseController extends Controller
 
                     $stmt->execute();
 
-                    dump($req);
+
 
 
 
