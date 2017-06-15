@@ -118,7 +118,6 @@ class CrmFilter extends \Twig_Extension
 
     public function dateFilter(\DateTime $date = null)
     {
-        dump($date);
 
        if(gettype($date) === null){
            return $date;
