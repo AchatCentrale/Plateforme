@@ -17,9 +17,24 @@
 
                         <div id="crop-avatar">
                             <!-- Current avatar -->
+
+                            {% if client[0].clLogo %}
+
+
+
                             <img class="img-responsive img-rounded  avatar-view"
                                  src="http://www.centrale-{{ centrale | centrale }}.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].clId }}/{{ client[0].clLogo }}"
                                  alt="Logo" style="width: 35%">
+
+                                {% else %}
+
+
+                                    <img class="img-responsive img-rounded  avatar-view"
+                                         src="{{ asset('images/phot-indispo.jpg') }}"
+                                         alt="Logo" style="width: 35%">
+
+
+                            {% endif %}
 
 
                         </div>
