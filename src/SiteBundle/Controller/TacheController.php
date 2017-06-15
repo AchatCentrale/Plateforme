@@ -55,6 +55,8 @@ class TacheController extends Controller
     public function DetailTaskAction($id)
     {
 
+        \Moment\Moment::setLocale('fr_FR');
+
         $tacheUtil = $this->get('site.service.taches_utils');
 
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches');
@@ -70,13 +72,25 @@ class TacheController extends Controller
             ]);
 
 
+
+
+            $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+            $creationFromNow = $creation->fromNow();
+
+
+
+            $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+            $echanceFuture = $echeance->calendar();
+
+
+
             $data = [
                 "id" => utf8_encode($result->getClaId()),
                 "nom" => utf8_encode($result->getclaNom()),
                 "descr" => utf8_encode($result->getclaDescr()),
                 "user" => utf8_encode($user[0]->getUsPrenom()),
-                "creation" => $tacheUtil->utf8_encode_datetime($result->getInsDate()),
-                "echeance" => $tacheUtil->utf8_encode_datetime($result->getClaEcheance())
+                "creation" => $creationFromNow->getRelative(),
+                "echeance" => $echanceFuture
 
             ];
 

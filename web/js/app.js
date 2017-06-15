@@ -356,10 +356,10 @@ $('.detail-tache').on("click", function (e) {
                             </div>
                             <div class="two column row">
                                 <div class="column">
-                                    <p>Crée le : ${data.creation} </p>
+                                    <h4>Crée ${data.creation} </h4>
                                 </div>
                                 <div class="column">
-                                    <p>${data.echeance}</p>
+                                    <h4>A terminer avant le ${data.echeance}</h4>
                                 </div>
                             </div>
                             <div class="three column row">
@@ -369,7 +369,7 @@ $('.detail-tache').on("click", function (e) {
                                     </button>
                                 </div>
                                 <div class="column">
-                                    <button class="ui button">
+                                    <button id="archive-task-detail" onclick="archiveTask(${data.id})" class="ui button">
                                         Archiver la tâche
                                     </button>
                                 </div>
@@ -383,9 +383,6 @@ $('.detail-tache').on("click", function (e) {
 
 
             el.append(tpl);
-
-
-            console.log(el);
 
 
             $('#modal-task').modal('show')
@@ -521,3 +518,5 @@ $('.text-hover-edit').on('click', function () {
     $('#logo-edit').modal('show')
 
 });
+
+
