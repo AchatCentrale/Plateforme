@@ -81,10 +81,39 @@ class BaseController extends Controller
 
 
                 if ($request->getMethod() == 'POST') {
-
                     $req = $request->request->get('client-new');
 
-                    dump($req);
+
+                    $sql_insert = 'INSERT INTO CENTRALE_ACHAT_JB.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
+                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(year, +1, GETDATE())  )';
+
+
+                    $db2 = $this->get('doctrine.dbal.centrale_funecap_jb_connection');
+
+
+                    $stmt = $db2->prepare($sql_insert);
+
+                    $stmt->bindValue("re", $req["region"], 'integer');
+                    $stmt->bindValue("ref", $req["ref"], 'text');
+                    $stmt->bindValue("raisonSoc", $req["raison-soc"], 'text');
+                    $stmt->bindValue("siret", $req["siret"], 'text');
+                    $stmt->bindValue("siret", str_replace(' ', '', $req["siret"]), 'text');
+                    $stmt->bindValue("adresse", $req["adresse"], 'text');
+                    $stmt->bindValue("cp", $req["cp"], 'text');
+                    $stmt->bindValue("ville", $req["ville"], 'text');
+                    $stmt->bindValue("pays", $req["pays"], 'text');
+                    $stmt->bindValue("tel", str_replace(' ', '', $req["tel"]), 'text');
+                    $stmt->bindValue("mail", $req["mail"], 'text');
+                    $stmt->bindValue("web", $req["web"], 'text');
+                    $stmt->bindValue("activite", $req["acti"], 'integer');
+                    $stmt->bindValue("groupe", $req["groupe"], 'integer');
+                    $stmt->bindValue("effectif", $req["effe"], 'integer');
+                    $stmt->bindValue("classif", $req["classif"], 'integer');
+                    $stmt->bindValue("ca", str_replace(' ', '', $req["ca"]), 'float');
+                    $stmt->bindValue("status", $req["status"], 'text');
+                    $stmt->bindValue("user", $this->getUser()->getusMail(), 'text');
+
+                    $stmt->execute();
 
 
                     return $this->render('@Site/Base/client.new.html.twig', [
@@ -124,7 +153,7 @@ class BaseController extends Controller
 
 
                     $sql_insert = 'INSERT INTO CENTRALE_FUNECAP_JB.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
-                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, (year(getdate()) + 1)  )';
+                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(year, +1, GETDATE())  )';
 
 
                     $db2 = $this->get('doctrine.dbal.centrale_funecap_jb_connection');
@@ -558,7 +587,6 @@ class BaseController extends Controller
         }
 
 
-        dump($client);
         return $this->render(
             '@Site/Base/client.adresse.html.twig',
             [
@@ -624,7 +652,6 @@ class BaseController extends Controller
     {
         $count = \Doctrine\DBAL\Types\Type::getTypesMap();
 
-        dump($count);
 
         return $this->render(
             '@AchatCentraleCrm/testView.html.twig',
