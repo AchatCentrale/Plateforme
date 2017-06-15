@@ -181,7 +181,6 @@ $('.menu .item')
 ;
 
 
-
 $('#siret-client').mask('000 000 000 00000');
 $('#siret-update').mask('000 000 000 00000');
 $('#tel-client').mask('00 00 00 00 00 ');
@@ -226,7 +225,7 @@ $('#btn-new-cl').on('click', function (e) {
 
     let centrale = $('#centrale').val();
 
-    let tpl = "/client/new?raison-soc=" + query+ "&centrale=" + centrale ;
+    let tpl = "/client/new?raison-soc=" + query + "&centrale=" + centrale;
 
     let loc = window.location.origin + tpl;
     console.log(loc);
@@ -328,61 +327,62 @@ $('.detail-tache').on("click", function (e) {
 
             let title = `<p>tâche #${data.id}</p>`;
 
-            $('.modal-title-task').append( title );
+            $('.modal-title-task').append(title);
 
 
+            console.log(data);
 
-            console.log();
 
-
-            let tpl = ` <div class="ui centered  grid">
-                        <div class="three column row">
-                            <div class="column">
-                                <p>${data.nom}</p>
+            let tpl = `  <h4>${data.nom}</h4> 
+  <br>
+                    <div class="ui centered  grid">
+                           
+                            <div class="one column row">
+                                <div class="column">
+                                    <p>Assigné à : </p> 
+                                    <a class="ui image label">
+  <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+  ${data.user}
+</a>
+                                </div>
+    
                             </div>
-
-                        </div>
-                        <div class="one column row">
-                            <div class="column">
-                                <p>Assigné à</p>
+                            <div class="one column row">
+                                <div class="column">
+                                    <h5>Description de la tâche a éffectuer :</h5>
+                                    <p class="task-description">${data.descr}</p>
+                                </div>
+    
                             </div>
-
-                        </div>
-                        <div class="one column row">
-                            <div class="column">
-                                <p>${data.descr}</p>
+                            <div class="two column row">
+                                <div class="column">
+                                    <p>Crée le : ${data.creation} </p>
+                                </div>
+                                <div class="column">
+                                    <p>${data.echeance}</p>
+                                </div>
                             </div>
-
-                        </div>
-                        <div class="two column row">
-                            <div class="column">
-                                <p>Crée le : ${data.creation} </p>
+                            <div class="three column row">
+                                <div class="column">
+                                    <button class="ui button">
+                                        Modifié la tache
+                                    </button>
+                                </div>
+                                <div class="column">
+                                    <button class="ui button">
+                                        Archiver la tâche
+                                    </button>
+                                </div>
+                                <div class="column">
+                                    <button class="ui button">
+                                        Relancer le contact
+                                    </button>
+                                </div>
                             </div>
-                            <div class="column">
-                                <p>${data.echeance}</p>
-                            </div>
-                        </div>
-                        <div class="three column row">
-                            <div class="column">
-                                <button class="ui button">
-                                    Modifié la tache
-                                </button>
-                            </div>
-                            <div class="column">
-                                <button class="ui button">
-                                    Archiver la tâche
-                                </button>
-                            </div>
-                            <div class="column">
-                                <button class="ui button">
-                                    Relancer le contact
-                                </button>
-                            </div>
-                        </div>
                     </div>`;
 
 
-            el.append( tpl );
+            el.append(tpl);
 
 
             console.log(el);
@@ -400,19 +400,18 @@ $('.detail-tache').on("click", function (e) {
     });
 
 
-
 });
 
 $('.save-update-client').on('click', function (e) {
 
     let values = $("input[name='data-client[]'], select[name='data-client[]']")
-        .map(function(){
-            return $(this).val();
-        }
+        .map(function () {
+                return $(this).val();
+            }
         ).get();
 
 
-   console.log(values);
+    console.log(values);
 
     let url = CURRENT_URL.substring(0, 60) + "update";
 
@@ -421,18 +420,18 @@ $('.save-update-client').on('click', function (e) {
         // Adresse à laquelle la requête est envoyée
         url: url,
 
-        type : 'POST',
+        type: 'POST',
 
 
         data: {
-            siret : values[0].replace(/\s/g,''),
-            mail : values[1],
-            tel : values[2].replace(/\s/g,''),
-            cp : values[3],
-            eff : values[4],
-            ca : values[5],
-            adresse : values[6],
-            ville : values[7],
+            siret: values[0].replace(/\s/g, ''),
+            mail: values[1],
+            tel: values[2].replace(/\s/g, ''),
+            cp: values[3],
+            eff: values[4],
+            ca: values[5],
+            adresse: values[6],
+            ville: values[7],
 
         },
         // Le délai maximun en millisecondes de traitement de la demande
@@ -453,8 +452,6 @@ $('.save-update-client').on('click', function (e) {
         }
 
     });
-
-
 
 
     $('#myModal').modal('hide')
@@ -474,11 +471,11 @@ $('.add-note').on('click', function (e) {
         // Adresse à laquelle la requête est envoyée
         url: url,
 
-        type : 'POST',
+        type: 'POST',
 
 
         data: {
-            content_note : $input
+            content_note: $input
 
         },
         // Le délai maximun en millisecondes de traitement de la demande
@@ -504,24 +501,23 @@ $('.add-note').on('click', function (e) {
 });
 
 
-
 $('#isGenerique').on('click', function (e) {
 
-    if(document.getElementById("achatcentrale_crmbundle_clientstaches_cl").disabled === true){
+    if (document.getElementById("achatcentrale_crmbundle_clientstaches_cl").disabled === true) {
         $('#achatcentrale_crmbundle_clientstaches_cl').prop("disabled", false);
 
-    }else if(document.getElementById("achatcentrale_crmbundle_clientstaches_cl").disabled === false){
+    } else if (document.getElementById("achatcentrale_crmbundle_clientstaches_cl").disabled === false) {
         $('#achatcentrale_crmbundle_clientstaches_cl').prop("disabled", true);
 
-    }else{
+    } else {
         alert('error');
     }
-
-
-
 
 
 });
 
 
+$('.text-hover-edit').on('click', function () {
+    $('#logo-edit').modal('show')
 
+});

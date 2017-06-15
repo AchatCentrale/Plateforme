@@ -21,19 +21,24 @@
                             {% if client[0].clLogo %}
 
 
-
-                            <img class="img-responsive img-rounded  avatar-view"
-                                 src="http://www.centrale-{{ centrale | centrale }}.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].clId }}/{{ client[0].clLogo }}"
-                                 alt="Logo" style="width: 35%">
-
-                                {% else %}
-
-
+                                <div class="container-hover-image">
                                     <img class="img-responsive img-rounded  avatar-view"
+                                         src="http://www.centrale-{{ centrale | centrale }}.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].clId }}/{{ client[0].clLogo }}"
+                                         alt="Logo" style="width: 35%">
+                                    <div class="middle">
+                                        <div class="text-hover-edit cursor"><i class="paint large brush icon"></i></div>
+                                    </div>
+                                </div>
+                            {% else %}
+
+                                <div class="container-hover-image">
+                                    <img class="img-responsive img-rounded image-hover-edit   avatar-view"
                                          src="{{ asset('images/phot-indispo.jpg') }}"
                                          alt="Logo" style="width: 35%">
-
-
+                                    <div class="middle">
+                                        <div class="text-hover-edit cursor"><i class="paint large brush icon"></i></div>
+                                    </div>
+                                </div>
                             {% endif %}
 
 
@@ -176,48 +181,14 @@
                             <div class="ui feed">
                                 <div class="event">
                                     <div class="label">
-                                        <i class="pencil icon"></i>                                    </div>
+                                        <i class="pencil icon"></i></div>
                                     <div class="content">
                                         You added Elliot Fu to the group <a>Coworkers</a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="ui feed">
-                                <div class="event">
-                                    <div class="label">
-                                        <i class="pencil icon"></i>                                    </div>
-                                    <div class="content">
-                                        You added Elliot Fu to the group <a>Coworkers</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ui feed">
-                                <div class="event">
-                                    <div class="label">
-                                        <i class="pencil icon"></i>                                    </div>
-                                    <div class="content">
-                                        You added Elliot Fu to the group <a>Coworkers</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ui feed">
-                                <div class="event">
-                                    <div class="label">
-                                        <i class="pencil icon"></i>                                    </div>
-                                    <div class="content">
-                                        You added Elliot Fu to the group <a>Coworkers</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="ui feed">
-                                <div class="event">
-                                    <div class="label">
-                                        <i class="pencil icon"></i>                                    </div>
-                                    <div class="content">
-                                        You added Elliot Fu to the group <a>Coworkers</a>
-                                    </div>
-                                </div>
-                            </div>
+
+
                         </div>
 
                         <div class="tab-detail-client" role="tabpanel" data-example-id="togglable-tabs">
@@ -254,7 +225,7 @@
                                 {#User_client#}
                                 <div role="tabpanel" class="tab-pane fade active in" id="tab_content3"
                                      aria-labelledby="profile-tab">
-                                    {% if user  %}
+                                    {% if user %}
                                         <table class="ui celled padded table">
                                             <thead>
                                             <tr>
@@ -287,7 +258,7 @@
                                             {% endfor %}
                                             </tbody>
                                         </table>
-                                        {% else %}
+                                    {% else %}
                                         <p>Il n'y aucun utilisateur pour ce client</p>
                                     {% endif %}
                                 </div>
@@ -361,7 +332,7 @@
                                                                 <li>{{ n.insDate | Time }} : {{ n.cnNote }}</li>
                                                             </ul>
                                                         {% endfor %}
-                                                        {% else %}
+                                                    {% else %}
                                                         <p>Il n'y aucune note pour le client</p>
 
                                                     {% endif %}
@@ -468,6 +439,49 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 <button type="button" class="btn btn-success save-update-client">Enregistrer les modifications</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="logo-edit" tabindex="-1" role="dialog" aria-labelledby="logo-edit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modifier le logo</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="ui equal centered width grid">
+                    <div class="equal width row">
+                        <div class="column">
+                            <h4>Photos actuelle</h4>
+                            <img class="img-responsive img-for-edit"
+                                 src="http://www.centrale-{{ centrale | centrale }}.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].clId }}/{{ client[0].clLogo }}"/>
+                            
+                        </div>
+                        <div class="column">
+
+
+
+                            <form action="/file-upload" class="dropzone">
+                                <div class="fallback">
+                                    <input name="file" type="file" multiple />
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-success save-edit-logo">Enregistrer les modifications</button>
             </div>
         </div>
     </div>

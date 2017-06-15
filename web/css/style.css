@@ -371,3 +371,52 @@ label{
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
+.container-hover-image {
+    position: relative;
+    width: 100%;
+}
+
+.image-hover-edit {
+    opacity: 1;
+    transition: .4s ease;
+    backface-visibility: hidden;
+}
+
+.middle {
+    transition: .4s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%)
+}
+.container-hover-image:hover .image {
+    opacity: 0.3;
+}
+
+.container-hover-image:hover .middle {
+    opacity: 1;
+}
+
+.text-hover-edit {
+    color: black;
+    background-color: #ededed;
+    border: 1px solid black;
+    font-size: 16px;
+    border-radius: 100%;
+    padding: 16px 32px;
+}
+
+.img-for-edit{
+
+    border: 1px solid black;
+}
+
+p.task-description {
+    background-color: #e8e8e8;
+    padding: 10px 10px 70px 10px;
+    font-size: 14pt;
+    border-radius: 3px;
+}
