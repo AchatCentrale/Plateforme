@@ -5,23 +5,19 @@ namespace SiteBundle\Controller;
 
 use AchatCentrale\CrmBundle\Entity\ClientsNotes;
 use DateTime;
-use DateTimeZone;
 use FunecapBundle\Entity\Clients;
-use Ivory\GoogleMap\Base\Bound;
+use Http\Adapter\Guzzle6\Client;
+use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Base\Coordinate;
 use Ivory\GoogleMap\Map;
 use Ivory\GoogleMap\Overlay\Animation;
 use Ivory\GoogleMap\Overlay\Icon;
-use Ivory\GoogleMap\Overlay\InfoWindow;
-use Ivory\GoogleMap\Overlay\InfoWindowType;
 use Ivory\GoogleMap\Overlay\Marker;
 use Ivory\GoogleMap\Overlay\MarkerShape;
 use Ivory\GoogleMap\Overlay\MarkerShapeType;
 use Ivory\GoogleMap\Overlay\Symbol;
 use Ivory\GoogleMap\Overlay\SymbolPath;
 use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
-use Http\Adapter\Guzzle6\Client;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -73,125 +69,119 @@ class BaseController extends Controller
             ]);
 
 
-
-       switch ($centrale[0]->getSoRaisonsoc()){
-           case 'CENTRALE_ROC_ECLERC':
-               $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
-               $activite = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findBy([
-                   'soId' => $centrale_ID
-               ]);
-               $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findAll();
-               $classif = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Classif')->findAll();
-               $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findAll();
-
-
-               if ($request->getMethod() == 'POST') {
-
-                   $req = $request->request->get('client-new');
-
-                   dump($req);
+        switch ($centrale[0]->getSoRaisonsoc()) {
+            case 'CENTRALE_ROC_ECLERC':
+                $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
+                $activite = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findBy([
+                    'soId' => $centrale_ID
+                ]);
+                $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findAll();
+                $classif = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Classif')->findAll();
+                $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findAll();
 
 
+                if ($request->getMethod() == 'POST') {
+
+                    $req = $request->request->get('client-new');
+
+                    dump($req);
 
 
+                    return $this->render('@Site/Base/client.new.html.twig', [
+                        'state' => 'Client enregistrer',
+                        'pays' => $pays,
+                        'activite' => $activite,
+                        'groupe' => $groupe,
+                        'classif' => $classif,
+                        'region' => $region,
+                        'centrale' => $centrale,
+                        'raisonSoc' => $raison_soc,
+                    ]);
+                }
 
 
-                   return $this->render('@Site/Base/client.new.html.twig', [
-                       'state' => 'Client enregistrer',
-                       'pays' => $pays,
-                       'activite' => $activite,
-                       'groupe' => $groupe,
-                       'classif' => $classif,
-                       'region' => $region,
-                       'centrale' => $centrale,
-                       'raisonSoc' => $raison_soc,
-                   ]);
-               }
+                return $this->render('@Site/Base/client.new.html.twig', [
+                    'raisonSoc' => $raison_soc,
+                    'pays' => $pays,
+                    'activite' => $activite,
+                    'groupe' => $groupe,
+                    'classif' => $classif,
+                    'region' => $region,
+                ]);
+                break;
+            case 'CENTRALE_FUNECAP':
+
+                $pays = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Pays')->findAll();
+                $activite = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Activites')->findAll();
+                $groupe = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Groupe')->findAll();
+                $classif = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Classif')->findAll();
+                $region = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Regions')->findAll();
 
 
+                if ($request->getMethod() == 'POST') {
+
+                    $req = $request->request->get('client-new');
 
 
-
-               return $this->render('@Site/Base/client.new.html.twig', [
-                   'raisonSoc' => $raison_soc,
-                   'pays' => $pays,
-                   'activite' => $activite,
-                   'groupe' => $groupe,
-                   'classif' => $classif,
-                   'region' => $region,
-               ]);
-               break;
-           case 'CENTRALE_FUNECAP':
-
-               $pays = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Pays')->findAll();
-               $activite = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Activites')->findAll();
-               $groupe = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Groupe')->findAll();
-               $classif = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Classif')->findAll();
-               $region = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Regions')->findAll();
+                    $sql_insert = 'INSERT INTO CENTRALE_FUNECAP_JB.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER)
+                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user  )';
 
 
-               if ($request->getMethod() == 'POST') {
-
-                   $req = $request->request->get('client-new');
-
-                   dump($req);
-
-                   $clientNew = new Clients();
+                    $db2 = $this->get('doctrine.dbal.centrale_funecap_jb_connection');
 
 
+                    $stmt = $db2->prepare($sql_insert);
 
+                    $stmt->bindValue("re", $req["region"], 'integer');
+                    $stmt->bindValue("ref", $req["ref"], 'text');
+                    $stmt->bindValue("raisonSoc", $req["raison-soc"], 'text');
+                    $stmt->bindValue("siret", $req["siret"], 'text');
+                    $stmt->bindValue("siret", str_replace(' ', '', $req["siret"]), 'text');
+                    $stmt->bindValue("adresse", $req["adresse"], 'text');
+                    $stmt->bindValue("cp", $req["cp"], 'text');
+                    $stmt->bindValue("ville", $req["ville"], 'text');
+                    $stmt->bindValue("pays", $req["pays"], 'text');
+                    $stmt->bindValue("tel", str_replace(' ', '', $req["tel"]), 'text');
+                    $stmt->bindValue("mail", $req["mail"], 'text');
+                    $stmt->bindValue("web", $req["web"], 'text');
+                    $stmt->bindValue("activite", $req["acti"], 'integer');
+                    $stmt->bindValue("groupe", $req["groupe"], 'integer');
+                    $stmt->bindValue("effectif", $req["effe"], 'integer');
+                    $stmt->bindValue("classif", $req["classif"], 'integer');
+                    $stmt->bindValue("ca", str_replace(' ', '', $req["ca"]), 'float');
+                    $stmt->bindValue("status", $req["status"], 'text');
+                    $stmt->bindValue("user", $this->getUser()->getusMail(), 'text');
 
-                   $clientNew
-                       ->setClRef($req["ref"])
-                       ->setClRaisonsoc($req["raison-soc"])
-                       ->setClSiret($req["siret"])
-                       ->setClAdresse1($req["adresse"])
-                       ->setClVille($req["ville"])
-                       ->setClCp($req["cp"])
-                       ->setClPays($req["pays"])
-                       ->setClMail($req["mail"])
-                       ->setClTel(trim($req["tel"]))
-                       ->setClWeb($req["web"])
-                       ->setClCa($req['ca'])
-                       ->setClEffectif($req["effe"])
-                       ->setReId($req["region"])
-                       ->setClActivite($req["acti"])
-                       ->setClGroupe($req["groupe"])
-                       ->setClStatus(1)
-                       ->setInsUser($this->getUser()->getusMail())
-                       ->setSoId(1)
-                   ;
+                    $stmt->execute();
 
-                   $emFunecap->persist($clientNew);
-                   $emFunecap->flush();
-
-
-
-                   return $this->render('@Site/Base/client.new.html.twig', [
-                       'state' => 'Client enregistrer',
-                       'pays' => $pays,
-                       'activite' => $activite,
-                       'groupe' => $groupe,
-                       'classif' => $classif,
-                       'region' => $region,
-                       'centrale' => $centrale,
-                       'raisonSoc' => $raison_soc,
-                   ]);
-               }
+                    dump($req);
 
 
 
 
-               return $this->render('@Site/Base/client.new.html.twig', [
-                   'raisonSoc' => $raison_soc,
-                   'pays' => $pays,
-                   'activite' => $activite,
-                   'groupe' => $groupe,
-                   'classif' => $classif,
-                   'region' => $region,
-               ]);
-               break;
-       }
+                    return $this->render('@Site/Base/client.new.html.twig', [
+                        'state' => 'Client enregistrer',
+                        'pays' => $pays,
+                        'activite' => $activite,
+                        'groupe' => $groupe,
+                        'classif' => $classif,
+                        'region' => $region,
+                        'centrale' => $centrale,
+                        'raisonSoc' => $raison_soc,
+                    ]);
+                }
+
+
+                return $this->render('@Site/Base/client.new.html.twig', [
+                    'raisonSoc' => $raison_soc,
+                    'pays' => $pays,
+                    'activite' => $activite,
+                    'groupe' => $groupe,
+                    'classif' => $classif,
+                    'region' => $region,
+                ]);
+                break;
+        }
     }
 
     public function ClientAction(Request $request)
@@ -199,7 +189,6 @@ class BaseController extends Controller
 
 
         $centrale = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Societes')->findAll();
-
 
 
         $con = $this->getDoctrine()->getManager()->getConnection();
@@ -310,7 +299,7 @@ class BaseController extends Controller
 
         $conn = $this->get('database_connection');
 
-        switch ($centrale){
+        switch ($centrale) {
             case "CENTRALE_FUNECAP":
                 $restresult = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Clients')->findBy([
                         'clId' => $id
@@ -327,9 +316,6 @@ class BaseController extends Controller
                 $stmt->execute();
 
                 $task = $stmt->fetchAll();
-
-
-
 
 
                 $user = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsUsers')->findBy([
@@ -350,12 +336,10 @@ class BaseController extends Controller
                 ]);
 
 
-
                 $notes = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsNotes')->findBy([
                     'cl' => $id,
 
                 ]);
-
 
 
                 return $this->render(
@@ -390,7 +374,6 @@ class BaseController extends Controller
                 $task = $stmt->fetchAll();
 
 
-
                 $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy([
                     'cl' => $id
                 ]);
@@ -406,7 +389,6 @@ class BaseController extends Controller
                 $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findBy([
                     'grId' => $id
                 ]);
-
 
 
                 $notes = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsNotes')->findBy([
@@ -436,8 +418,7 @@ class BaseController extends Controller
     }
 
 
-
-    public function updateClientAction(Request $request,$id,$centrale)
+    public function updateClientAction(Request $request, $id, $centrale)
     {
 
 
@@ -460,7 +441,7 @@ class BaseController extends Controller
 
         if (!$client) {
             throw $this->createNotFoundException(
-                'Pas de client pour l\'id '.$id
+                'Pas de client pour l\'id ' . $id
             );
         }
 
@@ -477,7 +458,6 @@ class BaseController extends Controller
         $em->flush();
 
         $res = "client mise à jour";
-
 
 
         return new JsonResponse($res, 200);
@@ -502,8 +482,7 @@ class BaseController extends Controller
         $notes
             ->setCl($client[0])
             ->setCnNote($content_notes)
-            ->getInsUser($user)
-            ;
+            ->getInsUser($user);
 
         $em->persist($notes);
         $em->flush();
@@ -526,23 +505,14 @@ class BaseController extends Controller
         );
 
 
-
-
-
-
-
         $request = new GeocoderAddressRequest($restresult['getCaAdresse1']);
         $response = $geocoder->geocode($request);
-
 
 
         foreach ($response->getResults() as $result) {
 
 
-
-            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(),$result->getGeometry()->getLocation()->getLongitude());
-
-
+            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
 
 
             $map->setAutoZoom(false);
@@ -578,9 +548,9 @@ class BaseController extends Controller
 
         $client = [];
 
-        foreach ($restresult as $client){
+        foreach ($restresult as $client) {
 
-            if($client->getCaType() === "F"){
+            if ($client->getCaType() === "F") {
 
 
             }
@@ -652,17 +622,9 @@ class BaseController extends Controller
 
     public function testAction()
     {
+        $count = \Doctrine\DBAL\Types\Type::getTypesMap();
 
-        $con = $this->getDoctrine()->getManager()->getConnection();
-        $stmt = $con->executeQuery('SELECT *
-        FROM CENTRALE_FUNECAP_JB.dbo.CLIENTS');
-        $count = $stmt->fetchAll();
-
-        $datetime = new DateTime();
-        dump($datetime->format('Y-m-d H:i:s'));
-
-
-
+        dump($count);
 
         return $this->render(
             '@AchatCentraleCrm/testView.html.twig',
@@ -681,12 +643,12 @@ class BaseController extends Controller
 
 
         $sql = "SELECT *
-FROM CLIENTS as C
+FROM CLIENTS AS C
 
-  JOIN CLIENTS_TACHES as CT on C.CL_ID = CT.CL_ID
-  LEFT OUTER JOIN CLIENTS_NOTES as CN ON C.CL_ID = CN.CL_ID
-  LEFT OUTER JOIN MESSAGE_ENTETE as ME ON C.CL_ID = ME.CL_ID
-  LEFT OUTER JOIN MESSAGE_DETAIL as MD on ME.ME_ID = MD.ME_ID
+  JOIN CLIENTS_TACHES AS CT ON C.CL_ID = CT.CL_ID
+  LEFT OUTER JOIN CLIENTS_NOTES AS CN ON C.CL_ID = CN.CL_ID
+  LEFT OUTER JOIN MESSAGE_ENTETE AS ME ON C.CL_ID = ME.CL_ID
+  LEFT OUTER JOIN MESSAGE_DETAIL AS MD ON ME.ME_ID = MD.ME_ID
 WHERE C.CL_ID = :id
 ORDER BY CT.INS_DATE, CN.INS_DATE, ME.INS_DATE ASC               
         ";

@@ -50,6 +50,9 @@ class CrmFilter extends \Twig_Extension
     public function statusFilter($status){
 
         switch ($status){
+            case 0:
+                return "<p class=\"ui blue label\">A Validé</p>";
+                break;
             case 1:
                 return "<p class=\"ui green label\">Validé</p>";
                 break;
@@ -113,16 +116,21 @@ class CrmFilter extends \Twig_Extension
         return implode($result);
     }
 
-    public function dateFilter(\DateTime $date)
+    public function dateFilter(\DateTime $date = null)
     {
+        dump($date);
+
+       if(gettype($date) === null){
+           return $date;
+
+       }else{
+           \Moment\Moment::setLocale('fr_FR');
+
+           $m = new \Moment\Moment($date->format('Y-m-d H:i:s'), 'UTC');
 
 
-        \Moment\Moment::setLocale('fr_FR');
-
-        $m = new \Moment\Moment($date->format('Y-m-d H:i:s'), 'UTC');
-
-
-        return $m->format('l dS F Y ');
+           return $m->format('l dS F Y ');
+       }
     }
 
     public function typeFilter($type)
