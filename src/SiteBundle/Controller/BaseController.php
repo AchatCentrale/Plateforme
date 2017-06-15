@@ -36,6 +36,13 @@ class BaseController extends Controller
             throw $this->createAccessDeniedException();
         }
 
+
+        $Funecap = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Clients')->findAll();
+
+        $rocEclerc = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
+
+
+
         $user = $this->getUser();
 
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(
@@ -51,6 +58,8 @@ class BaseController extends Controller
             '@Site/Base/home.html.twig',
             [
                 'task' => $task,
+                'funecap' => $Funecap,
+                'roc' => $rocEclerc,
             ]
         );
 
@@ -477,7 +486,6 @@ class BaseController extends Controller
 
 
 
-        return new JsonResponse("Statut modifié", 200);
     }
 
     public function updateClientAction(Request $request, $id, $centrale)
@@ -689,15 +697,8 @@ class BaseController extends Controller
         $statut = "Bloqué";
 
 
-        $count = $clientUtil->getTheIdForTheStatut($statut);
 
 
-        return $this->render(
-            '@AchatCentraleCrm/testView.html.twig',
-            [
-                'count' => $count
-            ]
-        );
 
     }
 
