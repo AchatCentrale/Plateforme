@@ -15,7 +15,7 @@ security:
 
                 class: AchatCentraleCrmBundle:Users
                 property: usMail
-                manager_name: default
+                manager_name: centrale_achat_jb
 
     firewalls:
         main:
