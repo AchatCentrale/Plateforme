@@ -12,8 +12,10 @@ security:
     providers:
         default:
             entity:
+
                 class: AchatCentraleCrmBundle:Users
                 property: usMail
+                manager_name: default
 
     firewalls:
         main:
