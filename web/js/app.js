@@ -32,6 +32,8 @@ function archiveTask(e) {
                         text: "Action archivé",
                         type: "info",
                         showCancelButton: true,
+                        confirmButtonText: "Oui",
+                        cancelButtonText: "Annuler",
                     });
 
                     let id = e;
@@ -289,7 +291,6 @@ $('.img-centrale').on('click', function (e) {
 
 });
 
-
 $('.detail-tache').on("click", function (e) {
 
     let id = $(this).closest("tr").data('task');
@@ -315,7 +316,7 @@ $('.detail-tache').on("click", function (e) {
             $('.modal-title-task').empty();
             el.empty();
 
-            let title = `<p>tâche #${data.id}</p>`;
+            let title = `<p>Tâche #${data.id}</p>`;
 
             $('.modal-title-task').append(title);
 
@@ -324,7 +325,7 @@ $('.detail-tache').on("click", function (e) {
 
 
             let tpl = `  <h4>${data.nom}</h4> 
-  <br>
+                    <br>
                     <div class="ui centered  grid">
                            
                             <div class="one column row">
@@ -352,14 +353,14 @@ $('.detail-tache').on("click", function (e) {
                                     <h4>A terminer avant le ${data.echeance}</h4>
                                 </div>
                             </div>
-                             <div class="three column row">
+                            <div class="three column row">
                                
                                 <div class="ui buttons">
-                                   <button id="archive-task-detail" onclick="archiveTask($\{data.id})" class="ui red button">
+                                   <button id="archive-task-detail" onclick="archiveTask(${data.id})" class="ui red button">
                                         Archiver la tâche
                                     </button>
                                   <div class="or" data-text="ou"></div>
-                                  <button class="ui positive button">Donner suite</button>
+                                  <button onclick="SuiteTask()" class="ui blue button ">Donner suite</button>
                                 </div>
                                 
                                    
@@ -371,7 +372,7 @@ $('.detail-tache').on("click", function (e) {
                                     </button>
                                 </div>
                                 <div class="column center aligned">
-                                    <button id="archive-task-detail" onclick="archiveTask($\{data.id})" class="ui basic positive button">
+                                    <button  class="ui basic positive button">
                                         Relancer le contact
                                     </button>
                                 </dia
@@ -381,8 +382,10 @@ $('.detail-tache').on("click", function (e) {
                             
                                
                             </div>
-                           
-                           
+                            <div class="suite-task">
+                            
+                            </div>
+                                                       
                             
                     </div>`;
 
@@ -577,3 +580,6 @@ $('.edit-client-user').on('click', function () {
 
 });
 
+function  SuiteTask() {
+   $('.suite-task').append('A definir : Quelle elements mettre ? un champ, deux champs ? Leur positions ? Ce qu\'il sera ecrit dedans ? etcccc');
+}
