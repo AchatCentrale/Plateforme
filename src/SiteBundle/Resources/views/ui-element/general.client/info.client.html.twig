@@ -57,7 +57,7 @@
 
                     {% if client[0].clWeb %}
                         <li class="m-top-xs web-li">
-                            <a href="{{ client[0].clWeb }}" target="_blank">{{ client[0].clWeb }}</a>
+                            <a href="{{ relative_path(client[0].clWeb ) }}" >{{ client[0].clWeb }}</a>
                         </li>
                     {% else %}
                         <p>Pas de site web</p>
@@ -74,7 +74,14 @@
                 <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="ui equal width grid raison-soc">
                         <div class="equal width row">
-                            <div class="column"><h3><i class="building icon"></i> {{ client[0].clRaisonsoc }}</h3></div>
+                            <div class="column">
+                                <h3>
+                                    <i class="building icon"></i> {{ client[0].clRaisonsoc }}
+                                </h3>
+                                <h1><span class="label big label-primary">{{ centrale |replace({"_" : " "}) }}</span></h1>
+
+
+                            </div>
                             <div class="column"><h3><i class="square icon"></i>{{ client[0].clRef }}</h3></div>
                         </div>
                         {% if groupe %}
@@ -166,6 +173,7 @@
                                     <p class="cursor label-background statut-client-edit"
                                        data-index="fact-stat"> {{ client[0].clStatus | status }}</p>
                                     <select class="form-control" id="select-statut-edit-client" style="display: none">
+                                        <option selected aria-selected="true" >Choisir une valeur</option>
                                         <option>À valider</option>
                                         <option>Validé</option>
                                         <option>Bloqué</option>
