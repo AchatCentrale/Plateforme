@@ -126,6 +126,7 @@ class BaseController extends Controller
 
 
                     return $this->render('@Site/Base/client.new.html.twig', [
+                        'idNew' => $db2->lastInsertId(),
                         'state' => 'Client enregistrer',
                         'pays' => $pays,
                         'activite' => $activite,
@@ -198,6 +199,8 @@ class BaseController extends Controller
 
 
                     return $this->render('@Site/Base/client.new.html.twig', [
+                        'idNew' => $db2->lastInsertId(),
+                        'centrale_raison_soc' => $centrale[0]->getSoRaisonsoc(),
                         'state' => 'Client enregistrer',
                         'pays' => $pays,
                         'activite' => $activite,
