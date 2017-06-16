@@ -8,11 +8,11 @@ imports:
 #        query_cache_driver: apc
 
 monolog:
-	handlers:
-		main:
-			type:               fingers_crossed
-			action_level:       error
-			handler:            grouped
+    handlers:
+        main:
+            type:               fingers_crossed
+            action_level:       error
+            handler:            grouped
 		grouped:
 			type:               group
 			members:            [streamed, swift]
