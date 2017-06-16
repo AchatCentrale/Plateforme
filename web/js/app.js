@@ -219,7 +219,7 @@ $('.zone-submit-new button').on('click', function () {
 
 $('#btn-new-cl').on('click', function (e) {
 
-   $('#modal-insert-client-new').modal('show');
+    $('#modal-insert-client-new').modal('show');
 
 
 });
@@ -331,9 +331,9 @@ $('.detail-tache').on("click", function (e) {
                                 <div class="column">
                                     <p>Assigné à : </p> 
                                     <a class="ui image label">
-  <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
-  ${data.user}
-</a>
+                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                      ${data.user}
+                                    </a>
                                 </div>
     
                             </div>
@@ -352,23 +352,38 @@ $('.detail-tache').on("click", function (e) {
                                     <h4>A terminer avant le ${data.echeance}</h4>
                                 </div>
                             </div>
-                            <div class="three column row">
-                                <div class="column">
-                                    <button class="ui button">
-                                        Modifié la tache
-                                    </button>
-                                </div>
-                                <div class="column">
-                                    <button id="archive-task-detail" onclick="archiveTask(${data.id})" class="ui button">
+                             <div class="three column row">
+                               
+                                <div class="ui buttons">
+                                   <button id="archive-task-detail" onclick="archiveTask($\{data.id})" class="ui red button">
                                         Archiver la tâche
                                     </button>
+                                  <div class="or" data-text="ou"></div>
+                                  <button class="ui positive button">Donner suite</button>
                                 </div>
-                                <div class="column">
-                                    <button class="ui button">
-                                        Relancer le contact
+                                
+                                   
+                                </div>
+                            <div class="two column  row">
+                               <div class="column center aligned">
+                                   <button id=""  class="ui basic orange button">
+                                       Modifier la tâche
                                     </button>
                                 </div>
+                                <div class="column center aligned">
+                                    <button id="archive-task-detail" onclick="archiveTask($\{data.id})" class="ui basic positive button">
+                                        Relancer le contact
+                                    </button>
+                                </dia
+                                
                             </div>
+                            
+                            
+                               
+                            </div>
+                           
+                           
+                            
                     </div>`;
 
 
@@ -511,8 +526,8 @@ $('.text-hover-edit').on('click', function () {
 
 
 $('.statut-client-edit').on('click', function () {
-   $(this).hide();
-   $('#select-statut-edit-client').show();
+    $(this).hide();
+    $('#select-statut-edit-client').show();
 });
 
 
