@@ -241,6 +241,7 @@
                                                 <th>Tel</th>
                                                 <th>Mail</th>
                                                 <th>Password</th>
+                                                <th>Action</th>
 
                                             </tr>
                                             </thead>
@@ -259,6 +260,7 @@
                                                     <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
                                                     <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a></td>
                                                     <td>{{ users.ccPass }}</td>
+                                                    <td><i class="write icon cursor edit-client-user"></i></td>
                                                 </tr>
                                             {% endfor %}
                                             </tbody>
@@ -481,6 +483,26 @@
                         </div>
                     </div>
                 </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-success save-edit-logo">Enregistrer les modifications</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="client-user-edit" tabindex="-1" role="dialog" aria-labelledby="client-user-edit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modifier l'utilisateur # pour le client {{ client[0].clRaisonSoc }}</h4>
+            </div>
+            <div class="modal-body">
+
 
 
             </div>

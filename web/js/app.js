@@ -219,17 +219,7 @@ $('.zone-submit-new button').on('click', function () {
 
 $('#btn-new-cl').on('click', function (e) {
 
-    e.preventDefault();
-
-    let query = $('#usr').val().trim();
-
-    let centrale = $('#centrale').val();
-
-    let tpl = "/client/new?raison-soc=" + query + "&centrale=" + centrale;
-
-    let loc = window.location.origin + tpl;
-    console.log(loc);
-    window.location.replace(loc);
+   $('#modal-insert-client-new').modal('show');
 
 
 });
@@ -563,6 +553,12 @@ $('#select-statut-edit-client').on('change', function (e) {
         }
 
     });
+
+});
+
+
+$('.edit-client-user').on('click', function () {
+    $('#client-user-edit').show();
 
 });
 

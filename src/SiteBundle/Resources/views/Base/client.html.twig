@@ -3,54 +3,22 @@
 {% block body %}
 
     <div class="row">
-
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Clients</h2>
-                    <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Settings 1</a>
-                                </li>
-                                <li><a href="#">Settings 2</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                        </li>
-                    </ul>
+
                     <div class="clearfix"></div>
                 </div>
                 <div class="ation-toolbox">
                     <div class="ui equal width grid">
                         <div class="equal width row">
-                            <div class="column">
-                                <input type="text" class="form-control" placeholder="Nom de l'entreprise" id="usr">
-                            </div>
-                            <div class="column">
-                                {#choix-centrale#}
-                                <div class="form-group">
-                                    <div class="ui form">
-                                        <div class="field">
-                                            <select id="centrale" class="ui search dropdown">
-                                                <option value="">Choix de la centrale</option>
-                                                {% for centr in centrale %}
-                                                    <option value="{{ centr.soId }}">{{ centr.soRaisonsoc }}</option>
 
-                                                {% endfor %}
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="column">
-                                <a href="{{ path('client-new') }}" class="ui button green" id="btn-new-cl" role="button">Ajouter un nouveau client</a>
+
+                                <button class="ui button green" id="btn-new-cl" role="button">Ajouter un nouveau client
+
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -58,8 +26,6 @@
 
                 </div>
                 <div class="ui divider"></div>
-
-
 
 
                 <div class="x_content ">
@@ -114,32 +80,33 @@
                         <div class="client-all">
 
 
-                                <table id="client-all" class="display hover" cellspacing="0" width="100%">
-                                    <thead>
-                                    <tr>
-                                        <th>Réf</th>
-                                        <th>Centrale</th>
-                                        <th>Raison Sociale</th>
-                                        <th>Adresse</th>
-                                        <th>Tel</th>
-                                        <th>Siret</th>
-                                        <th>Etat</th>
-                                    </tr>
-                                    </thead>
-                                    <tfoot>
-                                    <tr>
-                                        <th>Réf</th>
-                                        <th>Centrale</th>
-                                        <th>Raison Sociale</th>
-                                        <th>Adresse</th>
-                                        <th>Tel</th>
-                                        <th>Siret</th>
-                                        <th>Etat</th>
-                                    </tr>
-                                    </tfoot>
-                                    <tbody>
-                                    {% for cl in client  %}
-                                    <tr data-centrale="{{ cl.SO_RAISONSOC }}" data-id="{{ cl.CL_ID }}" class="cursor go-to-client" >
+                            <table id="client-all" class="display hover" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Réf</th>
+                                    <th>Centrale</th>
+                                    <th>Raison Sociale</th>
+                                    <th>Adresse</th>
+                                    <th>Tel</th>
+                                    <th>Siret</th>
+                                    <th>Etat</th>
+                                </tr>
+                                </thead>
+                                <tfoot>
+                                <tr>
+                                    <th>Réf</th>
+                                    <th>Centrale</th>
+                                    <th>Raison Sociale</th>
+                                    <th>Adresse</th>
+                                    <th>Tel</th>
+                                    <th>Siret</th>
+                                    <th>Etat</th>
+                                </tr>
+                                </tfoot>
+                                <tbody>
+                                {% for cl in client %}
+                                    <tr data-centrale="{{ cl.SO_RAISONSOC }}" data-id="{{ cl.CL_ID }}"
+                                        class="cursor go-to-client">
                                         <td>{{ cl.CL_REF }}</td>
                                         <td>{{ cl.SO_RAISONSOC }}</td>
                                         <td>{{ cl.CL_RAISONSOC }}</td>
@@ -148,9 +115,9 @@
                                         <td>{{ cl.CL_SIRET | siret }}</td>
                                         <td>{{ cl.CL_STATUS | status | raw }}</td>
                                     </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                                {% endfor %}
+                                </tbody>
+                            </table>
 
 
                         </div>
@@ -164,6 +131,51 @@
 
     <!-- /page content -->
 
+
+    <div class="modal fade" id="modal-insert-client-new" tabindex="-1" role="dialog"
+         aria-labelledby="modal-insert-client-new">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Choississez la centrale</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Pour ajouter un nouveau client, choisir d'abord la centrale</p>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-center ">
+                        <ul class="pagination pagination-split">
+                            <li><a href="{{ path('client-new', { 'centrale' : 2}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_FUNECAP"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+                                </a>
+                            </li>
+                            <li><a href="{{ path('client-new', { 'centrale' : 1}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_ROC_ECLERC"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+                                </a>
+                            </li>
+                            {#<li><a href="{{ path('client-new', { 'centrale' : 3}) }}">#}
+                                    {#<img#}
+                                            {#data-centrale="achat-centrale"#}
+                                            {#class="cursor img-centrale-new-client"#}
+                                            {#src="{{ asset('images/logo-centrale/logo-ac.png') }}">#}
+                                {#</a></li>#}
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
