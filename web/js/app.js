@@ -370,8 +370,6 @@ $('.detail-tache').on("click", function (e) {
                             <li><a href="#">Attente de quelqu'un d'autre</a></li>
                             <li><a href="#">Reportée</a></li>
 
-                           
-                          
                           </ul>
                         </div>
                         </div>
@@ -671,8 +669,26 @@ $('.detail-tache-home').on('click', function (e) {
 
 
             let tpl = `  <h4>${data.nom}</h4> 
-                        <div class="detail-tache-etat">
-                        ${ stateTask(data.statut) }
+                      <div class="state-tache-detail">
+                            ${ stateTask(data.statut) }
+                        </div>
+                        <div class="change-statut-tache">
+                       <div class="dropup">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Changer le statut de la tache
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a href="#">Non commencé</a></li>
+                            <li><a href="#">En cours</a></li>
+                            <li><a href="#">Terminé</a></li>
+                            <li><a href="#">Attente de quelqu'un d'autre</a></li>
+                            <li><a href="#">Reportée</a></li>
+
+                          </ul>
+                        </div>
+                        </div>
+                        
                     </div>
                     <br>
                     <div class="ui centered  grid">
