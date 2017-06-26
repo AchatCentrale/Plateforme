@@ -440,3 +440,44 @@ p.task-description {
     font-weight: bold;
     font-family: Titillium Web, serif !important;
 }
+
+.detail-tache-home{
+    display: flex;
+    justify-content: space-between;
+}
+
+.pastille{
+
+
+    border-radius: 50px;
+    display: inline-block;
+    height: 20px;
+    width: 7%;
+
+}
+.blue{
+    background: deepskyblue;
+}
+.orange{
+    background: orange;
+}
+
+.green{
+    background: forestgreen;
+}
+
+.red{
+    background: indianred;
+}
+
+.purple{
+    background: purple;
+}
+.state-tache-detail {
+    width: 100%;
+}
+.detail-tache-etat{
+    display: flex;
+    justify-content: initial;
+}
+

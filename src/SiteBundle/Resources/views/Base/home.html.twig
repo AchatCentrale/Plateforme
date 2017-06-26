@@ -58,9 +58,8 @@
                                     <ul class="to_do">
                                         {% for tasks in task %}
                                             <li data-id="{{ tasks.claId }}" class="cursor detail-tache-home">
-                                                <p>
-                                                    {{ tasks.claNom }} <i class="fitted red mark icon"></i>
-                                                </p>
+                                                <p>{{ tasks.claNom }} </p>
+                                                {{ tasks.claStatus | etat | raw }}
                                             </li>
                                         {% endfor %}
 

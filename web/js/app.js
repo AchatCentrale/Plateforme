@@ -291,6 +291,34 @@ $('.img-centrale').on('click', function (e) {
 
 });
 
+function stateTask(state) {
+
+    state = parseInt(state);
+
+    switch (state) {
+        case 0:
+            return '<p class="pastille blue" ></p> Non commencé';
+            break;
+        case 1:
+            return '<p class="pastille orange" ></p> En cours';
+            break;
+        case 3:
+            return '<p class="pastille green" ></p>';
+            break;
+        case 4:
+            return '<p class="pastille red" ></p>';
+            break;
+        case 5:
+            return '<p class="pastille purple" ></p>';
+            break;
+        default:
+            break;
+
+    }
+
+
+}
+
 $('.detail-tache').on("click", function (e) {
 
     let id = $(this).closest("tr").data('task');
@@ -324,7 +352,31 @@ $('.detail-tache').on("click", function (e) {
             console.log(data);
 
 
-            let tpl = `  <h4>${data.nom}</h4> 
+            let tpl = `<h4>${data.nom}</h4>
+                    <div class="detail-tache-etat">
+                       <div class="state-tache-detail">
+                            ${ stateTask(data.statut) }
+                        </div>
+                        <div class="change-statut-tache">
+                       <div class="dropup">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Changer le statut de la tache
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a href="#">Non commencé</a></li>
+                            <li><a href="#">En cours</a></li>
+                            <li><a href="#">Terminé</a></li>
+                            <li><a href="#">Attente de quelqu'un d'autre</a></li>
+                            <li><a href="#">Reportée</a></li>
+
+                           
+                          
+                          </ul>
+                        </div>
+                        </div>
+                        
+                    </div>
                     <br>
                     <div class="ui centered  grid">
                            
@@ -580,8 +632,8 @@ $('.edit-client-user').on('click', function () {
 
 });
 
-function  SuiteTask() {
-   $('.suite-task').append('A definir : Quelle elements mettre ? un champ, deux champs ? Leur positions ? Ce qu\'il sera ecrit dedans ? etcccc');
+function SuiteTask() {
+    $('.suite-task').append('A definir : Quelle elements mettre ? un champ, deux champs ? Leur positions ? Ce qu\'il sera ecrit dedans ? etcccc');
 }
 
 
@@ -619,6 +671,9 @@ $('.detail-tache-home').on('click', function (e) {
 
 
             let tpl = `  <h4>${data.nom}</h4> 
+                        <div class="detail-tache-etat">
+                        ${ stateTask(data.statut) }
+                    </div>
                     <br>
                     <div class="ui centered  grid">
                            

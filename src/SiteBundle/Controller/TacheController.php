@@ -90,7 +90,8 @@ class TacheController extends Controller
                 "descr" => utf8_encode($result->getclaDescr()),
                 "user" => utf8_encode($user[0]->getUsPrenom()),
                 "creation" => $creationFromNow->getRelative(),
-                "echeance" => $echanceFuture
+                "echeance" => $echanceFuture,
+                "statut" => utf8_encode($result->getClaStatus())
 
             ];
 

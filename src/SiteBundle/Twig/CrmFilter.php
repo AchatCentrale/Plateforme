@@ -30,7 +30,40 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('status', [$this, 'statusFilter']),
             new \Twig_SimpleFilter('isEmpty', [$this, 'isEmpty']),
             new \Twig_SimpleFilter('centrale', [$this, 'centraleFilter']),
+            new \Twig_SimpleFilter('etat', [$this, 'etatTache']),
         );
+    }
+
+
+    public function etatTache($state)
+    {
+
+        $green = '<p class="pastille orange" ></p>';
+
+        switch ($state)
+        {
+            case 0:
+                return '<p class="pastille blue" ></p>';
+                break;
+            case 1:
+                return '<p class="pastille orange" ></p>';
+                break;
+            case 2:
+                return '<p class="pastille green" ></p>';
+                break;
+            case 3:
+                return '<p class="pastille red" ></p>';
+                break;
+            case 4:
+                return '<p class="pastille purple" ></p>';
+                break;
+            default:
+                break;
+
+        }
+
+
+        return $state;
     }
 
     public function centraleFilter($centrale)
