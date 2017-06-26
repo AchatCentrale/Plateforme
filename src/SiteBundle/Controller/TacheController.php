@@ -35,8 +35,6 @@ class TacheController extends Controller
         ]);
     }
 
-
-
     public function DeleteAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
@@ -246,6 +244,29 @@ class TacheController extends Controller
         ]);
     }
 
+
+    public function changetheStateAction($state, $id)
+    {
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "UPDATE CLIENTS_TACHES
+                SET
+                  CLA_STATUS = :etat,
+                  MAJ_DATE = GETUTCDATE()
+                WHERE CLA_ID = :id
+                ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':etat', $state);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+
+
+        return $this->redirectToRoute('taches_home',[] ,301);
+    }
 
     public function sendMailTaskAction($id)
     {

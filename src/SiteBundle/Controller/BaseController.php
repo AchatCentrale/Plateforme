@@ -48,7 +48,7 @@ class BaseController extends Controller
         $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(
             [
                 'usId' => $user->getUsId(),
-                'claStatus' => 0,
+
 
             ]
         );

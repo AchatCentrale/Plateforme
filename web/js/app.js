@@ -364,11 +364,11 @@ $('.detail-tache').on("click", function (e) {
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="#">Non commencé</a></li>
-                            <li><a href="#">En cours</a></li>
-                            <li><a href="#">Terminé</a></li>
-                            <li><a href="#">Attente de quelqu'un d'autre</a></li>
-                            <li><a href="#">Reportée</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/0/"+ data.id}">Non commencé</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/1/"+ data.id}">En cours</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/2/"+ data.id}">Terminé</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/3/"+ data.id}">Attente de quelqu'un d'autre</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/4/"+ data.id}">Reportée</a></li>
 
                           </ul>
                         </div>
@@ -668,7 +668,7 @@ $('.detail-tache-home').on('click', function (e) {
             console.log(data);
 
 
-            let tpl = `  <h4>${data.nom}</h4>
+            let tpl = `<h4>${data.nom}</h4>
               <div class="detail-tache-etat">
                       <div class="state-tache-detail">
                             ${ stateTask(data.statut) }
@@ -680,16 +680,15 @@ $('.detail-tache-home').on('click', function (e) {
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="#">Non commencé</a></li>
-                            <li><a href="#">En cours</a></li>
-                            <li><a href="#">Terminé</a></li>
-                            <li><a href="#">Attente de quelqu'un d'autre</a></li>
-                            <li><a href="#">Reportée</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/0/"+ data.id}">Non commencé</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/1/"+ data.id}">En cours</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/2/"+ data.id}">Terminé</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/3/"+ data.id}">Attente de quelqu'un d'autre</a></li>
+                            <li><a href="${CURRENT_URL+"/etat/4/"+ data.id}">Reportée</a></li>
 
                           </ul>
                         </div>
                         </div>
-                        
                     </div>
                     </div>
                     <br>

@@ -85,6 +85,9 @@ mail-task:
     path: /taches/mail/{id}
     defaults: {_controller: SiteBundle:Tache:sendMailTask}
 
+change-state:
+    path: /taches/etat/{state}/{id}
+    defaults: {_controller: SiteBundle:Tache:changetheState}
 
 update-client-statut:
     path: /client/{id}/{centrale}/update/statut
@@ -100,3 +103,4 @@ add-notes:
     path: /client/{id}/{centrale}/notes/add
     defaults: {_controller: SiteBundle:Base:newNotesClient}
     methods: POST
+
