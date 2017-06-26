@@ -583,3 +583,122 @@ $('.edit-client-user').on('click', function () {
 function  SuiteTask() {
    $('.suite-task').append('A definir : Quelle elements mettre ? un champ, deux champs ? Leur positions ? Ce qu\'il sera ecrit dedans ? etcccc');
 }
+
+
+$('.detail-tache-home').on('click', function (e) {
+
+    let id = $(this).data('id');
+
+    let aidy = Number(id);
+
+
+    let url = CURRENT_URL + "taches/detail/" + aidy;
+    console.log(url);
+
+    $.ajax({
+
+        // Adresse à laquelle la requête est envoyée
+        url: url,
+
+        // Le délai maximun en millisecondes de traitement de la demande
+        timeout: 4000,
+
+        // La fonction à apeller si la requête aboutie
+        success: function (data) {
+
+            let el = $('.body-task-detail-home');
+            $('.modal-title-task-home').empty();
+            el.empty();
+
+            let title = `<p>Tâche #${data.id}</p>`;
+
+            $('.modal-title-task-home').append(title);
+
+
+            console.log(data);
+
+
+            let tpl = `  <h4>${data.nom}</h4> 
+                    <br>
+                    <div class="ui centered  grid">
+                           
+                            <div class="one column row">
+                                <div class="column">
+                                    <p>Assigné à : </p> 
+                                    <a class="ui image label">
+                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                      ${data.user}
+                                    </a>
+                                </div>
+    
+                            </div>
+                            <div class="one column row">
+                                <div class="column">
+                                    <h5>Description de la tâche a éffectuer :</h5>
+                                    <p class="task-description">${data.descr}</p>
+                                </div>
+    
+                            </div>
+                            <div class="two column row">
+                                <div class="column">
+                                    <h4>Créée ${data.creation} </h4>
+                                </div>
+                                <div class="column">
+                                    <h4>A terminer avant le ${data.echeance}</h4>
+                                </div>
+                            </div>
+                            <div class="three column row">
+                               
+                                <div class="ui buttons">
+                                   <button id="archive-task-detail" onclick="archiveTask(${data.id})" class="ui red button">
+                                        Archiver la tâche
+                                    </button>
+                                  <div class="or" data-text="ou"></div>
+                                  <button onclick="SuiteTask()" class="ui blue button ">Donner suite</button>
+                                </div>
+                                
+                                   
+                                </div>
+                            <div class="two column  row">
+                               <div class="column center aligned">
+                                   <button id=""  class="ui basic orange button">
+                                       Modifier la tâche
+                                    </button>
+                                </div>
+                                <div class="column center aligned">
+                                    <button  class="ui basic positive button">
+                                        Relancer le contact
+                                    </button>
+                                </dia
+                                
+                            </div>
+                            
+                            
+                               
+                            </div>
+                            <div class="suite-task">
+                            
+                            </div>
+                                                       
+                            
+                    </div>`;
+
+
+            el.append(tpl);
+
+
+            $('#modal-detail-task-home').modal('show')
+
+
+        },
+        error: function (e) {
+            console.error(e);
+        }
+
+
+    });
+
+
+});
+
+
