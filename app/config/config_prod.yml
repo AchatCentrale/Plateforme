@@ -25,7 +25,7 @@ monolog:
             from_email:         jb@achatcentrale.fr
             to_email:           jbagostin@gmail.com
             subject:            "Il y a un soucis avec le CRM coco"
-            level:              debug
+            level:              critical
         login:
             type:               stream
             path:               "%kernel.logs_dir%/auth.log"

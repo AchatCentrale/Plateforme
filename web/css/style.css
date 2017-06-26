@@ -481,3 +481,6 @@ p.task-description {
     justify-content: initial;
 }
 
+.hidden-centrale{
+    display: none;
+}

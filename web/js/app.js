@@ -260,7 +260,6 @@ $("form input.date").datepicker({
 });
 
 $('.go-to-client').on('click', function () {
-    console.log(CURRENT_URL);
 
     let centrale = $(this).data('centrale');
     let id = $(this).data('id');
@@ -465,10 +464,10 @@ $('.save-update-client').on('click', function (e) {
             }
         ).get();
 
+    let centrale = $('#centrale').html();
+    let id =  $('#id').html();
 
-    console.log(values);
-
-    let url = CURRENT_URL.substring(0, 60) + "/update";
+    let url = "http://crm.achatcentrale.fr/client/"+id+"/"+ centrale +"/update";
 
     $.ajax({
 
