@@ -680,11 +680,11 @@ $('.detail-tache-home').on('click', function (e) {
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="${CURRENT_URL+"/etat/0/"+ data.id}">Non commencé</a></li>
-                            <li><a href="${CURRENT_URL+"/etat/1/"+ data.id}">En cours</a></li>
-                            <li><a href="${CURRENT_URL+"/etat/2/"+ data.id}">Terminé</a></li>
-                            <li><a href="${CURRENT_URL+"/etat/3/"+ data.id}">Attente de quelqu'un d'autre</a></li>
-                            <li><a href="${CURRENT_URL+"/etat/4/"+ data.id}">Reportée</a></li>
+                            <li><a href="${CURRENT_URL+"taches/etat/0/"+ data.id}">Non commencé</a></li>
+                            <li><a href="${CURRENT_URL+"taches/etat/1/"+ data.id}">En cours</a></li>
+                            <li><a href="${CURRENT_URL+"taches/etat/2/"+ data.id}">Terminé</a></li>
+                            <li><a href="${CURRENT_URL+"taches/etat/3/"+ data.id}">Attente de quelqu'un d'autre</a></li>
+                            <li><a href="${CURRENT_URL+"taches/etat/4/"+ data.id}">Reportée</a></li>
 
                           </ul>
                         </div>
