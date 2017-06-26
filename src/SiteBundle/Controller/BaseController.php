@@ -45,13 +45,25 @@ class BaseController extends Controller
 
         $user = $this->getUser();
 
-        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy(
-            [
-                'usId' => $user->getUsId(),
 
 
-            ]
-        );
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "SELECT *
+                FROM CLIENTS_TACHES
+                WHERE US_ID = :usId
+                AND CLA_STATUS = 0
+                OR CLA_STATUS = 1
+                ORDER BY CLA_ECHEANCE DESC
+                ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':usId', $user->getUsId());
+
+
+        $stmt->execute();
+        $task = $stmt->fetchAll();
+
 
 
         return $this->render(

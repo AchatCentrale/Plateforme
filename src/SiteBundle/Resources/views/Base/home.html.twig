@@ -45,21 +45,20 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Action a faire
+                            <h2>Actions à faire
                             </h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-
-
                             {% if task %}
 
                                 <div class="">
                                     <ul class="to_do">
                                         {% for tasks in task %}
-                                            <li data-id="{{ tasks.claId }}" class="cursor detail-tache-home">
-                                                <p>{{ tasks.claNom | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
-                                                {{ tasks.claStatus | etat | raw }}
+                                            {% dump(tasks) %}
+                                            <li data-id="{{ tasks['CLA_ID'] }}" class="cursor detail-tache-home">
+                                                <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
+                                                {{ tasks['CLA_STATUS'] | etat | raw }}
                                             </li>
                                         {% endfor %}
 

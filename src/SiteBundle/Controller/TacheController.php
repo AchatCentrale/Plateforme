@@ -21,16 +21,24 @@ class TacheController extends Controller
 
         $user = $this->getUser();
 
-        $tache_acheve = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->getActionTermine($user->getUsId());
-        $tache_en_cour = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches')->getActionEnCour($user->getUsId());
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "SELECT *
+                FROM CLIENTS_TACHES
+                WHERE US_ID = :usId
+                ORDER BY CLA_STATUS ASC
+                ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':usId', $user->getUsId());
 
 
-
+        $stmt->execute();
+        $task = $stmt->fetchAll();
 
 
         return $this->render('@Site/Base/tache.home.html.twig', [
-            'task_acheve' => $tache_acheve,
-            'task_en_cour' => $tache_en_cour,
+            'task' => $task,
             'user' => $user->getUsPrenom(),
         ]);
     }

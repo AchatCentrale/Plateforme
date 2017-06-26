@@ -281,40 +281,29 @@
                                 {#Action_client#}
                                 <div role="tabpanel" class="tab-pane fade " id="tab_content1"
                                      aria-labelledby="home-tab">
+                                    <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter une tâche</a>
 
                                     <div class="ui items">
 
                                         {% if task %}
-                                            <!-- start recent activity -->
-                                            <div class="ui items">
+
+                                            <div class="">
+                                                <ul class="to_do">
+                                                    {% for tasks in task %}
+                                                        {% dump(tasks) %}
+                                                        <li data-id="{{ tasks['CLA_ID'] }}" class="cursor detail-tache-home">
+                                                            <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
+                                                            {{ tasks['CLA_STATUS'] | etat | raw }}
+                                                        </li>
+                                                    {% endfor %}
 
 
-                                                {% for tasks in task %}
 
-                                                    <div class="item">
-                                                        <a class="ui tiny image">
-                                                            {% if tasks["CLA_STATUS"] == 0 %}
-                                                                <i class="warning red big sign icon"></i>
-                                                            {% else %}
-                                                                <i class="check green big sign icon"></i>
-
-                                                            {% endif %}
-                                                        </a>
-                                                        <div class="content">
-                                                            <a class="header">{{ tasks["CLA_NOM"] }}</a>
-                                                            <div class="description">
-                                                                <p>{{ tasks["CLA_DESCR"] }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                {% endfor %}
-
+                                                </ul>
                                             </div>
-                                            <!-- end recent activity -->
+
                                         {% else %}
-                                            <p>Aucune action a deja été éfféctué avec ce client</p>
+                                            <h5>Pas de taches pour le moment</h5>
                                         {% endif %}
 
 
@@ -355,11 +344,11 @@
 
                                                 </div>
                                             </div>
-                                            <div class="column">
-                                                <a href="{{ path('new-task', {'u' : client[0].clId }) }}"
-                                                   class="btn btn-success" role="button">Crée une action</a>
+                                            {#<div class="column">#}
+                                                {#<a href="{{ path('new-task', {'u' : client[0].clId }) }}"#}
+                                                   {#class="btn btn-success" role="button">Crée une action</a>#}
 
-                                            </div>
+                                            {#</div>#}
                                         </div>
                                     </div>
 

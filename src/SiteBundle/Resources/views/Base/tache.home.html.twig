@@ -19,136 +19,55 @@
 
                     <div class="tab-task" role="tabpanel" data-example-id="togglable-tabs">
 
-
-                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-
-
-                            <li role="presentation" class="active">
-                                <a href="#en_cour" role="tab" id="profile-tab"
-                                   data-toggle="tab" aria-expanded="false">
-                                    En cours
-                                </a>
-                            </li>
-                            <li role="presentation" class="">
-                                <a href="#termine" id="home-tab"
-                                   role="tab"
-                                   data-toggle="tab" aria-expanded="true">
-                                    Archivée
-                                </a>
-                            </li>
-
-                        </ul>
-
-
-                        <div id="myTabContent" class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade active in " id="en_cour"
-                                 aria-labelledby="profile-tab">
-                                {% if task_en_cour %}
-
-
-                                    <table class="ui striped table">
-                                        <thead>
-                                        <tr>
-                                            <th class="one wide">Type</th>
-                                            <th class="two wide">Nom de l'action</th>
-                                            <th class="one wide">Date de creation</th>
-                                            <th class="one wide">Assigné à</th>
-                                            <th class="two wide">Date d'échéance</th>
-                                            <th class="three wide">Description</th>
-                                            <th class="one wide">Priorité</th>
-                                            <th class="two wide">Nom client</th>
-                                            <th class="one wide">Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {% for tasks in task_en_cour %}
+                        <table class="ui striped table">
+                            <thead>
+                            <tr>
+                                <th class="one wide">Type</th>
+                                <th class="two wide">Nom de l'action</th>
+                                <th class="one wide">Date de creation</th>
+                                <th class="one wide">Assigné à</th>
+                                <th class="two wide">Date d'échéance</th>
+                                <th class="three wide">Description</th>
+                                <th class="one wide">Priorité</th>
+                                <th class="two wide">Statut de l'action</th>
+                                <th class="one wide">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for tasks in task %}
 
 
 
-                                                <tr class="task-id  " data-task="{{ tasks.claId }} " id="{{ tasks.claId }}">
-                                                    <td>
-                                                        <div class="ui label"> {{ tasks.claType | type }}</div>
-                                                    </td>
-                                                    <td>
-                                                        <h5><a class="detail-tache cursor" >{{ tasks.claNom }}</a></h5>
-                                                    </td>
-                                                    <td>
-                                                        <div class="ui label">
-                                                            {{ tasks.insDate | Time }}
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="ui label"><i class="user icon"></i>{{ user }}</div>
-                                                    </td>
-                                                    <td>{{ tasks.claEcheance | timeFromNow }}</td>
-                                                    <td><h4>{{ tasks.claDescr | convert_encoding('UTF-8', 'Windows-1252') }}</h4></td>
-                                                    <td>{{ tasks.claPriorite | priorite | raw }}</td>
-                                                    <td>{#<a href="{{ path('client-general', { 'id' : tasks.cl.clId, 'centrale' : tasks.cl.}, '') }}">{{ tasks.cl.clRaisonsoc }}</a>#}</td>
-                                                    <td><i id="{{ tasks.claId }}"
-                                                           class="check  large icon cursor"></i></td>
-                                                </tr>
+                                <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} " id="{{ tasks['CLA_ID'] }}">
+                                    <td>
+                                        <div class="ui label"> {{ tasks['CLA_TYPE'] | type }}</div>
+                                    </td>
+                                    <td>
+                                        <h5><a class="detail-tache cursor" >{{ tasks['CLA_NOM'] }}</a></h5>
+                                    </td>
+                                    <td>
+                                        <div class="ui label">
+                                            {#{{ tasks['INS_DATE'] | Time }}#} time
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui label"><i class="user icon"></i>{{ user }}</div>
+                                    </td>
+                                    <td>
+                                        {#{{ tasks['CLA_ECHEANCE'] | timeFromNow }}#} Echeance
+                                    </td>
+                                    <td><h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') }}</h4></td>
+                                    <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
+                                    <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
+                                    <td><i id="{{ tasks['CLA_ID'] }}"
+                                           class="check  large icon cursor"></i></td>
+                                </tr>
 
-                                        {% endfor %}
+                            {% endfor %}
 
-                                        </tbody>
-                                    </table>
-                                {% endif %}
+                            </tbody>
+                        </table>
 
-
-                            </div>
-
-                            <div role="tabpanel" class="tab-pane fade " id="termine"
-                                 aria-labelledby="home-tab">
-
-                                {% if task_acheve is defined %}
-                                    <table class="ui striped table">
-                                        <thead>
-                                        <tr>
-
-                                            <th>Crée le </th>
-                                            <th>Modifié le </th>
-                                            <th>Assigné à</th>
-                                            <th>Nom de l'action</th>
-                                            <th>Action</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        {% for tasks in task_acheve %}
-
-                                            {% if tasks.claStatus == 1 %}
-                                                <tr id="{{ tasks.claId }}">
-                                                    <td><h6>{{ tasks.insDate | Time }}</h6></td>
-
-
-                                                    {% if tasks.majDate %}
-                                                        <td><h6>{{ tasks.majDate | Time }}</h6></td>
-                                                        {% else %}
-                                                            <td><h6>Aucune date encore</h6></td>
-                                                    {% endif %}
-
-
-                                                    <td>
-                                                        <div class="ui label"><i class="user icon"></i>{{ user }}</div>
-                                                    </td>
-
-                                                    <td>{{ tasks.claDescr }}</td>
-                                                    <td><i id="{{ tasks.claId }}"
-                                                               class="check uncheck large icon cursor"></i></td>
-
-                                                </tr>
-                                            {% endif %}
-
-                                        {% endfor %}
-
-                                        </tbody>
-                                    </table>
-                                {% endif %}
-
-                            </div>
-
-
-                        </div>
                     </div>
 
 
