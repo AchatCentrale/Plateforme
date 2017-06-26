@@ -668,7 +668,8 @@ $('.detail-tache-home').on('click', function (e) {
             console.log(data);
 
 
-            let tpl = `  <h4>${data.nom}</h4> 
+            let tpl = `  <h4>${data.nom}</h4>
+              <div class="detail-tache-etat">
                       <div class="state-tache-detail">
                             ${ stateTask(data.statut) }
                         </div>
@@ -689,6 +690,7 @@ $('.detail-tache-home').on('click', function (e) {
                         </div>
                         </div>
                         
+                    </div>
                     </div>
                     <br>
                     <div class="ui centered  grid">
