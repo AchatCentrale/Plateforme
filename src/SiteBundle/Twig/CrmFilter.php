@@ -50,9 +50,10 @@ class CrmFilter extends \Twig_Extension
     {
         \Moment\Moment::setLocale('fr_FR');
 
+
         $m = new \Moment\Moment($date);
 
-        return $m->fromNow()->getRelative();
+        return $m->format('ll', new \Moment\CustomFormats\MomentJs());
 
     }
 
