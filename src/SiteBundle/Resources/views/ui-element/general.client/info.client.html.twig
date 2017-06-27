@@ -78,7 +78,7 @@
                     <div class="ui equal width grid raison-soc">
                         <div class="equal width row">
                             <div class="column">
-                                <h3>
+                                <h3 class="raison-soc-titre">
                                     <i class="building icon"></i> {{ client[0].clRaisonsoc }}
                                 </h3>
                                 {{ centrale |replace({"_" : " "}) | centraleLabel | raw }}
@@ -86,8 +86,8 @@
 
                             </div>
                             <div class="column">
-                                <h3><span class="pastille green" ></span> {{ random() }}</h3>
-                                <h3><span class="pastille green" ></span> {{ client[0].clRef }}</h3>
+                                <h3><span class="pastille-ref green" ></span> {{ random() }}</h3>
+                                <h3><span class="pastille-ref green" ></span> {{ client[0].clRef }}</h3>
                             </div>
                         </div>
                         {% if groupe %}
