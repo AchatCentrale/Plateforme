@@ -33,7 +33,27 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('etat', [$this, 'etatTache']),
             new \Twig_SimpleFilter('dateString', [$this, 'dateString']),
             new \Twig_SimpleFilter('fromNowString', [$this, 'dateFromNowString']),
+            new \Twig_SimpleFilter('centraleLabel', [$this, 'centraleLabel']),
         );
+    }
+
+
+    public function centraleLabel($centrale)
+    {
+
+        switch ($centrale){
+            case 'CENTRALE ROC ECLERC':
+                return "<h1><span class=\"label big label-warning \">".$centrale."</span></h1>";
+                break;
+            case 'CENTRALE FUNECAP':
+                return "<h3><span class=\"label big label-danger \">".$centrale."</span></h3>";
+                break;
+
+        }
+
+
+        return $centrale;
+
     }
 
     public function dateString($date)
