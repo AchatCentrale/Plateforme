@@ -22,9 +22,6 @@ class ClientsTachesType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-
-
         $builder
             ->add('claType', EntityType::class, [
                 'class' => 'AchatCentrale\CrmBundle\Entity\ActionType',
@@ -68,7 +65,7 @@ class ClientsTachesType extends AbstractType
             ->add('usId', EntityType::class, [
                 'class' => "AchatCentrale\CrmBundle\Entity\Users",
                 'choice_label' => "usPrenom",
-                'placeholder' => $this->get,
+                'placeholder' => 'Utilisateur affecté a la tache',
                 'label' => "Affectation",
                 "attr" => ["class" => "ui dropdown add-action"],
             ])
