@@ -57,7 +57,7 @@
                                 <div class="">
                                     <ul class="to_do">
                                         {% for tasks in task %}
-                                            {% dump(tasks) %}
+
                                             <li data-id="{{ tasks['CLA_ID'] }}" class="cursor detail-tache-home">
                                                 <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
                                                 {{ tasks['CLA_STATUS'] | etat | raw }}
