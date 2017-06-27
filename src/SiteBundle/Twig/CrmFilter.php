@@ -202,8 +202,8 @@ class CrmFilter extends \Twig_Extension
             case "Appel":
                 return '<i class="call big square icon"></i>';
                 break;
-            case "Audit":
-                return '<i class="sticky note outline icon"></i>';
+            case "Administratif":
+                return '<i class="sticky big note outline icon"></i>';
                 break;
         }
         dump($typeDB);
