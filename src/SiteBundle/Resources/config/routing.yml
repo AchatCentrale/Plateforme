@@ -73,8 +73,8 @@ delete-task:
     path:   /taches/delete/{id}
     defaults: {_controller: SiteBundle:Tache:Delete}
 archive-task:
-    path: /taches/archive/{id}
-    defaults: {_controller: SiteBundle:Tache:ArchiveTask}
+    path: /taches/terminer/{id}
+    defaults: {_controller: SiteBundle:Tache:TerminerTask}
 
 
 unarchive-task:

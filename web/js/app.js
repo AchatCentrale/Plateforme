@@ -2,9 +2,9 @@ const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
 
 moment.locale('fr');
 
-function archiveTask(e) {
+function terminerTask(e) {
     console.log(e);
-    let url = 'http://localhost:8000/taches/archive/' + e;
+    let url = 'http://localhost:8000/taches/terminer/' + e;
 
     swal({
             title: "Achiver d'une action",
@@ -205,7 +205,7 @@ $('#dtadh-client').datepicker({
 
 
 $('.check').on('click', function (e) {
-    archiveTask(e.currentTarget.id);
+    terminerTask(e.currentTarget.id);
 });
 $('.uncheck').on('click', function (e) {
     unArchiveTask(e.currentTarget.id);
@@ -301,14 +301,14 @@ function stateTask(state) {
         case 1:
             return '<p class="pastille-detail orange" ></p> En cours';
             break;
+        case 2:
+            return '<p class="pastille-detail green" ></p> Terminé ';
+            break;
         case 3:
-            return '<p class="pastille-detail green" ></p>';
+            return '<p class="pastille-detail red" ></p> En attente de quelqu\'un d\'autre ';
             break;
         case 4:
-            return '<p class="pastille-detail red" ></p>';
-            break;
-        case 5:
-            return '<p class="pastille-detail purple" ></p>';
+            return '<p class="pastille-detail purple" ></p> Délégué';
             break;
         default:
             break;
@@ -405,7 +405,7 @@ $('.detail-tache').on("click", function (e) {
                             <div class="three column row">
                                
                                 <div class="ui buttons">
-                                   <button id="archive-task-detail" onclick="archiveTask(${data.id})" class="ui red button">
+                                   <button id="archive-task-detail" onclick="terminerTask(${data.id})" class="ui red button">
                                         Terminer la tâche
                                     </button>
                                   <div class="or" data-text="ou"></div>
@@ -722,7 +722,7 @@ $('.detail-tache-home').on('click', function (e) {
                                
                                 <div class="ui buttons">
                                    <button id="archive-task-detail" onclick="archiveTask(${data.id})" class="ui red button">
-                                        Archiver la tâche
+                                        Terminer la tâche
                                     </button>
                                   <div class="or" data-text="ou"></div>
                                   <button onclick="SuiteTask()" class="ui blue button ">Donner suite</button>

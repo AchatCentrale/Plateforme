@@ -117,14 +117,14 @@ class TacheController extends Controller
 
     }
 
-    public function ArchiveTaskAction($id)
+    public function TerminerTaskAction($id)
     {
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "UPDATE CLIENTS_TACHES
                 SET
-                  CLA_STATUS = 1,
+                  CLA_STATUS = 2,
                   MAJ_DATE = GETUTCDATE()
                 WHERE CLA_ID = :id
                 ";
@@ -134,7 +134,7 @@ class TacheController extends Controller
 
         $stmt->execute();
         $result = $stmt->fetchAll();
-        return new Response('taches numero :  ' . $id . ' archivé', 200, [
+        return new Response('taches numero :  ' . $id . ' terminé', 200, [
             'Access-Control-Allow-Origin' => '*'
         ]);
     }
