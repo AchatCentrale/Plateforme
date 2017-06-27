@@ -406,7 +406,7 @@ $('.detail-tache').on("click", function (e) {
                                
                                 <div class="ui buttons">
                                    <button id="archive-task-detail" onclick="archiveTask(${data.id})" class="ui red button">
-                                        Archiver la tâche
+                                        Terminer la tâche
                                     </button>
                                   <div class="or" data-text="ou"></div>
                                   <button onclick="SuiteTask()" class="ui blue button ">Donner suite</button>
