@@ -271,7 +271,7 @@
                                                         <a target="_blank"
                                                            href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccNom }}</a>
                                                     </td>
-                                                    <td>{{ users.ccFonction }}</td>
+                                                    <td>{{ users.ccFonction |  convert_encoding('UTF-8', 'Windows-1252') }} }}</td>
                                                     <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
                                                     <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a></td>
                                                     <td>{{ users.ccPass }}</td>
