@@ -7,11 +7,13 @@ function terminerTask(e) {
     let url = 'http://localhost:8000/taches/terminer/' + e;
 
     swal({
-            title: "Achiver d'une action",
-            text: "Voulez-vous vraiment archiver cet action ?",
+            title: "Terminer une action",
+            text: "Avez-vous vraiment terminer la tâche ?",
             type: "info",
             showCancelButton: true,
             closeOnConfirm: false,
+            confirmButtonText: "Oui",
+            cancelButtonText: "Annuler",
             showLoaderOnConfirm: true,
             allowOutsideClick: true,
             confirmButtonColor: "#d65d5d"
@@ -28,17 +30,15 @@ function terminerTask(e) {
                 // La fonction à apeller si la requête aboutie
                 success: function (data) {
                     swal({
-                        title: "Archiver une action",
-                        text: "Action archivé",
+                        title: "Action teriné",
+                        text: "Action terminé",
                         type: "info",
-                        showCancelButton: true,
-                        confirmButtonText: "Oui",
-                        cancelButtonText: "Annuler",
+                        showCancelButton: false,
+                        confirmButtonText: "Super !",
+
                     });
 
-                    let id = e;
-
-                    $("#" + id).remove()
+                    location.reload();
                 },
 
                 // La fonction à appeler si la requête n'a pas abouti
@@ -721,7 +721,7 @@ $('.detail-tache-home').on('click', function (e) {
                             <div class="three column row">
                                
                                 <div class="ui buttons">
-                                   <button id="archive-task-detail" onclick="archiveTask(${data.id})" class="ui red button">
+                                   <button id="archive-task-detail" onclick="terminerTask(${data.id})" class="ui red button">
                                         Terminer la tâche
                                     </button>
                                   <div class="or" data-text="ou"></div>
