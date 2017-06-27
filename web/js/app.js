@@ -30,7 +30,7 @@ function terminerTask(e) {
                 // La fonction à apeller si la requête aboutie
                 success: function (data) {
                     swal({
-                        title: "Action teriné",
+                        title: "Action terminé",
                         text: "Action terminé",
                         type: "info",
                         showCancelButton: false,
