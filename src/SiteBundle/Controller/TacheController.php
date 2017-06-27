@@ -26,8 +26,7 @@ class TacheController extends Controller
         $sql = "SELECT *
                 FROM CLIENTS_TACHES
                 WHERE US_ID = :usId
-                ORDER BY CLA_STATUS ASC
-                ";
+                ORDER BY CLA_STATUS ASC";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':usId', $user->getUsId());

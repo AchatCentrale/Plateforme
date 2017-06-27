@@ -31,9 +31,30 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('isEmpty', [$this, 'isEmpty']),
             new \Twig_SimpleFilter('centrale', [$this, 'centraleFilter']),
             new \Twig_SimpleFilter('etat', [$this, 'etatTache']),
+            new \Twig_SimpleFilter('dateString', [$this, 'dateString']),
+            new \Twig_SimpleFilter('fromNowString', [$this, 'dateFromNowString']),
         );
     }
 
+    public function dateString($date)
+    {
+        \Moment\Moment::setLocale('fr_FR');
+
+
+        $m = new \Moment\Moment($date, 'UTC');
+
+        return $m->format('ll', new \Moment\CustomFormats\MomentJs());
+
+    }
+    public function dateFromNowString($date)
+    {
+        \Moment\Moment::setLocale('fr_FR');
+
+        $m = new \Moment\Moment($date, 'UTC');
+
+        return $m->fromNow()->getRelative();
+
+    }
 
     public function etatTache($state)
     {
@@ -79,7 +100,6 @@ class CrmFilter extends \Twig_Extension
 
     }
 
-
     public function statusFilter($status){
 
         switch ($status){
@@ -99,7 +119,6 @@ class CrmFilter extends \Twig_Extension
         return $status;
     }
 
-
     public function isEmpty($input){
 
 
@@ -110,7 +129,6 @@ class CrmFilter extends \Twig_Extension
         }
 
     }
-
 
     public function phoneFilter($number)
     {
@@ -174,7 +192,28 @@ class CrmFilter extends \Twig_Extension
             'acId' => $type
         ]);
 
-        return $typee[0]->getAcNom();
+
+
+        $typeDB = $typee[0]->getAcNom();
+
+        switch ($typeDB){
+            case "Envoi devis":
+                return '<i class="bar big chart icon"></i>';
+                break;
+            case "Relance":
+                return '<i class=" big history icon"></i>';
+                break;
+            case "Appel":
+                return '<i class="call big square icon"></i>';
+                break;
+            case "Audit":
+                return '<i class="sticky note outline icon"></i>';
+                break;
+        }
+        dump($typeDB);
+
+
+
     }
 
     public function priorityFilter($priorite)

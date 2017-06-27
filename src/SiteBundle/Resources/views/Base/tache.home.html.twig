@@ -23,44 +23,42 @@
                             <thead>
                             <tr>
                                 <th class="one wide">Type</th>
-                                <th class="two wide">Nom de l'action</th>
-                                <th class="one wide">Date de creation</th>
+                                <th class="one wide">Nom de l'action</th>
+                                <th class="two wide">Date de creation</th>
                                 <th class="one wide">Assigné à</th>
                                 <th class="two wide">Date d'échéance</th>
-                                <th class="three wide">Description</th>
+                                <th class="five wide">Description</th>
                                 <th class="one wide">Priorité</th>
-                                <th class="two wide">Statut de l'action</th>
-                                <th class="one wide">Action</th>
+                                <th class="one wide">Statut de l'action</th>
+
                             </tr>
                             </thead>
                             <tbody>
                             {% for tasks in task %}
 
 
-
                                 <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} " id="{{ tasks['CLA_ID'] }}">
                                     <td>
-                                        <div class="ui label"> {{ tasks['CLA_TYPE'] | type }}</div>
+                                        <div>{{ tasks['CLA_TYPE'] | type | raw }}</div>
                                     </td>
                                     <td>
                                         <h5><a class="detail-tache cursor" >{{ tasks['CLA_NOM'] }}</a></h5>
                                     </td>
                                     <td>
-                                        <div class="ui label">
-                                            {#{{ tasks['INS_DATE'] | Time }}#} time
+                                        <div>
+                                            {{ tasks['INS_DATE'] | dateString }}
                                         </div>
                                     </td>
                                     <td>
                                         <div class="ui label"><i class="user icon"></i>{{ user }}</div>
                                     </td>
                                     <td>
-                                        {#{{ tasks['CLA_ECHEANCE'] | timeFromNow }}#} Echeance
+                                        {{ tasks['CLA_ECHEANCE'] | fromNowString }}
                                     </td>
-                                    <td><h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') }}</h4></td>
+                                    <td class="justify" ><h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') }}</h4></td>
                                     <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
                                     <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
-                                    <td><i id="{{ tasks['CLA_ID'] }}"
-                                           class="check  large icon cursor"></i></td>
+
                                 </tr>
 
                             {% endfor %}

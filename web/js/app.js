@@ -296,19 +296,19 @@ function stateTask(state) {
 
     switch (state) {
         case 0:
-            return '<p class="pastille blue" ></p> Non commencé';
+            return '<p class="pastille-detail blue" ></p> Non commencé';
             break;
         case 1:
-            return '<p class="pastille orange" ></p> En cours';
+            return '<p class="pastille-detail orange" ></p> En cours';
             break;
         case 3:
-            return '<p class="pastille green" ></p>';
+            return '<p class="pastille-detail green" ></p>';
             break;
         case 4:
-            return '<p class="pastille red" ></p>';
+            return '<p class="pastille-detail red" ></p>';
             break;
         case 5:
-            return '<p class="pastille purple" ></p>';
+            return '<p class="pastille-detail purple" ></p>';
             break;
         default:
             break;
