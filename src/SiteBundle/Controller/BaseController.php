@@ -396,6 +396,7 @@ class BaseController extends Controller
                 ]);
 
 
+
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [
@@ -450,6 +451,8 @@ class BaseController extends Controller
 
                 ]);
 
+
+                dump($groupe);
 
                 return $this->render(
                     '@Site/Base/client.general.html.twig',

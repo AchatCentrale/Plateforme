@@ -332,7 +332,7 @@ label{
 
 
 #tab_content3{
-    font-size: 12pt;
+    font-size: 10pt;
     font-family: "Titillium Web", serif;
 }
 
@@ -535,4 +535,8 @@ h3.raison-soc-titre {
 .ref-client h3 {
     font-size: 20pt;
     font-family: Helvetica Neue;
+}
+
+.ajoutuser{
+    padding: 20px;
 }
