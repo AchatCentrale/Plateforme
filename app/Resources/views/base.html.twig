@@ -80,6 +80,15 @@
 
                 {% block body %}
 
+                    {% set randomPassword = [] %}
+                    {% for i in 1..10 %}
+                        {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+                        {% set alphaUpper = alpha|upper %}
+                        {% set numbers = '0123456789' %}
+                        {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers ~ '-_') %}
+                        {% set randomPassword = randomPassword|merge([randomCharacter]) %}
+                    {% endfor %}
+                    {% set randomPassword = randomPassword|join %}
 
 
 

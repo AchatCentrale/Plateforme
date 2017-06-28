@@ -370,6 +370,7 @@ $('.menu .item')
 $('#siret-client').mask('000 000 000 00000');
 $('#siret-update').mask('000 000 000 00000');
 $('#tel-client').mask('00 00 00 00 00 ');
+$('#tel-user').mask('00 00 00 00 00 ');
 $('#Téléphone-update').mask('00 00 00 00 00 ');
 $('#dtadh-client').datepicker({
     altField: "#datepicker",
@@ -986,5 +987,11 @@ $('#afficherplus-historique').on('click', function () {
 
 
     showHideEl(el);
+
+});
+
+$('.client-user-new').on('click', function () {
+
+    $('#client-user-new').show();
 
 });

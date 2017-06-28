@@ -1,9 +1,17 @@
-
 <div class="hidden-centrale">
-    <p id="centrale" >{{ centrale  }}</p>
-    <p id="id" >{{ client[0].clId  }}</p>
+    <p id="centrale">{{ centrale }}</p>
+    <p id="id">{{ client[0].clId }}</p>
 </div>
 
+{% set randomPassword = [] %}
+                    {% for i in 1..5 %}
+                        {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+                        {% set alphaUpper = alpha|upper %}
+                        {% set numbers = '0123456789' %}
+                        {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers) %}
+                        {% set randomPassword = randomPassword|merge([randomCharacter]) %}
+                    {% endfor %}
+                    {% set randomPassword = randomPassword|join %}
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -60,7 +68,7 @@
 
                     {% if client[0].clWeb %}
                         <li class="m-top-xs web-li">
-                            <a href="{{ relative_path(client[0].clWeb ) }}" >{{ client[0].clWeb }}</a>
+                            <a href="{{ relative_path(client[0].clWeb ) }}">{{ client[0].clWeb }}</a>
                         </li>
                     {% else %}
                         <p>Pas de site web</p>
@@ -86,8 +94,8 @@
 
                             </div>
                             <div class="column ref-client">
-                                <h3><span class="pastille-ref green" ></span> {{ random() }}</h3>
-                                <h3><span class="pastille-ref green" ></span> {{ client[0].clRef }}</h3>
+                                <h3><span class="pastille-ref green"></span> {{ random() }}</h3>
+                                <h3><span class="pastille-ref green"></span> {{ client[0].clRef }}</h3>
                             </div>
                         </div>
                         {% if groupe %}
@@ -143,7 +151,8 @@
                                         <p class="cursor label-background"
                                            data-index="siret">{{ activite[0].acDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
                                     {% else %}
-                                        <p></p>
+                                        <p class="cursor label-background"
+                                           data-index="region">Pas d'activité enregistrer encore</p>
                                     {% endif %}
                                 </div>
                             </div>
@@ -162,8 +171,13 @@
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Regions</p>
-                                    <p class="cursor label-background"
-                                       data-index="region">{{ region[0].reNom }}</p>
+                                    {% if region %}
+                                        <p class="cursor label-background"
+                                           data-index="region">{{ region[0].reNom }}</p>
+                                    {% else %}
+                                        <p class="cursor label-background"
+                                           data-index="region">Pas de region enregistrer encore</p>
+                                    {% endif %}
 
                                 </div>
 
@@ -189,9 +203,10 @@
 
 
                         <div class="profile_title historique-client">
-                            <h2>Historique du client <small id="afficherplus-historique" class="cursor">Afficher plus</small> </h2>
+                            <h2>Historique du client
+                                <small id="afficherplus-historique" class="cursor">Afficher plus</small>
+                            </h2>
                         </div>
-
 
 
                         <div class="historique-client-content">
@@ -207,14 +222,16 @@
                         </div>
 
 
-
                         <div class="profile_title ">
-                            <h2>Details du client  <small id="afficherplus-detail" class="cursor">Afficher plus</small></h2>
+                            <h2>Details du client
+                                <small id="afficherplus-detail" class="cursor">Afficher plus</small>
+                            </h2>
                         </div>
 
                         <div id="detail-client-content">
                             <div class="ajoutuser">
-                                <button class="ui button">
+                                <button class="ui button client-user-new" type="button" data-toggle="modal"
+                                        data-target="#client-user-new">
                                     Ajouter un utilisateur
                                 </button>
                             </div>
@@ -276,9 +293,10 @@
                                                             <a target="_blank"
                                                                href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccNom }}</a>
                                                         </td>
-                                                        <td>{{ users.ccFonction |  convert_encoding('UTF-8', 'Windows-1252')  }}</td>
+                                                        <td>{{ users.ccFonction |  convert_encoding('UTF-8', 'Windows-1252') }}</td>
                                                         <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
-                                                        <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a></td>
+                                                        <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a>
+                                                        </td>
                                                         <td>{{ users.ccPass }}</td>
                                                         <td><i class="write icon cursor edit-client-user"></i></td>
                                                     </tr>
@@ -293,7 +311,8 @@
                                     {#Action_client#}
                                     <div role="tabpanel" class="tab-pane fade " id="tab_content1"
                                          aria-labelledby="home-tab">
-                                        <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter une tâche</a>
+                                        <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter
+                                            une tâche</a>
 
                                         <div class="ui items">
 
@@ -302,12 +321,12 @@
                                                 <div class="">
                                                     <ul class="to_do">
                                                         {% for tasks in task %}
-                                                            <li data-id="{{ tasks['CLA_ID'] }}" class="cursor detail-tache-home">
+                                                            <li data-id="{{ tasks['CLA_ID'] }}"
+                                                                class="cursor detail-tache-home">
                                                                 <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
                                                                 {{ tasks['CLA_STATUS'] | etat | raw }}
                                                             </li>
                                                         {% endfor %}
-
 
 
                                                     </ul>
@@ -376,6 +395,8 @@
         </div>
     </div>
 </div>
+
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -417,8 +438,6 @@
 
                     </div>
                     <div class="eight wide column">
-
-
                         <div class="form-group">
                             <label for="effectif-update">Effectif de l'entrprise</label>
                             <select disabled name="data-client[]" class="form-control data-update-client">
@@ -460,6 +479,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="logo-edit" tabindex="-1" role="dialog" aria-labelledby="logo-edit">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -476,18 +496,16 @@
                             <h4>Photos actuelle</h4>
                             <img class="img-responsive img-for-edit"
                                  src="http://www.centrale-{{ centrale | centrale }}.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].clId }}/{{ client[0].clLogo }}"/>
-                            
+
                         </div>
                         <div class="column">
 
 
-
                             <form action="/file-upload" class="dropzone">
                                 <div class="fallback">
-                                    <input name="file" type="file" multiple />
+                                    <input name="file" type="file" multiple/>
                                 </div>
                             </form>
-
 
 
                         </div>
@@ -503,16 +521,17 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="client-user-edit" tabindex="-1" role="dialog" aria-labelledby="client-user-edit">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Modifier l'utilisateur # pour le client {{ client[0].clRaisonSoc }}</h4>
+                <h4 class="modal-title" id="myModalLabel">Modifier l'utilisateur # pour le
+                    client {{ client[0].clRaisonSoc }}</h4>
             </div>
             <div class="modal-body">
-
 
 
             </div>
@@ -521,5 +540,86 @@
                 <button type="button" class="btn btn-success save-edit-logo">Enregistrer les modifications</button>
             </div>
         </div>
+    </div>
+</div>
+
+<div id="client-user-new" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter un utilisateur du
+                    compte {{ client[0].clRaisonsoc }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ui centered grid">
+                    <div class="eight wide column">
+
+
+                        <div class="form-group">
+                            <label for="prenom-user">Prénom</label>
+                            <input name="data-user[]" type="text" class="form-control data-update-client"
+                                   id="prenom-user" placeholder="Albert">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email-user">Adresse mail</label>
+                            <input name="data-user[]" type="email" class="form-control data-update-client"
+                                   id="email-user" placeholder="Albert.bert@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="fonction-user">Fonction</label>
+                            <select name="data-user[]" class="form-control data-update-client">
+                                {% for fonctions in fonction %}
+                                    <option value="{{ fonctions.foId }}">{{ fonctions.foDescr }}</option>
+
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profil-user">Profil utilisateur</label>
+                            <input name="data-client[]" type="text" class="form-control" id="profil-user"
+                                  >
+                        </div>
+
+
+                    </div>
+                    <div class="eight wide column">
+                        <div class="form-group">
+                            <label for="nom-user">Nom</label>
+                            <input name="data-user[]" type="email" class="form-control data-update-client" id="nom-user"
+                                   placeholder="Bert">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd-user">Mot de passe </label>
+                            <input name="data-user[]" type="text" class="form-control data-update-client"
+                                   id="pwd-user" value="{{ randomPassword }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tel-user">Téléphone</label>
+                            <input name="data-user[]" type="text" class="form-control" id="tel-user"
+                                   placeholder="05 16 54 84 44 ">
+                        </div>
+                        <div class="form-group">
+                            <label for="niveau-user">Niveau</label>
+                            <input name="data-user[]" type="text" class="form-control" id="niveau-user" placeholder="">
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success save-update-client">Enregistrer les modifications</button>
+            </div>
+        </div>
+
     </div>
 </div>

@@ -394,6 +394,10 @@ class BaseController extends Controller
                     'cl' => $id,
 
                 ]);
+                $fonction = $this->getDoctrine()->getRepository('FunecapBundle:Fonctions')->findBy([
+                    'soId' => 1,
+                ]);
+
 
 
 
@@ -408,6 +412,7 @@ class BaseController extends Controller
                         "groupe" => $groupe,
                         "note" => $notes,
                         "centrale" => $centrale,
+                        "fonction" => $fonction,
                     ]
                 );
                 break;
@@ -452,6 +457,11 @@ class BaseController extends Controller
                 ]);
 
 
+                $fonction = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Fonctions')->findBy([
+                    'soId' => 1,
+                ]);
+
+
 
 
                 return $this->render(
@@ -465,6 +475,7 @@ class BaseController extends Controller
                         "groupe" => $groupe,
                         "note" => $notes,
                         "centrale" => $centrale,
+                        "fonction" => $fonction,
                     ]
                 );
                 break;
@@ -473,7 +484,6 @@ class BaseController extends Controller
         }
 
     }
-
 
     public function updateStatutAction($id, $centrale, Request $request)
     {
@@ -552,7 +562,6 @@ class BaseController extends Controller
         return new JsonResponse($res, 200);
     }
 
-
     public function newNotesClientAction(Request $request, $id, $centrale)
     {
 
@@ -579,6 +588,11 @@ class BaseController extends Controller
         return new JsonResponse('Notes ajouté ', 200);
     }
 
+    public function newClientsUserAction(Request $request, $id, $centrale)
+    {
+
+        return new JsonResponse('ok', 200);
+    }
 
     public function ClientAdresseAction($id)
     {
