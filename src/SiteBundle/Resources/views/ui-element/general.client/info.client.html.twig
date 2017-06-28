@@ -79,7 +79,7 @@
                         <div class="equal width row">
                             <div class="column">
                                 <h3 class="raison-soc-titre">
-                                    <i class="building icon"></i> {{ client[0].clRaisonsoc }}
+                                    <i class="building icon"></i> {{ client[0].clRaisonsoc | convert_encoding('UTF-8', 'Windows-1252') }}
                                 </h3>
                                 {{ centrale |replace({"_" : " "}) | centraleLabel | raw }}
 
