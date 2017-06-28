@@ -574,7 +574,7 @@
                             <label for="fonction-user">Fonction</label>
                             <select name="data-user[]" class="form-control data-update-client">
                                 {% for fonctions in fonction %}
-                                    <option value="{{ fonctions.foId }}">{{ fonctions.foDescr }}</option>
+                                    <option value="{{ fonctions.foId }}">{{ fonctions.foDescr | convert_encoding('UTF-8', 'Windows-1252') }}</option>
 
                                 {% endfor %}
                             </select>
