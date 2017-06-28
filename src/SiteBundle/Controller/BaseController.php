@@ -591,6 +591,8 @@ class BaseController extends Controller
     public function newClientsUserAction(Request $request, $id, $centrale)
     {
 
+
+
         return new JsonResponse('ok', 200);
     }
 
@@ -688,6 +690,17 @@ class BaseController extends Controller
         );
 
     }
+
+    public function ClientFacturationAction(Request $request,$id, $centrale)
+    {
+
+        return $this->render('@Site/Base/client.facturation.html.twig',
+            [
+
+            ]
+        );
+    }
+
 
     public function sendClientDetailMailAction(Request $request, $clientId)
     {

@@ -44,6 +44,10 @@ client-status:
     path:     /client/{id}/{centrale}/status
     defaults: { _controller: SiteBundle:Base:ClientStatut }
 
+client-facturation:
+    path:     /client/{id}/{centrale}/facturation
+    defaults: {_controller: SiteBundle:Base:ClientFacturation}
+
 
 sendClientDetailMail:
     path:     /send/client/{clientId}
