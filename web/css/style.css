@@ -523,3 +523,7 @@ h3.raison-soc-titre {
 #detail-client-content{
     display: none;
 }
+
+.historique-client-content{
+    display: none;
+}
