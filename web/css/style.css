@@ -413,6 +413,8 @@ label{
     font-size: 16px;
     border-radius: 100%;
     padding: 16px 32px;
+    height: 88px;
+    padding-top: 31px;
 }
 
 .img-for-edit{
@@ -526,4 +528,11 @@ h3.raison-soc-titre {
 
 .historique-client-content{
     display: none;
+}
+
+
+
+.ref-client h3 {
+    font-size: 20pt;
+    font-family: Helvetica Neue;
 }
