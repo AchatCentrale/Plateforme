@@ -351,7 +351,7 @@ label{
 }
 
 .tab-detail-client {
-    padding-top: 55px;
+    padding-top: 12px;
 }
 
 .label-background{
@@ -367,6 +367,10 @@ label{
     border-radius: 57px;
     font-size: 20pt;
     padding-left: 22px;
+}
+
+.historique-client-content {
+    margin-bottom: 40px;
 }
 
 .historique-client {
@@ -514,4 +518,8 @@ input.check-non-pa {
 
 h3.raison-soc-titre {
     font-size: 14pt;
+}
+
+#detail-client-content{
+    display: none;
 }

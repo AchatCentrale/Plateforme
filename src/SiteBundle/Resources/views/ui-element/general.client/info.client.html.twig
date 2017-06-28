@@ -189,8 +189,11 @@
 
 
                         <div class="profile_title historique-client">
-                            <h2>Historique du client </h2>
+                            <h2>Historique du client <small id="afficherplus-historique" class="cursor">Afficher plus</small> </h2>
                         </div>
+
+
+
                         <div class="historique-client-content">
                             <div class="ui feed">
                                 <div class="event">
@@ -201,158 +204,165 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
 
-                        <div class="tab-detail-client" role="tabpanel" data-example-id="togglable-tabs">
 
 
-                            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                                <li role="presentation" class="active">
-                                    <a href="#tab_content3" role="tab" id="profile-tab"
-                                       data-toggle="tab" aria-expanded="false">
-                                        Utilisateurs
-                                    </a>
-                                </li>
-                                <li role="presentation" class="">
-                                    <a href="#tab_content1" id="home-tab"
-                                       role="tab"
-                                       data-toggle="tab" aria-expanded="true">
-                                        <span class="badge bg-green">{{ task | length }}</span> Actions
-                                    </a>
-                                </li>
-                                <li role="presentation" class="">
-                                    <a href="#tab_content2" role="tab" id="profile-tab"
-                                       data-toggle="tab" aria-expanded="true">
-                                        <span class="badge bg-green"> {{ note | length }} </span> Notes
-                                    </a>
-                                </li>
+                        <div class="profile_title ">
+                            <h2>Details du client  <small id="afficherplus-detail" class="cursor">Afficher plus</small></h2>
+                        </div>
+
+                        <div id="detail-client-content">
+                            <div class="tab-detail-client" role="tabpanel" data-example-id="togglable-tabs">
 
 
-                            </ul>
+                                <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#tab_content3" role="tab" id="profile-tab"
+                                           data-toggle="tab" aria-expanded="false">
+                                            Utilisateurs
+                                        </a>
+                                    </li>
+                                    <li role="presentation" class="">
+                                        <a href="#tab_content1" id="home-tab"
+                                           role="tab"
+                                           data-toggle="tab" aria-expanded="true">
+                                            <span class="badge bg-green">{{ task | length }}</span> Actions
+                                        </a>
+                                    </li>
+                                    <li role="presentation" class="">
+                                        <a href="#tab_content2" role="tab" id="profile-tab"
+                                           data-toggle="tab" aria-expanded="true">
+                                            <span class="badge bg-green"> {{ note | length }} </span> Notes
+                                        </a>
+                                    </li>
 
 
-                            <div id="myTabContent" class="tab-content">
+                                </ul>
 
 
-                                {#User_client#}
-                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content3"
-                                     aria-labelledby="profile-tab">
-                                    {% if user %}
-                                        <table class="ui celled padded table">
-                                            <thead>
-                                            <tr>
-                                                <th>Prénom</th>
-                                                <th>Nom</th>
-                                                <th>Fonction</th>
-                                                <th>Tel</th>
-                                                <th>Mail</th>
-                                                <th>Password</th>
-                                                <th>Action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {% for users in user %}
+                                <div id="myTabContent" class="tab-content">
+
+
+                                    {#User_client#}
+                                    <div role="tabpanel" class="tab-pane fade active in" id="tab_content3"
+                                         aria-labelledby="profile-tab">
+                                        {% if user %}
+                                            <table class="ui celled padded table">
+                                                <thead>
                                                 <tr>
-                                                    <td>
-                                                        <a target="_blank"
-                                                           href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom }}</a>
-                                                    </td>
-                                                    <td>
-                                                        <a target="_blank"
-                                                           href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccNom }}</a>
-                                                    </td>
-                                                    <td>{{ users.ccFonction |  convert_encoding('UTF-8', 'Windows-1252')  }}</td>
-                                                    <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
-                                                    <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a></td>
-                                                    <td>{{ users.ccPass }}</td>
-                                                    <td><i class="write icon cursor edit-client-user"></i></td>
+                                                    <th>Prénom</th>
+                                                    <th>Nom</th>
+                                                    <th>Fonction</th>
+                                                    <th>Tel</th>
+                                                    <th>Mail</th>
+                                                    <th>Password</th>
+                                                    <th>Action</th>
                                                 </tr>
-                                            {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    {% else %}
-                                        <p>Il n'y aucun utilisateur pour ce client</p>
-                                    {% endif %}
-                                </div>
-
-                                {#Action_client#}
-                                <div role="tabpanel" class="tab-pane fade " id="tab_content1"
-                                     aria-labelledby="home-tab">
-                                    <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter une tâche</a>
-
-                                    <div class="ui items">
-
-                                        {% if task %}
-
-                                            <div class="">
-                                                <ul class="to_do">
-                                                    {% for tasks in task %}
-                                                        <li data-id="{{ tasks['CLA_ID'] }}" class="cursor detail-tache-home">
-                                                            <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
-                                                            {{ tasks['CLA_STATUS'] | etat | raw }}
-                                                        </li>
-                                                    {% endfor %}
-
-
-
-                                                </ul>
-                                            </div>
-
+                                                </thead>
+                                                <tbody>
+                                                {% for users in user %}
+                                                    <tr>
+                                                        <td>
+                                                            <a target="_blank"
+                                                               href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom }}</a>
+                                                        </td>
+                                                        <td>
+                                                            <a target="_blank"
+                                                               href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccNom }}</a>
+                                                        </td>
+                                                        <td>{{ users.ccFonction |  convert_encoding('UTF-8', 'Windows-1252')  }}</td>
+                                                        <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
+                                                        <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a></td>
+                                                        <td>{{ users.ccPass }}</td>
+                                                        <td><i class="write icon cursor edit-client-user"></i></td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
                                         {% else %}
-                                            <h5>Pas de taches pour le moment</h5>
+                                            <p>Il n'y aucun utilisateur pour ce client</p>
                                         {% endif %}
+                                    </div>
+
+                                    {#Action_client#}
+                                    <div role="tabpanel" class="tab-pane fade " id="tab_content1"
+                                         aria-labelledby="home-tab">
+                                        <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter une tâche</a>
+
+                                        <div class="ui items">
+
+                                            {% if task %}
+
+                                                <div class="">
+                                                    <ul class="to_do">
+                                                        {% for tasks in task %}
+                                                            <li data-id="{{ tasks['CLA_ID'] }}" class="cursor detail-tache-home">
+                                                                <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
+                                                                {{ tasks['CLA_STATUS'] | etat | raw }}
+                                                            </li>
+                                                        {% endfor %}
+
+
+
+                                                    </ul>
+                                                </div>
+
+                                            {% else %}
+                                                <h5>Pas de taches pour le moment</h5>
+                                            {% endif %}
+
+
+                                        </div>
 
 
                                     </div>
 
-
-                                </div>
-
-                                {#Notes_client#}
-                                <div role="tabpanel" class="tab-pane fade" id="tab_content2"
-                                     aria-labelledby="profile-tab">
-                                    <div class="ui equal width grid" style="margin-top: 30px">
-                                        <div class="equal width row">
-                                            <div class="column">
-                                                <div class="note-left">
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" id="add-note"
-                                                               placeholder="Consigner une action pour le client {{ client[0].clRaisonsoc }}">
-                                                        <span class="input-group-btn">
+                                    {#Notes_client#}
+                                    <div role="tabpanel" class="tab-pane fade" id="tab_content2"
+                                         aria-labelledby="profile-tab">
+                                        <div class="ui equal width grid" style="margin-top: 30px">
+                                            <div class="equal width row">
+                                                <div class="column">
+                                                    <div class="note-left">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="add-note"
+                                                                   placeholder="Consigner une action pour le client {{ client[0].clRaisonsoc }}">
+                                                            <span class="input-group-btn">
                                                         <button class="btn btn-secondar btn-success add-note"
                                                                 type="button">Enregistrer</button>
                                                     </span>
+                                                        </div>
+                                                        <br>
+
+                                                        {% if note %}
+                                                            <h5>Historique client: </h5>
+                                                            {% for n in note %}
+                                                                <ul>
+                                                                    <li>{{ n.insDate | Time }} : {{ n.cnNote }}</li>
+                                                                </ul>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            <p>Il n'y aucune note pour le client</p>
+
+                                                        {% endif %}
+
+
                                                     </div>
-                                                    <br>
-
-                                                    {% if note %}
-                                                        <h5>Historique client: </h5>
-                                                        {% for n in note %}
-                                                            <ul>
-                                                                <li>{{ n.insDate | Time }} : {{ n.cnNote }}</li>
-                                                            </ul>
-                                                        {% endfor %}
-                                                    {% else %}
-                                                        <p>Il n'y aucune note pour le client</p>
-
-                                                    {% endif %}
-
-
                                                 </div>
-                                            </div>
-                                            {#<div class="column">#}
+                                                {#<div class="column">#}
                                                 {#<a href="{{ path('new-task', {'u' : client[0].clId }) }}"#}
-                                                   {#class="btn btn-success" role="button">Crée une action</a>#}
+                                                {#class="btn btn-success" role="button">Crée une action</a>#}
 
-                                            {#</div>#}
+                                                {#</div>#}
+                                            </div>
                                         </div>
+
                                     </div>
 
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
 
