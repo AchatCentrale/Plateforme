@@ -4,11 +4,14 @@ namespace SiteBundle\Controller;
 
 use AchatCentrale\CrmBundle\Entity\ClientsTaches;
 use SiteBundle\Form\ClientsTachesType;
+use FunecapBundle\Form\ClientsTachesType as fClientsTachesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 
 class TacheController extends Controller
 {
@@ -17,7 +20,6 @@ class TacheController extends Controller
     public function TacheAction()
     {
 
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $user = $this->getUser();
 
@@ -138,6 +140,7 @@ class TacheController extends Controller
             'Access-Control-Allow-Origin' => '*'
         ]);
     }
+
     public function UnArchiveTaskAction($id){
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
@@ -162,70 +165,154 @@ class TacheController extends Controller
     {
 
 
-        $user = $request->query->get('u');
+        $centrale = $request->query->get('c');
 
-        $req = $request->request->get('achatcentrale_crmbundle_clientstaches');
 
-        $task = new ClientsTaches();
+        switch ($centrale){
+            case 'roc':
+                $req = $request->request->get('achatcentrale_crmbundle_clientstaches');
 
-        if ($user){
-            $task->setUsId($user);
+                $task = new ClientsTaches();
+
+
+
+                if (isset($req['cl'])){
+                    $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+                        'clId' => $req['cl'],
+                    ]);
+
+                }
+
+                $form = $this->createForm(ClientsTachesType::class, $task, [
+                    'action' => $this->generateUrl('new-task', [ 'c' => $centrale ]),
+
+                ]);
+
+                $form->add('submit', SubmitType::class, [
+                        'label' => 'Enregistrer',
+                        'attr' => array('class' => 'fluid positive ui button'),]
+                );
+
+                if ($request->getMethod() == "POST") {
+
+                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req['claEcheance']);
+
+                    $task
+                        ->setClaType($req['claType'])
+                        ->setClaNom($req['claNom'])
+                        ->setClaDescr($req['claDescr'])
+                        ->setClaPriorite($req['claPriorite'])
+                        ->setClaEcheance($date_echeance2)
+                        ->setUsId($req['usId'])
+                        ->setInsUser($this->getUser()->getusId());
+
+                    if(isset($client)){
+                        $task->setCl($client[0]);
+                    }
+
+
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($task);
+                    $em->flush();
+
+
+                    return $this->redirectToRoute('taches_home', [
+
+                    ], 301);
+
+                }
+
+
+
+
+
+
+                return $this->render(
+                    'SiteBundle:ui-element/taches:action.form.html.twig',
+                    [
+                'form' => $form->createView(),
+                    ]
+                );
+                break;
+
+            case 'funecap':
+                $req = $request->request->get('achatcentrale_crmbundle_clientstaches');
+
+                $task = new \FunecapBundle\Entity\ClientsTaches();
+
+
+                if (isset($req['cl'])){
+                    $client = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+                        'clId' => $req['cl'],
+                    ]);
+
+                }
+
+                $form = $this->createForm(fClientsTachesType::class , $task, [
+                    'action' => $this->generateUrl('new-task', [ 'c' => $centrale ]),
+
+                ]);
+
+                $form->add('submit', SubmitType::class, [
+                        'label' => 'Enregistrer',
+                        'attr' => array('class' => 'fluid positive ui button'),]
+                );
+
+                if ($request->getMethod() == "POST") {
+
+
+
+                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req['claEcheance']);
+
+
+                    $task
+                        ->setClaType($req['claType'])
+                        ->setClaNom($req['claNom'])
+                        ->setClaDescr($req['claDescr'])
+                        ->setClaPriorite($req['claPriorite'])
+                        ->setClaEcheance($date_echeance2)
+                        ->setUsId($req['usId'])
+                        ->setInsUser($this->getUser()->getusId());
+
+                    if(isset($client)){
+                        $task->setCl($client[0]);
+                    }
+
+
+
+                    $em = $this->getDoctrine()->getManager('centrale_funecap_jb');
+                    $em->persist($task);
+                    $em->flush();
+
+
+
+                    return $this->redirectToRoute('taches_home', [
+
+                    ], 301);
+
+                }
+
+
+
+
+
+
+                return $this->render(
+                    'SiteBundle:ui-element/taches:action.form.html.twig',
+                    [
+                'form' => $form->createView(),
+                    ]
+                );
+                break;
         }
 
-        if (isset($req['cl'])){
-            $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
-                'clId' => $req['cl'],
-            ]);
 
-        }
-
-        $form = $this->createForm(ClientsTachesType::class, $task, [
-            'action' => $this->generateUrl('new-task'),
-            'us' => $user,
-        ]);
-
-        $form->add('submit', SubmitType::class, [
-                'label' => 'Enregistrer',
-                'attr' => array('class' => 'fluid positive ui button'),]
-        );
-
-        if ($request->getMethod() == "POST") {
-
-            $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req['claEcheance']);
-
-            $task
-                ->setClaType($req['claType'])
-                ->setClaNom($req['claNom'])
-                ->setClaDescr($req['claDescr'])
-                ->setClaPriorite($req['claPriorite'])
-                ->setClaEcheance($date_echeance2)
-                ->setUsId($req['usId'])
-                ->setInsUser($this->getUser()->getusId());
-
-            if(isset($client)){
-                $task->setCl($client[0]);
-            }
-
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($task);
-            $em->flush();
-
-
-            return $this->redirectToRoute('taches_home', [
-
-            ], 301);
-
-        }
 
         return $this->render(
             'SiteBundle:ui-element/taches:action.form.html.twig',
             [
-                'form' => $form->createView(),
             ]
         );
-
-
     }
 
     public function TaksByIdAction($id)
@@ -250,7 +337,6 @@ class TacheController extends Controller
             'tache' => $result[0]
         ]);
     }
-
 
     public function changetheStateAction($state, $id)
     {
@@ -296,7 +382,6 @@ class TacheController extends Controller
 
 
     }
-
 
     public function updateTaskAction(Request $request, $id)
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace SiteBundle\Form;
+namespace FunecapBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -24,7 +24,7 @@ class ClientsTachesType extends AbstractType
     {
         $builder
             ->add('claType', EntityType::class, [
-                'class' => 'AchatCentrale\CrmBundle\Entity\ActionType',
+                'class' => 'FunecapBundle\Entity\ActionType',
                 "choice_label" => 'acNom',
                 "label" => "Type d'action",
                 "attr" => ["class" => "ui dropdown add-action"]
@@ -56,7 +56,6 @@ class ClientsTachesType extends AbstractType
                 'format' => 'dd/MM/yyyy',
                 'label' => "Date échéance",
                 'attr' => [ 'class' => 'date add-action'],
-                'model_timezone' => 'Europe/Paris',
 
             ])
             /*->add('claNotifRef', CheckboxType::class, [
@@ -64,14 +63,14 @@ class ClientsTachesType extends AbstractType
                 'required' => false,
             ])*/
             ->add('usId', EntityType::class, [
-                'class' => "AchatCentrale\CrmBundle\Entity\Users",
+                'class' => "FunecapBundle\Entity\Users",
                 'choice_label' => "usPrenom",
                 'placeholder' => 'Utilisateur affecté a la tache',
                 'label' => "Affectation",
                 "attr" => ["class" => "ui dropdown add-action"],
             ])
             ->add('cl', EntityType::class, [
-                'class' => 'AchatCentrale\CrmBundle\Entity\Clients',
+                'class' => 'FunecapBundle\Entity\Clients',
                 'choice_label' => 'clRaisonsoc',
 
 
@@ -83,16 +82,15 @@ class ClientsTachesType extends AbstractType
             ])
 
         ;
-
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AchatCentrale\CrmBundle\Entity\ClientsTaches',
+            'data_class' => 'FunecapBundle\Entity\ClientsTaches',
             'allow_extra_fields' => true,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
@@ -106,7 +104,7 @@ class ClientsTachesType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'achatcentrale_crmbundle_clientstaches';
+        return 'funecapbundle_clientstaches';
     }
 
 

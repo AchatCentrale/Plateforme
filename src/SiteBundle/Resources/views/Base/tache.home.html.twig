@@ -14,7 +14,9 @@
                 </div>
                 <div class="x_content">
 
-                    <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter une tâche</a>
+                    {#<a href="{{ path('new-task') }}" data-toggle="modal" data-target="#modal-choix-centrale" class="btn btn-success" role="button">Ajouter une tâche</a>#}
+
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-choix-centrale">Ajouter une tâche</button>
 
 
                     <div class="tab-task" role="tabpanel" data-example-id="togglable-tabs">
@@ -75,7 +77,7 @@
     </div>
 
 
-
+    <!-- Modal detail action -->
     <div class="modal fade" id="modal-task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -90,6 +92,55 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+    <!-- Choix centrale -->
+    <div id="modal-choix-centrale" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Choississez la centrale</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Pour ajouter un nouveau client, choisir d'abord la centrale</p>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-center ">
+                        <ul class="pagination pagination-split">
+                            <li><a href="{{ path('new-task', { 'c' : 'funecap'}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_FUNECAP"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+                                </a>
+                            </li>
+                            <li><a href="{{ path('new-task', { 'c' : 'roc'}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_ROC_ECLERC"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+                                </a>
+                            </li>
+                            {#<li><a href="{{ path('client-new', { 'centrale' : 3}) }}">#}
+                            {#<img#}
+                            {#data-centrale="achat-centrale"#}
+                            {#class="cursor img-centrale-new-client"#}
+                            {#src="{{ asset('images/logo-centrale/logo-ac.png') }}">#}
+                            {#</a></li>#}
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+
         </div>
     </div>
 
