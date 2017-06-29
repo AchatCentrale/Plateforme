@@ -384,7 +384,8 @@ $('#dtadh-client').datepicker({
     dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
     dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
     weekHeader: 'Sem.',
-    dateFormat: 'd/mm/yy'
+    dateFormat: 'd/mm/yy',
+    firstDay: 1,
 
 });
 
@@ -440,7 +441,8 @@ $("form input.date").datepicker({
     dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
     dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
     weekHeader: 'Sem.',
-    dateFormat: 'd/mm/yy'
+    dateFormat: 'd/mm/yy',
+    firstDay: 1,
 
 });
 
