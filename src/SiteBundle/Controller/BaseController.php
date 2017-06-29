@@ -395,7 +395,7 @@ class BaseController extends Controller
                     'cl' => $id,
 
                 ]);
-                $fonction = $this->getDoctrine()->getRepository('FunecapBundle:Fonctions')->findBy([
+                $fonction = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Fonctions')->findBy([
                     'soId' => 1,
                 ]);
 

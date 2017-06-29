@@ -63,6 +63,33 @@ class FeedServices
 
                 return $this;
                 break;
+            case 'CENTRALE_FUNECAP':
+                $action = $this->doctrine->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsTaches')->findBy([
+                    'cl' => $id
+                ], [
+                    'claEcheance' => 'ASC'
+                ],  5);
+
+                $notes = $this->doctrine->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsNotes')->findBy([
+                    'cl' => $id
+                ], [
+                    'insDate' => 'ASC'
+                ], 5);
+
+                $tickets = $this->doctrine->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:MessageEntete')->findBy([
+                    'clId' => $id
+                ], [
+                    'insDate' => 'ASC'
+                ], 5);
+
+
+
+                $this->setAction($action);
+                $this->setNotes($notes);
+                $this->setTickets($tickets);
+
+                return $this;
+                break;
 
 
         }
