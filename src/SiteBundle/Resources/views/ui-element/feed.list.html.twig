@@ -4,24 +4,42 @@
 
 
            <h4>Derniers tickets</h4>
-           {% for ticket in lastTicket  %}
-        <div class="detail-feed-ticket-container">
-               <p style="margin: 0" >{{ ticket.meDate | Time }}  <b>{{ ticket.meSujet }}</b> </p>
-               <a class="detail-feed-ticket" href="http://www.centrale-roc-eclerc.fr/extranet/MB_Tickets_Detail.asp?SO_ID={{ ticket.soId }}&ME_ID={{ ticket.meId }}&ME_STATUS_ORI=0&DataBase={{ centrale }}">Details</a>
+        {% if lastTicket %}
+            {% for ticket in lastTicket  %}
+                <div class="detail-feed-ticket-container">
+                    <p style="margin: 0" >{{ ticket.meDate | Time }}  <b>{{ ticket.meSujet }}</b> </p>
+                    <a class="detail-feed-ticket" href="http://www.centrale-roc-eclerc.fr/extranet/MB_Tickets_Detail.asp?SO_ID={{ ticket.soId }}&ME_ID={{ ticket.meId }}&ME_STATUS_ORI=0&DataBase={{ centrale }}">Details</a>
 
-       </div>
-           {% endfor %}
+                </div>
+            {% endfor %}
+            {% else %}
+                <div class="detail-feed-ticket-container">
+                    <p style="margin: 0" >Il n'y pas de tickets pour ce client</p>
+
+                </div>
+
+        {% endif %}
 
     </div>
     <div class="vertical-divider"></div>
     <div class="column">
         <h4>Dernieres tâches</h4>
-        {% for task in lastAction  %}
+
+        {% if lastAction %}
+            {% for task in lastAction  %}
+                <div class="detail-feed-ticket-container">
+                    <p style="margin: 0" >{{ task.insDate | Time }}  <b>{{ task.claNom }}</b> </p>
+
+                </div>
+            {% endfor %}
+        {% else %}
             <div class="detail-feed-ticket-container">
-                <p style="margin: 0" >{{ task.insDate | Time }}  <b>{{ task.claNom }}</b> </p>
+                <p style="margin: 0" >Il n'y pas de tâche pour ce client</p>
 
             </div>
-        {% endfor %}
+
+        {% endif %}
+
 
 
     </div>
@@ -29,12 +47,22 @@
     <div class="column">
 
         <h4>Dernieres notes</h4>
-        {% for note in lastNote  %}
+
+        {% if lastNote %}
+            {% for note in lastNote  %}
+                <div class="detail-feed-ticket-container">
+                    <p style="margin: 0" >{{ note.insDate | Time }}  <b>{{ note.cnNote }}</b> </p>
+
+                </div>
+            {% endfor %}
+        {% else %}
             <div class="detail-feed-ticket-container">
-                <p style="margin: 0" >{{ note.insDate | Time }}  <b>{{ note.cnNote }}</b> </p>
+                <p style="margin: 0" >Il n'y pas de note pour ce client</p>
 
             </div>
-        {% endfor %}
+
+        {% endif %}
+
 
     </div>
 </div>
