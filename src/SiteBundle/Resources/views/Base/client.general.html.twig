@@ -11,7 +11,13 @@
 
         <div class="container-general">
             <div class="container-info-client">
-                {% include '@Site/ui-element/general.client/info.client.html.twig' with {'client': client, 'task' : tache, 'user' : user, 'activite' : activite} %}
+                {% include '@Site/ui-element/general.client/info.client.html.twig' with
+                {
+                'client': client,
+                'task' : tache,
+                'user' : user,
+                'activite' : activite
+                } %}
 
             </div>
         </div>

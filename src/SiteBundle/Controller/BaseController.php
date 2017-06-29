@@ -23,6 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
 
 
 class BaseController extends Controller
@@ -463,7 +464,6 @@ class BaseController extends Controller
 
 
 
-
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [
@@ -476,6 +476,7 @@ class BaseController extends Controller
                         "note" => $notes,
                         "centrale" => $centrale,
                         "fonction" => $fonction,
+
                     ]
                 );
                 break;
@@ -701,6 +702,28 @@ class BaseController extends Controller
         );
     }
 
+    public function ClientFeedAction($id, $centrale)
+    {
+
+        $feed = $this->get('site.service.feed_services');
+
+
+        $feed->getTheLast($id, $centrale);
+
+
+
+
+        return $this->render('@Site/ui-element/feed.list.html.twig', [
+            'lastAction' => $feed->getAction(),
+            'lastTicket' => $feed->getTickets(),
+            'lastNote' => $feed->getNotes(),
+            'centrale' => $centrale,
+            'id' => $id,
+        ]);
+
+
+
+    }
 
     public function sendClientDetailMailAction(Request $request, $clientId)
     {

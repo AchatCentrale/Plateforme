@@ -9,3 +9,9 @@ services:
         class: SiteBundle\Service\TachesUtils
     site.service.client_services:
         class: SiteBundle\Service\ClientServices
+    site.service.feed_services:
+        class: SiteBundle\Service\FeedServices
+        arguments:
+            doctrine: '@doctrine'
+            tags:
+                - { name: twig.extension}

@@ -541,3 +541,12 @@ h3.raison-soc-titre {
     padding: 20px;
 }
 
+.detail-feed-ticket{
+    font-size: 12pt;
+    font-weight: 500;
+}
+
+
+.detail-feed-ticket-container {
+    padding: 0px 0px 12px 0px;
+}
