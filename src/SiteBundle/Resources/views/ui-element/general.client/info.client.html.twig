@@ -101,6 +101,7 @@
                                 <h3><span class="pastille-ref green"></span> {{ client[0].clRef }}</h3>
                             </div>
                         </div>
+
                         {% if groupe %}
                             <p class="ui label green">{{ groupe[0].grDescr }}</p><br>
                         {% else %}
@@ -308,7 +309,7 @@
                                     {#Action_client#}
                                     <div role="tabpanel" class="tab-pane fade " id="tab_content1"
                                          aria-labelledby="home-tab">
-                                        <a href="{{ path('new-task') }}" class="btn btn-success" role="button">Ajouter
+                                        <a href="{{ path('new-task', {'c' : centrale}) }}" class="btn btn-success" role="button">Ajouter
                                             une tâche</a>
 
                                         <div class="ui items">
@@ -579,8 +580,16 @@
 
                         <div class="form-group">
                             <label for="profil-user">Profil utilisateur</label>
-                            <input name="data-client[]" type="text" class="form-control" id="profil-user"
-                                  >
+                            <select name="data-user[]" class="form-control data-update-client">
+                                {% for profils in profil %}
+                                    <option value="{{ profils.puId }}">{% if profils.puPole %}
+                                            {{ profils.puPole | convert_encoding('UTF-8', 'Windows-1252') }} /
+                                            {% else %}
+
+                                        {% endif %} {{ profils.puDescr | convert_encoding('UTF-8', 'Windows-1252') }}</option>
+
+                                {% endfor %}
+                            </select>
                         </div>
 
 

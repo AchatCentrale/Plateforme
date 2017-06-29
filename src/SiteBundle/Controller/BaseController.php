@@ -399,6 +399,8 @@ class BaseController extends Controller
                     'soId' => 1,
                 ]);
 
+                $profil = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ProfilsUsers')->findAll();
+
 
 
 
@@ -414,6 +416,8 @@ class BaseController extends Controller
                         "note" => $notes,
                         "centrale" => $centrale,
                         "fonction" => $fonction,
+                        "profil"   => $profil,
+
                     ]
                 );
                 break;
@@ -462,6 +466,7 @@ class BaseController extends Controller
                     'soId' => 1,
                 ]);
 
+                $profil = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ProfilsUsers')->findAll();
 
 
                 return $this->render(
@@ -476,6 +481,7 @@ class BaseController extends Controller
                         "note" => $notes,
                         "centrale" => $centrale,
                         "fonction" => $fonction,
+                        "profil"   => $profil,
 
                     ]
                 );
