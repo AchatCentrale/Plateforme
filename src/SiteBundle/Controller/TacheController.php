@@ -236,13 +236,13 @@ class TacheController extends Controller
                 break;
 
             case 'funecap':
-                $req = $request->request->get('achatcentrale_crmbundle_clientstaches');
+                $req = $request->request->get('funecapbundle_clientstaches');
 
                 $task = new \FunecapBundle\Entity\ClientsTaches();
 
 
                 if (isset($req['cl'])){
-                    $client = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+                    $client = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Clients')->findBy([
                         'clId' => $req['cl'],
                     ]);
 
@@ -261,6 +261,7 @@ class TacheController extends Controller
                 if ($request->getMethod() == "POST") {
 
 
+                    dump($req['claEcheance']);
 
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req['claEcheance']);
 
