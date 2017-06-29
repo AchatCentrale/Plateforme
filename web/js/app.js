@@ -997,3 +997,64 @@ $('.client-user-new').on('click', function () {
     $('#client-user-new').show();
 
 });
+
+
+$('.new-clients-user').on('click', function (e) {
+
+
+    let values = $("input[name='data-user[]'], select[name='data-user[]']")
+        .map(function () {
+                return $(this).val();
+            }
+        ).get();
+
+    let centrale = $('#centrale').html();
+    let id =  $('#id').html();
+
+    let url = "http://crm.achatcentrale.fr/client/"+id+"/"+ centrale +"/users/new";
+
+
+    console.log(values);
+
+    $.ajax({
+
+        // Adresse à laquelle la requête est envoyée
+        url: url,
+
+        type: 'POST',
+
+
+        data: {
+            prenom: values[0],
+            mail: values[1],
+            fonction: values[2],
+            profil: values[3],
+            nom: values[4],
+            pwd: values[5],
+            tel: values[6].replace(/\s/g, ''),
+            niveau: values[7],
+
+        },
+        // Le délai maximun en millisecondes de traitement de la demande
+        timeout: 4000,
+
+        // La fonction à apeller si la requête aboutie
+        success: function (data) {
+
+            console.log(data);
+
+            window.location.reload();
+        },
+
+        // La fonction à appeler si la requête n'a pas abouti
+        error: function (e) {
+            console.log(e);
+
+        }
+
+    });
+
+
+
+    $('#client-user-new').modal('hide')
+});

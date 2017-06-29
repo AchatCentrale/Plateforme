@@ -4,6 +4,7 @@ namespace SiteBundle\Controller;
 
 
 use AchatCentrale\CrmBundle\Entity\ClientsNotes;
+use AchatCentrale\CrmBundle\Entity\ClientsUsers;
 use DateTime;
 use FunecapBundle\Entity\Clients;
 use Http\Adapter\Guzzle6\Client;
@@ -598,9 +599,57 @@ class BaseController extends Controller
     public function newClientsUserAction(Request $request, $id, $centrale)
     {
 
+        $em = $this->getDoctrine()->getManager();
 
 
-        return new JsonResponse('ok', 200);
+        $prenom= $request->request->get('prenom');
+        $mail = $request->request->get('mail');
+        $fonction = $request->request->get('fonction');
+        $profil = $request->request->get('profil');
+        $nom = $request->request->get('nom');
+        $pwd = $request->request->get('pwd');
+        $tel = $request->request->get('tel');
+        $niveau = $request->request->get('niveau');
+
+
+        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+            'clId' => $id
+        ]);
+
+
+        if (!$client) {
+            throw $this->createNotFoundException(
+                'Pas de client pour l\'id ' . $id
+            );
+        }
+
+        $clientUsers = new ClientsUsers();
+
+
+        $clientUsers
+            ->setCl($client[0])
+            ->setInsUser($this->getUser()->getusMail())
+            ->setCcFonction($fonction)
+            ->setCcNiveau($niveau)
+            ->setCcPass($pwd)
+            ->setCcMail($mail)
+            ->setCcPrenom($prenom)
+            ->setCcNom($nom)
+            ->setCcTel($tel)
+            ->setPuId($profil)
+            ;
+
+
+
+
+
+        $em->flush();
+
+        $res = "client mise à jour";
+
+
+        return new JsonResponse($res, 200);
+
     }
 
     public function ClientAdresseAction($id)

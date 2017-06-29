@@ -572,7 +572,7 @@
                             <label for="fonction-user">Fonction</label>
                             <select name="data-user[]" class="form-control data-update-client">
                                 {% for fonctions in fonction %}
-                                    <option value="{{ fonctions.foId }}">{{ fonctions.foDescr | convert_encoding('UTF-8', 'Windows-1252') }}</option>
+                                    <option value="{{ fonctions.foDescr | convert_encoding('UTF-8', 'Windows-1252') }}">{{ fonctions.foDescr | convert_encoding('UTF-8', 'Windows-1252') }}</option>
 
                                 {% endfor %}
                             </select>
@@ -612,7 +612,10 @@
                         </div>
                         <div class="form-group">
                             <label for="niveau-user">Niveau</label>
-                            <input name="data-user[]" type="text" class="form-control" id="niveau-user" placeholder="">
+                            <select name="data-user[]" id="niveau-user" class="form-control data-update-client">
+                                <option value="0">Admin</option>
+                                <option value="1" selected="selected">Utilisateur</option>
+                            </select>
                         </div>
                     </div>
 
@@ -623,7 +626,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-success save-update-client">Enregistrer les modifications</button>
+                <button type="button" class="btn btn-success new-clients-user">Enregistrer les modifications</button>
             </div>
         </div>
 
