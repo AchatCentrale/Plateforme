@@ -261,7 +261,6 @@ class TacheController extends Controller
                 if ($request->getMethod() == "POST") {
 
 
-                    dump($req['claEcheance']);
 
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req['claEcheance']);
 
