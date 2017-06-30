@@ -395,6 +395,8 @@ class BaseController extends Controller
                 $notes = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsNotes')->findBy([
                     'cl' => $id,
 
+                ], [
+                    'insDate' => 'ASC'
                 ]);
                 $fonction = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Fonctions')->findBy([
                     'soId' => 1,
@@ -460,6 +462,8 @@ class BaseController extends Controller
                 $notes = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsNotes')->findBy([
                     'cl' => $id,
 
+                ], [
+                'insDate' => 'DESC'
                 ]);
 
 

@@ -7,6 +7,13 @@ namespace FunecapBundle\Entity;
  */
 class ClientsTaches
 {
+
+
+    public function __construct()
+    {
+        $this->insDate = new \DateTime('now');
+    }
+
     /**
      * @var integer
      */
