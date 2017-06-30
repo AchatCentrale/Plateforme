@@ -600,67 +600,120 @@ class BaseController extends Controller
     {
 
 
-        $em = $this->getDoctrine()->getManager();
 
 
-        $prenom= $request->request->get('prenom');
-        $mail = $request->request->get('mail');
-        $fonction = $request->request->get('fonction');
-        $profil = $request->request->get('profil');
-        $nom = $request->request->get('nom');
-        $pwd = $request->request->get('pwd');
-        $tel = $request->request->get('tel');
-        $niveau = $request->request->get('niveau');
 
 
-        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
-            'clId' => $id
-        ]);
+
+        switch ($centrale){
+            case 'CENTRALE_ROC_ECLERC':
+
+                $em = $this->getDoctrine()->getManager();
+
+                $prenom= $request->request->get('prenom');
+                $mail = $request->request->get('mail');
+                $fonction = $request->request->get('fonction');
+                $profil = $request->request->get('profil');
+                $nom = $request->request->get('nom');
+                $pwd = $request->request->get('pwd');
+                $tel = $request->request->get('tel');
+                $niveau = $request->request->get('niveau');
+
+                $client = $em->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+
+                if (!$client) {
+                    throw $this->createNotFoundException(
+                        'Pas de client pour l\'id ' . $id
+                    );
+                }
+                if(!$this->getUser()->getusMail()){
+                    throw $this->createNotFoundException(
+                        'pas d\'email'
+                    );
+                }
+
+                $clientUsers = new ClientsUsers();
+                $clientUsers
+                    ->setCl($client[0])
+                    ->setInsUser($this->getUser()->getusMail())
+                    ->setCcFonction($fonction)
+                    ->setCcNiveau($niveau)
+                    ->setCcPass($pwd)
+                    ->setCcMail($mail)
+                    ->setCcPrenom($prenom)
+                    ->setCcNom($nom)
+                    ->setCcTel($tel)
+                    ->setPuId($profil)
+                    ->setInsDate(new DateTime('now'))
+                    ->setCcStatus(0)
+                    ->setCircuitValidation($CCvalidation)
+                ;
+                $em->persist($clientUsers);
+                $em->flush();
+                $res = "client mise à jour";
+
+                return new JsonResponse($res, 200, [
+                    'Access-Control-Allow-Origin' => '*'
+                ]);
+                break;
+            case 'CENTRALE_FUNECAP':
+
+                $em = $this->getDoctrine()->getManager('centrale_funecap_jb');
 
 
-        if (!$client) {
-            throw $this->createNotFoundException(
-                'Pas de client pour l\'id ' . $id
-            );
+                $prenom= $request->request->get('prenom');
+                $mail = $request->request->get('mail');
+                $fonction = $request->request->get('fonction');
+                $profil = $request->request->get('profil');
+                $nom = $request->request->get('nom');
+                $pwd = $request->request->get('pwd');
+                $tel = $request->request->get('tel');
+                $niveau = $request->request->get('niveau');
+                $CCvalidation = $request->request->get('CCvalidation');
+
+                $client = $em->getRepository('FunecapBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+
+                if (!$client) {
+                    throw $this->createNotFoundException(
+                        'Pas de client pour l\'id ' . $id
+                    );
+                }
+                if(!$this->getUser()->getusMail()){
+                    throw $this->createNotFoundException(
+                        'pas d\'email'
+                    );
+                }
+
+                $clientUsers =  new \FunecapBundle\Entity\ClientsUsers();
+                $clientUsers
+                    ->setCl($client[0])
+                    ->setInsUser($this->getUser()->getusMail())
+                    ->setCcFonction($fonction)
+                    ->setCcNiveau($niveau)
+                    ->setCcPass($pwd)
+                    ->setCcMail($mail)
+                    ->setCcPrenom($prenom)
+                    ->setCcNom($nom)
+                    ->setCcTel($tel)
+                    ->setPuId($profil)
+                    ->setCcStatus(0)
+                    ->setInsDate(new DateTime('now'))
+                    ->setCircuitValidation($CCvalidation)
+
+                ;
+                $em->persist($clientUsers);
+                $em->flush();
+                $res = "client mise à jour";
+
+                return new JsonResponse($res, 200, [
+                    'Access-Control-Allow-Origin' => '*'
+                ]);
+                break;
         }
-
-        if(!$this->getUser()->getusMail()){
-            throw $this->createNotFoundException(
-                'pas d\'email'
-            );
-        }
-
-        $clientUsers = new ClientsUsers();
-
-
-        $clientUsers
-            ->setCl($client[0])
-            ->setInsUser($this->getUser()->getusMail())
-            ->setCcFonction($fonction)
-            ->setCcNiveau($niveau)
-            ->setCcPass($pwd)
-            ->setCcMail($mail)
-            ->setCcPrenom($prenom)
-            ->setCcNom($nom)
-            ->setCcTel($tel)
-            ->setPuId($profil)
-            ;
-
-
-
-
-
-        $em->persist($clientUsers);
-        $em->flush();
-
-        $res = "client mise à jour";
-
-
-        return $this->render('@Site/test.html.twig');
-
-//        return new JsonResponse($res, 200, [
-//            'Access-Control-Allow-Origin' => '*'
-//        ]);
 
     }
 

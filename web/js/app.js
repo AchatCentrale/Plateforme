@@ -1033,6 +1033,7 @@ $('.new-clients-user').on('click', function (e) {
             pwd: values[5],
             tel: values[6].replace(/\s/g, ''),
             niveau: values[7],
+            CCvalidation: values[8],
 
         },
         // Le délai maximun en millisecondes de traitement de la demande
