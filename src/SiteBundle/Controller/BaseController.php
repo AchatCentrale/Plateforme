@@ -648,9 +648,11 @@ class BaseController extends Controller
         $res = "client mise à jour";
 
 
-        return new JsonResponse($res, 200, [
-            'Access-Control-Allow-Origin' => '*'
-        ]);
+        return $this->render('@Site/test.html.twig', 200);
+
+//        return new JsonResponse($res, 200, [
+//            'Access-Control-Allow-Origin' => '*'
+//        ]);
 
     }
 
