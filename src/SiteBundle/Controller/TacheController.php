@@ -26,7 +26,7 @@ class TacheController extends Controller
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "SELECT *
-                FROM CLIENTS_TACHES
+                FROM Vue_All_Taches
                 WHERE US_ID = :usId
                 ORDER BY CLA_STATUS ASC";
 
@@ -36,6 +36,8 @@ class TacheController extends Controller
 
         $stmt->execute();
         $task = $stmt->fetchAll();
+
+        dump($task);
 
 
         return $this->render('@Site/Base/tache.home.html.twig', [

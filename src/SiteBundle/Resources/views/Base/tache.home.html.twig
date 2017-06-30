@@ -30,8 +30,9 @@
                                 <th class="one wide">Assigné à</th>
                                 <th class="one wide">Date d'échéance</th>
                                 <th class="seven wide">Description</th>
-                                <th class="one wide">Priorité</th>
+                                {#<th class="one wide">Priorité</th>#}
                                 <th class="one wide">Statut de l'action</th>
+                                <th class="one wide">Centrale</th>
 
                             </tr>
                             </thead>
@@ -58,8 +59,9 @@
                                         {{ tasks['CLA_ECHEANCE'] | fromNowString }}
                                     </td>
                                     <td class="justify" ><h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') }}</h4></td>
-                                    <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
+                                    {#<td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>#}
                                     <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
+                                    <td>{{ tasks['SO_RAISONSOC'] | centraleLabel  }}</td>
 
                                 </tr>
 
