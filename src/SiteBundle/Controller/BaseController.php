@@ -599,7 +599,6 @@ class BaseController extends Controller
     public function newClientsUserAction(Request $request, $id, $centrale)
     {
 
-        dump($this->getUser()->getusMail());
 
         $em = $this->getDoctrine()->getManager();
 
