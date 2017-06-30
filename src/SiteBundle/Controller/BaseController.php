@@ -625,6 +625,12 @@ class BaseController extends Controller
             );
         }
 
+        if(!$this->getUser()->getusMail()){
+            throw $this->createNotFoundException(
+                'pas d\'email'
+            );
+        }
+
         $clientUsers = new ClientsUsers();
 
 
