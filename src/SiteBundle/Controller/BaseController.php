@@ -650,6 +650,7 @@ class BaseController extends Controller
 
 
 
+        $em->persist($clientUsers);
         $em->flush();
 
         $res = "client mise à jour";
