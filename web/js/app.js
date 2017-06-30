@@ -705,7 +705,7 @@ $('.add-note').on('click', function (e) {
     let $input = $('#add-note').val();
 
 
-    let url = CURRENT_URL.substring(0, 60) + "notes/add";
+    let url = CURRENT_URL.replace("general","notes/add");
 
     $.ajax({
 
