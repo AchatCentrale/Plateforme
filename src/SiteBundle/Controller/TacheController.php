@@ -37,7 +37,7 @@ class TacheController extends Controller
         $stmt->execute();
         $task = $stmt->fetchAll();
 
-        dump($task);
+
 
 
         return $this->render('@Site/Base/tache.home.html.twig', [
