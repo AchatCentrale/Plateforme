@@ -703,6 +703,7 @@ class BaseController extends Controller
 
         switch ($centrale) {
             case "CENTRALE_FUNECAP":
+
                 $restresult = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsAdresses')->findBy([
                         'clId' => $id
                     ]
@@ -764,23 +765,98 @@ class BaseController extends Controller
 
                 break;
             case "CENTRALE_ROC_ECLERC":
-                $restresult = $this->getDoctrine()->getManager()->getRepository('FunecapBundle:ClientsAdresses')->findBy([
+                $restresult = $this->getDoctrine()->getManager()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy([
                         'clId' => $id
                     ]
                 );
 
-
-                $map = new Map();
+                $mapF = new Map();
+                $mapL = new Map();
                 $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
 
 
+                dump($restresult);
+
+                foreach ($restresult as &$adresse) {
+                    if ($adresse->getCaType() === "L") {
+
+
+
+
+                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " .$restresult[0]->getCaCp() . " " .$restresult[0]->getCaVille() );
+                        $response = $geocoder->geocode($request);
+
+
+                        foreach ($response->getResults() as $result) {
+                            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
+                            $mapF->setAutoZoom(false);
+                            $mapF->setCenter($here);
+                            $mapF->setMapOption('zoom', 12);
+
+
+
+
+                            $marker = new Marker(
+                                new Coordinate($here->getLatitude(), $here->getLatitude()),
+                                Animation::BOUNCE,
+                                new Icon(),
+                                new Symbol(SymbolPath::CIRCLE),
+                                new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]),
+                                ['clickable' => false]
+                            );
+                            $marker->setVariable('marker');
+                            $marker->setAnimation(Animation::DROP);
+                            $marker->setIcon(new Icon());
+                            $marker->setSymbol(new Symbol(SymbolPath::CIRCLE));
+                            $marker->setShape(new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]));
+                            // TODO : mettre Marker sur l'adresse
+                            $mapF->getOverlayManager()->addMarker($marker);
+                        }
+
+
+                    } elseif ($adresse->getCaType() === "F") {
+
+
+
+                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " .$restresult[0]->getCaCp() . " " .$restresult[0]->getCaVille() );
+                        $response = $geocoder->geocode($request);
+
+
+                        foreach ($response->getResults() as $result) {
+                            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
+                            $mapL->setAutoZoom(false);
+                            $mapL->setCenter($here);
+                            $mapL->setMapOption('zoom', 12);
+
+
+
+
+                            $marker = new Marker(
+                                new Coordinate($here->getLatitude(), $here->getLatitude()),
+                                Animation::BOUNCE,
+                                new Icon(),
+                                new Symbol(SymbolPath::CIRCLE),
+                                new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]),
+                                ['clickable' => false]
+                            );
+                            $marker->setVariable('marker');
+                            $marker->setAnimation(Animation::DROP);
+                            $marker->setIcon(new Icon());
+                            $marker->setSymbol(new Symbol(SymbolPath::CIRCLE));
+                            $marker->setShape(new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]));
+                            // TODO : mettre Marker sur l'adresse
+                            $mapL->getOverlayManager()->addMarker($marker);
+                        }
+                    }
+                }
 
 
                 return $this->render(
                     '@Site/Base/client.adresse.html.twig',
                     [
                         "client" => $restresult,
-                        "map" => $map
+                        "mapF" => $mapF,
+                        "mapL" => $mapL
 
                     ]
                 );
