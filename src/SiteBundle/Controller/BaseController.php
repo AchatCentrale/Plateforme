@@ -835,7 +835,6 @@ class BaseController extends Controller
                 $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
 
 
-                dump($restresult);
 
                 foreach ($restresult as &$adresse) {
                     if ($adresse->getCaType() === "L") {
