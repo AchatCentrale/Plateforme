@@ -716,7 +716,7 @@ class BaseController extends Controller
                         $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
 
 
-                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " .$restresult[0]->getCaCp() );
+                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " .$restresult[0]->getCaCp() . " " .$restresult[0]->getCaVille() );
                         $response = $geocoder->geocode($request);
                         foreach ($response->getResults() as $result) {
                             $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
