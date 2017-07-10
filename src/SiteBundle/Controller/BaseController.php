@@ -751,7 +751,6 @@ class BaseController extends Controller
                 }
 
 
-                dump($restresult);
 
 
                 return $this->render(
@@ -775,7 +774,6 @@ class BaseController extends Controller
                 $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
 
 
-                dump($restresult);
 
 
                 return $this->render(
