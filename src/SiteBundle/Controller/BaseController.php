@@ -532,7 +532,7 @@ class BaseController extends Controller
                 $ville = $request->request->get('ville');
 
 
-                $client = $em->getRepository('FunecapBundle:Clients:Clients')->findBy([
+                $client = $em->getRepository('FunecapBundle:Clients')->findBy([
                     'clId' => $id
                 ]);
 
