@@ -550,3 +550,7 @@ h3.raison-soc-titre {
 .detail-feed-ticket-container {
     padding: 0px 0px 12px 0px;
 }
+
+.google-map-card {
+    margin-left: 30%;
+}

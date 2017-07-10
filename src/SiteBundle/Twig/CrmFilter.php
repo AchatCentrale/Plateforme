@@ -4,6 +4,8 @@ namespace SiteBundle\Twig;
 
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Twig_Function;
 
 
 class CrmFilter extends \Twig_Extension
@@ -15,6 +17,13 @@ class CrmFilter extends \Twig_Extension
     public function __construct(RegistryInterface $doctrine)
     {
         $this->doctrine = $doctrine;
+    }
+
+    public function getFunctions()
+    {
+        return array(
+            new Twig_Function('randFacture', [$this, 'generateFactureNumber']),
+        );
     }
 
 
@@ -37,6 +46,48 @@ class CrmFilter extends \Twig_Extension
         );
     }
 
+
+    public function generateFactureNumber($centrale)
+    {
+
+        $result = "";
+
+        switch ($centrale){
+
+            case "CENTRALE_FUNECAP":
+
+                $result .= "FUN-";
+
+                $rand = rand(1, 24);
+
+                for ($i = 0; $i <= 8; $i++){
+                    $rand .= rand(1, 9);
+
+                }
+
+
+
+                $result = $result . $rand;
+
+                break;
+            case "CENTRALE_ROC_ECLERC":
+
+                $result .= "ROC-";
+
+                $rand = rand(1, 24);
+
+                for ($i = 0; $i <= 8; $i++){
+                    $rand .= rand(1, 9);
+                }
+                $result = $result . $rand;
+                break;
+
+
+        }
+
+
+        return $result;
+    }
 
     public function centraleLabel($centrale)
     {
@@ -267,5 +318,6 @@ class CrmFilter extends \Twig_Extension
 
         return $momentFromVo->getRelative();
     }
+
 
 }
