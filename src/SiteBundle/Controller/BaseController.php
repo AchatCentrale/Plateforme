@@ -519,7 +519,7 @@ class BaseController extends Controller
 
         switch ($centrale) {
             case "CENTRALE_FUNECAP":
-                $em = $this->getDoctrine()->getManager('centrale_achat_jb');
+                $em = $this->getDoctrine()->getManager('centrale_funecap_jb');
 
 
                 $siret = $request->request->get('siret');
