@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}
-{% endblock %}
+    {% block title %}
+        {{ client[0].clRaisonsoc }} - Facturation
+    {% endblock %}
 
 {% block body %}
 
@@ -11,8 +12,14 @@
 
         <div class="container-general">
             <div class="container-info-client">
-               <h1>facturation</h1>
+                {% include '@Site/ui-element/facturation.client/facturation.html.twig' with {'client': client } %}
+
             </div>
+
+
+
         </div>
+
+
     </div>
 {% endblock %}

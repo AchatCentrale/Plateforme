@@ -16,7 +16,9 @@
 
                     {#<a href="{{ path('new-task') }}" data-toggle="modal" data-target="#modal-choix-centrale" class="btn btn-success" role="button">Ajouter une tâche</a>#}
 
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-choix-centrale">Ajouter une tâche</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#modal-choix-centrale">Ajouter une tâche
+                    </button>
 
 
                     <div class="tab-task" role="tabpanel" data-example-id="togglable-tabs">
@@ -30,10 +32,9 @@
                                 <th class="one wide">Assigné à</th>
                                 <th class="one wide">Date d'échéance</th>
                                 <th class="seven wide">Description</th>
-                                {#<th class="one wide">Priorité</th>#}
+                                <th class="one wide">Priorité</th>
                                 <th class="one wide">Statut de l'action</th>
                                 <th class="one wide">Centrale</th>
-
                             </tr>
                             </thead>
                             <tbody>
@@ -45,7 +46,7 @@
                                         <div>{{ tasks['CLA_TYPE'] | type | raw }}</div>
                                     </td>
                                     <td>
-                                        <h5><a class="detail-tache cursor" >{{ tasks['CLA_NOM'] }}</a></h5>
+                                        <h5><a class="detail-tache cursor">{{ tasks['CLA_NOM'] }}</a></h5>
                                     </td>
                                     <td>
                                         <div>
@@ -58,10 +59,12 @@
                                     <td>
                                         {{ tasks['CLA_ECHEANCE'] | fromNowString }}
                                     </td>
-                                    <td class="justify" ><h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') }}</h4></td>
-                                    {#<td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>#}
+                                    <td class="justify">
+                                        <h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') }}</h4>
+                                    </td>
+                                    <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
                                     <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
-                                    <td>{{ tasks['SO_RAISONSOC'] | centraleLabel  }}</td>
+                                    <td>{{ tasks['SO_RAISONSOC'] | centraleLabel }}</td>
 
                                 </tr>
 
@@ -84,7 +87,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title-task"></h4>
                 </div>
                 <div class="modal-body body-task-detail">

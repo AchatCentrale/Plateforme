@@ -6,7 +6,6 @@ namespace SiteBundle\Controller;
 use AchatCentrale\CrmBundle\Entity\ClientsNotes;
 use AchatCentrale\CrmBundle\Entity\ClientsUsers;
 use DateTime;
-use FunecapBundle\Entity\Clients;
 use Http\Adapter\Guzzle6\Client;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Base\Coordinate;
@@ -24,7 +23,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
 
 
 class BaseController extends Controller
@@ -44,9 +42,7 @@ class BaseController extends Controller
         $rocEclerc = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
 
 
-
         $user = $this->getUser();
-
 
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -65,7 +61,6 @@ class BaseController extends Controller
 
         $stmt->execute();
         $task = $stmt->fetchAll();
-
 
 
         return $this->render(
@@ -108,7 +103,7 @@ class BaseController extends Controller
 
 
                     $sql_insert = 'INSERT INTO CENTRALE_ACHAT_JB.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
-                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(year, +1, GETDATE())  )';
+                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(YEAR, +1, GETDATE())  )';
 
 
                     $db2 = $this->get('doctrine.dbal.centrale_funecap_jb_connection');
@@ -178,7 +173,7 @@ class BaseController extends Controller
 
 
                     $sql_insert = 'INSERT INTO CENTRALE_FUNECAP_JB.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
-                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(year, +1, GETDATE())  )';
+                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(YEAR, +1, GETDATE())  )';
 
 
                     $db2 = $this->get('doctrine.dbal.centrale_funecap_jb_connection');
@@ -207,10 +202,6 @@ class BaseController extends Controller
                     $stmt->bindValue("user", $this->getUser()->getusMail(), 'text');
 
                     $stmt->execute();
-
-
-
-
 
 
                     return $this->render('@Site/Base/client.new.html.twig', [
@@ -362,7 +353,6 @@ class BaseController extends Controller
                     ]
                 );
 
-
                 $sql = 'SELECT *
                   FROM CENTRALE_FUNECAP_JB.dbo.CLIENTS_TACHES
                   WHERE CL_ID = :id';
@@ -405,8 +395,6 @@ class BaseController extends Controller
                 $profil = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ProfilsUsers')->findAll();
 
 
-
-
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [
@@ -419,7 +407,7 @@ class BaseController extends Controller
                         "note" => $notes,
                         "centrale" => $centrale,
                         "fonction" => $fonction,
-                        "profil"   => $profil,
+                        "profil" => $profil,
 
                     ]
                 );
@@ -463,7 +451,7 @@ class BaseController extends Controller
                     'cl' => $id,
 
                 ], [
-                'insDate' => 'DESC'
+                    'insDate' => 'DESC'
                 ]);
 
 
@@ -486,7 +474,7 @@ class BaseController extends Controller
                         "note" => $notes,
                         "centrale" => $centrale,
                         "fonction" => $fonction,
-                        "profil"   => $profil,
+                        "profil" => $profil,
 
                     ]
                 );
@@ -521,10 +509,6 @@ class BaseController extends Controller
         return new Response('Client numero :  ' . $id . ' modifié', 200, [
             'Access-Control-Allow-Origin' => '*'
         ]);
-
-
-
-
 
 
     }
@@ -604,17 +588,12 @@ class BaseController extends Controller
     {
 
 
-
-
-
-
-
-        switch ($centrale){
+        switch ($centrale) {
             case 'CENTRALE_ROC_ECLERC':
 
                 $em = $this->getDoctrine()->getManager();
 
-                $prenom= $request->request->get('prenom');
+                $prenom = $request->request->get('prenom');
                 $mail = $request->request->get('mail');
                 $fonction = $request->request->get('fonction');
                 $profil = $request->request->get('profil');
@@ -632,7 +611,7 @@ class BaseController extends Controller
                         'Pas de client pour l\'id ' . $id
                     );
                 }
-                if(!$this->getUser()->getusMail()){
+                if (!$this->getUser()->getusMail()) {
                     throw $this->createNotFoundException(
                         'pas d\'email'
                     );
@@ -652,8 +631,7 @@ class BaseController extends Controller
                     ->setPuId($profil)
                     ->setInsDate(new DateTime('now'))
                     ->setCcStatus(0)
-                    ->setCircuitValidation($CCvalidation)
-                ;
+                    ->setCircuitValidation($CCvalidation);
                 $em->persist($clientUsers);
                 $em->flush();
                 $res = "client mise à jour";
@@ -667,7 +645,7 @@ class BaseController extends Controller
                 $em = $this->getDoctrine()->getManager('centrale_funecap_jb');
 
 
-                $prenom= $request->request->get('prenom');
+                $prenom = $request->request->get('prenom');
                 $mail = $request->request->get('mail');
                 $fonction = $request->request->get('fonction');
                 $profil = $request->request->get('profil');
@@ -686,13 +664,13 @@ class BaseController extends Controller
                         'Pas de client pour l\'id ' . $id
                     );
                 }
-                if(!$this->getUser()->getusMail()){
+                if (!$this->getUser()->getusMail()) {
                     throw $this->createNotFoundException(
                         'pas d\'email'
                     );
                 }
 
-                $clientUsers =  new \FunecapBundle\Entity\ClientsUsers();
+                $clientUsers = new \FunecapBundle\Entity\ClientsUsers();
                 $clientUsers
                     ->setCl($client[0])
                     ->setInsUser($this->getUser()->getusMail())
@@ -706,9 +684,7 @@ class BaseController extends Controller
                     ->setPuId($profil)
                     ->setCcStatus(0)
                     ->setInsDate(new DateTime('now'))
-                    ->setCircuitValidation($CCvalidation)
-
-                ;
+                    ->setCircuitValidation($CCvalidation);
                 $em->persist($clientUsers);
                 $em->flush();
                 $res = "client mise à jour";
@@ -721,81 +697,100 @@ class BaseController extends Controller
 
     }
 
-    public function ClientAdresseAction($id)
+    public function ClientAdresseAction($id, $centrale, Request $request)
     {
 
-        $map = new Map();
-        $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
+
+        switch ($centrale) {
+            case "CENTRALE_FUNECAP":
+                $restresult = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsAdresses')->findBy([
+                        'clId' => $id
+                    ]
+                );
 
 
-        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(
-            array(
-                "clId" => $id,
-            )
-        );
+                foreach ($restresult as &$adresse) {
+                    if ($adresse->getCaType() === "L") {
+
+                        $mapF = new Map();
+                        $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
 
 
-        $request = new GeocoderAddressRequest($restresult['getCaAdresse1']);
-        $response = $geocoder->geocode($request);
+                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " .$restresult[0]->getCaCp() );
+                        $response = $geocoder->geocode($request);
+                        foreach ($response->getResults() as $result) {
+                            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
+                            $mapF->setAutoZoom(false);
+                            $mapF->setCenter($here);
+                            $mapF->setMapOption('zoom', 12);
 
 
-        foreach ($response->getResults() as $result) {
+                            dump($here);
+
+                            $marker = new Marker(
+                                new Coordinate($here->getLatitude(), $here->getLatitude()),
+                                Animation::BOUNCE,
+                                new Icon(),
+                                new Symbol(SymbolPath::CIRCLE),
+                                new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]),
+                                ['clickable' => false]
+                            );
+                            $marker->setVariable('marker');
+                            $marker->setAnimation(Animation::DROP);
+                            $marker->setIcon(new Icon());
+                            $marker->setSymbol(new Symbol(SymbolPath::CIRCLE));
+                            $marker->setShape(new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]));
+                            // TODO : mettre Marker sur l'adresse
+                            $mapF->getOverlayManager()->addMarker($marker);
+                        }
 
 
-            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
+                    } elseif ($adresse->getCaType() === "F") {
+                        return 0;
+                    }
+                }
 
 
-            $map->setAutoZoom(false);
+                dump($restresult);
 
 
-            $map->setCenter($here);
+                return $this->render(
+                    '@Site/Base/client.adresse.html.twig',
+                    [
+                        "client" => $restresult,
+                        "mapF" => $mapF
+
+                    ]
+                );
+
+                break;
+            case "CENTRALE_ROC_ECLERC":
+                $restresult = $this->getDoctrine()->getManager()->getRepository('FunecapBundle:ClientsAdresses')->findBy([
+                        'clId' => $id
+                    ]
+                );
 
 
-            $map->setMapOption('zoom', 12);
-
-            $marker = new Marker(
-                new Coordinate(),
-                Animation::BOUNCE,
-                new Icon(),
-                new Symbol(SymbolPath::CIRCLE),
-                new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]),
-                ['clickable' => false]
-            );
-
-            $marker->setVariable('marker');
-            $marker->setAnimation(Animation::DROP);
-            $marker->setIcon(new Icon());
-            $marker->setSymbol(new Symbol(SymbolPath::CIRCLE));
-            $marker->setShape(new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]));
-
-            // TODO : mettre Marker sur l'adresse
+                $map = new Map();
+                $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
 
 
-            $map->getOverlayManager()->addMarker($marker);
+                dump($restresult);
 
 
+                return $this->render(
+                    '@Site/Base/client.adresse.html.twig',
+                    [
+                        "client" => $restresult,
+                        "map" => $map
+
+                    ]
+                );
+                break;
+            default:
+                break;
         }
 
-        $client = [];
-
-        foreach ($restresult as $client) {
-
-            if ($client->getCaType() === "F") {
-
-
-            }
-
-        }
-
-
-        return $this->render(
-            '@Site/Base/client.adresse.html.twig',
-            [
-                "client" => $restresult,
-                "map" => $map
-
-            ]
-        );
 
     }
 
@@ -816,14 +811,44 @@ class BaseController extends Controller
 
     }
 
-    public function ClientFacturationAction(Request $request,$id, $centrale)
+    public function ClientFacturationAction(Request $request, $id, $centrale)
     {
+        switch ($centrale) {
+            case "CENTRALE_FUNECAP":
+                $restresult = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Clients')->findBy([
+                        'clId' => $id
+                    ]
+                );
 
-        return $this->render('@Site/Base/client.facturation.html.twig',
-            [
 
-            ]
-        );
+                return $this->render(
+                    '@Site/Base/client.facturation.html.twig',
+                    [
+                        "client" => $restresult,
+                        "centrale" => $centrale,
+                    ]
+                );
+                break;
+            case "CENTRALE_ROC_ECLERC":
+                $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+                        'clId' => $id
+                    ]
+                );
+
+
+                return $this->render(
+                    '@Site/Base/client.facturation.html.twig',
+                    [
+                        "client" => $restresult,
+                        "centrale" => $centrale,
+                    ]
+                );
+                break;
+            default:
+                break;
+        }
+
+
     }
 
     public function ClientFeedAction($id, $centrale)
@@ -835,8 +860,6 @@ class BaseController extends Controller
         $feed->getTheLast($id, $centrale);
 
 
-
-
         return $this->render('@Site/ui-element/feed.list.html.twig', [
             'lastAction' => $feed->getAction(),
             'lastTicket' => $feed->getTickets(),
@@ -844,7 +867,6 @@ class BaseController extends Controller
             'centrale' => $centrale,
             'id' => $id,
         ]);
-
 
 
     }
@@ -888,9 +910,6 @@ class BaseController extends Controller
 
 
         $statut = "Bloqué";
-
-
-
 
 
     }
