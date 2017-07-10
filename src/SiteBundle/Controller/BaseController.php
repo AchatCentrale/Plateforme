@@ -725,7 +725,7 @@ class BaseController extends Controller
                             $mapF->setMapOption('zoom', 12);
 
 
-              z
+
 
                             $marker = new Marker(
                                 new Coordinate($here->getLatitude(), $here->getLatitude()),
