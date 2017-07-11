@@ -1,7 +1,6 @@
 AchatCentrale\CrmBundle\Entity\ClientsTaches:
     type: entity
     table: CLIENTS_TACHES
-    repositoryClass: AchatCentrale\CrmBundle\Repository\TachesRepository
     indexes:
         IDX_1AB05ADE3F592A49:
             columns:

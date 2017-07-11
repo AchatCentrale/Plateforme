@@ -3,25 +3,15 @@
 namespace AchatCentrale\CrmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * ClientsTaches
  *
  * @ORM\Table(name="CLIENTS_TACHES", indexes={@ORM\Index(name="IDX_1AB05ADE3F592A49", columns={"CL_ID"})})
- * @ORM\Entity(repositoryClass="AchatCentrale\CrmBundle\Repository\TachesRepository")
+ * @ORM\Entity
  */
 class ClientsTaches
 {
-
-
-    public function __construct()
-    {
-        $this->insDate = new \DateTime('now');
-    }
-    
-    
     /**
      * @var integer
      *
@@ -47,26 +37,15 @@ class ClientsTaches
 
     /**
      * @var string
-     * @Assert\Length(
-     *     min="0",
-     *     max="140",
-     *     minMessage="Vous devez rentrez une description"
-     *     maxMessage="Vous pouvez mettre au moins 140 caractères"
-     * )
+     *
      * @ORM\Column(name="CLA_NOM", type="string", length=50, nullable=true)
      */
     private $claNom;
 
     /**
      * @var string
-     * @Assert\Length(
-     *     min="0",
-     *     max="140",
-     *     minMessage="Vous devez rentrez une description"
-     *     maxMessage="Vous pouvez mettre au moins 140 caractères"
-     * )
      *
-     * @ORM\Column(name="CLA_DESCR", type="text", length=-140, nullable=true)
+     * @ORM\Column(name="CLA_DESCR", type="text", length=-1, nullable=true)
      */
     private $claDescr;
 
@@ -90,6 +69,13 @@ class ClientsTaches
      * @ORM\Column(name="CLA_NOTIF_REF", type="integer", nullable=true)
      */
     private $claNotifRef;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CLA_STATUS", type="integer", nullable=true)
+     */
+    private $claStatus = '0';
 
     /**
      * @var \DateTime
@@ -310,6 +296,30 @@ class ClientsTaches
     }
 
     /**
+     * Set claStatus
+     *
+     * @param integer $claStatus
+     *
+     * @return ClientsTaches
+     */
+    public function setClaStatus($claStatus)
+    {
+        $this->claStatus = $claStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get claStatus
+     *
+     * @return integer
+     */
+    public function getClaStatus()
+    {
+        return $this->claStatus;
+    }
+
+    /**
      * Set insDate
      *
      * @param \DateTime $insDate
@@ -427,34 +437,5 @@ class ClientsTaches
     public function getCl()
     {
         return $this->cl;
-    }
-    /**
-     * @var integer
-     */
-    private $claStatus = '0';
-
-
-    /**
-     * Set claStatus
-     *
-     * @param integer $claStatus
-     *
-     * @return ClientsTaches
-     */
-    public function setClaStatus($claStatus)
-    {
-        $this->claStatus = $claStatus;
-
-        return $this;
-    }
-
-    /**
-     * Get claStatus
-     *
-     * @return integer
-     */
-    public function getClaStatus()
-    {
-        return $this->claStatus;
     }
 }

@@ -2,13 +2,31 @@
 
 namespace SiteBundle\Service;
 
+use Doctrine\DBAL\Connection;
+
 class ClientServices
 {
 
 
+    /**
+     * @InjectParams({
+     *    "em" = @Inject("doctrine.orm.entity_manager")
+     * })
+     */
+
+    /**
+     *
+     * @var Connection
+     */
+    private $connection;
+
+    public function __construct(Connection $dbalConnection)  {
+        $this->connection = $dbalConnection;
+    }
+
+
     public function getTheSqlForCentrale($centrale)
     {
-
 
         switch ($centrale){
             case "CENTRALE_FUNECAP":
@@ -31,14 +49,7 @@ class ClientServices
                 WHERE
                   SO_ID = 1';
                 return $sql;
-
-
         }
-
-
-
-
-
     }
 
 
@@ -67,5 +78,33 @@ class ClientServices
 
 
 
+    public function getTheCount()
+    {
+        //SELECT count(*) FROM CENTRALE_ACHAT_JB.dbo.CLIENTS
+        $data = [];
+
+        $sql = "SELECT count(*) FROM CENTRALE_ACHAT_JB.dbo.CLIENTS";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        $roc = $stmt->fetchAll();
+
+        $sql2 = "SELECT count(*) FROM CENTRALE_FUNECAP_JB.dbo.CLIENTS";
+        $stmt2 = $this->connection->prepare($sql2);
+        $stmt2->execute();
+
+        $fun = $stmt->fetchAll();
+
+
+        $data = [
+            "roc" => $roc[0]["computed"],
+            "fun" => $fun[0]["computed"]
+        ];
+
+        return $data;
+
+
+
+
+    }
 
 }

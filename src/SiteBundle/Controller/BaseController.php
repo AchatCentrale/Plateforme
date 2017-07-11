@@ -23,6 +23,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use AchatCentrale\CrmBundle\Entity\Clients;
 
 
 class BaseController extends Controller
@@ -37,9 +38,9 @@ class BaseController extends Controller
         }
 
 
-        $Funecap = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Clients')->findAll();
+        $clientService = $this->get('site.service.client_services');
+        $dataCount = $clientService->getTheCount();
 
-        $rocEclerc = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findAll();
 
 
         $user = $this->getUser();
@@ -63,12 +64,14 @@ class BaseController extends Controller
         $task = $stmt->fetchAll();
 
 
+
+
         return $this->render(
             '@Site/Base/home.html.twig',
             [
                 'task' => $task,
-                'funecap' => $Funecap,
-                'roc' => $rocEclerc,
+                "dataCount" => $dataCount
+
             ]
         );
 
