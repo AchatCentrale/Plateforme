@@ -2,12 +2,12 @@ AchatCentrale\CrmBundle\Entity\ClientsOptions:
     type: entity
     table: CLIENTS_OPTIONS
     indexes:
-        IDX_74C57C7DE0662F6F:
-            columns:
-                - OP_ID
         IDX_74C57C7D3F592A49:
             columns:
                 - CL_ID
+        IDX_74C57C7DE0662F6F:
+            columns:
+                - OP_ID
     id:
         coId:
             type: integer
@@ -27,16 +27,6 @@ AchatCentrale\CrmBundle\Entity\ClientsOptions:
                 fixed: false
             column: CO_REPONSE
     manyToOne:
-        op:
-            targetEntity: Options
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                OP_ID:
-                    referencedColumnName: OP_ID
-            orphanRemoval: false
         cl:
             targetEntity: Clients
             cascade: {  }
@@ -46,5 +36,15 @@ AchatCentrale\CrmBundle\Entity\ClientsOptions:
             joinColumns:
                 CL_ID:
                     referencedColumnName: CL_ID
+            orphanRemoval: false
+        op:
+            targetEntity: Options
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                OP_ID:
+                    referencedColumnName: OP_ID
             orphanRemoval: false
     lifecycleCallbacks: {  }

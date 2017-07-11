@@ -12,17 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Clients
 {
-
-    /**
-     * Clients constructor.
-     */
-    public function __construct()
-    {
-        $this->insDate = new \DateTime('now');
-    }
-
-
-
     /**
      * @var integer
      *
@@ -231,6 +220,13 @@ class Clients
     /**
      * @var string
      *
+     * @ORM\Column(name="CL_ETIQUETTE", type="string", length=500, nullable=true)
+     */
+    private $clEtiquette;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="CL_TEMPO", type="string", length=50, nullable=true)
      */
     private $clTempo;
@@ -269,7 +265,6 @@ class Clients
      * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
-
 
 
 
@@ -953,6 +948,30 @@ class Clients
     public function getClMasqVt()
     {
         return $this->clMasqVt;
+    }
+
+    /**
+     * Set clEtiquette
+     *
+     * @param string $clEtiquette
+     *
+     * @return Clients
+     */
+    public function setClEtiquette($clEtiquette)
+    {
+        $this->clEtiquette = $clEtiquette;
+
+        return $this;
+    }
+
+    /**
+     * Get clEtiquette
+     *
+     * @return string
+     */
+    public function getClEtiquette()
+    {
+        return $this->clEtiquette;
     }
 
     /**

@@ -205,6 +205,13 @@ AchatCentrale\CrmBundle\Entity\Clients:
             options:
                 default: '0'
             column: CL_MASQ_VT
+        clEtiquette:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+            column: CL_ETIQUETTE
         clTempo:
             type: string
             nullable: true

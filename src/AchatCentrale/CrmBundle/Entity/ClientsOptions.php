@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ClientsOptions
  *
- * @ORM\Table(name="CLIENTS_OPTIONS", indexes={@ORM\Index(name="IDX_74C57C7DE0662F6F", columns={"OP_ID"}), @ORM\Index(name="IDX_74C57C7D3F592A49", columns={"CL_ID"})})
+ * @ORM\Table(name="CLIENTS_OPTIONS", indexes={@ORM\Index(name="IDX_74C57C7D3F592A49", columns={"CL_ID"}), @ORM\Index(name="IDX_74C57C7DE0662F6F", columns={"OP_ID"})})
  * @ORM\Entity
  */
 class ClientsOptions
@@ -29,16 +29,6 @@ class ClientsOptions
     private $coReponse;
 
     /**
-     * @var \AchatCentrale\CrmBundle\Entity\Options
-     *
-     * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Options")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="OP_ID", referencedColumnName="OP_ID")
-     * })
-     */
-    private $op;
-
-    /**
      * @var \AchatCentrale\CrmBundle\Entity\Clients
      *
      * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")
@@ -47,6 +37,16 @@ class ClientsOptions
      * })
      */
     private $cl;
+
+    /**
+     * @var \AchatCentrale\CrmBundle\Entity\Options
+     *
+     * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Options")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="OP_ID", referencedColumnName="OP_ID")
+     * })
+     */
+    private $op;
 
 
 
@@ -85,30 +85,6 @@ class ClientsOptions
     }
 
     /**
-     * Set op
-     *
-     * @param \AchatCentrale\CrmBundle\Entity\Options $op
-     *
-     * @return ClientsOptions
-     */
-    public function setOp(\AchatCentrale\CrmBundle\Entity\Options $op = null)
-    {
-        $this->op = $op;
-
-        return $this;
-    }
-
-    /**
-     * Get op
-     *
-     * @return \AchatCentrale\CrmBundle\Entity\Options
-     */
-    public function getOp()
-    {
-        return $this->op;
-    }
-
-    /**
      * Set cl
      *
      * @param \AchatCentrale\CrmBundle\Entity\Clients $cl
@@ -130,5 +106,29 @@ class ClientsOptions
     public function getCl()
     {
         return $this->cl;
+    }
+
+    /**
+     * Set op
+     *
+     * @param \AchatCentrale\CrmBundle\Entity\Options $op
+     *
+     * @return ClientsOptions
+     */
+    public function setOp(\AchatCentrale\CrmBundle\Entity\Options $op = null)
+    {
+        $this->op = $op;
+
+        return $this;
+    }
+
+    /**
+     * Get op
+     *
+     * @return \AchatCentrale\CrmBundle\Entity\Options
+     */
+    public function getOp()
+    {
+        return $this->op;
     }
 }
