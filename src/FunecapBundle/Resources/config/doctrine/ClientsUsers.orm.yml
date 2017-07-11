@@ -21,6 +21,7 @@ FunecapBundle\Entity\ClientsUsers:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: PU_ID
         ccPrenom:
             type: string
@@ -77,6 +78,7 @@ FunecapBundle\Entity\ClientsUsers:
             length: 50
             options:
                 fixed: false
+                default: '123456'
             column: CC_PASS
         ccNiveau:
             type: integer
@@ -87,6 +89,8 @@ FunecapBundle\Entity\ClientsUsers:
         circuitValidation:
             type: boolean
             nullable: false
+            options:
+                default: '1'
             column: CIRCUIT_VALIDATION
         ccStatus:
             type: integer

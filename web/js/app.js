@@ -508,13 +508,14 @@ function stateTask(state) {
 $('.detail-tache').on("click", function (e) {
 
     let id = $(this).closest("tr").data('task');
+    let idCentrale = $(this).closest("tr").data('centrale');
 
     let aidy = Number(id);
+    let aidyCentrale = Number(idCentrale);
 
 
-    let url = CURRENT_URL + "/detail/" + aidy;
+    let url = CURRENT_URL + "/detail/" + aidyCentrale + "/" + aidy;
     console.log(url);
-
     $.ajax({
 
         // Adresse à laquelle la requête est envoyée
@@ -639,6 +640,7 @@ $('.detail-tache').on("click", function (e) {
 
 
     });
+
 
 
 });
@@ -824,11 +826,13 @@ function SuiteTask() {
 $('.detail-tache-home').on('click', function (e) {
 
     let id = $(this).data('id');
+    let idCentrale = $(this).data('centrale');
 
     let aidy = Number(id);
+    let aidyCentrale = Number(idCentrale);
 
 
-    let url = CURRENT_URL + "taches/detail/" + aidy;
+    let url = CURRENT_URL + "taches/detail/" + aidyCentrale + "/"+ aidy;
     console.log(url);
 
     $.ajax({

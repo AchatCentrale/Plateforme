@@ -23,6 +23,7 @@ FunecapBundle\Entity\Clients:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: RE_ID
         clRef:
             type: string
@@ -124,6 +125,7 @@ FunecapBundle\Entity\Clients:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: CL_PRESCRIPT
         clTarif:
             type: float
@@ -156,43 +158,60 @@ FunecapBundle\Entity\Clients:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: CL_ACTIVITE
         clGroupe:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: CL_GROUPE
         clClassif:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: CL_CLASSIF
         clEffectif:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: CL_EFFECTIF
         clCa:
             type: float
             nullable: true
             precision: 53
             scale: 0
+            options:
+                default: '0'
             column: CL_CA
         clMasqHa:
             type: float
             nullable: true
             precision: 53
             scale: 0
+            options:
+                default: '0'
             column: CL_MASQ_HA
         clMasqVt:
             type: float
             nullable: true
             precision: 53
             scale: 0
+            options:
+                default: '0'
             column: CL_MASQ_VT
+        clEtiquette:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+            column: CL_ETIQUETTE
         clTempo:
             type: string
             nullable: true
@@ -200,6 +219,13 @@ FunecapBundle\Entity\Clients:
             options:
                 fixed: false
             column: CL_TEMPO
+        clNivAction:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: CL_NIV_ACTION
         insDate:
             type: datetime
             nullable: true

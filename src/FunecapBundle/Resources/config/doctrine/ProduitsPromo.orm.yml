@@ -29,6 +29,7 @@ FunecapBundle\Entity\ProduitsPromo:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: PP_ORDRE
         ppDate:
             type: datetime

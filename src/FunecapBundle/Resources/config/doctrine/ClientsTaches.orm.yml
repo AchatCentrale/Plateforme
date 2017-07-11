@@ -36,9 +36,9 @@ FunecapBundle\Entity\ClientsTaches:
                 fixed: false
             column: CLA_NOM
         claDescr:
-            type: string
+            type: text
             nullable: true
-            length: 5000
+            length: -1
             options:
                 fixed: false
             column: CLA_DESCR
@@ -58,6 +58,13 @@ FunecapBundle\Entity\ClientsTaches:
             options:
                 unsigned: false
             column: CLA_NOTIF_REF
+        claStatus:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: CLA_STATUS
         insDate:
             type: datetime
             nullable: true

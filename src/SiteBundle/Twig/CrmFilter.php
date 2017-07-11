@@ -93,11 +93,11 @@ class CrmFilter extends \Twig_Extension
     {
 
         switch ($centrale){
-            case 'CENTRALE ROC ECLERC':
-                return "<h3><span class=\"label big label-warning \">".$centrale."</span></h3>";
+            case '1':
+                return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
                 break;
-            case 'CENTRALE FUNECAP':
-                return "<h3><span class=\"label big label-danger \">".$centrale."</span></h3>";
+            case '2':
+                return "<h3><span class=\"label big label-danger \">Centrale Funecap</span></h3>";
                 break;
 
         }

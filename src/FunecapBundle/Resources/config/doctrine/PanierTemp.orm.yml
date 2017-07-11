@@ -41,6 +41,7 @@ FunecapBundle\Entity\PanierTemp:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: ME_ID
         ptDate:
             type: date
@@ -51,6 +52,7 @@ FunecapBundle\Entity\PanierTemp:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: PT_QTE
         ptDetail:
             type: string
@@ -64,6 +66,8 @@ FunecapBundle\Entity\PanierTemp:
             nullable: true
             precision: 53
             scale: 0
+            options:
+                default: '0'
             column: PT_PRIX_VC
         insDate:
             type: datetime

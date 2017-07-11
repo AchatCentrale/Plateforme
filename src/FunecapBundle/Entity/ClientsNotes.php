@@ -2,45 +2,70 @@
 
 namespace FunecapBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * ClientsNotes
+ *
+ * @ORM\Table(name="CLIENTS_NOTES", indexes={@ORM\Index(name="IDX_F77855983F592A49", columns={"CL_ID"})})
+ * @ORM\Entity
  */
 class ClientsNotes
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CN_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $cnId;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CN_NOTE", type="string", length=500, nullable=true)
      */
     private $cnNote;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
      */
     private $insDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
      */
     private $insUser;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="MAJ_DATE", type="datetime", nullable=true)
      */
     private $majDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
 
     /**
      * @var \FunecapBundle\Entity\Clients
+     *
+     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Clients")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
+     * })
      */
     private $cl;
+
 
 
     /**
@@ -197,4 +222,3 @@ class ClientsNotes
         return $this->cl;
     }
 }
-

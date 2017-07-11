@@ -31,7 +31,11 @@ class ClientsTachesType extends AbstractType
             ])
             ->add('claNom', TextType::class, [
                 "label" => "Nom de l'action",
-                "attr" => ["class" => "add-action"]
+                "attr" => [
+                    "class" => "add-action",
+                    "size" => 140,
+
+                    ]
             ])
             ->add('claDescr', TextareaType::class, [
                 "label" => "Description de l'action",

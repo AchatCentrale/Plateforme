@@ -14,7 +14,7 @@ FunecapBundle\Entity\CategRayons:
     fields:
         raId:
             type: integer
-            nullable: false
+            nullable: true
             options:
                 unsigned: false
             column: RA_ID

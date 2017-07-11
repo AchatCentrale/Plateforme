@@ -41,7 +41,7 @@
                             {% for tasks in task %}
 
 
-                                <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} " id="{{ tasks['CLA_ID'] }}">
+                                <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} " data-centrale="{{ tasks['SO_ID']  }}"  id="{{ tasks['CLA_ID'] }}">
                                     <td>
                                         <div>{{ tasks['CLA_TYPE'] | type | raw }}</div>
                                     </td>
@@ -64,7 +64,7 @@
                                     </td>
                                     <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
                                     <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
-                                    <td>{{ tasks['SO_RAISONSOC'] | centraleLabel }}</td>
+                                    <td>{{ tasks['SO_ID'] | centraleLabel | raw }}</td>
 
                                 </tr>
 

@@ -2,135 +2,193 @@
 
 namespace FunecapBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Contrats
+ *
+ * @ORM\Table(name="CONTRATS")
+ * @ORM\Entity
  */
 class Contrats
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CO_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $coId;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CL_ID", type="integer", nullable=true)
      */
-    private $coUser;
+    private $clId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CO_USER", type="integer", nullable=true)
+     */
+    private $coUser = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CO_CATEGORIE", type="integer", nullable=true)
+     */
+    private $coCategorie = '0';
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CO_TIER", type="string", length=100, nullable=true)
      */
     private $coTier;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CO_DESCR", type="string", length=200, nullable=true)
      */
     private $coDescr;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="CO_DEBUT", type="datetime", nullable=true)
      */
     private $coDebut;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="CO_RENOUV", type="datetime", nullable=true)
      */
     private $coRenouv;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CO_DUREE", type="integer", nullable=true)
      */
-    private $coDuree;
+    private $coDuree = '0';
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CO_PREAVIS", type="integer", nullable=true)
      */
-    private $coPreavis;
+    private $coPreavis = '0';
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CO_CONTACT", type="string", length=100, nullable=true)
      */
     private $coContact;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CO_CONT_TEL", type="string", length=50, nullable=true)
      */
     private $coContTel;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CO_CONT_MAIL", type="string", length=200, nullable=true)
      */
     private $coContMail;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CO_CONFIDENT", type="integer", nullable=true)
      */
-    private $coConfident;
+    private $coConfident = '0';
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="CO_MONTANT", type="float", precision=53, scale=0, nullable=true)
      */
     private $coMontant;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CO_ECHEANCE", type="string", length=50, nullable=true)
      */
     private $coEcheance;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CO_MODE_PAIE", type="string", length=50, nullable=true)
      */
     private $coModePaie;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CO_COMMENT", type="text", length=16, nullable=true)
      */
     private $coComment;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CO_STATUS", type="integer", nullable=true)
      */
-    private $coStatus;
+    private $coStatus = '0';
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CO_ALERT", type="integer", nullable=true)
      */
-    private $coAlert;
+    private $coAlert = '0';
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CO_TEMPO", type="string", length=50, nullable=true)
      */
     private $coTempo;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
      */
     private $insDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
      */
     private $insUser;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="MAJ_DATE", type="datetime", nullable=true)
      */
     private $majDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
 
-    /**
-     * @var \FunecapBundle\Entity\Clients
-     */
-    private $cl;
-
-    /**
-     * @var \FunecapBundle\Entity\ContratsCat
-     */
-    private $coCategorie;
 
 
     /**
@@ -141,6 +199,30 @@ class Contrats
     public function getCoId()
     {
         return $this->coId;
+    }
+
+    /**
+     * Set clId
+     *
+     * @param integer $clId
+     *
+     * @return Contrats
+     */
+    public function setClId($clId)
+    {
+        $this->clId = $clId;
+
+        return $this;
+    }
+
+    /**
+     * Get clId
+     *
+     * @return integer
+     */
+    public function getClId()
+    {
+        return $this->clId;
     }
 
     /**
@@ -165,6 +247,30 @@ class Contrats
     public function getCoUser()
     {
         return $this->coUser;
+    }
+
+    /**
+     * Set coCategorie
+     *
+     * @param integer $coCategorie
+     *
+     * @return Contrats
+     */
+    public function setCoCategorie($coCategorie)
+    {
+        $this->coCategorie = $coCategorie;
+
+        return $this;
+    }
+
+    /**
+     * Get coCategorie
+     *
+     * @return integer
+     */
+    public function getCoCategorie()
+    {
+        return $this->coCategorie;
     }
 
     /**
@@ -670,53 +776,4 @@ class Contrats
     {
         return $this->majUser;
     }
-
-    /**
-     * Set cl
-     *
-     * @param \FunecapBundle\Entity\Clients $cl
-     *
-     * @return Contrats
-     */
-    public function setCl(\FunecapBundle\Entity\Clients $cl = null)
-    {
-        $this->cl = $cl;
-
-        return $this;
-    }
-
-    /**
-     * Get cl
-     *
-     * @return \FunecapBundle\Entity\Clients
-     */
-    public function getCl()
-    {
-        return $this->cl;
-    }
-
-    /**
-     * Set coCategorie
-     *
-     * @param \FunecapBundle\Entity\ContratsCat $coCategorie
-     *
-     * @return Contrats
-     */
-    public function setCoCategorie(\FunecapBundle\Entity\ContratsCat $coCategorie = null)
-    {
-        $this->coCategorie = $coCategorie;
-
-        return $this;
-    }
-
-    /**
-     * Get coCategorie
-     *
-     * @return \FunecapBundle\Entity\ContratsCat
-     */
-    public function getCoCategorie()
-    {
-        return $this->coCategorie;
-    }
 }
-

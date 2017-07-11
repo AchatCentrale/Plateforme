@@ -90,6 +90,7 @@ FunecapBundle\Entity\CommandeDetail:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: CD_STATUS
         insDate:
             type: datetime

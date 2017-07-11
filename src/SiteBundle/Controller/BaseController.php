@@ -830,6 +830,10 @@ class BaseController extends Controller
                     ]
                 );
 
+
+
+
+                dump($restresult);
                 $mapF = new Map();
                 $mapL = new Map();
                 $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
@@ -968,12 +972,18 @@ class BaseController extends Controller
                     ]
                 );
 
+                $contrat = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Contrats')->findBy([
+                    'clId' => $id
+                ]);
+
+                dump($contrat);
 
                 return $this->render(
                     '@Site/Base/client.facturation.html.twig',
                     [
                         "client" => $restresult,
                         "centrale" => $centrale,
+                        "contrat" => $contrat
                     ]
                 );
                 break;
@@ -1055,15 +1065,15 @@ class BaseController extends Controller
 
 
         $sql = "SELECT *
-FROM CLIENTS AS C
-
-  JOIN CLIENTS_TACHES AS CT ON C.CL_ID = CT.CL_ID
-  LEFT OUTER JOIN CLIENTS_NOTES AS CN ON C.CL_ID = CN.CL_ID
-  LEFT OUTER JOIN MESSAGE_ENTETE AS ME ON C.CL_ID = ME.CL_ID
-  LEFT OUTER JOIN MESSAGE_DETAIL AS MD ON ME.ME_ID = MD.ME_ID
-WHERE C.CL_ID = :id
-ORDER BY CT.INS_DATE, CN.INS_DATE, ME.INS_DATE ASC               
-        ";
+                FROM CLIENTS AS C
+                
+                  JOIN CLIENTS_TACHES AS CT ON C.CL_ID = CT.CL_ID
+                  LEFT OUTER JOIN CLIENTS_NOTES AS CN ON C.CL_ID = CN.CL_ID
+                  LEFT OUTER JOIN MESSAGE_ENTETE AS ME ON C.CL_ID = ME.CL_ID
+                  LEFT OUTER JOIN MESSAGE_DETAIL AS MD ON ME.ME_ID = MD.ME_ID
+                WHERE C.CL_ID = :id
+                ORDER BY CT.INS_DATE, CN.INS_DATE, ME.INS_DATE ASC               
+                        ";
 
 
         $stmt = $db2->prepare($sql);
@@ -1083,3 +1093,5 @@ ORDER BY CT.INS_DATE, CN.INS_DATE, ME.INS_DATE ASC
 
 
 }
+
+

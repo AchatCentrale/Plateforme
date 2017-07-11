@@ -2,45 +2,67 @@
 
 namespace FunecapBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * Tarifs
+ *
+ * @ORM\Table(name="TARIFS")
+ * @ORM\Entity
  */
 class Tarifs
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="TA_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $taId;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="TA_EFFECTIF", type="string", length=50, nullable=true)
      */
     private $taEffectif;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="TA_UNITE", type="integer", nullable=true)
      */
     private $taUnite;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="TA_PRIX", type="float", precision=53, scale=0, nullable=true)
      */
     private $taPrix;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="TA_PRIX_REMISE", type="float", precision=53, scale=0, nullable=true)
      */
     private $taPrixRemise;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="TA_DATE", type="datetime", nullable=true)
      */
     private $taDate;
+
 
 
     /**
@@ -197,4 +219,3 @@ class Tarifs
         return $this->taDate;
     }
 }
-

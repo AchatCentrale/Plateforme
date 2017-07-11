@@ -21,90 +21,105 @@ FunecapBundle\Entity\UsersDroits:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_EXTRANET
         udInstutionnel:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_INSTUTIONNEL
         udProduit:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_PRODUIT
         udOptions:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_OPTIONS
         udCommission:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_COMMISSION
         udRfaSup:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_RFA_SUP
         udClientIns:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_CLIENT_INS
         udClientMaj:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_CLIENT_MAJ
         udClientSup:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_CLIENT_SUP
         udUserIns:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_USER_INS
         udUserMaj:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_USER_MAJ
         udUserSup:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_USER_SUP
         udExtraction:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_EXTRACTION
         udFournisseur:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_FOURNISSEUR
         udCopieTicket:
             type: integer
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: UD_COPIE_TICKET
         insDate:
             type: datetime

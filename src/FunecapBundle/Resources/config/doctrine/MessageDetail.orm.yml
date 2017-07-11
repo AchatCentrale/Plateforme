@@ -33,6 +33,7 @@ FunecapBundle\Entity\MessageDetail:
             nullable: true
             options:
                 unsigned: false
+                default: '0'
             column: US_ID
         mdDate:
             type: datetime

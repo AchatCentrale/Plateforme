@@ -47,7 +47,12 @@ class ClientsTaches
 
     /**
      * @var string
-     *
+     * @Assert\Length(
+     *     min="0",
+     *     max="140",
+     *     minMessage="Vous devez rentrez une description"
+     *     maxMessage="Vous pouvez mettre au moins 140 caractères"
+     * )
      * @ORM\Column(name="CLA_NOM", type="string", length=50, nullable=true)
      */
     private $claNom;

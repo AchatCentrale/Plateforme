@@ -2,82 +2,119 @@
 
 namespace FunecapBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * ClientsTaches
+ *
+ * @ORM\Table(name="CLIENTS_TACHES", indexes={@ORM\Index(name="IDX_1AB05ADE3F592A49", columns={"CL_ID"})})
+ * @ORM\Entity
  */
 class ClientsTaches
 {
-
-
-    public function __construct()
-    {
-        $this->insDate = new \DateTime('now');
-    }
-
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CLA_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $claId;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="US_ID", type="integer", nullable=true)
      */
     private $usId;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CLA_TYPE", type="integer", nullable=true)
      */
     private $claType;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CLA_NOM", type="string", length=50, nullable=true)
      */
     private $claNom;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CLA_DESCR", type="text", length=-1, nullable=true)
      */
     private $claDescr;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="CLA_ECHEANCE", type="datetime", nullable=true)
      */
     private $claEcheance;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CLA_PRIORITE", type="integer", nullable=true)
      */
     private $claPriorite;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CLA_NOTIF_REF", type="integer", nullable=true)
      */
     private $claNotifRef;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="CLA_STATUS", type="integer", nullable=true)
+     */
+    private $claStatus = '0';
+
+    /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
      */
     private $insDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
      */
     private $insUser;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="MAJ_DATE", type="datetime", nullable=true)
      */
     private $majDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
 
     /**
      * @var \FunecapBundle\Entity\Clients
+     *
+     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Clients")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
+     * })
      */
     private $cl;
+
 
 
     /**
@@ -259,6 +296,30 @@ class ClientsTaches
     }
 
     /**
+     * Set claStatus
+     *
+     * @param integer $claStatus
+     *
+     * @return ClientsTaches
+     */
+    public function setClaStatus($claStatus)
+    {
+        $this->claStatus = $claStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get claStatus
+     *
+     * @return integer
+     */
+    public function getClaStatus()
+    {
+        return $this->claStatus;
+    }
+
+    /**
      * Set insDate
      *
      * @param \DateTime $insDate
@@ -378,4 +439,3 @@ class ClientsTaches
         return $this->cl;
     }
 }
-

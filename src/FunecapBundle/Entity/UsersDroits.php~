@@ -1,0 +1,169 @@
+<?php
+
+namespace FunecapBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * UsersDroits
+ *
+ * @ORM\Table(name="USERS_DROITS", indexes={@ORM\Index(name="IDX_52C12AD2D8830FA2", columns={"US_ID"})})
+ * @ORM\Entity
+ */
+class UsersDroits
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $udId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_EXTRANET", type="integer", nullable=true)
+     */
+    private $udExtranet = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_INSTUTIONNEL", type="integer", nullable=true)
+     */
+    private $udInstutionnel = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_PRODUIT", type="integer", nullable=true)
+     */
+    private $udProduit = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_OPTIONS", type="integer", nullable=true)
+     */
+    private $udOptions = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_COMMISSION", type="integer", nullable=true)
+     */
+    private $udCommission = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_RFA_SUP", type="integer", nullable=true)
+     */
+    private $udRfaSup = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_CLIENT_INS", type="integer", nullable=true)
+     */
+    private $udClientIns = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_CLIENT_MAJ", type="integer", nullable=true)
+     */
+    private $udClientMaj = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_CLIENT_SUP", type="integer", nullable=true)
+     */
+    private $udClientSup = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_USER_INS", type="integer", nullable=true)
+     */
+    private $udUserIns = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_USER_MAJ", type="integer", nullable=true)
+     */
+    private $udUserMaj = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_USER_SUP", type="integer", nullable=true)
+     */
+    private $udUserSup = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_EXTRACTION", type="integer", nullable=true)
+     */
+    private $udExtraction = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_FOURNISSEUR", type="integer", nullable=true)
+     */
+    private $udFournisseur = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="UD_COPIE_TICKET", type="integer", nullable=true)
+     */
+    private $udCopieTicket = '0';
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
+     */
+    private $insDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
+     */
+    private $insUser;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="MAJ_DATE", type="datetime", nullable=true)
+     */
+    private $majDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
+     */
+    private $majUser;
+
+    /**
+     * @var \FunecapBundle\Entity\Users
+     *
+     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Users")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="US_ID", referencedColumnName="US_ID")
+     * })
+     */
+    private $us;
+
+
+}
+

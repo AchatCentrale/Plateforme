@@ -2,55 +2,81 @@
 
 namespace FunecapBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * CodesPromo
+ *
+ * @ORM\Table(name="CODES_PROMO")
+ * @ORM\Entity
  */
 class CodesPromo
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CP_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $cpId;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="SO_ID", type="integer", nullable=true)
      */
     private $soId;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="CP_CODE", type="string", length=50, nullable=true)
      */
     private $cpCode;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="CP_REMISE", type="float", precision=53, scale=0, nullable=true)
      */
     private $cpRemise;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="CP_VALIDITE", type="datetime", nullable=true)
      */
     private $cpValidite;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
      */
     private $insDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
      */
     private $insUser;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="MAJ_DATE", type="datetime", nullable=true)
      */
     private $majDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
+
 
 
     /**
@@ -255,4 +281,3 @@ class CodesPromo
         return $this->majUser;
     }
 }
-

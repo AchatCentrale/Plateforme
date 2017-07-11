@@ -138,6 +138,7 @@ FunecapBundle\Entity\ParamFixes:
             nullable: true
             options:
                 unsigned: false
+                default: '1'
             column: PF_PRIX_AFFICHE
         pfRegion:
             type: integer

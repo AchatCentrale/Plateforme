@@ -61,61 +61,93 @@ class TacheController extends Controller
         return new JsonResponse('ok', 200);
     }
 
-    public function DetailTaskAction($id)
+    public function DetailTaskAction($id, $idCentrale)
     {
 
-        \Moment\Moment::setLocale('fr_FR');
+      switch ($idCentrale){
 
-        $tacheUtil = $this->get('site.service.taches_utils');
-
-        $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches');
-
-        $result = $task->findOneBy([
-            'claId' => $id
-        ]);
-
-        if($result){
-
-            $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy([
-                'usId' => $result->getInsUser()
-            ]);
+          case 1:
+              //roc-eclerc
 
 
+              \Moment\Moment::setLocale('fr_FR');
+              $tacheUtil = $this->get('site.service.taches_utils');
+              $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches');
+              $result = $task->findOneBy([
+                  'claId' => $id
+              ]);
+              if($result){
 
+                  $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy([
+                      'usId' => $result->getInsUser()
+                  ]);
+                  $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                  $creationFromNow = $creation->fromNow();
+                  $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                  $echanceFuture = $echeance->calendar();
+                  $data = [
+                      "id" => utf8_encode($result->getClaId()),
+                      "nom" => utf8_encode($result->getclaNom()),
+                      "descr" => utf8_encode($result->getclaDescr()),
+                      "user" => utf8_encode($user[0]->getUsPrenom()),
+                      "creation" => $creationFromNow->getRelative(),
+                      "echeance" => $echanceFuture,
+                      "statut" => utf8_encode($result->getClaStatus())
 
-            $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
-            $creationFromNow = $creation->fromNow();
-
-
-
-            $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
-            $echanceFuture = $echeance->calendar();
-
-
-
-            $data = [
-                "id" => utf8_encode($result->getClaId()),
-                "nom" => utf8_encode($result->getclaNom()),
-                "descr" => utf8_encode($result->getclaDescr()),
-                "user" => utf8_encode($user[0]->getUsPrenom()),
-                "creation" => $creationFromNow->getRelative(),
-                "echeance" => $echanceFuture,
-                "statut" => utf8_encode($result->getClaStatus())
-
-            ];
-
+                  ];
+                  $response = new JsonResponse($data);
+                  $response->headers->set('Content-Type', 'application/json');
+                  $response->setStatusCode(200);
+                  return $response;
+              }else{
+                  return new JsonResponse('no taches', 200);
+              }
 
 
 
-            $response = new JsonResponse($data);
-            $response->headers->set('Content-Type', 'application/json');
-            $response->setStatusCode(200);
-            return $response;
+              break;
+          case 2:
+              //funecap
+
+              \Moment\Moment::setLocale('fr_FR');
+              $tacheUtil = $this->get('site.service.taches_utils');
+              $task = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsTaches');
+              $result = $task->findOneBy([
+                  'claId' => $id
+              ]);
+              if($result){
+
+                  $user = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Users')->findBy([
+                      'usId' => $result->getInsUser()
+                  ]);
+                  $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                  $creationFromNow = $creation->fromNow();
+                  $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                  $echanceFuture = $echeance->calendar();
+                  $data = [
+                      "id" => utf8_encode($result->getClaId()),
+                      "nom" => utf8_encode($result->getclaNom()),
+                      "descr" => utf8_encode($result->getclaDescr()),
+                      "user" => utf8_encode($user[0]->getUsPrenom()),
+                      "creation" => $creationFromNow->getRelative(),
+                      "echeance" => $echanceFuture,
+                      "statut" => utf8_encode($result->getClaStatus())
+
+                  ];
+                  $response = new JsonResponse($data);
+                  $response->headers->set('Content-Type', 'application/json');
+                  $response->setStatusCode(200);
+                  return $response;
+              }else{
+                  return new JsonResponse('no taches', 200);
+              }
 
 
-        }else{
-            return new JsonResponse('no taches', 200);
-        }
+
+              break;
+
+
+      }
 
 
 
