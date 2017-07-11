@@ -316,11 +316,22 @@ class Users implements UserInterface
     /**
      * Returns the roles granted to the user.
      *
-     * @return array The user roles
+     * <code>
+     * public function getRoles()
+     * {
+     *     return array('ROLE_USER');
+     * }
+     * </code>
+     *
+     * Alternatively, the roles might be stored on a ``roles`` property,
+     * and populated in any number of different ways when the user object
+     * is created.
+     *
+     * @return (Role|string)[] The user roles
      */
     public function getRoles()
     {
-        return array('ROLE_USER');
+        // TODO: Implement getRoles() method.
     }
 
     /**
@@ -333,7 +344,7 @@ class Users implements UserInterface
      */
     public function getPassword()
     {
-        return $this->usPass;
+        return $this->getUsPass();
     }
 
     /**
@@ -355,7 +366,7 @@ class Users implements UserInterface
      */
     public function getUsername()
     {
-        return $this->usMail;
+        return $this->getUsMail();
     }
 
     /**
