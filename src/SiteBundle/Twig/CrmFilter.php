@@ -92,15 +92,37 @@ class CrmFilter extends \Twig_Extension
     public function centraleLabel($centrale)
     {
 
-        switch ($centrale){
-            case '1':
-                return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
-                break;
-            case '2':
-                return "<h3><span class=\"label big label-danger \">Centrale Funecap</span></h3>";
-                break;
 
+        if(gettype($centrale) === "string"){
+
+        dump($centrale);
+
+            switch ($centrale){
+                case 'CENTRALE ROC ECLERC':
+                    return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
+                    break;
+                case 'CENTRALE FUNECAP':
+                    return "<h3><span class=\"label big label-danger \">Centrale Funecap</span></h3>";
+                    break;
+
+            }
+
+
+            return $centrale;
+        }else{
+
+            switch ($centrale){
+                case '1':
+                    return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
+                    break;
+                case '2':
+                    return "<h3><span class=\"label big label-danger \">Centrale Funecap</span></h3>";
+                    break;
+
+            }
         }
+
+
 
 
         return $centrale;
