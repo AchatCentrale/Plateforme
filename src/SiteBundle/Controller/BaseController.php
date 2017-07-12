@@ -836,7 +836,6 @@ class BaseController extends Controller
 
 
 
-                dump($restresult);
                 $mapF = new Map();
                 $mapL = new Map();
                 $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
@@ -979,7 +978,6 @@ class BaseController extends Controller
                     'clId' => $id
                 ]);
 
-                dump($contrat);
 
                 return $this->render(
                     '@Site/Base/client.facturation.html.twig',

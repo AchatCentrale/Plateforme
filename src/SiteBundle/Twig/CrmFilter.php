@@ -95,7 +95,6 @@ class CrmFilter extends \Twig_Extension
 
         if(gettype($centrale) === "string"){
 
-        dump($centrale);
 
             switch ($centrale){
                 case 'CENTRALE ROC ECLERC':
@@ -299,7 +298,6 @@ class CrmFilter extends \Twig_Extension
                 return '<i class="sticky big note outline icon"></i>';
                 break;
         }
-        dump($typeDB);
 
 
 
