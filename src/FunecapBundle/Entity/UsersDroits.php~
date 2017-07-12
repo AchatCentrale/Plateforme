@@ -26,105 +26,105 @@ class UsersDroits
      *
      * @ORM\Column(name="UD_EXTRANET", type="integer", nullable=true)
      */
-    private $udExtranet = '0';
+    private $udExtranet;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_INSTUTIONNEL", type="integer", nullable=true)
      */
-    private $udInstutionnel = '0';
+    private $udInstutionnel;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_PRODUIT", type="integer", nullable=true)
      */
-    private $udProduit = '0';
+    private $udProduit;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_OPTIONS", type="integer", nullable=true)
      */
-    private $udOptions = '0';
+    private $udOptions;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_COMMISSION", type="integer", nullable=true)
      */
-    private $udCommission = '0';
+    private $udCommission;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_RFA_SUP", type="integer", nullable=true)
      */
-    private $udRfaSup = '0';
+    private $udRfaSup;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_CLIENT_INS", type="integer", nullable=true)
      */
-    private $udClientIns = '0';
+    private $udClientIns;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_CLIENT_MAJ", type="integer", nullable=true)
      */
-    private $udClientMaj = '0';
+    private $udClientMaj;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_CLIENT_SUP", type="integer", nullable=true)
      */
-    private $udClientSup = '0';
+    private $udClientSup;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_USER_INS", type="integer", nullable=true)
      */
-    private $udUserIns = '0';
+    private $udUserIns;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_USER_MAJ", type="integer", nullable=true)
      */
-    private $udUserMaj = '0';
+    private $udUserMaj;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_USER_SUP", type="integer", nullable=true)
      */
-    private $udUserSup = '0';
+    private $udUserSup;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_EXTRACTION", type="integer", nullable=true)
      */
-    private $udExtraction = '0';
+    private $udExtraction;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_FOURNISSEUR", type="integer", nullable=true)
      */
-    private $udFournisseur = '0';
+    private $udFournisseur;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="UD_COPIE_TICKET", type="integer", nullable=true)
      */
-    private $udCopieTicket = '0';
+    private $udCopieTicket;
 
     /**
      * @var \DateTime

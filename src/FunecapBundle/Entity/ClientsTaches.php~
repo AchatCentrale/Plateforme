@@ -45,7 +45,7 @@ class ClientsTaches
     /**
      * @var string
      *
-     * @ORM\Column(name="CLA_DESCR", type="text", length=-1, nullable=true)
+     * @ORM\Column(name="CLA_DESCR", type="string", length=5000, nullable=true)
      */
     private $claDescr;
 
@@ -75,7 +75,7 @@ class ClientsTaches
      *
      * @ORM\Column(name="CLA_STATUS", type="integer", nullable=true)
      */
-    private $claStatus = '0';
+    private $claStatus;
 
     /**
      * @var \DateTime

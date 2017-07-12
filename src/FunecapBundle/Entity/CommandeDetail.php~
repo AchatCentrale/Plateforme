@@ -103,7 +103,7 @@ class CommandeDetail
      *
      * @ORM\Column(name="CD_STATUS", type="integer", nullable=true)
      */
-    private $cdStatus = '0';
+    private $cdStatus;
 
     /**
      * @var \DateTime

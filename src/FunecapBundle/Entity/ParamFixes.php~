@@ -159,7 +159,7 @@ class ParamFixes
      *
      * @ORM\Column(name="PF_PRIX_AFFICHE", type="integer", nullable=true)
      */
-    private $pfPrixAffiche = '1';
+    private $pfPrixAffiche;
 
     /**
      * @var integer

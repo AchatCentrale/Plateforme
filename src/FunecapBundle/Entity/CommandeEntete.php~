@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CommandeEntete
  *
- * @ORM\Table(name="COMMANDE_ENTETE")
+ * @ORM\Table(name="COMMANDE_ENTETE", indexes={@ORM\Index(name="IDX_BD3767A9FD61DBA2", columns={"ME_ID"})})
  * @ORM\Entity
  */
 class CommandeEntete
@@ -20,13 +20,6 @@ class CommandeEntete
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $ceId;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="ME_ID", type="integer", nullable=true)
-     */
-    private $meId;
 
     /**
      * @var integer
@@ -68,14 +61,14 @@ class CommandeEntete
      *
      * @ORM\Column(name="CE_ETIQ_CB", type="integer", nullable=true)
      */
-    private $ceEtiqCb = '0';
+    private $ceEtiqCb;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CE_ETIQ_PV", type="integer", nullable=true)
      */
-    private $ceEtiqPv = '0';
+    private $ceEtiqPv;
 
     /**
      * @var string
@@ -89,7 +82,7 @@ class CommandeEntete
      *
      * @ORM\Column(name="CE_STATUS", type="integer", nullable=true)
      */
-    private $ceStatus = '0';
+    private $ceStatus;
 
     /**
      * @var \DateTime
@@ -118,6 +111,16 @@ class CommandeEntete
      * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
+
+    /**
+     * @var \FunecapBundle\Entity\MessageEntete
+     *
+     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\MessageEntete")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ME_ID", referencedColumnName="ME_ID")
+     * })
+     */
+    private $me;
 
 
 }

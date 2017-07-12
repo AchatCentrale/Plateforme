@@ -26,7 +26,7 @@ class ClientsUsers
      *
      * @ORM\Column(name="PU_ID", type="integer", nullable=true)
      */
-    private $puId = '0';
+    private $puId;
 
     /**
      * @var string
@@ -82,7 +82,7 @@ class ClientsUsers
      *
      * @ORM\Column(name="CC_PASS", type="string", length=50, nullable=true)
      */
-    private $ccPass = '123456';
+    private $ccPass;
 
     /**
      * @var integer
@@ -96,7 +96,7 @@ class ClientsUsers
      *
      * @ORM\Column(name="CIRCUIT_VALIDATION", type="boolean", nullable=false)
      */
-    private $circuitValidation = '1';
+    private $circuitValidation;
 
     /**
      * @var integer

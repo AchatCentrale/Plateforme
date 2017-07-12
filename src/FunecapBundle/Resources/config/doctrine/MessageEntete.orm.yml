@@ -29,7 +29,6 @@ FunecapBundle\Entity\MessageEntete:
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: CC_ID
         foId:
             type: integer
@@ -42,14 +41,12 @@ FunecapBundle\Entity\MessageEntete:
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: FC_ID
         prId:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: PR_ID
         meDate:
             type: datetime
@@ -74,49 +71,42 @@ FunecapBundle\Entity\MessageEntete:
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: ME_STATUS
         meLuC:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: ME_LU_C
         meLuF:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: ME_LU_F
         meRelance:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '1'
             column: ME_RELANCE
         meAdrFac:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: ME_ADR_FAC
         meAdrLiv:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: ME_ADR_LIV
         meCmde:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: ME_CMDE
         meTempo:
             type: string

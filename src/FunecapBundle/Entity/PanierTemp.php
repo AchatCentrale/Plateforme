@@ -54,7 +54,7 @@ class PanierTemp
      *
      * @ORM\Column(name="ME_ID", type="integer", nullable=true)
      */
-    private $meId = '0';
+    private $meId;
 
     /**
      * @var \DateTime
@@ -68,7 +68,7 @@ class PanierTemp
      *
      * @ORM\Column(name="PT_QTE", type="integer", nullable=true)
      */
-    private $ptQte = '0';
+    private $ptQte;
 
     /**
      * @var string
@@ -82,7 +82,7 @@ class PanierTemp
      *
      * @ORM\Column(name="PT_PRIX_VC", type="float", precision=53, scale=0, nullable=true)
      */
-    private $ptPrixVc = '0';
+    private $ptPrixVc;
 
     /**
      * @var \DateTime

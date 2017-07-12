@@ -33,7 +33,7 @@ class Clients
      *
      * @ORM\Column(name="RE_ID", type="integer", nullable=true)
      */
-    private $reId = '0';
+    private $reId;
 
     /**
      * @var string
@@ -138,7 +138,7 @@ class Clients
      *
      * @ORM\Column(name="CL_PRESCRIPT", type="integer", nullable=true)
      */
-    private $clPrescript = '0';
+    private $clPrescript;
 
     /**
      * @var float
@@ -173,56 +173,49 @@ class Clients
      *
      * @ORM\Column(name="CL_ACTIVITE", type="integer", nullable=true)
      */
-    private $clActivite = '0';
+    private $clActivite;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CL_GROUPE", type="integer", nullable=true)
      */
-    private $clGroupe = '0';
+    private $clGroupe;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CL_CLASSIF", type="integer", nullable=true)
      */
-    private $clClassif = '0';
+    private $clClassif;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CL_EFFECTIF", type="integer", nullable=true)
      */
-    private $clEffectif = '0';
+    private $clEffectif;
 
     /**
      * @var float
      *
      * @ORM\Column(name="CL_CA", type="float", precision=53, scale=0, nullable=true)
      */
-    private $clCa = '0';
+    private $clCa;
 
     /**
      * @var float
      *
      * @ORM\Column(name="CL_MASQ_HA", type="float", precision=53, scale=0, nullable=true)
      */
-    private $clMasqHa = '0';
+    private $clMasqHa;
 
     /**
      * @var float
      *
      * @ORM\Column(name="CL_MASQ_VT", type="float", precision=53, scale=0, nullable=true)
      */
-    private $clMasqVt = '0';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="CL_ETIQUETTE", type="string", length=500, nullable=true)
-     */
-    private $clEtiquette;
+    private $clMasqVt;
 
     /**
      * @var string
@@ -230,13 +223,6 @@ class Clients
      * @ORM\Column(name="CL_TEMPO", type="string", length=50, nullable=true)
      */
     private $clTempo;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="CL_NIV_ACTION", type="integer", nullable=true)
-     */
-    private $clNivAction = '0';
 
     /**
      * @var \DateTime
@@ -951,30 +937,6 @@ class Clients
     }
 
     /**
-     * Set clEtiquette
-     *
-     * @param string $clEtiquette
-     *
-     * @return Clients
-     */
-    public function setClEtiquette($clEtiquette)
-    {
-        $this->clEtiquette = $clEtiquette;
-
-        return $this;
-    }
-
-    /**
-     * Get clEtiquette
-     *
-     * @return string
-     */
-    public function getClEtiquette()
-    {
-        return $this->clEtiquette;
-    }
-
-    /**
      * Set clTempo
      *
      * @param string $clTempo
@@ -996,30 +958,6 @@ class Clients
     public function getClTempo()
     {
         return $this->clTempo;
-    }
-
-    /**
-     * Set clNivAction
-     *
-     * @param integer $clNivAction
-     *
-     * @return Clients
-     */
-    public function setClNivAction($clNivAction)
-    {
-        $this->clNivAction = $clNivAction;
-
-        return $this;
-    }
-
-    /**
-     * Get clNivAction
-     *
-     * @return integer
-     */
-    public function getClNivAction()
-    {
-        return $this->clNivAction;
     }
 
     /**

@@ -77,8 +77,10 @@ class ClientsTachesType extends AbstractType
             ->add('cl', EntityType::class, [
                 'class' => 'AchatCentrale\CrmBundle\Entity\Clients',
                 'choice_label' => 'clRaisonsoc',
-
-
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.clRaisonsoc', 'ASC');
+                },
                 'placeholder' => 'Choisir l\'entreprise',
 
                 'label' => 'Entreprise (numéro/nom)',

@@ -142,7 +142,6 @@ FunecapBundle\Entity\Societes:
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: SO_STATUS
         soDatabase:
             type: string

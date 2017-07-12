@@ -211,9 +211,9 @@ class TacheController extends Controller
 
 
                 if (isset($req['cl'])){
-                    $client = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
-                        'clId' => $req['cl'],
-                    ]);
+
+
+
 
                 }
 

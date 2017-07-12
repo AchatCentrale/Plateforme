@@ -5,28 +5,28 @@ namespace AchatCentrale\CrmBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ProfilsFourn
+ * ClientsNotes
  *
- * @ORM\Table(name="PROFILS_FOURN", indexes={@ORM\Index(name="IDX_84165EC03508DF0E", columns={"PU_ID"})})
+ * @ORM\Table(name="CLIENTS_NOTES", indexes={@ORM\Index(name="IDX_F77855983F592A49", columns={"CL_ID"})})
  * @ORM\Entity
  */
-class ProfilsFourn
+class ClientsNotes
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="PF_ID", type="integer")
+     * @ORM\Column(name="CN_ID", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $pfId;
+    private $cnId;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="FO_ID", type="integer", nullable=true)
+     * @ORM\Column(name="CN_NOTE", type="string", length=500, nullable=true)
      */
-    private $foId;
+    private $cnNote;
 
     /**
      * @var \DateTime
@@ -57,14 +57,14 @@ class ProfilsFourn
     private $majUser;
 
     /**
-     * @var \AchatCentrale\CrmBundle\Entity\ProfilsUsers
+     * @var \AchatCentrale\CrmBundle\Entity\Clients
      *
-     * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\ProfilsUsers")
+     * @ORM\ManyToOne(targetEntity="AchatCentrale\CrmBundle\Entity\Clients")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="PU_ID", referencedColumnName="PU_ID")
+     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
      * })
      */
-    private $pu;
+    private $cl;
 
 
 }

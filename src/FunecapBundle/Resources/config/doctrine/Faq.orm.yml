@@ -37,7 +37,6 @@ FunecapBundle\Entity\Faq:
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: QF_ORDRE
         qfDate:
             type: datetime

@@ -82,7 +82,7 @@ class ClientsAdresses
      *
      * @ORM\Column(name="CA_PRINCIPALE", type="integer", nullable=true)
      */
-    private $caPrincipale = '0';
+    private $caPrincipale;
 
     /**
      * @var \DateTime

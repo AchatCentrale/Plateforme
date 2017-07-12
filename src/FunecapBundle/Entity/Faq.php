@@ -47,7 +47,7 @@ class Faq
      *
      * @ORM\Column(name="QF_ORDRE", type="integer", nullable=true)
      */
-    private $qfOrdre = '0';
+    private $qfOrdre;
 
     /**
      * @var \DateTime

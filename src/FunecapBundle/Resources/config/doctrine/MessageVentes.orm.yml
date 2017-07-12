@@ -23,35 +23,30 @@ FunecapBundle\Entity\MessageVentes:
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: ME_ID
         mvClient:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: MV_CLIENT
         mvClientU:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: MV_CLIENT_U
         mvFourn:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: MV_FOURN
         mvFournU:
             type: integer
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: MV_FOURN_U
         mvSujet:
             type: string
@@ -94,7 +89,6 @@ FunecapBundle\Entity\MessageVentes:
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: MV_STATUS
         insDate:
             type: datetime

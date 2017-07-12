@@ -72,7 +72,6 @@ FunecapBundle\Entity\ClientsAdresses:
             nullable: true
             options:
                 unsigned: false
-                default: '0'
             column: CA_PRINCIPALE
         insDate:
             type: datetime

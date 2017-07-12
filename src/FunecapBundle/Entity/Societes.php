@@ -152,7 +152,7 @@ class Societes
      *
      * @ORM\Column(name="SO_STATUS", type="integer", nullable=true)
      */
-    private $soStatus = '0';
+    private $soStatus;
 
     /**
      * @var string

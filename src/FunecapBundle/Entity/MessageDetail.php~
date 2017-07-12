@@ -40,7 +40,7 @@ class MessageDetail
      *
      * @ORM\Column(name="US_ID", type="integer", nullable=true)
      */
-    private $usId = '0';
+    private $usId;
 
     /**
      * @var \DateTime

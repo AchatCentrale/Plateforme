@@ -40,7 +40,7 @@ class MessageEntete
      *
      * @ORM\Column(name="CC_ID", type="integer", nullable=true)
      */
-    private $ccId = '0';
+    private $ccId;
 
     /**
      * @var integer
@@ -54,14 +54,14 @@ class MessageEntete
      *
      * @ORM\Column(name="FC_ID", type="integer", nullable=true)
      */
-    private $fcId = '0';
+    private $fcId;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="PR_ID", type="integer", nullable=true)
      */
-    private $prId = '0';
+    private $prId;
 
     /**
      * @var \DateTime
@@ -89,49 +89,49 @@ class MessageEntete
      *
      * @ORM\Column(name="ME_STATUS", type="integer", nullable=true)
      */
-    private $meStatus = '0';
+    private $meStatus;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="ME_LU_C", type="integer", nullable=true)
      */
-    private $meLuC = '0';
+    private $meLuC;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="ME_LU_F", type="integer", nullable=true)
      */
-    private $meLuF = '0';
+    private $meLuF;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="ME_RELANCE", type="integer", nullable=true)
      */
-    private $meRelance = '1';
+    private $meRelance;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="ME_ADR_FAC", type="integer", nullable=true)
      */
-    private $meAdrFac = '0';
+    private $meAdrFac;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="ME_ADR_LIV", type="integer", nullable=true)
      */
-    private $meAdrLiv = '0';
+    private $meAdrLiv;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="ME_CMDE", type="integer", nullable=true)
      */
-    private $meCmde = '0';
+    private $meCmde;
 
     /**
      * @var string

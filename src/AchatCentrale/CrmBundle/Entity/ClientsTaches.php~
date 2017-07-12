@@ -3,25 +3,15 @@
 namespace AchatCentrale\CrmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * ClientsTaches
  *
  * @ORM\Table(name="CLIENTS_TACHES", indexes={@ORM\Index(name="IDX_1AB05ADE3F592A49", columns={"CL_ID"})})
- * @ORM\Entity(repositoryClass="AchatCentrale\CrmBundle\Repository\TachesRepository")
+ * @ORM\Entity
  */
 class ClientsTaches
 {
-
-
-    public function __construct()
-    {
-        $this->insDate = new \DateTime('now');
-    }
-    
-    
     /**
      * @var integer
      *
@@ -54,14 +44,8 @@ class ClientsTaches
 
     /**
      * @var string
-     * @Assert\Length(
-     *     min="0",
-     *     max="140",
-     *     minMessage="Vous devez rentrez une description"
-     *     maxMessage="Vous pouvez mettre au moins 140 caractères"
-     * )
      *
-     * @ORM\Column(name="CLA_DESCR", type="text", length=-140, nullable=true)
+     * @ORM\Column(name="CLA_DESCR", type="text", length=-1, nullable=true)
      */
     private $claDescr;
 
@@ -85,6 +69,13 @@ class ClientsTaches
      * @ORM\Column(name="CLA_NOTIF_REF", type="integer", nullable=true)
      */
     private $claNotifRef;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CLA_STATUS", type="integer", nullable=true)
+     */
+    private $claStatus = '0';
 
     /**
      * @var \DateTime
@@ -125,331 +116,5 @@ class ClientsTaches
     private $cl;
 
 
-
-    /**
-     * Get claId
-     *
-     * @return integer
-     */
-    public function getClaId()
-    {
-        return $this->claId;
-    }
-
-    /**
-     * Set usId
-     *
-     * @param integer $usId
-     *
-     * @return ClientsTaches
-     */
-    public function setUsId($usId)
-    {
-        $this->usId = $usId;
-
-        return $this;
-    }
-
-    /**
-     * Get usId
-     *
-     * @return integer
-     */
-    public function getUsId()
-    {
-        return $this->usId;
-    }
-
-    /**
-     * Set claType
-     *
-     * @param integer $claType
-     *
-     * @return ClientsTaches
-     */
-    public function setClaType($claType)
-    {
-        $this->claType = $claType;
-
-        return $this;
-    }
-
-    /**
-     * Get claType
-     *
-     * @return integer
-     */
-    public function getClaType()
-    {
-        return $this->claType;
-    }
-
-    /**
-     * Set claNom
-     *
-     * @param string $claNom
-     *
-     * @return ClientsTaches
-     */
-    public function setClaNom($claNom)
-    {
-        $this->claNom = $claNom;
-
-        return $this;
-    }
-
-    /**
-     * Get claNom
-     *
-     * @return string
-     */
-    public function getClaNom()
-    {
-        return $this->claNom;
-    }
-
-    /**
-     * Set claDescr
-     *
-     * @param string $claDescr
-     *
-     * @return ClientsTaches
-     */
-    public function setClaDescr($claDescr)
-    {
-        $this->claDescr = $claDescr;
-
-        return $this;
-    }
-
-    /**
-     * Get claDescr
-     *
-     * @return string
-     */
-    public function getClaDescr()
-    {
-        return $this->claDescr;
-    }
-
-    /**
-     * Set claEcheance
-     *
-     * @param \DateTime $claEcheance
-     *
-     * @return ClientsTaches
-     */
-    public function setClaEcheance($claEcheance)
-    {
-        $this->claEcheance = $claEcheance;
-
-        return $this;
-    }
-
-    /**
-     * Get claEcheance
-     *
-     * @return \DateTime
-     */
-    public function getClaEcheance()
-    {
-        return $this->claEcheance;
-    }
-
-    /**
-     * Set claPriorite
-     *
-     * @param integer $claPriorite
-     *
-     * @return ClientsTaches
-     */
-    public function setClaPriorite($claPriorite)
-    {
-        $this->claPriorite = $claPriorite;
-
-        return $this;
-    }
-
-    /**
-     * Get claPriorite
-     *
-     * @return integer
-     */
-    public function getClaPriorite()
-    {
-        return $this->claPriorite;
-    }
-
-    /**
-     * Set claNotifRef
-     *
-     * @param integer $claNotifRef
-     *
-     * @return ClientsTaches
-     */
-    public function setClaNotifRef($claNotifRef)
-    {
-        $this->claNotifRef = $claNotifRef;
-
-        return $this;
-    }
-
-    /**
-     * Get claNotifRef
-     *
-     * @return integer
-     */
-    public function getClaNotifRef()
-    {
-        return $this->claNotifRef;
-    }
-
-    /**
-     * Set insDate
-     *
-     * @param \DateTime $insDate
-     *
-     * @return ClientsTaches
-     */
-    public function setInsDate($insDate)
-    {
-        $this->insDate = $insDate;
-
-        return $this;
-    }
-
-    /**
-     * Get insDate
-     *
-     * @return \DateTime
-     */
-    public function getInsDate()
-    {
-        return $this->insDate;
-    }
-
-    /**
-     * Set insUser
-     *
-     * @param string $insUser
-     *
-     * @return ClientsTaches
-     */
-    public function setInsUser($insUser)
-    {
-        $this->insUser = $insUser;
-
-        return $this;
-    }
-
-    /**
-     * Get insUser
-     *
-     * @return string
-     */
-    public function getInsUser()
-    {
-        return $this->insUser;
-    }
-
-    /**
-     * Set majDate
-     *
-     * @param \DateTime $majDate
-     *
-     * @return ClientsTaches
-     */
-    public function setMajDate($majDate)
-    {
-        $this->majDate = $majDate;
-
-        return $this;
-    }
-
-    /**
-     * Get majDate
-     *
-     * @return \DateTime
-     */
-    public function getMajDate()
-    {
-        return $this->majDate;
-    }
-
-    /**
-     * Set majUser
-     *
-     * @param string $majUser
-     *
-     * @return ClientsTaches
-     */
-    public function setMajUser($majUser)
-    {
-        $this->majUser = $majUser;
-
-        return $this;
-    }
-
-    /**
-     * Get majUser
-     *
-     * @return string
-     */
-    public function getMajUser()
-    {
-        return $this->majUser;
-    }
-
-    /**
-     * Set cl
-     *
-     * @param \AchatCentrale\CrmBundle\Entity\Clients $cl
-     *
-     * @return ClientsTaches
-     */
-    public function setCl(\AchatCentrale\CrmBundle\Entity\Clients $cl = null)
-    {
-        $this->cl = $cl;
-
-        return $this;
-    }
-
-    /**
-     * Get cl
-     *
-     * @return \AchatCentrale\CrmBundle\Entity\Clients
-     */
-    public function getCl()
-    {
-        return $this->cl;
-    }
-    /**
-     * @var integer
-     */
-    private $claStatus = '0';
-
-
-    /**
-     * Set claStatus
-     *
-     * @param integer $claStatus
-     *
-     * @return ClientsTaches
-     */
-    public function setClaStatus($claStatus)
-    {
-        $this->claStatus = $claStatus;
-
-        return $this;
-    }
-
-    /**
-     * Get claStatus
-     *
-     * @return integer
-     */
-    public function getClaStatus()
-    {
-        return $this->claStatus;
-    }
 }
+

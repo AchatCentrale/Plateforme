@@ -344,7 +344,7 @@ class Users implements UserInterface
      */
     public function getPassword()
     {
-        return $this->getUsPass();
+        return $this->usPass;
     }
 
     /**
@@ -366,7 +366,7 @@ class Users implements UserInterface
      */
     public function getUsername()
     {
-        return $this->getUsMail();
+        return $this->usMail;
     }
 
     /**

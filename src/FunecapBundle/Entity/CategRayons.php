@@ -24,7 +24,7 @@ class CategRayons
     /**
      * @var integer
      *
-     * @ORM\Column(name="RA_ID", type="integer", nullable=true)
+     * @ORM\Column(name="RA_ID", type="integer", nullable=false)
      */
     private $raId;
 

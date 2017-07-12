@@ -40,7 +40,7 @@ class ProduitsPromo
      *
      * @ORM\Column(name="PP_ORDRE", type="integer", nullable=true)
      */
-    private $ppOrdre = '0';
+    private $ppOrdre;
 
     /**
      * @var \DateTime

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Contrats
  *
- * @ORM\Table(name="CONTRATS")
+ * @ORM\Table(name="CONTRATS", indexes={@ORM\Index(name="IDX_B45BA5203F592A49", columns={"CL_ID"}), @ORM\Index(name="IDX_B45BA520DA314FF6", columns={"CO_CATEGORIE"})})
  * @ORM\Entity
  */
 class Contrats
@@ -24,23 +24,9 @@ class Contrats
     /**
      * @var integer
      *
-     * @ORM\Column(name="CL_ID", type="integer", nullable=true)
-     */
-    private $clId;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="CO_USER", type="integer", nullable=true)
      */
-    private $coUser = '0';
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="CO_CATEGORIE", type="integer", nullable=true)
-     */
-    private $coCategorie = '0';
+    private $coUser;
 
     /**
      * @var string
@@ -75,14 +61,14 @@ class Contrats
      *
      * @ORM\Column(name="CO_DUREE", type="integer", nullable=true)
      */
-    private $coDuree = '0';
+    private $coDuree;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CO_PREAVIS", type="integer", nullable=true)
      */
-    private $coPreavis = '0';
+    private $coPreavis;
 
     /**
      * @var string
@@ -110,7 +96,7 @@ class Contrats
      *
      * @ORM\Column(name="CO_CONFIDENT", type="integer", nullable=true)
      */
-    private $coConfident = '0';
+    private $coConfident;
 
     /**
      * @var float
@@ -145,14 +131,14 @@ class Contrats
      *
      * @ORM\Column(name="CO_STATUS", type="integer", nullable=true)
      */
-    private $coStatus = '0';
+    private $coStatus;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="CO_ALERT", type="integer", nullable=true)
      */
-    private $coAlert = '0';
+    private $coAlert;
 
     /**
      * @var string
@@ -189,6 +175,26 @@ class Contrats
      */
     private $majUser;
 
+    /**
+     * @var \FunecapBundle\Entity\Clients
+     *
+     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Clients")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
+     * })
+     */
+    private $cl;
+
+    /**
+     * @var \FunecapBundle\Entity\ContratsCat
+     *
+     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\ContratsCat")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="CO_CATEGORIE", referencedColumnName="CC_ID")
+     * })
+     */
+    private $coCategorie;
+
 
 
     /**
@@ -199,30 +205,6 @@ class Contrats
     public function getCoId()
     {
         return $this->coId;
-    }
-
-    /**
-     * Set clId
-     *
-     * @param integer $clId
-     *
-     * @return Contrats
-     */
-    public function setClId($clId)
-    {
-        $this->clId = $clId;
-
-        return $this;
-    }
-
-    /**
-     * Get clId
-     *
-     * @return integer
-     */
-    public function getClId()
-    {
-        return $this->clId;
     }
 
     /**
@@ -247,30 +229,6 @@ class Contrats
     public function getCoUser()
     {
         return $this->coUser;
-    }
-
-    /**
-     * Set coCategorie
-     *
-     * @param integer $coCategorie
-     *
-     * @return Contrats
-     */
-    public function setCoCategorie($coCategorie)
-    {
-        $this->coCategorie = $coCategorie;
-
-        return $this;
-    }
-
-    /**
-     * Get coCategorie
-     *
-     * @return integer
-     */
-    public function getCoCategorie()
-    {
-        return $this->coCategorie;
     }
 
     /**
@@ -775,5 +733,53 @@ class Contrats
     public function getMajUser()
     {
         return $this->majUser;
+    }
+
+    /**
+     * Set cl
+     *
+     * @param \FunecapBundle\Entity\Clients $cl
+     *
+     * @return Contrats
+     */
+    public function setCl(\FunecapBundle\Entity\Clients $cl = null)
+    {
+        $this->cl = $cl;
+
+        return $this;
+    }
+
+    /**
+     * Get cl
+     *
+     * @return \FunecapBundle\Entity\Clients
+     */
+    public function getCl()
+    {
+        return $this->cl;
+    }
+
+    /**
+     * Set coCategorie
+     *
+     * @param \FunecapBundle\Entity\ContratsCat $coCategorie
+     *
+     * @return Contrats
+     */
+    public function setCoCategorie(\FunecapBundle\Entity\ContratsCat $coCategorie = null)
+    {
+        $this->coCategorie = $coCategorie;
+
+        return $this;
+    }
+
+    /**
+     * Get coCategorie
+     *
+     * @return \FunecapBundle\Entity\ContratsCat
+     */
+    public function getCoCategorie()
+    {
+        return $this->coCategorie;
     }
 }

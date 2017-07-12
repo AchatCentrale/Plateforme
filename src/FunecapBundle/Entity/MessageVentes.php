@@ -33,35 +33,35 @@ class MessageVentes
      *
      * @ORM\Column(name="ME_ID", type="integer", nullable=true)
      */
-    private $meId = '0';
+    private $meId;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="MV_CLIENT", type="integer", nullable=true)
      */
-    private $mvClient = '0';
+    private $mvClient;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="MV_CLIENT_U", type="integer", nullable=true)
      */
-    private $mvClientU = '0';
+    private $mvClientU;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="MV_FOURN", type="integer", nullable=true)
      */
-    private $mvFourn = '0';
+    private $mvFourn;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="MV_FOURN_U", type="integer", nullable=true)
      */
-    private $mvFournU = '0';
+    private $mvFournU;
 
     /**
      * @var string
@@ -110,7 +110,7 @@ class MessageVentes
      *
      * @ORM\Column(name="MV_STATUS", type="integer", nullable=true)
      */
-    private $mvStatus = '0';
+    private $mvStatus;
 
     /**
      * @var \DateTime
