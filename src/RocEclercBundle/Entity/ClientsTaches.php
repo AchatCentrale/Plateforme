@@ -12,6 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ClientsTaches
 {
+
+
+    public function __construct()
+    {
+        $this->setInsDate(new \DateTime('now'));
+
+
+    }
+
     /**
      * @var integer
      *
@@ -82,7 +91,7 @@ class ClientsTaches
      *
      * @ORM\Column(name="CLA_STATUS", type="integer", nullable=true)
      */
-    private $claStatus;
+    private $claStatus = 0;
 
     /**
      * @var \DateTime
