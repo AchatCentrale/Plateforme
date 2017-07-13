@@ -259,8 +259,9 @@ class BaseController extends Controller
               ORDER BY SO_RAISONSOC DESC 
               '
                );
-               $result = $stmt->fetchAll();
 
+
+               $result = $stmt->fetchAll();
                break;
            case 'roc':
                $con = $this->getDoctrine()->getManager()->getConnection();
@@ -327,7 +328,7 @@ class BaseController extends Controller
 
 
        }
-
+        dump($centrale);
 
         return $this->render(
             '@Site/Base/client.html.twig',

@@ -449,6 +449,13 @@ $("form input.date").datepicker({
 $('.go-to-client').on('click', function () {
 
     let centrale = $(this).data('centrale');
+
+    if(centrale === 'CENTRALE_ROC_ECLERC'){
+        centrale = 'ROC_ECLERC'
+    }
+
+   console.log(centrale);
+
     let id = $(this).data('id');
 
     window.location.replace(CURRENT_URL + "/" + id + "/" + centrale + "/general");
