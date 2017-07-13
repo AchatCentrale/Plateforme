@@ -95,13 +95,23 @@ class CrmFilter extends \Twig_Extension
 
         if(gettype($centrale) === "string"){
 
+            dump($centrale);
 
             switch ($centrale){
-                case 'CENTRALE ROC ECLERC':
+                case 'ROC ECLERC':
                     return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
                     break;
                 case 'CENTRALE FUNECAP':
                     return "<h3><span class=\"label big label-danger \">Centrale Funecap</span></h3>";
+                    break;
+                case 'CENTRALE GCCP':
+                    return "<h3><span class=\"label big label-danger \">Centrale GCCP</span></h3>";
+                    break;
+                case 'ACHAT CENTRALE':
+                    return "<h3><span class=\"label big label-danger \">Achat centrale</span></h3>";
+                    break;
+                case 'CENTRALE PFPL':
+                    return "<h3><span class=\"label big label-danger \">Centrale PFPL</span></h3>";
                     break;
 
             }
@@ -179,11 +189,18 @@ class CrmFilter extends \Twig_Extension
     {
         switch ($centrale){
             case "CENTRALE_FUNECAP":
-                return substr($centrale, 9);
+                return "centrale-".substr($centrale, 9);
                 break;
-            case 'CENTRALE_ROC_ECLERC':
-                return substr(str_replace("_","-", $centrale ), 9);
+            case 'ROC_ECLERC':
+                return "centrale-".strtolower(str_replace("_","-", $centrale ));
                 break;
+            case 'ACHAT_CENTRALE':
+                return "achatcentrale";
+                break;
+            case 'CENTRALE_PFPL':
+                return strtolower(str_replace("_","-", $centrale ));
+                break;
+
         }
 
     }
