@@ -1,0 +1,71 @@
+PfplBundle\Entity\Users:
+    type: entity
+    table: USERS
+    id:
+        usId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: US_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        usPrenom:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: US_PRENOM
+        usNom:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: US_NOM
+        usMail:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: US_MAIL
+        usPass:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: US_PASS
+        usNiveau:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: US_NIVEAU
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    lifecycleCallbacks: {  }

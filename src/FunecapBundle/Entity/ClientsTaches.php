@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ClientsTaches
  *
- * @ORM\Table(name="CLIENTS_TACHES", indexes={@ORM\Index(name="IDX_1AB05ADE3F592A49", columns={"CL_ID"})})
+ * @ORM\Table(name="CLIENTS_TACHES")
  * @ORM\Entity
  */
 class ClientsTaches
@@ -20,6 +20,13 @@ class ClientsTaches
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $claId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CL_ID", type="integer", nullable=true)
+     */
+    private $clId;
 
     /**
      * @var integer
@@ -45,7 +52,7 @@ class ClientsTaches
     /**
      * @var string
      *
-     * @ORM\Column(name="CLA_DESCR", type="string", length=5000, nullable=true)
+     * @ORM\Column(name="CLA_DESCR", type="text", length=-1, nullable=true)
      */
     private $claDescr;
 
@@ -105,16 +112,6 @@ class ClientsTaches
      */
     private $majUser;
 
-    /**
-     * @var \FunecapBundle\Entity\Clients
-     *
-     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Clients")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
-     * })
-     */
-    private $cl;
-
 
 
     /**
@@ -125,6 +122,30 @@ class ClientsTaches
     public function getClaId()
     {
         return $this->claId;
+    }
+
+    /**
+     * Set clId
+     *
+     * @param integer $clId
+     *
+     * @return ClientsTaches
+     */
+    public function setClId($clId)
+    {
+        $this->clId = $clId;
+
+        return $this;
+    }
+
+    /**
+     * Get clId
+     *
+     * @return integer
+     */
+    public function getClId()
+    {
+        return $this->clId;
     }
 
     /**
@@ -413,29 +434,5 @@ class ClientsTaches
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Set cl
-     *
-     * @param \FunecapBundle\Entity\Clients $cl
-     *
-     * @return ClientsTaches
-     */
-    public function setCl(\FunecapBundle\Entity\Clients $cl = null)
-    {
-        $this->cl = $cl;
-
-        return $this;
-    }
-
-    /**
-     * Get cl
-     *
-     * @return \FunecapBundle\Entity\Clients
-     */
-    public function getCl()
-    {
-        return $this->cl;
     }
 }

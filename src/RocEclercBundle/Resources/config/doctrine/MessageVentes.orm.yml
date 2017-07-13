@@ -1,0 +1,115 @@
+RocEclercBundle\Entity\MessageVentes:
+    type: entity
+    table: MESSAGE_VENTES
+    id:
+        mvId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: MV_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        soId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: SO_ID
+        meId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: ME_ID
+        mvClient:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: MV_CLIENT
+        mvClientU:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: MV_CLIENT_U
+        mvFourn:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: MV_FOURN
+        mvFournU:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: MV_FOURN_U
+        mvSujet:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+            column: MV_SUJET
+        mvDtVente:
+            type: datetime
+            nullable: true
+            column: MV_DT_VENTE
+        mvMontant:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: MV_MONTANT
+        mvCommisPct:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: MV_COMMIS_PCT
+        mvCommisEur:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: MV_COMMIS_EUR
+        mvComment:
+            type: text
+            nullable: true
+            length: 16
+            options:
+                fixed: false
+            column: MV_COMMENT
+        mvStatus:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: MV_STATUS
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    lifecycleCallbacks: {  }

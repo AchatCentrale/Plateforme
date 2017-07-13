@@ -27,6 +27,10 @@ class AppKernel extends Kernel
             new Ivory\SerializerBundle\IvorySerializerBundle(),
             new Http\HttplugBundle\HttplugBundle(),
             new FunecapBundle\FunecapBundle(),
+            new AchatCentraleBundle\AchatCentraleBundle(),
+            new RocEclercBundle\RocEclercBundle(),
+            new GccpBundle\GccpBundle(),
+            new PfplBundle\PfplBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

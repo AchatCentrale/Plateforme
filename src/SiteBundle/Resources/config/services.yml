@@ -9,7 +9,7 @@ services:
         class: SiteBundle\Service\TachesUtils
     site.service.client_services:
         class: SiteBundle\Service\ClientServices
-        arguments: [ '@doctrine.dbal.centrale_funecap_jb_connection' ]
+        arguments: [ '@doctrine.dbal.centrale_funecap_connection' ]
     site.service.feed_services:
         class: SiteBundle\Service\FeedServices
         arguments:

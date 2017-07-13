@@ -31,13 +31,13 @@ class ClientsTachesType extends AbstractType
             ])
             ->add('claNom', TextType::class, [
                 "label" => "Nom de l'action",
-                "attr" => ["class" => "add-action"]
+                "attr" => ["class" => "add-action validation-input-nom", "maxlength" => 140]
             ])
             ->add('claDescr', TextareaType::class, [
                 "label" => "Description de l'action",
                 "attr" => [
                     "class" => "ui dropdown add-action",
-                    "maxlength" => 140,
+
                 ]
             ])
             ->add('claPriorite', ChoiceType::class, [

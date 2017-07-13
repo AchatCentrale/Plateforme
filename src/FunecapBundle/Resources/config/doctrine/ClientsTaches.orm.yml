@@ -1,10 +1,6 @@
 FunecapBundle\Entity\ClientsTaches:
     type: entity
     table: CLIENTS_TACHES
-    indexes:
-        IDX_1AB05ADE3F592A49:
-            columns:
-                - CL_ID
     id:
         claId:
             type: integer
@@ -16,6 +12,12 @@ FunecapBundle\Entity\ClientsTaches:
             generator:
                 strategy: IDENTITY
     fields:
+        clId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CL_ID
         usId:
             type: integer
             nullable: true
@@ -36,9 +38,9 @@ FunecapBundle\Entity\ClientsTaches:
                 fixed: false
             column: CLA_NOM
         claDescr:
-            type: string
+            type: text
             nullable: true
-            length: 5000
+            length: -1
             options:
                 fixed: false
             column: CLA_DESCR
@@ -86,15 +88,4 @@ FunecapBundle\Entity\ClientsTaches:
             options:
                 fixed: false
             column: MAJ_USER
-    manyToOne:
-        cl:
-            targetEntity: Clients
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                CL_ID:
-                    referencedColumnName: CL_ID
-            orphanRemoval: false
     lifecycleCallbacks: {  }

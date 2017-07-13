@@ -33,15 +33,18 @@ class ClientsTachesType extends AbstractType
                 "label" => "Nom de l'action",
                 "attr" => [
                     "class" => "add-action",
-                    "size" => 140,
+                    "id" => "validation-input-desc"
+
 
                     ]
             ])
             ->add('claDescr', TextareaType::class, [
                 "label" => "Description de l'action",
+
                 "attr" => [
                     "class" => "ui dropdown add-action",
-                    "maxlength" => 140,
+                    "data" => "test"
+
                 ]
             ])
             ->add('claPriorite', ChoiceType::class, [
@@ -79,10 +82,10 @@ class ClientsTachesType extends AbstractType
                 'choice_label' => 'clRaisonsoc',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
-                        ->orderBy('u.clRaisonsoc', 'ASC');
+                        ->select('u.clRaisonsoc')
+                        ->orderBy('u.clRaisonsoc');
                 },
                 'placeholder' => 'Choisir l\'entreprise',
-
                 'label' => 'Entreprise (numéro/nom)',
                 "attr" => ["class" => "ui dropdown add-action"]
 

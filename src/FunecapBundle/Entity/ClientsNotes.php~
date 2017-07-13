@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ClientsNotes
  *
- * @ORM\Table(name="CLIENTS_NOTES", indexes={@ORM\Index(name="IDX_F77855983F592A49", columns={"CL_ID"})})
+ * @ORM\Table(name="CLIENTS_NOTES")
  * @ORM\Entity
  */
 class ClientsNotes
@@ -20,6 +20,13 @@ class ClientsNotes
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $cnId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CL_ID", type="integer", nullable=true)
+     */
+    private $clId;
 
     /**
      * @var string
@@ -55,16 +62,6 @@ class ClientsNotes
      * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
-
-    /**
-     * @var \FunecapBundle\Entity\Clients
-     *
-     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Clients")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
-     * })
-     */
-    private $cl;
 
 
 }

@@ -220,6 +220,13 @@ class Clients
     /**
      * @var string
      *
+     * @ORM\Column(name="CL_ETIQUETTE", type="string", length=500, nullable=true)
+     */
+    private $clEtiquette;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="CL_TEMPO", type="string", length=50, nullable=true)
      */
     private $clTempo;

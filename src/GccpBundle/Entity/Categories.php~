@@ -1,0 +1,124 @@
+<?php
+
+namespace GccpBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Categories
+ *
+ * @ORM\Table(name="Categories")
+ * @ORM\Entity
+ */
+class Categories
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CatID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $catid;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="SO_ID", type="integer", nullable=true)
+     */
+    private $soId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CatIDParent", type="integer", nullable=true)
+     */
+    private $catidparent;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatDescription", type="string", length=100, nullable=true)
+     */
+    private $catdescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatTitre", type="string", length=100, nullable=true)
+     */
+    private $cattitre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatTitreReq", type="string", length=100, nullable=true)
+     */
+    private $cattitrereq;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatLien", type="string", length=300, nullable=true)
+     */
+    private $catlien;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatLienRW", type="string", length=100, nullable=true)
+     */
+    private $catlienrw;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatTagDescr", type="string", length=200, nullable=true)
+     */
+    private $cattagdescr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatTagKeyword", type="string", length=1000, nullable=true)
+     */
+    private $cattagkeyword;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatImage", type="string", length=100, nullable=true)
+     */
+    private $catimage;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatImage_H", type="string", length=100, nullable=true)
+     */
+    private $catimageH;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CatBandeau", type="string", length=100, nullable=true)
+     */
+    private $catbandeau;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CatSort", type="integer", nullable=true)
+     */
+    private $catsort;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="CatDate", type="datetime", nullable=true)
+     */
+    private $catdate;
+
+
+}
+

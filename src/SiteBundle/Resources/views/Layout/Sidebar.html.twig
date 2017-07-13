@@ -28,7 +28,7 @@
                 <ul class="nav side-menu" style="">
                     <li class="{% if app.request.attributes.get('_route') == 'index_auth' %}current-page {% endif %}"><a href="/"><i class="fa fa-home"></i> Home</a></li>
                     <li class="{% if app.request.attributes.get('_route') == 'taches_home' or app.request.attributes.get('_route') == 'new-task' %}current-page {% endif %}"><a  href="{{ path('taches_home') }}"><i class="fa fa-calendar"></i> Action</a></li>
-                    <li class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-facturation' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}current-page {% endif %}"><a  href="{{ path('client') }}"><i class="fa fa-user"></i> Client
+                    <li class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-facturation' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}current-page {% endif %}"><a  href="{{ path('client', { 'c' : 'all'}) }}"><i class="fa fa-user"></i> Client
                             {% if  app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'client-facturation' %}
                             <span class="fa fa-chevron-down"></span>
                         </a>

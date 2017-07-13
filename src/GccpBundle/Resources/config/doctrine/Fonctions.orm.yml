@@ -1,0 +1,50 @@
+GccpBundle\Entity\Fonctions:
+    type: entity
+    table: FONCTIONS
+    id:
+        foId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: FO_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        soId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: SO_ID
+        foDescr:
+            type: string
+            nullable: true
+            length: 200
+            options:
+                fixed: false
+            column: FO_DESCR
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    lifecycleCallbacks: {  }

@@ -4,6 +4,10 @@ imports:
     - { resource: services.yml }
     - { resource: "@SiteBundle/Resources/config/services.yml" }
     - { resource: "@FunecapBundle/Resources/config/services.yml" }
+    - { resource: "@AchatCentraleBundle/Resources/config/services.yml" }
+    - { resource: "@RocEclercBundle/Resources/config/services.yml" }
+    - { resource: "@GccpBundle/Resources/config/services.yml" }
+    - { resource: "@PfplBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -69,18 +73,59 @@ doctrine:
                     1002:  "SET NAMES 'UTF8'"
                     ansi_nulls: on
                     ansi_warnings: on
-            centrale_funecap_jb:
+            centrale_funecap:
                  driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
                  host:           "185.29.149.32"
                  user:           "AC_JBAGOSTIN"
                  password:       "35H7Hjvy"
-                 dbname:         "CENTRALE_FUNECAP_JB"
+                 dbname:         "CENTRALE_FUNECAP"
                  charset:  UTF8
                  options:
                      1002:  "SET NAMES 'UTF8'"
                      ansi_nulls: on
                      ansi_warnings: on
-
+            achat_centrale:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:         "185.29.149.32"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_ACHAT"
+                charset:  UTF8
+                options:
+                    1002:  "SET NAMES 'UTF8'"
+                    ansi_nulls: on
+                    ansi_warnings: on
+            roc_eclerc:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:         "185.29.149.32"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_ROC_ECLERC"
+                charset:      UTF8
+                options:
+                     1002:  "SET NAMES 'UTF8'"
+                     ansi_nulls: on
+                     ansi_warnings: on
+            centrale_gccp:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:         "185.29.149.32"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_GCCP"
+                options:
+                    1002:  "SET NAMES 'UTF8'"
+                    ansi_nulls: on
+                    ansi_warnings: on
+            centrale_pascal_leclerc:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:         "185.29.149.32"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_PFPL"
+                options:
+                    1002:  "SET NAMES 'UTF8'"
+                    ansi_nulls: on
+                    ansi_warnings: on
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -94,10 +139,26 @@ doctrine:
                 connection: centrale_produits
                 mappings:
                     SiteBundle : ~
-            centrale_funecap_jb:
-                connection: centrale_funecap_jb
+            centrale_funecap:
+                connection: centrale_funecap
                 mappings:
                     FunecapBundle : ~
+            achat_centrale:
+                connection: achat_centrale
+                mappings:
+                    AchatCentraleBundle: ~
+            roc_eclerc:
+                connection: roc_eclerc
+                mappings:
+                    RocEclercBundle: ~
+            centrale_gccp:
+                connection: centrale_gccp
+                mappings:
+                    GccpBundle: ~
+            centrale_pascal_leclerc:
+                connection: centrale_pascal_leclerc
+                mappings:
+                    PfplBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:

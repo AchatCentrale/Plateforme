@@ -210,12 +210,6 @@ class TacheController extends Controller
 
 
 
-                if (isset($req['cl'])){
-
-
-
-
-                }
 
                 $form = $this->createForm(ClientsTachesType::class, $task, [
                     'action' => $this->generateUrl('new-task', [ 'c' => $centrale ]),

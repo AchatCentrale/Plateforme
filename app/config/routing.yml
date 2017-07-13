@@ -1,3 +1,4 @@
+
 site:
     resource: "@SiteBundle/Resources/config/routing.yml"
     prefix:   /
@@ -15,3 +16,22 @@ action:
     type:   rest
     resource: "@AchatCentraleCrmBundle/Controller/ActionController.php"
 
+achat_centrale:
+    resource: "@AchatCentraleBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+pfpl:
+    resource: "@PfplBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+gccp:
+    resource: "@GccpBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+roc_eclerc:
+    resource: "@RocEclercBundle/Controller/"
+    type:     annotation
+    prefix:   /

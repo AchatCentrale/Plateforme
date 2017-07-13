@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Contrats
  *
- * @ORM\Table(name="CONTRATS", indexes={@ORM\Index(name="IDX_B45BA5203F592A49", columns={"CL_ID"}), @ORM\Index(name="IDX_B45BA520DA314FF6", columns={"CO_CATEGORIE"})})
+ * @ORM\Table(name="CONTRATS", indexes={@ORM\Index(name="IDX_B45BA520DA314FF6", columns={"CO_CATEGORIE"}), @ORM\Index(name="IDX_B45BA5203F592A49", columns={"CL_ID"})})
  * @ORM\Entity
  */
 class Contrats
@@ -176,16 +176,6 @@ class Contrats
     private $majUser;
 
     /**
-     * @var \FunecapBundle\Entity\Clients
-     *
-     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Clients")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
-     * })
-     */
-    private $cl;
-
-    /**
      * @var \FunecapBundle\Entity\ContratsCat
      *
      * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\ContratsCat")
@@ -194,6 +184,16 @@ class Contrats
      * })
      */
     private $coCategorie;
+
+    /**
+     * @var \FunecapBundle\Entity\Clients
+     *
+     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Clients")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
+     * })
+     */
+    private $cl;
 
 
 
@@ -736,30 +736,6 @@ class Contrats
     }
 
     /**
-     * Set cl
-     *
-     * @param \FunecapBundle\Entity\Clients $cl
-     *
-     * @return Contrats
-     */
-    public function setCl(\FunecapBundle\Entity\Clients $cl = null)
-    {
-        $this->cl = $cl;
-
-        return $this;
-    }
-
-    /**
-     * Get cl
-     *
-     * @return \FunecapBundle\Entity\Clients
-     */
-    public function getCl()
-    {
-        return $this->cl;
-    }
-
-    /**
      * Set coCategorie
      *
      * @param \FunecapBundle\Entity\ContratsCat $coCategorie
@@ -781,5 +757,29 @@ class Contrats
     public function getCoCategorie()
     {
         return $this->coCategorie;
+    }
+
+    /**
+     * Set cl
+     *
+     * @param \FunecapBundle\Entity\Clients $cl
+     *
+     * @return Contrats
+     */
+    public function setCl(\FunecapBundle\Entity\Clients $cl = null)
+    {
+        $this->cl = $cl;
+
+        return $this;
+    }
+
+    /**
+     * Get cl
+     *
+     * @return \FunecapBundle\Entity\Clients
+     */
+    public function getCl()
+    {
+        return $this->cl;
     }
 }

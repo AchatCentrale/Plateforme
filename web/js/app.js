@@ -412,7 +412,7 @@ $('#btn-new-cl').on('click', function (e) {
 
 });
 
-var table = $('#client-all').DataTable({
+let table = $('#client-all').DataTable({
     "colReorder": true,
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
@@ -456,26 +456,7 @@ $('.go-to-client').on('click', function () {
 });
 
 
-$('.img-centrale').on('click', function (e) {
 
-    let centrale = $(this).data('centrale');
-
-
-    if (centrale === "all") {
-        table
-            .search('')
-            .columns().search('')
-            .draw();
-
-    } else {
-        table
-            .search(centrale)
-            .column(1)
-            .draw();
-    }
-
-
-});
 
 function stateTask(state) {
 
@@ -1063,3 +1044,8 @@ $('.new-clients-user').on('click', function (e) {
 
     $('#client-user-new').modal('hide')
 });
+
+
+
+
+

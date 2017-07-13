@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ClientsOptions
  *
- * @ORM\Table(name="CLIENTS_OPTIONS", indexes={@ORM\Index(name="IDX_74C57C7D3F592A49", columns={"CL_ID"}), @ORM\Index(name="IDX_74C57C7DE0662F6F", columns={"OP_ID"})})
+ * @ORM\Table(name="CLIENTS_OPTIONS", indexes={@ORM\Index(name="IDX_74C57C7DE0662F6F", columns={"OP_ID"}), @ORM\Index(name="IDX_74C57C7D3F592A49", columns={"CL_ID"})})
  * @ORM\Entity
  */
 class ClientsOptions
@@ -29,16 +29,6 @@ class ClientsOptions
     private $coReponse;
 
     /**
-     * @var \FunecapBundle\Entity\Clients
-     *
-     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Clients")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
-     * })
-     */
-    private $cl;
-
-    /**
      * @var \FunecapBundle\Entity\Options
      *
      * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Options")
@@ -47,6 +37,16 @@ class ClientsOptions
      * })
      */
     private $op;
+
+    /**
+     * @var \FunecapBundle\Entity\Clients
+     *
+     * @ORM\ManyToOne(targetEntity="FunecapBundle\Entity\Clients")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
+     * })
+     */
+    private $cl;
 
 
 }

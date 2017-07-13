@@ -8,11 +8,6 @@ class ClientServices
 {
 
 
-    /**
-     * @InjectParams({
-     *    "em" = @Inject("doctrine.orm.entity_manager")
-     * })
-     */
 
     /**
      *
@@ -83,21 +78,41 @@ class ClientServices
         //SELECT count(*) FROM CENTRALE_ACHAT_JB.dbo.CLIENTS
         $data = [];
 
-        $sql = "SELECT count(*) FROM CENTRALE_ACHAT_JB.dbo.CLIENTS";
+        $sql = "SELECT count(*) FROM CENTRALE_ACHAT.dbo.CLIENTS";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
-        $roc = $stmt->fetchAll();
+        $ac = $stmt->fetchAll();
 
-        $sql2 = "SELECT count(*) FROM CENTRALE_FUNECAP_JB.dbo.CLIENTS";
+        $sql2 = "SELECT count(*) FROM CENTRALE_FUNECAP.dbo.CLIENTS";
         $stmt2 = $this->connection->prepare($sql2);
         $stmt2->execute();
-
         $fun = $stmt->fetchAll();
 
 
+        $sql3 = "SELECT count(*) FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS";
+        $stmt3 = $this->connection->prepare($sql3);
+        $stmt3->execute();
+        $roc = $stmt3->fetchAll();
+
+
+        $sql4 = "SELECT count(*) FROM CENTRALE_GCCP.dbo.CLIENTS";
+        $stmt4 = $this->connection->prepare($sql4);
+        $stmt4->execute();
+        $gccp = $stmt4->fetchAll();
+
+        $sql5 = "SELECT count(*) FROM CENTRALE_PFPL.dbo.CLIENTS";
+        $stmt5 = $this->connection->prepare($sql5);
+        $stmt5->execute();
+        $pfpl = $stmt5->fetchAll();
+
+
         $data = [
+            "ac" => $ac[0]["computed"],
+            "fun" => $fun[0]["computed"],
             "roc" => $roc[0]["computed"],
-            "fun" => $fun[0]["computed"]
+            "gccp" => $gccp[0]["computed"],
+            "pfpl" => $pfpl[0]["computed"],
+            "total" => $ac[0]["computed"] + $fun[0]["computed"] + $roc[0]["computed"] + $gccp[0]["computed"] +$pfpl[0]["computed"],
         ];
 
         return $data;
@@ -107,4 +122,33 @@ class ClientServices
 
     }
 
+
+    public function getTheCentrale($centrale)
+    {
+        switch ($centrale) {
+
+            case 'all':
+                return "all";
+                break;
+            case 'roc':
+                return "ROC_ECLERC";
+                break;
+            case 'fun':
+                return "CENTRALE_FUNECAP";
+                break;
+            case 'gccp':
+                return "CENTRALE_GCCP";
+                break;
+            case 'pfpl':
+                return "CENTRALE_PFPL";
+                break;
+            case 'ac':
+                return "ACHAT_CENTRALE";
+                break;
+
+
+
+
+        }
+    }
 }

@@ -32,40 +32,40 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12 text-center ">
                             <ul class="pagination pagination-split">
-                                <li><a href="#">
+                                <li><a href="{{ path("client", { "c" : "all"}) }}">
                                         <img
                                                 data-centrale="all"
                                                 class="cursor  img-circle img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-all.png') }}">
                                     </a>
                                 </li>
-                                <li><a href="#">
+                                <li><a href="{{ path("client", { "c" : "fun"}) }}">
                                         <img
                                                 data-centrale="CENTRALE_FUNECAP"
                                                 class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
                                     </a>
                                 </li>
-                                <li><a href="#">
+                                <li><a href="{{ path("client", { "c" : "roc"}) }}">
                                         <img
                                                 data-centrale="CENTRALE_ROC_ECLERC"
                                                 class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
                                     </a>
                                 </li>
-                                <li><a href="#">
+                                <li><a href="{{ path("client", { "c" : "ac"}) }}">
                                         <img
                                                 data-centrale="achat-centrale"
                                                 class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-ac.png') }}">
                                     </a></li>
-                                <li><a href="#">
+                                <li><a href="{{ path("client", { "c" : "gccp"}) }}">
                                         <img
                                                 data-centrale="centrale-gccp"
                                                 class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}"></a>
                                 </li>
-                                <li><a href="#">
+                                <li><a href="{{ path("client", { "c" : "pfpl"}) }}">
                                         <img
                                                 data-centrale="centrale-pfpl"
                                                 class="cursor img-centrale"
@@ -103,12 +103,13 @@
                                     <th>Etat</th>
                                 </tr>
                                 </tfoot>
+
                                 <tbody>
                                 {% for cl in client %}
-                                    <tr data-centrale="{{ cl.SO_RAISONSOC }}" data-id="{{ cl.CL_ID }}"
+                                    <tr data-centrale="{{ centrale }}" data-id="{{ cl.CL_ID }}"
                                         class="cursor go-to-client">
                                         <td>{{ cl.CL_REF }}</td>
-                                        <td>{{ cl.SO_RAISONSOC }}</td>
+                                        <td>{{ centrale }}</td>
                                         <td>{{ cl.CL_RAISONSOC }}</td>
                                         <td>{{ cl.CL_CP }} {{ cl.CL_VILLE }}</td>
                                         <td>{{ cl.CL_TEL | phone }}</td>

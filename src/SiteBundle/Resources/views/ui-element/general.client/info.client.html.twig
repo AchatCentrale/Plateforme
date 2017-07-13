@@ -151,12 +151,18 @@
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Activité</p>
-                                    {% if activite %}
+                                    {% if  activite == "Aucune activité pour le moment" %}
                                         <p class="cursor label-background"
-                                           data-index="siret">{{ activite[0].acDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
-                                    {% else %}
-                                        <p class="cursor label-background"
-                                           data-index="region">Pas d'activité enregistrer encore</p>
+                                           data-index="activite">{{ activite }}</p>
+
+                                        {% else %}
+                                            {% if activite %}
+                                                <p class="cursor label-background"
+                                                   data-index="activite">{{ activite[0].acDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
+                                            {% else %}
+                                                <p class="cursor label-background"
+                                                   data-index="activite">Pas d'activité enregistrer encore</p>
+                                            {% endif %}
                                     {% endif %}
                                 </div>
                             </div>
@@ -175,12 +181,19 @@
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Régions</p>
-                                    {% if region %}
+                                    {% if region == "Aucne région pour le moment" %}
+
                                         <p class="cursor label-background"
-                                           data-index="region">{{ region[0].reNom }}</p>
-                                    {% else %}
-                                        <p class="cursor label-background"
-                                           data-index="region">Pas de region enregistrer encore</p>
+                                           data-index="region">{{ region }}</p>
+
+                                        {% else %}
+                                            {% if region %}
+                                                <p class="cursor label-background"
+                                                   data-index="region">{{ region[0].reNom }}</p>
+                                            {% else %}
+                                                <p class="cursor label-background"
+                                                   data-index="region">Pas de region enregistrer encore</p>
+                                            {% endif %}
                                     {% endif %}
 
                                 </div>

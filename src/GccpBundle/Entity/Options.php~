@@ -1,0 +1,47 @@
+<?php
+
+namespace GccpBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Options
+ *
+ * @ORM\Table(name="OPTIONS")
+ * @ORM\Entity
+ */
+class Options
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="OP_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $opId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="SO_ID", type="integer", nullable=true)
+     */
+    private $soId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="OP_DESCR", type="string", length=100, nullable=true)
+     */
+    private $opDescr;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="OP_FORMAT", type="string", length=50, nullable=true)
+     */
+    private $opFormat;
+
+
+}
+
