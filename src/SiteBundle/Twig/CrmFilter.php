@@ -95,7 +95,7 @@ class CrmFilter extends \Twig_Extension
 
         if(gettype($centrale) === "string"){
 
-            dump($centrale);
+           
 
             switch ($centrale){
                 case 'ROC ECLERC':

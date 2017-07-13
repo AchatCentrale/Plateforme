@@ -328,8 +328,6 @@ class BaseController extends Controller
 
 
        }
-        dump($centrale);
-
         return $this->render(
             '@Site/Base/client.html.twig',
             [
