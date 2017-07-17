@@ -796,12 +796,9 @@ class BaseController extends Controller
     public function updateClientAction(Request $request, $id, $centrale)
     {
 
-
         switch ($centrale) {
             case "CENTRALE_FUNECAP":
-                $em = $this->getDoctrine()->getManager('centrale_funecap_jb');
-
-
+                $em = $this->getDoctrine()->getManager('centrale_funecap');
                 $siret = $request->request->get('siret');
                 $mail = $request->request->get('mail');
                 $tel = $request->request->get('tel');
@@ -810,14 +807,9 @@ class BaseController extends Controller
                 $ca = $request->request->get('ca');
                 $adresse = $request->request->get('adresse');
                 $ville = $request->request->get('ville');
-
-
                 $client = $em->getRepository('FunecapBundle:Clients')->findBy([
                     'clId' => $id
                 ]);
-
-
-
                 if (!$client) {
                     throw $this->createNotFoundException(
                         'Pas de client pour l\'id ' . $id
