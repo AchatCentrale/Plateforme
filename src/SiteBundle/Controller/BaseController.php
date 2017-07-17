@@ -609,7 +609,6 @@ class BaseController extends Controller
                 $profil = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ProfilsUsers')->findAll();
 
 
-                dump($region);
 
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
@@ -825,17 +824,14 @@ class BaseController extends Controller
                 $client[0]->setClAdresse1($adresse);
                 $client[0]->setClVille($ville);
 
-
                 $em->flush();
 
                 $res = "client mise à jour";
-
-
                 return new JsonResponse($res, 200);
 
                 break;
             case "CENTRALE_ROC_ECLERC":
-                $em = $this->getDoctrine()->getManager();
+                $em = $this->getDoctrine()->getManager('roc_eclerc');
 
 
                 $siret = $request->request->get('siret');
@@ -848,7 +844,7 @@ class BaseController extends Controller
                 $ville = $request->request->get('ville');
 
 
-                $client = $em->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
+                $client = $em->getRepository('AchatCentraleBundle:Clients')->findBy([
                     'clId' => $id
                 ]);
 
@@ -1269,7 +1265,6 @@ class BaseController extends Controller
 
     public function ClientFacturationAction(Request $request, $id, $centrale)
     {
-        dump($centrale);
 
         switch ($centrale) {
             case "CENTRALE_FUNECAP":
@@ -1302,7 +1297,6 @@ class BaseController extends Controller
                 $restresult = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy([ 'clId' => $id ]);
                 $contrat = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Contrats')->findBy([ 'cl' => $id ]);
 
-                dump($restresult);
                 return $this->render(
                     '@Site/Base/client.facturation.html.twig',
                     [
@@ -1328,7 +1322,6 @@ class BaseController extends Controller
                 $restresult = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([ 'clId' => $id ]);
                 $contrat = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Contrats')->findBy([ 'cl' => $id ]);
 
-                dump($restresult);
 
                 return $this->render(
                     '@Site/Base/client.facturation.html.twig',
