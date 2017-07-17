@@ -205,6 +205,9 @@ class CrmFilter extends \Twig_Extension
             case 'CENTRALE_PFPL':
                 return strtolower(str_replace("_","-", $centrale ));
                 break;
+            case 'CENTRALE_GCCP':
+                return strtolower(str_replace("_","-", $centrale ));
+                break;
 
         }
 
