@@ -86,8 +86,8 @@ class TacheController extends Controller
                         "user" => utf8_encode($user[0]->getUsPrenom()),
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
+                        "idCentrale" => $idCentrale,
                         "statut" => utf8_encode($result->getClaStatus())
-
                     ];
                     $response = new JsonResponse($data);
                     $response->headers->set('Content-Type', 'application/json');
@@ -123,6 +123,7 @@ class TacheController extends Controller
                         "user" => utf8_encode($user[0]->getUsPrenom()),
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
+                        "idCentrale" => $idCentrale,
                         "statut" => utf8_encode($result->getClaStatus())
 
                     ];
@@ -161,6 +162,7 @@ class TacheController extends Controller
                         "user" => utf8_encode($user[0]->getUsPrenom()),
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
+                        "idCentrale" => $idCentrale,
                         "statut" => utf8_encode($result->getClaStatus())
 
                     ];
@@ -199,6 +201,7 @@ class TacheController extends Controller
                         "user" => utf8_encode($user[0]->getUsPrenom()),
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
+                        "idCentrale" => $idCentrale,
                         "statut" => utf8_encode($result->getClaStatus())
 
                     ];
@@ -237,6 +240,7 @@ class TacheController extends Controller
                         "user" => utf8_encode($user[0]->getUsPrenom()),
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
+                        "idCentrale" => $idCentrale,
                         "statut" => utf8_encode($result->getClaStatus())
 
                     ];
@@ -281,8 +285,7 @@ class TacheController extends Controller
         ]);
     }
 
-    public function UnArchiveTaskAction($id)
-    {
+    public function UnArchiveTaskAction($id){
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "UPDATE CLIENTS_TACHES
@@ -490,48 +493,97 @@ class TacheController extends Controller
 
     }
 
-    public function TaksByIdAction($id)
-    {
-
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-        $sql = "SELECT *
-        FROM CLIENTS_TACHES
-        INNER JOIN USERS ON CLIENTS_TACHES.US_ID = USERS.US_ID
-        WHERE CLA_ID = :id
-                ";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-
-
-        return $this->render('@Site/ui-element/taches/taches.by.id.html.twig', [
-            'tache' => $result[0]
-        ]);
-    }
-
-    public function changetheStateAction($state, $id)
+    public function changetheStateAction($state, $id, $centrale)
     {
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $sql = "UPDATE CLIENTS_TACHES
+        switch ($centrale){
+            case "1":
+                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES
                 SET
                   CLA_STATUS = :etat,
                   MAJ_DATE = GETUTCDATE()
                 WHERE CLA_ID = :id
                 ";
 
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':id', $id);
-        $stmt->bindValue(':etat', $state);
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':etat', $state);
 
-        $stmt->execute();
-        $result = $stmt->fetchAll();
+                $stmt->execute();
+                $result = $stmt->fetchAll();
 
 
-        return $this->redirectToRoute('taches_home', [], 301);
+                return $this->redirectToRoute('taches_home', [], 301);
+            case "2":
+                $sql = "UPDATE CENTRALE_GCCP.dbo.CLIENTS_TACHES
+                SET
+                  CLA_STATUS = :etat,
+                  MAJ_DATE = GETUTCDATE()
+                WHERE CLA_ID = :id
+                ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':etat', $state);
+
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+                return $this->redirectToRoute('taches_home', [], 301);
+            case "4":
+                $sql = "UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES
+                SET
+                  CLA_STATUS = :etat,
+                  MAJ_DATE = GETUTCDATE()
+                WHERE CLA_ID = :id
+                ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':etat', $state);
+
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+                return $this->redirectToRoute('taches_home', [], 301);
+            case "5":
+                $sql = "UPDATE CENTRALE_PFPL.dbo.CLIENTS_TACHES
+                SET
+                  CLA_STATUS = :etat,
+                  MAJ_DATE = GETUTCDATE()
+                WHERE CLA_ID = :id
+                ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':etat', $state);
+
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+                return $this->redirectToRoute('taches_home', [], 301);
+            case "6":
+                $sql = "UPDATE CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES
+                SET
+                  CLA_STATUS = :etat,
+                  MAJ_DATE = GETUTCDATE()
+                WHERE CLA_ID = :id
+                ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':etat', $state);
+
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+                return $this->redirectToRoute('taches_home', [], 301);
+        }
     }
 
     public function sendMailTaskAction($id)
@@ -555,10 +607,7 @@ class TacheController extends Controller
 
     }
 
-    public function updateTaskAction(Request $request, $id)
-    {
-        return new Response($id, 222);
-    }
+    public function updateTaskAction(Request $request, $id){ return new Response($id, 222); }
 
 
 }

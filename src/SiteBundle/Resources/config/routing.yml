@@ -94,7 +94,7 @@ mail-task:
     defaults: {_controller: SiteBundle:Tache:sendMailTask}
 
 change-state:
-    path: /taches/etat/{state}/{id}
+    path: /taches/etat/{state}/{id}/{centrale}
     defaults: {_controller: SiteBundle:Tache:changetheState}
 
 update-client-statut:
