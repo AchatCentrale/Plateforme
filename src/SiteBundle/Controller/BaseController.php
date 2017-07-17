@@ -830,7 +830,7 @@ class BaseController extends Controller
                 return new JsonResponse($res, 200);
 
                 break;
-            case "CENTRALE_ROC_ECLERC":
+            case "ROC_ECLERC":
                 $em = $this->getDoctrine()->getManager('roc_eclerc');
 
 
