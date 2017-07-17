@@ -844,7 +844,7 @@ class BaseController extends Controller
                 $ville = $request->request->get('ville');
 
 
-                $client = $em->getRepository('RoceclercBundle:Clients')->findBy([
+                $client = $em->getRepository('RocEclercBundle:Clients')->findBy([
                     'clId' => $id
                 ]);
 
