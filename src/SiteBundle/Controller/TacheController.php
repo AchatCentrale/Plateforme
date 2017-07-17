@@ -19,12 +19,15 @@ class TacheController extends Controller
     {
 
 
+
         $user = $this->getUser();
+
+
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $sql = "SELECT *
-                FROM Vue_All_Taches
+        $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE
+                FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE US_ID = :usId
                 ORDER BY CLA_STATUS ASC";
 
@@ -34,6 +37,9 @@ class TacheController extends Controller
 
         $stmt->execute();
         $task = $stmt->fetchAll();
+
+
+        dump($task);
 
 
         return $this->render('@Site/Base/tache.home.html.twig', [
@@ -63,20 +69,13 @@ class TacheController extends Controller
         switch ($idCentrale) {
 
             case 1:
-                //roc-eclerc
-
-
+                //Achatcentrale
                 \Moment\Moment::setLocale('fr_FR');
                 $tacheUtil = $this->get('site.service.taches_utils');
-                $task = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsTaches');
-                $result = $task->findOneBy([
-                    'claId' => $id
-                ]);
+                $task = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches');
+                $result = $task->findOneBy([ 'claId' => $id ]);
                 if ($result) {
-
-                    $user = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Users')->findBy([
-                        'usId' => $result->getInsUser()
-                    ]);
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
                     $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
                     $creationFromNow = $creation->fromNow();
                     $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
@@ -102,19 +101,18 @@ class TacheController extends Controller
 
                 break;
             case 2:
-                //funecap
+                //GCCP
 
                 \Moment\Moment::setLocale('fr_FR');
                 $tacheUtil = $this->get('site.service.taches_utils');
-                $task = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsTaches');
+                $task = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsTaches');
                 $result = $task->findOneBy([
                     'claId' => $id
                 ]);
                 if ($result) {
 
-                    $user = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Users')->findBy([
-                        'usId' => $result->getInsUser()
-                    ]);
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
+
                     $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
                     $creationFromNow = $creation->fromNow();
                     $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
@@ -139,6 +137,122 @@ class TacheController extends Controller
 
 
                 break;
+            case 4:
+                //FUNECAP
+
+                \Moment\Moment::setLocale('fr_FR');
+                $tacheUtil = $this->get('site.service.taches_utils');
+                $task = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsTaches');
+                $result = $task->findOneBy([
+                    'claId' => $id
+                ]);
+                if ($result) {
+
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
+
+
+                    $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                    $creationFromNow = $creation->fromNow();
+                    $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                    $echanceFuture = $echeance->calendar();
+                    $data = [
+                        "id" => utf8_encode($result->getClaId()),
+                        "nom" => utf8_encode($result->getclaNom()),
+                        "descr" => utf8_encode($result->getclaDescr()),
+                        "user" => utf8_encode($user[0]->getUsPrenom()),
+                        "creation" => $creationFromNow->getRelative(),
+                        "echeance" => $echanceFuture,
+                        "statut" => utf8_encode($result->getClaStatus())
+
+                    ];
+                    $response = new JsonResponse($data);
+                    $response->headers->set('Content-Type', 'application/json');
+                    $response->setStatusCode(200);
+                    return $response;
+                } else {
+                    return new JsonResponse('no taches', 200);
+                }
+
+
+                break;
+            case 5:
+                //PFPL
+
+                \Moment\Moment::setLocale('fr_FR');
+                $tacheUtil = $this->get('site.service.taches_utils');
+                $task = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsTaches');
+                $result = $task->findOneBy([
+                    'claId' => $id
+                ]);
+                if ($result) {
+
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
+
+
+                    $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                    $creationFromNow = $creation->fromNow();
+                    $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                    $echanceFuture = $echeance->calendar();
+                    $data = [
+                        "id" => utf8_encode($result->getClaId()),
+                        "nom" => utf8_encode($result->getclaNom()),
+                        "descr" => utf8_encode($result->getclaDescr()),
+                        "user" => utf8_encode($user[0]->getUsPrenom()),
+                        "creation" => $creationFromNow->getRelative(),
+                        "echeance" => $echanceFuture,
+                        "statut" => utf8_encode($result->getClaStatus())
+
+                    ];
+                    $response = new JsonResponse($data);
+                    $response->headers->set('Content-Type', 'application/json');
+                    $response->setStatusCode(200);
+                    return $response;
+                } else {
+                    return new JsonResponse('no taches', 200);
+                }
+
+
+                break;
+            case 6:
+                //Roc-eclerc
+
+                \Moment\Moment::setLocale('fr_FR');
+                $tacheUtil = $this->get('site.service.taches_utils');
+                $task = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsTaches');
+                $result = $task->findOneBy([
+                    'claId' => $id
+                ]);
+                if ($result) {
+
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
+
+
+                    $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                    $creationFromNow = $creation->fromNow();
+                    $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                    $echanceFuture = $echeance->calendar();
+                    $data = [
+                        "id" => utf8_encode($result->getClaId()),
+                        "nom" => utf8_encode($result->getclaNom()),
+                        "descr" => utf8_encode($result->getclaDescr()),
+                        "user" => utf8_encode($user[0]->getUsPrenom()),
+                        "creation" => $creationFromNow->getRelative(),
+                        "echeance" => $echanceFuture,
+                        "statut" => utf8_encode($result->getClaStatus())
+
+                    ];
+                    $response = new JsonResponse($data);
+                    $response->headers->set('Content-Type', 'application/json');
+                    $response->setStatusCode(200);
+                    return $response;
+                } else {
+                    return new JsonResponse('no taches', 200);
+                }
+
+
+                break;
+
+
 
 
         }
@@ -197,12 +311,13 @@ class TacheController extends Controller
 
 
         switch ($centrale) {
+
             case 'roc':
                 $req = $request->request;
                 $task = new \RocEclercBundle\Entity\ClientsTaches();
                 $type = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ActionType')->findAll();
                 $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findAll();
-                $user = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Users')->findAll();
+                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task
@@ -236,7 +351,7 @@ class TacheController extends Controller
                 $task = new \FunecapBundle\Entity\ClientsTaches();
                 $type = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ActionType')->findAll();
                 $clients = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findAll();
-                $user = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Users')->findAll();
+                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task
@@ -305,7 +420,7 @@ class TacheController extends Controller
                 $task = new \PfplBundle\Entity\ClientsTaches();
                 $type = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ActionType')->findAll();
                 $clients = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findAll();
-                $user = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Users')->findAll();
+                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task
@@ -340,7 +455,7 @@ class TacheController extends Controller
                 $task = new \GccpBundle\Entity\ClientsTaches();
                 $type = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ActionType')->findAll();
                 $clients = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findAll();
-                $user = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Users')->findAll();
+                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task

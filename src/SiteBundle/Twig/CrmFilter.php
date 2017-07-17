@@ -94,9 +94,6 @@ class CrmFilter extends \Twig_Extension
 
 
         if(gettype($centrale) === "string"){
-
-           
-
             switch ($centrale){
                 case 'ROC ECLERC':
                     return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
@@ -113,19 +110,27 @@ class CrmFilter extends \Twig_Extension
                 case 'CENTRALE PFPL':
                     return "<h3><span class=\"label big label-danger \">Centrale PFPL</span></h3>";
                     break;
-
             }
-
-
             return $centrale;
         }else{
-
             switch ($centrale){
                 case '1':
-                    return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
+                    return "<h3><span class=\"label big label-primary \">Achat Centrale</span></h3>";
                     break;
                 case '2':
+                    return "<h3><span class=\"label big label-default \">Centrale GCCP</span></h3>";
+                    break;
+                case '3':
+                    return "<h3><span class=\"label big label-danger \">Centrale PROMUCF</span></h3>";
+                    break;
+                case '4':
                     return "<h3><span class=\"label big label-danger \">Centrale Funecap</span></h3>";
+                    break;
+                case '5':
+                    return "<h3><span class=\"label big label-success \">Centrale PFPL</span></h3>";
+                    break;
+                case '6':
+                    return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
                     break;
 
             }
@@ -291,11 +296,12 @@ class CrmFilter extends \Twig_Extension
     public function typeFilter($type)
     {
 
-        $em = $this->doctrine->getManager();
+        $em = $this->doctrine->getManager('achat_centrale');
 
-        $typee = $em->getRepository('AchatCentraleCrmBundle:ActionType')->findBy([
+        $typee = $em->getRepository('AchatCentraleBundle:ActionType')->findBy([
             'acId' => $type
         ]);
+
 
 
 

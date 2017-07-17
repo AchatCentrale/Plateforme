@@ -462,7 +462,7 @@ $('.go-to-client').on('click', function () {
             break;
         case "CENTRALE PFPL":
             centrale = 'CENTRALE_PFPL';
-            break;
+            break
 
     }
 

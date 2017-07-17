@@ -1,6 +1,6 @@
 security:
     encoders:
-        AchatCentrale\CrmBundle\Entity\Users:
+        AchatCentraleBundle\Entity\Users:
              algorithm:            plaintext
              ignore_case:          false
 
@@ -12,10 +12,9 @@ security:
     providers:
         default:
             entity:
-
-                class: AchatCentraleCrmBundle:Users
+                class: AchatCentraleBundle:Users
                 property: usMail
-                manager_name: centrale_achat_jb
+                manager_name: achat_centrale
 
     firewalls:
         main:
