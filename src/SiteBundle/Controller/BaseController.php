@@ -31,24 +31,17 @@ class BaseController extends Controller
 
     public function indexAuthAction(Request $request)
     {
-
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
-
-
         $clientService = $this->get('site.service.client_services');
         $dataCount = $clientService->getTheCount();
 
-
-
         $user = $this->getUser();
-
-
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "SELECT *
-                FROM CLIENTS_TACHES
+                FROM Vue_All_Taches
                 WHERE US_ID = :usId
                 AND CLA_STATUS = 0
                 OR CLA_STATUS = 1
@@ -923,15 +916,6 @@ class BaseController extends Controller
             default:
                 break;
         }
-
-
-
-
-
-
-
-
-
 
     }
 
