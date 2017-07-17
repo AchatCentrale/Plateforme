@@ -1290,12 +1290,12 @@ class BaseController extends Controller
                     ]
                 );
                 break;
-            case "CENTRALE_ROC_ECLERC":
+            case "ROC_ECLERC":
                 $restresult = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
                         'clId' => $id
                     ]);
-                $contrat = $this->getDoctrine()->getRepository('RocEclercBundle:Contrats')->findBy([
-                    'clId' => $id
+                $contrat = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Contrats')->findBy([
+                    'cl' => $id
                 ]);
                 return $this->render(
                     '@Site/Base/client.facturation.html.twig',
@@ -1308,9 +1308,9 @@ class BaseController extends Controller
                 break;
             case 'CENTRALE_PFPL':
                 $restresult = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy([ 'clId' => $id ]);
-                $contrat = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Contrats')->findBy([ 'clId' => $id ]);
+                $contrat = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Contrats')->findBy([ 'cl' => $id ]);
 
-                dump($contrat);
+                dump($restresult);
                 return $this->render(
                     '@Site/Base/client.facturation.html.twig',
                     [
@@ -1323,6 +1323,21 @@ class BaseController extends Controller
             case "CENTRALE_GCCP":
                 $restresult = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy([ 'clId' => $id ]);
                 $contrat = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Contrats')->findBy([ 'clId' => $id ]);
+                return $this->render(
+                    '@Site/Base/client.facturation.html.twig',
+                    [
+                        "client" => $restresult,
+                        "centrale" => $centrale,
+                        "contrat" => $contrat
+                    ]
+                );
+                break;
+            case "ACHAT_CENTRALE":
+                $restresult = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([ 'clId' => $id ]);
+                $contrat = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Contrats')->findBy([ 'cl' => $id ]);
+
+                dump($restresult);
+
                 return $this->render(
                     '@Site/Base/client.facturation.html.twig',
                     [
