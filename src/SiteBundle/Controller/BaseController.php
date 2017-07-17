@@ -903,25 +903,73 @@ class BaseController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $client = $em->getRepository('AchatCentraleCrmBundle:Clients')->findBy([
-            'clId' => $id
 
-        ]);
+        switch ($centrale){
+            case"ACHAT_CENTRALE":
+                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+                $content_notes = $request->request->get('content_note');
+                $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
+                        VALUES ( :id, :content, GETUTCDATE(), :user)";
+                $stmt = $db2->prepare($sql);
+                $stmt->bindValue("id", $id);
+                $stmt->bindValue("content", $content_notes);
+                $stmt->bindValue("user", $this->getUser()->getUsId());
+                $stmt->execute();
+                return new JsonResponse('Notes ajouté ', 200);
+                break;
+            case"ROC_ECLERC":
+                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+                $content_notes = $request->request->get('content_note');
+                $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
+                        VALUES ( :id, :content, GETUTCDATE(), :user)";
+                $stmt = $db2->prepare($sql);
+                $stmt->bindValue("id", $id);
+                $stmt->bindValue("content", $content_notes);
+                $stmt->bindValue("user", $this->getUser()->getUsId());
+                $stmt->execute();
+                return new JsonResponse('Notes ajouté ', 200);
+                break;
+            case"CENTRALE_PFPL":
+                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+                $content_notes = $request->request->get('content_note');
+                $sql = "INSERT INTO CENTRALE_PFPL.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
+                        VALUES ( :id, :content, GETUTCDATE(), :user)";
+                $stmt = $db2->prepare($sql);
+                $stmt->bindValue("id", $id);
+                $stmt->bindValue("content", $content_notes);
+                $stmt->bindValue("user", $this->getUser()->getUsId());
+                $stmt->execute();
+                return new JsonResponse('Notes ajouté ', 200);
+                break;
+            case"CENTRALE_GCCP":
+                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+                $content_notes = $request->request->get('content_note');
+                $sql = "INSERT INTO CENTRALE_GCCP.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
+                        VALUES ( :id, :content, GETUTCDATE(), :user)";
+                $stmt = $db2->prepare($sql);
+                $stmt->bindValue("id", $id);
+                $stmt->bindValue("content", $content_notes);
+                $stmt->bindValue("user", $this->getUser()->getUsId());
+                $stmt->execute();
+                return new JsonResponse('Notes ajouté ', 200);
+                break;
+            case"CENTRALE_FUNECAP":
+                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+                $content_notes = $request->request->get('content_note');
+                $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
+                        VALUES ( :id, :content, GETUTCDATE(), :user)";
+                $stmt = $db2->prepare($sql);
+                $stmt->bindValue("id", $id);
+                $stmt->bindValue("content", $content_notes);
+                $stmt->bindValue("user", $this->getUser()->getUsId());
+                $stmt->execute();
+                return new JsonResponse('Notes ajouté ', 200);
+                break;
+        }
 
-        $content_notes = $request->request->get('content_note');
-        $user = $this->getUser()->getusId();
 
-        $notes = new ClientsNotes();
 
-        $notes
-            ->setCl($client[0])
-            ->setCnNote($content_notes)
-            ->getInsUser($user);
 
-        $em->persist($notes);
-        $em->flush();
-
-        return new JsonResponse('Notes ajouté ', 200);
     }
 
     public function newClientsUserAction(Request $request, $id, $centrale)
