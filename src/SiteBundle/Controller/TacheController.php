@@ -23,7 +23,6 @@ class TacheController extends Controller
         $user = $this->getUser();
 
 
-
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE

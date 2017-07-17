@@ -1425,6 +1425,46 @@ class BaseController extends Controller
         return new Response('Mail envoyé');
     }
 
+    public function getClientRaisonSocAction(Request $request, $id, $centrale)
+    {
+
+
+
+        switch ($centrale){
+
+            case 1:
+                $client = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+                return new Response($client[0]->getClRaisonsoc(), 200);
+            case 2:
+                $client = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+                return new Response($client[0]->getClRaisonsoc(), 200);
+            case 4:
+                $client = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+                return new Response($client[0]->getClRaisonsoc(), 200);
+            case 5:
+                $client = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+                return new Response($client[0]->getClRaisonsoc(), 200);
+            case 6:
+                $client = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+                return new Response($client[0]->getClRaisonsoc(), 200);
+
+        }
+
+
+        return $this->render('@Site/ui-element/taches/action.client-raisonSoc.html.twig');
+
+    }
+
     public function testAction()
     {
 

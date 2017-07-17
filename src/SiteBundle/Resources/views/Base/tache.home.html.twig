@@ -14,66 +14,76 @@
                 </div>
                 <div class="x_content">
 
-                    {#<a href="{{ path('new-task') }}" data-toggle="modal" data-target="#modal-choix-centrale" class="btn btn-success" role="button">Ajouter une tâche</a>#}
 
                     <button type="button" class="btn btn-success" data-toggle="modal"
                             data-target="#modal-choix-centrale">Ajouter une tâche
                     </button>
 
+                    {% if task %}
+                        <div class="tab-task" role="tabpanel" data-example-id="togglable-tabs">
 
-                    <div class="tab-task" role="tabpanel" data-example-id="togglable-tabs">
-
-                        <table class="ui striped table">
-                            <thead>
-                            <tr>
-                                <th class="one wide">Type</th>
-                                <th class="two wide">Nom de l'action</th>
-                                <th class="one wide">Date de creation</th>
-                                <th class="one wide">Assigné à</th>
-                                <th class="one wide">Date d'échéance</th>
-                                <th class="seven wide">Description</th>
-                                <th class="one wide">Priorité</th>
-                                <th class="one wide">Statut de l'action</th>
-                                <th class="one wide">Centrale</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for tasks in task %}
-
-
-                                <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} " data-centrale="{{ tasks['SO_ID']  }}"  id="{{ tasks['CLA_ID'] }}">
-                                    <td>
-                                        <div>{{ tasks['CLA_TYPE'] | type | raw }}</div>
-                                    </td>
-                                    <td>
-                                        <h5><a class="detail-tache cursor">{{ tasks['CLA_NOM'] }}</a></h5>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            {{ tasks['INS_DATE'] | dateString }}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="ui label"><i class="user icon"></i>{{ user }}</div>
-                                    </td>
-                                    <td>
-                                        {{ tasks['CLA_ECHEANCE'] | fromNowString }}
-                                    </td>
-                                    <td class="justify">
-                                        <h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') }}</h4>
-                                    </td>
-                                    <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
-                                    <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
-                                    <td>{{ tasks['SO_ID'] | centraleLabel | raw }}</td>
-
+                            <table class="ui striped table">
+                                <thead>
+                                <tr>
+                                    <th class="one wide">Type</th>
+                                    <th class="two wide">Nom de l'action</th>
+                                    <th class="one wide">Date de creation</th>
+                                    <th class="one wide">Assigné à</th>
+                                    <th class="one wide">Date d'échéance</th>
+                                    <th class="four wide">Description</th>
+                                    <th class="three wide">Nom du client</th>
+                                    <th class="one wide">Priorité</th>
+                                    <th class="one wide">Statut de l'action</th>
+                                    <th class="one wide">Centrale</th>
                                 </tr>
+                                </thead>
+                                <tbody>
+                                {% for tasks in task %}
 
-                            {% endfor %}
+                                    <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} " data-centrale="{{ tasks['SO_ID']  }}"  id="{{ tasks['CLA_ID'] }}">
+                                        <td>
+                                            <div>{{ tasks['CLA_TYPE'] | type | raw }}</div>
+                                        </td>
+                                        <td>
+                                            <h5><a class="detail-tache cursor">{{ tasks['CLA_NOM'] }}</a></h5>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                {{ tasks['INS_DATE'] | dateString }}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="ui label"><i class="user icon"></i>{{ user }}</div>
+                                        </td>
+                                        <td>
+                                            {{ tasks['CLA_ECHEANCE'] | fromNowString }}
+                                        </td>
+                                        <td class="justify">
+                                            <h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') }}</h4>
+                                        </td>
+                                        <td>
+                                            <h4>{{ render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] }))
 
-                            </tbody>
-                        </table>
 
-                    </div>
+                                                }}</h4>
+                                        </td>
+                                        <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
+                                        <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
+                                        <td>{{ tasks['SO_ID'] | centraleLabel | raw }}</td>
+
+                                    </tr>
+
+                                {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        {% else %}
+
+                        <p>Il n'y a pas de tâches pour le moment</p>
+                    {% endif %}
+
 
 
                 </div>

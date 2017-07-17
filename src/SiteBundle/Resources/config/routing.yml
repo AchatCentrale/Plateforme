@@ -57,6 +57,10 @@ sendClientDetailMail:
     path:     /send/client/{clientId}
     defaults: {_controller: SiteBundle:Base:sendClientDetailMail}
 
+get-raison-soc:
+    path:     /client/raisonSoc/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Base:getClientRaisonSoc}
+
 test:
     path:    /test
     defaults: {_controller: SiteBundle:Base:test}
