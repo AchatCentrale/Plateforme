@@ -832,8 +832,6 @@ class BaseController extends Controller
                 break;
             case "ROC_ECLERC":
                 $em = $this->getDoctrine()->getManager('roc_eclerc');
-
-
                 $siret = $request->request->get('siret');
                 $mail = $request->request->get('mail');
                 $tel = $request->request->get('tel');
@@ -842,18 +840,14 @@ class BaseController extends Controller
                 $ca = $request->request->get('ca');
                 $adresse = $request->request->get('adresse');
                 $ville = $request->request->get('ville');
-
-
                 $client = $em->getRepository('RocEclercBundle:Clients')->findBy([
                     'clId' => $id
                 ]);
-
                 if (!$client) {
                     throw $this->createNotFoundException(
                         'Pas de client pour l\'id ' . $id
                     );
                 }
-
                 $client[0]->setClSiret($siret);
                 $client[0]->setClMail($mail);
                 $client[0]->setClTel($tel);
@@ -862,13 +856,38 @@ class BaseController extends Controller
                 $client[0]->setClCa($ca);
                 $client[0]->setClAdresse1($adresse);
                 $client[0]->setClVille($ville);
-
-
                 $em->flush();
-
                 $res = "client mise à jour";
-
-
+                return new JsonResponse($res, 200);
+                break;
+            case "CENTRALE_PFPL":
+                $em = $this->getDoctrine()->getManager('centrale_pascal_leclerc');
+                $siret = $request->request->get('siret');
+                $mail = $request->request->get('mail');
+                $tel = $request->request->get('tel');
+                $cp = $request->request->get('cp');
+                $eff = $request->request->get('eff');
+                $ca = $request->request->get('ca');
+                $adresse = $request->request->get('adresse');
+                $ville = $request->request->get('ville');
+                $client = $em->getRepository('PfplBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+                if (!$client) {
+                    throw $this->createNotFoundException(
+                        'Pas de client pour l\'id ' . $id
+                    );
+                }
+                $client[0]->setClSiret($siret);
+                $client[0]->setClMail($mail);
+                $client[0]->setClTel($tel);
+                $client[0]->setClCp($cp);
+                $client[0]->setClEffectif($eff);
+                $client[0]->setClCa($ca);
+                $client[0]->setClAdresse1($adresse);
+                $client[0]->setClVille($ville);
+                $em->flush();
+                $res = "client mise à jour";
                 return new JsonResponse($res, 200);
                 break;
             default:
