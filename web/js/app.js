@@ -450,8 +450,20 @@ $('.go-to-client').on('click', function () {
 
     let centrale = $(this).data('centrale');
 
-    if(centrale === 'CENTRALE_ROC_ECLERC'){
-        centrale = 'ROC_ECLERC'
+    switch (centrale){
+        case "CENTRALE ROC ECLERC":
+            centrale = 'ROC_ECLERC';
+            break;
+        case "ACHAT CENTRALE":
+            centrale = 'ACHAT_CENTRALE';
+            break;
+        case "CENTRALE GCCP":
+            centrale = 'CENTRALE_GCCP';
+            break;
+        case "CENTRALE PFPL":
+            centrale = 'CENTRALE_PFPL';
+            break;
+
     }
 
    console.log(centrale);

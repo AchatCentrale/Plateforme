@@ -255,7 +255,7 @@ class BaseController extends Controller
              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION,
               GR_DESCR, AC_DESCR, CL_TEL
               FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
-              INNER JOIN SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
+              INNER JOIN CENTRALE_ACHAT.dbo.SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
               ORDER BY SO_RAISONSOC DESC 
               '
                );
@@ -608,6 +608,8 @@ class BaseController extends Controller
 
                 $profil = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ProfilsUsers')->findAll();
 
+
+                dump($region);
 
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
