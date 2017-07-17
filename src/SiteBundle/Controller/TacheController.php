@@ -39,7 +39,6 @@ class TacheController extends Controller
         $task = $stmt->fetchAll();
 
 
-        dump($task);
 
 
         return $this->render('@Site/Base/tache.home.html.twig', [
@@ -506,7 +505,6 @@ class TacheController extends Controller
         $stmt->bindValue(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll();
-        dump($result);
 
 
         return $this->render('@Site/ui-element/taches/taches.by.id.html.twig', [
