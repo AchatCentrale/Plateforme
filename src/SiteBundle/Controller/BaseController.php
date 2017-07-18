@@ -38,14 +38,14 @@ class BaseController extends Controller
         $dataCount = $clientService->getTheCount();
 
         $user = $this->getUser();
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $conn = $this->get('doctrine.dbal.centrale_gccp_connection');
 
         $sql = "SELECT *
-                FROM Vue_All_Taches
+                FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE US_ID = :usId
-                AND CLA_STATUS = 0
-                OR CLA_STATUS = 1
-                ORDER BY CLA_ECHEANCE DESC
+                      AND CLA_STATUS = 0
+                      OR CLA_STATUS = 1
+                ORDER BY CLA_STATUS DESC
                 ";
 
         $stmt = $conn->prepare($sql);
