@@ -998,7 +998,49 @@ class BaseController extends Controller
         switch ($centrale) {
             case 'ROC_ECLERC':
 
-                $em = $this->getDoctrine()->getManager('roc_eclerc');
+                $prenom = $request->request->get('prenom');
+                $mail = $request->request->get('mail');
+                $fonction = $request->request->get('fonction');
+                $profil = $request->request->get('profil');
+                $nom = $request->request->get('nom');
+                $pwd = $request->request->get('pwd');
+                $tel = $request->request->get('tel');
+                $niveau = $request->request->get('niveau');
+                $CCvalidation = $request->request->get('CCvalidation');
+
+                $conn = $this->get('doctrine.dbal.centrale_pascal_leclerc_connection');
+
+                $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_USERS (CL_ID ,CC_PRENOM, CC_NOM, CC_FONCTION, CC_TEL, CC_MAIL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER)
+    VALUES
+      (:cl,:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, :status, GETDATE(), :user)
+      ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':cl', $id);
+                $stmt->bindValue(':prenom', $prenom);
+                $stmt->bindValue(':nom', $nom);
+                $stmt->bindValue(':fonction', $fonction);
+                $stmt->bindValue(':tel', $tel);
+                $stmt->bindValue(':mail', $mail);
+                $stmt->bindValue(':pass', $pwd);
+                $stmt->bindValue(':niveau', $niveau);
+                $stmt->bindValue(':validation',$CCvalidation );
+                $stmt->bindValue(':status',$profil );
+                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
+
+
+                $stmt->execute();
+                $user = $stmt->fetchAll();
+
+
+
+                $res = "client mise à jour";
+
+                return new JsonResponse($res, 200);
+                break;
+            case 'CENTRALE_FUNECAP':
+
+
 
                 $prenom = $request->request->get('prenom');
                 $mail = $request->request->get('mail');
@@ -1010,17 +1052,15 @@ class BaseController extends Controller
                 $niveau = $request->request->get('niveau');
                 $CCvalidation = $request->request->get('CCvalidation');
 
+                $conn = $this->get('doctrine.dbal.centrale_pascal_leclerc_connection');
 
-
-
-                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-                $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_USERS ( CC_PRENOM, CC_NOM, CC_FONCTION, CC_TEL, CC_MAIL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER)
+                $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_USERS (CL_ID ,CC_PRENOM, CC_NOM, CC_FONCTION, CC_TEL, CC_MAIL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER)
     VALUES
-      (:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, :status, GETDATE(), :user)
+      (:cl,:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, :status, GETDATE(), :user)
       ";
 
                 $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':cl', $id);
                 $stmt->bindValue(':prenom', $prenom);
                 $stmt->bindValue(':nom', $nom);
                 $stmt->bindValue(':fonction', $fonction);
@@ -1028,9 +1068,132 @@ class BaseController extends Controller
                 $stmt->bindValue(':mail', $mail);
                 $stmt->bindValue(':pass', $pwd);
                 $stmt->bindValue(':niveau', $niveau);
-                $stmt->bindValue(':niveau',$CCvalidation );
+                $stmt->bindValue(':validation',$CCvalidation );
                 $stmt->bindValue(':status',$profil );
-                $stmt->bindValue(':user', $this->getUser()->getUsId() );
+                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
+
+
+                $stmt->execute();
+                $user = $stmt->fetchAll();
+
+
+
+                $res = "client mise à jour";
+
+                return new JsonResponse($res, 200);
+                break;
+            case 'CENTRALE_GCCP':
+                $prenom = $request->request->get('prenom');
+                $mail = $request->request->get('mail');
+                $fonction = $request->request->get('fonction');
+                $profil = $request->request->get('profil');
+                $nom = $request->request->get('nom');
+                $pwd = $request->request->get('pwd');
+                $tel = $request->request->get('tel');
+                $niveau = $request->request->get('niveau');
+                $CCvalidation = $request->request->get('CCvalidation');
+
+                $conn = $this->get('doctrine.dbal.centrale_pascal_leclerc_connection');
+
+                $sql = "INSERT INTO CENTRALE_GCCP.dbo.CLIENTS_USERS (CL_ID ,CC_PRENOM, CC_NOM, CC_FONCTION, CC_TEL, CC_MAIL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER)
+    VALUES
+      (:cl,:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, :status, GETDATE(), :user)
+      ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':cl', $id);
+                $stmt->bindValue(':prenom', $prenom);
+                $stmt->bindValue(':nom', $nom);
+                $stmt->bindValue(':fonction', $fonction);
+                $stmt->bindValue(':tel', $tel);
+                $stmt->bindValue(':mail', $mail);
+                $stmt->bindValue(':pass', $pwd);
+                $stmt->bindValue(':niveau', $niveau);
+                $stmt->bindValue(':validation',$CCvalidation );
+                $stmt->bindValue(':status',$profil );
+                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
+
+
+                $stmt->execute();
+                $user = $stmt->fetchAll();
+
+
+
+                $res = "client mise à jour";
+
+                return new JsonResponse($res, 200);
+                break;
+            case 'CENTRALE_PFPL':
+                $prenom = $request->request->get('prenom');
+                $mail = $request->request->get('mail');
+                $fonction = $request->request->get('fonction');
+                $profil = $request->request->get('profil');
+                $nom = $request->request->get('nom');
+                $pwd = $request->request->get('pwd');
+                $tel = $request->request->get('tel');
+                $niveau = $request->request->get('niveau');
+                $CCvalidation = $request->request->get('CCvalidation');
+
+                $conn = $this->get('doctrine.dbal.centrale_pascal_leclerc_connection');
+
+                $sql = "INSERT INTO CENTRALE_PFPL.dbo.CLIENTS_USERS (CL_ID ,CC_PRENOM, CC_NOM, CC_FONCTION, CC_TEL, CC_MAIL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER)
+    VALUES
+      (:cl,:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, :status, GETDATE(), :user)
+      ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':cl', $id);
+                $stmt->bindValue(':prenom', $prenom);
+                $stmt->bindValue(':nom', $nom);
+                $stmt->bindValue(':fonction', $fonction);
+                $stmt->bindValue(':tel', $tel);
+                $stmt->bindValue(':mail', $mail);
+                $stmt->bindValue(':pass', $pwd);
+                $stmt->bindValue(':niveau', $niveau);
+                $stmt->bindValue(':validation',$CCvalidation );
+                $stmt->bindValue(':status',$profil );
+                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
+
+
+                $stmt->execute();
+                $user = $stmt->fetchAll();
+
+
+
+                $res = "client mise à jour";
+
+                return new JsonResponse($res, 200);
+                break;
+            case 'ACHAT_CENTRALE':
+                $prenom = $request->request->get('prenom');
+                $mail = $request->request->get('mail');
+                $fonction = $request->request->get('fonction');
+                $profil = $request->request->get('profil');
+                $nom = $request->request->get('nom');
+                $pwd = $request->request->get('pwd');
+                $tel = $request->request->get('tel');
+                $niveau = $request->request->get('niveau');
+                $CCvalidation = $request->request->get('CCvalidation');
+
+                $conn = $this->get('doctrine.dbal.centrale_pascal_leclerc_connection');
+
+                $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_USERS (CL_ID ,CC_PRENOM, CC_NOM, CC_FONCTION, CC_TEL, CC_MAIL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER)
+    VALUES
+      (:cl,:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, :status, GETDATE(), :user)
+      ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':cl', $id);
+                $stmt->bindValue(':prenom', $prenom);
+                $stmt->bindValue(':nom', $nom);
+                $stmt->bindValue(':fonction', $fonction);
+                $stmt->bindValue(':tel', $tel);
+                $stmt->bindValue(':mail', $mail);
+                $stmt->bindValue(':pass', $pwd);
+                $stmt->bindValue(':niveau', $niveau);
+                $stmt->bindValue(':validation',$CCvalidation );
+                $stmt->bindValue(':status',$profil );
+                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
 
 
                 $stmt->execute();
@@ -1043,60 +1206,6 @@ class BaseController extends Controller
                 return new JsonResponse($res, 200);
                 break;
 
-
-            case 'CENTRALE_FUNECAP':
-
-                $em = $this->getDoctrine()->getManager('centrale_funecap_jb');
-
-
-                $prenom = $request->request->get('prenom');
-                $mail = $request->request->get('mail');
-                $fonction = $request->request->get('fonction');
-                $profil = $request->request->get('profil');
-                $nom = $request->request->get('nom');
-                $pwd = $request->request->get('pwd');
-                $tel = $request->request->get('tel');
-                $niveau = $request->request->get('niveau');
-                $CCvalidation = $request->request->get('CCvalidation');
-
-                $client = $em->getRepository('FunecapBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-
-                if (!$client) {
-                    throw $this->createNotFoundException(
-                        'Pas de client pour l\'id ' . $id
-                    );
-                }
-                if (!$this->getUser()->getusMail()) {
-                    throw $this->createNotFoundException(
-                        'pas d\'email'
-                    );
-                }
-
-                $clientUsers = new \FunecapBundle\Entity\ClientsUsers();
-                $clientUsers
-                    ->setCl($client[0])
-                    ->setInsUser($this->getUser()->getusMail())
-                    ->setCcFonction($fonction)
-                    ->setCcNiveau($niveau)
-                    ->setCcPass($pwd)
-                    ->setCcMail($mail)
-                    ->setCcPrenom($prenom)
-                    ->setCcNom($nom)
-                    ->setCcTel($tel)
-                    ->setPuId($profil)
-                    ->setCcStatus(0)
-                    ->setInsDate(new DateTime('now'))
-                    ->setCircuitValidation($CCvalidation);
-                $em->persist($clientUsers);
-                $em->flush();
-                $res = "client mise à jour";
-
-                return new JsonResponse($res, 200, [
-                    'Access-Control-Allow-Origin' => '*'
-                ]);
-                break;
         }
 
     }
