@@ -464,7 +464,6 @@ class BaseController extends Controller
 
                 $profil = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ProfilsUsers')->findAll();
 
-                dump($task);
 
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
