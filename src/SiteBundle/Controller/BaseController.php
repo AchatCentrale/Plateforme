@@ -526,7 +526,7 @@ class BaseController extends Controller
                 ], [
                     'insDate' => 'ASC'
                 ]);
-                $fonction = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Fonctions')->findBy([
+                $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
                     'soId' => 1,
                 ]);
 
@@ -593,7 +593,7 @@ class BaseController extends Controller
                 ]);
 
 
-                $fonction = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Fonctions')->findBy([
+                $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
                     'soId' => 1,
                 ]);
 
@@ -661,7 +661,7 @@ class BaseController extends Controller
                 ]);
 
 
-                $fonction = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Fonctions')->findBy([
+                $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
                     'soId' => 1,
                 ]);
 
@@ -724,7 +724,7 @@ class BaseController extends Controller
                 ]);
 
 
-                $fonction = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Fonctions')->findBy([
+                $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
                     'soId' => 1,
                 ]);
 
