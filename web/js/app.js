@@ -1015,7 +1015,7 @@ $('.new-clients-user').on('click', function (e) {
     let centrale = $('#centrale').html();
     let id =  $('#id').html();
 
-    let url = "http://localhost:8000/client/"+id+"/"+ centrale +"/users/new";
+    let url = "http://http://crm.achatcentrale.fr/client/"+id+"/"+ centrale +"/users/new";
 
 
     console.log(values);
