@@ -64,7 +64,7 @@
 
                     <ul class="list-unstyled user_data">
                         <li><i class="fa fa-map-marker user-profile-icon"></i>
-                            {{ client[0].clAdresse1 | convert_encoding('UTF-8', 'Windows-1252')  }}<br>
+                            {{ client[0].clAdresse1  }}<br>
                             {{ client[0].clCp }} {{ client[0].clVille }}
                         </li>
                     </ul>
@@ -323,7 +323,7 @@
                                     {#Action_client#}
                                     <div role="tabpanel" class="tab-pane fade " id="tab_content1"
                                          aria-labelledby="home-tab">
-                                        <a href="{{ path('new-task', {'c' : centrale}) }}" class="btn btn-success" role="button">Ajouter
+                                        <a href="{{ path('new-task', {'c' : centrale | centrale, 'cl' : client[0].clId }) }}" class="btn btn-success" role="button">Ajouter
                                             une tâche</a>
 
                                         <div class="ui items">
@@ -409,6 +409,13 @@
 </div>
 
 
+
+
+
+
+
+
+{#//modal#}
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

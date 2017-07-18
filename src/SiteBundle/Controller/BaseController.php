@@ -426,13 +426,12 @@ class BaseController extends Controller
                 );
 
                 $sql = 'SELECT *
-                  FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES
-                  WHERE CL_ID = :id';
+                        FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES
+                        WHERE CL_ID = :id';
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue('id', $id);
                 $stmt->execute();
-
                 $task = $stmt->fetchAll();
 
 
@@ -456,7 +455,6 @@ class BaseController extends Controller
 
                 $notes = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
                     'clId' => $id,
-
                 ], [
                     'insDate' => 'ASC'
                 ]);
@@ -466,6 +464,7 @@ class BaseController extends Controller
 
                 $profil = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ProfilsUsers')->findAll();
 
+                dump($task);
 
                 return $this->render(
                     '@Site/Base/client.general.html.twig',

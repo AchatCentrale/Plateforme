@@ -568,8 +568,8 @@ $('.detail-tache').on("click", function (e) {
                             <div class="one column row">
                                 <div class="column">
                                     <p>Assigné à : </p> 
-                                    <a class="ui image label">
-                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                    <a class="ui image label show change-user">
+                                      <img src="https://semantic-ui.com/images/avatar/small/jenny.jpg">
                                       ${data.user}
                                     </a>
                                 </div>
@@ -1065,6 +1065,10 @@ $('.new-clients-user').on('click', function (e) {
 });
 
 
+$('.change-user').on('click', function (e) {
+
+   console.log('salut')
+});
 
 
 

@@ -18,10 +18,7 @@ class TacheController extends Controller
     public function TacheAction()
     {
 
-
-
         $user = $this->getUser();
-
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
@@ -309,16 +306,30 @@ class TacheController extends Controller
 
 
         $centrale = $request->query->get('c');
+        $clientChoice = $request->query->get('cl');
 
 
         switch ($centrale) {
 
+            case 'centrale-roc-eclerc':
             case 'roc':
                 $req = $request->request;
                 $task = new \RocEclercBundle\Entity\ClientsTaches();
                 $type = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ActionType')->findAll();
-                $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findAll();
                 $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+
+
+                if ($clientChoice){
+
+                    $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
+                        'clId' => $clientChoice
+                    ]);
+
+                }else{
+
+                    $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findAll();
+                }
+
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task
@@ -343,16 +354,28 @@ class TacheController extends Controller
                         'type' => $type,
                         'client' => $clients,
                         'user' => $user,
-                        'centrale' => $centrale
+                        'centrale' => $centrale,
                     ]
                 );
                 break;
+            case 'CENTRALE_FUNECAP':
             case 'funecap':
                 $req = $request->request;
                 $task = new \FunecapBundle\Entity\ClientsTaches();
                 $type = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ActionType')->findAll();
-                $clients = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findAll();
                 $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+
+                if ($clientChoice){
+
+                    $clients = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findBy([
+                        'clId' => $clientChoice
+                    ]);
+
+                }else{
+
+                    $clients = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findAll();
+                }
+
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task
@@ -381,13 +404,27 @@ class TacheController extends Controller
                     ]
                 );
                 break;
+            case 'ACHAT_CENTRALE':
             case 'ac':
 
                 $req = $request->request;
                 $task = new \AchatCentraleBundle\Entity\ClientsTaches();
                 $type = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ActionType')->findAll();
-                $clients = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findAll();
                 $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+
+                if ($clientChoice){
+
+                    $clients = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([
+                        'clId' => $clientChoice
+                    ]);
+
+                }else{
+
+                    $clients = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findAll();
+                }
+
+
+
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task
@@ -416,12 +453,26 @@ class TacheController extends Controller
                     ]
                 );
                 break;
+            case 'CENTRALE_PFPL':
             case 'pfpl':
                 $req = $request->request;
                 $task = new \PfplBundle\Entity\ClientsTaches();
                 $type = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ActionType')->findAll();
-                $clients = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findAll();
                 $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+
+
+
+                if ($clientChoice){
+
+                    $clients = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy([
+                        'clId' => $clientChoice
+                    ]);
+
+                }else{
+
+                    $clients = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findAll();
+                }
+
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task
@@ -450,13 +501,28 @@ class TacheController extends Controller
                     ]
                 );
                 break;
+            case 'CENTRALE_GCCP':
             case 'gccp':
 
                 $req = $request->request;
                 $task = new \GccpBundle\Entity\ClientsTaches();
                 $type = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ActionType')->findAll();
-                $clients = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findAll();
                 $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+
+
+
+                if ($clientChoice){
+
+                    $clients = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy([
+                        'clId' => $clientChoice
+                    ]);
+
+                }else{
+
+                    $clients = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findAll();
+                }
+
+
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task

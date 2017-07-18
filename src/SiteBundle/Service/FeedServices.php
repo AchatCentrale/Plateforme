@@ -38,19 +38,19 @@ class FeedServices
 
 
             case 'ACHAT_CENTRALE':
-                $action = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsTaches')->findBy([
+                $action = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches')->findBy([
                     'clId' => $id
                 ], [
                     'claEcheance' => 'ASC'
                 ],  5);
 
-                $notes = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsNotes')->findBy([
+                $notes = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
                     'clId' => $id
                 ], [
                     'insDate' => 'ASC'
                 ], 5);
 
-                $tickets = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:MessageEntete')->findBy([
+                $tickets = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:MessageEntete')->findBy([
                     'clId' => $id
                 ], [
                     'insDate' => 'ASC'
