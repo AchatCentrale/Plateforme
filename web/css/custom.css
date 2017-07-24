@@ -1721,11 +1721,11 @@ span.right {
 .tile_count .tile_stats_count .count {
     font-size: 30px;
     line-height: 47px;
-    font-weight: 600
+    font-weight: 600;
 }
 @media (min-width: 768px) {
     .tile_count .tile_stats_count .count {
-        font-size: 40px
+        font-size: 20pt;
     }
 }
 @media (min-width: 992px) and (max-width: 1100px) {
