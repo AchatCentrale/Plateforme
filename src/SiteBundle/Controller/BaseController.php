@@ -42,7 +42,8 @@ class BaseController extends Controller
 
         $sql = "SELECT *
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
-                WHERE US_ID = 5
+                WHERE US_ID = :usId
+                AND CLA_STATUS <> 10
                 ORDER BY CLA_STATUS DESC
                 ";
 

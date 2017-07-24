@@ -1,12 +1,13 @@
-(function($,sr){
+(function ($, sr) {
     // debouncing function from John Hann
     // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
     var debounce = function (func, threshold, execAsap) {
         var timeout;
 
-        return function debounced () {
+        return function debounced() {
             var obj = this, args = arguments;
-            function delayed () {
+
+            function delayed() {
                 if (!execAsap)
                     func.apply(obj, args);
                 timeout = null;
@@ -22,12 +23,14 @@
     };
 
     // smartresize
-    jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
+    jQuery.fn[sr] = function (fn) {
+        return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr);
+    };
 
-})(jQuery,'smartresize');
+})(jQuery, 'smartresize');
 
 
-var $BODY = $('body'),
+let $BODY = $('body'),
     $MENU_TOGGLE = $('#menu_toggle'),
     $SIDEBAR_MENU = $('#sidebar-menu'),
     $SIDEBAR_FOOTER = $('.sidebar-footer'),
@@ -35,8 +38,6 @@ var $BODY = $('body'),
     $RIGHT_COL = $('.right_col'),
     $NAV_MENU = $('.nav_menu'),
     $FOOTER = $('footer');
-
-
 
 
 // Sidebar
@@ -54,13 +55,13 @@ function init_sidebar() {
 
     };
 
-    $SIDEBAR_MENU.find('a').on('click', function(ev) {
+    $SIDEBAR_MENU.find('a').on('click', function (ev) {
         console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
 
         if ($li.is('.active')) {
             $li.removeClass('active active-sm');
-            $('ul:first', $li).slideUp(function() {
+            $('ul:first', $li).slideUp(function () {
                 setContentHeight();
             });
         } else {
@@ -68,24 +69,22 @@ function init_sidebar() {
             if (!$li.parent().is('.child_menu')) {
                 $SIDEBAR_MENU.find('li').removeClass('active active-sm');
                 $SIDEBAR_MENU.find('li ul').slideUp();
-            }else
-            {
-                if ( $BODY.is( ".nav-sm" ) )
-                {
-                    $SIDEBAR_MENU.find( "li" ).removeClass( "active active-sm" );
-                    $SIDEBAR_MENU.find( "li ul" ).slideUp();
+            } else {
+                if ($BODY.is(".nav-sm")) {
+                    $SIDEBAR_MENU.find("li").removeClass("active active-sm");
+                    $SIDEBAR_MENU.find("li ul").slideUp();
                 }
             }
             $li.addClass('active');
 
-            $('ul:first', $li).slideDown(function() {
+            $('ul:first', $li).slideDown(function () {
                 setContentHeight();
             });
         }
     });
 
 // toggle small or large menu
-    $MENU_TOGGLE.on('click', function() {
+    $MENU_TOGGLE.on('click', function () {
         console.log('clicked - menu toggle');
 
         if ($BODY.hasClass('nav-md')) {
@@ -106,12 +105,12 @@ function init_sidebar() {
 
     $SIDEBAR_MENU.find('a').filter(function () {
         return this.href == CURRENT_URL;
-    }).parent('li').addClass('current-page').parents('ul').slideDown(function() {
+    }).parent('li').addClass('current-page').parents('ul').slideDown(function () {
         setContentHeight();
     }).parent().addClass('active');
 
     // recompute content when resizing
-    $(window).smartresize(function(){
+    $(window).smartresize(function () {
         setContentHeight();
     });
 
@@ -122,27 +121,27 @@ function init_sidebar() {
         $('.menu_fixed').mCustomScrollbar({
             autoHideScrollbar: true,
             theme: 'minimal',
-            mouseWheel:{ preventDefault: true }
+            mouseWheel: {preventDefault: true}
         });
     }
 };
 // /Sidebar
 
-var randNum = function() {
+var randNum = function () {
     return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
 };
 
 
 // Panel toolbox
-$(document).ready(function() {
-    $('.collapse-link').on('click', function() {
+$(document).ready(function () {
+    $('.collapse-link').on('click', function () {
         var $BOX_PANEL = $(this).closest('.x_panel'),
             $ICON = $(this).find('i'),
             $BOX_CONTENT = $BOX_PANEL.find('.x_content');
 
         // fix for some div with hardcoded fix class
         if ($BOX_PANEL.attr('style')) {
-            $BOX_CONTENT.slideToggle(200, function(){
+            $BOX_CONTENT.slideToggle(200, function () {
                 $BOX_PANEL.removeAttr('style');
             });
         } else {
@@ -160,25 +159,6 @@ $(document).ready(function() {
     });
 });
 // /Panel toolbox
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
@@ -449,7 +429,7 @@ $('.go-to-client').on('click', function () {
 
     let centrale = $(this).data('centrale');
 
-    switch (centrale){
+    switch (centrale) {
         case "CENTRALE ROC ECLERC":
             centrale = 'ROC_ECLERC';
             break;
@@ -465,15 +445,13 @@ $('.go-to-client').on('click', function () {
 
     }
 
-   console.log(centrale);
+    console.log(centrale);
 
     let id = $(this).data('id');
 
     window.location.replace(CURRENT_URL + "/" + id + "/" + centrale + "/general");
 
 });
-
-
 
 
 function stateTask(state) {
@@ -550,11 +528,11 @@ $('.detail-tache').on("click", function (e) {
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="${CURRENT_URL+"/etat/0/"+ data.id + "/" + data.idCentrale}">Non commencé</a></li>
-                            <li><a href="${CURRENT_URL+"/etat/1/"+ data.id+ "/" + data.idCentrale}">En cours</a></li>
-                            <li><a href="${CURRENT_URL+"/etat/2/"+ data.id + "/" + data.idCentrale }">Terminé</a></li>
-                            <li><a href="${CURRENT_URL+"/etat/3/"+ data.id + "/" + data.idCentrale }">Attente de quelqu'un d'autre</a></li>
-                            <li><a href="${CURRENT_URL+"/etat/4/"+ data.id + "/" + data.idCentrale }">Reportée</a></li>
+                            <li><a href="${CURRENT_URL + "/etat/0/" + data.id + "/" + data.idCentrale}">Non commencé</a></li>
+                            <li><a href="${CURRENT_URL + "/etat/1/" + data.id + "/" + data.idCentrale}">En cours</a></li>
+                            <li><a href="${CURRENT_URL + "/etat/2/" + data.id + "/" + data.idCentrale }">Terminé</a></li>
+                            <li><a href="${CURRENT_URL + "/etat/3/" + data.id + "/" + data.idCentrale }">Attente de quelqu'un d'autre</a></li>
+                            <li><a href="${CURRENT_URL + "/etat/4/" + data.id + "/" + data.idCentrale }">Reportée</a></li>
 
                           </ul>
                         </div>
@@ -601,27 +579,32 @@ $('.detail-tache').on("click", function (e) {
                                 
                                    
                                 </div>
-                            <div class="two column  row">
-                               <div class="column center aligned">
-                                   <button id=""  class="ui basic orange button">
-                                       Modifier la tâche
-                                    </button>
+                               <div class="three column  row">
+                                  
+                                  <div class="update-action">
+                                        <a class="ui basic button" href="#">Modifier l'action</a>
+                                  </div>
+                                  
+                                  
+                                  
+                                   <div class="archive-action">
+                                        <a class="ui basic button" href="/taches/archive/${data.id}/${data.idCentrale}"><i class="archive icon"></i>
+                                           Archiver l'action</a>
+                                   </div>
+                                  
+                                  
+                                  <div class="archive-action">
+                                        <a class="ui red basic button" href="/taches/delete/${data.id}/${data.idCentrale}"><i class="delete icon"></i>
+                                           Supprimer l'action</a>
+                                   </div>
+                                   
+                                  
                                 </div>
-                                <div class="column center aligned">
-                                    <button  class="ui basic positive button">
-                                        Relancer le contact
-                                    </button>
-                                </dia
-                                
-                            </div>
                             
                             
                                
                             </div>
-                            <div class="suite-task">
-                            
-                            </div>
-                                                       
+                                         
                             
                     </div>`;
 
@@ -641,7 +624,6 @@ $('.detail-tache').on("click", function (e) {
     });
 
 
-
 });
 
 $('.save-update-client').on('click', function (e) {
@@ -653,9 +635,9 @@ $('.save-update-client').on('click', function (e) {
         ).get();
 
     let centrale = $('#centrale').html();
-    let id =  $('#id').html();
+    let id = $('#id').html();
 
-    let url = "http://crm.achatcentrale.fr/client/"+id+"/"+ centrale +"/update";
+    let url = "http://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/update";
 
     $.ajax({
 
@@ -706,7 +688,7 @@ $('.add-note').on('click', function (e) {
     let $input = $('#add-note').val();
 
 
-    let url = CURRENT_URL.replace("general","notes/add");
+    let url = CURRENT_URL.replace("general", "notes/add");
 
     $.ajax({
 
@@ -831,7 +813,7 @@ $('.detail-tache-home').on('click', function (e) {
     let aidyCentrale = Number(idCentrale);
 
 
-    let url = CURRENT_URL + "taches/detail/" + aidyCentrale + "/"+ aidy;
+    let url = CURRENT_URL + "taches/detail/" + aidyCentrale + "/" + aidy;
     console.log(url);
 
     $.ajax({
@@ -869,11 +851,11 @@ $('.detail-tache-home').on('click', function (e) {
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="${CURRENT_URL+"taches/etat/0/"+ data.id+ "/" + data.idCentrale}">Non commencé</a></li>
-                            <li><a href="${CURRENT_URL+"taches/etat/1/"+ data.id+ "/" + data.idCentrale}">En cours</a></li>
-                            <li><a href="${CURRENT_URL+"taches/etat/2/"+ data.id+ "/" + data.idCentrale}">Terminé</a></li>
-                            <li><a href="${CURRENT_URL+"taches/etat/3/"+ data.id+ "/" + data.idCentrale}">Attente de quelqu'un d'autre</a></li>
-                            <li><a href="${CURRENT_URL+"taches/etat/4/"+ data.id+ "/" + data.idCentrale}">Reportée</a></li>
+                            <li><a href="${CURRENT_URL + "taches/etat/0/" + data.id + "/" + data.idCentrale}">Non commencé</a></li>
+                            <li><a href="${CURRENT_URL + "taches/etat/1/" + data.id + "/" + data.idCentrale}">En cours</a></li>
+                            <li><a href="${CURRENT_URL + "taches/etat/2/" + data.id + "/" + data.idCentrale}">Terminé</a></li>
+                            <li><a href="${CURRENT_URL + "taches/etat/3/" + data.id + "/" + data.idCentrale}">Attente de quelqu'un d'autre</a></li>
+                            <li><a href="${CURRENT_URL + "taches/etat/4/" + data.id + "/" + data.idCentrale}">Reportée</a></li>
 
                           </ul>
                         </div>
@@ -920,18 +902,27 @@ $('.detail-tache-home').on('click', function (e) {
                                 
                                    
                                 </div>
-                            <div class="two column  row">
-                               <div class="column center aligned">
-                                   <button id=""  class="ui basic orange button">
-                                       Modifier la tâche
-                                    </button>
-                                </div>
-                                <div class="column center aligned">
-                                    <button  class="ui basic positive button">
-                                        Relancer le contact
-                                    </button>
-                                </dia
-                                
+                            
+                               <div class="three column  row">
+                              
+                               <div class="update-action">
+                                        <a class="ui basic button" href="#">Modifier l'action</a>
+                                  </div>
+                                  
+                                  
+                                  
+                               <div class="archive-action">
+                                    <a class="ui basic button" href="/taches/archive/${data.id}/${data.idCentrale}"><i class="archive icon"></i>
+                                    Archiver l'action</a>
+                               </div>
+                                  
+                               <div class="archive-action">
+                                        <a class="ui red basic button" href="/taches/delete/${data.id}/${data.idCentrale}"><i class="delete icon"></i>
+                                           Supprimer l'action</a>
+                                   </div>
+                                   
+                               
+                              
                             </div>
                             
                             
@@ -963,10 +954,10 @@ $('.detail-tache-home').on('click', function (e) {
 });
 
 function showHideEl(element) {
-    if($(element).is(":visible")){
+    if ($(element).is(":visible")) {
         element.hide().fadeOut("slow");
         $(this).html('Afficher plus')
-    }else{
+    } else {
         element.show().fadeIn("slow");
         $(this).html('Afficher moins')
 
@@ -1012,9 +1003,9 @@ $('.new-clients-user').on('click', function (e) {
         ).get();
 
     let centrale = $('#centrale').html();
-    let id =  $('#id').html();
+    let id = $('#id').html();
 
-    let url = "http://crm.achatcentrale.fr/client/"+id+"/"+ centrale +"/users/new";
+    let url = "http://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/users/new";
 
 
     console.log(values);
@@ -1060,14 +1051,13 @@ $('.new-clients-user').on('click', function (e) {
     });
 
 
-
     $('#client-user-new').modal('hide')
 });
 
 
 $('.change-user').on('click', function (e) {
 
-   console.log('salut')
+    console.log('salut')
 });
 
 

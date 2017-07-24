@@ -81,12 +81,18 @@ detail-task:
 new-task:
     path:   /taches/new
     defaults: {_controller: SiteBundle:Tache:NewTask}
-delete-task:
-    path:   /taches/delete/{id}
-    defaults: {_controller: SiteBundle:Tache:Delete}
+
+
+
+
 archive-task:
-    path: /taches/terminer/{id}
-    defaults: {_controller: SiteBundle:Tache:TerminerTask}
+    path: /taches/archive/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:ArchiveTask}
+
+delete-task:
+    path:   /taches/delete/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:DeleteTask}
+
 
 
 unarchive-task:
