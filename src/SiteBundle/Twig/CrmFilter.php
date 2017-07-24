@@ -44,6 +44,7 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('fromNowString', [$this, 'dateFromNowString']),
             new \Twig_SimpleFilter('centraleLabel', [$this, 'centraleLabel']),
             new \Twig_SimpleFilter('limitLength', [$this, 'limitLength']),
+            new \Twig_SimpleFilter('formatVille', [$this, 'formatVille']),
         );
     }
 
@@ -389,5 +390,13 @@ class CrmFilter extends \Twig_Extension
 
     }
 
+
+    public function formatVille($word)
+    {
+
+
+        $result = strtolower( $word );
+        return ucwords($result);
+    }
 
 }
