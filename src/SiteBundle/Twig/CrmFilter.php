@@ -369,8 +369,8 @@ class CrmFilter extends \Twig_Extension
     public function limitLength($word){
 
 
-        if (strlen($word) >= 80){
-            $chaine = substr($word, 0, 150);
+        if (strlen($word) >= 30){
+            $chaine = substr($word, 0, 50);
 
             return $chaine. '.....';
         } else{
