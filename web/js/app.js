@@ -1055,10 +1055,5 @@ $('.new-clients-user').on('click', function (e) {
 });
 
 
-$('.change-user').on('click', function (e) {
-
-    console.log('salut')
-});
-
 
 

@@ -43,6 +43,7 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('dateString', [$this, 'dateString']),
             new \Twig_SimpleFilter('fromNowString', [$this, 'dateFromNowString']),
             new \Twig_SimpleFilter('centraleLabel', [$this, 'centraleLabel']),
+            new \Twig_SimpleFilter('limitLength', [$this, 'limitLength']),
         );
     }
 
@@ -363,6 +364,19 @@ class CrmFilter extends \Twig_Extension
 
 
         return $momentFromVo->getRelative();
+    }
+
+    public function limitLength($word){
+
+
+        if (strlen($word) >= 80){
+            $chaine = substr($word, 0, 150);
+
+            return $chaine. '.....';
+        } else{
+            return $word;
+        }
+
     }
 
 
