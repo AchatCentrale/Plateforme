@@ -59,13 +59,13 @@
                                             {{ tasks['CLA_ECHEANCE'] | fromNowString }}
                                         </td>
                                         <td class="justify">
-                                            <p>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') | limitLength }}<p/>
+                                            <h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') | limitLength }}</h4>
                                         </td>
                                         <td>
-                                            <h4>{{ render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] }))
+                                            <p>{{ render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] }))
 
 
-                                                }}</h4>
+                                                }}</p>
                                         </td>
                                         <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
                                         <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
