@@ -824,7 +824,57 @@ class TacheController extends Controller
 
     }
 
-    public function updateTaskAction(Request $request, $id){ return new Response($id, 222); }
+    public function UpdateTaskAction(Request $request, $id, $centrale)
+    {
+
+
+
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        switch ($centrale){
+
+
+            case "ACHAT_CENTRALE":
+            case "1":
+
+
+               $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+               $stmt = $conn->prepare($sqlTask);
+               $stmt->bindValue(':id', $id);
+               $stmt->execute();
+
+               $resultTask = $stmt->fetchAll();
+
+               $resultUser = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+
+               dump($resultUser);
+
+
+                if ($request->getMethod() == "POST") {
+
+                    dump($request);
+
+                }
+
+
+
+                return $this->render('@Site/ui-element/taches/action.form.update.html.twig', [
+                    'task' => $resultTask,
+                    'centrale' => "ACHAT_CENTRALE",
+                    'user' => $resultUser,
+                    'id' => $id
+                ]);
+
+        }
+
+
+
+
+        return $this->render('@Site/test.html.twig');
+
+    }
 
 
 }

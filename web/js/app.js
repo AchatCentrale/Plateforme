@@ -528,9 +528,9 @@ $('.detail-tache').on("click", function (e) {
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="${CURRENT_URL + "/etat/0/" + data.id + "/" + data.idCentrale}">Non commencé</a></li>
+                            <li><a href="${CURRENT_URL + "/etat/0/" + data.id + "/" + data.idCentrale}">Non commencée</a></li>
                             <li><a href="${CURRENT_URL + "/etat/1/" + data.id + "/" + data.idCentrale}">En cours</a></li>
-                            <li><a href="${CURRENT_URL + "/etat/2/" + data.id + "/" + data.idCentrale }">Terminé</a></li>
+                            <li><a href="${CURRENT_URL + "/etat/2/" + data.id + "/" + data.idCentrale }">Terminée</a></li>
                             <li><a href="${CURRENT_URL + "/etat/3/" + data.id + "/" + data.idCentrale }">Attente de quelqu'un d'autre</a></li>
                             <li><a href="${CURRENT_URL + "/etat/4/" + data.id + "/" + data.idCentrale }">Reportée</a></li>
 
@@ -544,11 +544,13 @@ $('.detail-tache').on("click", function (e) {
                            
                             <div class="one column row">
                                 <div class="column">
-                                    <p>Assigné à : </p> 
-                                    <a class="ui image label show change-user">
-                                      <img src="https://semantic-ui.com/images/avatar/small/jenny.jpg">
-                                      ${data.user}
+                                    <p>Assigné à : </p>
+                                    <a class="ui image label">
+                                      <img src="https://semantic-ui.com/images/avatar/small/joe.jpg">
+                                       ${data.user}
                                     </a>
+                                    
+                                 
                                 </div>
     
                             </div>
@@ -582,7 +584,7 @@ $('.detail-tache').on("click", function (e) {
                                <div class="three column  row">
                                   
                                   <div class="update-action">
-                                        <a class="ui basic button" href="#">Modifier l'action</a>
+                                        <a class="ui basic button update-task-btn" href="/taches/update/${data.id}/${data.idCentrale}">Modifier l'action</a>
                                   </div>
                                   
                                   
@@ -1053,6 +1055,7 @@ $('.new-clients-user').on('click', function (e) {
 
     $('#client-user-new').modal('hide')
 });
+
 
 
 

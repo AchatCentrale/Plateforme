@@ -26,7 +26,7 @@
                                 <thead>
                                 <tr>
                                     <th class="one wide">Type</th>
-                                    <th class="one wide">Nom de l'action</th>
+                                    <th class="two wide">Nom de l'action</th>
                                     <th class="one wide">Date de creation</th>
                                     <th class="one wide">Assigné à</th>
                                     <th class="one wide">Date d'échéance</th>
@@ -59,13 +59,10 @@
                                             {{ tasks['CLA_ECHEANCE'] | fromNowString }}
                                         </td>
                                         <td class="justify">
-                                            <h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') | limitLength }}</h4>
+                                            <h4 >{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') | limitLength }}</h4>
                                         </td>
                                         <td>
-                                            <p>{{ render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] }))
-
-
-                                                }}</p>
+                                            <p>{{ render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] })) }}</p>
                                         </td>
                                         <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
                                         <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
@@ -181,6 +178,8 @@
 
         </div>
     </div>
+
+
 
     <!-- /page content -->
 

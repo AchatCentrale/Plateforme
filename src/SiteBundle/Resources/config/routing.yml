@@ -93,6 +93,9 @@ delete-task:
     path:   /taches/delete/{id}/{centrale}
     defaults: {_controller: SiteBundle:Tache:DeleteTask}
 
+update-task:
+    path: /taches/update/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:UpdateTask}
 
 
 unarchive-task:

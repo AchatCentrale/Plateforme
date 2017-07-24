@@ -565,5 +565,7 @@ h3.raison-soc-titre {
     border: 0px;
 }
 
-
+.active-centrale{
+    border: 5px solid blue;
+}
 
