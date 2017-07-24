@@ -3,9 +3,7 @@
 namespace SiteBundle\Controller;
 
 
-use AchatCentrale\CrmBundle\Entity\ClientsNotes;
-use AchatCentrale\CrmBundle\Entity\ClientsUsers;
-use DateTime;
+
 use Http\Adapter\Guzzle6\Client;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Base\Coordinate;

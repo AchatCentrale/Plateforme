@@ -156,7 +156,17 @@ class CrmFilter extends \Twig_Extension
     }
     public function dateFromNowString($date)
     {
-       return $date;
+
+        \Moment\Moment::setLocale('fr_FR');
+
+
+        $m = new \Moment\Moment($date);
+        $momentFromVo = $m->fromNow();
+
+
+        return $momentFromVo->getRelative();
+
+
 
     }
 
