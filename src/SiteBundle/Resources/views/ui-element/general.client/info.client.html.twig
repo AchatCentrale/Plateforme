@@ -206,19 +206,21 @@
 
 
                             </div>
+
                             <div class="four wide column recap-client">
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Afficher les prix d'achats</p>
                                     <div class="prix-achat-check">
-                                        <input class="check-oui-pa" type="checkbox"> Oui
-                                        <input class="check-non-pa" type="checkbox"> Non
+                                        <input class="check-oui-pa" type="checkbox" {{ (client[0].clMasqHa == 1) ? 'checked' :  '' }} > oui
+
+                                        <input class="check-non-pa" type="checkbox" {{ (client[0].clMasqHa == 0) ? 'checked' :  '' }} > Non
                                     </div>
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Afficher les prix de vente</p>
                                     <div class="prix-achat-check">
-                                        <input class="check-oui-pa" type="checkbox"> Oui
-                                        <input class="check-non-pa" type="checkbox"> Non
+                                        <input class="check-oui-pa" type="checkbox" {{ (client[0].clMasqVt == 1) ? 'checked' :  '' }} > Oui
+                                        <input class="check-non-pa" type="checkbox" {{ (client[0].clMasqVt == 0) ? 'checked' :  '' }} > Non
                                     </div>
                                 </div>
                             </div>
@@ -244,7 +246,6 @@
                                 <small id="afficherplus-detail" class="cursor">Afficher plus</small>
                             </h2>
                         </div>
-
                         <div id="detail-client-content">
 
                             <div class="tab-detail-client" role="tabpanel" data-example-id="togglable-tabs">
@@ -264,6 +265,14 @@
                                             <span class="badge bg-green">{{ task | length }}</span> Actions
                                         </a>
                                     </li>
+                                    <li role="presentation" class="">
+                                        <a href="#tab_content4" id="home-tab"
+                                           role="tab"
+                                           data-toggle="tab" aria-expanded="true">
+                                            <span class="badge bg-green">{{ tacheA | length }}</span> Actions archivé
+                                        </a>
+                                    </li>
+
                                     <li role="presentation" class="">
                                         <a href="#tab_content2" role="tab" id="profile-tab"
                                            data-toggle="tab" aria-expanded="true">
@@ -346,6 +355,37 @@
 
                                             {% else %}
                                                 <h5>Pas de taches pour le moment</h5>
+                                            {% endif %}
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    {#Action_client_archive#}
+                                    <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="home-tab">
+                                        <div class="ui items">
+
+                                            {% if tacheA %}
+
+                                                <div class="">
+                                                    <ul class="to_do">
+                                                        {% for tasks in tacheA %}
+                                                            <li data-id="{{ tasks.clId }}"
+                                                                class="cursor detail-tache-home">
+                                                                <p>{{ tasks.claNom | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
+                                                                {{ tasks.claStatus | etat | raw }}
+                                                            </li>
+                                                        {% endfor %}
+
+
+                                                    </ul>
+                                                </div>
+
+                                            {% else %}
+                                                <h5>Aucune tâche n'a été encore crée pour cet utilisateur</h5>
                                             {% endif %}
 
 

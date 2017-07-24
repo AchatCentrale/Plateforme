@@ -426,7 +426,10 @@ class BaseController extends Controller
 
                 $sql = 'SELECT *
                         FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES
-                        WHERE CL_ID = :id';
+                       WHERE CL_ID = :id
+                      AND CLA_STATUS <> 10
+                      ORDER BY CLA_STATUS ASC
+                        ';
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue('id', $id);
@@ -464,6 +467,14 @@ class BaseController extends Controller
                 $profil = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ProfilsUsers')->findAll();
 
 
+                $tacheArchive = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches')->findBy([
+                        'clId' => $id,
+                        'claStatus' => 10
+                    ]
+                );
+
+
+
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [
@@ -477,6 +488,7 @@ class BaseController extends Controller
                         "centrale" => $centrale,
                         "fonction" => $fonction,
                         "profil" => $profil,
+                        "tacheArchiv" => $tacheArchive,
 
                     ]
                 );
@@ -492,7 +504,10 @@ class BaseController extends Controller
 
                 $sql = 'SELECT *
                   FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES
-                  WHERE CL_ID = :id';
+                  WHERE CL_ID = :id
+                  AND CLA_STATUS <> 10
+                  ORDER BY CLA_STATUS ASC
+                  ';
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue('id', $id);
@@ -532,6 +547,12 @@ class BaseController extends Controller
                 $profil = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ProfilsUsers')->findAll();
 
 
+                $tacheArchive = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsTaches')->findBy([
+                        'clId' => $id,
+                        'claStatus' => 10
+                    ]
+                );
+
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [
@@ -545,6 +566,8 @@ class BaseController extends Controller
                         "centrale" => $centrale,
                         "fonction" => $fonction,
                         "profil" => $profil,
+                        "tacheArchiv" => $tacheArchive,
+
 
                     ]
                 );
@@ -558,7 +581,9 @@ class BaseController extends Controller
                 $sql = 'SELECT *
                 FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES
                   WHERE CL_ID = :id
-                ORDER BY CLA_STATUS ASC';
+                AND CLA_STATUS <> 10
+                ORDER BY CLA_STATUS ASC
+                ';
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue('id', $id);
@@ -598,6 +623,12 @@ class BaseController extends Controller
 
                 $profil = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ProfilsUsers')->findAll();
 
+                $tacheArchive = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsTaches')->findBy([
+                        'clId' => $id,
+                        'claStatus' => 10
+                    ]
+                );
+
 
 
                 return $this->render(
@@ -613,6 +644,7 @@ class BaseController extends Controller
                         "centrale" => $centrale,
                         "fonction" => $fonction,
                         "profil" => $profil,
+                        "tacheArchiv" => $tacheArchive,
 
                     ]
                 );
@@ -626,7 +658,10 @@ class BaseController extends Controller
                 $sql = 'SELECT *
                 FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES
                   WHERE CL_ID = :id
-                ORDER BY CLA_STATUS ASC';
+                  AND CLA_STATUS <> 10
+
+                ORDER BY CLA_STATUS ASC
+                ';
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue('id', $id);
@@ -667,6 +702,15 @@ class BaseController extends Controller
                 $profil = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ProfilsUsers')->findAll();
 
 
+
+                $tacheArchive = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsTaches')->findBy([
+                        'clId' => $id,
+                        'claStatus' => 10
+                    ]
+                );
+
+
+
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [
@@ -680,6 +724,7 @@ class BaseController extends Controller
                         "centrale" => $centrale,
                         "fonction" => $fonction,
                         "profil" => $profil,
+                        "tacheArchiv" => $tacheArchive,
 
                     ]
                 );
@@ -693,7 +738,9 @@ class BaseController extends Controller
                 $sql = 'SELECT *
                 FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES
                   WHERE CL_ID = :id
-                ORDER BY CLA_STATUS ASC';
+                AND CLA_STATUS <> 10
+                ORDER BY CLA_STATUS ASC
+                ';
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue('id', $id);
@@ -731,6 +778,13 @@ class BaseController extends Controller
 
 
 
+                $tacheArchive = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsTaches')->findBy([
+                        'clId' => $id,
+                        'claStatus' => 10
+                    ]
+                );
+
+
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [
@@ -744,6 +798,7 @@ class BaseController extends Controller
                         "centrale" => $centrale,
                         "fonction" => $fonction,
                         "profil" => $profil,
+                        "tacheArchiv" => $tacheArchive,
 
                     ]
                 );
