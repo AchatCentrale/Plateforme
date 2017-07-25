@@ -1059,9 +1059,21 @@ $('.new-clients-user').on('click', function (e) {
 
 
 $(".text-area-validation").on("keydown", function(e){
-  console.log(e);
 
-  $(this).append('<p>test</p>');
+    $('#countTextarea').empty();
+
+  let count = $('.text-area-validation').val().length;
+
+  console.log(count);
+
+
+  $('#countTextarea').html('<p>'+ count  +'/150</p>');
+
+  if(count > 145){
+      $('.text-area-validation').addClass('border-red');
+
+  }
+
 });
 
 

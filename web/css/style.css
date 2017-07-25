@@ -569,3 +569,6 @@ h3.raison-soc-titre {
     border: 5px solid blue;
 }
 
+.border-red{
+    border: 1px solid red;
+}
