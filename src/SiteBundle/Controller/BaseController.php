@@ -968,11 +968,10 @@ class BaseController extends Controller
             default:
                 break;
         }
+        $res = "client mise à jour";
 
-        return $this->redirectToRoute('client-general', [
-            'centrale' => $centrale,
-            'id' => $id,
-        ] );
+        return new JsonResponse($res, 200);
+
 
     }
 
