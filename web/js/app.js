@@ -1084,7 +1084,7 @@ $('.ui.search')
         fields: {
             results : 'items',
             title   : 'US_PRENOM',
-            description   : 'Achat centrale',
+            description   : 'US_ID',
         },
         minCharacters : 2
     })
