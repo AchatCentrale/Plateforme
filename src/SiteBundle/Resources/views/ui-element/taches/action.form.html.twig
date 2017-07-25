@@ -68,15 +68,15 @@
                                             <input required type="text"  name="cla_nom"
                                                    placeholder="Nom de l'action" maxlength="50">
                                         </div>
-                                        <div class="ui search field clients-auto">
-                                            <label>Clients</label>
+                                        {#<div class="ui search field clients-auto">#}
+                                            {#<label>Clients</label>#}
 
-                                            <div class="ui left icon  input">
+                                            {#<div class="ui left icon  input">#}
 
-                                                <input class="prompt" type="text" placeholder="Clients associé a l'action">
-                                                <i class="user icon"></i>
-                                            </div>
-                                        </div>
+                                                {#<input class="prompt" type="text" placeholder="Clients associé a l'action">#}
+                                                {#<i class="user icon"></i>#}
+                                            {#</div>#}
+                                        {#</div>#}
 
                                         <div class="field">
                                             <label>Client associé a l'action</label>
@@ -88,24 +88,24 @@
 
                                             </select>
                                         </div>
-                                        {#<div class="field">#}
-                                            {#<label>Utilisateur assigné </label>#}
-                                            {#<select required name="cla_us" class="ui dropdown">#}
-                                                {#<option selected value="">Client associé a l'action</option>#}
-                                                {#{% for us in user %}#}
-                                                    {#<option value="{{ us.usId }}">{{ us.usPrenom }} {{  us.usNom }}</option>#}
-                                                {#{% endfor %}#}
-                                            {#</select>#}
-                                        {#</div>#}
-                                        <div class="ui search field">
-                                            <label>Utilisateur</label>
-
-                                            <div class="ui left icon  input">
-
-                                                <input class="prompt" type="text" placeholder="Utilisateur associé a l'action">
-                                                <i class="user icon"></i>
-                                            </div>
+                                        <div class="field">
+                                            <label>Utilisateur assigné </label>
+                                            <select required name="cla_us" class="ui dropdown">
+                                                <option selected value="">Client associé a l'action</option>
+                                                {% for us in user %}
+                                                    <option value="{{ us.usId }}">{{ us.usPrenom }} {{  us.usNom }}</option>
+                                                {% endfor %}
+                                            </select>
                                         </div>
+                                        {#<div class="ui search field">#}
+                                            {#<label>Utilisateur</label>#}
+
+                                            {#<div class="ui left icon  input">#}
+
+                                                {#<input class="prompt" type="text" placeholder="Utilisateur associé a l'action">#}
+                                                {#<i class="user icon"></i>#}
+                                            {#</div>#}
+                                        {#</div>#}
 
                                     </div>
 
