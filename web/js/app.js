@@ -472,7 +472,7 @@ function stateTask(state) {
             return '<p class="pastille-detail red" ></p> En attente de quelqu\'un d\'autre ';
             break;
         case 4:
-            return '<p class="pastille-detail purple" ></p> Délégué';
+            return '<p class="pastille-detail purple" ></p> Reportée';
             break;
         default:
             break;

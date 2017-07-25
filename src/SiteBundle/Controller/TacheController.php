@@ -61,7 +61,6 @@ class TacheController extends Controller
                     $creationFromNow = $creation->fromNow();
                     $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
                     $echanceFuture = $echeance->calendar();
-
                     $data = [
                         "id" => utf8_encode($result->getClaId()),
                         "nom" => utf8_encode($result->getclaNom()),
@@ -71,6 +70,7 @@ class TacheController extends Controller
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
                         "statut" => utf8_encode($result->getClaStatus()),
+                        "centrale" => "ACHAT_CENTRALE",
                     ];
                     $response = new JsonResponse($data);
                     $response->headers->set('Content-Type', 'application/json');
@@ -846,8 +846,6 @@ class TacheController extends Controller
 
                $resultUser = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
 
-
-
                 if ($request->getMethod() == "POST") {
 
 
@@ -860,10 +858,31 @@ class TacheController extends Controller
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $echeanceNew);
 
 
-                    dump($date_echeance2);
+
+                    $sqlUpdate = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES
+                                  SET
+                                    CLA_DESCR = :desc,
+                                    CLA_NOM = :nom,
+                                    CLA_PRIORITE = :priorite,
+                                    CLA_ECHEANCE = :echeance,
+                                    CLA_PRIORITE = :priorite,
+                                    MAJ_DATE = GETDATE(),
+                                    MAJ_USER = :user
+                                  WHERE CLA_ID = :id
+                                  "
+                    ;
 
 
-
+                    $stmt = $conn->prepare($sqlUpdate);
+                    $stmt->bindValue(':id', $id);
+                    $stmt->bindValue(':user', $this->getUser()->getUsMail());
+                    $stmt->bindValue(':desc', $descrNew);
+                    $stmt->bindValue(':nom', $nomNew);
+                    $stmt->bindValue(':type', $prioriteNew);
+                    $stmt->bindValue(':echeance', $date_echeance2);
+                    $stmt->bindValue(':priorite', $prioriteNew);
+                    $stmt->execute();
+                    $update = $stmt->fetchAll();
 
                 }
 

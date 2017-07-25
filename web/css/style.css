@@ -577,3 +577,9 @@ h3.raison-soc-titre {
 .black{
     color: black;
 }
+
+.input-top-tables{
+    position: absolute;
+    left: 20%;
+    bottom: 92%;
+}
