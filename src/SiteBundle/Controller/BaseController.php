@@ -1725,7 +1725,7 @@ class BaseController extends Controller
                 $result = [
                     "total_count" => count($clients),
                     "incomplete_results" => false,
-                    "items" => $clients
+                    "items" => array_map("utf8_encode", $clients ),
                 ];
 
                 return new JsonResponse($result, 200);
