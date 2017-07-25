@@ -513,7 +513,6 @@ $('.detail-tache').on("click", function (e) {
             $('.modal-title-task').append(title);
 
 
-            console.log(data);
 
 
             let tpl = `<h4>${data.nom}</h4>
@@ -1081,9 +1080,11 @@ $('.ui.search')
         apiSettings: {
             url: 'http://crm.achatcentrale.fr/client/search/{query}'
         },
+        searchOnFocus: true,
         fields: {
             results : 'items',
             title   : 'US_PRENOM',
+            description   : 'Achat centrale',
         },
         minCharacters : 2
     })
