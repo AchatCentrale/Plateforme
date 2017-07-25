@@ -1108,3 +1108,9 @@ $('.ui.search.clients-auto')
     })
 ;
 
+
+
+
+
+
+// $('#modal-task-detail-home-client').modal('show');

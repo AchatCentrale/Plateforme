@@ -270,6 +270,8 @@ class CrmFilter extends \Twig_Extension
     public function isEmpty($input){
 
 
+        dump($input);
+
         if(empty($input)){
             return "<h2>à remplire</h2>";
         }else{

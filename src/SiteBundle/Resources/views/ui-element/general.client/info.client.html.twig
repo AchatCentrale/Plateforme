@@ -343,8 +343,8 @@
                                                     <ul class="to_do">
                                                         {% for tasks in task %}
                                                             <li data-id="{{ tasks['CLA_ID'] }}"
-                                                                class="cursor detail-tache-home">
-                                                                <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
+                                                                class="cursor detail-tache-home-client">
+                                                                <p>{{ tasks['INS_DATE'] | fromNowString }} - {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
                                                                 {{ tasks['CLA_STATUS'] | etat | raw }}
                                                             </li>
                                                         {% endfor %}
@@ -456,7 +456,7 @@
 
 
 {#//modal#}
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal"  role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -539,7 +539,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="logo-edit" tabindex="-1" role="dialog" aria-labelledby="logo-edit">
+<div class="modal fade" id="logo-edit"  role="dialog" aria-labelledby="logo-edit">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -581,7 +581,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="client-user-edit" tabindex="-1" role="dialog" aria-labelledby="client-user-edit">
+<div class="modal fade" id="client-user-edit"  role="dialog" aria-labelledby="client-user-edit">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -704,3 +704,23 @@
 
     </div>
 </div>
+
+<div class="modal fade" id="modal-task-detail-home-client"  role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
