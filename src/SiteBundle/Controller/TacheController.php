@@ -61,6 +61,7 @@ class TacheController extends Controller
                     $creationFromNow = $creation->fromNow();
                     $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
                     $echanceFuture = $echeance->calendar();
+
                     $data = [
                         "id" => utf8_encode($result->getClaId()),
                         "nom" => utf8_encode($result->getclaNom()),
@@ -69,7 +70,7 @@ class TacheController extends Controller
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
-                        "statut" => utf8_encode($result->getClaStatus())
+                        "statut" => utf8_encode($result->getClaStatus()),
                     ];
                     $response = new JsonResponse($data);
                     $response->headers->set('Content-Type', 'application/json');

@@ -204,24 +204,47 @@ class CrmFilter extends \Twig_Extension
 
     public function centraleFilter($centrale)
     {
-        switch ($centrale){
-            case "CENTRALE_FUNECAP":
-                return "centrale-".substr($centrale, 9);
-                break;
-            case 'ROC_ECLERC':
-                return "centrale-".strtolower(str_replace("_","-", $centrale ));
-                break;
-            case 'ACHAT_CENTRALE':
-                return "achatcentrale";
-                break;
-            case 'CENTRALE_PFPL':
-                return strtolower(str_replace("_","-", $centrale ));
-                break;
-            case 'CENTRALE_GCCP':
-                return strtolower(str_replace("_","-", $centrale ));
-                break;
 
+        if(gettype($centrale) === "string"){
+
+            switch ($centrale){
+                case "CENTRALE_FUNECAP":
+                    return "centrale-".substr($centrale, 9);
+                    break;
+                case 'ROC_ECLERC':
+                    return "centrale-".strtolower(str_replace("_","-", $centrale ));
+                    break;
+                case 'ACHAT_CENTRALE':
+                    return "achatcentrale";
+                    break;
+                case 'CENTRALE_PFPL':
+                    return strtolower(str_replace("_","-", $centrale ));
+                    break;
+                case 'CENTRALE_GCCP':
+                    return strtolower(str_replace("_","-", $centrale ));
+                    break;
+            }
+        }else{
+            switch ($centrale){
+                case "1":
+                    return "ACHAT_CENTRALE";
+                    break;
+                case '2':
+                    return "CENTRALE_GCCP";
+                    break;
+                case '4':
+                    return "CENTRALE_FUNECAP";
+                    break;
+                case '5':
+                    return "CENTRALE_PFPL";
+                    break;
+                case '6':
+                    return "ROC_ECLERC";
+                    break;
+            }
         }
+
+
 
     }
 
