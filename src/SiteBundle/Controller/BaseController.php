@@ -1711,7 +1711,7 @@ class BaseController extends Controller
 
         switch ($centrale){
             case'pfpl':
-                $sql = 'SELECT *
+                $sql = 'SELECT CL_RAISONSOC, CL_REF, CL_ID
                 FROM CENTRALE_PFPL.dbo.CLIENTS
                 WHERE CLIENTS.CL_RAISONSOC LIKE :query
                   ';
