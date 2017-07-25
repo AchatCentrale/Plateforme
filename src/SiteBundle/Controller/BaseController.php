@@ -1721,11 +1721,12 @@ class BaseController extends Controller
                 $stmt->execute();
 
                 $clients = $stmt->fetchAll();
+                mb_convert_variables('utf-8', 'original encode', $clients);
 
                 $result = [
                     "total_count" => count($clients),
                     "incomplete_results" => false,
-                    "items" => array_map("utf8_encode", $clients ),
+                    "items" => $clients
                 ];
 
                 return new JsonResponse($result, 200);
