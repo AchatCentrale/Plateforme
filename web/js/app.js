@@ -1058,5 +1058,11 @@ $('.new-clients-user').on('click', function (e) {
 
 
 
+$(".text-area-validation").on("keydown", function(e){
+  console.log(e);
+
+  $(this).append('<p>test</p>');
+});
+
 
 

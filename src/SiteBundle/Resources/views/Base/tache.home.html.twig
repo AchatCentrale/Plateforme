@@ -49,14 +49,14 @@
                                         </td>
                                         <td>
                                             <div>
-                                                {{ tasks['INS_DATE'] | dateString }}
+                                                {{ tasks['INS_DATE'] | fromNowString }}
                                             </div>
                                         </td>
                                         <td>
                                             <div class="ui label"><i class="user icon"></i>{{ user }}</div>
                                         </td>
                                         <td>
-                                            {{ tasks['CLA_ECHEANCE'] | fromNowString }}
+                                            {{ tasks['CLA_ECHEANCE'] | dateString }}
                                         </td>
                                         <td class="justify">
                                             <h4 >{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') | limitLength }}</h4>
