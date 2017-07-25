@@ -137,3 +137,4 @@ get-user-autocomplete:
 
 get-client-autocomplete:
     path: /client/search/{centrale}/{query}
+    defaults: {_controller: SiteBundle:Base:getClientAutocomplete}
