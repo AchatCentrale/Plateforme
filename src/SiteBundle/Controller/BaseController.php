@@ -1677,7 +1677,22 @@ class BaseController extends Controller
 
     }
 
+    public function getClientAutocompleteAction(Request $request, $query)
+    {
 
+
+
+        $users = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+
+
+        $result = [
+            "total_count" => 121,
+            "incomplete_results" => false,
+            "items" => $users
+        ];
+
+        return new JsonResponse($result, 200);
+    }
 }
 
 
