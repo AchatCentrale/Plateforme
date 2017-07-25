@@ -711,7 +711,7 @@ $('.add-note').on('click', function (e) {
         success: function (data) {
 
             console.log(data);
-            $(this).empty();
+            $('input#add-note').empty();
             window.location.reload();
         },
 
