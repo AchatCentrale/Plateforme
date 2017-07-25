@@ -1677,7 +1677,7 @@ class BaseController extends Controller
 
     }
 
-    public function getClientAutocompleteAction(Request $request, $query)
+    public function getUserAutocompleteAction(Request $request, $query)
     {
 
         $conn = $this->get('database_connection');
@@ -1701,6 +1701,35 @@ class BaseController extends Controller
         ];
 
         return new JsonResponse($result, 200);
+    }
+
+
+    public function getClientAutocompleteAction(Request $request, $query,$centrale)
+    {
+
+        $conn = $this->get('database_connection');
+
+        switch ($centrale){
+            case'pfpl':
+                $sql = 'SELECT *
+                FROM CENTRALE_PFPL.dbo.CLIENTS
+                WHERE CLIENTS.CL_RAISONSOC LIKE :query
+                  ';
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->execute();
+
+                $clients = $stmt->fetchAll();
+
+                $result = [
+                    "total_count" => count($clients),
+                    "incomplete_results" => false,
+                    "items" => $users
+                ];
+
+                return new JsonResponse($result, 200);
+        }
     }
 }
 

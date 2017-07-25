@@ -131,6 +131,9 @@ add-notes:
     defaults: {_controller: SiteBundle:Base:newNotesClient}
     methods: POST
 
+get-user-autocomplete:
+    path: /user/search/{query}
+    defaults:  {_controller: SiteBundle:Base:getUserAutocomplete}
+
 get-client-autocomplete:
-    path: /client/search/{query}
-    defaults:  {_controller: SiteBundle:Base:getClientAutocomplete}
+    path: /client/search/{centrale}/{query}

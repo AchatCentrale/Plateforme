@@ -1090,3 +1090,21 @@ $('.ui.search')
     })
 ;
 
+
+
+
+$('.ui.search.clients-auto')
+    .search({
+        apiSettings: {
+            url: 'http://crm.achatcentrale.fr/user/search/{query}/'+ $('#centrale').html()
+        },
+        searchOnFocus: true,
+        fields: {
+            results : 'items',
+            title   : 'US_PRENOM',
+            description   : 'US_ID',
+        },
+        minCharacters : 2
+    })
+;
+

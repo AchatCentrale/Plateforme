@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
+
+
+
 {% block body %}
+
+
+    <div class="hidden-centrale">
+        <p id="centrale">{{ centrale }}</p>
+    </div>
 
     <!-- page content -->
 
@@ -59,6 +67,15 @@
                                             <label>Nom de l'action</label>
                                             <input type="text"  name="cla_nom"
                                                    placeholder="Nom de l'action" maxlength="50">
+                                        </div>
+                                        <div class="ui search field clients-auto">
+                                            <label>Clients</label>
+
+                                            <div class="ui left icon  input">
+
+                                                <input class="prompt" type="text" placeholder="Clients associé a l'action">
+                                                <i class="user icon"></i>
+                                            </div>
                                         </div>
 
                                         <div class="field">
