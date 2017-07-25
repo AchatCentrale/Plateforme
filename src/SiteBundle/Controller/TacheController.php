@@ -470,18 +470,14 @@ class TacheController extends Controller
                 $type = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ActionType')->findAll();
                 $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
 
-
                 if ($clientChoice){
 
                     $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
                         'clId' => $clientChoice
                     ]);
-
                 }else{
-
                     $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findAll();
                 }
-
                 if ($request->getMethod() == "POST") {
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task
