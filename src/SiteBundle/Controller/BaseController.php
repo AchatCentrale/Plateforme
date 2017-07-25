@@ -1683,13 +1683,13 @@ class BaseController extends Controller
         $conn = $this->get('database_connection');
 
 
-        $sql = '  SELECT *
-                  FROM CENTRALE_ACHAT.dbo.USERS
-                  WHERE US_PRENOM LIKE :query
+        $sql = 'SELECT *
+                FROM CENTRALE_ACHAT.dbo.USERS
+                WHERE US_PRENOM LIKE :query
                   ';
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindValue('query', $query);
+        $stmt->bindValue('query', '%'.$query.'%');
         $stmt->execute();
 
         $users = $stmt->fetchAll();
