@@ -38,6 +38,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {{ dump(task) }}
+
                                 {% for tasks in task %}
 
                                     <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} " data-centrale="{{ tasks['SO_ID']  }}"  id="{{ tasks['CLA_ID'] }}">
@@ -62,7 +64,7 @@
                                             <h4 >{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') | limitLength }}</h4>
                                         </td>
                                         <td>
-                                            <p>{{ render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] })) }}</p>
+                                            <p><a href="{{ path('client-general', { 'centrale' : render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] })), 'id' : tasks['CL_ID'] }) }}">{{ render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] })) }}</a></p>
                                         </td>
                                         <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
                                         <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
