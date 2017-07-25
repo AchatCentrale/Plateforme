@@ -849,12 +849,24 @@ class TacheController extends Controller
 
                $resultUser = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
 
-               dump($resultUser);
 
 
                 if ($request->getMethod() == "POST") {
 
-                    dump($request);
+
+                    $echeanceNew = $request->get('cla_echeance');
+                    $nomNew = $request->get('cla_nom');
+                    $descrNew = $request->get('cla_desc');
+                    $usNew = $request->get('cla_us');
+                    $prioriteNew = $request->get('cla_priorite');
+
+                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $echeanceNew);
+
+
+                    dump($date_echeance2);
+
+
+
 
                 }
 

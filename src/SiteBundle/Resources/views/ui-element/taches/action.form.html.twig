@@ -26,7 +26,7 @@
 
                                         <div class="field">
                                             <label>Type de l'action</label>
-                                            <select name="cla_type" class="ui dropdown">
+                                            <select required name="cla_type" class="ui dropdown">
                                                 <option selected value="">Type de l'action</option>
                                                 {% for ty in type %}
                                                     <option value="{{ ty.acId }}">{{ ty.acNom }}</option>
@@ -37,12 +37,12 @@
                                         </div>
                                         <div class="field">
                                             <label>Date d'échéance</label>
-                                            <input type="text" class="date add-action" name="cla_echeance"
+                                            <input required type="text" class="date add-action" name="cla_echeance"
                                                    placeholder="Date d'échéance">
                                         </div>
                                         <div class="field">
                                             <label>Priorité de l'action</label>
-                                            <select name="cla_priorite" class="ui dropdown">
+                                            <select required name="cla_priorite" class="ui dropdown">
                                                 <option selected value="">Priorité de l'action</option>
                                                 <option value="1">A faire au plus vite</option>
                                                 <option value="2">Important</option>
@@ -63,7 +63,7 @@
 
                                         <div class="field">
                                             <label>Client associé a l'action</label>
-                                            <select name="cla_cl" class="ui dropdown">
+                                            <select required name="cla_cl" class="ui dropdown">
                                                 <option selected value="">Client associé a l'action</option>
                                                 {% for cl in client %}
                                                     <option value="{{ cl.clId }}">{{ cl.clRaisonsoc }}</option>
@@ -73,12 +73,11 @@
                                         </div>
                                         <div class="field">
                                             <label>Utilisateur assigné </label>
-                                            <select name="cla_us" class="ui dropdown">
+                                            <select required name="cla_us" class="ui dropdown">
                                                 <option selected value="">Client associé a l'action</option>
                                                 {% for us in user %}
                                                     <option value="{{ us.usId }}">{{ us.usPrenom }} {{  us.usNom }}</option>
                                                 {% endfor %}
-
                                             </select>
                                         </div>
 
@@ -89,7 +88,7 @@
                             </div>
                             <div class="field">
                                 <label>Description de l'action</label>
-                                <textarea  class="text-area-validation" name="cla_desc" rows="2"></textarea>
+                                <textarea required class="text-area-validation" name="cla_desc" rows="2"></textarea>
                                 <p id="countTextarea"></p>
                             </div>
 

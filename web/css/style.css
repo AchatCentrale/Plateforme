@@ -427,6 +427,7 @@ p.task-description {
     padding: 10px 10px 70px 10px;
     font-size: 14pt;
     border-radius: 3px;
+    word-wrap: break-word;
 }
 
 

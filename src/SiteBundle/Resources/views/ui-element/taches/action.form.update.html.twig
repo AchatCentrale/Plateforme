@@ -9,7 +9,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>modifier une tâche</h2>
+                    <h2>Modifier une tâche</h2>
 
                     <div class="clearfix"></div>
                 </div>
@@ -24,23 +24,40 @@
 
                                         <div class="field">
                                             <label>Date d'échéance</label>
-                                            <input type="text" class="date add-action" name="cla_echeance"
+                                            <input required type="text" class="date add-action" name="cla_echeance"
                                                    placeholder="Date d'échéance">
                                         </div>
 
+
+
+                                        <div class="field">
+                                            <label>Priorité de l'action</label>
+                                            <select required name="cla_priorite" class="ui dropdown">
+                                                <option selected value="">Priorité de l'action</option>
+                                                <option value="1">A faire au plus vite</option>
+                                                <option value="2">Important</option>
+                                                <option value="3">Moyen</option>
+                                                <option value="4">Faible</option>
+                                                <option value="5">Un jour peut-être</option>
+                                            </select>
+                                        </div>
+
+
                                     </div>
+
+
 
                                     <div class="column">
 
                                         <div class="field">
                                             <label>Nom de l'action</label>
-                                            <input type="text"  name="cla_nom"
-                                                   placeholder="{{ task[0]['CLA_NOM'] }}"  maxlength="50">
+                                            <input  required type="text"  name="cla_nom"
+                                                   value="{{ task[0]['CLA_NOM'] }}"  maxlength="50">
                                         </div>
 
                                         <div class="field">
                                             <label>Utilisateur assigné </label>
-                                            <select name="cla_us" class="ui dropdown fluid ">
+                                            <select required name="cla_us" class="ui dropdown fluid ">
                                                 <option selected value="">Modifier l'utilisateur</option>
                                                 {% for us in user %}
                                                     <option value="{{ us.usId }}">{{ us.usPrenom }} {{  us.usNom }}</option>
@@ -58,7 +75,7 @@
 
                             <div class="field">
                                 <label>Description de l'action</label>
-                                <textarea name="cla_desc" rows="2" placeholder="{{ task[0]['CLA_DESCR'] }}"></textarea>
+                                <textarea name="cla_desc" rows="2" >{{ task[0]['CLA_DESCR'] }}</textarea>
                             </div>
 
                             <button type="submit" class="fluid positive ui button"> Enregistré</button>
