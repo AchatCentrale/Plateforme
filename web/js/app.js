@@ -1096,7 +1096,7 @@ $('.ui.search')
 $('.ui.search.clients-auto')
     .search({
         apiSettings: {
-            url: 'http://crm.achatcentrale.fr/user/search/{query}/'+ $('#centrale').html()
+            url: 'http://crm.achatcentrale.fr/client/search/{query}/'+ $('#centrale').html()
         },
         searchOnFocus: true,
         fields: {
