@@ -1709,6 +1709,7 @@ class BaseController extends Controller
 
         $conn = $this->get('database_connection');
 
+        dump($centrale);
         switch ($centrale){
             case'pfpl':
                 $sql = 'SELECT *
@@ -1730,7 +1731,6 @@ class BaseController extends Controller
 
                 return new JsonResponse($result, 200);
         }
-        return new JsonResponse($result, 200);
 
     }
 }
