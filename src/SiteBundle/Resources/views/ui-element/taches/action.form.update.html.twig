@@ -40,7 +40,8 @@
 
                                         <div class="field">
                                             <label>Utilisateur assigné </label>
-                                            <select name="cla_us" class="ui dropdown">
+                                            <select name="cla_us" class="ui dropdown fluid ">
+                                                <option selected value="">Modifier l'utilisateur</option>
                                                 {% for us in user %}
                                                     <option value="{{ us.usId }}">{{ us.usPrenom }} {{  us.usNom }}</option>
                                                 {% endfor %}
@@ -53,10 +54,11 @@
                                 </div>
 
                             </div>
+
+
                             <div class="field">
                                 <label>Description de l'action</label>
-                                <textarea name="cla_desc" rows="2">{{ task[0]['CLA_DESCR'] }}
-                                </textarea>
+                                <textarea name="cla_desc" rows="2" placeholder="{{ task[0]['CLA_DESCR'] }}"></textarea>
                             </div>
 
                             <button type="submit" class="fluid positive ui button"> Enregistré</button>
