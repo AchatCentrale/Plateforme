@@ -1709,7 +1709,6 @@ class BaseController extends Controller
 
         $conn = $this->get('database_connection');
 
-        dump($centrale);
         switch ($centrale){
             case'pfpl':
                 $sql = 'SELECT *

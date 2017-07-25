@@ -1101,8 +1101,8 @@ $('.ui.search.clients-auto')
         searchOnFocus: true,
         fields: {
             results : 'items',
-            title   : 'US_PRENOM',
-            description   : 'US_ID',
+            title   : 'CL_RAISONSOC',
+            description   : 'CL_REF',
         },
         minCharacters : 2
     })
