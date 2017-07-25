@@ -1680,13 +1680,20 @@ class BaseController extends Controller
     public function getClientAutocompleteAction(Request $request, $query)
     {
 
+        $conn = $this->get('database_connection');
 
 
-        $users = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+        $sql = 'SELECT *
+                  FROM CENTRALE_ACHAT.dbo.USERS
+                  ';
 
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+        $users = $stmt->fetchAll();
 
         $result = [
-            "total_count" => 121,
+            "total_count" => count($users),
             "incomplete_results" => false,
             "items" => $users
         ];

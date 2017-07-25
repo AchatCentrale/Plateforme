@@ -1083,8 +1083,7 @@ $('.ui.search')
         },
         fields: {
             results : 'items',
-            title   : 'name',
-            url     : 'html_url'
+            title   : 'US_PRENOM',
         },
         minCharacters : 2
     })
