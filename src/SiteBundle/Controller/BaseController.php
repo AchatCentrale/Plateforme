@@ -870,6 +870,8 @@ class BaseController extends Controller
                 $em->flush();
 
                 $res = "client mise à jour";
+
+
                 return new JsonResponse($res, 200);
 
                 break;
@@ -966,6 +968,11 @@ class BaseController extends Controller
             default:
                 break;
         }
+
+        return $this->redirectToRoute('client-general', [
+            'centrale' => $centrale,
+            'id' => $id,
+        ] );
 
     }
 
