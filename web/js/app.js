@@ -1079,7 +1079,7 @@ $('.new-clients-user').on('click', function (e) {
 $('.ui.search')
     .search({
         apiSettings: {
-            url: '//api.github.com/search/repositories?q={query}'
+            url: 'http://crm.achatcentrale.fr/client/search/{query}'
         },
         fields: {
             results : 'items',
