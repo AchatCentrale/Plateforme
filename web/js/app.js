@@ -661,7 +661,7 @@ $('.save-update-client').on('click', function (e) {
 
             console.log(data);
 
-            // window.location.reload();
+            window.location.reload();
         },
 
         // La fonction à appeler si la requête n'a pas abouti
