@@ -1282,4 +1282,16 @@ $('.detail-tache-home-client').on('click', function (e) {
 
 });
 
-// $('#modal-task-detail-home-client').modal('show');
+
+let tableTache = $('#table-tache').DataTable({
+    "colReorder": true,
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
+    },
+    "dom": '<"el_top_tables">' +
+    't' +
+    '<"el_bottom_tables"' +
+    '>'
+
+
+});
