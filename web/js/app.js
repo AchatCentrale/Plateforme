@@ -1302,27 +1302,7 @@ console.log(centrale);
 
                     let tpl = `<h4>${data.nom}</h4>
               <div class="detail-tache-etat">
-                      <div class="state-tache-detail">
-                            ${ stateTask(data.statut) }
-                        </div>
-                        <div class="change-statut-tache">
-                       <div class="dropup">
-                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Changer le statut de la tache
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="${CURRENT_URL + "taches/etat/0/" + data.id + "/" + data.idCentrale}">Non commencé</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/1/" + data.id + "/" + data.idCentrale}">En cours</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/2/" + data.id + "/" + data.idCentrale}">Terminé</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/3/" + data.id + "/" + data.idCentrale}">Attente de quelqu'un d'autre</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/4/" + data.id + "/" + data.idCentrale}">Reportée</a></li>
-
-                          </ul>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+                      
                     <br>
                     <div class="ui centered  grid">
 
