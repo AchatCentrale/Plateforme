@@ -46,7 +46,10 @@
                                             <div>{{ tasks['CLA_TYPE'] | type | raw }}</div>
                                         </td>
                                         <td>
-                                            <h5><a class="detail-tache cursor">{{ tasks['CLA_NOM'] }}</a></h5>
+                                            <div>
+                                                <h5><a class="detail-tache cursor">{{ tasks['CLA_NOM'] }}</a></h5>
+                                                {#<span class="count_bottom">Modifié le : {{ tasks['MAJ_DATE'] }} </span>#}
+                                            </div>
                                         </td>
                                         <td>
                                             <div>

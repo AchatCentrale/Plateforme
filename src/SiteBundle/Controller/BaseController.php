@@ -1709,24 +1709,26 @@ class BaseController extends Controller
 
         $conn = $this->get('database_connection');
 
+        $clientService = $this->get('site.service.client_services');
+
         switch ($centrale){
             case'pfpl':
-                $sql = 'SELECT CL_RAISONSOC, CL_REF, CL_ID
+                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
                 FROM CENTRALE_PFPL.dbo.CLIENTS
                 WHERE CLIENTS.CL_RAISONSOC LIKE :query
-                  ';
+                  ";
 
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue('query', '%'.$query.'%');
                 $stmt->execute();
 
                 $clients = $stmt->fetchAll();
-                mb_convert_variables('utf-8', 'original encode', $clients);
+                $result = $clientService->array_utf8_encode($clients);
 
                 $result = [
                     "total_count" => count($clients),
                     "incomplete_results" => false,
-                    "items" => $clients
+                    "items" => $result
                 ];
 
                 return new JsonResponse($result, 200);
