@@ -1115,7 +1115,7 @@ $('.ui.search.clients-auto')
 
 
 $('.detail-tache-home-client').on('click', function (e) {
-   console.log('click');
+
 
 
    let centrale = $('#centrale').html();
@@ -1145,23 +1145,12 @@ $('.detail-tache-home-client').on('click', function (e) {
                // La fonction à apeller si la requête aboutie
                success: function (data) {
 
-                  console.log(data);
-
-
-
-
-
-
-
                    let title = `<p>Tâche #${data.id}</p>`;
                    let el = $('.modal-content-client-detail-action');
 
                    $('.modal-title-task-client-detail').empty();
                    el.empty();
                    $('.modal-title-task-client-detail').append(title);
-
-                   console.log(el);
-
                    let tpl = `<h4>${data.nom}</h4>
               <div class="detail-tache-etat">
                       <div class="state-tache-detail">
@@ -1249,15 +1238,7 @@ $('.detail-tache-home-client').on('click', function (e) {
 
                             </div>
                     </div>`;
-
-
                    el.append(tpl);
-
-
-
-
-
-
                    $('#modal-task-detail-home-client').modal('show');
 
 
@@ -1274,6 +1255,52 @@ $('.detail-tache-home-client').on('click', function (e) {
 
 
 
+
+});
+
+$('.detail-tache-archive-client').on('click', function (e) {
+
+    let centrale = $('#centrale').html();
+
+console.log(centrale);
+
+    switch (centrale){
+
+        case 'CENTRALE_FUNECAP':
+
+            let id = $(this).data('id');
+
+            let aidy = Number(id);
+            let aidyCentrale = 4;
+
+
+            let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
+            console.log(url);
+
+            $.ajax({
+
+                // Adresse à laquelle la requête est envoyée
+                url: url,
+
+                // Le délai maximun en millisecondes de traitement de la demande
+                timeout: 4000,
+
+                // La fonction à apeller si la requête aboutie
+                success: function (data) {
+
+                   console.log(data);
+
+
+                },
+                error: function (e) {
+                    console.error(e);
+                }
+
+
+            });
+
+
+    }
 
 });
 

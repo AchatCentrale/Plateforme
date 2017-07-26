@@ -462,9 +462,10 @@ class TacheController extends Controller
         $clientChoice = $request->query->get('cl');
 
 
+
         switch ($centrale) {
 
-            case 'centrale-roc-eclerc':
+            case 'ROC_ECLERC':
             case 'roc':
                 $req = $request->request;
                 $task = new \RocEclercBundle\Entity\ClientsTaches();

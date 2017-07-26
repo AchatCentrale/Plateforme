@@ -342,8 +342,7 @@
                                                 <div class="">
                                                     <ul class="to_do">
                                                         {% for tasks in task %}
-                                                            <li data-id="{{ tasks['CLA_ID'] }}" data-centrale=""
-                                                                class="cursor detail-tache-home-client">
+                                                            <li data-id="{{ tasks['CLA_ID'] }}" class="cursor detail-tache-home-client">
                                                                 <p>{{ tasks['INS_DATE'] | fromNowString }} - {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
                                                                 {{ tasks['CLA_STATUS'] | etat | raw }}
                                                             </li>
@@ -374,7 +373,7 @@
                                                     <ul class="to_do">
                                                         {% for tasks in tacheA %}
                                                             <li data-id="{{ tasks.clId }}"
-                                                                class="cursor detail-tache-home">
+                                                                class="cursor detail-tache-archive-client">
                                                                 <p>{{ tasks.claNom | raw |  convert_encoding('UTF-8', 'Windows-1252') }} - {{ tasks.claDescr | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
 
                                                             </li>
