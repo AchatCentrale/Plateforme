@@ -969,7 +969,7 @@ class BaseController extends Controller
             default:
                 break;
         }
-        $res = "client mise à jour";
+        $res = "Aucun client mise a jour";
 
         return new JsonResponse($res, 200);
 
@@ -1702,7 +1702,6 @@ class BaseController extends Controller
 
         return new JsonResponse($result, 200);
     }
-
 
     public function getClientAutocompleteAction(Request $request, $query,$centrale)
     {
