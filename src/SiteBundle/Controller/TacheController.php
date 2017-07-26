@@ -481,26 +481,24 @@ class TacheController extends Controller
                 }
                 if ($request->getMethod() == "POST") {
 
-                    dump($req);
 
-                    return $this->render('@Site/test.html.twig');
 
-//                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
-//                    $task
-//                        ->setClaType($req->get('cla_type'))
-//                        ->setClaNom($req->get('cla_nom'))
-//                        ->setClaDescr($req->get('cla_desc'))
-//                        ->setClaPriorite($req->get('cla_priorite'))
-//                        ->setClaEcheance($date_echeance2)
-//                        ->setUsId($req->get('cla_us'))
-//                        ->setInsUser($this->getUser()->getusId())
-//                        ->setClId($req->get('cla_cl'));
-//                    $em = $this->getDoctrine()->getManager('roc_eclerc');
-//                    $em->persist($task);
-//                    $em->flush();
-//                    return $this->redirectToRoute('taches_home', [
-//
-//                    ], 301);
+                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
+                    $task
+                        ->setClaType($req->get('cla_type'))
+                        ->setClaNom($req->get('cla_nom'))
+                        ->setClaDescr($req->get('cla_desc'))
+                        ->setClaPriorite($req->get('cla_priorite'))
+                        ->setClaEcheance($date_echeance2)
+                        ->setUsId($req->get('cla_us'))
+                        ->setInsUser($this->getUser()->getusId())
+                        ->setClId($req->get('cla_cl'));
+                    $em = $this->getDoctrine()->getManager('roc_eclerc');
+                    $em->persist($task);
+                    $em->flush();
+                    return $this->redirectToRoute('taches_home', [
+
+                    ], 301);
                 }
                 return $this->render(
                     'SiteBundle:ui-element/taches:action.form.html.twig',
