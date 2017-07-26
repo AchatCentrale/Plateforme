@@ -570,13 +570,7 @@ $('.detail-tache').on("click", function (e) {
                             </div>
                             <div class="three column row">
                                
-                                <div class="ui buttons">
-                                   <button id="archive-task-detail" onclick="terminerTask(${data.id})" class="ui red button">
-                                        Terminer la tâche
-                                    </button>
-                                  <div class="or" data-text="ou"></div>
-                                  <button onclick="SuiteTask()" class="ui blue button ">Donner suite</button>
-                                </div>
+                              
                                 
                                    
                                 </div>
@@ -893,13 +887,7 @@ $('.detail-tache-home').on('click', function (e) {
                             </div>
                             <div class="three column row">
                                
-                                <div class="ui buttons">
-                                   <button id="archive-task-detail" onclick="terminerTask(${data.id})" class="ui red button">
-                                        Terminer la tâche
-                                    </button>
-                                  <div class="or" data-text="ou"></div>
-                                  <button onclick="SuiteTask()" class="ui blue button ">Donner suite</button>
-                                </div>
+                               
                                 
                                    
                                 </div>
