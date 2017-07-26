@@ -56,7 +56,7 @@ class TacheController extends Controller
                 $task = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches');
                 $result = $task->findOneBy([ 'claId' => $id ]);
                 if ($result) {
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
                     $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
                     $creationFromNow = $creation->fromNow();
                     $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
@@ -93,7 +93,7 @@ class TacheController extends Controller
                 ]);
                 if ($result) {
 
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
 
                     $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
                     $creationFromNow = $creation->fromNow();
@@ -131,7 +131,7 @@ class TacheController extends Controller
                 ]);
                 if ($result) {
 
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
 
 
                     $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
@@ -170,7 +170,7 @@ class TacheController extends Controller
                 ]);
                 if ($result) {
 
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
 
 
                     $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
@@ -209,7 +209,7 @@ class TacheController extends Controller
                 ]);
                 if ($result) {
 
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getInsUser() ]);
+                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
 
 
                     $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
@@ -867,7 +867,6 @@ class TacheController extends Controller
                     $stmt->bindValue(':desc', $descrNew);
                     $stmt->bindValue(':nom', $nomNew);
                     $stmt->bindValue(':us', $usNew);
-                    $stmt->bindValue(':priorite', $prioriteNew);
                     $stmt->bindValue(':echeance', $date_echeance2->format('Y-m-d H:i:s'));
                     $stmt->bindValue(':priorite', $prioriteNew);
                     $stmt->execute();
