@@ -1752,7 +1752,7 @@ class BaseController extends Controller
                 ];
 
                 return new JsonResponse($result, 200);
-            case 'fun':
+            case 'funecap':
                 $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
                 FROM CENTRALE_FUNECAP.dbo.CLIENTS
                 WHERE CLIENTS.CL_RAISONSOC LIKE :query
