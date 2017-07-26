@@ -631,17 +631,13 @@ $('.save-update-client').on('click', function (e) {
 
     let centrale = $('#centrale').html();
     let id = $('#id').html();
-
     let url = "http://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/update";
 
     $.ajax({
 
         // Adresse à laquelle la requête est envoyée
         url: url,
-
         type: 'POST',
-
-
         data: {
             siret: values[0].replace(/\s/g, ''),
             mail: values[1],
@@ -651,7 +647,6 @@ $('.save-update-client').on('click', function (e) {
             ca: values[5],
             adresse: values[6],
             ville: values[7],
-
         },
         // Le délai maximun en millisecondes de traitement de la demande
         timeout: 4000,
