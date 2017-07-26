@@ -1078,7 +1078,7 @@ $('.new-clients-user').on('click', function (e) {
 $('.ui.search')
     .search({
         apiSettings: {
-            url: 'http://crm.achatcentrale.fr/client/search/{query}'
+            url: 'http://crm.achatcentrale.fr/user/search/{query}'
         },
         searchOnFocus: true,
         fields: {
