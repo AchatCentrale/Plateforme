@@ -342,7 +342,7 @@
                                                 <div class="">
                                                     <ul class="to_do">
                                                         {% for tasks in task %}
-                                                            <li data-id="{{ tasks['CLA_ID'] }}"
+                                                            <li data-id="{{ tasks['CLA_ID'] }}" data-centrale=""
                                                                 class="cursor detail-tache-home-client">
                                                                 <p>{{ tasks['INS_DATE'] | fromNowString }} - {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
                                                                 {{ tasks['CLA_STATUS'] | etat | raw }}

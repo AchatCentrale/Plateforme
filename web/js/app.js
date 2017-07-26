@@ -1112,5 +1112,57 @@ $('.ui.search.clients-auto')
 
 
 
+$('.detail-tache-home-client').on('click', function (e) {
+   console.log('click');
+
+
+   let centrale = $('#centrale').html();
+
+
+   switch (centrale){
+
+       case 'CENTRALE_FUNECAP':
+
+           let id = $(this).data('id');
+
+           let aidy = Number(id);
+           let aidyCentrale = 4;
+
+
+           let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
+           console.log(url);
+
+           $.ajax({
+
+               // Adresse à laquelle la requête est envoyée
+               url: url,
+
+               // Le délai maximun en millisecondes de traitement de la demande
+               timeout: 4000,
+
+               // La fonction à apeller si la requête aboutie
+               success: function (data) {
+
+                  console.log(data);
+
+
+                   $('#modal-detail-task-home').modal('show')
+
+
+               },
+               error: function (e) {
+                   console.error(e);
+               }
+
+
+           });
+
+
+   }
+
+
+
+
+});
 
 // $('#modal-task-detail-home-client').modal('show');
