@@ -456,7 +456,7 @@ class BaseController extends Controller
                 $notes = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
                     'clId' => $id,
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ]);
                 $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
                     'soId' => 1,
