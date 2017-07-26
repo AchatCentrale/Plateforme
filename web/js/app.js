@@ -1088,11 +1088,11 @@ $('.ui.search')
         },
         minCharacters : 2,
         error : {
-            source      : 'Cannot search. No source used, and Semantic API module was not included',
+            source      : 'Pas de source',
             noResults   : 'Pas de resultat',
             logging     : 'Error in debug logging, exiting.',
             noTemplate  : 'A valid template name was not specified.',
-            serverError : 'There was an issue with querying the server.',
+            serverError : 'Problème de seerveur',
             maxResults  : 'Results must be an array to use maxResults setting',
             method      : 'The method you called is not defined.'
         },
@@ -1115,11 +1115,11 @@ $('.ui.search.clients-auto')
         },
         minCharacters : 2,
         error : {
-            source      : 'Cannot search. No source used, and Semantic API module was not included',
+            source      : 'Pas de source',
             noResults   : 'Pas de resultat',
             logging     : 'Error in debug logging, exiting.',
             noTemplate  : 'A valid template name was not specified.',
-            serverError : 'There was an issue with querying the server.',
+            serverError : 'Problème de seerveur',
             maxResults  : 'Results must be an array to use maxResults setting',
             method      : 'The method you called is not defined.'
         },
