@@ -1712,9 +1712,89 @@ class BaseController extends Controller
         $clientService = $this->get('site.service.client_services');
 
         switch ($centrale){
-            case'pfpl':
+            case 'pfpl':
                 $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
                 FROM CENTRALE_PFPL.dbo.CLIENTS
+                WHERE CLIENTS.CL_RAISONSOC LIKE :query
+                  ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->execute();
+
+                $clients = $stmt->fetchAll();
+                $result = $clientService->array_utf8_encode($clients);
+
+                $result = [
+                    "total_count" => count($clients),
+                    "incomplete_results" => false,
+                    "items" => $result
+                ];
+
+                return new JsonResponse($result, 200);
+            case 'roc':
+                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
+                FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
+                WHERE CLIENTS.CL_RAISONSOC LIKE :query
+                  ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->execute();
+
+                $clients = $stmt->fetchAll();
+                $result = $clientService->array_utf8_encode($clients);
+
+                $result = [
+                    "total_count" => count($clients),
+                    "incomplete_results" => false,
+                    "items" => $result
+                ];
+
+                return new JsonResponse($result, 200);
+            case 'fun':
+                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
+                FROM CENTRALE_FUNECAP.dbo.CLIENTS
+                WHERE CLIENTS.CL_RAISONSOC LIKE :query
+                  ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->execute();
+
+                $clients = $stmt->fetchAll();
+                $result = $clientService->array_utf8_encode($clients);
+
+                $result = [
+                    "total_count" => count($clients),
+                    "incomplete_results" => false,
+                    "items" => $result
+                ];
+
+                return new JsonResponse($result, 200);
+            case 'ac' :
+                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
+                FROM CENTRALE_ACHAT.dbo.CLIENTS
+                WHERE CLIENTS.CL_RAISONSOC LIKE :query
+                  ";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->execute();
+
+                $clients = $stmt->fetchAll();
+                $result = $clientService->array_utf8_encode($clients);
+
+                $result = [
+                    "total_count" => count($clients),
+                    "incomplete_results" => false,
+                    "items" => $result
+                ];
+
+                return new JsonResponse($result, 200);
+            case 'gccp' :
+                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
+                FROM CENTRALE_GCCP.dbo.CLIENTS
                 WHERE CLIENTS.CL_RAISONSOC LIKE :query
                   ";
 
