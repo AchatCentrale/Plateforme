@@ -1086,7 +1086,7 @@ $('.ui.search')
             title   : 'US_PRENOM',
             description   : 'US_ID',
         },
-        minCharacters : 2
+        minCharacters : 2,
         error : {
             source      : 'Cannot search. No source used, and Semantic API module was not included',
             noResults   : 'Pas de resultat',
@@ -1113,7 +1113,7 @@ $('.ui.search.clients-auto')
             title   : 'CL_RAISONSOC',
             description   : 'CL_REF',
         },
-        minCharacters : 2
+        minCharacters : 2,
         error : {
             source      : 'Cannot search. No source used, and Semantic API module was not included',
             noResults   : 'Pas de resultat',
