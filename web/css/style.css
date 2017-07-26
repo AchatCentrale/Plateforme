@@ -583,3 +583,8 @@ h3.raison-soc-titre {
     left: 10%;
     bottom: 93%;
 }
+
+.ui.search > .results {
+    top: 300%;
+
+}
