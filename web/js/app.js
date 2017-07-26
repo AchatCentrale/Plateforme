@@ -1083,8 +1083,8 @@ $('.ui.search')
         searchOnFocus: true,
         fields: {
             results : 'items',
-            title   : 'US_PRENOM',
-            description   : 'US_ID',
+            title   : 'US_ID',
+            description   : 'US_PRENOM',
         },
         minCharacters : 2,
         error : {
@@ -1110,8 +1110,8 @@ $('.ui.search.clients-auto')
         searchOnFocus: true,
         fields: {
             results : 'items',
-            title   : 'CL_RAISONSOC',
-            description   : 'CL_REF',
+            title   : 'CL_ID',
+            description   : 'CL_RAISONSOC',
         },
         minCharacters : 2,
         error : {
@@ -1123,10 +1123,7 @@ $('.ui.search.clients-auto')
             maxResults  : 'Results must be an array to use maxResults setting',
             method      : 'The method you called is not defined.'
         },
-        onSelect: function(result, response) {
-            console.log(result);
-            return false;
-        },
+
     })
 ;
 
