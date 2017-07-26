@@ -1351,41 +1351,7 @@ console.log(centrale);
                                     <h4>A terminer avant le ${data.echeance}</h4>
                                 </div>
                             </div>
-                            <div class="three column row">
-
-
-
-
-                                </div>
-
-                               <div class="three column  row">
-
-                               <div class="update-action">
-                                        <a class="ui basic button" href="#">Modifier l'action</a>
-                                  </div>
-
-
-
-                               <div class="archive-action">
-                                    <a class="ui basic button" href="/taches/archive/${data.id}/${data.idCentrale}"><i class="archive icon"></i>
-                                    Archiver l'action</a>
-                               </div>
-
-                               <div class="archive-action">
-                                        <a class="ui red basic button" href="/taches/delete/${data.id}/${data.idCentrale}"><i class="delete icon"></i>
-                                           Supprimer l'action</a>
-                                   </div>
-
-
-
-                            </div>
-
-
-
-                            </div>
-                            <div class="suite-task">
-
-                            </div>
+                        
                     </div>`;
 
 
