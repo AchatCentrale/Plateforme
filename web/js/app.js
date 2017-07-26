@@ -1273,7 +1273,6 @@ console.log(centrale);
             let aidy = Number(id);
             let aidyCentrale = 4;
 
-
             let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
             console.log(url);
 
@@ -1289,6 +1288,110 @@ console.log(centrale);
                 success: function (data) {
 
                    console.log(data);
+
+
+                    let title = `<p>Tâche #${data.id}</p>`;
+                    let el = $('.modal-content-client-archive-action');
+
+                    $('.modal-title-task-archive-detail').empty();
+                    el.empty();
+                    $('.modal-title-task-archive-detail').append(title);
+
+
+
+
+                    let tpl = `<h4>${data.nom}</h4>
+              <div class="detail-tache-etat">
+                      <div class="state-tache-detail">
+                            ${ stateTask(data.statut) }
+                        </div>
+                        <div class="change-statut-tache">
+                       <div class="dropup">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Changer le statut de la tache
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li><a href="${CURRENT_URL + "taches/etat/0/" + data.id + "/" + data.idCentrale}">Non commencé</a></li>
+                            <li><a href="${CURRENT_URL + "taches/etat/1/" + data.id + "/" + data.idCentrale}">En cours</a></li>
+                            <li><a href="${CURRENT_URL + "taches/etat/2/" + data.id + "/" + data.idCentrale}">Terminé</a></li>
+                            <li><a href="${CURRENT_URL + "taches/etat/3/" + data.id + "/" + data.idCentrale}">Attente de quelqu'un d'autre</a></li>
+                            <li><a href="${CURRENT_URL + "taches/etat/4/" + data.id + "/" + data.idCentrale}">Reportée</a></li>
+
+                          </ul>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+                    <div class="ui centered  grid">
+
+                            <div class="one column row">
+                                <div class="column">
+                                    <p>Assigné à : </p>
+                                    <a class="ui image label">
+                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                      ${data.user}
+                                    </a>
+                                </div>
+
+                            </div>
+                            <div class="one column row">
+                                <div class="column">
+                                    <h5>Description de la tâche a éffectuer :</h5>
+                                    <p class="task-description">${data.descr}</p>
+                                </div>
+
+                            </div>
+                            <div class="two column row">
+                                <div class="column">
+                                    <h4>Créée ${data.creation} </h4>
+                                </div>
+                                <div class="column">
+                                    <h4>A terminer avant le ${data.echeance}</h4>
+                                </div>
+                            </div>
+                            <div class="three column row">
+
+
+
+
+                                </div>
+
+                               <div class="three column  row">
+
+                               <div class="update-action">
+                                        <a class="ui basic button" href="#">Modifier l'action</a>
+                                  </div>
+
+
+
+                               <div class="archive-action">
+                                    <a class="ui basic button" href="/taches/archive/${data.id}/${data.idCentrale}"><i class="archive icon"></i>
+                                    Archiver l'action</a>
+                               </div>
+
+                               <div class="archive-action">
+                                        <a class="ui red basic button" href="/taches/delete/${data.id}/${data.idCentrale}"><i class="delete icon"></i>
+                                           Supprimer l'action</a>
+                                   </div>
+
+
+
+                            </div>
+
+
+
+                            </div>
+                            <div class="suite-task">
+
+                            </div>
+                    </div>`;
+
+
+
+                    el.append(tpl);
+                    $('#modal-task-detail-archive-client').modal('show');
 
 
                 },
