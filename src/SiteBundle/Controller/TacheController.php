@@ -835,65 +835,190 @@ class TacheController extends Controller
 
             case "ACHAT_CENTRALE":
             case "1":
-
-
                $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
                $stmt = $conn->prepare($sqlTask);
                $stmt->bindValue(':id', $id);
                $stmt->execute();
-
                $resultTask = $stmt->fetchAll();
-
                $resultUser = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
-
                 if ($request->getMethod() == "POST") {
-
-
                     $echeanceNew = $request->get('cla_echeance');
                     $nomNew = $request->get('cla_nom');
                     $descrNew = $request->get('cla_desc');
                     $usNew = $request->get('cla_us');
                     $prioriteNew = $request->get('cla_priorite');
-
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $echeanceNew);
-
-
-
                     $sqlUpdate = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES
                                   SET
                                     CLA_DESCR = :desc,
                                     CLA_NOM = :nom,
-                                    CLA_PRIORITE = :priorite,
                                     CLA_ECHEANCE = :echeance,
                                     CLA_PRIORITE = :priorite,
                                     MAJ_DATE = GETDATE(),
-                                    MAJ_USER = :user
-                                  WHERE CLA_ID = :id
-                                  "
-                    ;
-
-
+                                    US_ID = :us,
+                                    MAJ_USER = :user                                    
+                                  WHERE CLA_ID = :id";
                     $stmt = $conn->prepare($sqlUpdate);
                     $stmt->bindValue(':id', $id);
                     $stmt->bindValue(':user', $this->getUser()->getUsMail());
                     $stmt->bindValue(':desc', $descrNew);
                     $stmt->bindValue(':nom', $nomNew);
-                    $stmt->bindValue(':type', $prioriteNew);
-                    $stmt->bindValue(':echeance', $date_echeance2);
+                    $stmt->bindValue(':us', $usNew);
+                    $stmt->bindValue(':priorite', $prioriteNew);
+                    $stmt->bindValue(':echeance', $date_echeance2->format('Y-m-d H:i:s'));
                     $stmt->bindValue(':priorite', $prioriteNew);
                     $stmt->execute();
                     $update = $stmt->fetchAll();
 
+                    return $this->redirectToRoute('taches_home', [], 301);
+
                 }
-
-
-
                 return $this->render('@Site/ui-element/taches/action.form.update.html.twig', [
                     'task' => $resultTask,
                     'centrale' => "ACHAT_CENTRALE",
                     'user' => $resultUser,
                     'id' => $id
                 ]);
+            case "CENTRALE_GCCP":
+            case "2":
+            $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+            $stmt = $conn->prepare($sqlTask);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            $resultTask = $stmt->fetchAll();
+            $resultUser = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+            if ($request->getMethod() == "POST") {
+                $echeanceNew = $request->get('cla_echeance');
+                $nomNew = $request->get('cla_nom');
+                $descrNew = $request->get('cla_desc');
+                $usNew = $request->get('cla_us');
+                $prioriteNew = $request->get('cla_priorite');
+                $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $echeanceNew);
+                $sqlUpdate = "UPDATE CENTRALE_GCCP.dbo.CLIENTS_TACHES
+                                  SET
+                                    CLA_DESCR = :desc,
+                                    CLA_NOM = :nom,
+                                    CLA_ECHEANCE = :echeance,
+                                    CLA_PRIORITE = :priorite,
+                                    MAJ_DATE = GETDATE(),
+                                    US_ID = :us,
+                                    MAJ_USER = :user
+                                  WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sqlUpdate);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':user', $this->getUser()->getUsMail());
+                $stmt->bindValue(':desc', $descrNew);
+                $stmt->bindValue(':nom', $nomNew);
+                $stmt->bindValue(':us', $usNew);
+                $stmt->bindValue(':priorite', $prioriteNew);
+                $stmt->bindValue(':echeance', $date_echeance2->format('Y-m-d H:i:s'));
+                $stmt->bindValue(':priorite', $prioriteNew);
+                $stmt->execute();
+                $update = $stmt->fetchAll();
+
+                return $this->redirectToRoute('taches_home', [], 301);
+
+            }
+            return $this->render('@Site/ui-element/taches/action.form.update.html.twig', [
+                'task' => $resultTask,
+                'centrale' => "CENTRALE_GCCP",
+                'user' => $resultUser,
+                'id' => $id
+            ]);
+            case "CENTRALE_FUNECAP":
+            case "4":
+            $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+            $stmt = $conn->prepare($sqlTask);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            $resultTask = $stmt->fetchAll();
+            $resultUser = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+            if ($request->getMethod() == "POST") {
+                $echeanceNew = $request->get('cla_echeance');
+                $nomNew = $request->get('cla_nom');
+                $descrNew = $request->get('cla_desc');
+                $usNew = $request->get('cla_us');
+                $prioriteNew = $request->get('cla_priorite');
+                $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $echeanceNew);
+                $sqlUpdate = "UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES
+                                  SET
+                                    CLA_DESCR = :desc,
+                                    CLA_NOM = :nom,
+                                    CLA_ECHEANCE = :echeance,
+                                    CLA_PRIORITE = :priorite,
+                                    MAJ_DATE = GETDATE(),
+                                    US_ID = :us,
+                                    MAJ_USER = :user
+                                  WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sqlUpdate);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':user', $this->getUser()->getUsMail());
+                $stmt->bindValue(':desc', $descrNew);
+                $stmt->bindValue(':nom', $nomNew);
+                $stmt->bindValue(':us', $usNew);
+                $stmt->bindValue(':priorite', $prioriteNew);
+                $stmt->bindValue(':echeance', $date_echeance2->format('Y-m-d H:i:s'));
+                $stmt->bindValue(':priorite', $prioriteNew);
+                $stmt->execute();
+                $update = $stmt->fetchAll();
+
+                return $this->redirectToRoute('taches_home', [], 301);
+
+            }
+            return $this->render('@Site/ui-element/taches/action.form.update.html.twig', [
+                'task' => $resultTask,
+                'centrale' => "CENTRALE_FUNECAP",
+                'user' => $resultUser,
+                'id' => $id
+            ]);
+            case "CENTRALE_PFPL":
+            case "5":
+            $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+            $stmt = $conn->prepare($sqlTask);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            $resultTask = $stmt->fetchAll();
+            $resultUser = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
+            if ($request->getMethod() == "POST") {
+                $echeanceNew = $request->get('cla_echeance');
+                $nomNew = $request->get('cla_nom');
+                $descrNew = $request->get('cla_desc');
+                $usNew = $request->get('cla_us');
+                $prioriteNew = $request->get('cla_priorite');
+                $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $echeanceNew);
+                $sqlUpdate = "UPDATE CENTRALE_PFPL.dbo.CLIENTS_TACHES
+                                  SET
+                                    CLA_DESCR = :desc,
+                                    CLA_NOM = :nom,
+                                    CLA_ECHEANCE = :echeance,
+                                    CLA_PRIORITE = :priorite,
+                                    US_ID = :us,
+                                    MAJ_DATE = GETDATE(),
+                                    MAJ_USER = :user
+                                  WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sqlUpdate);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':user', $this->getUser()->getUsMail());
+                $stmt->bindValue(':desc', $descrNew);
+                $stmt->bindValue(':nom', $nomNew);
+                $stmt->bindValue(':us', $usNew);
+                $stmt->bindValue(':priorite', $prioriteNew);
+                $stmt->bindValue(':echeance', $date_echeance2->format('Y-m-d H:i:s'));
+                $stmt->bindValue(':priorite', $prioriteNew);
+                $stmt->execute();
+                $update = $stmt->fetchAll();
+
+                return $this->redirectToRoute('taches_home', [], 301);
+
+            }
+            return $this->render('@Site/ui-element/taches/action.form.update.html.twig', [
+                'task' => $resultTask,
+                'centrale' => "CENTRALE_PFPL",
+                'user' => $resultUser,
+                'id' => $id
+            ]);
+
+
 
         }
 
