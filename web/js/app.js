@@ -1119,15 +1119,16 @@ $('.detail-tache-home-client').on('click', function (e) {
 
 
    let centrale = $('#centrale').html();
+   let id = $(this).data('id');
+    let aidy = Number(id);
 
 
-   switch (centrale){
+    switch (centrale){
 
        case 'CENTRALE_FUNECAP':
 
-           let id = $(this).data('id');
 
-           let aidy = Number(id);
+
            let aidyCentrale = 4;
 
 
@@ -1240,20 +1241,21 @@ $('.detail-tache-home-client').on('click', function (e) {
                     </div>`;
                    el.append(tpl);
                    $('#modal-task-detail-home-client').modal('show');
+                   return;
 
 
                },
                error: function (e) {
                    console.error(e);
+                   return;
                }
 
 
            });
        case 'ACHAT_CENTRALE':
 
-           let id = $(this).data('id');
 
-           let aidy = Number(id);
+
            let aidyCentrale = 1;
 
 
