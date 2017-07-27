@@ -1857,7 +1857,7 @@ class BaseController extends Controller
             case 'CENTRALE_FUNECAP':
 
 
-                $sql = "SELECT *
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
                         FROM CENTRALE_FUNECAP.dbo.CLIENTS_USERS
                         WHERE CC_ID = :id";
 
