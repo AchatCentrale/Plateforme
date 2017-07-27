@@ -1849,6 +1849,7 @@ class BaseController extends Controller
     public function getClientUserAction(Request $request, $id, $centrale){
 
         $conn = $this->get('database_connection');
+        $clientService = $this->get('site.service.client_services');
 
 
         switch ($centrale)
@@ -1865,6 +1866,8 @@ class BaseController extends Controller
                 $stmt->bindValue('id', $id);
                 $stmt->execute();
                 $ccUser = $stmt->fetchAll();
+
+                $clientService->array_utf8_encode($ccUser);
                 return new JsonResponse($ccUser, 200);
 
 
