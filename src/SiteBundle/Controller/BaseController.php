@@ -76,36 +76,26 @@ class BaseController extends Controller
 
 
 
-        $centrale = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Societes')
-            ->findBy([
-                'soId' => $centrale_ID
-            ]);
+        switch ($centrale_ID) {
+            case '1':
 
-
-        switch ($centrale[0]->getSoRaisonsoc()) {
-            case 'CENTRALE_ROC_ECLERC':
-                $pays = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Pays')->findAll();
-                $activite = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Activites')->findBy([
+                $pays = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Pays')->findAll();
+                $activite = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Activites')->findBy([
                     'soId' => $centrale_ID
                 ]);
-                $groupe = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Groupe')->findAll();
-                $classif = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Classif')->findAll();
-                $region = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Regions')->findAll();
+                $groupe = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Groupe')->findAll();
+                $classif = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Classif')->findAll();
+                $region = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Regions')->findAll();
 
 
                 if ($request->getMethod() == 'POST') {
                     $req = $request->request->get('client-new');
 
 
-                    $sql_insert = 'INSERT INTO CENTRALE_ACHAT_JB.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
+                    $sql_insert = 'INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
                                     VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(YEAR, +1, GETDATE())  )';
 
-
-                    $db2 = $this->get('doctrine.dbal.centrale_funecap_jb_connection');
-
-
-                    $stmt = $db2->prepare($sql_insert);
-
+                    $stmt = $conn->prepare($sql_insert);
                     $stmt->bindValue("re", $req["region"], 'integer');
                     $stmt->bindValue("ref", $req["ref"], 'text');
                     $stmt->bindValue("raisonSoc", $req["raison-soc"], 'text');
@@ -130,22 +120,19 @@ class BaseController extends Controller
 
 
                     return $this->render('@Site/Base/client.new.html.twig', [
-                        'idNew' => $db2->lastInsertId(),
-                        'centrale_raison_soc' => $centrale[0]->getSoRaisonsoc(),
+                        'idNew' => $conn->lastInsertId(),
+                        'centrale_raison_soc' => "ACHAT_CENTRALE",
                         'state' => 'Client enregistrer',
                         'pays' => $pays,
                         'activite' => $activite,
                         'groupe' => $groupe,
                         'classif' => $classif,
                         'region' => $region,
-                        'centrale' => $centrale,
-                        'raisonSoc' => $raison_soc,
                     ]);
                 }
 
 
                 return $this->render('@Site/Base/client.new.html.twig', [
-                    'raisonSoc' => $raison_soc,
                     'pays' => $pays,
                     'activite' => $activite,
                     'groupe' => $groupe,
@@ -153,29 +140,87 @@ class BaseController extends Controller
                     'region' => $region,
                 ]);
                 break;
-            case 'CENTRALE_FUNECAP':
+            case '2':
 
-                $pays = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Pays')->findAll();
-                $activite = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Activites')->findAll();
-                $groupe = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Groupe')->findAll();
-                $classif = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Classif')->findAll();
-                $region = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:Regions')->findAll();
+                $pays = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Pays')->findAll();
+                $activite = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Activites')->findBy([
+                    'soId' => 1
+                ]);
+                $groupe = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Groupe')->findAll();
+                $classif = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Classif')->findAll();
+                $region = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Regions')->findAll();
 
 
                 if ($request->getMethod() == 'POST') {
-
                     $req = $request->request->get('client-new');
 
 
-                    $sql_insert = 'INSERT INTO CENTRALE_FUNECAP_JB.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
+                    $sql_insert = 'INSERT INTO CENTRALE_GCCP.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
                                     VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(YEAR, +1, GETDATE())  )';
 
+                    $stmt = $conn->prepare($sql_insert);
+                    $stmt->bindValue("re", $req["region"], 'integer');
+                    $stmt->bindValue("ref", $req["ref"], 'text');
+                    $stmt->bindValue("raisonSoc", $req["raison-soc"], 'text');
+                    $stmt->bindValue("siret", $req["siret"], 'text');
+                    $stmt->bindValue("siret", str_replace(' ', '', $req["siret"]), 'text');
+                    $stmt->bindValue("adresse", $req["adresse"], 'text');
+                    $stmt->bindValue("cp", $req["cp"], 'text');
+                    $stmt->bindValue("ville", $req["ville"], 'text');
+                    $stmt->bindValue("pays", $req["pays"], 'text');
+                    $stmt->bindValue("tel", str_replace(' ', '', $req["tel"]), 'text');
+                    $stmt->bindValue("mail", $req["mail"], 'text');
+                    $stmt->bindValue("web", $req["web"], 'text');
+                    $stmt->bindValue("activite", $req["acti"], 'integer');
+                    $stmt->bindValue("groupe", $req["groupe"], 'integer');
+                    $stmt->bindValue("effectif", $req["effe"], 'integer');
+                    $stmt->bindValue("classif", 1, 'integer');
+                    $stmt->bindValue("ca", str_replace(' ', '', $req["ca"]), 'float');
+                    $stmt->bindValue("status", $req["status"], 'text');
+                    $stmt->bindValue("user", $this->getUser()->getusMail(), 'text');
 
-                    $db2 = $this->get('doctrine.dbal.centrale_funecap_jb_connection');
+                    $stmt->execute();
 
 
-                    $stmt = $db2->prepare($sql_insert);
+                    return $this->render('@Site/Base/client.new.html.twig', [
+                        'idNew' => $conn->lastInsertId(),
+                        'centrale_raison_soc' => "CENTRALE_GCCP",
+                        'state' => 'Client enregistrer',
+                        'pays' => $pays,
+                        'activite' => $activite,
+                        'groupe' => $groupe,
+                        'classif' => $classif,
+                        'region' => $region,
+                    ]);
+                }
 
+
+                return $this->render('@Site/Base/client.new.html.twig', [
+                    'pays' => $pays,
+                    'activite' => $activite,
+                    'groupe' => $groupe,
+                    'classif' => $classif,
+                    'region' => $region,
+                ]);
+                break;
+            case '4':
+                $pays = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Pays')->findAll();
+                $activite = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Activites')->findBy([
+                    'soId' => 1
+                ]);
+                $groupe = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Groupe')->findAll();
+                $classif = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Classif')->findAll();
+                $region = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Regions')->findAll();
+
+
+                if ($request->getMethod() == 'POST') {
+                    $req = $request->request->get('client-new');
+
+
+                    $sql_insert = 'INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
+                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(YEAR, +1, GETDATE())  )';
+
+                    $stmt = $conn->prepare($sql_insert);
                     $stmt->bindValue("re", $req["region"], 'integer');
                     $stmt->bindValue("ref", $req["ref"], 'text');
                     $stmt->bindValue("raisonSoc", $req["raison-soc"], 'text');
@@ -200,22 +245,19 @@ class BaseController extends Controller
 
 
                     return $this->render('@Site/Base/client.new.html.twig', [
-                        'idNew' => $db2->lastInsertId(),
-                        'centrale_raison_soc' => $centrale[0]->getSoRaisonsoc(),
+                        'idNew' => $conn->lastInsertId(),
+                        'centrale_raison_soc' => "CENTRALE_FUNECAP",
                         'state' => 'Client enregistrer',
                         'pays' => $pays,
                         'activite' => $activite,
                         'groupe' => $groupe,
                         'classif' => $classif,
                         'region' => $region,
-                        'centrale' => $centrale,
-                        'raisonSoc' => $raison_soc,
                     ]);
                 }
 
 
                 return $this->render('@Site/Base/client.new.html.twig', [
-                    'raisonSoc' => $raison_soc,
                     'pays' => $pays,
                     'activite' => $activite,
                     'groupe' => $groupe,
@@ -223,6 +265,132 @@ class BaseController extends Controller
                     'region' => $region,
                 ]);
                 break;
+            case '5':
+                $pays = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Pays')->findAll();
+                $activite = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Activites')->findBy([
+                    'soId' => 1
+                ]);
+                $groupe = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Groupe')->findAll();
+                $classif = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Classif')->findAll();
+                $region = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Regions')->findAll();
+
+
+                if ($request->getMethod() == 'POST') {
+                    $req = $request->request->get('client-new');
+
+
+                    $sql_insert = 'INSERT INTO CENTRALE_PFPL.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
+                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(YEAR, +1, GETDATE())  )';
+
+                    $stmt = $conn->prepare($sql_insert);
+                    $stmt->bindValue("re", $req["region"], 'integer');
+                    $stmt->bindValue("ref", $req["ref"], 'text');
+                    $stmt->bindValue("raisonSoc", $req["raison-soc"], 'text');
+                    $stmt->bindValue("siret", $req["siret"], 'text');
+                    $stmt->bindValue("siret", str_replace(' ', '', $req["siret"]), 'text');
+                    $stmt->bindValue("adresse", $req["adresse"], 'text');
+                    $stmt->bindValue("cp", $req["cp"], 'text');
+                    $stmt->bindValue("ville", $req["ville"], 'text');
+                    $stmt->bindValue("pays", $req["pays"], 'text');
+                    $stmt->bindValue("tel", str_replace(' ', '', $req["tel"]), 'text');
+                    $stmt->bindValue("mail", $req["mail"], 'text');
+                    $stmt->bindValue("web", $req["web"], 'text');
+                    $stmt->bindValue("activite", $req["acti"], 'integer');
+                    $stmt->bindValue("groupe", $req["groupe"], 'integer');
+                    $stmt->bindValue("effectif", $req["effe"], 'integer');
+                    $stmt->bindValue("classif", $req["classif"], 'integer');
+                    $stmt->bindValue("ca", str_replace(' ', '', $req["ca"]), 'float');
+                    $stmt->bindValue("status", $req["status"], 'text');
+                    $stmt->bindValue("user", $this->getUser()->getusMail(), 'text');
+
+                    $stmt->execute();
+
+
+                    return $this->render('@Site/Base/client.new.html.twig', [
+                        'idNew' => $conn->lastInsertId(),
+                        'centrale_raison_soc' => "CENTRALE_PFPL",
+                        'state' => 'Client enregistrer',
+                        'pays' => $pays,
+                        'activite' => $activite,
+                        'groupe' => $groupe,
+                        'classif' => $classif,
+                        'region' => $region,
+                    ]);
+                }
+
+
+                return $this->render('@Site/Base/client.new.html.twig', [
+                    'pays' => $pays,
+                    'activite' => $activite,
+                    'groupe' => $groupe,
+                    'classif' => $classif,
+                    'region' => $region,
+                ]);
+                break;
+            case '6':
+                $pays = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Pays')->findAll();
+                $activite = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Activites')->findBy([
+                    'soId' => 1
+                ]);
+                $groupe = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Groupe')->findAll();
+                $classif = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Classif')->findAll();
+                $region = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Regions')->findAll();
+
+
+                if ($request->getMethod() == 'POST') {
+                    $req = $request->request->get('client-new');
+
+
+                    $sql_insert = 'INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC, CL_SIRET, CL_ADRESSE1, CL_CP,CL_CLASSIF, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_STATUS, CL_ADHESION, CL_ACTIVITE, CL_GROUPE, CL_EFFECTIF, CL_CA,INS_DATE, INS_USER, CL_DT_ADHESION)
+                                    VALUES (1, :re,:ref, :raisonSoc, :siret, :adresse,:cp,:classif ,:ville,:pays, :tel,:mail, :web, 0, :status, :activite, :groupe , :effectif, :ca, GETUTCDATE(), :user, DATEADD(YEAR, +1, GETDATE())  )';
+
+                    $stmt = $conn->prepare($sql_insert);
+                    $stmt->bindValue("re", $req["region"], 'integer');
+                    $stmt->bindValue("ref", $req["ref"], 'text');
+                    $stmt->bindValue("raisonSoc", $req["raison-soc"], 'text');
+                    $stmt->bindValue("siret", $req["siret"], 'text');
+                    $stmt->bindValue("siret", str_replace(' ', '', $req["siret"]), 'text');
+                    $stmt->bindValue("adresse", $req["adresse"], 'text');
+                    $stmt->bindValue("cp", $req["cp"], 'text');
+                    $stmt->bindValue("ville", $req["ville"], 'text');
+                    $stmt->bindValue("pays", $req["pays"], 'text');
+                    $stmt->bindValue("tel", str_replace(' ', '', $req["tel"]), 'text');
+                    $stmt->bindValue("mail", $req["mail"], 'text');
+                    $stmt->bindValue("web", $req["web"], 'text');
+                    $stmt->bindValue("activite", $req["acti"], 'integer');
+                    $stmt->bindValue("groupe", $req["groupe"], 'integer');
+                    $stmt->bindValue("effectif", $req["effe"], 'integer');
+                    $stmt->bindValue("classif", $req["classif"], 'integer');
+                    $stmt->bindValue("ca", str_replace(' ', '', $req["ca"]), 'float');
+                    $stmt->bindValue("status", $req["status"], 'text');
+                    $stmt->bindValue("user", $this->getUser()->getusMail(), 'text');
+
+                    $stmt->execute();
+
+
+                    return $this->render('@Site/Base/client.new.html.twig', [
+                        'idNew' => $conn->lastInsertId(),
+                        'centrale_raison_soc' => "ROC_ECLERC",
+                        'state' => 'Client enregistrer',
+                        'pays' => $pays,
+                        'activite' => $activite,
+                        'groupe' => $groupe,
+                        'classif' => $classif,
+                        'region' => $region,
+                    ]);
+                }
+
+
+                return $this->render('@Site/Base/client.new.html.twig', [
+                    'pays' => $pays,
+                    'activite' => $activite,
+                    'groupe' => $groupe,
+                    'classif' => $classif,
+                    'region' => $region,
+                ]);
+                break;
+
+
         }
     }
 

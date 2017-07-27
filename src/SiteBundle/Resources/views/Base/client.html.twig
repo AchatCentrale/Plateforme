@@ -173,18 +173,40 @@
 
                     <div class="col-md-12 col-sm-12 col-xs-12 text-center ">
                         <ul class="pagination pagination-split">
-                            <li><a href="{{ path('client-new', { 'centrale' : 2}) }}">
+                            <li>
+                                <a href="{{ path('client-new', { 'centrale' : 1}) }}">
                                     <img
-                                            data-centrale="CENTRALE_FUNECAP"
+                                            data-centrale="ACHAT_CENTRALE"
                                             class="cursor img-centrale-new-client"
-                                            src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+                                            src="{{ asset('images/logo-centrale/logo-ac.png') }}">
                                 </a>
                             </li>
-                            <li><a href="{{ path('client-new', { 'centrale' : 1}) }}">
+                            <li><a href="{{ path('client-new', { 'centrale' : 6}) }}">
                                     <img
                                             data-centrale="CENTRALE_ROC_ECLERC"
                                             class="cursor img-centrale-new-client"
                                             src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+                                </a>
+                            </li>
+                            <li><a href="{{ path('client-new', { 'centrale' : 2}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_GCCP"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
+                                </a>
+                            </li>
+                            <li><a href="{{ path('client-new', { 'centrale' : 4}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_GCCP"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+                                </a>
+                            </li>
+                            <li><a href="{{ path('client-new', { 'centrale' : 5}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_GCCP"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-pfpl.jpg') }}">
                                 </a>
                             </li>
                             {#<li><a href="{{ path('client-new', { 'centrale' : 3}) }}">#}
