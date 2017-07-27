@@ -1869,8 +1869,61 @@ class BaseController extends Controller
 
                 $clientService->array_utf8_encode($ccUser);
                 return new JsonResponse($ccUser, 200);
+                break;
+            case 'CENTRALE_GCCP':
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
+                        FROM CENTRALE_GCCP.dbo.CLIENTS_USERS
+                        WHERE CC_ID = :id";
 
 
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('id', $id);
+                $stmt->execute();
+                $ccUser = $stmt->fetchAll();
+
+                $clientService->array_utf8_encode($ccUser);
+                return new JsonResponse($ccUser, 200);
+            case 'ROC_ECLERC':
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
+                        FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_USERS
+                        WHERE CC_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('id', $id);
+                $stmt->execute();
+                $ccUser = $stmt->fetchAll();
+
+                $clientService->array_utf8_encode($ccUser);
+                return new JsonResponse($ccUser, 200);
+                break;
+            case 'CENTRALE_PFPL':
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
+                        FROM CENTRALE_PFPL.dbo.CLIENTS_USERS
+                        WHERE CC_ID = :id";
+
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('id', $id);
+                $stmt->execute();
+                $ccUser = $stmt->fetchAll();
+
+                $clientService->array_utf8_encode($ccUser);
+                return new JsonResponse($ccUser, 200);
+                break;
+            case 'ACHAT_CENTRALE' :
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
+                        FROM CENTRALE_ACHAT.dbo.CLIENTS_USERS
+                        WHERE CC_ID = :id";
+
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('id', $id);
+                $stmt->execute();
+                $ccUser = $stmt->fetchAll();
+
+                $clientService->array_utf8_encode($ccUser);
+                return new JsonResponse($ccUser, 200);
+                break;
         }
 
 

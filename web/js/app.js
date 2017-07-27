@@ -789,7 +789,6 @@ $('.edit-client-user').on('click', function () {
 
 
 
-    console.log(input[us_prename]);
 
     $('#update_user_client').modal('show');
 
