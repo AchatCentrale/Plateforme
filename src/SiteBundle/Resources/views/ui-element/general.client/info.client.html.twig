@@ -307,7 +307,7 @@
                                                 </thead>
                                                 <tbody>
                                                 {% for users in user %}
-                                                    <tr>
+                                                    <tr  >
                                                         <td>
                                                             <a target="_blank"
                                                                href="http://www.{{ centrale |replace({'_': '-'}) }}.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom | convert_encoding('UTF-8', 'Windows-1252') }}</a>
@@ -321,7 +321,7 @@
                                                         <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a>
                                                         </td>
                                                         <td>{{ users.ccPass }}</td>
-                                                        <td><i class="write icon cursor edit-client-user"></i></td>
+                                                        <td data-id=" {{ users.ccId }} " ><i class="write icon cursor edit-client-user"></i></td>
                                                     </tr>
                                                 {% endfor %}
                                                 </tbody>
@@ -377,10 +377,7 @@
                                                         {% for tasks in tacheA %}
                                                             <li data-id="{{ tasks.claId }}"
                                                                 class="cursor detail-tache-archive-client">
-                                                                <p>{{ tasks.claNom | raw |  convert_encoding('UTF-8', 'Windows-1252') }}
-                                                                    - {{ tasks.claDescr | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
-
-                                                            </li>
+                                                                <p>{{ tasks.claNom | raw |  convert_encoding('UTF-8', 'Windows-1252') }}- {{ tasks.claDescr | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p></li>
                                                         {% endfor %}
 
 
@@ -717,7 +714,6 @@
     </div>
 </div>
 
-
 <div class="modal fade" id="modal-task-detail-archive-client" role="dialog"
      aria-labelledby="modal-task-detail-home-client">
     <div class="modal-dialog" role="document">
@@ -735,8 +731,6 @@
     </div>
 </div>
 
-
-
 <div class="modal fade" id="update_user_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -749,11 +743,11 @@
                 <form class="ui form">
                     <div class="field">
                         <label>Prénom</label>
-                        <input type="text" name="us_prename" placeholder="Prénom">
+                        <input class="user-update-input" type="text" name="us_prename" placeholder="Prénom">
                     </div>
                     <div class="field">
                         <label>Nom</label>
-                        <input type="text" name="us_name" placeholder="Nom">
+                        <input class="user-update-input" type="text" name="us_name" placeholder="Nom">
                     </div>
                     <div class="field">
                         <div class="field">
@@ -766,15 +760,15 @@
                     </div>
                     <div class="field">
                         <label>Téléphone</label>
-                        <input type="text" id="Téléphone-user-update" name="us_tel" placeholder="Téléphone">
+                        <input class="user-update-input" type="text" id="Téléphone-user-update" name="us_tel" placeholder="Téléphone">
                     </div>
                     <div class="field">
                         <label>Mail</label>
-                        <input type="text" name="us_mail" placeholder="Adresse mail">
+                        <input class="user-update-input" type="text" name="us_mail" placeholder="Adresse mail">
                     </div>
                     <div class="field">
                         <label>Mot de passe</label>
-                        <input type="text" name="us_pass" placeholder="Mot de passe">
+                        <input class="user-update-input" type="text" name="us_pass" placeholder="Mot de passe">
                     </div>
                     <button class="ui button" type="submit">Enregistrer</button>
                 </form>

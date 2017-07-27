@@ -786,14 +786,15 @@ $('#select-statut-edit-client').on('change', function (e) {
 $('.edit-client-user').on('click', function () {
 
 
+
+
+
+    console.log(input[us_prename]);
+
     $('#update_user_client').modal('show');
 
 
 });
-
-function SuiteTask() {
-    $('.suite-task').append('A definir : Quelle elements mettre ? un champ, deux champs ? Leur positions ? Ce qu\'il sera ecrit dedans ? etcccc');
-}
 
 
 $('.detail-tache-home').on('click', function (e) {
@@ -977,7 +978,6 @@ $('.client-user-new').on('click', function () {
     $('#client-user-new').show();
 
 });
-
 
 $('.new-clients-user').on('click', function (e) {
 
@@ -1363,7 +1363,6 @@ $('.detail-tache-archive-client').on('click', function (e) {
 
 
 });
-
 
 let tableTache = $('#table-tache').DataTable({
     "colReorder": true,

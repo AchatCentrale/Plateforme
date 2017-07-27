@@ -1845,6 +1845,10 @@ class BaseController extends Controller
         }
 
     }
+
+    public function getClientUserAction(Request $request, $id, $centrale){
+
+    }
 }
 
 
