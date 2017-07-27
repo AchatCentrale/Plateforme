@@ -1137,6 +1137,8 @@ $('.detail-tache-home-client').on('click', function (e) {
         aidyCentrale = 5
     }else if (centrale === 'ROC_ECLERC'){
         aidyCentrale = 6
+    }else if (centrale === 'ACHAT_CENTRALE'){
+        aidyCentrale = 1;
     }
 
 
