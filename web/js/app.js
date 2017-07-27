@@ -1121,15 +1121,24 @@ $('.ui.search.clients-auto')
 $('.detail-tache-home-client').on('click', function (e) {
 
 
+    let centrale = $('#centrale').html();
 
-   let centrale = $('#centrale').html();
+
+    switch (centrale){
+
+        case 'CENTRALE_FUNECAP':
+            return aidyCentrale = 4;
+
+
+    }
+
+
     let id = $(this).data('id');
 
 
 
 
    let aidy = Number(id);
-   let aidyCentrale = 4;
 
 
     let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
