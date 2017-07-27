@@ -69,10 +69,13 @@ class BaseController extends Controller
     public function ClientNewAction(Request $request)
     {
 
-        $emFunecap = $this->getDoctrine()->getManager('centrale_funecap_jb');
 
-        $raison_soc = $request->query->get('raison-soc');
+        $conn = $this->get('database_connection');
         $centrale_ID = $request->query->get('centrale');
+
+
+
+
         $centrale = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:Societes')
             ->findBy([
                 'soId' => $centrale_ID
@@ -1802,7 +1805,7 @@ class BaseController extends Controller
                 ];
 
                 return new JsonResponse($result, 200);
-            case 'ac' :
+            case 'ACHAT_CENTRALE' :
                 $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
                 FROM CENTRALE_ACHAT.dbo.CLIENTS
                 WHERE CLIENTS.CL_RAISONSOC LIKE :query
@@ -1928,7 +1931,6 @@ class BaseController extends Controller
 
 
 
-        return new JsonResponse('ok', 200);
     }
 }
 
