@@ -176,7 +176,7 @@
                                                 {#region#}
                                                 <div class="form-group">
                                                     <label for="region-client">Région</label>
-                                                    <select required  name="client-new[region]" class="form-control" id="region-client">
+                                                    <select   name="client-new[region]" class="form-control" id="region-client">
                                                         <option value="">Selectionner la region pour l'entreprise</option>
 
                                                         {% for reg in region %}
@@ -189,7 +189,7 @@
                                                 {#acti#}
                                                 <div class="form-group">
                                                     <label for="acti-client">Activité</label>
-                                                    <select required  name="client-new[acti]" class="form-control form-control-sm"
+                                                    <select   name="client-new[acti]" class="form-control form-control-sm"
                                                             id="acti-client">
                                                         <option value="">Selectionner l'activité de l'entreprise</option>
 
@@ -202,7 +202,7 @@
                                                 {#groupe#}
                                                 <div class="form-group">
                                                     <label for="groupe-client">Groupe</label>
-                                                    <select required  name="client-new[groupe]" class="form-control form-control-sm"
+                                                    <select  name="client-new[groupe]" class="form-control form-control-sm"
                                                             id="groupe-client">
                                                         <option value="">Selectionner le groupe du client</option>
                                                         {% for gr in groupe %}
@@ -216,7 +216,7 @@
                                                 {% if classif %}
                                                     <div class="form-group">
                                                         <label for="classif-client">Classification</label>
-                                                        <select required  name="client-new[classif]" class="form-control form-control-sm"
+                                                        <select   name="client-new[classif]" class="form-control form-control-sm"
                                                                 id="classif-client">
                                                             <option value="">Selectionner la classification pour l'entreprise</option>
                                                             {% for class in classif %}
