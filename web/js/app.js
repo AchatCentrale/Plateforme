@@ -1130,6 +1130,13 @@ $('.detail-tache-home-client').on('click', function (e) {
 
     }else if (centrale ===  'CENTRALE_GCCP'){
 
+        aidyCentrale = 2;
+
+    }else if (centrale === 'CENTRALE_PFPL'){
+
+        aidyCentrale = 5
+    }else if (centrale === 'ROC_ECLERC'){
+        aidyCentrale = 6
     }
 
 
