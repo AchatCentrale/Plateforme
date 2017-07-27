@@ -347,9 +347,7 @@
                                                         {% for tasks in task %}
                                                             <li data-id="{{ tasks['CLA_ID'] }}"
                                                                 class="cursor detail-tache-home-client">
-                                                                <p>{{ tasks['INS_DATE'] | fromNowString }}- {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}- {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
-                                                                {{ tasks['CLA_STATUS'] | etat | raw }}
-                                                            </li>
+                                                                <p>{{ tasks['INS_DATE'] | fromNowString }}- {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}- {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>{{ tasks['CLA_STATUS'] | etat | raw }}</li>
                                                         {% endfor %}
 
 
