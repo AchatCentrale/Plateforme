@@ -1848,6 +1848,10 @@ class BaseController extends Controller
 
     public function getClientUserAction(Request $request, $id, $centrale){
 
+
+
+
+        return new JsonResponse('ok', 200);
     }
 }
 
