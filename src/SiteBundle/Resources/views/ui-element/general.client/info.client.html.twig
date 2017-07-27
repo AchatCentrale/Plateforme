@@ -4,8 +4,6 @@
 </div>
 
 
-
-
 {% set randomPassword = [] %}
                     {% for i in 1..5 %}
                         {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
@@ -64,7 +62,7 @@
 
                     <ul class="list-unstyled user_data">
                         <li><i class="fa fa-map-marker user-profile-icon"></i>
-                            {{ client[0].clAdresse1 | formatVille  }}<br>
+                            {{ client[0].clAdresse1 | formatVille }}<br>
                             {{ client[0].clCp }} {{ client[0].clVille | formatVille }}
                         </li>
                     </ul>
@@ -161,14 +159,14 @@
                                         <p class="cursor label-background"
                                            data-index="activite">{{ activite }}</p>
 
+                                    {% else %}
+                                        {% if activite %}
+                                            <p class="cursor label-background"
+                                               data-index="activite">{{ activite[0].acDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
                                         {% else %}
-                                            {% if activite %}
-                                                <p class="cursor label-background"
-                                                   data-index="activite">{{ activite[0].acDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
-                                            {% else %}
-                                                <p class="cursor label-background"
-                                                   data-index="activite">Pas d'activité enregistrer encore</p>
-                                            {% endif %}
+                                            <p class="cursor label-background"
+                                               data-index="activite">Pas d'activité enregistrer encore</p>
+                                        {% endif %}
                                     {% endif %}
                                 </div>
                             </div>
@@ -192,14 +190,14 @@
                                         <p class="cursor label-background"
                                            data-index="region">{{ region }}</p>
 
+                                    {% else %}
+                                        {% if region %}
+                                            <p class="cursor label-background"
+                                               data-index="region">{{ region[0].reNom }}</p>
                                         {% else %}
-                                            {% if region %}
-                                                <p class="cursor label-background"
-                                                   data-index="region">{{ region[0].reNom }}</p>
-                                            {% else %}
-                                                <p class="cursor label-background"
-                                                   data-index="region">Pas de region enregistrer encore</p>
-                                            {% endif %}
+                                            <p class="cursor label-background"
+                                               data-index="region">Pas de region enregistrer encore</p>
+                                        {% endif %}
                                     {% endif %}
 
                                 </div>
@@ -211,16 +209,20 @@
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Afficher les prix d'achats</p>
                                     <div class="prix-achat-check">
-                                        <input class="check-oui-pa" type="checkbox" {{ (client[0].clMasqHa == 1) ? 'checked' :  '' }} > oui
+                                        <input class="check-oui-pa"
+                                               type="checkbox" {{ (client[0].clMasqHa == 1) ? 'checked' :  '' }} > oui
 
-                                        <input class="check-non-pa" type="checkbox" {{ (client[0].clMasqHa == 0) ? 'checked' :  '' }} > Non
+                                        <input class="check-non-pa"
+                                               type="checkbox" {{ (client[0].clMasqHa == 0) ? 'checked' :  '' }} > Non
                                     </div>
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Afficher les prix de vente</p>
                                     <div class="prix-achat-check">
-                                        <input class="check-oui-pa" type="checkbox" {{ (client[0].clMasqVt == 1) ? 'checked' :  '' }} > Oui
-                                        <input class="check-non-pa" type="checkbox" {{ (client[0].clMasqVt == 0) ? 'checked' :  '' }} > Non
+                                        <input class="check-oui-pa"
+                                               type="checkbox" {{ (client[0].clMasqVt == 1) ? 'checked' :  '' }} > Oui
+                                        <input class="check-non-pa"
+                                               type="checkbox" {{ (client[0].clMasqVt == 0) ? 'checked' :  '' }} > Non
                                     </div>
                                 </div>
                             </div>
@@ -308,7 +310,7 @@
                                                     <tr>
                                                         <td>
                                                             <a target="_blank"
-                                                               href="http://www.{{  centrale |replace({'_': '-'}) }}.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom | convert_encoding('UTF-8', 'Windows-1252')  }}</a>
+                                                               href="http://www.{{ centrale |replace({'_': '-'}) }}.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom | convert_encoding('UTF-8', 'Windows-1252') }}</a>
                                                         </td>
                                                         <td>
                                                             <a target="_blank"
@@ -332,7 +334,8 @@
                                     {#Action_client#}
                                     <div role="tabpanel" class="tab-pane fade " id="tab_content1"
                                          aria-labelledby="home-tab">
-                                        <a href="{{ path('new-task', {'c' : centrale, 'cl' : client[0].clId }) }}" class="btn btn-success" role="button">Ajouter
+                                        <a href="{{ path('new-task', {'c' : centrale, 'cl' : client[0].clId }) }}"
+                                           class="btn btn-success" role="button">Ajouter
                                             une tâche</a>
 
                                         <div class="ui items">
@@ -342,8 +345,11 @@
                                                 <div class="">
                                                     <ul class="to_do">
                                                         {% for tasks in task %}
-                                                            <li data-id="{{ tasks['CLA_ID'] }}" class="cursor detail-tache-home-client">
-                                                                <p>{{ tasks['INS_DATE'] | fromNowString }} - {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
+                                                            <li data-id="{{ tasks['CLA_ID'] }}"
+                                                                class="cursor detail-tache-home-client">
+                                                                <p>{{ tasks['INS_DATE'] | fromNowString }}
+                                                                    - {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}
+                                                                    - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
                                                                 {{ tasks['CLA_STATUS'] | etat | raw }}
                                                             </li>
                                                         {% endfor %}
@@ -364,7 +370,8 @@
 
 
                                     {#Action_client_archive#}
-                                    <div role="tabpanel" class="tab-pane fade " id="tab_content4" aria-labelledby="home-tab">
+                                    <div role="tabpanel" class="tab-pane fade " id="tab_content4"
+                                         aria-labelledby="home-tab">
                                         <div class="ui items">
 
                                             {% if tacheA %}
@@ -374,7 +381,8 @@
                                                         {% for tasks in tacheA %}
                                                             <li data-id="{{ tasks.claId }}"
                                                                 class="cursor detail-tache-archive-client">
-                                                                <p>{{ tasks.claNom | raw |  convert_encoding('UTF-8', 'Windows-1252') }} - {{ tasks.claDescr | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
+                                                                <p>{{ tasks.claNom | raw |  convert_encoding('UTF-8', 'Windows-1252') }}
+                                                                    - {{ tasks.claDescr | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
 
                                                             </li>
                                                         {% endfor %}
@@ -448,14 +456,8 @@
 </div>
 
 
-
-
-
-
-
-
 {#//modal#}
-<div class="modal fade" id="myModal"  role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -538,7 +540,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="logo-edit"  role="dialog" aria-labelledby="logo-edit">
+<div class="modal fade" id="logo-edit" role="dialog" aria-labelledby="logo-edit">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -580,7 +582,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="client-user-edit"  role="dialog" aria-labelledby="client-user-edit">
+<div class="modal fade" id="client-user-edit" role="dialog" aria-labelledby="client-user-edit">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -644,15 +646,13 @@
                                 {% for profils in profil %}
                                     <option value="{{ profils.puId }}">{% if profils.puPole %}
                                             {{ profils.puPole | convert_encoding('UTF-8', 'Windows-1252') }} /
-                                            {% else %}
+                                        {% else %}
 
                                         {% endif %} {{ profils.puDescr | convert_encoding('UTF-8', 'Windows-1252') }}</option>
 
                                 {% endfor %}
                             </select>
                         </div>
-
-
 
 
                     </div>
@@ -684,7 +684,7 @@
                             <label for="validation-user">Niveau de validation</label>
                             <select name="data-user[]" id="validation-user" class="form-control data-update-client">
                                 <option value="true" selected="selected">Oui</option>
-                                <option value="false" >Non</option>
+                                <option value="false">Non</option>
                             </select>
                         </div>
 
@@ -704,11 +704,13 @@
     </div>
 </div>
 
-<div class="modal fade" id="modal-task-detail-home-client"  role="dialog" aria-labelledby="modal-task-detail-home-client">
+<div class="modal fade" id="modal-task-detail-home-client" role="dialog"
+     aria-labelledby="modal-task-detail-home-client">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title modal-title-task-client-detail" id="myModalLabel"></h4>
             </div>
             <div class="modal-body modal-content-client-detail-action">
@@ -720,11 +722,13 @@
 </div>
 
 
-<div class="modal fade" id="modal-task-detail-archive-client"  role="dialog" aria-labelledby="modal-task-detail-home-client">
+<div class="modal fade" id="modal-task-detail-archive-client" role="dialog"
+     aria-labelledby="modal-task-detail-home-client">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title modal-title-task-archive-detail" id="myModalLabel"></h4>
             </div>
             <div class="modal-body modal-content-client-archive-action">
@@ -735,3 +739,51 @@
     </div>
 </div>
 
+
+
+<div class="modal fade" id="update_user_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modifier l'utilisateur</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="ui form">
+                    <div class="field">
+                        <label>Prénom</label>
+                        <input type="text" name="us_prename" placeholder="Prénom">
+                    </div>
+                    <div class="field">
+                        <label>Nom</label>
+                        <input type="text" name="us_name" placeholder="Nom">
+                    </div>
+                    <div class="field">
+                        <div class="field">
+                            <label>Fonction</label>
+                            <select name="us_fonct" multiple="" class="ui dropdown user-update">
+                                <option value="">Choisir la fonction</option>
+                                <option value="1">Autres</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Téléphone</label>
+                        <input type="text" id="Téléphone-user-update" name="us_tel" placeholder="Téléphone">
+                    </div>
+                    <div class="field">
+                        <label>Mail</label>
+                        <input type="text" name="us_mail" placeholder="Adresse mail">
+                    </div>
+                    <div class="field">
+                        <label>Mot de passe</label>
+                        <input type="text" name="us_pass" placeholder="Mot de passe">
+                    </div>
+                    <button class="ui button" type="submit">Enregistrer</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

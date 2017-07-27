@@ -351,6 +351,7 @@ $('#siret-update').mask('000 000 000 00000');
 $('#tel-client').mask('00 00 00 00 00 ');
 $('#tel-user').mask('00 00 00 00 00 ');
 $('#Téléphone-update').mask('00 00 00 00 00 ');
+$('#Téléphone-user-update').mask('00 00 00 00 00 ');
 $('#dtadh-client').datepicker({
     altField: "#datepicker",
     closeText: 'Fermer',
@@ -785,7 +786,10 @@ $('#select-statut-edit-client').on('change', function (e) {
 
 
 $('.edit-client-user').on('click', function () {
-    $('#client-user-edit').show();
+
+
+    $('#update_user_client').modal('show');
+
 
 });
 
@@ -1119,40 +1123,38 @@ $('.detail-tache-home-client').on('click', function (e) {
 
 
    let centrale = $('#centrale').html();
-   let id = $(this).data('id');
-    let aidy = Number(id);
-
-
-    switch (centrale){
-
-       case 'CENTRALE_FUNECAP':
+    let id = $(this).data('id');
 
 
 
-           let aidyCentrale = 4;
+
+   let aidy = Number(id);
+   let aidyCentrale = 4;
 
 
-           let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
-           console.log(url);
+    let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
+    console.log(url);
 
-           $.ajax({
+    $.ajax({
 
-               // Adresse à laquelle la requête est envoyée
-               url: url,
+        // Adresse à laquelle la requête est envoyée
+        url: url,
 
-               // Le délai maximun en millisecondes de traitement de la demande
-               timeout: 4000,
+        // Le délai maximun en millisecondes de traitement de la demande
+        timeout: 4000,
 
-               // La fonction à apeller si la requête aboutie
-               success: function (data) {
+        // La fonction à apeller si la requête aboutie
+        success: function (data) {
 
-                   let title = `<p>Tâche #${data.id}</p>`;
-                   let el = $('.modal-content-client-detail-action');
+            let title = `<p>Tâche #${data.id}</p>`;
+            let el = $('.modal-content-client-detail-action');
 
-                   $('.modal-title-task-client-detail').empty();
-                   el.empty();
-                   $('.modal-title-task-client-detail').append(title);
-                   let tpl = `<h4>${data.nom}</h4>
+            $('.modal-title-task-client-detail').empty()
+                .append(title);
+            el.empty();
+
+
+            let tpl = `<h4>${data.nom}</h4>
               <div class="detail-tache-etat">
                       <div class="state-tache-detail">
                             ${ stateTask(data.statut) }
@@ -1239,146 +1241,18 @@ $('.detail-tache-home-client').on('click', function (e) {
 
                             </div>
                     </div>`;
-                   el.append(tpl);
-                   $('#modal-task-detail-home-client').modal('show');
-                   return;
+            el.append(tpl);
+
+            $('#modal-task-detail-home-client').modal('show');
 
 
-               },
-               error: function (e) {
-                   console.error(e);
-                   return;
-               }
+        },
+        error: function (e) {
+            console.error(e);
+        }
 
 
-           });
-       case 'ACHAT_CENTRALE':
-
-
-
-           let aidyCentrale = 1;
-
-
-           let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
-           console.log(url);
-
-           $.ajax({
-
-               // Adresse à laquelle la requête est envoyée
-               url: url,
-
-               // Le délai maximun en millisecondes de traitement de la demande
-               timeout: 4000,
-
-               // La fonction à apeller si la requête aboutie
-               success: function (data) {
-
-                   let title = `<p>Tâche #${data.id}</p>`;
-                   let el = $('.modal-content-client-detail-action');
-
-                   $('.modal-title-task-client-detail').empty();
-                   el.empty();
-                   $('.modal-title-task-client-detail').append(title);
-                   let tpl = `<h4>${data.nom}</h4>
-              <div class="detail-tache-etat">
-                      <div class="state-tache-detail">
-                            ${ stateTask(data.statut) }
-                        </div>
-                        <div class="change-statut-tache">
-                       <div class="dropup">
-                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Changer le statut de la tache
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="${CURRENT_URL + "taches/etat/0/" + data.id + "/" + data.idCentrale}">Non commencé</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/1/" + data.id + "/" + data.idCentrale}">En cours</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/2/" + data.id + "/" + data.idCentrale}">Terminé</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/3/" + data.id + "/" + data.idCentrale}">Attente de quelqu'un d'autre</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/4/" + data.id + "/" + data.idCentrale}">Reportée</a></li>
-
-                          </ul>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                    <br>
-                    <div class="ui centered  grid">
-
-                            <div class="one column row">
-                                <div class="column">
-                                    <p>Assigné à : </p>
-                                    <a class="ui image label">
-                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
-                                      ${data.user}
-                                    </a>
-                                </div>
-
-                            </div>
-                            <div class="one column row">
-                                <div class="column">
-                                    <h5>Description de la tâche a éffectuer :</h5>
-                                    <p class="task-description">${data.descr}</p>
-                                </div>
-
-                            </div>
-                            <div class="two column row">
-                                <div class="column">
-                                    <h4>Créée ${data.creation} </h4>
-                                </div>
-                                <div class="column">
-                                    <h4>A terminer avant le ${data.echeance}</h4>
-                                </div>
-                            </div>
-                            <div class="three column row">
-
-
-
-
-                                </div>
-
-                               <div class="three column  row">
-
-                               <div class="update-action">
-                                        <a class="ui basic button" href="#">Modifier l'action</a>
-                                  </div>
-
-
-
-                               <div class="archive-action">
-                                    <a class="ui basic button" href="/taches/archive/${data.id}/${data.idCentrale}"><i class="archive icon"></i>
-                                    Archiver l'action</a>
-                               </div>
-
-                               <div class="archive-action">
-                                        <a class="ui red basic button" href="/taches/delete/${data.id}/${data.idCentrale}"><i class="delete icon"></i>
-                                           Supprimer l'action</a>
-                                   </div>
-
-
-
-                            </div>
-
-
-
-                            </div>
-                            <div class="suite-task">
-
-                            </div>
-                    </div>`;
-                   el.append(tpl);
-                   $('#modal-task-detail-home-client').modal('show');
-
-
-               },
-               error: function (e) {
-                   console.error(e);
-               }
-
-
-           });
-   }
-
+    });
 
 
 
@@ -1480,6 +1354,9 @@ console.log(centrale);
 });
 
 
+
+
+
 let tableTache = $('#table-tache').DataTable({
     "colReorder": true,
     "language": {
@@ -1492,3 +1369,4 @@ let tableTache = $('#table-tache').DataTable({
 
 
 });
+
