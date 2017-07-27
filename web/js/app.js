@@ -378,11 +378,7 @@ $('.uncheck').on('click', function (e) {
 });
 
 
-$('.zone-submit-new button').on('click', function () {
 
-    console.log($('.client-new').val());
-
-});
 
 
 $('#btn-new-cl').on('click', function (e) {
@@ -461,7 +457,7 @@ function stateTask(state) {
 
     switch (state) {
         case 0:
-            return '<p class="pastille-detail blue" ></p> Non commencé';
+            return '<p class="pastille-detail blue" ></p> Non commencée';
             break;
         case 1:
             return '<p class="pastille-detail orange" ></p> En cours';
@@ -554,7 +550,7 @@ $('.detail-tache').on("click", function (e) {
                             </div>
                             <div class="one column row">
                                 <div class="column">
-                                    <h5>Description de la tâche a éffectuer :</h5>
+                                    <h5>Description de la tâche a éfféctuer :</h5>
                                     <p class="task-description">${data.descr}</p>
                                 </div>
     
@@ -869,7 +865,7 @@ $('.detail-tache-home').on('click', function (e) {
                             </div>
                             <div class="one column row">
                                 <div class="column">
-                                    <h5>Description de la tâche a éffectuer :</h5>
+                                    <h5>Description de la tâche a éfféctuer :</h5>
                                     <p class="task-description">${data.descr}</p>
                                 </div>
     
@@ -1331,7 +1327,7 @@ $('.detail-tache-archive-client').on('click', function (e) {
                             </div>
                             <div class="one column row">
                                 <div class="column">
-                                    <h5>Description de la tâche a éffectuer :</h5>
+                                    <h5>Description de la tâche a éfféctuer :</h5>
                                     <p class="task-description">${data.descr}</p>
                                 </div>
 
