@@ -514,8 +514,6 @@ $('.detail-tache').on("click", function (e) {
             $('.modal-title-task').append(title);
 
 
-
-
             let tpl = `<h4>${data.nom}</h4>
                     <div class="detail-tache-etat">
                        <div class="state-tache-detail">
@@ -1043,7 +1041,6 @@ $('.new-clients-user').on('click', function (e) {
 });
 
 
-
 // $(".text-area-validation").on("keydown", function(e){
 //
 //     $('#countTextarea').empty();
@@ -1069,53 +1066,48 @@ $('.ui.search')
         },
         searchOnFocus: true,
         fields: {
-            results : 'items',
-            title   : 'US_ID',
-            description   : 'US_PRENOM',
+            results: 'items',
+            title: 'US_ID',
+            description: 'US_PRENOM',
         },
-        minCharacters : 2,
-        error : {
-            source      : 'Pas de source',
-            noResults   : 'Pas de resultat',
-            logging     : 'Error in debug logging, exiting.',
-            noTemplate  : 'A valid template name was not specified.',
-            serverError : 'Problème de seerveur',
-            maxResults  : 'Results must be an array to use maxResults setting',
-            method      : 'The method you called is not defined.'
+        minCharacters: 2,
+        error: {
+            source: 'Pas de source',
+            noResults: 'Pas de resultat',
+            logging: 'Error in debug logging, exiting.',
+            noTemplate: 'A valid template name was not specified.',
+            serverError: 'Problème de seerveur',
+            maxResults: 'Results must be an array to use maxResults setting',
+            method: 'The method you called is not defined.'
         },
     })
 ;
-
-
 
 
 $('.ui.search.clients-auto')
     .search({
         apiSettings: {
-            url: 'http://crm.achatcentrale.fr/client/search/{query}/'+ $('#centrale').html()
+            url: 'http://crm.achatcentrale.fr/client/search/{query}/' + $('#centrale').html()
         },
         searchOnFocus: true,
         fields: {
-            results : 'items',
-            title   : 'CL_ID',
-            description   : 'CL_RAISONSOC',
+            results: 'items',
+            title: 'CL_ID',
+            description: 'CL_RAISONSOC',
         },
-        minCharacters : 2,
-        error : {
-            source      : 'Pas de source',
-            noResults   : 'Pas de resultat',
-            logging     : 'Error in debug logging, exiting.',
-            noTemplate  : 'A valid template name was not specified.',
-            serverError : 'Problème de seerveur',
-            maxResults  : 'Results must be an array to use maxResults setting',
-            method      : 'The method you called is not defined.'
+        minCharacters: 2,
+        error: {
+            source: 'Pas de source',
+            noResults: 'Pas de resultat',
+            logging: 'Error in debug logging, exiting.',
+            noTemplate: 'A valid template name was not specified.',
+            serverError: 'Problème de seerveur',
+            maxResults: 'Results must be an array to use maxResults setting',
+            method: 'The method you called is not defined.'
         },
 
     })
 ;
-
-
-
 
 
 $('.detail-tache-home-client').on('click', function (e) {
@@ -1125,19 +1117,19 @@ $('.detail-tache-home-client').on('click', function (e) {
     let aidyCentrale = 0;
 
 
-    if( centrale === "CENTRALE_FUNECAP"){
+    if (centrale === "CENTRALE_FUNECAP") {
         aidyCentrale = 4;
 
-    }else if (centrale ===  'CENTRALE_GCCP'){
+    } else if (centrale === 'CENTRALE_GCCP') {
 
         aidyCentrale = 2;
 
-    }else if (centrale === 'CENTRALE_PFPL'){
+    } else if (centrale === 'CENTRALE_PFPL') {
 
         aidyCentrale = 5
-    }else if (centrale === 'ROC_ECLERC'){
+    } else if (centrale === 'ROC_ECLERC') {
         aidyCentrale = 6
-    }else if (centrale === 'ACHAT_CENTRALE'){
+    } else if (centrale === 'ACHAT_CENTRALE') {
         aidyCentrale = 1;
     }
 
@@ -1145,9 +1137,7 @@ $('.detail-tache-home-client').on('click', function (e) {
     let id = $(this).data('id');
 
 
-
-
-   let aidy = Number(id);
+    let aidy = Number(id);
 
 
     let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
@@ -1273,52 +1263,62 @@ $('.detail-tache-home-client').on('click', function (e) {
     });
 
 
-
 });
 
 $('.detail-tache-archive-client').on('click', function (e) {
 
     let centrale = $('#centrale').html();
 
-console.log(centrale);
 
-    switch (centrale){
+    let id = $(this).data('id');
 
-        case 'CENTRALE_FUNECAP':
-
-            let id = $(this).data('id');
-
-            let aidy = Number(id);
-            let aidyCentrale = 4;
-
-            let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
-            console.log(url);
-
-            $.ajax({
-
-                // Adresse à laquelle la requête est envoyée
-                url: url,
-
-                // Le délai maximun en millisecondes de traitement de la demande
-                timeout: 4000,
-
-                // La fonction à apeller si la requête aboutie
-                success: function (data) {
-
-                   console.log(data);
+    let aidy = Number(id);
+    let aidyCentrale = 4;
 
 
-                    let title = `<p>Tâche #${data.id}</p>`;
-                    let el = $('.modal-content-client-archive-action');
+    if (centrale === "CENTRALE_FUNECAP") {
+        aidyCentrale = 4;
 
-                    $('.modal-title-task-archive-detail').empty();
-                    el.empty();
-                    $('.modal-title-task-archive-detail').append(title);
+    } else if (centrale === 'CENTRALE_GCCP') {
+
+        aidyCentrale = 2;
+
+    } else if (centrale === 'CENTRALE_PFPL') {
+
+        aidyCentrale = 5
+    } else if (centrale === 'ROC_ECLERC') {
+        aidyCentrale = 6
+    } else if (centrale === 'ACHAT_CENTRALE') {
+        aidyCentrale = 1;
+    }
 
 
+    let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
+    console.log(url);
+
+    $.ajax({
+
+        // Adresse à laquelle la requête est envoyée
+        url: url,
+
+        // Le délai maximun en millisecondes de traitement de la demande
+        timeout: 4000,
+
+        // La fonction à apeller si la requête aboutie
+        success: function (data) {
+
+            console.log(data);
 
 
-                    let tpl = `<h4>${data.nom}</h4>
+            let title = `<p>Tâche #${data.id}</p>`;
+            let el = $('.modal-content-client-archive-action');
+
+            $('.modal-title-task-archive-detail').empty();
+            el.empty();
+            $('.modal-title-task-archive-detail').append(title);
+
+
+            let tpl = `<h4>${data.nom}</h4>
               <div class="detail-tache-etat">
                       
                     <br>
@@ -1353,26 +1353,20 @@ console.log(centrale);
                     </div>`;
 
 
-
-                    el.append(tpl);
-                    $('#modal-task-detail-archive-client').modal('show');
-
-
-                },
-                error: function (e) {
-                    console.error(e);
-                }
+            el.append(tpl);
+            $('#modal-task-detail-archive-client').modal('show');
 
 
-            });
+        },
+        error: function (e) {
+            console.error(e);
+        }
 
 
-    }
+    });
+
 
 });
-
-
-
 
 
 let tableTache = $('#table-tache').DataTable({
