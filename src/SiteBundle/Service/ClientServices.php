@@ -19,7 +19,6 @@ class ClientServices
         $this->connection = $dbalConnection;
     }
 
-
     public function getTheSqlForCentrale($centrale)
     {
 
@@ -48,7 +47,6 @@ class ClientServices
     }
 
 
-
     public function getTheIdForTheStatut($statut){
 
 
@@ -70,7 +68,6 @@ class ClientServices
 
         return $statut;
     }
-
 
 
     public function getTheCount()
@@ -168,5 +165,12 @@ class ClientServices
         foreach ($dat as $i => $d)
             $ret[$i] = self::array_utf8_encode($d);
         return $ret;
+    }
+
+    public function getTheEvolution($centrale)
+    {
+
+
+
     }
 }

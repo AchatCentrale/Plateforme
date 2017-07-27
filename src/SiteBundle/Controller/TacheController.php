@@ -461,7 +461,6 @@ class TacheController extends Controller
         $centrale = $request->query->get('c');
         $clientChoice = $request->query->get('cl');
 
-        dump($clientChoice);
 
         switch ($centrale) {
 
