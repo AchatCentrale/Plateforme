@@ -91,7 +91,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label col-form-label-lg" for="cp-client">Code postal</label>
                                                 <div class="col-xs-5">
-                                                    <input required name="client-new[cp]" type="text" class="form-control client-new" id="cp-client"
+                                                    <input name="client-new[cp]" type="text" class="form-control client-new" id="cp-client"
                                                            placeholder="Le code postal de l'entreprise">
                                                 </div>
                                             </div>
@@ -101,7 +101,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label col-form-label-lg" for="pays-client">Pays</label>
                                                 <div class="col-xs-5">
-                                                    <select required name="client-new[pays]" class="form-control form-control-sm client-new"
+                                                    <select name="client-new[pays]" class="form-control form-control-sm client-new"
                                                             id="pays-client">
                                                         <option value="0" selected>Le pays de l'entreprise</option>
                                                         {% for country in pays %}
@@ -147,7 +147,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label col-form-label-lg" for="ca-client">Chiffre d'affaires</label>
                                                 <div class="col-xs-5">
-                                                    <input required name="client-new[ca]" type="text" class="form-control client-new" id="ca-client"
+                                                    <input name="client-new[ca]" type="text" class="form-control client-new" id="ca-client"
                                                            placeholder="Le chiffre d'affaires de l'entreprise">
                                                 </div>
                                             </div>
@@ -157,7 +157,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label col-form-label-lg" for="effectif-client">Effectif</label>
                                                 <div class="col-xs-5">
-                                                    <input required name="client-new[effe]" type="text" class="form-control client-new"
+                                                    <input name="client-new[effe]" type="text" class="form-control client-new"
                                                            id="effectif-client"
                                                            placeholder="Effectif de l'entreprise">
                                                 </div>
