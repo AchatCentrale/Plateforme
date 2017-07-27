@@ -1122,13 +1122,13 @@ $('.detail-tache-home-client').on('click', function (e) {
 
 
     let centrale = $('#centrale').html();
+    let aidyCentrale = 0;
 
 
-    switch (centrale){
+    if( centrale === "CENTRALE_FUNECAP"){
+        aidyCentrale = 4;
 
-        case 'CENTRALE_FUNECAP':
-            return aidyCentrale = 4;
-
+    }else if (centrale ===  'CENTRALE_GCCP'){
 
     }
 
