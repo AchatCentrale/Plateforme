@@ -1857,7 +1857,7 @@ class BaseController extends Controller
             case 'CENTRALE_FUNECAP':
 
 
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
                         FROM CENTRALE_FUNECAP.dbo.CLIENTS_USERS
                         WHERE CC_ID = :id";
 
@@ -1871,7 +1871,7 @@ class BaseController extends Controller
                 return new JsonResponse($ccUser, 200);
                 break;
             case 'CENTRALE_GCCP':
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
                         FROM CENTRALE_GCCP.dbo.CLIENTS_USERS
                         WHERE CC_ID = :id";
 
@@ -1884,7 +1884,7 @@ class BaseController extends Controller
                 $clientService->array_utf8_encode($ccUser);
                 return new JsonResponse($ccUser, 200);
             case 'ROC_ECLERC':
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
                         FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_USERS
                         WHERE CC_ID = :id";
 
@@ -1897,7 +1897,7 @@ class BaseController extends Controller
                 return new JsonResponse($ccUser, 200);
                 break;
             case 'CENTRALE_PFPL':
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
                         FROM CENTRALE_PFPL.dbo.CLIENTS_USERS
                         WHERE CC_ID = :id";
 
@@ -1911,7 +1911,7 @@ class BaseController extends Controller
                 return new JsonResponse($ccUser, 200);
                 break;
             case 'ACHAT_CENTRALE' :
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
+                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
                         FROM CENTRALE_ACHAT.dbo.CLIENTS_USERS
                         WHERE CC_ID = :id";
 
