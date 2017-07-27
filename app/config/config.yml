@@ -45,6 +45,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        client_service: "@site.service.client_services"
 
 # Doctrine Configuration
 doctrine:

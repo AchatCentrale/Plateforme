@@ -169,7 +169,143 @@ class ClientServices
 
     public function getTheEvolution($centrale)
     {
-        $conn = $this->connection->
+        switch ($centrale){
+            case "1":
+                $sql = "SELECT COUNT(*)
+                FROM CENTRALE_ACHAT.dbo.CLIENTS
+                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+                $sqlTotal = "SELECT COUNT(*)
+                            FROM CENTRALE_ACHAT.dbo.CLIENTS";
+
+                $stmtTotal = $this->connection->prepare($sqlTotal);
+                $stmtTotal->execute();
+                $resultTotal = $stmtTotal->fetchAll();
+
+                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+
+
+
+                $data = [
+                    "total" => $total
+                ];
+
+
+                return $data;
+            case "2":
+                $sql = "SELECT COUNT(*)
+                FROM CENTRALE_GCCP.dbo.CLIENTS
+                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+                $sqlTotal = "SELECT COUNT(*)
+                            FROM CENTRALE_GCCP.dbo.CLIENTS";
+
+                $stmtTotal = $this->connection->prepare($sqlTotal);
+                $stmtTotal->execute();
+                $resultTotal = $stmtTotal->fetchAll();
+
+                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+
+
+
+                $data = [
+                    "total" => $total
+                ];
+
+
+                return $data;
+            case "4":
+                $sql = "SELECT COUNT(*)
+                FROM CENTRALE_FUNECAP.dbo.CLIENTS
+                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+                $sqlTotal = "SELECT COUNT(*)
+                            FROM CENTRALE_FUNECAP.dbo.CLIENTS";
+
+                $stmtTotal = $this->connection->prepare($sqlTotal);
+                $stmtTotal->execute();
+                $resultTotal = $stmtTotal->fetchAll();
+
+                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+
+
+
+                $data = [
+                    "total" => $total
+                ];
+
+
+                return $data;
+            case "5":
+                $sql = "SELECT COUNT(*)
+                FROM CENTRALE_PFPL.dbo.CLIENTS
+                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+                $sqlTotal = "SELECT COUNT(*)
+                            FROM CENTRALE_PFPL.dbo.CLIENTS";
+
+                $stmtTotal = $this->connection->prepare($sqlTotal);
+                $stmtTotal->execute();
+                $resultTotal = $stmtTotal->fetchAll();
+
+                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+
+
+
+                $data = [
+                    "total" => $total
+                ];
+
+
+                return $data;
+            case "6":
+                $sql = "SELECT COUNT(*)
+                FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
+                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+                $sqlTotal = "SELECT COUNT(*)
+                            FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS";
+
+                $stmtTotal = $this->connection->prepare($sqlTotal);
+                $stmtTotal->execute();
+                $resultTotal = $stmtTotal->fetchAll();
+
+                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+
+
+
+                $data = [
+                    "total" => $total
+                ];
+
+
+                return $data;
+        }
 
 
     }

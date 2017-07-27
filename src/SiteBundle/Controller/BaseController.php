@@ -1837,8 +1837,14 @@ class BaseController extends Controller
     {
 
 
-        $clients = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findAll();
 
+
+        $clientService = $this->get('site.service.client_services');
+
+        $result = $clientService->getTheEvolution(1);
+
+
+        dump($result);
 
         return $this->render('@Site/test.html.twig');
 
