@@ -1278,13 +1278,9 @@ $('.detail-tache-archive-client').on('click', function (e) {
 
     if (centrale === "CENTRALE_FUNECAP") {
         aidyCentrale = 4;
-
     } else if (centrale === 'CENTRALE_GCCP') {
-
         aidyCentrale = 2;
-
     } else if (centrale === 'CENTRALE_PFPL') {
-
         aidyCentrale = 5
     } else if (centrale === 'ROC_ECLERC') {
         aidyCentrale = 6
