@@ -1848,6 +1848,27 @@ class BaseController extends Controller
 
     public function getClientUserAction(Request $request, $id, $centrale){
 
+        $conn = $this->get('database_connection');
+
+
+        switch ($centrale)
+        {
+            case 'CENTRALE_FUNECAP':
+
+
+                $sql = "SELECT *
+                        FROM CENTRALE_FUNECAP.dbo.CLIENTS_USERS
+                        WHERE CC_ID = :id";
+
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue('id', $id);
+                $stmt->execute();
+                $ccUser = $stmt->fetchAll();
+                return new JsonResponse($ccUser, 200);
+
+
+        }
 
 
 
