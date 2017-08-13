@@ -1801,9 +1801,6 @@ class BaseController extends Controller
                 $client = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([
                     'clId' => $id
                 ]);
-
-
-
                 return new Response($client[0]->getClRaisonsoc(), 200);
             case 2:
                 $client = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy([
@@ -1979,7 +1976,7 @@ class BaseController extends Controller
                 ];
 
                 return new JsonResponse($result, 200);
-            case 'ACHAT_CENTRALE' :
+            case 'ac' :
                 $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
                 FROM CENTRALE_ACHAT.dbo.CLIENTS
                 WHERE CLIENTS.CL_RAISONSOC LIKE :query
