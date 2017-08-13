@@ -362,7 +362,7 @@ label{
 }
 
 .input-top-tables input {
-    width: 300px !important;
+    width: 100% !important;
     height: 49px;
     border-radius: 57px;
     font-size: 20pt;
