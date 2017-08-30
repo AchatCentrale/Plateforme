@@ -20,6 +20,34 @@ class TacheController extends Controller
 
         $user = $this->getUser();
 
+
+        if($user->getUsId() === 2){
+
+
+            $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+            $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE
+                FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                WHERE CLA_STATUS <> 10
+                ORDER BY CLA_STATUS ASC";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':usId', $user->getUsId());
+
+
+            $stmt->execute();
+            $task = $stmt->fetchAll();
+
+
+
+
+            return $this->render('@Site/Base/tache.home.html.twig', [
+                'task' => $task,
+                'user' => $user->getUsPrenom(),
+            ]);
+        }
+
+
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE

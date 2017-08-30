@@ -36,6 +36,36 @@ class BaseController extends Controller
         $dataCount = $clientService->getTheCount();
 
         $user = $this->getUser();
+
+        if($user->getUsId() === 2){
+
+
+            $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+            $sql = "SELECT *
+                FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                WHERE CLA_STATUS <> 10
+                ORDER BY CLA_STATUS DESC";
+
+            $stmt = $conn->prepare($sql);
+
+
+            $stmt->execute();
+            $task = $stmt->fetchAll();
+
+
+
+
+            return $this->render(
+                '@Site/Base/home.html.twig',
+                [
+                    'task' => $task,
+                    "dataCount" => $dataCount
+
+                ]
+            );
+        }
+
         $conn = $this->get('doctrine.dbal.centrale_gccp_connection');
 
         $sql = "SELECT *
