@@ -229,18 +229,7 @@
                         </div>
 
 
-                        <div class="profile_title historique-client">
-                            <h2>Historique du client
-                                <small id="afficherplus-historique" class="cursor">Afficher plus</small>
-                            </h2>
-                        </div>
 
-
-                        <div class="historique-client-content">
-
-                            {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0].clId, 'centrale': centrale })) }}
-
-                        </div>
 
 
                         <div class="profile_title ">
@@ -438,6 +427,19 @@
 
                                 </div>
                             </div>
+
+                        </div>
+
+                        <div class="profile_title historique-client">
+                            <h2>Historique du client
+                                <small id="afficherplus-historique" class="cursor">Afficher plus</small>
+                            </h2>
+                        </div>
+
+
+                        <div class="historique-client-content">
+
+                            {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0].clId, 'centrale': centrale })) }}
 
                         </div>
                     </div>
