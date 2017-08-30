@@ -42,6 +42,7 @@
                             {% endif %}
                         </a>
                     </li>
+                    <li class="{% if app.request.attributes.get('_route') == 'index-fournisseur' %}current-page {% endif %}"><a href="{{ path('index-fournisseur', { "c" : "all"}) }}"><i class="fa fa-industry"></i> Fournisseurs</a></li>
 
                 </ul>
             </div>

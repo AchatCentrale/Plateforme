@@ -405,6 +405,7 @@ let table = $('#client-all').DataTable({
 });
 
 
+
 $("form input.date").datepicker({
     altField: "#datepicker",
     closeText: 'Fermer',
@@ -1372,3 +1373,19 @@ let tableTache = $('#table-tache').DataTable({
 
 });
 
+
+let fournisseurTable = $('#fournisseurs-all').DataTable({
+    "colReorder": true,
+    "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
+    },
+    "dom": '<"el_top_tables"' +
+    '<l><"input-top-tables"f><p>' +
+    '>' +
+    't' +
+    '<"el_bottom_tables"' +
+    '<l><i><p>' +
+    '>'
+
+
+});

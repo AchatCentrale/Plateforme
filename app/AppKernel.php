@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new RocEclercBundle\RocEclercBundle(),
             new GccpBundle\GccpBundle(),
             new PfplBundle\PfplBundle(),
+            new ProductBundle\ProductBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

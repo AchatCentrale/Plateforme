@@ -300,7 +300,7 @@ class ClientServices
 
 
                 $data = [
-                    "total" => $total
+                    "total" => round($total)
                 ];
 
 

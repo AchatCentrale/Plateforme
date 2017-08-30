@@ -142,3 +142,7 @@ get-client-autocomplete:
 get-client-user:
     path: /client/user/{centrale}/{id}
     defaults: {_controller: SiteBundle:Base:getClientUser}
+
+index-fournisseur:
+    path: /fournisseurs
+    defaults: {_controller: SiteBundle:Fournisseur:index}
