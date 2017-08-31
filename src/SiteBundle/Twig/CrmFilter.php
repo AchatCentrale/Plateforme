@@ -4,7 +4,6 @@ namespace SiteBundle\Twig;
 
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Twig_Function;
 
 
@@ -55,7 +54,7 @@ class CrmFilter extends \Twig_Extension
 
         $result = "";
 
-        switch ($centrale){
+        switch ($centrale) {
 
             case "CENTRALE_FUNECAP":
 
@@ -63,11 +62,10 @@ class CrmFilter extends \Twig_Extension
 
                 $rand = rand(1, 24);
 
-                for ($i = 0; $i <= 8; $i++){
+                for ($i = 0; $i <= 8; $i++) {
                     $rand .= rand(1, 9);
 
                 }
-
 
 
                 $result = $result . $rand;
@@ -79,7 +77,7 @@ class CrmFilter extends \Twig_Extension
 
                 $rand = rand(1, 24);
 
-                for ($i = 0; $i <= 8; $i++){
+                for ($i = 0; $i <= 8; $i++) {
                     $rand .= rand(1, 9);
                 }
                 $result = $result . $rand;
@@ -96,8 +94,8 @@ class CrmFilter extends \Twig_Extension
     {
 
 
-        if(gettype($centrale) === "string"){
-            switch ($centrale){
+        if (gettype($centrale) === "string") {
+            switch ($centrale) {
                 case 'ROC ECLERC':
                     return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
                     break;
@@ -108,38 +106,36 @@ class CrmFilter extends \Twig_Extension
                     return "<h3><span class=\"label big label-danger \">Centrale GCCP</span></h3>";
                     break;
                 case 'ACHAT CENTRALE':
-                    return "<h3><span class=\"label big label-danger \">Achat centrale</span></h3>";
+                    return "<div class=\"little-pic-centrale\"><img src=\"{{ asset('assets/images/logo-ac-tiny.png') }}\" alt=\"\"></div>";
                     break;
                 case 'CENTRALE PFPL':
                     return "<h3><span class=\"label big label-danger \">Centrale PFPL</span></h3>";
                     break;
             }
             return $centrale;
-        }else{
-            switch ($centrale){
+        } else {
+            switch ($centrale) {
                 case '1':
-                    return "<h3><span class=\"label big label-primary \">Achat Centrale</span></h3>";
+                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-ac-tiny.png\" alt=\"\"></div>";
                     break;
                 case '2':
-                    return "<h3><span class=\"label big label-default \">Centrale GCCP</span></h3>";
+                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-gccp-tiny.png\" alt=\"\"></div>";
                     break;
                 case '3':
                     return "<h3><span class=\"label big label-danger \">Centrale PROMUCF</span></h3>";
                     break;
                 case '4':
-                    return "<h3><span class=\"label big label-danger \">Centrale Funecap</span></h3>";
+                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-funecap-tiny.png\" alt=\"\"></div>";
                     break;
                 case '5':
-                    return "<h3><span class=\"label big label-success \">Centrale PFPL</span></h3>";
+                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-pfpl-tiny.jpg\" alt=\"\"></div>";
                     break;
                 case '6':
-                    return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
+                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-roc-tiny.png\" alt=\"\"></div>";
                     break;
 
             }
         }
-
-
 
 
         return $centrale;
@@ -170,7 +166,6 @@ class CrmFilter extends \Twig_Extension
         return $momentFromVo->getRelative();
 
 
-
     }
 
     public function etatTache($state)
@@ -178,8 +173,7 @@ class CrmFilter extends \Twig_Extension
 
         $green = '<p class="pastille orange" ></p>';
 
-        switch ($state)
-        {
+        switch ($state) {
             case 0:
                 return '<p class="pastille blue" ></p>';
                 break;
@@ -207,27 +201,27 @@ class CrmFilter extends \Twig_Extension
     public function centraleFilter($centrale)
     {
 
-        if(gettype($centrale) === "string"){
+        if (gettype($centrale) === "string") {
 
-            switch ($centrale){
+            switch ($centrale) {
                 case "CENTRALE_FUNECAP":
-                    return "centrale-".substr($centrale, 9);
+                    return "centrale-" . substr($centrale, 9);
                     break;
                 case 'ROC_ECLERC':
-                    return "centrale-".strtolower(str_replace("_","-", $centrale ));
+                    return "centrale-" . strtolower(str_replace("_", "-", $centrale));
                     break;
                 case 'ACHAT_CENTRALE':
                     return "achatcentrale";
                     break;
                 case 'CENTRALE_PFPL':
-                    return strtolower(str_replace("_","-", $centrale ));
+                    return strtolower(str_replace("_", "-", $centrale));
                     break;
                 case 'CENTRALE_GCCP':
-                    return strtolower(str_replace("_","-", $centrale ));
+                    return strtolower(str_replace("_", "-", $centrale));
                     break;
             }
-        }else{
-            switch ($centrale){
+        } else {
+            switch ($centrale) {
                 case "1":
                     return "ACHAT_CENTRALE";
                     break;
@@ -247,12 +241,12 @@ class CrmFilter extends \Twig_Extension
         }
 
 
-
     }
 
-    public function statusFilter($status){
+    public function statusFilter($status)
+    {
 
-        switch ($status){
+        switch ($status) {
             case 0:
                 return "A Validé";
                 break;
@@ -269,14 +263,13 @@ class CrmFilter extends \Twig_Extension
         return $status;
     }
 
-    public function isEmpty($input){
+    public function isEmpty($input)
+    {
 
 
-
-
-        if(empty($input)){
+        if (empty($input)) {
             return "<h2>à remplire</h2>";
-        }else{
+        } else {
             return $input;
         }
 
@@ -299,17 +292,17 @@ class CrmFilter extends \Twig_Extension
         for ($i = 0; $i <= strlen($siret); $i++) {
 
 
-            if($i === 3){
-                array_push($result, substr($siret, 0, 3) );
+            if ($i === 3) {
+                array_push($result, substr($siret, 0, 3));
                 array_push($result, " ");
-            }else if ($i === 6){
-                array_push($result, substr($siret, 3, 3) );
+            } else if ($i === 6) {
+                array_push($result, substr($siret, 3, 3));
                 array_push($result, " ");
-            }else if($i === 9){
-                array_push($result, substr($siret, 6, 3) );
+            } else if ($i === 9) {
+                array_push($result, substr($siret, 6, 3));
                 array_push($result, " ");
-            }else if($i === 14){
-                array_push($result, substr($siret, 9, 5) );
+            } else if ($i === 14) {
+                array_push($result, substr($siret, 9, 5));
 
 
             }
@@ -322,17 +315,17 @@ class CrmFilter extends \Twig_Extension
     public function dateFilter(\DateTime $date = null)
     {
 
-       if(gettype($date) === null){
-           return $date;
+        if (gettype($date) === null) {
+            return $date;
 
-       }else{
-           \Moment\Moment::setLocale('fr_FR');
+        } else {
+            \Moment\Moment::setLocale('fr_FR');
 
-           $m = new \Moment\Moment($date->format('Y-m-d H:i:s'), 'UTC');
+            $m = new \Moment\Moment($date->format('Y-m-d H:i:s'), 'UTC');
 
 
-           return $m->format('l dS F Y ');
-       }
+            return $m->format('l dS F Y ');
+        }
     }
 
     public function typeFilter($type)
@@ -345,11 +338,9 @@ class CrmFilter extends \Twig_Extension
         ]);
 
 
-
-
         $typeDB = $typee[0]->getAcNom();
 
-        switch ($typeDB){
+        switch ($typeDB) {
             case "Envoi devis":
                 return '<i class="bar big chart icon"></i>';
                 break;
@@ -363,7 +354,6 @@ class CrmFilter extends \Twig_Extension
                 return '<i class="sticky big note outline icon"></i>';
                 break;
         }
-
 
 
     }
@@ -404,14 +394,15 @@ class CrmFilter extends \Twig_Extension
         return $momentFromVo->getRelative();
     }
 
-    public function limitLength($word){
+    public function limitLength($word)
+    {
 
 
-        if (strlen($word) >= 30){
+        if (strlen($word) >= 30) {
             $chaine = substr($word, 0, 50);
 
-            return $chaine. '.....';
-        } else{
+            return $chaine . '.....';
+        } else {
             return $word;
         }
 
@@ -421,13 +412,14 @@ class CrmFilter extends \Twig_Extension
     {
 
 
-        $result = strtolower( $word );
+        $result = strtolower($word);
         return ucwords($result);
     }
 
-    public function userFilter($user){
+    public function userFilter($user)
+    {
 
-        switch ($user){
+        switch ($user) {
 
 
             case 1:

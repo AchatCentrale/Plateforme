@@ -971,7 +971,10 @@ $('#afficherplus-historique').on('click', function () {
     el = $('.historique-client-content');
 
 
-    $('.right_col').css('height','100%');
+    $('.right_col').css('height','100%' +
+        '' +
+        '' +
+        '');
 
 
     showHideEl(el);

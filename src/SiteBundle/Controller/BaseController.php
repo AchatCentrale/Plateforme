@@ -1866,12 +1866,6 @@ class BaseController extends Controller
 
 
 
-        $clientService = $this->get('site.service.client_services');
-
-        $result = $clientService->getTheEvolution(1);
-
-
-        dump($result);
 
         return $this->render('@Site/test.html.twig');
 
