@@ -64,6 +64,8 @@ class TacheController extends Controller
 
 
 
+        dump($task);
+
         return $this->render('@Site/Base/tache.home.html.twig', [
             'task' => $task,
         ]);
