@@ -1941,6 +1941,8 @@ class BaseController extends Controller
     public function getClientAutocompleteAction(Request $request, $query,$centrale)
     {
 
+
+
         $conn = $this->get('database_connection');
 
         $clientService = $this->get('site.service.client_services');

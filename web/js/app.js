@@ -715,25 +715,15 @@ $('#isGenerique').on('click', function (e) {
 
 
     //el disabled or not
-    let el = $('#client-isDisabled'
-
-
-
-
-
-
-
-
-
-    );
+    let el = $('#client-isDisabled');
 
 
     switch (e.target.checked){
         case true:
-            el.removeAttr('disabled');
+            el.attr('disabled','disabled');
             break;
         case false:
-            el.attr('disabled','disabled');
+            el.removeAttr('disabled');
             break;
     }
 
