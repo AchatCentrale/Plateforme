@@ -45,6 +45,7 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('centraleLabel', [$this, 'centraleLabel']),
             new \Twig_SimpleFilter('limitLength', [$this, 'limitLength']),
             new \Twig_SimpleFilter('formatVille', [$this, 'formatVille']),
+            new \Twig_SimpleFilter('userFilter', [$this, 'userFilter']),
         );
     }
 
@@ -155,6 +156,7 @@ class CrmFilter extends \Twig_Extension
         return $m->format('ll', new \Moment\CustomFormats\MomentJs());
 
     }
+
     public function dateFromNowString($date)
     {
 
@@ -415,13 +417,37 @@ class CrmFilter extends \Twig_Extension
 
     }
 
-
     public function formatVille($word)
     {
 
 
         $result = strtolower( $word );
         return ucwords($result);
+    }
+
+    public function userFilter($user){
+
+        switch ($user){
+
+
+            case 1:
+                return "Laurent";
+                break;
+            case 2:
+                return "Alexis";
+                break;
+            case 3:
+                return "Evelyne";
+                break;
+            case 4:
+                return "Morgane";
+                break;
+            case 5:
+                return "Jean-baptiste";
+                break;
+
+        }
+
     }
 
 }

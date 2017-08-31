@@ -19,8 +19,10 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>Ajouter une tâche</h2>
-
                     <div class="clearfix"></div>
+                <div class="checkbox-action-generique">
+                    <label><input id="isGenerique" type="checkbox" value=""> Action générique ?</label>
+                </div>
                 </div>
                 <div class="x_content">
 
@@ -71,7 +73,7 @@
                                         <div class="ui search field clients-auto">
                                             <label>Clients</label>
                                             <div class="ui left icon  input">
-                                                <input name="cla_cl" required class="prompt" type="text" placeholder="{{ client[0].clId }}">
+                                                <input id="client-isDisabled" name="cla_cl" required class="prompt" type="text" placeholder="{{ client[0].clId }}">
                                                 <i class="id card outline icon"></i>
                                             </div>
                                         </div>

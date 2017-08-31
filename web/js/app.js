@@ -713,15 +713,30 @@ $('.add-note').on('click', function (e) {
 
 $('#isGenerique').on('click', function (e) {
 
-    if (document.getElementById("achatcentrale_crmbundle_clientstaches_cl").disabled === true) {
-        $('#achatcentrale_crmbundle_clientstaches_cl').prop("disabled", false);
 
-    } else if (document.getElementById("achatcentrale_crmbundle_clientstaches_cl").disabled === false) {
-        $('#achatcentrale_crmbundle_clientstaches_cl').prop("disabled", true);
+    //el disabled or not
+    let el = $('#client-isDisabled'
 
-    } else {
-        alert('error');
+
+
+
+
+
+
+
+
+    );
+
+
+    switch (e.target.checked){
+        case true:
+            el.removeAttr('disabled');
+            break;
+        case false:
+            el.attr('disabled','disabled');
+            break;
     }
+
 
 
 });

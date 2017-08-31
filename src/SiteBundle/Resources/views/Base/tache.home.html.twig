@@ -25,14 +25,14 @@
                                 <thead>
                                 <tr>
                                     <th class="one wide">Type</th>
-                                    <th class="two wide">Nom de l'action</th>
-                                    <th class="one wide">Date de creation</th>
-                                    <th class="one wide">Assigné à</th>
-                                    <th class="one wide">Date d'échéance</th>
-                                    <th class="four wide">Description</th>
-                                    <th class="two wide">Nom du client</th>
                                     <th class="one wide">Priorité</th>
                                     <th class="one wide">Statut de l'action</th>
+                                    <th class="one wide">Date d'échéance</th>
+                                    <th class="one wide">Assigné à</th>
+                                    <th class="two wide">Nom de l'action</th>
+                                    <th class="four wide">Description</th>
+                                    <th class="two wide">Nom du client</th>
+                                    <th class="one wide">Date de creation</th>
                                     <th class="one wide">Centrale</th>
                                 </tr>
                                 </thead>
@@ -40,9 +40,18 @@
 
                                 {% for tasks in task %}
 
-                                    <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} " data-centrale="{{ tasks['SO_ID']  }}"  id="{{ tasks['CLA_ID'] }}">
+                                    <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} "
+                                        data-centrale="{{ tasks['SO_ID'] }}" id="{{ tasks['CLA_ID'] }}">
                                         <td>
                                             <div>{{ tasks['CLA_TYPE'] | type | raw }}</div>
+                                        </td>
+                                        <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
+                                        <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
+                                        <td>
+                                            {{ tasks['CLA_ECHEANCE'] | dateString }}
+                                        </td>
+                                        <td>
+                                            <div class="ui label"><i class="user icon"></i>{{ tasks['US_ID'] | userFilter }}</div>
                                         </td>
                                         <td>
                                             <div>
@@ -50,19 +59,8 @@
                                                 {#<span class="count_bottom">Modifié le : {{ tasks['MAJ_DATE'] }} </span>#}
                                             </div>
                                         </td>
-                                        <td>
-                                            <div>
-                                                {{ tasks['INS_DATE'] | fromNowString }}
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="ui label"><i class="user icon"></i>{{ user }}</div>
-                                        </td>
-                                        <td>
-                                            {{ tasks['CLA_ECHEANCE'] | dateString }}
-                                        </td>
                                         <td class="justify">
-                                            <h4 >{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') | limitLength }}</h4>
+                                            <h4>{{ tasks['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252') | limitLength }}</h4>
                                         </td>
                                         <td>
                                             <p>
@@ -71,8 +69,11 @@
                                                 </a>
                                             </p>
                                         </td>
-                                        <td>{{ tasks['CLA_PRIORITE'] | priorite | raw }}</td>
-                                        <td>{{ tasks['CLA_STATUS'] | etat | raw }}</td>
+                                        <td>
+                                            <div>
+                                                {{ tasks['INS_DATE'] | fromNowString }}
+                                            </div>
+                                        </td>
                                         <td>{{ tasks['SO_ID'] | centraleLabel | raw }}</td>
 
                                     </tr>
@@ -82,11 +83,10 @@
                             </table>
 
                         </div>
-                        {% else %}
+                    {% else %}
 
                         <p>Il n'y a pas de tâches pour le moment</p>
                     {% endif %}
-
 
 
                 </div>

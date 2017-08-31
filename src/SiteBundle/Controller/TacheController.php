@@ -26,7 +26,7 @@ class TacheController extends Controller
 
             $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-            $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE
+            $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE CLA_STATUS <> 10
                 ORDER BY CLA_STATUS ASC";
@@ -38,19 +38,18 @@ class TacheController extends Controller
             $stmt->execute();
             $task = $stmt->fetchAll();
 
-
+            dump($task);
 
 
             return $this->render('@Site/Base/tache.home.html.twig', [
                 'task' => $task,
-                'user' => $user->getUsPrenom(),
             ]);
         }
 
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE
+        $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE US_ID = :usId
                 AND CLA_STATUS <> 10
@@ -65,10 +64,8 @@ class TacheController extends Controller
 
 
 
-
         return $this->render('@Site/Base/tache.home.html.twig', [
             'task' => $task,
-            'user' => $user->getUsPrenom(),
         ]);
     }
 
@@ -508,9 +505,6 @@ class TacheController extends Controller
                     $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findAll();
                 }
                 if ($request->getMethod() == "POST") {
-
-
-
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
                     $task
                         ->setClaType($req->get('cla_type'))
