@@ -120,7 +120,7 @@
                                             class="cursor go-to-client">
                                             <td>{{ cl.CL_REF }}</td>
                                             <td>{{ cl.SO_RAISONSOC }}</td>
-                                            <td>{{ cl.CL_RAISONSOC |  convert_encoding('SQL_Latin1_General_CP1_CS_AS', 'Windows-1252') }}</td>
+                                            <td>{{ cl.CL_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252//TRANSLIT') }}</td>
                                             <td>{{ cl.CL_CP }} {{ cl.CL_VILLE |  convert_encoding('UTF-8', 'Windows-1252') | formatVille }}</td>
                                             <td>{{ cl.CL_TEL | phone }}</td>
                                             <td>{{ cl.CL_SIRET | siret }}</td>
