@@ -942,6 +942,7 @@ $('.detail-tache-home').on('click', function (e) {
 });
 
 function showHideEl(element) {
+
     if ($(element).is(":visible")) {
         element.hide().fadeOut("slow");
         $(this).html('Afficher plus')
@@ -968,6 +969,9 @@ $('#afficherplus-detail').on('click', function () {
 $('#afficherplus-historique').on('click', function () {
 
     el = $('.historique-client-content');
+
+
+    $('.right_col').css('height','100%');
 
 
     showHideEl(el);
