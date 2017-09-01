@@ -1418,13 +1418,10 @@ $('.user-label').focusout(function() {
         let centrale = getUrlParameter('c')
 
 
-        if(!value){
+
             $('.client-label').after('<div class="ui  label ">Roc- eclerc</div>');
 
-            firstime = false;
-        }
-
-
+        $('#client-isDisabled').attr('disabled','disabled');
 
 
 
