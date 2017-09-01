@@ -236,7 +236,7 @@ class CrmFilter extends \Twig_Extension
                     return "CENTRALE_PFPL";
                     break;
                 case '6':
-                    return "ROC_ECLERC";
+                    return "CENTRALE-ROC-ECLERC";
                     break;
             }
         }
