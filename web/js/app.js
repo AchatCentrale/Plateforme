@@ -1408,7 +1408,6 @@ function getUrlParameter(name) {
 
 
 $('.user-label').focusout(function() {
-    var firstime = true;
 
 
 
@@ -1419,8 +1418,8 @@ $('.user-label').focusout(function() {
         let centrale = getUrlParameter('c')
 
 
-        if(firstime === true){
-            $('.client-label').after('<div class="ui  label ">Tiny</div>');
+        if(!value){
+            $('.client-label').after('<div class="ui  label ">Roc- eclerc</div>');
 
             firstime = false;
         }
