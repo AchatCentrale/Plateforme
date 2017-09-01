@@ -60,9 +60,7 @@ doctrine:
                 user:           "%database_user%"
                 password:       "%database_password%"
                 dbname:         "CENTRALE_ACHAT_JB"
-                charset:  UTF8
                 options:
-                    1002:  "SET NAMES 'UTF8'"
                     ansi_nulls: on
                     ansi_warnings: on
             centrale_produits:
@@ -71,9 +69,7 @@ doctrine:
                 user:           "AC_JBAGOSTIN"
                 password:       "35H7Hjvy"
                 dbname:         "CENTRALE_PRODUITS_JB"
-                charset:  UTF8
                 options:
-                    1002:  "SET NAMES 'UTF8'"
                     ansi_nulls: on
                     ansi_warnings: on
             centrale_funecap:
@@ -82,9 +78,7 @@ doctrine:
                  user:           "AC_JBAGOSTIN"
                  password:       "35H7Hjvy"
                  dbname:         "CENTRALE_FUNECAP"
-                 charset:  UTF8
                  options:
-                     1002:  "SET NAMES 'UTF8'"
                      ansi_nulls: on
                      ansi_warnings: on
             achat_centrale:
@@ -93,7 +87,6 @@ doctrine:
                 user:         "AC_JBAGOSTIN"
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_ACHAT"
-                charset:  UTF8
                 options:
                     1002:  "SET NAMES 'UTF8'"
                     ansi_nulls: on
@@ -104,9 +97,7 @@ doctrine:
                 user:         "AC_JBAGOSTIN"
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_ROC_ECLERC"
-                charset:      UTF8
                 options:
-                     1002:  "SET NAMES 'UTF8'"
                      ansi_nulls: on
                      ansi_warnings: on
             centrale_gccp:
@@ -116,7 +107,6 @@ doctrine:
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_GCCP"
                 options:
-                    1002:  "SET NAMES 'UTF8'"
                     ansi_nulls: on
                     ansi_warnings: on
             centrale_pascal_leclerc:
@@ -126,7 +116,6 @@ doctrine:
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_PFPL"
                 options:
-                    1002:  "SET NAMES 'UTF8'"
                     ansi_nulls: on
                     ansi_warnings: on
             ac_produits:
@@ -136,7 +125,6 @@ doctrine:
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_PRODUITS"
                 options:
-                    1002:  "SET NAMES 'UTF8'"
                     ansi_nulls: on
                     ansi_warnings: on
 
