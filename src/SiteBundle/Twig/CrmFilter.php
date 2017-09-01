@@ -45,6 +45,7 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('limitLength', [$this, 'limitLength']),
             new \Twig_SimpleFilter('formatVille', [$this, 'formatVille']),
             new \Twig_SimpleFilter('userFilter', [$this, 'userFilter']),
+            new \Twig_SimpleFilter('avatar', [$this, 'getAvatar']),
         );
     }
 
@@ -440,6 +441,22 @@ class CrmFilter extends \Twig_Extension
 
         }
 
+    }
+
+    public function getAvatar($nom, $prenom, $tiny = false)
+    {
+
+        if ($tiny === true){
+            $tpl = "<div class='avatar_background-tiny'><p class='text-avatar-tiny'>".$prenom[0].$nom[0]."</p></div>";
+        }else {
+            $tpl = "<div class='avatar_background'><p class='text-avatar'>".$prenom[0].$nom[0]."</p></div>";
+        }
+
+
+
+
+
+        return $tpl;
     }
 
 }
