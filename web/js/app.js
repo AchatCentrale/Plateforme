@@ -1426,7 +1426,7 @@ $('.user-label').focusout(function() {
 
         $('.remove-client-label').on('click', function (e) {
             console.log(e);
-            $('.client-label').after('');
+            $('.client-label').after("  ");
 
         });
 
