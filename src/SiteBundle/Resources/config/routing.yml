@@ -143,6 +143,13 @@ get-client-user:
     path: /client/user/{centrale}/{id}
     defaults: {_controller: SiteBundle:Base:getClientUser}
 
+client-label:
+    path: /client/label/{centrale}/{id}
+    defaults: {_controller: SiteBundle:Base:getClientLabel}
+
+
+
 index-fournisseur:
     path: /fournisseurs
     defaults: {_controller: SiteBundle:Fournisseur:index}
+

@@ -2137,6 +2137,13 @@ class BaseController extends Controller
 
     public function getClientLabelAction(Request$request, $id, $centrale){
 
+
+
+
+
+
+
+
     }
 }
 

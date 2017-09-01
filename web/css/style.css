@@ -643,3 +643,13 @@ h3.raison-soc-titre {
     font-size: 13pt;
 
 }
+.label-client{
+    padding-top: 5px;
+    border-left: solid rgba(34, 36, 38, 0.15) 1px;
+    border-bottom: solid 1px rgba(34, 36, 38, 0.15);
+    border-top: solid 1px rgba(34, 36, 38, 0.15);
+    padding-left: 13px;
+    border-top-left-radius: 0.28571429rem;
+    box-shadow: 0em 0em 0em 0em transparent inset;
+    border-bottom-left-radius: 0.28571429rem;
+}

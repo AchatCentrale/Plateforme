@@ -72,9 +72,14 @@
                                         </div>
                                         <div class="ui search field clients-auto">
                                             <label>Clients</label>
-                                            <div class="ui left icon  input">
-                                                <input id="client-isDisabled"  name="cla_cl" required class="prompt user-label" type="text" placeholder="{{ client[0].clId }}">
-                                                <i class="id card outline icon"></i>
+                                            <div class="ui   input">
+
+                                                <div class="ui large labels label-client">
+                                                    <i class="address book outline icon client-label"></i>
+
+
+                                                </div>
+                                                <input id="client-isDisabled"  name="cla_cl" required class="prompt user-label" type="text" placeholder="{{ client[0].clId }}" value="">
                                             </div>
                                         </div>
                                         {#<div class="field">#}

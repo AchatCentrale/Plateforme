@@ -1401,16 +1401,23 @@ let fournisseurTable = $('#fournisseurs-all').DataTable({
 
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
+    let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    let results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
 
 $('.user-label').focusout(function() {
     setTimeout(function () {
-        console.log($('.user-label').val());
-        console.log(getUrlParameter('c'));
+
+
+
+        let value = $('.user-label').val();
+        let centrale = getUrlParameter('c')
+
+
+        $('.client-label').after('<div class="ui  label ">Tiny</div>');
+
 
 
 
