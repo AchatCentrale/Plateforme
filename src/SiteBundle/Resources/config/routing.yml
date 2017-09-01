@@ -148,6 +148,9 @@ client-label:
     defaults: {_controller: SiteBundle:Base:getClientLabel}
 
 
+export-client:
+    path: /client/export/{centrale}
+    defaults: {_controller: SiteBundle:Base:exportClient}
 
 index-fournisseur:
     path: /fournisseurs

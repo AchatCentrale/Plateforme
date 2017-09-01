@@ -1425,6 +1425,8 @@ $('.user-label').focusout(function() {
 
 });
 
+//TODO: Quand on appuie sur la croix sa retire la raison sociale
+
 $('.remove-client-label').on('click', function (e) {
     console.log(e);
     $('#label-client-task').remove();

@@ -4,6 +4,9 @@ namespace SiteBundle\Controller;
 
 
 
+use Goodby\CSV\Export\Standard\Collection\PdoCollection;
+use Goodby\CSV\Export\Standard\CsvFileObject;
+use Goodby\CSV\Export\Standard\Exporter;
 use Http\Adapter\Guzzle6\Client;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Base\Coordinate;
@@ -21,6 +24,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Goodby\CSV\Export\Standard\ExporterConfig;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
 class BaseController extends Controller
@@ -2211,6 +2216,113 @@ class BaseController extends Controller
 
 
     }
+
+    public function exportClientAction(Request $request, $centrale)
+    {
+        $conn = $this->get('database_connection');
+
+
+        switch ($centrale) {
+            case 'roc':
+                $stmt = $conn->prepare('SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS');
+                $stmt->execute();
+                $response = new StreamedResponse();
+                $response->setStatusCode(200);
+                $response->headers->set('Content-Type', 'text/csv');
+                $response->setCallback(function () use ($stmt) {
+                    $config = new ExporterConfig();
+                    $config
+                        ->setDelimiter(";")
+                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
+                    ;
+                    $exporter = new Exporter($config);
+                    $exporter->export('php://output', $stmt->fetchAll());
+                });
+                $response->send();
+                return $response;
+                break;
+            case 'fun':
+                $stmt = $conn->prepare('SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS');
+                $stmt->execute();
+                $response = new StreamedResponse();
+                $response->setStatusCode(200);
+                $response->headers->set('Content-Type', 'text/csv');
+                $response->setCallback(function () use ($stmt) {
+                    $config = new ExporterConfig();
+                    $config
+                        ->setDelimiter(";")
+                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
+                    ;
+                    $exporter = new Exporter($config);
+                    $exporter->export('php://output', $stmt->fetchAll());
+                });
+                $response->send();
+                return $response;
+                break;
+            case 'ac':
+                $conn = $this->get('database_connection');
+                $stmt = $conn->prepare('SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS');
+                $stmt->execute();
+                $response = new StreamedResponse();
+                $response->setStatusCode(200);
+                $response->headers->set('Content-Type', 'text/csv');
+                $response->setCallback(function () use ($stmt) {
+                    $config = new ExporterConfig();
+                    $config
+                        ->setDelimiter(";")
+                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
+                    ;
+                    $exporter = new Exporter($config);
+                    $exporter->export('php://output', $stmt->fetchAll());
+                });
+                $response->send();
+                return $response;
+                break;
+            case 'gccp':
+                $conn = $this->get('database_connection');
+                $stmt = $conn->prepare('SELECT * FROM CENTRALE_GCCP.dbo.CLIENTS');
+                $stmt->execute();
+                $response = new StreamedResponse();
+                $response->setStatusCode(200);
+                $response->headers->set('Content-Type', 'text/csv');
+                $response->setCallback(function () use ($stmt) {
+                    $config = new ExporterConfig();
+                    $config
+                        ->setDelimiter(";")
+                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
+                    ;
+                    $exporter = new Exporter($config);
+                    $exporter->export('php://output', $stmt->fetchAll());
+                });
+                $response->send();
+                return $response;
+                break;
+            case 'pfpl':
+                $conn = $this->get('database_connection');
+                $stmt = $conn->prepare('SELECT * FROM CENTRALE_PFPL.dbo.CLIENTS');
+                $stmt->execute();
+                $response = new StreamedResponse();
+                $response->setStatusCode(200);
+                $response->headers->set('Content-Type', 'text/csv');
+                $response->setCallback(function () use ($stmt) {
+                    $config = new ExporterConfig();
+                    $config
+                        ->setDelimiter(";")
+                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
+                    ;
+                    $exporter = new Exporter($config);
+                    $exporter->export('php://output', $stmt->fetchAll());
+                });
+                $response->send();
+                return $response;
+                break;
+
+
+        }
+
+
+    }
+
 }
 
 
