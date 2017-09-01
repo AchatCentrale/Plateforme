@@ -1470,7 +1470,7 @@ class BaseController extends Controller
 
                 $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_USERS (CL_ID ,CC_PRENOM, CC_NOM, CC_FONCTION, CC_TEL, CC_MAIL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER, PU_ID)
     VALUES
-      (:cl,:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, :status, GETDATE(), :user, :profil)
+      (:cl,:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, 0, GETDATE(), :user, :profil)
       ";
 
                 $stmt = $conn->prepare($sql);
@@ -1484,7 +1484,6 @@ class BaseController extends Controller
                 $stmt->bindValue(':pass', $pwd);
                 $stmt->bindValue(':niveau', $niveau);
                 $stmt->bindValue(':validation',$CCvalidation );
-                $stmt->bindValue(':status',$profil );
                 $stmt->bindValue(':user', $this->getUser()->getUsMail() );
 
 
