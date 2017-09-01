@@ -1377,10 +1377,7 @@ let tableTache = $('#table-tache').DataTable({
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
     },
-    "dom": '<"el_top_tables">' +
-    't' +
-    '<"el_bottom_tables"' +
-    '>'
+
 
 
 });
