@@ -1400,5 +1400,6 @@ let fournisseurTable = $('#fournisseurs-all').DataTable({
 
 
 $('.user-label').focusout(function() {
-   console.log('salut');
+    console.log($(this).val());
+
 });
