@@ -1419,7 +1419,7 @@ $('.user-label').focusout(function() {
 
 
 
-            $('.client-label').after('<div class="ui  label ">Roc- eclerc  <i class="remove icon remove-client-label"></i>\n</div>');
+            $('.client-label').after('<div class="ui  label ">Roc- eclerc  <i class="remove icon remove-client-label cursor"></i>\n</div>');
             $('#client-isDisabled').attr('disabled','disabled');
 
 
