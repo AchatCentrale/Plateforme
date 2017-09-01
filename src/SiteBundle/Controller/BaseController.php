@@ -2149,7 +2149,7 @@ class BaseController extends Controller
                 $stmt->execute();
                 $result = $stmt->fetchAll();
                 $data = [
-                    "raison-soc" => $result[0]['CL_RAISONSOC']
+                    "raisonSoc" => $result[0]['CL_RAISONSOC']
                 ];
 
                 return new JsonResponse($data, 200);
@@ -2161,7 +2161,7 @@ class BaseController extends Controller
                 $stmt->execute();
                 $result = $stmt->fetchAll();
                 $data = [
-                    "raison-soc" => $result[0]['CL_RAISONSOC']
+                    "raisonSoc" => $result[0]['CL_RAISONSOC']
                 ];
 
                 return new JsonResponse($data, 200);
@@ -2173,7 +2173,7 @@ class BaseController extends Controller
                 $stmt->execute();
                 $result = $stmt->fetchAll();
                 $data = [
-                    "raison-soc" => $result[0]['CL_RAISONSOC']
+                    "raisonSoc" => $result[0]['CL_RAISONSOC']
                 ];
 
                 return new JsonResponse($data, 200);
@@ -2185,7 +2185,7 @@ class BaseController extends Controller
                 $stmt->execute();
                 $result = $stmt->fetchAll();
                 $data = [
-                    "raison-soc" => $result[0]['CL_RAISONSOC']
+                    "raisonSoc" => $result[0]['CL_RAISONSOC']
                 ];
 
                 return new JsonResponse($data, 200);
@@ -2197,7 +2197,7 @@ class BaseController extends Controller
                 $stmt->execute();
                 $result = $stmt->fetchAll();
                 $data = [
-                    "raison-soc" => $result[0]['CL_RAISONSOC']
+                    "raisonSoc" => $result[0]['CL_RAISONSOC']
                 ];
 
                 return new JsonResponse($data, 200);
