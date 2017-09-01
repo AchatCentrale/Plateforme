@@ -1408,15 +1408,22 @@ function getUrlParameter(name) {
 
 
 $('.user-label').focusout(function() {
-    setTimeout(function () {
+    var firstime = true;
 
+
+
+    setTimeout(function () {
 
 
         let value = $('.user-label').val();
         let centrale = getUrlParameter('c')
 
 
-        $('.client-label').after('<div class="ui  label ">Tiny</div>');
+        if(firstime === true){
+            $('.client-label').after('<div class="ui  label ">Tiny</div>');
+
+            firstime = false;
+        }
 
 
 
