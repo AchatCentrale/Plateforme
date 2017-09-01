@@ -1409,8 +1409,6 @@ function getUrlParameter(name) {
 
 $('.user-label').focusout(function() {
 
-
-
     setTimeout(function () {
 
 
