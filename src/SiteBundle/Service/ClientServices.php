@@ -172,14 +172,12 @@ class ClientServices
         switch ($centrale){
             case "1":
                 $sql = "SELECT COUNT(*)
-                FROM CENTRALE_ACHAT.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+                        FROM CENTRALE_ACHAT.dbo.CLIENTS
+                        WHERE CAST(INS_DATE AS DATE) > DATEADD(m,-3, GETDATE());";
 
                 $stmt = $this->connection->prepare($sql);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-
-
                 $sqlTotal = "SELECT COUNT(*)
                             FROM CENTRALE_ACHAT.dbo.CLIENTS";
 
@@ -187,7 +185,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
 
 
 
@@ -200,7 +198,7 @@ class ClientServices
             case "2":
                 $sql = "SELECT COUNT(*)
                 FROM CENTRALE_GCCP.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
 
                 $stmt = $this->connection->prepare($sql);
                 $stmt->execute();
@@ -214,7 +212,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
 
 
 
@@ -227,7 +225,7 @@ class ClientServices
             case "4":
                 $sql = "SELECT COUNT(*)
                 FROM CENTRALE_FUNECAP.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
 
                 $stmt = $this->connection->prepare($sql);
                 $stmt->execute();
@@ -241,7 +239,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
 
 
 
@@ -254,7 +252,7 @@ class ClientServices
             case "5":
                 $sql = "SELECT COUNT(*)
                 FROM CENTRALE_PFPL.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
 
                 $stmt = $this->connection->prepare($sql);
                 $stmt->execute();
@@ -268,7 +266,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
 
 
 
@@ -281,7 +279,7 @@ class ClientServices
             case "6":
                 $sql = "SELECT COUNT(*)
                 FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(day,-21,GETDATE());";
+                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
 
                 $stmt = $this->connection->prepare($sql);
                 $stmt->execute();
@@ -295,7 +293,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = ($resultTotal[0]['computed'] - $result[0]['computed']) / 100;
+                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
 
 
 
