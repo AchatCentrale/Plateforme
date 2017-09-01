@@ -443,7 +443,7 @@ class CrmFilter extends \Twig_Extension
 
     }
 
-    public function getAvatar($nom, $prenom, $tiny = false)
+    public function getAvatar($prenom, $nom, $tiny = false)
     {
 
         if ($tiny === true){
