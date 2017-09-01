@@ -1411,26 +1411,16 @@ $('.user-label').focusout(function() {
 
     setTimeout(function () {
 
-
         let value = $('.user-label').val();
         let centrale = getUrlParameter('c');
 
         let url = "http://crm.achatcentrale.fr/client/label/"+centrale+"/"+value+"";
 
         $.getJSON( url, function( json ) {
-
-
-            $('.client-label').after('<div id="label-client-task" class="ui  label ">'+ json.raisonSoc +'<i class="remove icon remove-client-label cursor"></i>\n</div>');
+            $('.client-label').after('<div id="label-client-task" class="ui  label ">'+ json.raisonSoc +'<i class="remove icon remove-client-label cursor"></i></div>');
             $('#client-isDisabled').attr('disabled','disabled');
 
         });
-
-
-
-
-
-
-
     }, 200)
 
 });
