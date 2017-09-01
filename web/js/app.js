@@ -1413,12 +1413,19 @@ $('.user-label').focusout(function() {
 
 
         let value = $('.user-label').val();
-        let centrale = getUrlParameter('c')
+        let centrale = getUrlParameter('c');
+
+        let url = "http://localhost:8000/client/label/"+centrale+"/"+value+"";
+
+        $.getJSON( url, function( json ) {
+            console.log( json );
+        });
 
 
 
-            $('.client-label').after('<div id="label-client-task" class="ui  label ">Roc- eclerc  <i class="remove icon remove-client-label cursor"></i>\n</div>');
-            $('#client-isDisabled').attr('disabled','disabled');
+
+        $('.client-label').after('<div id="label-client-task" class="ui  label ">Roc- eclerc  <i class="remove icon remove-client-label cursor"></i>\n</div>');
+        $('#client-isDisabled').attr('disabled','disabled');
 
 
 
