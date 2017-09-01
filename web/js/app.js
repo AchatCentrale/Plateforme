@@ -1419,9 +1419,9 @@ $('.user-label').focusout(function() {
 
         $.getJSON( url, function( json ) {
 
-            console.log(json)
 
-            $('.client-label').after('<div id="label-client-task" class="ui  label ">Roc- eclerc  <i class="remove icon remove-client-label cursor"></i>\n</div>');
+            $('.client-label').after('<div id="label-client-task" class="ui  label ">'+ json.raison-soc
+                +'<i class="remove icon remove-client-label cursor"></i>\n</div>');
             $('#client-isDisabled').attr('disabled','disabled');
 
         });
