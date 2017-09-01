@@ -1402,6 +1402,13 @@ let fournisseurTable = $('#fournisseurs-all').DataTable({
 $('.user-label').focusout(function() {
     setTimeout(function () {
         console.log($('.user-label').val());
+        console.log(window.location.search);
+
+
+
+
+
+
     }, 200)
 
 });
