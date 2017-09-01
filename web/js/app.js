@@ -1418,14 +1418,16 @@ $('.user-label').focusout(function() {
         let url = "http://crm.achatcentrale.fr/client/label/"+centrale+"/"+value+"";
 
         $.getJSON( url, function( json ) {
-            console.log( json );
+
+            console.log(json)
+
+            $('.client-label').after('<div id="label-client-task" class="ui  label ">Roc- eclerc  <i class="remove icon remove-client-label cursor"></i>\n</div>');
+            $('#client-isDisabled').attr('disabled','disabled');
+
         });
 
 
 
-
-        $('.client-label').after('<div id="label-client-task" class="ui  label ">Roc- eclerc  <i class="remove icon remove-client-label cursor"></i>\n</div>');
-        $('#client-isDisabled').attr('disabled','disabled');
 
 
 
