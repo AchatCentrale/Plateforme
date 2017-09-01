@@ -1002,8 +1002,7 @@ $('.new-clients-user').on('click', function (e) {
     let url = "http://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/users/new";
 
 
-    console.log(values);
-    console.log(url);
+
 
     $.ajax({
 
@@ -1397,4 +1396,9 @@ let fournisseurTable = $('#fournisseurs-all').DataTable({
     '>'
 
 
+});
+
+
+$('.user-label').focusout(function() {
+   console.log('salut');
 });
