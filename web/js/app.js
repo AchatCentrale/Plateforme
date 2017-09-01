@@ -1427,7 +1427,7 @@ $('.user-label').focusout(function() {
         $('.remove-client-label').on('click', function (e) {
             console.log(e);
             $('#label-client-task').remove();
-            $('#client-isDisabled')removeAttr('disabled');
+            $('#client-isDisabled').removeAttr('disabled');
 
 
         });
