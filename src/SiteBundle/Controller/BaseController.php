@@ -1468,9 +1468,9 @@ class BaseController extends Controller
 
                 $conn = $this->get('doctrine.dbal.centrale_pascal_leclerc_connection');
 
-                $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_USERS (CL_ID ,CC_PRENOM, CC_NOM, CC_FONCTION, CC_TEL, CC_MAIL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER)
+                $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_USERS (CL_ID ,CC_PRENOM, CC_NOM, CC_FONCTION, CC_TEL, CC_MAIL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER, PU_ID)
     VALUES
-      (:cl,:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, :status, GETDATE(), :user)
+      (:cl,:prenom,:nom, :fonction, :tel, :mail, :pass, :niveau, :validation, :status, GETDATE(), :user, :profil)
       ";
 
                 $stmt = $conn->prepare($sql);
@@ -1480,6 +1480,7 @@ class BaseController extends Controller
                 $stmt->bindValue(':fonction', $fonction);
                 $stmt->bindValue(':tel', $tel);
                 $stmt->bindValue(':mail', $mail);
+                $stmt->bindValue(':profil', $profil);
                 $stmt->bindValue(':pass', $pwd);
                 $stmt->bindValue(':niveau', $niveau);
                 $stmt->bindValue(':validation',$CCvalidation );
