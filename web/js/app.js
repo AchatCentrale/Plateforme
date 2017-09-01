@@ -1415,7 +1415,7 @@ $('.user-label').focusout(function() {
         let value = $('.user-label').val();
         let centrale = getUrlParameter('c');
 
-        let url = "http://localhost:8000/client/label/"+centrale+"/"+value+"";
+        let url = "http://crm.achatcentrale.fr/client/label/"+centrale+"/"+value+"";
 
         $.getJSON( url, function( json ) {
             console.log( json );
