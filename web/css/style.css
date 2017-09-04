@@ -648,3 +648,7 @@ h3.raison-soc-titre {
     box-shadow: 0em 0em 0em 0em transparent inset;
     border-bottom-left-radius: 0.28571429rem;
 }
+
+.profile {
+    padding-left: 10px;
+}
