@@ -1218,7 +1218,7 @@ class BaseController extends Controller
 
     }
 
-    public function updateClientUserAction(Request $request, $id, $centrale)
+    public function updateClientUserAction(Request $request, $id, $centrale, $idUser)
     {
 
         dump($request);

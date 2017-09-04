@@ -121,7 +121,7 @@ update-client:
     methods: POST
 
 update-client-user:
-    path: /client/users/{id}/{centrale}/update
+    path: /client/users/{id}/{centrale}/update/{idUser}
     defaults: {_controller: SiteBundle:Base:updateClientUser}
 
 new-clients-user:
