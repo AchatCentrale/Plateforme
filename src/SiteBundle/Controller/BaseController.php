@@ -1223,7 +1223,7 @@ class BaseController extends Controller
 
         dump($request);
 
-        return new JsonResponse('ok', 200);
+        return $this->render('@Site/test.html.twig');
 
     }
 
