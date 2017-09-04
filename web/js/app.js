@@ -788,14 +788,72 @@ $('#select-statut-edit-client').on('change', function (e) {
 $('.edit-client-user').on('click', function () {
 
 
+    let id = $(this).parent().data('id');
+    let tpl = `<p class="hidden" id="id-user-client-update">${id}</p>`;
 
 
-
+    $('.user-client-update-title').append(tpl);
 
     $('#update_user_client').modal('show');
 
 
 });
+
+
+$('#save-client-user-update').on('click', function (e) {
+
+    e.preventDefault();
+
+    let centrale = $('#centrale').html();
+    let id = $('#id').html();
+    let idUsers = $('#id-user-client-update').html();
+    let url = "http://crm.achatcentrale.fr/client/users/" + id + "/" + centrale + "/update/"+ idUsers;
+
+    let values = $("input[name='us_update[]'], select[name='us_update[]']")
+        .map(function () {
+                return $(this).val();
+            }
+        ).get();
+
+    $.ajax({
+
+        // Adresse à laquelle la requête est envoyée
+        url: url,
+        type: 'POST',
+        data: {
+            siret: values[0].replace(/\s/g, ''),
+            mail: values[1],
+            tel: values[2].replace(/\s/g, ''),
+            cp: values[3],
+            eff: values[4],
+            ca: values[5],
+            adresse: values[6],
+            ville: values[7],
+        },
+        // Le délai maximun en millisecondes de traitement de la demande
+        timeout: 4000,
+
+        // La fonction à apeller si la requête aboutie
+        success: function (data) {
+
+            console.log(data);
+
+            window.location.reload();
+        },
+
+        // La fonction à appeler si la requête n'a pas abouti
+        error: function (e) {
+            console.log(e);
+        }
+
+    });
+
+
+    $('#update_user_client').modal('hide');
+    console.log(url);
+
+});
+
 
 
 $('.detail-tache-home').on('click', function (e) {
@@ -959,6 +1017,8 @@ $('#afficherplus-detail').on('click', function () {
     el = $('#detail-client-content');
 
     showHideEl(el);
+    $('.right_col').css('height','100%');
+
 
     $(this).html('Afficher moins')
 
@@ -971,10 +1031,7 @@ $('#afficherplus-historique').on('click', function () {
     el = $('.historique-client-content');
 
 
-    $('.right_col').css('height','100%' +
-        '' +
-        '' +
-        '');
+    $('.right_col').css('height','95vh');
 
 
     showHideEl(el);
@@ -1435,4 +1492,6 @@ $('.remove-client-label').on('click', function (e) {
 
 });
 
-
+$('.ui.dropdown.user-update')
+    .dropdown()
+;

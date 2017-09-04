@@ -306,11 +306,11 @@
                                                                   href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccNom }}</a>
                                                            </td>
                                                            <td>{{ users.ccFonction |  convert_encoding('UTF-8', 'Windows-1252') }}</td>
-                                                           <td>{{ users.ccTel | isEmpty | upper | phone | raw }}</td>
+                                                           <td>{{ users.ccTel | isEmpty  | phone | raw }}</td>
                                                            <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a>
                                                            </td>
                                                            <td>{{ users.ccPass }}</td>
-                                                           <td data-id="{{ users.ccId }}" ><i class="write icon cursor edit-client-user"></i></td>
+                                                           <td id="id-users-client" data-id="{{ users.ccId }}" ><i class="write icon cursor edit-client-user"></i></td>
                                                        </tr>
                                                    {% endfor %}
                                                    </tbody>
@@ -742,41 +742,42 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Modifier l'utilisateur</h4>
+                <h4 class="modal-title user-client-update-title" id="myModalLabel">Modifier l'utilisateur</h4>
             </div>
             <div class="modal-body">
 
                 <form class="ui form">
                     <div class="field">
-                        <label>Prénom</label>
-                        <input class="user-update-input" type="text" name="us_prename" placeholder="Prénom">
+                        <label for="us_prename" >Prénom</label>
+                        <input class="user-update-input" type="text" name="us_update[]" id="us_prename" placeholder="Prénom">
                     </div>
                     <div class="field">
-                        <label>Nom</label>
-                        <input class="user-update-input" type="text" name="us_name" placeholder="Nom">
+                        <label for="us_name" >Nom</label>
+                        <input class="user-update-input" type="text" name="us_update[]" id="us_name" placeholder="Nom">
+                    </div>
+                    <div class="field">
+                        <label for="us_pass" >Mot de passe</label>
+                        <input class="user-update-input" type="text" name="us_update[]" id="us_pass" placeholder="Mot de passe">
                     </div>
                     <div class="field">
                         <div class="field">
-                            <label>Fonction</label>
-                            <select name="us_fonct" multiple="" class="ui dropdown user-update">
+                            <label for="us_fonct">Fonction</label>
+                            <select name="us_update[]" id="us_fonct"  class="ui dropdown user-update">
                                 <option value="">Choisir la fonction</option>
                                 <option value="1">Autres</option>
                             </select>
                         </div>
                     </div>
                     <div class="field">
-                        <label>Téléphone</label>
-                        <input class="user-update-input" type="text" id="Téléphone-user-update" name="us_tel" placeholder="Téléphone">
+                        <label for="Téléphone-user-update" >Téléphone</label>
+                        <input class="user-update-input" type="text" id="Téléphone-user-update" name="us_update[]" placeholder="Téléphone">
                     </div>
                     <div class="field">
                         <label>Mail</label>
-                        <input class="user-update-input" type="text" name="us_mail" placeholder="Adresse mail">
+                        <input class="user-update-input" type="text" name="us_update[]" id="us_mail" placeholder="Adresse mail">
                     </div>
-                    <div class="field">
-                        <label>Mot de passe</label>
-                        <input class="user-update-input" type="text" name="us_pass" placeholder="Mot de passe">
-                    </div>
-                    <button class="ui button" type="submit">Enregistrer</button>
+
+                    <button class="ui button" id="save-client-user-update" type="submit">Enregistrer</button>
                 </form>
 
             </div>

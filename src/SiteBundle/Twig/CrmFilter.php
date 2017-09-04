@@ -269,7 +269,7 @@ class CrmFilter extends \Twig_Extension
 
 
         if (empty($input)) {
-            return "<h2>à remplire</h2>";
+            return "<h2>À remplire</h2>";
         } else {
             return $input;
         }

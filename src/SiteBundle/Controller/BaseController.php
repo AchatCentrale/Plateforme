@@ -1221,6 +1221,9 @@ class BaseController extends Controller
     public function updateClientUserAction(Request $request, $id, $centrale)
     {
 
+        dump($request);
+
+        return new JsonResponse('ok', 200);
 
     }
 
