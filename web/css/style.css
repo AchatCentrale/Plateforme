@@ -211,7 +211,7 @@ label{
 }
 
 .detail-client {
-    margin-top: 50px;
+    margin-top: 15px;
 }
 
 
@@ -273,9 +273,10 @@ label{
 }
 
 .title-detail-client {
-    font-size: 12pt;
-    margin: 0 !important;
+    font-size: 13pt;
     color: black;
+    margin: 0 !important;
+    font-family: "Titillium Web";
 }
 
 .info-client-detail {
@@ -283,24 +284,14 @@ label{
     padding-top: 15px;
 }
 
-.title-detail-client {
-    font-size: 16pt;
-    margin: 0 !important;
-    color: black;
-    font-family: "Titillium Web";
-}
+
 
 
 
 .info-client-detail p:last-child {
-    font-size: 11pt;
+    font-size: 10pt;
     font-weight: 500;
-}
-.title-detail-client {
-    font-size: 16pt;
-    margin: 0 !important;
     color: black;
-    font-family: "Titillium Web";
 }
 
 #modifierProfil{
@@ -374,7 +365,6 @@ label{
 }
 
 .historique-client {
-    margin-top: 30px;
     margin-bottom: 30px;
 }
 
@@ -651,4 +641,9 @@ h3.raison-soc-titre {
 
 .profile {
     padding-left: 10px;
+}
+
+.detail-client-container {
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
