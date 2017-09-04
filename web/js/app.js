@@ -807,7 +807,7 @@ $('#save-client-user-update').on('click', function (e) {
     let centrale = $('#centrale').html();
     let id = $('#id').html();
     let idUsers = $('#id-user-client-update').html();
-    let url = "http://crm.achatcentrale.fr/client/users/" + id + "/" + centrale + "/update/"+ idUsers;
+    let url = "http://localhost:8000/client/users/" + id + "/" + centrale + "/update/"+ idUsers;
 
     let values = $("input[name='us_update[]'], select[name='us_update[]']")
         .map(function () {
