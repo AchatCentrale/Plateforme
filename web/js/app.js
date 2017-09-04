@@ -821,14 +821,13 @@ $('#save-client-user-update').on('click', function (e) {
         url: url,
         type: 'POST',
         data: {
-            siret: values[0].replace(/\s/g, ''),
-            mail: values[1],
-            tel: values[2].replace(/\s/g, ''),
-            cp: values[3],
-            eff: values[4],
-            ca: values[5],
-            adresse: values[6],
-            ville: values[7],
+            prenom: values[0],
+            nom: values[1],
+            pass: values[2],
+            mail: values[3],
+            fct: values[4],
+            tel: values[5].replace(/\s/g, ''),
+
         },
         // Le délai maximun en millisecondes de traitement de la demande
         timeout: 4000,
@@ -850,7 +849,7 @@ $('#save-client-user-update').on('click', function (e) {
 
 
     $('#update_user_client').modal('hide');
-    console.log(url);
+    console.log(values);
 
 });
 
