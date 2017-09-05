@@ -30,6 +30,10 @@
 })(jQuery, 'smartresize');
 
 
+$(function() {
+
+
+
 let $BODY = $('body'),
     $MENU_TOGGLE = $('#menu_toggle'),
     $SIDEBAR_MENU = $('#sidebar-menu'),
@@ -133,30 +137,28 @@ var randNum = function () {
 
 
 // Panel toolbox
-$(document).ready(function () {
-    $('.collapse-link').on('click', function () {
-        var $BOX_PANEL = $(this).closest('.x_panel'),
-            $ICON = $(this).find('i'),
-            $BOX_CONTENT = $BOX_PANEL.find('.x_content');
+$('.collapse-link').on('click', function () {
+    var $BOX_PANEL = $(this).closest('.x_panel'),
+        $ICON = $(this).find('i'),
+        $BOX_CONTENT = $BOX_PANEL.find('.x_content');
 
-        // fix for some div with hardcoded fix class
-        if ($BOX_PANEL.attr('style')) {
-            $BOX_CONTENT.slideToggle(200, function () {
-                $BOX_PANEL.removeAttr('style');
-            });
-        } else {
-            $BOX_CONTENT.slideToggle(200);
-            $BOX_PANEL.css('height', 'auto');
-        }
+    // fix for some div with hardcoded fix class
+    if ($BOX_PANEL.attr('style')) {
+        $BOX_CONTENT.slideToggle(200, function () {
+            $BOX_PANEL.removeAttr('style');
+        });
+    } else {
+        $BOX_CONTENT.slideToggle(200);
+        $BOX_PANEL.css('height', 'auto');
+    }
 
-        $ICON.toggleClass('fa-chevron-up fa-chevron-down');
-    });
+    $ICON.toggleClass('fa-chevron-up fa-chevron-down');
+});
 
-    $('.close-link').click(function () {
-        var $BOX_PANEL = $(this).closest('.x_panel');
+$('.close-link').click(function () {
+    var $BOX_PANEL = $(this).closest('.x_panel');
 
-        $BOX_PANEL.remove();
-    });
+    $BOX_PANEL.remove();
 });
 // /Panel toolbox
 
@@ -378,9 +380,6 @@ $('.uncheck').on('click', function (e) {
 });
 
 
-
-
-
 $('#btn-new-cl').on('click', function (e) {
 
     $('#modal-insert-client-new').modal('show');
@@ -404,7 +403,6 @@ let table = $('#client-all').DataTable({
 
 
 });
-
 
 
 $("form input.date").datepicker({
@@ -719,15 +717,14 @@ $('#isGenerique').on('click', function (e) {
     let el = $('#client-isDisabled');
 
 
-    switch (e.target.checked){
+    switch (e.target.checked) {
         case true:
-            el.attr('disabled','disabled');
+            el.attr('disabled', 'disabled');
             break;
         case false:
             el.removeAttr('disabled');
             break;
     }
-
 
 
 });
@@ -808,7 +805,7 @@ $('#save-client-user-update').on('click', function (e) {
     let centrale = $('#centrale').html();
     let id = $('#id').html();
     let idUsers = $('#id-user-client-update').html();
-    let url = "http://localhost:8000/client/users/" + id + "/" + centrale + "/update/"+ idUsers;
+    let url = "http://localhost:8000/client/users/" + id + "/" + centrale + "/update/" + idUsers;
 
     let values = $("input[name='us_update[]'], select[name='us_update[]']")
         .map(function () {
@@ -852,7 +849,6 @@ $('#save-client-user-update').on('click', function (e) {
     console.log(values);
 
 });
-
 
 
 $('.detail-tache-home').on('click', function (e) {
@@ -1016,7 +1012,7 @@ $('#afficherplus-detail').on('click', function () {
     el = $('#detail-client-content');
 
     showHideEl(el);
-    $('.right_col').css('height','100%');
+    $('.right_col').css('height', '100%');
 
 
     $(this).html('Afficher moins')
@@ -1030,7 +1026,7 @@ $('#afficherplus-historique').on('click', function () {
     el = $('.historique-client-content');
 
 
-    $('.right_col').css('height','95vh');
+    $('.right_col').css('height', '95vh');
 
 
     showHideEl(el);
@@ -1056,8 +1052,6 @@ $('.new-clients-user').on('click', function (e) {
     let id = $('#id').html();
 
     let url = "http://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/users/new";
-
-
 
 
     $.ajax({
@@ -1435,7 +1429,6 @@ let tableTache = $('#table-tache').DataTable({
     },
 
 
-
 });
 
 
@@ -1465,18 +1458,18 @@ function getUrlParameter(name) {
 };
 
 
-$('.user-label').focusout(function() {
+$('.user-label').focusout(function () {
 
     setTimeout(function () {
 
         let value = $('.user-label').val();
         let centrale = getUrlParameter('c');
 
-        let url = "http://crm.achatcentrale.fr/client/label/"+centrale+"/"+value+"";
+        let url = "http://crm.achatcentrale.fr/client/label/" + centrale + "/" + value + "";
 
-        $.getJSON( url, function( json ) {
-            $('.client-label').after('<div id="label-client-task" class="ui cursor  label ">'+ json.raisonSoc +'<i class="remove icon remove-client-label cursor"></i></div>');
-            $('#client-isDisabled').attr('disabled','disabled');
+        $.getJSON(url, function (json) {
+            $('.client-label').after('<div id="label-client-task" class="ui cursor  label ">' + json.raisonSoc + '<i class="remove icon remove-client-label cursor"></i></div>');
+            $('#client-isDisabled').attr('disabled', 'disabled');
 
         });
     }, 200)
@@ -1494,5 +1487,7 @@ $('#label-client-task').on('click', function (e) {
 });
 
 $('.ui.dropdown.user-update')
-    .dropdown()
-;
+    .dropdown();
+
+
+});
