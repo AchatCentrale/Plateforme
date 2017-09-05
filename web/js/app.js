@@ -1455,12 +1455,12 @@ function getUrlParameter(name) {
     let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     let results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-};
+}
 
 
 $('.user-label').focusout(function () {
 
-    setTimeout(function () {
+    setTimeout(function (){
 
         let value = $('.user-label').val();
         let centrale = getUrlParameter('c');
@@ -1475,9 +1475,7 @@ $('.user-label').focusout(function () {
     }, 200)
 
 });
-
 //TODO: Quand on appuie sur la croix sa retire la raison sociale
-
 $('#label-client-task').on('click', function (e) {
     console.log(e);
     $('#label-client-task').remove();
@@ -1486,8 +1484,15 @@ $('#label-client-task').on('click', function (e) {
 
 });
 
-$('.ui.dropdown.user-update')
-    .dropdown();
+$('.ui.dropdown.user-update').dropdown();
+
+
+
+
+$('')
+
+
+
 
 
 });
