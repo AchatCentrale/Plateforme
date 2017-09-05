@@ -390,6 +390,7 @@ $('#btn-new-cl').on('click', function (e) {
 
 let table = $('#client-all').DataTable({
     "colReorder": true,
+    responsive: true,
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
     },
@@ -1428,6 +1429,7 @@ $('.detail-tache-archive-client').on('click', function (e) {
 
 let tableTache = $('#table-tache').DataTable({
     "colReorder": true,
+    responsive: true,
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
     },
@@ -1439,6 +1441,7 @@ let tableTache = $('#table-tache').DataTable({
 
 let fournisseurTable = $('#fournisseurs-all').DataTable({
     "colReorder": true,
+    responsive: true,
     "language": {
         "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/French.json"
     },
