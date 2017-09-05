@@ -665,3 +665,7 @@ h3.raison-soc-titre {
 .remove-client-label {
     padding-left: 15px;
 }
+
+.liste-users-client {
+    text-align: left;
+}

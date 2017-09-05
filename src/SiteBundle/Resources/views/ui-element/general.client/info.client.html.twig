@@ -85,6 +85,27 @@
                             Ajouter un utilisateur
                         </button>
                     </div>
+                    <div class="liste-users-client">
+                        <div class="ui list">
+
+
+                            {% for u in user  %}
+                                <div class="item">
+                                    <img class="ui avatar image" src="https://semantic-ui.com/images/avatar2/small/rachel.png">
+                                    <div class="content">
+                                        <a class="header">{{ u.ccPrenom  }} {{ u.ccNom }}</a>
+                                        <div class="description"><i class="mail icon"></i>{{ u.ccMail }}</div>
+                                        <div class="description"><i class="phone icon"></i>{{ u.ccTel }}</div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+
+
+
+                        </div>
+                    </div>
 
                 </div>
 
