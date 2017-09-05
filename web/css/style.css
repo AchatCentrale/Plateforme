@@ -599,11 +599,11 @@ h3.raison-soc-titre {
 }
 
 .text-avatar{
-    font-family: "Helvetica Neue", serif;
+    font-family: "San Francisco Display", serif;
     position: relative;
-    left: 9px;
-    top: 4px;
-    font-size: 28pt;
+    left: 15px;
+    top: 7px;
+    font-size: 25pt;
 
 }
 
@@ -621,12 +621,11 @@ h3.raison-soc-titre {
 
 
 .text-avatar-tiny{
-    font-family: "Helvetica Neue", serif;
+    font-family: "San Francisco Display", serif;
     position: relative;
-    left: 8px;
-    top: 4px;
-    font-size: 13pt;
-
+    left: 11px;
+    top: 6px;
+    font-size: 11pt;
 }
 .label-client{
     padding-top: 5px;
@@ -660,4 +659,9 @@ h3.raison-soc-titre {
     li.paginate_button {
         display: none;
     }
+}
+
+
+.remove-client-label {
+    padding-left: 15px;
 }
