@@ -86,16 +86,20 @@
                         </button>
                     </div>
                     <div class="liste-users-client">
-                        <div class="ui list">
+                        <div class="ui relaxed list">
 
 
                             {% for u in user  %}
                                 <div class="item">
-                                    <img class="ui avatar image" src="https://semantic-ui.com/images/avatar2/small/rachel.png">
-                                    <div class="content">
-                                        <a class="header">{{ u.ccPrenom  }} {{ u.ccNom }}</a>
+                                    <img class="ui avatar image image-avatar-list" data-title="Elliot Fu" data-content="Elliot has been a member since July 2012" src="https://semantic-ui.com/images/avatar/large/christian.jpg">
+                                    <div class="content content-list-user">
+                                        <a href="//www.{{ centrale_link  }}.fr/Login.asp?LOGIN={{ u.ccMail }}&PASS={{ u.ccPass }}"><i class="user icon"></i>{{ u.ccPrenom| convert_encoding('UTF-8', 'Windows-1252')  }} {{ u.ccNom | convert_encoding('UTF-8', 'Windows-1252')}}</a>
                                         <div class="description"><i class="mail icon"></i>{{ u.ccMail }}</div>
-                                        <div class="description"><i class="phone icon"></i>{{ u.ccTel }}</div>
+                                        <div class="description"><i class="phone icon"></i>{% if u.ccTel %}
+                                                {{ u.ccTel }}
+                                            {% endif %}
+                                                Pas encore de téléphone
+                                        </div>
                                     </div>
                                 </div>
 
@@ -264,13 +268,8 @@
 
 
                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+
                                        <li role="presentation" class="active">
-                                           <a href="#tab_content3" role="tab" id="profile-tab"
-                                              data-toggle="tab" aria-expanded="false">
-                                               Utilisateurs
-                                           </a>
-                                       </li>
-                                       <li role="presentation" class="">
                                            <a href="#tab_content1" id="home-tab"
                                               role="tab"
                                               data-toggle="tab" aria-expanded="true">
@@ -299,50 +298,9 @@
                                    <div id="myTabContent" class="tab-content">
 
 
-                                       {#User_client#}
-                                       <div role="tabpanel" class="tab-pane fade active in" id="tab_content3"
-                                            aria-labelledby="profile-tab">
-                                           {% if user %}
-                                               <table class="ui celled padded table">
-                                                   <thead>
-                                                   <tr>
-                                                       <th>Prénom</th>
-                                                       <th>Nom</th>
-                                                       <th>Fonction</th>
-                                                       <th>Tel</th>
-                                                       <th>Mail</th>
-                                                       <th>Password</th>
-                                                       <th>Action</th>
-                                                   </tr>
-                                                   </thead>
-                                                   <tbody>
-                                                   {% for users in user %}
-                                                       <tr  >
-                                                           <td>
-                                                               <a target="_blank"
-                                                                  href="http://www.{{ centrale_link  }}.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccPrenom | convert_encoding('UTF-8', 'Windows-1252') }}</a>
-                                                           </td>
-                                                           <td>
-                                                               <a target="_blank"
-                                                                  href="http://www.centrale-roc-eclerc.fr/Login.asp?LOGIN={{ users.ccMail }}&PASS={{ users.ccPass }}">{{ users.ccNom }}</a>
-                                                           </td>
-                                                           <td>{{ users.ccFonction |  convert_encoding('UTF-8', 'Windows-1252') }}</td>
-                                                           <td>{{ users.ccTel | isEmpty  | phone | raw }}</td>
-                                                           <td><a href="mailto:{{ users.ccMail }}">{{ users.ccMail }}</a>
-                                                           </td>
-                                                           <td>{{ users.ccPass }}</td>
-                                                           <td id="id-users-client" data-id="{{ users.ccId }}" ><i class="write icon cursor edit-client-user"></i></td>
-                                                       </tr>
-                                                   {% endfor %}
-                                                   </tbody>
-                                               </table>
-                                           {% else %}
-                                               <p>Il n'y aucun utilisateur pour ce client</p>
-                                           {% endif %}
-                                       </div>
 
                                        {#Action_client#}
-                                       <div role="tabpanel" class="tab-pane fade " id="tab_content1"
+                                       <div role="tabpanel" class="tab-pane fade active in " id="tab_content1"
                                             aria-labelledby="home-tab">
                                            <a href="{{ path('new-task', {'c' : centrale, 'cl' : client[0].clId }) }}"
                                               class="btn btn-success" role="button">Ajouter
