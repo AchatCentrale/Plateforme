@@ -189,7 +189,6 @@ class FeedServices
 
         for ($i = 0; $i <= $delimiter; $i++){
 
-                dump($this->getTickets()[$i]);
 
 
         }
