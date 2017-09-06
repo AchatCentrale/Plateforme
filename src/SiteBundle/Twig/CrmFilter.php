@@ -269,7 +269,7 @@ class CrmFilter extends \Twig_Extension
 
 
         if (empty($input)) {
-            return "<h2>À remplire</h2>";
+            return "À remplire";
         } else {
             return $input;
         }
@@ -278,6 +278,7 @@ class CrmFilter extends \Twig_Extension
 
     public function phoneFilter($number)
     {
+
 
         if (strlen($number) == 10) {
             return chunk_split($number, 2, ' ');
@@ -446,14 +447,11 @@ class CrmFilter extends \Twig_Extension
     public function getAvatar($prenom, $nom, $tiny = false)
     {
 
-        if ($tiny === true){
-            $tpl = "<div class='avatar_background-tiny'><p class='text-avatar-tiny'>".$prenom[0].$nom[0]."</p></div>";
-        }else {
-            $tpl = "<div class='avatar_background'><p class='text-avatar'>".$prenom[0].$nom[0]."</p></div>";
+        if ($tiny === true) {
+            $tpl = "<div class='avatar_background-tiny'><p class='text-avatar-tiny'>" . $prenom[0] . $nom[0] . "</p></div>";
+        } else {
+            $tpl = "<div class='avatar_background'><p class='text-avatar'>" . $prenom[0] . $nom[0] . "</p></div>";
         }
-
-
-
 
 
         return $tpl;

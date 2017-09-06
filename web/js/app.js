@@ -1012,7 +1012,6 @@ $('#afficherplus-detail').on('click', function () {
     el = $('#detail-client-content');
 
     showHideEl(el);
-    $('.right_col').css('height', '100%');
 
 
     $(this).html('Afficher moins')
@@ -1026,7 +1025,6 @@ $('#afficherplus-historique').on('click', function () {
     el = $('.historique-client-content');
 
 
-    $('.right_col').css('height', '95vh');
 
 
     showHideEl(el);
@@ -1116,8 +1114,7 @@ $('.new-clients-user').on('click', function (e) {
 //
 // });
 
-$('.ui.search')
-    .search({
+$('.ui.search').search({
         apiSettings: {
             url: 'http://crm.achatcentrale.fr/user/search/{query}'
         },
@@ -1141,8 +1138,7 @@ $('.ui.search')
 ;
 
 
-$('.ui.search.clients-auto')
-    .search({
+$('.ui.search.clients-auto').search({
         apiSettings: {
             url: 'http://crm.achatcentrale.fr/client/search/{query}/' + $('#centrale').html()
         },
@@ -1488,8 +1484,6 @@ $('.ui.dropdown.user-update').dropdown();
 
 
 
-
-$('')
 
 
 
