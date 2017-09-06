@@ -183,11 +183,24 @@ class FeedServices
 
     }
 
+    public function showTheFeed()
+    {
+        $delimiter = 4;
+
+        for ($i = 0; $i <= $delimiter; $i++){
+
+                dump($this->getTickets()[$i]);
 
 
+        }
+
+
+
+
+    }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getFeed()
     {
@@ -195,12 +208,16 @@ class FeedServices
     }
 
     /**
-     * @param string $feed
+     * @param array $feed
      */
     public function setFeed($feed)
     {
         $this->feed = $feed;
     }
+
+
+
+
 
     /**
      * @return mixed

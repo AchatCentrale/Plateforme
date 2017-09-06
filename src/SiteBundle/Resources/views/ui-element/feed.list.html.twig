@@ -1,68 +1,239 @@
+<div class="ui three column divided grid">
+    <div class="row">
+        <div class="column">
+            <div class="ui  feed">
+                <div class="event">
+                    <div>
+                        <img class="ui tiny circular image avatar-feed"
+                             src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
 
-<div class="ui equal width grid">
-    <div class="column">
+                    </div>
+                    <div class="content">
+                        <div class="summary">
+                            You submitted a new post to the page
+                            <div class="date">
+                                3 days ago
+                            </div>
+                        </div>
+                        <div class="extra text">
+                            I'm having a BBQ this weekend. Come by around 4pm if you can.
+                        </div>
+                        <div class="meta">
 
-
-           <h4>Derniers tickets</h4>
-        {% if lastTicket %}
-            {% for ticket in lastTicket  %}
-                <div class="detail-feed-ticket-container">
-                    <p style="margin: 0" >{{ ticket.meDate | Time }}  <b>{{ ticket.meSujet }}</b> </p>
-                    <a class="detail-feed-ticket" href="http://www.centrale-roc-eclerc.fr/extranet/MB_Tickets_Detail.asp?SO_ID={{ ticket.soId }}&ME_ID={{ ticket.meId }}&ME_STATUS_ORI=0&DataBase={{ centrale }}">Details</a>
-
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
-            {% else %}
-                <div class="detail-feed-ticket-container">
-                    <p style="margin: 0" >Il n'y pas de tickets pour ce client</p>
-
-                </div>
-
-        {% endif %}
-
-    </div>
-    <div class="vertical-divider"></div>
-    <div class="column">
-        <h4>Dernières tâches</h4>
-
-        {% if lastAction %}
-            {% for task in lastAction  %}
-                <div class="detail-feed-ticket-container">
-                    <p style="margin: 0" >{{ task.insDate | Time }}  <b>{{ task.claNom }}</b> </p>
-
-                </div>
-            {% endfor %}
-        {% else %}
-            <div class="detail-feed-ticket-container">
-                <p style="margin: 0" >Il n'y pas de tâche pour ce client</p>
-
             </div>
+        </div>
+        <div class="column">
+            <div class="ui  feed">
+                <div class="event">
+                    <div>
+                        <img class="ui tiny circular image avatar-feed"
+                             src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
 
-        {% endif %}
+                    </div>
+                    <div class="content">
+                        <div class="summary">
+                            You submitted a new post to the page
+                            <div class="date">
+                                3 days ago
+                            </div>
+                        </div>
+                        <div class="extra text">
+                            I'm having a BBQ this weekend. Come by around 4pm if you can.
+                        </div>
+                        <div class="meta">
 
-
-
-    </div>
-    <div class="vertical-divider"></div>
-    <div class="column">
-
-        <h4>Dernières notes</h4>
-
-        {% if lastNote %}
-            {% for note in lastNote  %}
-                <div class="detail-feed-ticket-container">
-                    <p style="margin: 0" >{{ note.insDate | Time }}  <b>{{ note.cnNote }}</b> </p>
-
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
-        {% else %}
-            <div class="detail-feed-ticket-container">
-                <p style="margin: 0" >Il n'y pas de note pour ce client</p>
-
             </div>
+        </div>
+        <div class="column">
+            <div class="ui  feed">
 
-        {% endif %}
+                <div class="event">
+                    <div>
+                        <img class="ui tiny circular image avatar-feed"
+                             src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
 
+                    </div>
+                    <div class="content">
+                        <div class="summary">
+                            You submitted a new post to the page
+                            <div class="date">
+                                3 days ago
+                            </div>
+                        </div>
+                        <div class="extra text">
+                            I'm having a BBQ this weekend. Come by around 4pm if you can.
+                        </div>
+                        <div class="meta">
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="ui  feed">
+
+                <div class="event">
+                    <div>
+                        <img class="ui tiny circular image avatar-feed"
+                             src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+
+                    </div>
+                    <div class="content">
+                        <div class="summary">
+                            You submitted a new post to the page
+                            <div class="date">
+                                3 days ago
+                            </div>
+                        </div>
+                        <div class="extra text">
+                            I'm having a BBQ this weekend. Come by around 4pm if you can.
+                        </div>
+                        <div class="meta">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui  feed">
+
+                <div class="event">
+                    <div>
+                        <img class="ui tiny circular image avatar-feed"
+                             src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+
+                    </div>
+                    <div class="content">
+                        <div class="summary">
+                            You submitted a new post to the page
+                            <div class="date">
+                                3 days ago
+                            </div>
+                        </div>
+                        <div class="extra text">
+                            I'm having a BBQ this weekend. Come by around 4pm if you can.
+                        </div>
+                        <div class="meta">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui  feed">
+                <div class="event">
+                    <div>
+                        <img class="ui tiny circular image avatar-feed"
+                             src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+
+                    </div>
+                    <div class="content">
+                        <div class="summary">
+                            You submitted a new post to the page
+                            <div class="date">
+                                3 days ago
+                            </div>
+                        </div>
+                        <div class="extra text">
+                            I'm having a BBQ this weekend. Come by around 4pm if you can.
+                        </div>
+                        <div class="meta">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            <div class="ui  feed">
+
+                <div class="event">
+                    <div>
+                        <img class="ui tiny circular image avatar-feed"
+                             src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+
+                    </div>
+                    <div class="content">
+                        <div class="summary">
+                            You submitted a new post to the page
+                            <div class="date">
+                                3 days ago
+                            </div>
+                        </div>
+                        <div class="extra text">
+                            I'm having a BBQ this weekend. Come by around 4pm if you can.
+                        </div>
+                        <div class="meta">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui  feed">
+
+                <div class="event">
+                    <div>
+                        <img class="ui tiny circular image avatar-feed"
+                             src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+
+                    </div>
+                    <div class="content">
+                        <div class="summary">
+                            You submitted a new post to the page
+                            <div class="date">
+                                3 days ago
+                            </div>
+                        </div>
+                        <div class="extra text">
+                            I'm having a BBQ this weekend. Come by around 4pm if you can.
+                        </div>
+                        <div class="meta">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui  feed">
+                <div class="event">
+                    <div>
+                        <img class="ui tiny circular image avatar-feed"
+                             src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+
+                    </div>
+                    <div class="content">
+                        <div class="summary">
+                            You submitted a new post to the page
+                            <div class="date">
+                                3 days ago
+                            </div>
+                        </div>
+                        <div class="extra text">
+                            I'm having a BBQ this weekend. Come by around 4pm if you can.
+                        </div>
+                        <div class="meta">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
