@@ -353,7 +353,7 @@ label{
 }
 
 .input-top-tables input {
-    width: 100% !important;
+    width: 150% !important;
     height: 49px;
     border-radius: 57px;
     font-size: 20pt;
@@ -566,9 +566,7 @@ h3.raison-soc-titre {
 }
 
 .input-top-tables{
-    position: absolute;
-    left: 10%;
-    bottom: 93%;
+    margin-top: 16px;
 }
 
 .ui.search > .results {
@@ -715,3 +713,13 @@ h3.raison-soc-titre {
     word-wrap: break-word;
     width: 20%;
 }
+
+div.dataTables_wrapper div.dataTables_paginate {
+    margin: 0;
+    white-space: nowrap;
+    text-align: right;
+    width: 125%;
+    height: 80px;
+    padding-top: 22px;
+}
+
