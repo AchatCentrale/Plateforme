@@ -683,7 +683,8 @@ h3.raison-soc-titre {
 }
 
 .avatar-feed{
-    width: 60% !important;
+    margin-right: 40px;
+    width: 50px !important;
 }
 
 .green-plus {
@@ -699,4 +700,18 @@ h3.raison-soc-titre {
 
 .container-hastag-label{
     width: 70%;
+}
+
+.ui.feed > .event > .content {
+    display: block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    text-align: left;
+    word-wrap: break-word;
+    width: 20%;
 }

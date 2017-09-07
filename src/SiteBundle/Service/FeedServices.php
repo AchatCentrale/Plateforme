@@ -185,30 +185,9 @@ class FeedServices
 
     public function showTheFeed()
     {
-        $delimiter = 4;
 
-        for ($i = 0; $i <= $delimiter; $i++){
-
-
-            if (isset($this->getTickets()[$i]))
-            {
-                $this->setFeed($this->getTickets()[$i]);
-
-            }
-
-            if (isset($this->getAction()[$i]))
-            {
-                $this->setFeed($this->getAction()[$i]);
-
-            }
-
-            if (isset($this->getNotes()[$i]))
-            {
-                $this->setFeed($this->getNotes()[$i]);
-
-            }
-
-        }
+        $result = array_merge( $this->getAction(), $this->getTickets(), $this->getNotes());
+        $this->setFeed($result);
 
 
 

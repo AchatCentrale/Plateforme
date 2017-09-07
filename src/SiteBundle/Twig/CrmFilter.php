@@ -46,10 +46,16 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('formatVille', [$this, 'formatVille']),
             new \Twig_SimpleFilter('userFilter', [$this, 'userFilter']),
             new \Twig_SimpleFilter('avatar', [$this, 'getAvatar']),
+            new \Twig_SimpleFilter('getClass', [$this, 'getClass']),
         );
     }
 
 
+
+    public function getClass($class){
+        return (new \ReflectionClass($class))->getShortName();
+
+    }
     public function generateFactureNumber($centrale)
     {
 

@@ -1960,11 +1960,9 @@ class BaseController extends Controller
 
         $feed->showTheFeed();
 
-
+        dump($feed);
         return $this->render('@Site/ui-element/feed.list.html.twig', [
-            'lastAction' => $feed->getAction(),
-            'lastTicket' => $feed->getTickets(),
-            'lastNote' => $feed->getNotes(),
+            'feed' => $feed,
             'centrale' => $centrale,
             'id' => $id,
         ]);

@@ -1,238 +1,97 @@
 <div class="ui three column divided grid">
+
     <div class="row">
-        <div class="column">
-            <div class="ui  feed">
-                <div class="event">
-                    <div>
-                        <img class="ui tiny circular image avatar-feed"
-                             src="{{ asset('assets/images/icon/logo_t.png') }}">
+        {% for fe in feed.feed %}
 
-                    </div>
-                    <div class="content">
-                        <div class="summary">
-                            You submitted a new post to the page
-                            <div class="date">
-                                3 days ago
+            <div class="column">
+                <div class="ui  feed">
+                    {% if fe | getClass == "MessageEntete" %}
+
+                        <div class="event">
+                            <div>
+                                <img class="ui tiny circular image avatar-feed"
+                                     src="{{ asset('assets/images/icon/logo_t.png') }}">
+
+                            </div>
+                            <div class="content">
+                                <div class="summary">
+                                    Tickets
+                                    <div class="date">
+                                        {{ fe.insDate |Time }}
+                                    </div>
+                                </div>
+                                <div class="extra text">
+                                    {{ fe.meSujet }}
+
+                                </div>
+                                <div class="meta">
+
+                                </div>
                             </div>
                         </div>
-                        <div class="extra text">
-                            I'm having a BBQ this weekend. Come by around 4pm if you can.
-                        </div>
-                        <div class="meta">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui  feed">
-                <div class="event">
-                    <div>
-                        <img class="ui tiny circular image avatar-feed"
-                             src="{{ asset('assets/images/icon/logo_n.png') }}">
+                    {% endif %}
 
-                    </div>
-                    <div class="content">
-                        <div class="summary">
-                            You submitted a new post to the page
-                            <div class="date">
-                                3 days ago
+                    {% if fe |getClass == "ClientsNotes" %}
+                        <div class="event">
+                            <div>
+                                <img class="ui tiny circular image avatar-feed"
+                                     src="{{ asset('assets/images/icon/logo_n.png') }}">
+
+                            </div>
+                            <div class="content">
+                                <div class="summary">
+                                    Notes
+                                    <div class="date">
+                                        {{ fe.insDate |Time }}
+                                    </div>
+                                </div>
+                                <div class="extra text">
+                                    {{ fe.cnNote }}
+
+                                </div>
+                                <div class="meta">
+
+                                </div>
                             </div>
                         </div>
-                        <div class="extra text">
-                            I'm having a BBQ this weekend. Come by around 4pm if you can.
-                        </div>
-                        <div class="meta">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui  feed">
+                    {% endif %}
 
-                <div class="event">
-                    <div>
-                        <img class="ui tiny circular image avatar-feed"
-                             src="{{ asset('assets/images/icon/logo_a.png') }}">
+                    {% if fe |getClass == "ClientsTaches" %}
+                        <div class="event">
+                            <div>
+                                <img class="ui tiny circular image avatar-feed"
+                                     src="{{ asset('assets/images/icon/logo_n.png.png') }}">
 
-                    </div>
-                    <div class="content">
-                        <div class="summary">
-                            You submitted a new post to the page
-                            <div class="date">
-                                3 days ago
+                            </div>
+                            <div class="content">
+                                <div class="summary">
+                                    You submitted a new post to the page
+                                    <div class="date">
+                                        {{ fe.insDate |Time }}
+                                    </div>
+                                </div>
+                                <div class="extra text">
+                                    I'm having a BBQ this weekend. Come by around 4pm if you can.
+                                </div>
+                                <div class="meta">
+
+                                </div>
                             </div>
                         </div>
-                        <div class="extra text">
-                            I'm having a BBQ this weekend. Come by around 4pm if you can.
-                        </div>
-                        <div class="meta">
 
-                        </div>
-                    </div>
+                    {% endif %}
+
+
                 </div>
             </div>
-        </div>
+
+
+        {% endfor %}
+
     </div>
-    <div class="row">
-        <div class="column">
-            <div class="ui  feed">
 
-                <div class="event">
-                    <div>
-                        <img class="ui tiny circular image avatar-feed"
-                             src="{{ asset('assets/images/icon/logo_t.png') }}">
 
-                    </div>
-                    <div class="content">
-                        <div class="summary">
-                            You submitted a new post to the page
-                            <div class="date">
-                                3 days ago
-                            </div>
-                        </div>
-                        <div class="extra text">
-                            I'm having a BBQ this weekend. Come by around 4pm if you can.
-                        </div>
-                        <div class="meta">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui  feed">
-
-                <div class="event">
-                    <div>
-                        <img class="ui tiny circular image avatar-feed"
-                             src="{{ asset('assets/images/icon/logo_n.png') }}">
-
-                    </div>
-                    <div class="content">
-                        <div class="summary">
-                            You submitted a new post to the page
-                            <div class="date">
-                                3 days ago
-                            </div>
-                        </div>
-                        <div class="extra text">
-                            I'm having a BBQ this weekend. Come by around 4pm if you can.
-                        </div>
-                        <div class="meta">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui  feed">
-                <div class="event">
-                    <div>
-                        <img class="ui tiny circular image avatar-feed"
-                             src="{{ asset('assets/images/icon/logo_a.png') }}">
-
-                    </div>
-                    <div class="content">
-                        <div class="summary">
-                            You submitted a new post to the page
-                            <div class="date">
-                                3 days ago
-                            </div>
-                        </div>
-                        <div class="extra text">
-                            I'm having a BBQ this weekend. Come by around 4pm if you can.
-                        </div>
-                        <div class="meta">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="column">
-            <div class="ui  feed">
-
-                <div class="event">
-                    <div>
-                        <img class="ui tiny circular image avatar-feed"
-                             src="{{ asset('assets/images/icon/logo_t.png') }}">
-
-                    </div>
-                    <div class="content">
-                        <div class="summary">
-                            You submitted a new post to the page
-                            <div class="date">
-                                3 days ago
-                            </div>
-                        </div>
-                        <div class="extra text">
-                            I'm having a BBQ this weekend. Come by around 4pm if you can.
-                        </div>
-                        <div class="meta">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui  feed">
-
-                <div class="event">
-                    <div>
-                        <img class="ui tiny circular image avatar-feed"
-                             src="{{ asset('assets/images/icon/logo_n.png') }}">
-
-                    </div>
-                    <div class="content">
-                        <div class="summary">
-                            You submitted a new post to the page
-                            <div class="date">
-                                3 days ago
-                            </div>
-                        </div>
-                        <div class="extra text">
-                            I'm having a BBQ this weekend. Come by around 4pm if you can.
-                        </div>
-                        <div class="meta">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui  feed">
-                <div class="event">
-                    <div>
-                        <img class="ui tiny circular image avatar-feed"
-                             src="{{ asset('assets/images/icon/logo_a.png') }}">
-                    </div>
-                    <div class="content">
-                        <div class="summary">
-                            You submitted a new post to the page
-                            <div class="date">
-                                3 days ago
-                            </div>
-                        </div>
-                        <div class="extra text">
-                            I'm having a BBQ this weekend. Come by around 4pm if you can.
-                        </div>
-                        <div class="meta">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
