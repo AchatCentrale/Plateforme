@@ -66,8 +66,8 @@
                     {% if fe |getClass == "ClientsTaches" %}
                         <div class="event">
                             <div>
-                                <img class="ui tiny circular image avatar-feed"
-                                     src="{{ asset('assets/images/icon/logo_t.png') }}">
+                                <img class="ui tiny circular image avatar-feed  {% if fe.claStatus == 10 %}round-border-tache{% endif %}"
+                                     src="{{ asset('assets/images/icon/logo_a.png') }}">
 
                             </div>
                             <div class="content">
