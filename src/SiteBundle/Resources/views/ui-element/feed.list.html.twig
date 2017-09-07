@@ -73,7 +73,7 @@
                                     </div>
                                 </div>
                                 <div class="extra text">
-                                    {{ fe.claNom }}
+                                    {{ fe.claNom | convert_encoding('UTF-8', 'Windows-1252') }}
                                 </div>
                                 <div class="meta">
 
