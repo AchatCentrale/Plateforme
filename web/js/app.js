@@ -1494,4 +1494,39 @@ $('.add-hastag-icon').on('click', function () {
 
 
 
+$('.save-hastag-client').on('click', function (e) {
+
+    console.log(e);
+    let $elTag = $('.add-hastag-icon');
+    let $elValue = $('#value-hashtag-client');
+    let tpl = `<a class="ui label" href="#">#${$elValue.val()}</a>`;
+
+    $elValue.val("");
+
+
+    if ($elTag.prevAll().length === 3){
+        console.log('stop');
+
+        $elValue.parent().toggleClass('error');
+        $(this).toggleClass('disabled ');
+
+
+    }
+
+
+
+
+    console.log(tpl);
+
+    $elTag.before(tpl);
+
+    console.log($elTag.prevAll().length )
+
+
+
+
+
+})
+
+
 });

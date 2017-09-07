@@ -683,7 +683,7 @@ h3.raison-soc-titre {
 }
 
 .avatar-feed{
-    width: 80% !important;
+    width: 60% !important;
 }
 
 .green-plus {
@@ -695,4 +695,8 @@ h3.raison-soc-titre {
     height: 64px;
     margin-top: 30px;
     margin-left: 10px;
+}
+
+.container-hastag-label{
+    width: 70%;
 }
