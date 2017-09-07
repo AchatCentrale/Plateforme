@@ -121,7 +121,7 @@
                                             <td>{{ cl.CL_REF }}</td>
                                             <td>{{ cl.SO_RAISONSOC }}</td>
                                             <td>{{ cl.CL_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252//TRANSLIT') }}</td>
-                                            <td>{{ cl.CL_CP }} {{ cl.CL_VILLE |  convert_encoding('UTF-8', 'Windows-1252') | formatVille }}</td>
+                                            <td>{{ cl.CL_CP }} {{ cl.CL_VILLE  | formatVille |  convert_encoding('UTF-8', 'Windows-1252') }}</td>
                                             <td>{{ cl.CL_TEL | phone }}</td>
                                             <td>{{ cl.CL_SIRET | siret }}</td>
                                             <td>{{ cl.CL_STATUS | status | raw }}</td>
