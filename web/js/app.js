@@ -343,9 +343,7 @@ $('#sidebar-menu').find('a').filter(function () {
 }).parent('li').addClass('current-page').parents('ul').slideDown(function () {
 }).parent().addClass('active');
 
-$('.menu .item')
-    .tab()
-;
+$('.menu .item').tab();
 
 
 $('#siret-client').mask('000 000 000 00000');
@@ -438,6 +436,9 @@ $('.go-to-client').on('click', function () {
             break;
         case "CENTRALE PFPL":
             centrale = 'CENTRALE_PFPL';
+            break;
+        case "CENTRALE FUNECAP":
+            centrale = 'CENTRALE_FUNECAP';
             break
 
     }
