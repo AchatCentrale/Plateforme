@@ -21,7 +21,7 @@
                                     </div>
                                 </div>
                                 <div class="extra text">
-                                    {{ fe.meSujet }}
+                                    {{ fe.meSujet | convert_encoding('UTF-8', 'Windows-1252') }}
 
                                 </div>
                                 <div class="meta">
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="extra text">
-                                    {{ fe.cnNote }}
+                                    {{ fe.cnNote | convert_encoding('UTF-8', 'Windows-1252') }}
 
                                 </div>
                                 <div class="meta">
@@ -62,18 +62,18 @@
                         <div class="event">
                             <div>
                                 <img class="ui tiny circular image avatar-feed"
-                                     src="{{ asset('assets/images/icon/logo_n.png.png') }}">
+                                     src="{{ asset('assets/images/icon/logo_t.png') }}">
 
                             </div>
                             <div class="content">
                                 <div class="summary">
-                                    You submitted a new post to the page
+                                    Taches
                                     <div class="date">
                                         {{ fe.insDate |Time }}
                                     </div>
                                 </div>
                                 <div class="extra text">
-                                    I'm having a BBQ this weekend. Come by around 4pm if you can.
+                                    {{ fe.claNom }}
                                 </div>
                                 <div class="meta">
 
