@@ -655,8 +655,10 @@ class BaseController extends Controller
                 ]);
 
                 $groupe = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Groupe')->findBy([
-                    'grId' => $id
+                    'grId' => $restresult[0]->getClGroupe()
                 ]);
+
+
 
 
                 $notes = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
@@ -676,6 +678,7 @@ class BaseController extends Controller
                         'claStatus' => 10
                     ]
                 );
+
 
 
 
@@ -735,7 +738,7 @@ class BaseController extends Controller
                 ]);
 
                 $groupe = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Groupe')->findBy([
-                    'grId' => $id
+                    'grId' => $restresult[0]->getClGroupe()
                 ]);
 
 
@@ -811,7 +814,7 @@ class BaseController extends Controller
                 ]);
 
                 $groupe = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Groupe')->findBy([
-                    'grId' => $id
+                    'grId' => $restresult[0]->getClGroupe()
                 ]);
 
 
@@ -890,7 +893,7 @@ class BaseController extends Controller
                 ]);
 
                 $groupe = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Groupe')->findBy([
-                    'grId' => $id
+                    'grId' => $restresult[0]->getClGroupe()
                 ]);
 
 
@@ -966,7 +969,7 @@ class BaseController extends Controller
                 $activite = "Aucune activité pour le moment";
 
                 $groupe = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Groupe')->findBy([
-                    'grId' => $id
+                    'grId' => $restresult[0]->getClGroupe()
                 ]);
 
 

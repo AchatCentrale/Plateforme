@@ -359,9 +359,7 @@ label{
     font-size: 20pt;
 }
 
-.historique-client-content {
-    margin-bottom: 40px;
-}
+
 
 .historique-client {
     margin-bottom: 30px;
@@ -722,3 +720,10 @@ div.dataTables_wrapper div.dataTables_paginate {
     padding-top: 22px;
 }
 
+.historique-client-content {
+    margin-bottom: 40px;
+    overflow: scroll;
+    height: 300px;
+    padding-left: 41px;
+    width: 100%;
+}
