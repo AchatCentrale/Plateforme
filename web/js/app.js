@@ -1484,11 +1484,12 @@ $('.ui.dropdown.user-update').dropdown();
 
 
 
+$('.add-hastag-container').hide();
 
 $('.add-hastag-icon').on('click', function () {
 
 
-    $('.add-hastag-container').show().transition('fade up');
+    $('.add-hastag-container').toggle("slow");
 });
 
 
