@@ -152,7 +152,7 @@
 
 
                                 {% if groupe %}
-                                    <p class="ui label green">{{ groupe[0].grDescr }}</p><br>
+                                    <p class="ui label green">{{ groupe[0].grDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p><br>
                                 {% else %}
                                     <p></p>
                                 {% endif %}
