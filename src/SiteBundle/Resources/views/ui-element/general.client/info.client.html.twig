@@ -119,7 +119,23 @@
                                 <h3 class="raison-soc-titre">
                                     <i class="building icon"></i> {{ client[0].clRaisonsoc | convert_encoding('UTF-8', 'Windows-1252') }}
                                 </h3>
-                                {{ centrale |replace({"_" : " "}) | centraleLabel | raw }}
+
+                                <div class="ui grid">
+                                    <div class="four wide column">
+                                        {{ centrale |replace({"_" : " "}) | centraleLabel | raw }}
+                                    </div>
+                                    <div class="four wide column">
+                                        <a class="ui label" href="#"> #test</a> <a class="ui label" href="#"> #test</a> <i class="plus cursor large green-plus add-hastag-icon circle icon"></i>
+                                    </div>
+                                </div>
+                                <div class="add-hastag-container">
+                                    <div class="ui input">
+                                        <input type="text" placeholder="Ajouter un hastag">
+                                        <button class="ui button">
+                                            Enregistrer
+                                        </button>
+                                    </div>
+                                </div>
 
 
                             </div>

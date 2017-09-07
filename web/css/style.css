@@ -669,6 +669,8 @@ h3.raison-soc-titre {
 .liste-users-client {
     text-align: left;
     margin-top: 25px;
+    overflow: overlay;
+    height: 400px;
 }
 
 .image-avatar-list{
@@ -682,5 +684,16 @@ h3.raison-soc-titre {
 
 .avatar-feed{
     width: 75% !important;
+}
 
+.green-plus {
+    color: green;
+}
+
+.add-hastag-container {
+    width: 100%;
+    height: 64px;
+    margin-top: 15px;
+    margin-left: 10px;
+    display: none;
 }

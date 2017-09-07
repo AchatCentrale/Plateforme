@@ -190,6 +190,23 @@ class FeedServices
         for ($i = 0; $i <= $delimiter; $i++){
 
 
+            if (isset($this->getTickets()[$i]))
+            {
+                $this->setFeed($this->getTickets()[$i]);
+
+            }
+
+            if (isset($this->getAction()[$i]))
+            {
+                $this->setFeed($this->getAction()[$i]);
+
+            }
+
+            if (isset($this->getNotes()[$i]))
+            {
+                $this->setFeed($this->getNotes()[$i]);
+
+            }
 
         }
 
