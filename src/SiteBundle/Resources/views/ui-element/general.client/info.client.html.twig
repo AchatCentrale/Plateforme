@@ -64,7 +64,7 @@
 
                     <ul class="list-unstyled user_data">
                         <li><i class="fa fa-map-marker user-profile-icon"></i>
-                            {{ client[0].clAdresse1 | formatVille }}<br>
+                            {{ client[0].clAdresse1 | formatVille |  convert_encoding('UTF-8', 'Windows-1252') }}<br>
                             {{ client[0].clCp }} {{ client[0].clVille | formatVille }}
                         </li>
                     </ul>
