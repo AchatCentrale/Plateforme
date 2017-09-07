@@ -113,7 +113,7 @@ class CrmFilter extends \Twig_Extension
                     return "<h3><span class=\"label big label-danger \">Centrale GCCP</span></h3>";
                     break;
                 case 'ACHAT CENTRALE':
-                    return "<div class=\"little-pic-centrale\"><img src=\"{{ asset('assets/images/logo-ac-tiny.png') }}\" alt=\"\"></div>";
+                    return "<h3><span class=\"label big label-danger \">Achat Centrale</span></h3>";
                     break;
                 case 'CENTRALE PFPL':
                     return "<h3><span class=\"label big label-danger \">Centrale PFPL</span></h3>";

@@ -1,6 +1,11 @@
 <div class="ui three column divided grid">
 
     <div class="row">
+        {% if feed.feed is empty %}
+            <h3 style="margin-left: 3%">Il n'y aucune activité pour ce client</h3>
+
+        {% else %}
+
         {% for fe in feed.feed %}
 
             <div class="column">
@@ -89,6 +94,8 @@
 
 
         {% endfor %}
+
+        {% endif %}
 
     </div>
 
