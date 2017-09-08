@@ -214,7 +214,7 @@
                                         <div class="ui form">
                                             <div class="field">
                                                 <label>Message complémentaire dans les tickets</label>
-                                                <textarea rows="2">{{ fournisseur['FO_MESS_SUP']  }}</textarea>
+                                                <textarea rows="2">{{ fournisseur['FO_MESS_SUP'] | convert_encoding('UTF-8', 'Windows-1252')  }}</textarea>
                                             </div>
                                         </div>
                                     </div>
