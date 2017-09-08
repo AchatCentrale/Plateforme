@@ -81,7 +81,7 @@
                                             <td>
                                                 <p>
                                                     <a href="{{ path('client-general', { 'centrale' : tasks['SO_ID'] | centrale , 'id' : tasks['CL_ID'] }) }}">
-                                                        {{ render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] })) }}
+                                                        {{ render(controller('SiteBundle:Base:getClientRaisonSoc', { "id" : tasks['CL_ID'], "centrale" : tasks['SO_ID'] })) | convert_encoding('UTF-8', 'Windows-1252') }}
                                                     </a>
                                                 </p>
                                             </td>
