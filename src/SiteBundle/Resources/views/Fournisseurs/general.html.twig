@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ fournisseur['FO_RAISONSOC'] }} - General {% endblock %}
+{% block title %} {{ fournisseur['FO_RAISONSOC'] | convert_encoding('UTF-8', 'Windows-1252') }} - General {% endblock %}
 
 {% block body %}
 
