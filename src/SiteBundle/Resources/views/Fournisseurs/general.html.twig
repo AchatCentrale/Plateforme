@@ -44,13 +44,21 @@
 
                         <ul class="list-unstyled user_data">
                             <li><i class="fa fa-map-marker user-profile-icon"></i>
-                                Adresse<br>
-                                Ville cp
+                                {{ fournisseur['FO_ADRESSE1'] | convert_encoding('UTF-8', 'Windows-1252') }}<br>
+                                {{ fournisseur['FO_VILLE'] | convert_encoding('UTF-8', 'Windows-1252') }} {{ fournisseur['FO_CP'] }}
                             </li>
                         </ul>
 
+                        {% if fournisseur['FO_WEB'] is empty %}
 
-                        <p>Pas de site web</p>
+                            <p>Pas de site web</p>
+
+                        {% else %}
+
+                            <p>{{ fournisseur['FO_WEB'] }}</p>
+
+                        {% endif %}
+
 
                         <button id="modifierProfil" type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#myModal">
@@ -95,7 +103,9 @@
                         <div class="ui equal width grid raison-soc">
                             <div class="equal width row">
                                 <div class="column">
-                                    <h3 class="raison-soc-titre"><i class="shipping icon"></i> {{ fournisseur['FO_RAISONSOC'] | convert_encoding('UTF-8', 'Windows-1252') }}</h3>
+                                    <h3 class="raison-soc-titre"><i
+                                                class="shipping icon"></i> {{ fournisseur['FO_RAISONSOC'] | convert_encoding('UTF-8', 'Windows-1252') }}
+                                    </h3>
 
                                     <div class="ui equal width grid container-hastag-label">
                                         <div class="column">
@@ -105,7 +115,7 @@
                                     </div>
                                 </div>
                                 <div class="column ref-client">
-                                    <h3><span class="pastille-ref green"></span> {{  fournisseur['FO_REF'] }}</h3>
+                                    <h3><span class="pastille-ref green"></span> {{ fournisseur['FO_REF'] }}</h3>
                                 </div>
                                 <div class="column">
 
@@ -140,12 +150,13 @@
                                         <p class="cursor " data-index="siret">
                                             <a class="cursor data-client " data-index="mail"
                                                href="mailto:">
-                                                <i class="mail link  circular icon"></i></a>{{ fournisseur['FO_MAIL'] | convert_encoding('UTF-8', 'Windows-1252') }}</p>
+                                                <i class="mail link  circular icon"></i></a>{{ fournisseur['FO_MAIL'] | convert_encoding('UTF-8', 'Windows-1252') }}
+                                        </p>
                                     </div>
                                     <div class="info-client-detail " id="detail-tel">
                                         <p class="title-detail-client ">Téléphone</p>
                                         <p class="cursor label-background"
-                                           data-index="siret">{{ fournisseur['FO_TEL'] }}</p>
+                                           data-index="siret">{{ fournisseur['FO_TEL'] | phone }}</p>
                                     </div>
                                 </div>
 
@@ -157,7 +168,8 @@
                                     </div>
                                     <div class="info-client-detail">
                                         <p class="title-detail-client ">Frais de port offert </p>
-                                        <p class="cursor label-background" data-index="siret"> à partir de {{ fournisseur['FO_PORT_OFFERT_MONTANT'] }} €</p>
+                                        <p class="cursor label-background" data-index="siret"> à partir
+                                            de {{ fournisseur['FO_PORT_OFFERT_MONTANT'] }} €</p>
                                     </div>
                                     <div class="info-client-detail">
                                         <p class="title-detail-client ">CGV</p>
@@ -166,14 +178,16 @@
                                             <p class="cursor label-background"
                                                data-index="activite">Pas de CGV encore</p>
 
-                                            {% else %}
+                                        {% else %}
 
-                                                <p class="cursor label-background"
+                                            <p class="cursor label-background"
 
-                                                   data-index="activite"><a target="_blank" href="http://www.achatcentrale.fr/UploadFichiers/Uploads/FOURN_{{ fournisseur['FO_ID'] }}_CGV/{{ fournisseur['FO_CGV'] }}">Voir les CGV</a></p>
+                                               data-index="activite"><a target="_blank"
+                                                                        href="http://www.achatcentrale.fr/UploadFichiers/Uploads/FOURN_{{ fournisseur['FO_ID'] }}_CGV/{{ fournisseur['FO_CGV'] }}">Voir
+                                                    les CGV</a></p>
 
                                         {% endif %}
-                                        
+
 
                                     </div>
                                 </div>
@@ -183,20 +197,14 @@
 
                                 <div class="four wide column recap-client">
                                     <div class="info-client-detail">
-                                        <p class="title-detail-client ">Groupe</p>
-                                        <p class="cursor label-background" data-index="groupe">PAS ENCORE</p>
-                                    </div>
-                                    <div class="info-client-detail">
-                                        <p class="title-detail-client ">Classification</p>
-                                        <p class="cursor label-background" data-index="classif">PAS ENCORE</p>
-                                    </div>
-                                    <div class="info-client-detail">
-                                        <p class="title-detail-client ">Régions</p>
-
+                                        <p class="title-detail-client ">Etiquetable</p>
                                         <p class="cursor label-background"
-                                           data-index="region">Pas de region enregistrer encore</p>
-
-
+                                           data-index="etiquetable">{% if  fournisseur['FO_ETIQUETABLE'] == 1 %}Oui{% elseif fournisseur['FO_ETIQUETABLE'] == 0 %}Non{% endif %}</p>
+                                    </div>
+                                    <div class="info-client-detail">
+                                        <p class="title-detail-client ">Statut</p>
+                                        <p class="cursor label-background"
+                                           data-index="classif">{% if  fournisseur['FO_STATUS'] == 1 %}Archivé{% elseif fournisseur['FO_STATUS'] == 0 %}Actif{% endif %}</p>
                                     </div>
 
 
