@@ -15,7 +15,6 @@
                 </div>
 
 
-                {{ dump(fournisseur) }}
 
                 <div class="x_content ">
                     <div class="col-md-3 col-sm-3 col-xs-12  profile_left" align="center">
@@ -28,8 +27,8 @@
 
 
                                 <div class="container-hover-image">
-                                    <img class="img-responsive img-rounded image-hover-edit avatar-view"
-                                         src="{{ asset('images/phot-indispo.jpg') }}" alt="Logo" style="width: 35%">
+                                    <img class="img-responsive img-for-edit"
+                                         src="http://www.achatcentrale.fr/UploadFichiers/Uploads/FOURN_{{ fournisseur['FO_ID'] }}/{{ fournisseur['FO_LOGO'] }}"/>
                                     <div class="middle">
                                         <div class="text-hover-edit cursor"><i class="paint large brush icon"></i></div>
                                     </div>
@@ -211,6 +210,15 @@
                                 </div>
 
                                 <div class="four wide column recap-client">
+                                    <div class="info-client-detail">
+                                        <div class="ui form">
+                                            <div class="field">
+                                                <label>Message complémentaire dans les tickets</label>
+                                                <textarea rows="2">{{ fournisseur['FO_MESS_SUP']  }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                 </div>
 

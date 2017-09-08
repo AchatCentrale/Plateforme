@@ -47,7 +47,8 @@ class FournisseurController extends Controller
 
         $sql = "SELECT *
                 FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS
-                WHERE FO_ID = :id
+                WHERE CENTRALE_PRODUITS.dbo.FOURNISSEURS.FO_ID = :id
+                
                 ";
 
         $stmt = $conn->prepare($sql);
