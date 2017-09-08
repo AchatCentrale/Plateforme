@@ -58,7 +58,6 @@ class FournisseurController extends Controller
         $four = $stmt->fetchAll();
 
 
-        dump($four);
 
 
 
