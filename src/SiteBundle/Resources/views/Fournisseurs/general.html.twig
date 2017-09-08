@@ -1,10 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} NOM_FOURNISSEUR - General {% endblock %}
+{% block title %} {{ fournisseur['FO_RAISONSOC'] }} - General {% endblock %}
 
 {% block body %}
-
-
 
 
     <div class="row">
@@ -15,14 +13,203 @@
 
                     <div class="clearfix"></div>
                 </div>
-                <div class="ation-toolbox">
 
 
-                </div>
+                {{ dump(fournisseur) }}
 
                 <div class="x_content ">
-                    <div class="row">
+                    <div class="col-md-3 col-sm-3 col-xs-12  profile_left" align="center">
 
+                        <div class="profile_img">
+
+
+                            <div id="crop-avatar">
+                                <!-- Current avatar -->
+
+
+                                <div class="container-hover-image">
+                                    <img class="img-responsive img-rounded image-hover-edit avatar-view"
+                                         src="{{ asset('images/phot-indispo.jpg') }}" alt="Logo" style="width: 35%">
+                                    <div class="middle">
+                                        <div class="text-hover-edit cursor"><i class="paint large brush icon"></i></div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!-- end of image cropping -->
+
+                        </div>
+
+
+                        <ul class="list-unstyled user_data">
+                            <li><i class="fa fa-map-marker user-profile-icon"></i>
+                                Adresse<br>
+                                Ville cp
+                            </li>
+                        </ul>
+
+
+                        <p>Pas de site web</p>
+
+                        <button id="modifierProfil" type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#myModal">
+                            <i class="fa fa-edit edit-client m-right-xs"></i>Modifier le profil
+                        </button>
+                        <div class="ajoutuser">
+                            <button class="ui button client-user-new" type="button" data-toggle="modal"
+                                    data-target="#client-user-new">
+                                Ajouter un utilisateur
+                            </button>
+                        </div>
+                        <div class="liste-users-client">
+                            <div class="ui relaxed list">
+
+
+                                {#{% for u in user %}#}
+                                {#<div class="item">#}
+                                {#<img class="ui avatar image image-avatar-list" data-title="Elliot Fu"#}
+                                {#data-content="Elliot has been a member since July 2012"#}
+                                {#src="https://semantic-ui.com/images/avatar/large/christian.jpg">#}
+                                {#<div class="content content-list-user">#}
+                                {#<a href="//www.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u.ccMail }}&PASS={{ u.ccPass }}"><i#}
+                                {#class="user icon"></i>{{ u.ccPrenom| convert_encoding('UTF-8', 'Windows-1252') }} {{ u.ccNom | convert_encoding('UTF-8', 'Windows-1252') }}#}
+                                {#</a>#}
+                                {#<div class="description"><i class="mail icon"></i>{{ u.ccMail }}</div>#}
+                                {#<div class="description"><i class="phone icon"></i>#}
+                                {#{{ u.ccTel | isEmpty | phone | raw }}#}
+                                {#</div>#}
+                                {#</div>#}
+                                {#</div>#}
+
+                                {#{% endfor %}#}
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="ui equal width grid raison-soc">
+                            <div class="equal width row">
+                                <div class="column">
+                                    <h3 class="raison-soc-titre"><i class="shipping icon"></i> {{ fournisseur['FO_RAISONSOC'] | convert_encoding('UTF-8', 'Windows-1252') }}</h3>
+
+                                    <div class="ui equal width grid container-hastag-label">
+                                        <div class="column">
+                                            FAMILLE DE PRODUIT
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="column ref-client">
+                                    <h3><span class="pastille-ref green"></span> {{  fournisseur['FO_REF'] }}</h3>
+                                </div>
+                                <div class="column">
+
+
+                                    GROUPE
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="detail-client">
+
+                            <div class="profile_title">
+                                <h2>Données du fournisseur </h2>
+                            </div>
+
+
+                            <div class="ui grid">
+
+
+                                <div class="four wide column">
+                                    <div class="info-client-detail">
+                                        <p class="title-detail-client ">Siret</p>
+                                        <p class="cursor label-background"
+                                           data-index="siret">{{ fournisseur['FO_SIRET'] | siret }}</p>
+                                    </div>
+                                    <div class="info-client-detail">
+                                        <p class="title-detail-client ">Mail</p>
+                                        <p class="cursor " data-index="siret">
+                                            <a class="cursor data-client " data-index="mail"
+                                               href="mailto:">
+                                                <i class="mail link  circular icon"></i></a>{{ fournisseur['FO_MAIL'] | convert_encoding('UTF-8', 'Windows-1252') }}</p>
+                                    </div>
+                                    <div class="info-client-detail " id="detail-tel">
+                                        <p class="title-detail-client ">Téléphone</p>
+                                        <p class="cursor label-background"
+                                           data-index="siret">{{ fournisseur['FO_TEL'] }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="three wide column">
+                                    <div class="info-client-detail">
+                                        <p class="title-detail-client ">Frais de port</p>
+                                        <p class="cursor label-background"
+                                           data-index="siret">{{ fournisseur['FO_PORT_PAYANT_MONTANT'] }} €</p>
+                                    </div>
+                                    <div class="info-client-detail">
+                                        <p class="title-detail-client ">Frais de port offert </p>
+                                        <p class="cursor label-background" data-index="siret"> à partir de {{ fournisseur['FO_PORT_OFFERT_MONTANT'] }} €</p>
+                                    </div>
+                                    <div class="info-client-detail">
+                                        <p class="title-detail-client ">CGV</p>
+
+                                        {% if fournisseur['FO_CGV']  is null %}
+                                            <p class="cursor label-background"
+                                               data-index="activite">Pas de CGV encore</p>
+
+                                            {% else %}
+
+                                                <p class="cursor label-background"
+
+                                                   data-index="activite"><a target="_blank" href="http://www.achatcentrale.fr/UploadFichiers/Uploads/FOURN_{{ fournisseur['FO_ID'] }}_CGV/{{ fournisseur['FO_CGV'] }}">Voir les CGV</a></p>
+
+                                        {% endif %}
+                                        
+
+                                    </div>
+                                </div>
+
+
+                                <div class="vertical-divider"></div>
+
+                                <div class="four wide column recap-client">
+                                    <div class="info-client-detail">
+                                        <p class="title-detail-client ">Groupe</p>
+                                        <p class="cursor label-background" data-index="groupe">PAS ENCORE</p>
+                                    </div>
+                                    <div class="info-client-detail">
+                                        <p class="title-detail-client ">Classification</p>
+                                        <p class="cursor label-background" data-index="classif">PAS ENCORE</p>
+                                    </div>
+                                    <div class="info-client-detail">
+                                        <p class="title-detail-client ">Régions</p>
+
+                                        <p class="cursor label-background"
+                                           data-index="region">Pas de region enregistrer encore</p>
+
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="four wide column recap-client">
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,11 +217,6 @@
     </div>
 
     <!-- /page content -->
-
-
-
-
-
 
 
 {% endblock %}
