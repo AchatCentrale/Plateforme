@@ -160,3 +160,12 @@ index-fournisseur:
     path: /fournisseurs
     defaults: {_controller: SiteBundle:Fournisseur:index}
 
+fournisseur-general:
+    path: /fournisseurs/{id}/general
+    defaults: {_controller: SiteBundle:Fournisseur:fournisseurGeneral}
+    requirements:
+            page: '\d+'
+
+
+
+

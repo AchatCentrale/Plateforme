@@ -36,6 +36,17 @@ class FournisseurController extends Controller
 
     }
 
+
+
+
+    public function fournisseurGeneralAction(Request $request)
+    {
+
+
+
+        return $this->render('@Site/Fournisseurs/general.html.twig');
+    }
+
 }
 
 
