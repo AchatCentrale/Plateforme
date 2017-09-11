@@ -72,24 +72,21 @@
                         <div class="liste-users-client">
                             <div class="ui relaxed list">
 
+                                {% for u in fournUser  %}
+                                    <div class="item">
+                                        <img class="ui avatar image image-avatar-list" src="https://semantic-ui.com/images/avatar/large/christian.jpg">
+                                        <div class="content content-list-user">
+                                            <a target="_blank" href="http://fournisseurs.achatcentrale.fr/Login.asp?LOGIN={{ u['FC_MAIL'] }}&PASS={{ u['FC_PASS'] }}" ><i class="user icon"></i>{{ u['FC_NOM'] | convert_encoding('UTF-8', 'Windows-1252')  }} {{ u['FC_PRENOM'] | convert_encoding('UTF-8', 'Windows-1252')}}</a>
+                                            <div class="description"><i class="mail icon"></i>{{ u['FC_MAIL'] }}</div>
+                                            <div class="description"><i class="phone icon"></i>
+                                                {{ u['FC_TEL'] | isEmpty | phone | raw }}
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                {#{% for u in user %}#}
-                                {#<div class="item">#}
-                                {#<img class="ui avatar image image-avatar-list" data-title="Elliot Fu"#}
-                                {#data-content="Elliot has been a member since July 2012"#}
-                                {#src="https://semantic-ui.com/images/avatar/large/christian.jpg">#}
-                                {#<div class="content content-list-user">#}
-                                {#<a href="//www.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u.ccMail }}&PASS={{ u.ccPass }}"><i#}
-                                {#class="user icon"></i>{{ u.ccPrenom| convert_encoding('UTF-8', 'Windows-1252') }} {{ u.ccNom | convert_encoding('UTF-8', 'Windows-1252') }}#}
-                                {#</a>#}
-                                {#<div class="description"><i class="mail icon"></i>{{ u.ccMail }}</div>#}
-                                {#<div class="description"><i class="phone icon"></i>#}
-                                {#{{ u.ccTel | isEmpty | phone | raw }}#}
-                                {#</div>#}
-                                {#</div>#}
-                                {#</div>#}
+                                {% endfor %}
 
-                                {#{% endfor %}#}
+
 
 
                             </div>

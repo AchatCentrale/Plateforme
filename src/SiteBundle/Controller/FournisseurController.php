@@ -66,12 +66,12 @@ class FournisseurController extends Controller
         $stmtCount->execute();
         $fourCount = $stmtCount->fetchAll();
 
-
+        dump($fourUser);
 
         if (count($four) > 0){
             return $this->render('@Site/Fournisseurs/general.html.twig', [
                 'fournisseur' => $four[0],
-                'fournUser' => $fourUser[0],
+                'fournUser' => $fourUser,
                 'fournCountProd' => $fourCount,
             ]);
         }else {
