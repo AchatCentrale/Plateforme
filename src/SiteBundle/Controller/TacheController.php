@@ -527,7 +527,7 @@ class TacheController extends Controller
 
 
 
-                    $mailer->sendTaskNotification($task->getClaId(), "test");
+                    $mailer->sendTaskNotification($task->getClaId(), "ROC_ECLERC" );
 
 
                     return $this->redirectToRoute('taches_home', [
@@ -576,6 +576,12 @@ class TacheController extends Controller
                     $em = $this->getDoctrine()->getManager('centrale_funecap');
                     $em->persist($task);
                     $em->flush();
+
+
+                    $mailer->sendTaskNotification($task->getClaId(), "CENTRALE_FUNECAP" );
+
+
+
                     return $this->redirectToRoute('taches_home', [
 
                     ], 301);
@@ -625,6 +631,11 @@ class TacheController extends Controller
                     $em = $this->getDoctrine()->getManager('achat_centrale');
                     $em->persist($task);
                     $em->flush();
+
+                    $mailer->sendTaskNotification($task->getClaId(), "ACHAT_CENTRALE" );
+
+
+
                     return $this->redirectToRoute('taches_home', [
 
                     ], 301);
@@ -673,6 +684,10 @@ class TacheController extends Controller
                     $em = $this->getDoctrine()->getManager('centrale_pascal_leclerc');
                     $em->persist($task);
                     $em->flush();
+
+                    $mailer->sendTaskNotification($task->getClaId(), "CENTRALE_PFPL" );
+
+
                     return $this->redirectToRoute('taches_home', [
 
                     ], 301);
@@ -723,6 +738,11 @@ class TacheController extends Controller
                     $em = $this->getDoctrine()->getManager('centrale_gccp');
                     $em->persist($task);
                     $em->flush();
+
+
+                    $mailer->sendTaskNotification($task->getClaId(), "CENTRALE_GCCP" );
+
+
                     return $this->redirectToRoute('taches_home', [
 
                     ], 301);
