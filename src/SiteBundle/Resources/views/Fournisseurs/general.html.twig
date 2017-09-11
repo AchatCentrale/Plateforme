@@ -223,6 +223,103 @@
                             </div>
 
                         </div>
+
+                        <div class="gestion-action-note-four-container">
+
+                            <div class="ui grid">
+                                <div class="three wide column">
+                                    <h5 id="add_notes_fournisseur_input_txt">Ajouter une nouvelle note</h5>
+                                </div>
+
+                                <div class="seven wide column">
+                                    <div class="ui fluid input">
+                                        <label for="add_notes_fournisseur_input_label"></label>
+                                        <input id="add_notes_fournisseur_input_label" type="text" placeholder="Nouvel notes">
+                                    </div>
+                                </div>
+                                <div class="six wide column">
+                                    <button class="ui button" id="add_notes_fournisseur_input_btn">
+                                        Enregistrer
+                                    </button>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="detail-client">
+
+                            <div class="profile_title">
+                                <h2>Historique du fournisseur </h2>
+                            </div>
+
+
+                            {#<div class="ui grid">#}
+
+
+                                {#<div class="four wide column">#}
+                                    {#<div class="info-client-detail">#}
+                                        {#<p class="title-detail-client ">Siret</p>#}
+                                        {#<p class="cursor label-background"#}
+                                           {#data-index="siret">{{ fournisseur['FO_SIRET'] | siret }}</p>#}
+                                    {#</div>#}
+                                    {#<div class="info-client-detail">#}
+                                        {#<p class="title-detail-client ">Mail</p>#}
+                                        {#<p class="cursor " data-index="siret">#}
+                                            {#<a class="cursor data-client " data-index="mail"#}
+                                               {#href="mailto:">#}
+                                                {#<i class="mail link  circular icon"></i></a>{{ fournisseur['FO_MAIL'] | convert_encoding('UTF-8', 'Windows-1252') }}#}
+                                        {#</p>#}
+                                    {#</div>#}
+                                    {#<div class="info-client-detail " id="detail-tel">#}
+                                        {#<p class="title-detail-client ">Téléphone</p>#}
+                                        {#<p class="cursor label-background"#}
+                                           {#data-index="siret">{{ fournisseur['FO_TEL'] | phone }}</p>#}
+                                    {#</div>#}
+                                {#</div>#}
+
+                                {#<div class="three wide column">#}
+                                    {#<div class="info-client-detail">#}
+                                        {#<p class="title-detail-client ">Frais de port</p>#}
+                                        {#<p class="cursor label-background"#}
+                                           {#data-index="siret">{{ fournisseur['FO_PORT_PAYANT_MONTANT'] }} €</p>#}
+                                    {#</div>#}
+                                    {#<div class="info-client-detail">#}
+                                        {#<p class="title-detail-client ">Frais de port offert </p>#}
+                                        {#<p class="cursor label-background" data-index="siret"> à partir#}
+                                            {#de {{ fournisseur['FO_PORT_OFFERT_MONTANT'] }} €</p>#}
+                                    {#</div>#}
+                                    {#<div class="info-client-detail">#}
+                                        {#<p class="title-detail-client ">CGV</p>#}
+
+                                        {#{% if fournisseur['FO_CGV']  is null %}#}
+                                            {#<p class="cursor label-background"#}
+                                               {#data-index="activite">Pas de CGV encore</p>#}
+
+                                        {#{% else %}#}
+
+                                            {#<p class="cursor label-background"#}
+
+                                               {#data-index="activite"><a target="_blank"#}
+                                                                        {#href="http://www.achatcentrale.fr/UploadFichiers/Uploads/FOURN_{{ fournisseur['FO_ID'] }}_CGV/{{ fournisseur['FO_CGV'] }}">Voir#}
+                                                    {#les CGV</a></p>#}
+
+                                        {#{% endif %}#}
+
+
+                                    {#</div>#}
+                                {#</div>#}
+
+
+                                {#<div class="vertical-divider"></div>#}
+
+
+
+                            {#</div>#}
+
+                        </div>
                     </div>
                 </div>
             </div>
