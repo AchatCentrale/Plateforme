@@ -45,18 +45,19 @@ class FournisseurController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_produits_connection');
 
-        $sql = "SELECT *
-                FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS
-                WHERE CENTRALE_PRODUITS.dbo.FOURNISSEURS.FO_ID = :id
-                
-                ";
-
+        $sql = "SELECT * FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS WHERE CENTRALE_PRODUITS.dbo.FOURNISSEURS.FO_ID = :id";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $id);
-
-
         $stmt->execute();
         $four = $stmt->fetchAll();
+
+
+        $sqlUser = "SELECT * FROM CENTRALE_PRODUITS.dbo.FOURN_USERS WHERE FO_ID = :id";
+
+        $stmtUser = $conn->prepare($sqlUser);
+        $stmtUser->bindValue(':id', $id);
+        $stmtUser->execute();
+        $fourUser = $stmt->fetchAll();
 
 
 
@@ -65,7 +66,8 @@ class FournisseurController extends Controller
 
         if (count($four) > 0){
             return $this->render('@Site/Fournisseurs/general.html.twig', [
-                'fournisseur' => $four[0]
+                'fournisseur' => $four[0],
+                'fournUser' => $fourUser[0]
             ]);
         }else {
 

@@ -115,7 +115,7 @@
                                 <tbody>
                                 {% for fo in fournisseurs %}
                                         <tr data-centrale="{{ fo.FO_RAISONSOC }}" data-id="{{ fo.FO_ID }}"
-                                            class="cursor go-to-client">
+                                            class="cursor go-to-fournisseur">
                                             <td>{{ fo.FO_REF }}</td>
                                             <td>{{ fo.FO_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252') }}</td>
                                             <td>{{ fo.FO_CP }} {{ fo.FO_VILLE |  convert_encoding('UTF-8', 'Windows-1252') | formatVille }}</td>

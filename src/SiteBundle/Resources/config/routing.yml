@@ -163,8 +163,6 @@ index-fournisseur:
 fournisseur-general:
     path: /fournisseurs/{id}/general
     defaults: {_controller: SiteBundle:Fournisseur:fournisseurGeneral}
-    requirements:
-            page: '\d+'
 
 
 

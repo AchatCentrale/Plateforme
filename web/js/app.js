@@ -1530,4 +1530,24 @@ $('.save-hastag-client').on('click', function (e) {
 })
 
 
+
+    $('.go-to-fournisseur').on('click', function () {
+
+
+
+        let id = $(this).data('id');
+
+
+
+        let url = CURRENT_URL + "/" + id + "/general";
+
+
+        window.location.href = url;
+
+    });
+
+
+
+
+
 });

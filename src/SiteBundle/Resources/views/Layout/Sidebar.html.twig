@@ -26,12 +26,29 @@
                 <ul class="nav side-menu" style="">
                     <li class="{% if app.request.attributes.get('_route') == 'index_auth' %}current-page {% endif %}"><a
                                 href="/"><i class="fa fa-home"></i> Home</a></li>
+
+
                     <li class="{% if app.request.attributes.get('_route') == 'taches_home' or app.request.attributes.get('_route') == 'new-task' %}current-page {% endif %}">
                         <a href="{{ path('taches_home') }}"><i class="fa fa-calendar"></i> Action</a></li>
+
+
                     <li class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-facturation' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}current-page {% endif %}">
+
+
                         <a href="{{ path('client', { 'c' : 'all'}) }}"><i class="fa fa-user"></i> Client
-                            {% if  app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'client-facturation' %}<span class="fa fa-chevron-down"></span></a>
+
+
+
+                            {% if  app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'client-facturation' %}
+                            <span class="fa fa-chevron-down"></span></a>
+
+
                         <ul class="nav child_menu">
+
+
+
+
+
                             <li class=" {% if app.request.attributes.get('_route') == 'client-general' %}current-page {% endif %}">
                                 <a href="{{ path('client-general', { id : app.request.attributes.get('id'), 'centrale' : app.request.attributes.get('centrale') }) }}">General</a>
                             </li>
@@ -48,18 +65,29 @@
                     </li>
                     {% endif %}
                     </a>
-                    </li>
-                    <li class="{% if app.request.attributes.get('_route') == 'index-fournisseur' %}current-page {% endif %}">
+
+
+
+                    <li class="{% if app.request.attributes.get('_route') == 'fournisseur-general' or app.request.attributes.get('_route') == 'index-fournisseur' %}current-page {% endif %}">
                         <a href="{{ path('index-fournisseur', { "c" : "all"}) }}"><i class="fa fa-industry"></i>
-                            Fournisseurs<span class="fa fa-chevron-down"></span></a>
+                            Fournisseurs
+                            {% if  app.request.attributes.get('_route') == 'fournisseur-general'  %}
+                            <span class="fa fa-chevron-down"></span></a>
+
+
+
+
                         <ul class="nav child_menu">
+
+
+
                             <li class=" {% if app.request.attributes.get('_route') == 'fournisseur-general' %}current-page {% endif %}">
-                                <a href="{{ path('fournisseur-general', { id : app.request.attributes.get('id') }) }}">Géneral</a>
+                                <a href="{% if app.request.attributes.get('id') %}{{ path('fournisseur-general', { id : app.request.attributes.get('id') }) }}{% endif %}">Géneral</a>
                             </li>
 
                         </ul>
                     </li>
-
+                    {% endif %}
                 </ul>
             </div>
 
@@ -71,6 +99,8 @@
 
         <!-- /menu footer buttons -->
         <div class="sidebar-footer hidden-small">
+
+
             <a href="#" data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
