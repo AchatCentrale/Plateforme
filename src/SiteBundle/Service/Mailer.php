@@ -57,7 +57,6 @@ class Mailer
 
         $task = $stmt->fetchAll();
 
-        dump($task);
 
         $subject = "Nouvel tache";
         $template = 'SiteBundle:mail:mailDetailClient.html.twig';
