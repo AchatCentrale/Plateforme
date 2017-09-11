@@ -26,6 +26,7 @@ class Mailer
     {
         $mail = \Swift_Message::newInstance();
 
+
         $mail
             ->setFrom($this->from, $this->name)
             ->setTo($to)
@@ -59,10 +60,11 @@ class Mailer
 
 
         $subject = "Nouvel tache";
+
         $template = 'SiteBundle:mail:mailDetailClient.html.twig';
         $to = 'jb@achatcentrale.fr';
         $body = $this->templating->render($template, [
-            "nom" => $task
+            'task' => $task,
         ]);
         $this->sendMessage($to, $subject, $body);
 
