@@ -485,7 +485,7 @@ class TacheController extends Controller
 
         $centrale = $request->query->get('c');
         $clientChoice = $request->query->get('cl');
-
+        $mailer = $this->get('site.service.mailer');
 
         switch ($centrale) {
 
@@ -505,9 +505,11 @@ class TacheController extends Controller
                     $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findAll();
                 }
                 if ($request->getMethod() == "POST") {
+
+
+
                     $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
-                    $task
-                        ->setClaType($req->get('cla_type'))
+                    $task->setClaType($req->get('cla_type'))
                         ->setClaNom($req->get('cla_nom'))
                         ->setClaDescr($req->get('cla_desc'))
                         ->setClaPriorite($req->get('cla_priorite'))
@@ -515,9 +517,19 @@ class TacheController extends Controller
                         ->setUsId($req->get('cla_us'))
                         ->setInsUser($this->getUser()->getusId())
                         ->setClId($req->get('cla_cl'));
+
+
                     $em = $this->getDoctrine()->getManager('roc_eclerc');
                     $em->persist($task);
                     $em->flush();
+
+
+
+
+
+                    $mailer->sendTaskNotification($task->getClaId(), "test");
+
+
                     return $this->redirectToRoute('taches_home', [
 
                     ], 301);
@@ -830,6 +842,9 @@ class TacheController extends Controller
 
 
         $mailer = $this->get('site.service.mailer');
+
+
+
 
 
         $mailer->sendTestMessage($id);

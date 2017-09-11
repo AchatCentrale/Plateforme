@@ -2051,7 +2051,7 @@ class BaseController extends Controller
 
 
 
-        return $this->render('@Site/test.html.twig');
+        return $this->render('@Site/mail/mailDetailClient.html.twig');
 
 
     }

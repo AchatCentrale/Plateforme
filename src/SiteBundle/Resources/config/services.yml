@@ -21,4 +21,4 @@ services:
                 - { name: twig.extension}
     site.service.mailer:
         class: SiteBundle\Service\Mailer
-        arguments: ['@mailer', '@templating.engine.twig']
+        arguments: ['@mailer', '@templating.engine.twig', '@doctrine.dbal.achat_centrale_connection']
