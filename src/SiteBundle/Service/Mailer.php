@@ -2,6 +2,7 @@
 
 namespace SiteBundle\Service;
 
+use Doctrine\DBAL\Driver\Connection;
 use Symfony\Component\Templating\EngineInterface;
 
 class Mailer
