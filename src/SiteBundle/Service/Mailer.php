@@ -64,7 +64,7 @@ class Mailer
         $template = 'SiteBundle:mail:mailDetailClient.html.twig';
         $to = 'jb@achatcentrale.fr';
         $body = $this->templating->render($template, [
-            'task' => $task,
+            'tasks' => $task[0],
         ]);
         $this->sendMessage($to, $subject, $body);
 
