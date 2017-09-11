@@ -126,10 +126,10 @@
 
                         <h2> Bonjour {{ user['US_PRENOM'] }}</h2>
 
-                        <p>Une nouvelle tache vous a été assignée.</p>
-                        <p>Nom de la tache : {{ tasks['CLA_NOM'] }}</p>
-                        <p>Description de la tache : {{ tasks['CLA_DESCR'] }}</p>
-                        <p>Crée il y a :  {{ tasks['INS_DATE'] | fromNowString }}</p>
+                        <p>Une nouvelle tâche vous a été assignée.</p>
+                        <p>Nom de la tâche : {{ tasks['CLA_NOM'] }}</p>
+                        <p>Description de la tâche : {{ tasks['CLA_DESCR'] }}</p>
+                        <p>Créée il y a :  {{ tasks['INS_DATE'] | fromNowString }}</p>
                         <p>Se termine le :  {{ tasks['CLA_ECHEANCE'] | dateString }}</p>
 
                         <table>
