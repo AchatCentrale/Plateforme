@@ -2047,11 +2047,27 @@ class BaseController extends Controller
     public function testAction()
     {
 
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id", 25);
+        $stmt->execute();
+        $task = $stmt->fetchAll();
 
 
+        $sqlUser = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id ";
+        $stmtUser = $conn->prepare($sqlUser);
+        $stmtUser->bindValue(":id", $task[0]['US_ID']);
+        $stmtUser->execute();
+        $user = $stmtUser->fetchAll();
 
+        dump($user);
 
-        return $this->render('@Site/mail/mailDetailClient.html.twig');
+        return $this->render('@Site/mail/mailDetailClient.html.twig',[
+            'tasks' => $task[0],
+            'user' => $user[0]
+        ]);
 
 
     }

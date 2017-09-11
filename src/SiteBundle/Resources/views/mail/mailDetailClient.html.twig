@@ -117,22 +117,26 @@
                 <tr>
                     <td align="center" class="masthead">
 
-                        <img src="{{ asset('images/logo-achatcentrale.png') }}" alt="">
+                        <img src="{{ absolute_url(asset('images/logo-achatcentrale.png')) }}" alt="">
 
                     </td>
                 </tr>
                 <tr>
                     <td class="content">
 
-                        <h2> Bonjour{{ user['US_NOM'] }} + prenom</h2>
+                        <h2> Bonjour {{ user['US_PRENOM'] }}</h2>
 
-                        <p>Une nouvelle tache vous a été assigné. {{ tasks['CLA_NOM'] }}</p>
+                        <p>Une nouvelle tache vous a été assigné.</p>
+                        <p>Nom de la tache : {{ tasks['CLA_NOM'] }}</p>
+                        <p>Description de la tache : {{ tasks['CLA_DESCR'] }}</p>
+                        <p>Crée il y a :  {{ tasks['INS_DATE'] | fromNowString }}</p>
+                        <p>Se termine le :  {{ tasks['CLA_ECHEANCE'] | dateString }}</p>
 
                         <table>
                             <tr>
                                 <td align="center">
                                     <p>
-                                        <a href="#" class="button">Voir la tâche</a>
+                                        <a href="{{ path('taches_home')}}" class="button">Voir mes tâches</a>
                                     </p>
                                 </td>
                             </tr>
@@ -152,8 +156,8 @@
             <table>
                 <tr>
                     <td class="content footer" align="center">
-                        <p>Envoyé par <a href="www.achatcentrale.fr">Achat-centrale</a></p>
-                        <p><a href="mailto:">jb@achatcentrale.fr</a> | </p>
+                        <p>Envoyé par <a href="http://www.achatcentrale.fr">Achat-centrale</a></p>
+                        <p><a href="mailto:jb@achatcentrale.fr">jb@achatcentrale.fr</a>  </p>
                     </td>
                 </tr>
             </table>

@@ -58,11 +58,12 @@ class Mailer
         $task = $stmt->fetchAll();
 
 
-        $sqlUser = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID= :id ";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindValue(":id", $task[0]['US_ID']);
-        $stmt->execute();
-        $user = $stmt->fetchAll();
+
+        $sqlUser = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id ";
+        $stmtUser = $this->conn->prepare($sqlUser);
+        $stmtUser->bindValue(":id", $task[0]['US_ID']);
+        $stmtUser->execute();
+        $user = $stmtUser->fetchAll();
 
 
 
@@ -72,7 +73,7 @@ class Mailer
         $to = 'jb@achatcentrale.fr';
         $body = $this->templating->render($template, [
             'tasks' => $task[0],
-            'user' => $user
+            'user' => $user[0]
         ]);
         $this->sendMessage($to, $subject, $body);
 
