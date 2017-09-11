@@ -57,17 +57,22 @@ class FournisseurController extends Controller
         $stmtUser = $conn->prepare($sqlUser);
         $stmtUser->bindValue(':id', $id);
         $stmtUser->execute();
-        $fourUser = $stmt->fetchAll();
+        $fourUser = $stmtUser->fetchAll();
 
 
-
+        $sqlCountProduit = "SELECT count(*) FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE FO_ID = :id";
+        $stmtCount = $conn->prepare($sqlCountProduit);
+        $stmtCount->bindValue(':id', $id);
+        $stmtCount->execute();
+        $fourCount = $stmtCount->fetchAll();
 
 
 
         if (count($four) > 0){
             return $this->render('@Site/Fournisseurs/general.html.twig', [
                 'fournisseur' => $four[0],
-                'fournUser' => $fourUser[0]
+                'fournUser' => $fourUser[0],
+                'fournCountProd' => $fourCount,
             ]);
         }else {
 

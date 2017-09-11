@@ -60,7 +60,6 @@ function init_sidebar() {
     };
 
     $SIDEBAR_MENU.find('a').on('click', function (ev) {
-        console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
 
         if ($li.is('.active')) {
@@ -89,7 +88,6 @@ function init_sidebar() {
 
 // toggle small or large menu
     $MENU_TOGGLE.on('click', function () {
-        console.log('clicked - menu toggle');
 
         if ($BODY.hasClass('nav-md')) {
             $SIDEBAR_MENU.find('li.active ul').hide();
@@ -168,7 +166,6 @@ const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
 moment.locale('fr');
 
 function terminerTask(e) {
-    console.log(e);
     let url = 'http://localhost:8000/taches/terminer/' + e;
 
     swal({
@@ -208,7 +205,6 @@ function terminerTask(e) {
 
                 // La fonction à appeler si la requête n'a pas abouti
                 error: function () {
-                    console.log("error");
 
                 }
 
@@ -222,7 +218,6 @@ function terminerTask(e) {
 
 
 function unArchiveTask(e) {
-    console.log(e);
     let url = 'http://localhost:8000/taches/unarchive/' + e;
 
     swal({
@@ -260,7 +255,6 @@ function unArchiveTask(e) {
 
                 // La fonction à appeler si la requête n'a pas abouti
                 error: function () {
-                    console.log("error");
 
                 }
 
@@ -275,12 +269,10 @@ function unArchiveTask(e) {
 $('.mail-send').on('click', function (e) {
 
     let user = $(this).data('user');
-    console.log(user);
 
     $.ajax({
         url: "/send/client/" + user,
         success: function (result) {
-            console.log(result);
         }
     });
 });
@@ -288,7 +280,6 @@ $('.mail-send').on('click', function (e) {
 
 //sidebar
 $('#menu_toggle').on('click', function () {
-    console.log('clicked - menu toggle');
 
     if ($('body').hasClass('nav-md')) {
         $('#sidebar-menu').find('li.active ul').hide();
@@ -1517,11 +1508,9 @@ $('.save-hastag-client').on('click', function (e) {
 
 
 
-    console.log(tpl);
 
     $elTag.before(tpl);
 
-    console.log($elTag.prevAll().length )
 
 
 
