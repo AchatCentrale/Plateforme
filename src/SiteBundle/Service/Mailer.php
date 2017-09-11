@@ -10,7 +10,7 @@ class Mailer
     protected $templating;
     private $from = "contact@achatcentrale.fr";
     private $reply = "jb@achatcentrale.fr";
-    private $name = "test-mail";
+    private $name = "Notification achat-centrale";
 
     public function __construct($mailer, EngineInterface $templating)
     {
