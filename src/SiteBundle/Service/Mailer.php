@@ -70,7 +70,7 @@ class Mailer
         $subject = "Nouvel tache";
 
         $template = 'SiteBundle:mail:mailDetailClient.html.twig';
-        $to = 'jb@achatcentrale.fr';
+        $to = $user[0]['US_MAIL'];
         $body = $this->templating->render($template, [
             'tasks' => $task[0],
             'user' => $user[0]
