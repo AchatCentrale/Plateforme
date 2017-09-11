@@ -19,3 +19,6 @@ services:
             doctrine: '@doctrine'
             tags:
                 - { name: twig.extension}
+    site.service.mailer:
+        class: SiteBundle\Service\Mailer
+        arguments: ['@mailer', '@templating.engine.twig']

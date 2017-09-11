@@ -829,17 +829,10 @@ class TacheController extends Controller
     {
 
 
-        /**
-         * @var \Swift_Mime_Message $message
-         */
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Some Subject')
-            ->setFrom('contact@gmail.com')
-            ->setTo('jb@achatcentrale.fr')
-            ->setBody('SiteBundle:mail:mailDetailClient.html.twig', 'text/html');
+        $mailer = $this->get('site.service.mailer');
 
 
-        $this->get('mailer')->send($message);
+        $mailer->sendTestMessage($id);
 
         return $this->render('@Site/test.html.twig');
 
