@@ -72,7 +72,7 @@ class Mailer
         $to = 'jb@achatcentrale.fr';
         $body = $this->templating->render($template, [
             'tasks' => $task[0],
-            'user' => $user[0]
+            'user' => $user
         ]);
         $this->sendMessage($to, $subject, $body);
 
