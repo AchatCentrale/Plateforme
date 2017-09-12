@@ -41,19 +41,19 @@ class FeedServices
                 $action = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches')->findBy([
                     'clId' => $id
                 ], [
-                    'claEcheance' => 'ASC'
+                    'claEcheance' => 'DESC'
                 ],  5);
 
                 $notes = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
                 $tickets = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:MessageEntete')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
 
