@@ -68,19 +68,19 @@ class FeedServices
                 $action = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsTaches')->findBy([
                     'clId' => $id
                 ], [
-                    'claEcheance' => 'ASC'
+                    'claEcheance' => 'DESC'
                 ],  5);
 
                 $notes = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsNotes')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
                 $tickets = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:MessageEntete')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
 
@@ -95,19 +95,19 @@ class FeedServices
                 $action = $this->doctrine->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsTaches')->findBy([
                     'clId' => $id
                 ], [
-                    'claEcheance' => 'ASC'
+                    'claEcheance' => 'DESC'
                 ],  5);
 
                 $notes = $this->doctrine->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsNotes')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
                 $tickets = $this->doctrine->getManager('centrale_funecap')->getRepository('FunecapBundle:MessageEntete')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
 
@@ -122,19 +122,19 @@ class FeedServices
                 $action = $this->doctrine->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsTaches')->findBy([
                     'clId' => $id
                 ], [
-                    'claEcheance' => 'ASC'
+                    'claEcheance' => 'DESC'
                 ],  5);
 
                 $notes = $this->doctrine->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsNotes')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
                 $tickets = $this->doctrine->getManager('centrale_gccp')->getRepository('GccpBundle:MessageEntete')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
 
@@ -149,19 +149,19 @@ class FeedServices
                 $action = $this->doctrine->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsTaches')->findBy([
                     'clId' => $id
                 ], [
-                    'claEcheance' => 'ASC'
+                    'claEcheance' => 'DESC'
                 ],  5);
 
                 $notes = $this->doctrine->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsNotes')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
                 $tickets = $this->doctrine->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:MessageEntete')->findBy([
                     'clId' => $id
                 ], [
-                    'insDate' => 'ASC'
+                    'insDate' => 'DESC'
                 ], 5);
 
 
