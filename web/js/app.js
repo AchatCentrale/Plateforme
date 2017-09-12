@@ -1492,7 +1492,6 @@ console.log($elValue, clId);
             cache : false,
 
             type: 'POST',
-            processData: false,
 
             data: {
                 cl: clId,
