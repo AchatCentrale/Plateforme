@@ -272,19 +272,19 @@
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Afficher les prix d'achats</p>
                                     <div class="prix-achat-check">
-                                        <input class="check-oui-pa"
+                                        <input title="prix dachat-o" class="check-oui-pa"
                                                type="checkbox" {{ (client[0].clMasqHa == 1) ? 'checked' :  '' }} > oui
 
-                                        <input class="check-non-pa"
+                                        <input title="prix dachat-n" class="check-non-pa"
                                                type="checkbox" {{ (client[0].clMasqHa == 0) ? 'checked' :  '' }} > Non
                                     </div>
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Afficher les prix de vente</p>
                                     <div class="prix-achat-check">
-                                        <input class="check-oui-pa"
+                                        <input title="prix de vente-o" class="check-oui-pa"
                                                type="checkbox" {{ (client[0].clMasqVt == 1) ? 'checked' :  '' }} > Oui
-                                        <input class="check-non-pa"
+                                        <input title="prix de vente-n" class="check-non-pa"
                                                type="checkbox" {{ (client[0].clMasqVt == 0) ? 'checked' :  '' }} > Non
                                     </div>
                                 </div>
