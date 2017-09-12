@@ -1462,6 +1462,22 @@ $(function () {
 
     $('.add-hastag-icon').on('click', function () {
 
+        let $elTag = $('.add-hastag-icon');
+        let $elValue = $('#value-hashtag-client');
+
+        let centrale = $('#centrale').html();
+
+        let clId = $('#id').html();
+
+
+        if ($elTag.prevAll().length === 3) {
+
+            $elValue.parent().toggleClass('error');
+            $(this).toggleClass('disabled ');
+            $('.save-hastag-client').toggleClass('disabled ');
+
+        }
+
 
         $('.add-hastag-container').toggle("slow");
     });

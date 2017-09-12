@@ -18,6 +18,8 @@ class TacheController extends Controller
     public function TacheAction()
     {
 
+
+
         $user = $this->getUser();
 
 
@@ -26,7 +28,7 @@ class TacheController extends Controller
 
             $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-            $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
+            $sql = "SELECT CL_ID, CLA_STATUS,INS_USER, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE CLA_STATUS <> 10
                 ORDER BY INS_DATE DESC";
@@ -48,7 +50,7 @@ class TacheController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
+        $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE US_ID = :usId
                 AND CLA_STATUS <> 10
