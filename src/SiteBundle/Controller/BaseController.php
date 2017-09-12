@@ -461,11 +461,12 @@ class BaseController extends Controller
            case 'roc':
                $con = $this->getDoctrine()->getManager()->getConnection();
                $stmt = $con->executeQuery(
-                   'SELECT DISTINCT
-              CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
-              FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
-              ORDER BY INS_DATE DESC 
+                   '
+                  SELECT DISTINCT
+                  CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
+                  CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
+                  FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
+                  ORDER BY INS_DATE DESC 
               '
                );
                $result = $stmt->fetchAll();
@@ -769,6 +770,16 @@ class BaseController extends Controller
                     ]
                 );
 
+
+
+                $sqlForTag = 'SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
+
+                $stmtForTag = $conn->prepare($sqlForTag);
+                $stmtForTag->bindValue('id', $id);
+                $stmtForTag->execute();
+                $tag = $stmtForTag->fetchAll();
+
+
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [
@@ -784,6 +795,7 @@ class BaseController extends Controller
                         "fonction" => $fonction,
                         "profil" => $profil,
                         "tacheArchiv" => $tacheArchive,
+                        "tag" => $tag
 
 
                     ]
@@ -846,6 +858,12 @@ class BaseController extends Controller
                     ]
                 );
 
+                $sqlForTag = 'SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
+
+                $stmtForTag = $conn->prepare($sqlForTag);
+                $stmtForTag->bindValue('id', $id);
+                $stmtForTag->execute();
+                $tag = $stmtForTag->fetchAll();
 
 
                 return $this->render(
@@ -863,6 +881,7 @@ class BaseController extends Controller
                         "fonction" => $fonction,
                         "profil" => $profil,
                         "tacheArchiv" => $tacheArchive,
+                        "tag" => $tag
 
                     ]
                 );
@@ -927,6 +946,13 @@ class BaseController extends Controller
                     ]
                 );
 
+                $sqlForTag = 'SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
+
+                $stmtForTag = $conn->prepare($sqlForTag);
+                $stmtForTag->bindValue('id', $id);
+                $stmtForTag->execute();
+                $tag = $stmtForTag->fetchAll();
+
 
 
                 return $this->render(
@@ -944,6 +970,7 @@ class BaseController extends Controller
                         "fonction" => $fonction,
                         "profil" => $profil,
                         "tacheArchiv" => $tacheArchive,
+                        "tag" => $tag
 
                     ]
                 );
@@ -1003,6 +1030,13 @@ class BaseController extends Controller
                     ]
                 );
 
+                $sqlForTag = 'SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
+
+                $stmtForTag = $conn->prepare($sqlForTag);
+                $stmtForTag->bindValue('id', $id);
+                $stmtForTag->execute();
+                $tag = $stmtForTag->fetchAll();
+
 
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
@@ -1019,6 +1053,7 @@ class BaseController extends Controller
                         "fonction" => $fonction,
                         "profil" => $profil,
                         "tacheArchiv" => $tacheArchive,
+                        "tag" => $tag
 
                     ]
                 );
