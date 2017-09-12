@@ -104,19 +104,19 @@ class CrmFilter extends \Twig_Extension
         if (gettype($centrale) === "string") {
             switch ($centrale) {
                 case 'ROC ECLERC':
-                    return "<h3><span class=\"label big label-warning \">Centrale Roc-Eclerc</span></h3>";
+                    return "<h3><span class=\"label large label-warning \">Centrale Roc-Eclerc</span></h3>";
                     break;
                 case 'CENTRALE FUNECAP':
-                    return "<h3><span class=\"label big label-danger \">Centrale Funecap</span></h3>";
+                    return "<h3><span class=\"label large label-danger \">Centrale Funecap</span></h3>";
                     break;
                 case 'CENTRALE GCCP':
-                    return "<h3><span class=\"label big label-danger \">Centrale GCCP</span></h3>";
+                    return "<h3><span class=\"label large label-danger \">Centrale GCCP</span></h3>";
                     break;
                 case 'ACHAT CENTRALE':
-                    return "<h3><span class=\"label big label-danger \">Achat Centrale</span></h3>";
+                    return "<h3><span class=\"label large label-danger \">Achat Centrale</span></h3>";
                     break;
                 case 'CENTRALE PFPL':
-                    return "<h3><span class=\"label big label-danger \">Centrale PFPL</span></h3>";
+                    return "<h3><span class=\"label large label-danger \">Centrale PFPL</span></h3>";
                     break;
             }
             return $centrale;
