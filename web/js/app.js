@@ -1479,7 +1479,6 @@ $(function () {
 
         let url = "http://crm.achatcentrale.fr/client/tag/new/"+ centrale +"/"+ clId ;
 
-console.log($elValue, clId);
 
 
         $.ajax({
@@ -1518,7 +1517,7 @@ console.log($elValue, clId);
 
         $elValue.val("");
 
-
+        console.log($elTag.prevAll().length);
         if ($elTag.prevAll().length === 3) {
 
             $elValue.parent().toggleClass('error');
