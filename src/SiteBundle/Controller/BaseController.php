@@ -2523,20 +2523,76 @@ class BaseController extends Controller
 
 
 
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        switch ($centrale){
 
-        $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(":id", mt_rand(0, 1000000));
-        $stmt->bindValue(":cl", $id);
-        $stmt->bindValue(":tag", $message);
-        $stmt->bindValue(":user", $this->getUser()->getUsId());
-        $stmt->execute();
-        $task = $stmt->fetchAll();
+            case "ROC_ECLERC":
+                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+                $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":id", mt_rand(0, 1000000));
+                $stmt->bindValue(":cl", $id);
+                $stmt->bindValue(":tag", $message);
+                $stmt->bindValue(":user", $this->getUser()->getUsId());
+                $stmt->execute();
+                $task = $stmt->fetchAll();
+                return new JsonResponse("Tag enregistrer", 200);
+                break;
+            case "CENTRALE_FUNECAP":
+                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+                $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":id", mt_rand(0, 1000000));
+                $stmt->bindValue(":cl", $id);
+                $stmt->bindValue(":tag", $message);
+                $stmt->bindValue(":user", $this->getUser()->getUsId());
+                $stmt->execute();
+                $task = $stmt->fetchAll();
+                return new JsonResponse("Tag enregistrer", 200);
+                break;
+            case "ACHAT_CENTRALE":
+                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+                $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":id", mt_rand(0, 1000000));
+                $stmt->bindValue(":cl", $id);
+                $stmt->bindValue(":tag", $message);
+                $stmt->bindValue(":user", $this->getUser()->getUsId());
+                $stmt->execute();
+                $task = $stmt->fetchAll();
+                return new JsonResponse("Tag enregistrer", 200);
+                break;
+            case "CENTRALE_PFPL":
+                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+                $sql = "INSERT INTO CENTRALE_PFPL.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":id", mt_rand(0, 1000000));
+                $stmt->bindValue(":cl", $id);
+                $stmt->bindValue(":tag", $message);
+                $stmt->bindValue(":user", $this->getUser()->getUsId());
+                $stmt->execute();
+                $task = $stmt->fetchAll();
+                return new JsonResponse("Tag enregistrer", 200);
+                break;
+            case "CENTRALE_GCCP":
+                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+                $sql = "INSERT INTO CENTRALE_GCCP.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":id", mt_rand(0, 1000000));
+                $stmt->bindValue(":cl", $id);
+                $stmt->bindValue(":tag", $message);
+                $stmt->bindValue(":user", $this->getUser()->getUsId());
+                $stmt->execute();
+                $task = $stmt->fetchAll();
+                return new JsonResponse("Tag enregistrer", 200);
+                break;
+
+        }
 
 
 
-        return new JsonResponse("Tag enregistrer", 200);
     }
 
 }
