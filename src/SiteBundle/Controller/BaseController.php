@@ -2527,7 +2527,7 @@ class BaseController extends Controller
 
         $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
         $stmt = $conn->prepare($sql);
-        $stmt->bindValue(":id", rand(0, 1000000000000));
+        $stmt->bindValue(":id", mt_rand(0, 1000000));
         $stmt->bindValue(":cl", $id);
         $stmt->bindValue(":tag", $message);
         $stmt->bindValue(":user", $this->getUser()->getUsId());
