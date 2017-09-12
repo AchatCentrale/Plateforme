@@ -99,7 +99,6 @@ class FournisseurController extends Controller
                 $produit = $stmt->fetchAll();
 
 
-                dump($produit);
 
                 return $this->render(
                     '@Site/Fournisseurs/produits.html.twig',
