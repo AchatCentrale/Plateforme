@@ -1479,7 +1479,7 @@ $(function () {
 
         let url = "http://crm.achatcentrale.fr/client/tag/new/"+ centrale +"/"+ clId ;
 
-
+console.log($elValue, clId);
 
 
         $.ajax({
@@ -1496,7 +1496,7 @@ $(function () {
 
             data: {
                 cl: clId,
-                tag: $elValue,
+                tag: $elValue.val(),
 
             },
 
@@ -1508,7 +1508,7 @@ $(function () {
             },
 
             // La fonction à appeler si la requête n'a pas abouti
-            error: function () {
+            error: function (data) {
                 console.log(data);
 
             }
