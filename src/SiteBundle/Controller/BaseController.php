@@ -679,6 +679,14 @@ class BaseController extends Controller
                 );
 
 
+                $sqlForTag = 'SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
+
+                $stmtForTag = $conn->prepare($sqlForTag);
+                $stmtForTag->bindValue('id', $id);
+                $stmtForTag->execute();
+                $tag = $stmtForTag->fetchAll();
+
+
 
 
                 return $this->render(
@@ -696,6 +704,7 @@ class BaseController extends Controller
                         "fonction" => $fonction,
                         "profil" => $profil,
                         "tacheArchiv" => $tacheArchive,
+                        "tag" => $tag
 
                     ]
                 );
