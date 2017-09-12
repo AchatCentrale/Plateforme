@@ -2525,8 +2525,9 @@ class BaseController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
+        $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
         $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":id", rand(0, 1000000000000));
         $stmt->bindValue(":cl", $id);
         $stmt->bindValue(":tag", $message);
         $stmt->bindValue(":user", $this->getUser()->getUsId());
@@ -2536,11 +2537,6 @@ class BaseController extends Controller
 
 
         return new JsonResponse("Tag enregistrer", 200);
-
-
-
-
-
     }
 
 }
