@@ -164,6 +164,11 @@ fournisseur-general:
     path: /fournisseurs/{id}/general
     defaults: {_controller: SiteBundle:Fournisseur:fournisseurGeneral}
 
+fournisseur-produits:
+    path: /fournisseurs/{id}/produits
+    defaults: {_controller: SiteBundle:Fournisseur:fournisseurProduit}
+
+
 new-hastag:
     path: /client/tag/new/{centrale}/{id}
     defaults: {_controller: SiteBundle:Base:newHastag}

@@ -38,8 +38,6 @@ class FournisseurController extends Controller
     }
 
 
-
-
     public function fournisseurGeneralAction(Request $request, $id)
     {
 
@@ -79,6 +77,47 @@ class FournisseurController extends Controller
         }
 
 
+
+    }
+
+
+    public function fournisseurProduitAction(Request $request, $id){
+
+        $req = $request->query->get('c');
+
+
+        switch ($req){
+
+
+            case 'all':
+            {
+                $conn = $this->get('doctrine.dbal.centrale_produits_connection');
+                $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.Vue_Produits_CRFF WHERE FO_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $produit = $stmt->fetchAll();
+
+
+                dump($produit);
+
+                return $this->render(
+                    '@Site/Fournisseurs/produits.html.twig',
+                    [
+                        'produit' => $produit
+                    ]
+                );
+            }
+        }
+
+
+
+        return $this->render(
+            '@Site/Fournisseurs/produits.html.twig',
+            [
+
+            ]
+        );
 
     }
 

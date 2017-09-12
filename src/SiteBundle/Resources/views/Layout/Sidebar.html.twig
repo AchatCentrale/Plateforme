@@ -64,8 +64,7 @@
                     <li class="{% if app.request.attributes.get('_route') == 'fournisseur-general' or app.request.attributes.get('_route') == 'index-fournisseur' %}current-page {% endif %}">
                         <a href="{{ path('index-fournisseur', { "c" : "all"}) }}"><i class="fa fa-industry"></i>
                             Fournisseurs</a>
-                            {% if  app.request.attributes.get('_route') == 'fournisseur-general' %}<span
-                                    class="fa fa-chevron-down"></span>
+                            {% if  app.request.attributes.get('_route') == 'fournisseur-general' or app.request.attributes.get('_route') == 'fournisseur-produits' %}
 
 
                         <ul class="nav child_menu">
@@ -73,6 +72,11 @@
 
                             <li class=" {% if app.request.attributes.get('_route') == 'fournisseur-general' %}current-page {% endif %}">
                                 <a href="{% if app.request.attributes.get('id') %}{{ path('fournisseur-general', { id : app.request.attributes.get('id') }) }}{% endif %}">Géneral</a>
+                            </li>
+
+
+                            <li class=" {% if app.request.attributes.get('_route') == 'fournisseur-general' or app.request.attributes.get('_route') == 'fournisseur-produits' %}current-page {% endif %}">
+                                <a href="{% if app.request.attributes.get('id') %}{{ path('fournisseur-produits', { id : app.request.attributes.get('id'), c : 'all' }) }}{% endif %}">Produits</a>
                             </li>
 
                         </ul>
