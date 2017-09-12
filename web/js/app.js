@@ -420,7 +420,6 @@ $(function () {
 
         }
 
-        console.log(centrale);
 
         let id = $(this).data('id');
 
@@ -1473,13 +1472,54 @@ $(function () {
         console.log(e);
         let $elTag = $('.add-hastag-icon');
         let $elValue = $('#value-hashtag-client');
+
+        let centrale = $('#centrale').html();
+
+        let clId = $('#id').html();
+
+        let url = "http://crm.achatcentrale.fr/client/tag/new/"+ centrale +"/"+ clId ;
+
+
+
+
+        $.ajax({
+
+            // Adresse à laquelle la requête est envoyée
+            url: url,
+
+            // Le délai maximun en millisecondes de traitement de la demande
+            timeout: 4000,
+            cache : false,
+
+            type: 'POST',
+            processData: false,
+
+            data: {
+                cl: clId,
+                tag: $elValue,
+
+            },
+
+
+            // La fonction à apeller si la requête aboutie
+            success: function (data) {
+                console.log(data);
+
+            },
+
+            // La fonction à appeler si la requête n'a pas abouti
+            error: function () {
+
+            }
+
+        });
+
         let tpl = `<a class="ui label" href="#">#${$elValue.val()}</a>`;
 
         $elValue.val("");
 
 
         if ($elTag.prevAll().length === 3) {
-            console.log('stop');
 
             $elValue.parent().toggleClass('error');
             $(this).toggleClass('disabled ');
@@ -1491,7 +1531,7 @@ $(function () {
         $elTag.before(tpl);
 
 
-    })
+    });
 
 
     $('.go-to-fournisseur').on('click', function () {
@@ -1506,6 +1546,9 @@ $(function () {
         window.location.href = url;
 
     });
+
+
+
 
 
 });

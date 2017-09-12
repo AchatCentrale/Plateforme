@@ -38,15 +38,11 @@
                         <a href="{{ path('client', { 'c' : 'all'}) }}"><i class="fa fa-user"></i> Client
 
 
-
                             {% if  app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'client-facturation' %}
                             <span class="fa fa-chevron-down"></span></a>
 
 
                         <ul class="nav child_menu">
-
-
-
 
 
                             <li class=" {% if app.request.attributes.get('_route') == 'client-general' %}current-page {% endif %}">
@@ -66,19 +62,14 @@
                     {% endif %}
                     </a>
 
-
-
                     <li class="{% if app.request.attributes.get('_route') == 'fournisseur-general' or app.request.attributes.get('_route') == 'index-fournisseur' %}current-page {% endif %}">
                         <a href="{{ path('index-fournisseur', { "c" : "all"}) }}"><i class="fa fa-industry"></i>
                             Fournisseurs
-                            {% if  app.request.attributes.get('_route') == 'fournisseur-general'  %}
-                            <span class="fa fa-chevron-down"></span></a>
-
-
+                            {% if  app.request.attributes.get('_route') == 'fournisseur-general' %}<span
+                                    class="fa fa-chevron-down"></span></a>
 
 
                         <ul class="nav child_menu">
-
 
 
                             <li class=" {% if app.request.attributes.get('_route') == 'fournisseur-general' %}current-page {% endif %}">
@@ -88,6 +79,8 @@
                         </ul>
                     </li>
                     {% endif %}
+
+
                 </ul>
             </div>
 
@@ -101,15 +94,15 @@
         <div class="sidebar-footer hidden-small">
 
 
-            <a href="#" data-toggle="tooltip" data-placement="top" title="Settings">
-                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-            </a>
-            <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-            </a>
+            {#<a href="#" data-toggle="tooltip" data-placement="top" title="Settings">#}
+            {#<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>#}
+            {#</a>#}
+            {#<a data-toggle="tooltip" data-placement="top" title="FullScreen">#}
+            {#<span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>#}
+            {#</a>#}
+            {#<a data-toggle="tooltip" data-placement="top" title="Lock">#}
+            {#<span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>#}
+            {#</a>#}
             <a data-toggle="tooltip" data-placement="top" title="Logout" href="{{ path('logout') }}">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
             </a>

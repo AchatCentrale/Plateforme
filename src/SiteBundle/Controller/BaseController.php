@@ -2513,6 +2513,36 @@ class BaseController extends Controller
 
     }
 
+    public function newHastagAction(Request $request, $id, $centrale)
+    {
+
+
+        $message = $request->request->get('tag');
+        $cl = $request->request->get('cl');
+
+
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(":cl", $id);
+        $stmt->bindValue(":tag", $message);
+        $stmt->bindValue(":user", $this->getUser()->getUsId());
+        $stmt->execute();
+        $task = $stmt->fetchAll();
+
+
+
+        return new JsonResponse("Tag enregistrer", 200);
+
+
+
+
+
+    }
+
 }
 
 
