@@ -2598,9 +2598,8 @@ class BaseController extends Controller
             case "ACHAT_CENTRALE":
                 $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-                $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":id", mt_rand(0, 1000000));
                 $stmt->bindValue(":cl", $id);
                 $stmt->bindValue(":tag", $message);
                 $stmt->bindValue(":user", $this->getUser()->getUsId());

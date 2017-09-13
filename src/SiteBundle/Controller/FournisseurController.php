@@ -97,13 +97,13 @@ class FournisseurController extends Controller
                 $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $produit = $stmt->fetchAll();
-
-
+    dump($produit);
 
                 return $this->render(
                     '@Site/Fournisseurs/produits.html.twig',
                     [
-                        'produit' => $produit
+                        'produit' => $produit,
+                        'raisonSoc' => $produit[0]['FO_RAISONSOC'],
                     ]
                 );
             }
