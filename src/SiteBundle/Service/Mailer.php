@@ -194,6 +194,8 @@ class Mailer
         ]);
         $this->sendMessage("Jbagostin@gmail.com", $subject, $body);
 
+        return "Sa c'est bien passé";
+
     }
 
 
