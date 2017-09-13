@@ -87,6 +87,8 @@
                             Ajouter un utilisateur
                         </button>
                     </div>
+
+
                     <div class="liste-users-client">
                         <div class="ui relaxed list">
 
@@ -128,16 +130,8 @@
                                     </div>
                                     <div class="column " style="width: 30%;">
 
-                                        {% if tag is defined %}
 
-
-                                            {% for t in tag  %}
-                                                <a class="ui label large" href="#">#{{ t['TAG'] }}</a>
-
-                                            {% endfor %}
                                             <i class="plus cursor large green-plus add-hastag-icon circle icon"></i>
-
-                                        {% endif %}
 
 
 
@@ -169,6 +163,23 @@
                                 {% else %}
                                     <p></p>
                                 {% endif %}
+
+                                <div class="hastag-container">
+
+                                    <ul>
+                                    {% if tag is defined %}
+
+
+                                        {% for t in tag  %}
+                                            <li><a class="" href="#">#{{ t['TAG'] }}</a></li>
+
+                                        {% endfor %}
+
+                                    {% endif %}
+
+
+                                    </ul>
+                                </div>
 
                             </div>
                         </div>
