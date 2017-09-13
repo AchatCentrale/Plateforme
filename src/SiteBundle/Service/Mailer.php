@@ -50,6 +50,7 @@ class Mailer
     public function sendTaskNotification($id,$centrale)
     {
 
+        $subject = "Nouvelle tâche  📩 ";
 
        switch ($centrale){
            case "ROC_ECLERC":
@@ -67,7 +68,6 @@ class Mailer
 
 
 
-               $subject = "Nouvel tache";
 
                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                $to = $user[0]['US_MAIL'];
@@ -92,7 +92,6 @@ class Mailer
 
 
 
-               $subject = "Nouvel tache";
 
                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                $to = $user[0]['US_MAIL'];
@@ -117,7 +116,6 @@ class Mailer
 
 
 
-               $subject = "Nouvel tache";
 
                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                $to = $user[0]['US_MAIL'];
@@ -142,7 +140,6 @@ class Mailer
 
 
 
-               $subject = "Nouvel tache";
 
                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                $to = $user[0]['US_MAIL'];
@@ -167,7 +164,6 @@ class Mailer
 
 
 
-               $subject = "Nouvel tache";
 
                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                $to = $user[0]['US_MAIL'];
