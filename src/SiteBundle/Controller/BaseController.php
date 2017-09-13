@@ -2031,7 +2031,7 @@ class BaseController extends Controller
             ->setTo('jb@achatcentrale.fr')
             ->setBody(
                 $this->renderView(
-                    'SiteBundle:mail:mailDetailClient.html.twig',
+                    'SiteBundle:mail:RelanceTaskNotification.html.twig',
                     array(
                         'client' => $client_info,
                     )
