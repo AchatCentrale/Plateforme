@@ -2572,7 +2572,7 @@ class BaseController extends Controller
             case "ROC_ECLERC":
                 $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-                $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue(":id", mt_rand(0, 1000000));
                 $stmt->bindValue(":cl", $id);
@@ -2585,7 +2585,7 @@ class BaseController extends Controller
             case "CENTRALE_FUNECAP":
                 $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-                $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue(":id", mt_rand(0, 1000000));
                 $stmt->bindValue(":cl", $id);
@@ -2609,7 +2609,7 @@ class BaseController extends Controller
                 break;
             case "CENTRALE_PFPL":
                 $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-                $sql = "INSERT INTO CENTRALE_PFPL.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $sql = "INSERT INTO CENTRALE_PFPL.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue(":id", mt_rand(0, 1000000));
                 $stmt->bindValue(":cl", $id);
@@ -2621,7 +2621,7 @@ class BaseController extends Controller
                 break;
             case "CENTRALE_GCCP":
                 $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-                $sql = "INSERT INTO CENTRALE_GCCP.dbo.CLIENTS_TAG (ID , CL_ID, TAG, INS_DATE, INS_USER) VALUES (:id ,:cl, :tag, GETUTCDATE(), :user)";
+                $sql = "INSERT INTO CENTRALE_GCCP.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue(":id", mt_rand(0, 1000000));
                 $stmt->bindValue(":cl", $id);
