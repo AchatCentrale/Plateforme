@@ -2103,7 +2103,6 @@ class BaseController extends Controller
         $stmt->execute();
         $task = $stmt->fetchAll();
 
-        dump($task);
         foreach ($task as $t) {
 
             $result = $mailer->sendRelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'],$t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']  );
