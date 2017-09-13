@@ -858,7 +858,7 @@ class BaseController extends Controller
                     ]
                 );
 
-                $sqlForTag = 'SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
+                $sqlForTag = 'SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
 
                 $stmtForTag = $conn->prepare($sqlForTag);
                 $stmtForTag->bindValue('id', $id);
@@ -946,7 +946,7 @@ class BaseController extends Controller
                     ]
                 );
 
-                $sqlForTag = 'SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
+                $sqlForTag = 'SELECT * FROM CENTRALE_GCCP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
 
                 $stmtForTag = $conn->prepare($sqlForTag);
                 $stmtForTag->bindValue('id', $id);
@@ -1030,7 +1030,7 @@ class BaseController extends Controller
                     ]
                 );
 
-                $sqlForTag = 'SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
+                $sqlForTag = 'SELECT * FROM CENTRALE_PFPL.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
 
                 $stmtForTag = $conn->prepare($sqlForTag);
                 $stmtForTag->bindValue('id', $id);
