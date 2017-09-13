@@ -1529,7 +1529,7 @@ $(function () {
 
         });
 
-        let tpl = `<a class="ui label" href="#">#${$elValue.val()}</a>`;
+        let tpl = `<a class="ui large label" href="#">#${$elValue.val()}</a>`;
 
         $elValue.val("");
 
