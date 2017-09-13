@@ -54,7 +54,6 @@ class CronCommand extends ContainerAwareCommand
                     $result = $mailer->sendRelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'],$t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']  );
 
                     $output->write("Mails envoyée  a " . $t['US_MAIL'] . PHP_EOL );
-                    $output->write( $result );
 
 
                 }

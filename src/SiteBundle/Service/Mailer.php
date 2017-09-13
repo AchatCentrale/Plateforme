@@ -192,9 +192,7 @@ class Mailer
             'userNom' => $userNom,
             'userPrenom' => $userPrenom,
         ]);
-        $this->sendMessage("Jbagostin@gmail.com", $subject, $body);
-
-        return "Sa c'est bien passé";
+        $this->sendMessage($to, $subject, $body);
 
     }
 
