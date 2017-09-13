@@ -38,6 +38,8 @@ class CronCommand extends ContainerAwareCommand
             case 'task':
                 $output->writeln("cron executé");
 
+                $mailer = $this->getContainer()->get('site.service.mailer');
+
                 $conn = $this->getContainer()->get('doctrine.dbal.centrale_achat_jb_connection');
                 $sql = "SELECT
                       *
@@ -53,7 +55,6 @@ class CronCommand extends ContainerAwareCommand
 
                     $result = $mailer->sendRelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'],$t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']  );
 
-                    $output->write("Mails envoyée  a " . $t['US_MAIL'] . PHP_EOL );
 
 
                 }
