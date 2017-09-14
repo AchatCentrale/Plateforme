@@ -106,6 +106,10 @@ mail-task:
     path: /taches/mail/{id}
     defaults: {_controller: SiteBundle:Tache:sendMailTask}
 
+relance-mail:
+    path: /taches/mail/relance
+    defaults: {_controller: SiteBundle:Tache:sendRelanceMailTask}
+
 change-state:
     path: /taches/etat/{state}/{id}/{centrale}
     defaults: {_controller: SiteBundle:Tache:changetheState}

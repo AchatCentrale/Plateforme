@@ -56,14 +56,14 @@ class CronCommand extends ContainerAwareCommand
                     $result = $mailer->RelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'],$t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']  );
 
 
+                    $transport = $this->getContainer()->get('swiftmailer.mailer.default.transport');
 
-                    $Mailer = $this->getContainer()->get('mailer');
 
-                    $transport = $Mailer->getTransport();
-                    if ($transport instanceof \Swift_Transport_SpoolTransport) {
-                        $spool = $transport->getSpool();
-                        $sent = $spool->flushQueue($this->getContainer()->get('swiftmailer.mailer.default.transport'));
-                    }
+                    $mailer = \Swift_Mailer::newInstance($transport);
+                    $mailer->send($message);
+
+
+
 
 
 
@@ -83,4 +83,7 @@ class CronCommand extends ContainerAwareCommand
 
 
     }
+
+
+
 }

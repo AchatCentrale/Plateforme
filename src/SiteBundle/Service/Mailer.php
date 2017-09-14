@@ -24,6 +24,9 @@ class Mailer
 
     protected function sendMessage($to, $subject, $body)
     {
+
+
+
         $mail = \Swift_Message::newInstance();
 
 
