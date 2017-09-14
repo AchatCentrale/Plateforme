@@ -38,6 +38,8 @@ class CronCommand extends ContainerAwareCommand
             case 'task':
                 $output->writeln("cron executé");
 
+                $subject = "Il reste encore du travail a faire 📚";
+
                 $mailer = $this->getContainer()->get('site.service.mailer');
 
                 $conn = $this->getContainer()->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -53,11 +55,27 @@ class CronCommand extends ContainerAwareCommand
 
                 foreach ($task as $t) {
 
-                    $result = $mailer->RelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'],$t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']  );
+                    $template = 'SiteBundle:mail:RelanceTaskNotification.html.twig';
+                    $body = $this->templating->render($template, [
+                        'nom' => $t['CLA_NOM'],
+                        'desc' => $t['CLA_DESCR'],
+                        'insDate' => $t['INS_DATE'],
+                        'echeance' => $t['CLA_ECHEANCE'],
+                        'userNom' => $t['US_NOM'],
+                        'userPrenom' => $t['US_PRENOM'],
+                    ]);
+
+                    $message = \Swift_Message::newInstance()
+                        ->setSubject($subject)
+                        ->setFrom('notification@achatcentrale.Fr')
+                        ->setTo($t['US_MAIL'])
+                        ->setCharset('UTF-8')
+                        ->setContentType('text/html')
+                        ->setBody($body);
 
 
 
-
+                    $this->getContainer()->get('mailer')->send($message);
 
                     $output->write("Normalement c'est envoyé ");
 
