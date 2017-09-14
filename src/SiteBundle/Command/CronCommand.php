@@ -56,7 +56,7 @@ class CronCommand extends ContainerAwareCommand
                 foreach ($task as $t) {
 
                     $template = 'SiteBundle:mail:RelanceTaskNotification.html.twig';
-                    $body = $this->templating->render($template, [
+                    $body = $this->getContainer()->get('templating')->render($template, [
                         'nom' => $t['CLA_NOM'],
                         'desc' => $t['CLA_DESCR'],
                         'insDate' => $t['INS_DATE'],
