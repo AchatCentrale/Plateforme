@@ -177,7 +177,7 @@ class Mailer
 
     }
 
-    public function sendRelanceTaskNotification($to, $nom, $descr, $insDate, $echeance, $userNom, $userPrenom )
+    public function RelanceTaskNotification($to, $nom, $descr, $insDate, $echeance, $userNom, $userPrenom )
     {
         $subject = "Il reste encore du travail a faire 📚";
 
