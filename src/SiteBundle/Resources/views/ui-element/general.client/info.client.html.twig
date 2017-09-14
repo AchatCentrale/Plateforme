@@ -171,7 +171,7 @@
 
 
                                         {% for t in tag  %}
-                                            <li><a class="" href="#">#{{ t['TAG'] }}</a></li>
+                                            <li><a class="" href="{{ path('hastag-action', { 'id' : t['TAG'] }) }}">#{{ t['TAG'] }}</a></li>
 
                                         {% endfor %}
 

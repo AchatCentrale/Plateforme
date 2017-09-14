@@ -774,3 +774,14 @@ div.dataTables_wrapper div.dataTables_paginate {
 .hastag-container ul {
     padding-left: 0 !important;
 }
+
+.fixed_height_90 {
+    height: 90px
+}
+
+.hastag_search{
+
+    color: black;
+    font-size: 40px;
+
+}
