@@ -77,6 +77,10 @@ class CronCommand extends ContainerAwareCommand
 
                     $this->getContainer()->get('mailer')->send($message);
 
+                    $spool = $mailer->getTransport()->getSpool();
+                    $transport = $this->getContainer()->get('swiftmailer.mailer.default');
+                    $spool->flushQueue($transport);
+
                     $output->write("Normalement c'est envoyé ");
 
                 }
