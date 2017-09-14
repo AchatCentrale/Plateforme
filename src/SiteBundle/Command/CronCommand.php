@@ -13,7 +13,7 @@ class CronCommand extends ContainerAwareCommand
     protected function configure()
     {
 // On set le nom de la commande
-        $this->setName('app:cron');
+        $this->setName('cron');
 
 // On set la description
         $this->setDescription("Permet juste de faire un test dans la console");
@@ -38,8 +38,6 @@ class CronCommand extends ContainerAwareCommand
             case 'task':
                 $output->writeln("cron executé");
 
-                $subject = "Il reste encore du travail a faire 📚";
-
                 $mailer = $this->getContainer()->get('site.service.mailer');
 
                 $conn = $this->getContainer()->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -55,30 +53,20 @@ class CronCommand extends ContainerAwareCommand
 
                 foreach ($task as $t) {
 
-                    $template = 'SiteBundle:mail:RelanceTaskNotification.html.twig';
-                    $body = $this->getContainer()->get('templating')->render($template, [
-                        'nom' => $t['CLA_NOM'],
-                        'desc' => $t['CLA_DESCR'],
-                        'insDate' => $t['INS_DATE'],
-                        'echeance' => $t['CLA_ECHEANCE'],
-                        'userNom' => $t['US_NOM'],
-                        'userPrenom' => $t['US_PRENOM'],
-                    ]);
-
-                    $message = \Swift_Message::newInstance()
-                        ->setSubject($subject)
-                        ->setFrom('notification@achatcentrale.Fr')
-                        ->setTo($t['US_MAIL'])
-                        ->setCharset('UTF-8')
-                        ->setContentType('text/html')
-                        ->setBody($body);
+                    $result = $mailer->RelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'],$t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']  );
 
 
 
-                    $this->getContainer()->get('mailer')->send($message);
+                    $mailer = $this->getContainer()->get('mailer');
+
+                    $transport = $mailer->getTransport();
+                    if ($transport instanceof \Swift_Transport_SpoolTransport) {
+                        $spool = $transport->getSpool();
+                        $sent = $spool->flushQueue($this->getContainer()->get('swiftmailer.mailer'));
+                    }
 
 
-                    $this->flushQueue();
+
                     $output->write("Normalement c'est envoyé ");
 
                 }
@@ -95,14 +83,4 @@ class CronCommand extends ContainerAwareCommand
 
 
     }
-
-
-    protected function flushQueue()
-    {
-        $container = $this->getContainer();
-        $transport = $container->get('mailer')->getTransport();
-        $spool = $transport->getSpool();
-        $spool->flushQueue($container->get('mailer'));
-    }
-
 }
