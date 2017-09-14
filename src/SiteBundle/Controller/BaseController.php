@@ -2634,6 +2634,17 @@ class BaseController extends Controller
 
     }
 
+
+    public function hashtagAction(Request $request, $id){
+
+
+
+
+
+        return $this->render('@Site/tags/index.html.twig');
+    }
+
+
 }
 
 

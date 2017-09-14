@@ -173,5 +173,7 @@ new-hastag:
     path: /client/tag/new/{centrale}/{id}
     defaults: {_controller: SiteBundle:Base:newHastag}
 
-
+hastag-action:
+    path: /tag/{id}
+    defaults: {_controller: SiteBundle:Base:hashtag}
 
