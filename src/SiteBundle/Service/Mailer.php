@@ -41,7 +41,7 @@ class Mailer
     public function sendTestMessage()
     {
         $subject = "test mail";
-        $template = 'SiteBundle:mail:mailDetailClient.html.twig';
+        $template = 'SiteBundle:mail:mail.html.twig';
         $to = 'jb@achatcentrale.fr';
         $body = $this->templating->render($template);
         $this->sendMessage($to, $subject, $body);
