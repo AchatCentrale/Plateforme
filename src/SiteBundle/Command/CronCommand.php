@@ -57,12 +57,12 @@ class CronCommand extends ContainerAwareCommand
 
 
 
-                    $mailer = $this->getContainer()->get('mailer');
+                    $Mailer = $this->getContainer()->get('mailer');
 
-                    $transport = $mailer->getTransport();
+                    $transport = $Mailer->getTransport();
                     if ($transport instanceof \Swift_Transport_SpoolTransport) {
                         $spool = $transport->getSpool();
-                        $sent = $spool->flushQueue($this->getContainer()->get('swiftmailer.mailer'));
+                        $sent = $spool->flushQueue($this->getContainer()->get('swiftmailer.mailer.default.transport'));
                     }
 
 

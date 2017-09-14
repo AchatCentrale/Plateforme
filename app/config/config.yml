@@ -184,6 +184,7 @@ swiftmailer:
             password:  "%mailer_password%"
             port:      "%port%"
             auth_mode:  "%auth_mode%"
+            logging:   '%kernel.debug%'
 
 
 
