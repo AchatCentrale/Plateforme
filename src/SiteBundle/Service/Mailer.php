@@ -38,6 +38,22 @@ class Mailer
         $this->mailer->send($mail);
     }
 
+    protected function sendMessageFromCommand($to, $subject, $body)
+    {
+        $mail = \Swift_Message::newInstance();
+
+
+        $mail
+            ->setFrom($this->from, $this->name)
+            ->setTo($to)
+            ->setSubject($subject)
+            ->setBody($body)
+            ->setReplyTo($this->reply, $this->name)
+            ->setContentType('text/html');
+
+        $this->getContainer()->get('mailer')->send($mail);
+    }
+
     public function sendTestMessage()
     {
         $subject = "test mail";
@@ -192,7 +208,7 @@ class Mailer
             'userNom' => $userNom,
             'userPrenom' => $userPrenom,
         ]);
-        $this->sendMessage($to, $subject, $body);
+        $this->sendMessageFromCommand($to, $subject, $body);
 
     }
 
