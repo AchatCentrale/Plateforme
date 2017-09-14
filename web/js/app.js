@@ -1485,8 +1485,7 @@ $(function () {
 
     $('.save-hastag-client').on('click', function (e) {
 
-        console.log(e);
-        let $elTag = $('.add-hastag-icon');
+        let $elTag = $('#hastag-inject');
         let $elValue = $('#value-hashtag-client');
 
         let centrale = $('#centrale').html();
@@ -1529,11 +1528,10 @@ $(function () {
 
         });
 
-        let tpl = `<a class="ui large label" href="#">#${$elValue.val()}</a>`;
+        let tpl = `<li><a class="" href="#">#${$elValue.val()}</a></li>`;
 
         $elValue.val("");
 
-        console.log($elTag.prevAll().length);
         if ($elTag.prevAll().length === 3) {
 
             $elValue.parent().toggleClass('error');
@@ -1543,7 +1541,7 @@ $(function () {
         }
 
 
-        $elTag.before(tpl);
+        $elTag.append(tpl);
 
 
     });
