@@ -33,7 +33,7 @@ class CronCommand extends ContainerAwareCommand
         $mailer = $this->getContainer()->get('site.service.mailer');
 
 
-        switch ($type){
+        switch ($type) {
 
             case 'task':
                 $output->writeln("cron executé");
@@ -53,18 +53,8 @@ class CronCommand extends ContainerAwareCommand
 
                 foreach ($task as $t) {
 
-                    $result = $mailer->RelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'],$t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']  );
 
-
-                    $transport = $this->getContainer()->get('swiftmailer.mailer.default.transport');
-
-
-                    $mailer = \Swift_Mailer::newInstance($transport);
-                    $mailer->send($message);
-
-
-
-
+                    $result = $mailer->RelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'], $t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']);
 
 
                     $output->write("Normalement c'est envoyé ");
@@ -72,18 +62,9 @@ class CronCommand extends ContainerAwareCommand
                 }
 
 
-
-
-
-
                 break;
-
         }
-
-
-
     }
-
 
 
 }
