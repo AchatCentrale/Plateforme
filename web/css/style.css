@@ -785,3 +785,14 @@ div.dataTables_wrapper div.dataTables_paginate {
     font-size: 40px;
 
 }
+
+
+.site_title i {
+    border-radius: 50%;
+    margin-left: 50px;
+    font-size: 25pt;
+}
+.nav_title{
+    height: 85px;
+    padding-top: 15px;
+}
