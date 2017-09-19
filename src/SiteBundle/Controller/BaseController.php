@@ -2594,7 +2594,6 @@ class BaseController extends Controller
         $stmt->execute();
         $tags = $stmt->fetchAll();
 
-        dump($tags);
 
         return $this->render('@Site/tags/index.html.twig', [
             "tag" => $tags
