@@ -2638,7 +2638,7 @@ class BaseController extends Controller
         if(empty($result))
         {
             $sqlAction = "SELECT
-                      CLA_DESCR, CLA_NOM
+                      CLA_NOM
                     FROM
                       CENTRALE_ACHAT.dbo.Vue_All_Taches
                     WHERE CLA_DESCR LIKE :query
