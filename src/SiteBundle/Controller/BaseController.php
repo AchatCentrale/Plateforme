@@ -2652,7 +2652,7 @@ class BaseController extends Controller
             $result = $clientService->array_utf8_encode($clients);
 
             $result = [
-                "total_count" => count($clients),
+                "total_count" => 1,
                 "incomplete_results" => false,
                 "items" => $query
             ];
