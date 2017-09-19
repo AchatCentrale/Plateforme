@@ -1568,7 +1568,7 @@ $(function () {
         searchOnFocus: true,
         fields: {
             results: 'items',
-            title: 'TAG',
+            title: '#'+'TAG',
         },
         minCharacters: 2,
         error: {
