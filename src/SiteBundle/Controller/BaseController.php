@@ -2634,6 +2634,34 @@ class BaseController extends Controller
         $clients = $stmt->fetchAll();
         $result = $clientService->array_utf8_encode($clients);
 
+
+        if(!isset($result))
+        {
+            $sqlAction = "SELECT
+                      CLA_DESCR, CLA_NOM
+                    FROM
+                      CENTRALE_ACHAT.dbo.Vue_All_Taches
+                    WHERE CLA_DESCR LIKE :query
+                  ";
+
+            $stmtAction = $conn->prepare($sqlAction);
+            $stmtAction->bindValue('query',  $query . '%');
+            $stmtAction->execute();
+
+            $clients = $stmt->fetchAll();
+            $result = $clientService->array_utf8_encode($clients);
+
+            $result = [
+                "total_count" => count($clients),
+                "incomplete_results" => false,
+                "items" => $query
+            ];
+
+            return new JsonResponse($result, 200);
+
+        }
+
+
         $result = [
             "total_count" => count($clients),
             "incomplete_results" => false,
