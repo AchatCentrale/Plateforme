@@ -3,9 +3,9 @@
 namespace SiteBundle\Controller;
 
 
-
 use Goodby\CSV\Export\Standard\CsvFileObject;
 use Goodby\CSV\Export\Standard\Exporter;
+use Goodby\CSV\Export\Standard\ExporterConfig;
 use Http\Adapter\Guzzle6\Client;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Ivory\GoogleMap\Base\Coordinate;
@@ -23,7 +23,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Goodby\CSV\Export\Standard\ExporterConfig;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 
@@ -41,7 +40,7 @@ class BaseController extends Controller
 
         $user = $this->getUser();
 
-        if($user->getUsId() === 2){
+        if ($user->getUsId() === 2) {
 
 
             $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -56,8 +55,6 @@ class BaseController extends Controller
 
             $stmt->execute();
             $task = $stmt->fetchAll();
-
-
 
 
             return $this->render(
@@ -87,8 +84,6 @@ class BaseController extends Controller
         $task = $stmt->fetchAll();
 
 
-
-
         return $this->render(
             '@Site/Base/home.html.twig',
             [
@@ -106,8 +101,6 @@ class BaseController extends Controller
 
         $conn = $this->get('database_connection');
         $centrale_ID = $request->query->get('centrale');
-
-
 
 
         switch ($centrale_ID) {
@@ -432,20 +425,16 @@ class BaseController extends Controller
     {
 
 
-
-
         $userChoice = $request->query->get('c');
         $centrale = $this->get('site.service.client_services')->getTheCentrale($userChoice);
 
 
+        switch ($userChoice) {
 
-
-       switch ($userChoice){
-
-           case "all":
-               $con = $this->getDoctrine()->getManager()->getConnection();
-               $stmt = $con->executeQuery(
-                   'SELECT DISTINCT
+            case "all":
+                $con = $this->getDoctrine()->getManager()->getConnection();
+                $stmt = $con->executeQuery(
+                    'SELECT DISTINCT
              SO_RAISONSOC,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION,
               GR_DESCR, AC_DESCR, CL_TEL
@@ -453,77 +442,77 @@ class BaseController extends Controller
               INNER JOIN CENTRALE_ACHAT.dbo.SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
               ORDER BY SO_RAISONSOC DESC 
               '
-               );
+                );
 
 
-               $result = $stmt->fetchAll();
-               break;
-           case 'roc':
-               $con = $this->getDoctrine()->getManager()->getConnection();
-               $stmt = $con->executeQuery(
-                   '
+                $result = $stmt->fetchAll();
+                break;
+            case 'roc':
+                $con = $this->getDoctrine()->getManager()->getConnection();
+                $stmt = $con->executeQuery(
+                    '
                   SELECT DISTINCT
                   CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
                   CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
                   FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
                   ORDER BY INS_DATE DESC 
               '
-               );
-               $result = $stmt->fetchAll();
-               break;
-           case 'fun':
-               $con = $this->getDoctrine()->getManager()->getConnection();
-               $stmt = $con->executeQuery(
-                   'SELECT DISTINCT
+                );
+                $result = $stmt->fetchAll();
+                break;
+            case 'fun':
+                $con = $this->getDoctrine()->getManager()->getConnection();
+                $stmt = $con->executeQuery(
+                    'SELECT DISTINCT
               CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
               CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
               FROM CENTRALE_FUNECAP.dbo.CLIENTS
               ORDER BY INS_DATE DESC 
               '
-               );
-               $result = $stmt->fetchAll();
+                );
+                $result = $stmt->fetchAll();
 
 
-               break;
-           case 'gccp':
-               $con = $this->getDoctrine()->getManager()->getConnection();
-               $stmt = $con->executeQuery(
-                   'SELECT DISTINCT
+                break;
+            case 'gccp':
+                $con = $this->getDoctrine()->getManager()->getConnection();
+                $stmt = $con->executeQuery(
+                    'SELECT DISTINCT
               CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
               CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
               FROM CENTRALE_GCCP.dbo.CLIENTS
               ORDER BY INS_DATE DESC 
               '
-               );
-               $result = $stmt->fetchAll();
-               break;
-           case 'pfpl':
-               $con = $this->getDoctrine()->getManager()->getConnection();
-               $stmt = $con->executeQuery(
-                   'SELECT DISTINCT
+                );
+                $result = $stmt->fetchAll();
+                break;
+            case 'pfpl':
+                $con = $this->getDoctrine()->getManager()->getConnection();
+                $stmt = $con->executeQuery(
+                    'SELECT DISTINCT
               CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
               CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
               FROM CENTRALE_PFPL.dbo.CLIENTS
               ORDER BY INS_DATE DESC 
               '
-               );
-               $result = $stmt->fetchAll();
-               break;
-           case 'ac':
-               $con = $this->getDoctrine()->getManager()->getConnection();
-               $stmt = $con->executeQuery(
-                   'SELECT DISTINCT
+                );
+                $result = $stmt->fetchAll();
+                break;
+            case 'ac':
+                $con = $this->getDoctrine()->getManager()->getConnection();
+                $stmt = $con->executeQuery(
+                    'SELECT DISTINCT
               CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
               CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
               FROM CENTRALE_ACHAT.dbo.CLIENTS
               ORDER BY INS_DATE DESC 
               '
-               );
-               $result = $stmt->fetchAll();
-           break;
+                );
+                $result = $stmt->fetchAll();
+                break;
 
 
-       }
+        }
         return $this->render(
             '@Site/Base/client.html.twig',
             [
@@ -659,8 +648,6 @@ class BaseController extends Controller
                 ]);
 
 
-
-
                 $notes = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
                     'clId' => $id,
                 ], [
@@ -688,8 +675,6 @@ class BaseController extends Controller
                 $tag = $stmtForTag->fetchAll();
 
 
-
-
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [
@@ -709,7 +694,6 @@ class BaseController extends Controller
 
                     ]
                 );
-
 
 
                 break;
@@ -769,7 +753,6 @@ class BaseController extends Controller
                         'claStatus' => 10
                     ]
                 );
-
 
 
                 $sqlForTag = 'SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
@@ -939,7 +922,6 @@ class BaseController extends Controller
                 $profil = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ProfilsUsers')->findAll();
 
 
-
                 $tacheArchive = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsTaches')->findBy([
                         'clId' => $id,
                         'claStatus' => 10
@@ -952,7 +934,6 @@ class BaseController extends Controller
                 $stmtForTag->bindValue('id', $id);
                 $stmtForTag->execute();
                 $tag = $stmtForTag->fetchAll();
-
 
 
                 return $this->render(
@@ -1021,7 +1002,6 @@ class BaseController extends Controller
                 ]);
 
                 $profil = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ProfilsUsers')->findAll();
-
 
 
                 $tacheArchive = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsTaches')->findBy([
@@ -1277,7 +1257,6 @@ class BaseController extends Controller
                 $pass = $request->request->get('pass');
 
 
-
                 $conn = $this->get('database_connection');
                 $sql = 'UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_USERS
                     SET CC_FONCTION = :fct, CC_MAIL = :mail, CC_TEL = :tel, CC_PASS = :pass, CC_PRENOM = :prenom, CC_NOM = :nom 
@@ -1286,8 +1265,7 @@ class BaseController extends Controller
                 $stmt = $conn->prepare($sql);
 
 
-
-                $stmt->bindValue("fct", $fct,  'integer');
+                $stmt->bindValue("fct", $fct, 'integer');
                 $stmt->bindValue("mail", $mail, 'text');
                 $stmt->bindValue("tel", $tel, 'integer');
                 $stmt->bindValue("nom", $nom, 'text');
@@ -1431,9 +1409,6 @@ class BaseController extends Controller
         return new JsonResponse($res, 200);
 
 
-
-        return $this->render('@Site/test.html.twig');
-
     }
 
     public function newNotesClientAction(Request $request, $id, $centrale)
@@ -1442,7 +1417,7 @@ class BaseController extends Controller
         $em = $this->getDoctrine()->getManager();
 
 
-        switch ($centrale){
+        switch ($centrale) {
             case"ACHAT_CENTRALE":
                 $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
                 $content_notes = $request->request->get('content_note');
@@ -1506,8 +1481,6 @@ class BaseController extends Controller
         }
 
 
-
-
     }
 
     public function newClientsUserAction(Request $request, $id, $centrale)
@@ -1543,14 +1516,13 @@ class BaseController extends Controller
                 $stmt->bindValue(':mail', $mail);
                 $stmt->bindValue(':pass', $pwd);
                 $stmt->bindValue(':niveau', $niveau);
-                $stmt->bindValue(':validation',$CCvalidation );
-                $stmt->bindValue(':status',$profil );
-                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
+                $stmt->bindValue(':validation', $CCvalidation);
+                $stmt->bindValue(':status', $profil);
+                $stmt->bindValue(':user', $this->getUser()->getUsMail());
 
 
                 $stmt->execute();
                 $user = $stmt->fetchAll();
-
 
 
                 $res = "client mise à jour";
@@ -1558,7 +1530,6 @@ class BaseController extends Controller
                 return new JsonResponse($res, 200);
                 break;
             case 'CENTRALE_FUNECAP':
-
 
 
                 $prenom = $request->request->get('prenom');
@@ -1587,14 +1558,13 @@ class BaseController extends Controller
                 $stmt->bindValue(':mail', $mail);
                 $stmt->bindValue(':pass', $pwd);
                 $stmt->bindValue(':niveau', $niveau);
-                $stmt->bindValue(':validation',$CCvalidation );
-                $stmt->bindValue(':status',$profil );
-                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
+                $stmt->bindValue(':validation', $CCvalidation);
+                $stmt->bindValue(':status', $profil);
+                $stmt->bindValue(':user', $this->getUser()->getUsMail());
 
 
                 $stmt->execute();
                 $user = $stmt->fetchAll();
-
 
 
                 $res = "client mise à jour";
@@ -1628,14 +1598,13 @@ class BaseController extends Controller
                 $stmt->bindValue(':mail', $mail);
                 $stmt->bindValue(':pass', $pwd);
                 $stmt->bindValue(':niveau', $niveau);
-                $stmt->bindValue(':validation',$CCvalidation );
-                $stmt->bindValue(':status',$profil );
-                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
+                $stmt->bindValue(':validation', $CCvalidation);
+                $stmt->bindValue(':status', $profil);
+                $stmt->bindValue(':user', $this->getUser()->getUsMail());
 
 
                 $stmt->execute();
                 $user = $stmt->fetchAll();
-
 
 
                 $res = "client mise à jour";
@@ -1669,14 +1638,13 @@ class BaseController extends Controller
                 $stmt->bindValue(':mail', $mail);
                 $stmt->bindValue(':pass', $pwd);
                 $stmt->bindValue(':niveau', $niveau);
-                $stmt->bindValue(':validation',$CCvalidation );
-                $stmt->bindValue(':status',$profil );
-                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
+                $stmt->bindValue(':validation', $CCvalidation);
+                $stmt->bindValue(':status', $profil);
+                $stmt->bindValue(':user', $this->getUser()->getUsMail());
 
 
                 $stmt->execute();
                 $user = $stmt->fetchAll();
-
 
 
                 $res = "client mise à jour";
@@ -1711,13 +1679,12 @@ class BaseController extends Controller
                 $stmt->bindValue(':profil', $profil);
                 $stmt->bindValue(':pass', $pwd);
                 $stmt->bindValue(':niveau', $niveau);
-                $stmt->bindValue(':validation',$CCvalidation );
-                $stmt->bindValue(':user', $this->getUser()->getUsMail() );
+                $stmt->bindValue(':validation', $CCvalidation);
+                $stmt->bindValue(':user', $this->getUser()->getUsMail());
 
 
                 $stmt->execute();
                 $user = $stmt->fetchAll();
-
 
 
                 $res = "client mise à jour";
@@ -1749,15 +1716,13 @@ class BaseController extends Controller
                         $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
 
 
-                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " .$restresult[0]->getCaCp() . " " .$restresult[0]->getCaVille() );
+                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " . $restresult[0]->getCaCp() . " " . $restresult[0]->getCaVille());
                         $response = $geocoder->geocode($request);
                         foreach ($response->getResults() as $result) {
                             $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
                             $mapF->setAutoZoom(false);
                             $mapF->setCenter($here);
                             $mapF->setMapOption('zoom', 12);
-
-
 
 
                             $marker = new Marker(
@@ -1784,8 +1749,6 @@ class BaseController extends Controller
                 }
 
 
-
-
                 return $this->render(
                     '@Site/Base/client.adresse.html.twig',
                     [
@@ -1803,21 +1766,16 @@ class BaseController extends Controller
                 );
 
 
-
-
                 $mapF = new Map();
                 $mapL = new Map();
                 $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
-
 
 
                 foreach ($restresult as &$adresse) {
                     if ($adresse->getCaType() === "L") {
 
 
-
-
-                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " .$restresult[0]->getCaCp() . " " .$restresult[0]->getCaVille() );
+                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " . $restresult[0]->getCaCp() . " " . $restresult[0]->getCaVille());
                         $response = $geocoder->geocode($request);
 
 
@@ -1826,8 +1784,6 @@ class BaseController extends Controller
                             $mapF->setAutoZoom(false);
                             $mapF->setCenter($here);
                             $mapF->setMapOption('zoom', 12);
-
-
 
 
                             $marker = new Marker(
@@ -1851,8 +1807,7 @@ class BaseController extends Controller
                     } elseif ($adresse->getCaType() === "F") {
 
 
-
-                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " .$restresult[0]->getCaCp() . " " .$restresult[0]->getCaVille() );
+                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " . $restresult[0]->getCaCp() . " " . $restresult[0]->getCaVille());
                         $response = $geocoder->geocode($request);
 
 
@@ -1861,8 +1816,6 @@ class BaseController extends Controller
                             $mapL->setAutoZoom(false);
                             $mapL->setCenter($here);
                             $mapL->setMapOption('zoom', 12);
-
-
 
 
                             $marker = new Marker(
@@ -1935,8 +1888,8 @@ class BaseController extends Controller
                 break;
             case "ROC_ECLERC":
                 $restresult = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
-                        'clId' => $id
-                    ]);
+                    'clId' => $id
+                ]);
                 $contrat = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Contrats')->findBy([
                     'cl' => $id
                 ]);
@@ -1950,8 +1903,8 @@ class BaseController extends Controller
                 );
                 break;
             case 'CENTRALE_PFPL':
-                $restresult = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy([ 'clId' => $id ]);
-                $contrat = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Contrats')->findBy([ 'cl' => $id ]);
+                $restresult = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy(['clId' => $id]);
+                $contrat = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Contrats')->findBy(['cl' => $id]);
 
                 return $this->render(
                     '@Site/Base/client.facturation.html.twig',
@@ -1963,8 +1916,8 @@ class BaseController extends Controller
                 );
                 break;
             case "CENTRALE_GCCP":
-                $restresult = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy([ 'clId' => $id ]);
-                $contrat = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Contrats')->findBy([ 'clId' => $id ]);
+                $restresult = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy(['clId' => $id]);
+                $contrat = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Contrats')->findBy(['clId' => $id]);
                 return $this->render(
                     '@Site/Base/client.facturation.html.twig',
                     [
@@ -1975,8 +1928,8 @@ class BaseController extends Controller
                 );
                 break;
             case "ACHAT_CENTRALE":
-                $restresult = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([ 'clId' => $id ]);
-                $contrat = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Contrats')->findBy([ 'cl' => $id ]);
+                $restresult = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy(['clId' => $id]);
+                $contrat = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Contrats')->findBy(['cl' => $id]);
 
 
                 return $this->render(
@@ -2052,8 +2005,7 @@ class BaseController extends Controller
     {
 
 
-
-        switch ($centrale){
+        switch ($centrale) {
 
             case 1:
                 $client = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([
@@ -2105,8 +2057,7 @@ class BaseController extends Controller
 
         foreach ($task as $t) {
 
-            $result = $mailer->sendRelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'],$t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']  );
-
+            $result = $mailer->sendRelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'], $t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']);
 
 
         }
@@ -2162,7 +2113,7 @@ class BaseController extends Controller
                   ';
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindValue('query', '%'.$query.'%');
+        $stmt->bindValue('query', '%' . $query . '%');
         $stmt->execute();
 
         $users = $stmt->fetchAll();
@@ -2176,16 +2127,15 @@ class BaseController extends Controller
         return new JsonResponse($result, 200);
     }
 
-    public function getClientAutocompleteAction(Request $request, $query,$centrale)
+    public function getClientAutocompleteAction(Request $request, $query, $centrale)
     {
-
 
 
         $conn = $this->get('database_connection');
 
         $clientService = $this->get('site.service.client_services');
 
-        switch ($centrale){
+        switch ($centrale) {
             case 'pfpl':
                 $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
                 FROM CENTRALE_PFPL.dbo.CLIENTS
@@ -2193,7 +2143,7 @@ class BaseController extends Controller
                   ";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->bindValue('query', '%' . $query . '%');
                 $stmt->execute();
 
                 $clients = $stmt->fetchAll();
@@ -2213,7 +2163,7 @@ class BaseController extends Controller
                   ";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->bindValue('query', '%' . $query . '%');
                 $stmt->execute();
 
                 $clients = $stmt->fetchAll();
@@ -2233,7 +2183,7 @@ class BaseController extends Controller
                   ";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->bindValue('query', '%' . $query . '%');
                 $stmt->execute();
 
                 $clients = $stmt->fetchAll();
@@ -2253,7 +2203,7 @@ class BaseController extends Controller
                   ";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->bindValue('query', '%' . $query . '%');
                 $stmt->execute();
 
                 $clients = $stmt->fetchAll();
@@ -2273,7 +2223,7 @@ class BaseController extends Controller
                   ";
 
                 $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%'.$query.'%');
+                $stmt->bindValue('query', '%' . $query . '%');
                 $stmt->execute();
 
                 $clients = $stmt->fetchAll();
@@ -2290,14 +2240,14 @@ class BaseController extends Controller
 
     }
 
-    public function getClientUserAction(Request $request, $id, $centrale){
+    public function getClientUserAction(Request $request, $id, $centrale)
+    {
 
         $conn = $this->get('database_connection');
         $clientService = $this->get('site.service.client_services');
 
 
-        switch ($centrale)
-        {
+        switch ($centrale) {
             case 'CENTRALE_FUNECAP':
 
 
@@ -2371,15 +2321,15 @@ class BaseController extends Controller
         }
 
 
-
     }
 
-    public function getClientLabelAction(Request$request, $id, $centrale){
+    public function getClientLabelAction(Request $request, $id, $centrale)
+    {
 
         $conn = $this->get('database_connection');
 
 
-        switch ($centrale){
+        switch ($centrale) {
 
             case "funecap":
                 $sql = "SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS WHERE CL_ID = :id";
@@ -2443,10 +2393,6 @@ class BaseController extends Controller
                 break;
 
         }
-
-
-
-
 
 
     }
@@ -2565,9 +2511,7 @@ class BaseController extends Controller
         $cl = $request->request->get('cl');
 
 
-
-
-        switch ($centrale){
+        switch ($centrale) {
 
             case "ROC_ECLERC":
                 $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -2631,17 +2575,31 @@ class BaseController extends Controller
         }
 
 
-
     }
 
 
-    public function hashtagAction(Request $request, $id){
+    public function hashtagAction(Request $request, $id)
+    {
 
 
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
+        $sqlTags = "SELECT DISTINCT CL_REF, SO_ID, CL_RAISONSOC, CL_ADRESSE1, CL_TEL, CL_SIRET, CL_ID
+                    FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
+                    WHERE CL_ID IN (SELECT CL_ID
+                                   FROM CENTRALE_ACHAT.dbo.Vue_All_Tags
+                                   WHERE TAG = :tag)";
+        $stmt = $conn->prepare($sqlTags);
+        $stmt->bindValue(":tag", $id);
+        $stmt->execute();
+        $tags = $stmt->fetchAll();
 
-        return $this->render('@Site/tags/index.html.twig');
+        dump($tags);
+
+        return $this->render('@Site/tags/index.html.twig', [
+            "tag" => $tags
+        ]);
     }
 
 

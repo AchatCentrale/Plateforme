@@ -112,9 +112,11 @@ class CrmFilter extends \Twig_Extension
                 case 'CENTRALE GCCP':
                     return "<h3><span class=\"label large label-danger \">Centrale GCCP</span></h3>";
                     break;
+                case'ACHAT_CENTRALE':
                 case 'ACHAT CENTRALE':
                     return "<h3><span class=\"label large label-danger \">Achat Centrale</span></h3>";
                     break;
+                case 'CENTRALE_PFPL':
                 case 'CENTRALE PFPL':
                     return "<h3><span class=\"label large label-danger \">Centrale PFPL</span></h3>";
                     break;

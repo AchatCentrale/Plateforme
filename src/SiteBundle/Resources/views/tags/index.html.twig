@@ -52,22 +52,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>AC_121312</td>
-                            <td>Achat-centrale</td>
-                            <td>Roc-eclerc Ordener</td>
-                            <td>1 Rue de la rue de la ville</td>
-                            <td>06 68 69 68 85</td>
-                            <td>12 12 12 21546</td>
-                        </tr>
-                        <tr>
-                            <td>AC_121312</td>
-                            <td>Achat-centrale</td>
-                            <td>Roc-eclerc Ordener</td>
-                            <td>1 Rue de la rue de la ville</td>
-                            <td>06 68 69 68 85</td>
-                            <td>12 12 12 21546</td>
-                        </tr>
+                        {% for t in tag %}
+
+                            <tr>
+                                <td>{{ t['CL_REF'] }}</td>
+                                <td>{{ t['SO_ID'] | centrale | centraleLabel |raw }}</td>
+                                <td><a href="{{ path('client-general', {'id' :  t['CL_ID'] , 'centrale' :  t['SO_ID'] | centrale }) }}">{{ t['CL_RAISONSOC'] }}</a></td>
+                                <td>{{ t['CL_ADRESSE1'] }}</td>
+                                <td>{{ t['CL_TEL'] | phone }}</td>
+                                <td>{{ t['CL_SIRET'] | siret }}</td>
+                            </tr>
+
+
+                        {% endfor %}
+
                         </tbody>
                     </table>
 
