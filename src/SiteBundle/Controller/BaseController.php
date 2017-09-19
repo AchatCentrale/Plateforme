@@ -2645,7 +2645,7 @@ class BaseController extends Controller
                   ";
 
             $stmtAction = $conn->prepare($sqlAction);
-            $stmtAction->bindValue('query',  $query . '%');
+            $stmtAction->bindValue('query', '%'.  $query . '%');
             $stmtAction->execute();
 
             $clients = $stmt->fetchAll();
