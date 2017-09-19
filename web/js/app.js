@@ -1559,28 +1559,9 @@ $(function () {
 
     });
 
-    $('.ui.search.container-search-hastag').search({
-        apiSettings: {
-            url: '//api.github.com/search/repositories?q={query}'
-        },
-        fields: {
-            results: 'items',
-            title: 'name',
-            url: 'html_url'
-        },
-        minCharacters: 2,
-        error: {
-            source: 'Pas de source',
-            noResults: 'Pas de resultat',
-            logging: 'Error in debug logging, exiting.',
-            noTemplate: 'A valid template name was not specified.',
-            serverError: 'Problème de seerveur',
-            maxResults: 'Results must be an array to use maxResults setting',
-            method: 'The method you called is not defined.'
-        },
-    });
 
-    $('.ui.search').search({
+
+    $('.ui.search.container-search-hastag').search({
         apiSettings: {
             url: 'http://crm.achatcentrale.fr/tag/search/{query}'
         },
