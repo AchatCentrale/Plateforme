@@ -566,9 +566,7 @@ h3.raison-soc-titre {
     margin-top: 16px;
 }
 
-.ui.search > .results {
-    top: 95%;
-}
+
 
 
 .stat-home{
@@ -786,6 +784,11 @@ div.dataTables_wrapper div.dataTables_paginate {
 
 }
 
+
+.ui.search > .results {
+    margin-top: 2.71111111em;
+    width: 90%;
+}
 
 .site_title i {
     border-radius: 50%;
