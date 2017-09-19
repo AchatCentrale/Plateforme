@@ -2650,13 +2650,14 @@ class BaseController extends Controller
 
             $action = $stmt->fetchAll();
 
+            $Action = $clientService->array_utf8_encode($action);
 
 
 
             $result = [
                 "total_count" => 1,
                 "incomplete_results" => false,
-                "items" => $action
+                "items" => $Action
             ];
 
             return new JsonResponse($result, 200);
