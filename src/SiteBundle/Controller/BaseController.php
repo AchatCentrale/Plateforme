@@ -2607,7 +2607,6 @@ class BaseController extends Controller
 
 
 
-        dump($action);
 
 
         return $this->render('@Site/tags/index.html.twig', [
@@ -2663,7 +2662,7 @@ class BaseController extends Controller
             $result = [
                 "total_count" => count($Action),
                 "incomplete_results" => false,
-                "items" => $tag
+                "items" => [$tag]
             ];
 
             return new JsonResponse($result, 200);
