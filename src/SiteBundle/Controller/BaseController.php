@@ -2655,7 +2655,7 @@ class BaseController extends Controller
 
 
             $result = [
-                "total_count" => 1,
+                "total_count" => count($Action),
                 "incomplete_results" => false,
                 "items" => $Action
             ];
