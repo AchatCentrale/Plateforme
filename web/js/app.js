@@ -1099,6 +1099,7 @@ $(function () {
             title: 'US_ID',
             description: 'US_PRENOM',
         },
+        cache: true,
         minCharacters: 2,
         error: {
             source: 'Pas de source',
@@ -1568,9 +1569,9 @@ $(function () {
         searchOnFocus: true,
         fields: {
             results: 'items',
-            title: '#'+'TAG',
+            title: 'TAG',
         },
-        minCharacters: 2,
+        minCharacters: 3,
         error: {
             source: 'Pas de source',
             noResults: 'Pas de resultat',
@@ -1580,8 +1581,7 @@ $(function () {
             maxResults: 'Results must be an array to use maxResults setting',
             method: 'The method you called is not defined.'
         },
-    })
-    ;
+    });
 
 
 });
