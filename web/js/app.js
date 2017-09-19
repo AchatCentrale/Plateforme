@@ -1581,6 +1581,11 @@ $(function () {
             maxResults: 'Results must be an array to use maxResults setting',
             method: 'The method you called is not defined.'
         },
+        onSelect: function (result, response) {
+            console.log(result);
+            return false;
+
+        }
     });
 
 
