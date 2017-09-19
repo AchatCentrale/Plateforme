@@ -109,6 +109,7 @@ class CrmFilter extends \Twig_Extension
                 case 'CENTRALE FUNECAP':
                     return "<h3><span class=\"label large label-danger \">Centrale Funecap</span></h3>";
                     break;
+                case 'CENTRALE_GCCP':
                 case 'CENTRALE GCCP':
                     return "<h3><span class=\"label large label-danger \">Centrale GCCP</span></h3>";
                     break;
