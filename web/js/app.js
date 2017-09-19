@@ -1582,7 +1582,7 @@ $(function () {
             method: 'The method you called is not defined.'
         },
         onSelect: function (result, response) {
-            console.log(result);
+            console.log(result.TAG);
             return false;
 
         }
