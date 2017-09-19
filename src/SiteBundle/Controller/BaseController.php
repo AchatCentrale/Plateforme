@@ -2658,13 +2658,12 @@ class BaseController extends Controller
                 'TAG' => $query
             ];
 
-            $result = json_encode($tag, JSON_UNESCAPED_SLASHES);
 
 
             $result = [
                 "total_count" => count($Action),
                 "incomplete_results" => false,
-                "items" => $result
+                "items" => $tag
             ];
 
             return new JsonResponse($result, 200);
