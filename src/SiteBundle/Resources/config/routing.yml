@@ -178,3 +178,7 @@ hastag-action:
     path: /tag/{id}
     defaults: {_controller: SiteBundle:Base:hashtag}
 
+hastag-typehead:
+    path: /tag/search/{query}
+    defaults: {_controller: SiteBundle:Base:getTagAutoomplete}
+

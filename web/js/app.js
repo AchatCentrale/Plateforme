@@ -1492,8 +1492,7 @@ $(function () {
 
         let clId = $('#id').html();
 
-        let url = "http://crm.achatcentrale.fr/client/tag/new/"+ centrale +"/"+ clId ;
-
+        let url = "http://crm.achatcentrale.fr/client/tag/new/" + centrale + "/" + clId;
 
 
         $.ajax({
@@ -1503,7 +1502,7 @@ $(function () {
 
             // Le délai maximun en millisecondes de traitement de la demande
             timeout: 4000,
-            cache : false,
+            cache: false,
 
             type: 'POST',
 
@@ -1560,8 +1559,48 @@ $(function () {
 
     });
 
+    $('.ui.search.container-search-hastag').search({
+        apiSettings: {
+            url: '//api.github.com/search/repositories?q={query}'
+        },
+        fields: {
+            results: 'items',
+            title: 'name',
+            url: 'html_url'
+        },
+        minCharacters: 2,
+        error: {
+            source: 'Pas de source',
+            noResults: 'Pas de resultat',
+            logging: 'Error in debug logging, exiting.',
+            noTemplate: 'A valid template name was not specified.',
+            serverError: 'Problème de seerveur',
+            maxResults: 'Results must be an array to use maxResults setting',
+            method: 'The method you called is not defined.'
+        },
+    });
 
-
+    $('.ui.search').search({
+        apiSettings: {
+            url: 'http://crm.achatcentrale.fr/tag/search/{query}'
+        },
+        searchOnFocus: true,
+        fields: {
+            results: 'items',
+            title: 'TAG',
+        },
+        minCharacters: 2,
+        error: {
+            source: 'Pas de source',
+            noResults: 'Pas de resultat',
+            logging: 'Error in debug logging, exiting.',
+            noTemplate: 'A valid template name was not specified.',
+            serverError: 'Problème de seerveur',
+            maxResults: 'Results must be an array to use maxResults setting',
+            method: 'The method you called is not defined.'
+        },
+    })
+    ;
 
 
 });

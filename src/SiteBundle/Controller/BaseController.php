@@ -2577,7 +2577,6 @@ class BaseController extends Controller
 
     }
 
-
     public function hashtagAction(Request $request, $id)
     {
 
@@ -2600,6 +2599,36 @@ class BaseController extends Controller
         return $this->render('@Site/tags/index.html.twig', [
             "tag" => $tags
         ]);
+    }
+
+    public function getTagAutoompleteAction(Request $request, $query){
+
+        $conn = $this->get('database_connection');
+
+        $clientService = $this->get('site.service.client_services');
+
+
+        $sql = "SELECT TAG
+                FROM CENTRALE_ACHAT.dbo.Vue_All_Tags
+                WHERE TAG LIKE :query
+                  ";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('query',  $query . '%');
+        $stmt->execute();
+
+        $clients = $stmt->fetchAll();
+        $result = $clientService->array_utf8_encode($clients);
+
+        $result = [
+            "total_count" => count($clients),
+            "incomplete_results" => false,
+            "items" => $result
+        ];
+
+        return new JsonResponse($result, 200);
+
+
     }
 
 

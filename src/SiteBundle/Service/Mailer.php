@@ -56,7 +56,7 @@ class Mailer
                 $stmtUser->bindValue(":id", $task[0]['US_ID']);
                 $stmtUser->execute();
                 $user = $stmtUser->fetchAll();
-                $subject = "Nouvel tache";
+                $subject = "Nouvelle tache";
                 $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                 $to = $user[0]['US_MAIL'];
                 $body = $this->templating->render($template, [
@@ -76,7 +76,7 @@ class Mailer
                 $stmtUser->bindValue(":id", $task[0]['US_ID']);
                 $stmtUser->execute();
                 $user = $stmtUser->fetchAll();
-                $subject = "Nouvel tache";
+                $subject = "Nouvelle tache";
                 $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                 $to = $user[0]['US_MAIL'];
                 $body = $this->templating->render($template, [
@@ -96,7 +96,7 @@ class Mailer
                 $stmtUser->bindValue(":id", $task[0]['US_ID']);
                 $stmtUser->execute();
                 $user = $stmtUser->fetchAll();
-                $subject = "Nouvel tache";
+                $subject = "Nouvelle tache";
                 $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                 $to = $user[0]['US_MAIL'];
                 $body = $this->templating->render($template, [
@@ -116,7 +116,7 @@ class Mailer
                 $stmtUser->bindValue(":id", $task[0]['US_ID']);
                 $stmtUser->execute();
                 $user = $stmtUser->fetchAll();
-                $subject = "Nouvel tache";
+                $subject = "Nouvelle tache";
                 $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                 $to = $user[0]['US_MAIL'];
                 $body = $this->templating->render($template, [
@@ -136,7 +136,7 @@ class Mailer
                 $stmtUser->bindValue(":id", $task[0]['US_ID']);
                 $stmtUser->execute();
                 $user = $stmtUser->fetchAll();
-                $subject = "Nouvel tache";
+                $subject = "Nouvelle tache";
                 $template = 'SiteBundle:mail:mailDetailClient.html.twig';
                 $to = $user[0]['US_MAIL'];
                 $body = $this->templating->render($template, [
