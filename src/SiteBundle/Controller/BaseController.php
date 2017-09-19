@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncode;
 
 
 class BaseController extends Controller
@@ -2653,11 +2654,17 @@ class BaseController extends Controller
             $Action = $clientService->array_utf8_encode($action);
 
 
+            $tag = [
+                "TAG" => $query
+            ];
+
+            $result = json_encode($tag);
+
 
             $result = [
                 "total_count" => count($Action),
                 "incomplete_results" => false,
-                "items" => $Action
+                "items" => $result
             ];
 
             return new JsonResponse($result, 200);
