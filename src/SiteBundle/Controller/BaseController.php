@@ -2658,7 +2658,7 @@ class BaseController extends Controller
                 "TAG" => $query
             ];
 
-            $result = json_encode($tag);
+            $result = json_encode($tag, JSON_UNESCAPED_SLASHES);
 
 
             $result = [
