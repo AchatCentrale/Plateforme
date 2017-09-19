@@ -1582,7 +1582,9 @@ $(function () {
             method: 'The method you called is not defined.'
         },
         onSelect: function (result, response) {
-            console.log(result.TAG);
+
+            window.location.href = "http://crm.achatcentrale.fr/tag/"+ result.TAG;
+
             return false;
 
         }
