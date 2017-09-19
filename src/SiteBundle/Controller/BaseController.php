@@ -2648,13 +2648,15 @@ class BaseController extends Controller
             $stmtAction->bindValue('query', '%'.  $query . '%');
             $stmtAction->execute();
 
-            $clients = $stmt->fetchAll();
-            $result = $clientService->array_utf8_encode($clients);
+            $action = $stmt->fetchAll();
+
+
+
 
             $result = [
                 "total_count" => 1,
                 "incomplete_results" => false,
-                "items" => $query
+                "items" => $action
             ];
 
             return new JsonResponse($result, 200);
