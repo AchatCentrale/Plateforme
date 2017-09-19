@@ -104,7 +104,7 @@
                                             <a>Intérêt pour un produit</a>
                                         </h2>
                                         <div class="byline">
-                                            <span>Il y a 13 heures</span> par <a>Céline Louis</a>
+                                            <span></span> par <a>Céline Louis</a>
                                         </div>
                                         <p class="excerpt">Bonjour Madame MARTIN,
 
@@ -146,7 +146,33 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
+                    <div class="dashboard-widget-content">
 
+                        <ul class="list-unstyled timeline widget">
+
+
+                            {% for a in action  %}
+
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                <a>{{ a['CLA_NOM'] | convert_encoding('UTF-8', 'Windows-1252')  }}</a>
+                                            </h2>
+                                            <div class="byline">
+                                                <span>{{ a['INS_DATE'] | fromNowString }}</span> par <a>Céline Louis</a>
+                                            </div>
+                                            <p class="excerpt">{{ a['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252')  | limitLength }}<a>Lire la suite</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            {% endfor %}
+
+
+                        </ul>
+                    </div>
                 </div>
 
             </div>

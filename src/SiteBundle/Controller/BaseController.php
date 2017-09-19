@@ -2594,9 +2594,24 @@ class BaseController extends Controller
         $stmt->execute();
         $tags = $stmt->fetchAll();
 
+        $sqlAction = "SELECT
+                      *
+                    FROM
+                      CENTRALE_ACHAT.dbo.Vue_All_Taches
+                    WHERE CLA_DESCR LIKE :query";
+        $stmtAction = $conn->prepare($sqlAction);
+        $stmtAction->bindValue(":query", '%#'.$id.'%');
+        $stmtAction->execute();
+        $action = $stmtAction->fetchAll();
+
+
+
+        dump($action);
+
 
         return $this->render('@Site/tags/index.html.twig', [
-            "tag" => $tags
+            "tag" => $tags,
+            "action" => $action,
         ]);
     }
 
