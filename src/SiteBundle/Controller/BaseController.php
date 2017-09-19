@@ -2635,7 +2635,7 @@ class BaseController extends Controller
         $result = $clientService->array_utf8_encode($clients);
 
 
-        if(!isset($result))
+        if(empty($result))
         {
             $sqlAction = "SELECT
                       CLA_DESCR, CLA_NOM
