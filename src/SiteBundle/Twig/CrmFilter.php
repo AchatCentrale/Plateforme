@@ -103,6 +103,7 @@ class CrmFilter extends \Twig_Extension
 
         if (gettype($centrale) === "string") {
             switch ($centrale) {
+                case 'ROC_ECLERC':
                 case 'ROC ECLERC':
                     return "<h3><span class=\"label large label-warning \">Centrale Roc-Eclerc</span></h3>";
                     break;

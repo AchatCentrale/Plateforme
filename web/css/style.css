@@ -799,3 +799,7 @@ div.dataTables_wrapper div.dataTables_paginate {
     height: 85px;
     padding-top: 15px;
 }
+
+::-webkit-scrollbar {
+    display: none;
+}

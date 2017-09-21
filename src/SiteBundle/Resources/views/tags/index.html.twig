@@ -43,35 +43,36 @@
                     <div id='container-tabme-tag' style='height:500px;overflow-x:scroll'>
 
 
-
                         <table class="ui very basic table">
-                        <thead>
-                        <tr>
-                            <th>Ref</th>
-                            <th>Centrale</th>
-                            <th>Raison social</th>
-                            <th>Adresse</th>
-                            <th>Tel</th>
-                            <th>Siret</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for t in tag %}
-
+                            <thead>
                             <tr>
-                                <td>{{ t['CL_REF'] }}</td>
-                                <td>{{ t['SO_ID'] | centrale | centraleLabel |raw }}</td>
-                                <td><a href="{{ path('client-general', {'id' :  t['CL_ID'] , 'centrale' :  t['SO_ID'] | centrale }) }}">{{ t['CL_RAISONSOC'] | convert_encoding('UTF-8', 'Windows-1252')  }}</a></td>
-                                <td>{{ t['CL_ADRESSE1'] }}</td>
-                                <td>{{ t['CL_TEL'] | phone }}</td>
-                                <td>{{ t['CL_SIRET'] | siret }}</td>
+                                <th>Ref</th>
+                                <th>Centrale</th>
+                                <th>Raison social</th>
+                                <th>Adresse</th>
+                                <th>Tel</th>
+                                <th>Siret</th>
                             </tr>
+                            </thead>
+                            <tbody>
+                            {% for t in tag %}
+
+                                <tr>
+                                    <td>{{ t['CL_REF'] }}</td>
+                                    <td>{{ t['SO_ID'] | centrale | centraleLabel |raw }}</td>
+                                    <td>
+                                        <a href="{{ path('client-general', {'id' :  t['CL_ID'] , 'centrale' :  t['SO_ID'] | centrale }) }}">{{ t['CL_RAISONSOC'] | convert_encoding('UTF-8', 'Windows-1252') }}</a>
+                                    </td>
+                                    <td>{{ t['CL_ADRESSE1'] }}</td>
+                                    <td>{{ t['CL_TEL'] | phone }}</td>
+                                    <td>{{ t['CL_SIRET'] | siret }}</td>
+                                </tr>
 
 
-                        {% endfor %}
+                            {% endfor %}
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
@@ -94,46 +95,44 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div class="dashboard-widget-content">
 
-                        <ul class="list-unstyled timeline widget">
-                            <li>
-                                <div class="block">
-                                    <div class="block_content">
-                                        <h2 class="title">
-                                            <a>Intérêt pour un produit</a>
-                                        </h2>
-                                        <div class="byline">
-                                            <span></span> par <a>Céline Louis</a>
+
+                    {% if ticketFRS %}
+
+
+
+                        <div class="dashboard-widget-content">
+
+                            <ul class="list-unstyled timeline widget">
+                                {% for tFRS in ticketFRS %}
+                                    <li>
+                                        <div class="block">
+                                            <div class="block_content">
+                                                <h2 class="title">
+                                                    <a>{{ tFRS['ME_SUJET'] }}</a>
+                                                </h2>
+                                                <div class="byline">
+                                                    <span></span> par <a>{{ tFRS['CL_RAISONSOC'] }}</a>
+                                                    <span></span> pour <a>{{ tFRS['FO_RAISONSOC'] }}</a>
+                                                </div>
+                                                <p class="excerpt">{{ tFRS['MD_CORPS'] }}
+                                                </p>
+                                            </div>
                                         </div>
-                                        <p class="excerpt">Bonjour Madame MARTIN,
+                                    </li>
 
-                                            Je fais suite à votre demande de devis auprès de notre partenaire Achat
-                                            Central...<a>Lire la suite</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="block">
-                                    <div class="block_content">
-                                        <h2 class="title">
-                                            <a>Intérêt pour un produit</a>
-                                        </h2>
-                                        <div class="byline">
-                                            <span>Il y a 13 heures</span> par <a>Céline Louis</a>
-                                        </div>
-                                        <p class="excerpt">Bonjour Madame MARTIN,
 
-                                            Je fais suite à votre demande de devis auprès de notre partenaire Achat
-                                            Central...<a>Lire la suite</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
+                                {% endfor %}
 
-                        </ul>
-                    </div>
+
+                            </ul>
+                        </div>
+
+                        {% else %}
+
+                        <p>Il n'y aucun ticket qui contient ce TAG</p>
+
+                    {% endif %}
                 </div>
 
             </div>
@@ -146,33 +145,41 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div class="dashboard-widget-content">
+                    {% if action %}
+                        <div class="dashboard-widget-content">
 
-                        <ul class="list-unstyled timeline widget">
+                            <ul class="list-unstyled timeline widget">
 
 
-                            {% for a in action  %}
+                                {% for a in action %}
 
-                                <li>
-                                    <div class="block">
-                                        <div class="block_content">
-                                            <h2 class="title">
-                                                <a>{{ a['CLA_NOM'] | convert_encoding('UTF-8', 'Windows-1252')  }}</a>
-                                            </h2>
-                                            <div class="byline">
-                                                <span>{{ a['INS_DATE'] | fromNowString }}</span> par <a>Céline Louis</a>
+                                    <li>
+                                        <div class="block">
+                                            <div class="block_content">
+                                                <h2 class="title">
+                                                    <a>{{ a['CLA_NOM'] | convert_encoding('UTF-8', 'Windows-1252') }}</a>
+                                                </h2>
+                                                <div class="byline">
+                                                    <span>{{ a['INS_DATE'] | fromNowString }}</span> par <a>Céline
+                                                        Louis</a>
+                                                </div>
+                                                <p class="excerpt">{{ a['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252')  | limitLength }}
+                                                    <a>Lire la suite</a>
+                                                </p>
                                             </div>
-                                            <p class="excerpt">{{ a['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252')  | limitLength }}<a>Lire la suite</a>
-                                            </p>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
 
-                            {% endfor %}
+                                {% endfor %}
 
 
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>
+                    {% else %}
+
+                        <p>Aucune action pour ce TAG</p>
+
+                    {% endif %}
                 </div>
 
             </div>
@@ -186,32 +193,32 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div class="ui feed">
-                        <div class="event">
-                            <div class="label">
-                                <i class="sticky note icon"></i>
-                            </div>
-                            <div class="content">
-                                <div class="summary">
-                                    Le client a voulu tester les imprimantes
-                                    <a>Roc-eclerc Ordener</a>
-                                    <div class="date">Il ya 2 mois</div>
+
+
+                    {% if note %}
+                        <div class="ui feed">
+                            {% for n in note %}
+                                <div class="event">
+                                    <div class="label">
+                                        <i class="sticky note icon"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="summary">
+                                            {{ n['CN_NOTE'] }}
+                                            <a>A FAIRE</a>
+                                            <div class="date">{{ n['INS_DATE'] | fromNowString }}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            {% endfor %}
                         </div>
-                        <div class="event">
-                            <div class="label">
-                                <i class="sticky note icon"></i>
-                            </div>
-                            <div class="content">
-                                <div class="summary">
-                                    Le client a voulu tester les imprimantes
-                                    <a>Roc-eclerc Ordener</a>
-                                    <div class="date">Il ya 2 mois</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    {% else %}
+
+                        <p>Aucune note pour ce tag</p>
+
+
+                    {% endif %}
                 </div>
 
             </div>

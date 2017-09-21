@@ -2606,12 +2606,48 @@ class BaseController extends Controller
         $action = $stmtAction->fetchAll();
 
 
+        $sqlNote = "SELECT
+                      *
+                    FROM
+                      CENTRALE_ACHAT.dbo.Vue_All_Notes
+                    WHERE Vue_All_Notes.CN_NOTE LIKE :query";
+        $stmtNote = $conn->prepare($sqlNote);
+        $stmtNote->bindValue(":query", '%#'.$id.'%');
+        $stmtNote->execute();
+        $note = $stmtNote->fetchAll();
+
+
+        $sqlTicketsFrs = "SELECT
+                      *
+                    FROM
+                      CENTRALE_ACHAT.dbo.Vue_All_Tickets_Frs
+                    WHERE Vue_All_Tickets_Frs.MD_CORPS LIKE :query";
+        $stmtTicketsFrs = $conn->prepare($sqlTicketsFrs);
+        $stmtTicketsFrs->bindValue(":query", '%#'.$id.'%');
+        $stmtTicketsFrs->execute();
+        $TicketsFrs = $stmtTicketsFrs->fetchAll();
+
+
+        $sqlTickets = "SELECT
+                          *
+                        FROM
+                          CENTRALE_ACHAT.dbo.Vue_All_Tickets_Frs
+                        WHERE Vue_All_Tickets_Frs.MD_CORPS LIKE :query";
+        $stmtTickets = $conn->prepare($sqlTickets);
+        $stmtTickets->bindValue(":query", '%#'.$id.'%');
+        $stmtTickets->execute();
+        $Tickets = $stmtTickets->fetchAll();
+
+
 
 
 
         return $this->render('@Site/tags/index.html.twig', [
             "tag" => $tags,
             "action" => $action,
+            "note" => $note,
+            "ticketFRS" => $TicketsFrs,
+            "ticket" => $Tickets,
         ]);
     }
 
