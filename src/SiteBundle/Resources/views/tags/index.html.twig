@@ -194,7 +194,6 @@
                 </div>
                 <div class="x_content">
 
-
                     {% if note %}
                         <div class="ui feed">
                             {% for n in note %}
@@ -205,7 +204,7 @@
                                     <div class="content">
                                         <div class="summary">
                                             {{ n['CN_NOTE'] }}
-                                            <a>A FAIRE</a>
+                                            <a>{{ client_service.getTheClientRaisonSoc(n['CL_ID'], n['SO_ID']) | convert_encoding('UTF-8', 'Windows-1252') }}</a>
                                             <div class="date">{{ n['INS_DATE'] | fromNowString }}</div>
                                         </div>
                                     </div>
