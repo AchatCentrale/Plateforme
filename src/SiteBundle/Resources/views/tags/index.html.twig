@@ -204,7 +204,7 @@
                                     <div class="content">
                                         <div class="summary">
                                             {{ n['CN_NOTE'] }}
-                                            <a>{{ client_service.getTheClientRaisonSoc(n['CL_ID'], n['SO_ID']) | convert_encoding('UTF-8', 'Windows-1252') }}</a>
+                                            <a href="{{ path('client-general', {'centrale':n['SO_ID'] | centrale , 'id': n['CL_ID']}) }}" >{{ client_service.getTheClientRaisonSoc(n['CL_ID'], n['SO_ID']) | convert_encoding('UTF-8', 'Windows-1252') }}</a>
                                             <div class="date">{{ n['INS_DATE'] | fromNowString }}</div>
                                         </div>
                                     </div>
