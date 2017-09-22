@@ -1619,7 +1619,9 @@ $(function () {
                 confirmButtonColor: "#d65d5d"
             },
             function () {
-               console.log('ok');
+
+                console.log('ok');
+                return;
 
 
             });
