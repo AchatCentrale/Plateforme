@@ -1606,22 +1606,25 @@ $(function () {
 
         console.log(url);
 
-
         swal({
-            title: 'Suprimer le TAG',
-            type: 'info',
-            html:
-            'Etes-vous de supprimer le TAG ? ',
-            showCloseButton: true,
-            showCancelButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-                'Oui',
-            confirmButtonAriaLabel: 'OUI',
-            cancelButtonText:
-                'Non',
-            cancelButtonAriaLabel: 'Non',
-        })
+                title: "Supprimer un TAG",
+                text: "Voulez-vous supprimez le TAG ?",
+                type: "info",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "Oui",
+                cancelButtonText: "Annuler",
+                showLoaderOnConfirm: true,
+                allowOutsideClick: true,
+                confirmButtonColor: "#d65d5d"
+            },
+            function () {
+               console.log('ok');
+
+
+            });
+
+
 
         // $.post( url);
         //
