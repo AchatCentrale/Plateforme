@@ -1601,7 +1601,7 @@ $(function () {
 
         ///tag/remove/{tag}/{centrale}
 
-        let url = "http://www.crm.achatcentrale.fr/tag/remove/"+ tag + "/" + centrale;
+        let url = "http://crm.achatcentrale.fr/tag/remove/"+ tag + "/" + centrale;
 
 
         console.log(url);
