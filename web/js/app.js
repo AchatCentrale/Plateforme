@@ -1608,7 +1608,7 @@ $(function () {
 
 
         swal({
-            title: '<u>Suprimer le TAG</u>',
+            title: 'Suprimer le TAG',
             type: 'info',
             html:
             'Etes-vous de supprimer le TAG ? ',
