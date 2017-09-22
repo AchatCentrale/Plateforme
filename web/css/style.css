@@ -803,3 +803,7 @@ div.dataTables_wrapper div.dataTables_paginate {
 ::-webkit-scrollbar {
     display: none;
 }
+
+#hastag-inject li a {
+    font-size: 15pt;
+}

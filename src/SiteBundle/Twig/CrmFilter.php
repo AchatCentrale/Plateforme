@@ -284,7 +284,7 @@ class CrmFilter extends \Twig_Extension
 
         switch ($status) {
             case 0:
-                return "A Validé";
+                return "A Valider";
                 break;
             case 1:
                 return "Validé";
