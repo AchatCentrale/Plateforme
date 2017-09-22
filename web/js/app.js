@@ -1608,7 +1608,7 @@ $(function () {
 
         $.post( url);
 
-        $('#'+ tag).remove().transition('fade');
+        $('#'+ tag).transition('fade').remove();
 
 
     });
