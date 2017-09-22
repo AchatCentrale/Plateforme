@@ -17,8 +17,11 @@
                         <div class="one wide column">
                             <i class="search huge icon"></i>
                         </div>
-                        <div class="eight wide column hastag_search">
+                        <div class="four wide column hastag_search">
                             <p>#{{ app.request.attributes.get('id') }}</p>
+                        </div>
+                        <div class="two wide column">
+                            <a href="{{ path('hastag-action', {'id': 'all'}) }}" class="positive ui button">Tous les tags</a>
                         </div>
 
                     </div>
