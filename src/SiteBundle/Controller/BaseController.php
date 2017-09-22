@@ -24,7 +24,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\Serializer\Encoder\JsonEncode;
 
 
 class BaseController extends Controller
@@ -2585,14 +2584,26 @@ class BaseController extends Controller
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
-        if ( $id === "all"){
+        if ($id === "all") {
+
+
+            $sqlTags = "SELECT *
+                        FROM CENTRALE_ACHAT.dbo.Vue_All_Tags";
+            $stmt = $conn->prepare($sqlTags);
+            $stmt->execute();
+            $tags = $stmt->fetchAll();
+
+
 
             return $this->render('@Site/tags/all.html.twig', [
-
+                    "tag" => $tags
             ]);
 
 
         }
+
+
+
         $sqlTags = "SELECT DISTINCT CL_REF, SO_ID, CL_RAISONSOC, CL_ADRESSE1, CL_TEL, CL_SIRET, CL_ID
                     FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
                     WHERE CL_ID IN (SELECT CL_ID
@@ -2609,7 +2620,7 @@ class BaseController extends Controller
                       CENTRALE_ACHAT.dbo.Vue_All_Taches
                     WHERE CLA_DESCR LIKE :query";
         $stmtAction = $conn->prepare($sqlAction);
-        $stmtAction->bindValue(":query", '%#'.$id.'%');
+        $stmtAction->bindValue(":query", '%#' . $id . '%');
         $stmtAction->execute();
         $action = $stmtAction->fetchAll();
 
@@ -2620,7 +2631,7 @@ class BaseController extends Controller
                       CENTRALE_ACHAT.dbo.Vue_All_Notes
                     WHERE Vue_All_Notes.CN_NOTE LIKE :query";
         $stmtNote = $conn->prepare($sqlNote);
-        $stmtNote->bindValue(":query", '%#'.$id.'%');
+        $stmtNote->bindValue(":query", '%#' . $id . '%');
         $stmtNote->execute();
         $note = $stmtNote->fetchAll();
 
@@ -2631,7 +2642,7 @@ class BaseController extends Controller
                       CENTRALE_ACHAT.dbo.Vue_All_Tickets_Frs
                     WHERE Vue_All_Tickets_Frs.MD_CORPS LIKE :query";
         $stmtTicketsFrs = $conn->prepare($sqlTicketsFrs);
-        $stmtTicketsFrs->bindValue(":query", '%#'.$id.'%');
+        $stmtTicketsFrs->bindValue(":query", '%#' . $id . '%');
         $stmtTicketsFrs->execute();
         $TicketsFrs = $stmtTicketsFrs->fetchAll();
 
@@ -2642,11 +2653,9 @@ class BaseController extends Controller
                           CENTRALE_ACHAT.dbo.Vue_All_Tickets_Frs
                         WHERE Vue_All_Tickets_Frs.MD_CORPS LIKE :query";
         $stmtTickets = $conn->prepare($sqlTickets);
-        $stmtTickets->bindValue(":query", '%#'.$id.'%');
+        $stmtTickets->bindValue(":query", '%#' . $id . '%');
         $stmtTickets->execute();
         $Tickets = $stmtTickets->fetchAll();
-
-
 
 
         return $this->render('@Site/tags/index.html.twig', [
@@ -2658,7 +2667,8 @@ class BaseController extends Controller
         ]);
     }
 
-    public function getTagAutoompleteAction(Request $request, $query){
+    public function getTagAutoompleteAction(Request $request, $query)
+    {
 
         $conn = $this->get('database_connection');
 
@@ -2671,15 +2681,14 @@ class BaseController extends Controller
                   ";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bindValue('query',  $query . '%');
+        $stmt->bindValue('query', $query . '%');
         $stmt->execute();
 
         $clients = $stmt->fetchAll();
         $result = $clientService->array_utf8_encode($clients);
 
 
-        if(empty($result))
-        {
+        if (empty($result)) {
             $sqlAction = "SELECT
                       CLA_NOM, CL_ID
                     FROM
@@ -2688,7 +2697,7 @@ class BaseController extends Controller
                   ";
 
             $stmtAction = $conn->prepare($sqlAction);
-            $stmtAction->bindValue('query', '%'.  $query . '%');
+            $stmtAction->bindValue('query', '%' . $query . '%');
             $stmtAction->execute();
 
             $action = $stmt->fetchAll();
@@ -2699,7 +2708,6 @@ class BaseController extends Controller
             $tag = [
                 'TAG' => $query
             ];
-
 
 
             $result = [

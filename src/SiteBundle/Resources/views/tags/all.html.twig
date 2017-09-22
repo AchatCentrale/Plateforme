@@ -2,7 +2,43 @@
 
 {% block body %}
 
-    <h1>all tags</h1>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Tout les tags</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                {{ dump(tag) }}
+
+
+                <div class="ui grid">
+
+
+                    {% for t in tag %}
+
+                    <div class="two wide column">
+                        <div class="ui raised segment">
+                            <div class="ui grid">
+                                <div class="eight wide column">
+                                    <p>#{{ t['TAG'] }}</p>
+                                </div>
+                                <div class="eight wide column">
+                                    <i class="write cursor large right square icon "></i><i data-centrale="{{ t['SO_ID'] }}" class="remove cursor large circle outline icon "></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}
