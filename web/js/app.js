@@ -1607,30 +1607,30 @@ $(function () {
         console.log(url);
 
         swal({
-                title: "Supprimer un TAG",
-                text: "Voulez-vous supprimez le TAG ?",
-                type: "info",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                confirmButtonText: "Oui",
-                cancelButtonText: "Annuler",
-                showLoaderOnConfirm: true,
-                allowOutsideClick: true,
-                confirmButtonColor: "#d65d5d"
-            },
-            function () {
+            title: "Supprimer un TAG",
+            text: "Voulez-vous supprimez le TAG ?",
+            type: "info",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            confirmButtonText: "Oui",
+            cancelButtonText: "Annuler",
+            showLoaderOnConfirm: true,
+            allowOutsideClick: true,
+            confirmButtonColor: "#d65d5d"
+        }).then(function () {
 
-                console.log('ok');
-                return;
+            $.post( url);
+
+            $('#'+ tag).transition('fade').remove();
+            swal(
+                'TAG supprimé',
+            )
+        });
 
 
-            });
 
 
 
-        // $.post( url);
-        //
-        // $('#'+ tag).transition('fade').remove();
 
 
     });
