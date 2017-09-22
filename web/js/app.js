@@ -1608,6 +1608,8 @@ $(function () {
 
         $.post( url);
 
+        $('#'+ tag).remove();
+
 
     });
 
