@@ -2585,6 +2585,14 @@ class BaseController extends Controller
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
+        if ( $id === "all"){
+
+            return $this->render('@Site/tags/all.html.twig', [
+
+            ]);
+
+
+        }
         $sqlTags = "SELECT DISTINCT CL_REF, SO_ID, CL_RAISONSOC, CL_ADRESSE1, CL_TEL, CL_SIRET, CL_ID
                     FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
                     WHERE CL_ID IN (SELECT CL_ID
@@ -2637,7 +2645,6 @@ class BaseController extends Controller
         $stmtTickets->bindValue(":query", '%#'.$id.'%');
         $stmtTickets->execute();
         $Tickets = $stmtTickets->fetchAll();
-
 
 
 

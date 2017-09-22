@@ -88,6 +88,7 @@
     <div class="row">
 
 
+        {#tickets#}
         <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="x_panel tile ">
                 <div class="x_title">
@@ -105,11 +106,14 @@
 
                             <ul class="list-unstyled timeline widget">
                                 {% for tFRS in ticketFRS %}
+
+                                    {{ dump(ticketFRS) }}
+
                                     <li>
                                         <div class="block">
                                             <div class="block_content">
                                                 <h2 class="title">
-                                                    <a>{{ tFRS['ME_SUJET'] }}</a>
+                                                    <a href="http://www.achatcentrale.fr/extranet/MB_Tickets_Detail.asp?SO_ID={{ tFRS['SO_ID'] }}&ME_ID={{ tFRS['ME_ID'] }}&ME_STATUS_ORI=0&DataBase={{ tFRS['SO_ID'] | centraleTickets}}" >{{ tFRS['ME_SUJET'] }}</a>
                                                 </h2>
                                                 <div class="byline">
                                                     <span></span> par <a>{{ tFRS['CL_RAISONSOC'] }}</a>
@@ -138,6 +142,7 @@
             </div>
         </div>
 
+        {#action#}
         <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="x_panel tile ">
                 <div class="x_title">
@@ -185,7 +190,7 @@
             </div>
         </div>
 
-
+        {#notes#}
         <div class="col-md-4 col-sm-4 col-xs-12">
             <div class="x_panel tile ">
                 <div class="x_title">

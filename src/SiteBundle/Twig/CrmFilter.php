@@ -47,6 +47,7 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('userFilter', [$this, 'userFilter']),
             new \Twig_SimpleFilter('avatar', [$this, 'getAvatar']),
             new \Twig_SimpleFilter('getClass', [$this, 'getClass']),
+            new \Twig_SimpleFilter('centraleTickets', [$this, 'centraleTickets']),
         );
     }
 
@@ -56,6 +57,7 @@ class CrmFilter extends \Twig_Extension
         return (new \ReflectionClass($class))->getShortName();
 
     }
+
     public function generateFactureNumber($centrale)
     {
 
@@ -249,6 +251,29 @@ class CrmFilter extends \Twig_Extension
                     return "ROC_ECLERC";
                     break;
             }
+        }
+
+
+    }
+
+    public function centraleTickets($centrale){
+
+        switch ($centrale) {
+            case "1":
+                return "CENTRALE_ACHAT";
+                break;
+            case '2':
+                return "CENTRALE_GCCP";
+                break;
+            case '4':
+                return "CENTRALE_FUNECAP";
+                break;
+            case '5':
+                return "CENTRALE_PFPL";
+                break;
+            case '6':
+                return "ROC_ECLERC";
+                break;
         }
 
 
