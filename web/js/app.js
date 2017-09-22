@@ -1625,14 +1625,8 @@ $(function () {
                 $.post( url);
 
                 $('#'+ tag).transition('fade').remove();
-                swal({
-                    title: "TAG supprimé",
-                    text: "TAG supprimé",
-                    type: "info",
-                    showCancelButton: false,
-                    confirmButtonText: "Super !",
 
-                });
+                swal('TAG supprimé');
 
 
 
