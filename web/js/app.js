@@ -1591,4 +1591,27 @@ $(function () {
     });
 
 
+
+    $('.remove-hashtag').on('click', function (e) {
+
+
+       let centrale = $(this).data('centrale');
+       let tag = $(this).data('tag');
+
+
+        ///tag/remove/{tag}/{centrale}
+
+        let url = "http://www.crm.achatcentrale.fr/tag/remove/"+ tag + "/" + centrale;
+
+
+        console.log(url);
+
+        $.post( url, function( data ) {
+            console.log(data);
+        });
+
+
+    });
+
+
 });

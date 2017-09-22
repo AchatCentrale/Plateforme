@@ -2667,6 +2667,65 @@ class BaseController extends Controller
         ]);
     }
 
+    public function removeHastagAction(Request $request, $tag, $centrale){
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+        switch ($centrale)
+        {
+            case 1:
+                $sql = "DELETE FROM CENTRALE_ACHAT.dbo.CLIENTS_TAG
+                WHERE TAG = :tag ";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":tag", $tag);
+                $stmt->execute();
+                $tags = $stmt->fetchAll();
+                return new JsonResponse('Tag supprimé', 200);
+                break;
+            case 2:
+                $sql = "DELETE FROM CENTRALE_GCCP.dbo.CLIENTS_TAG
+                WHERE TAG = :tag ";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":tag", $tag);
+                $stmt->execute();
+                $tags = $stmt->fetchAll();
+                return new JsonResponse('Tag supprimé', 200);
+                break;
+            case 4:
+                $sql = "DELETE FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG
+                WHERE TAG = :tag ";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":tag", $tag);
+                $stmt->execute();
+                $tags = $stmt->fetchAll();
+                return new JsonResponse('Tag supprimé', 200);
+                break;
+            case 5:
+                $sql = "DELETE FROM CENTRALE_PFPL.dbo.CLIENTS_TAG
+                WHERE TAG = :tag ";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":tag", $tag);
+                $stmt->execute();
+                $tags = $stmt->fetchAll();
+                return new JsonResponse('Tag supprimé', 200);
+                break;
+            case 6:
+                $sql = "DELETE FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG
+                WHERE TAG = :tag ";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":tag", $tag);
+                $stmt->execute();
+                $tags = $stmt->fetchAll();
+                return new JsonResponse('Tag supprimé', 200);
+                break;
+        }
+
+
+
+
+    }
+
     public function getTagAutoompleteAction(Request $request, $query)
     {
 

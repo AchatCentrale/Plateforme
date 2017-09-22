@@ -182,3 +182,8 @@ hastag-typehead:
     path: /tag/search/{query}
     defaults: {_controller: SiteBundle:Base:getTagAutoomplete}
 
+remove-hashtag:
+    path: /tag/remove/{tag}/{centrale}
+    defaults: {_controller: SiteBundle:Base:removeHastag}
+    methods: POST
+
