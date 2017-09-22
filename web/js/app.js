@@ -1608,21 +1608,19 @@ $(function () {
 
 
         swal({
-            title: '<i>HTML</i> <u>example</u>',
+            title: '<u>Suprimer le TAG</u>',
             type: 'info',
             html:
-            'You can use <b>bold text</b>, ' +
-            '<a href="//github.com">links</a> ' +
-            'and other HTML tags',
+            'Etes-vous de supprimer le TAG ? ',
             showCloseButton: true,
             showCancelButton: true,
             focusConfirm: false,
             confirmButtonText:
-                '<i class="fa fa-thumbs-up"></i> Great!',
-            confirmButtonAriaLabel: 'Thumbs up, great!',
+                'Oui',
+            confirmButtonAriaLabel: 'OUI',
             cancelButtonText:
-                '<i class="fa fa-thumbs-down"></i>',
-            cancelButtonAriaLabel: 'Thumbs down',
+                'Non',
+            cancelButtonAriaLabel: 'Non',
         })
 
         // $.post( url);
