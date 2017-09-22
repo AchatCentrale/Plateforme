@@ -1616,7 +1616,7 @@ $(function () {
             'and other HTML tags',
             showCloseButton: true,
             showCancelButton: true,
-            focusConfirm: false
+            focusConfirm: false,
             confirmButtonText:
                 '<i class="fa fa-thumbs-up"></i> Great!',
             confirmButtonAriaLabel: 'Thumbs up, great!',
