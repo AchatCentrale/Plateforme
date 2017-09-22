@@ -1606,7 +1606,7 @@ $(function () {
 
         console.log(url);
 
-        $.post( ur);
+        $.post( url);
 
 
     });
