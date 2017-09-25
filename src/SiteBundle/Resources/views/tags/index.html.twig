@@ -53,6 +53,7 @@
                                 <th>Centrale</th>
                                 <th>Raison social</th>
                                 <th>Adresse</th>
+                                <th>Ville</th>
                                 <th>Tel</th>
                                 <th>Siret</th>
                             </tr>
@@ -67,6 +68,7 @@
                                         <a href="{{ path('client-general', {'id' :  t['CL_ID'] , 'centrale' :  t['SO_ID'] | centrale }) }}">{{ t['CL_RAISONSOC'] | convert_encoding('UTF-8', 'Windows-1252') }}</a>
                                     </td>
                                     <td>{{ t['CL_ADRESSE1'] }}</td>
+                                    <td>{{ t['CL_VILLE'] }}</td>
                                     <td>{{ t['CL_TEL'] | phone }}</td>
                                     <td>{{ t['CL_SIRET'] | siret }}</td>
                                 </tr>
