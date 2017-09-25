@@ -1626,7 +1626,11 @@ $(function () {
 
                 $('#'+ tag).transition('fade').remove();
 
-                swal('TAG supprimé');
+                swal(
+                    'Succés',
+                    'TAG supprimé',
+                    'success'
+                )
 
 
 
