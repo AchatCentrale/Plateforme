@@ -2604,7 +2604,7 @@ class BaseController extends Controller
 
 
 
-        $sqlTags = "SELECT DISTINCT CL_REF, SO_ID, CL_RAISONSOC, CL_ADRESSE1, CL_TEL, CL_SIRET, CL_ID
+        $sqlTags = "SELECT DISTINCT CL_REF, SO_ID, CL_RAISONSOC, CL_ADRESSE1, CL_TEL, CL_SIRET, CL_ID, CL_VILLE
                     FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
                     WHERE CL_ID IN (SELECT CL_ID
                                    FROM CENTRALE_ACHAT.dbo.Vue_All_Tags
