@@ -251,14 +251,13 @@
                             <div class="four wide column recap-client">
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Groupe</p>
-                                    <p class="cursor " data-index="groupe">
+
                                         {% if groupe %}
                                     <p class="ui label large green">{{ groupe[0].grDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p><br>
                                     {% else %}
                                         <p></p>
                                     {% endif %}
 
-                                    </p>
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Classification</p>
