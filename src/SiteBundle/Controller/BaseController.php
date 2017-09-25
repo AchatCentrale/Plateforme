@@ -2417,7 +2417,7 @@ class BaseController extends Controller
                         ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
                     ;
                     $exporter = new Exporter($config);
-                    $exporter->export('php://output', new PdoCollection($stmt->getIterator()));
+                    $exporter->export('php://output', new PdoCollection($stmt->fetchAll()));
                 });
                 $response->send();
                 return $response;
