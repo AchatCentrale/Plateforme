@@ -1632,6 +1632,7 @@ $(function () {
                     'success'
                 )
 
+                location.reload();
 
 
             });
