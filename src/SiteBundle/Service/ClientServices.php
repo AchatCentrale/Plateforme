@@ -437,4 +437,99 @@ class ClientServices
 
         return $id. "  " . $centraleId;
     }
+
+    public function getTheClientGroupe($id, $centraleId){
+
+
+        switch ($centraleId){
+            case "ACHAT_CENTRALE":
+                $sql = "SELECT *
+                        FROM CENTRALE_ACHAT.dbo.GROUPE
+                        WHERE GR_ID = :id";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result){
+
+                    return $result[0]['GR_DESCR'];
+
+                }else{
+
+                    return 'Pas de groupe';
+                }            case "CENTRALE_GCCP":
+                $sql = "SELECT *
+                        FROM CENTRALE_GCCP.dbo.GROUPE
+                        WHERE GR_ID = :id";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result){
+
+                    return $result[0]['GR_DESCR'];
+
+                }else{
+
+                    return 'Pas de groupe';
+                }            case "CENTRALE_FUNECAP":
+                $sql = "SELECT *
+                        FROM CENTRALE_FUNECAP.dbo.GROUPE
+                        WHERE GR_ID = :id";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result){
+
+                    return $result[0]['GR_DESCR'];
+
+                }else{
+
+                    return 'Pas de groupe';
+                }            case "CENTRALE_PFPL":
+                $sql = "SELECT *
+                        FROM CENTRALE_PFPL.dbo.GROUPE
+                        WHERE GR_ID = :id";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result){
+
+                    return $result[0]['GR_DESCR'];
+
+                }else{
+
+                    return 'Pas de groupe';
+                }
+            case "ROC_ECLERC":
+
+                $sql = "SELECT *
+                        FROM CENTRALE_ROC_ECLERC.dbo.GROUPE
+                        WHERE GR_ID = :id";
+
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+
+
+
+                if ($result){
+
+                    return $result[0]['GR_DESCR'];
+
+                }else{
+
+                    return 'Pas de groupe';
+                }
+
+        }
+
+    }
 }

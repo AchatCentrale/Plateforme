@@ -437,7 +437,7 @@ class BaseController extends Controller
                     'SELECT DISTINCT
              SO_RAISONSOC,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION,
-              GR_DESCR, AC_DESCR, CL_TEL
+              GR_DESCR, AC_DESCR, CL_TEL, CL_GROUPE
               FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
               INNER JOIN CENTRALE_ACHAT.dbo.SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
               ORDER BY SO_RAISONSOC DESC 
@@ -453,7 +453,7 @@ class BaseController extends Controller
                     '
                   SELECT DISTINCT
                   CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-                  CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
+                  CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
                   FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
                   ORDER BY INS_DATE DESC 
               '
@@ -465,7 +465,7 @@ class BaseController extends Controller
                 $stmt = $con->executeQuery(
                     'SELECT DISTINCT
               CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
+              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
               FROM CENTRALE_FUNECAP.dbo.CLIENTS
               ORDER BY INS_DATE DESC 
               '
@@ -479,7 +479,7 @@ class BaseController extends Controller
                 $stmt = $con->executeQuery(
                     'SELECT DISTINCT
               CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
+              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
               FROM CENTRALE_GCCP.dbo.CLIENTS
               ORDER BY INS_DATE DESC 
               '
@@ -491,7 +491,7 @@ class BaseController extends Controller
                 $stmt = $con->executeQuery(
                     'SELECT DISTINCT
               CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
+              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
               FROM CENTRALE_PFPL.dbo.CLIENTS
               ORDER BY INS_DATE DESC 
               '
@@ -503,7 +503,7 @@ class BaseController extends Controller
                 $stmt = $con->executeQuery(
                     'SELECT DISTINCT
               CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL
+              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
               FROM CENTRALE_ACHAT.dbo.CLIENTS
               ORDER BY INS_DATE DESC 
               '
