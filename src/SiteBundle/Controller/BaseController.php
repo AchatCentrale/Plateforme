@@ -2404,7 +2404,7 @@ class BaseController extends Controller
 
         switch ($centrale) {
             case 'roc':
-                $stmt = $conn->prepare('SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS');
+                $stmt = $conn->prepare('SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Clients WHERE SO_ID = 6');
                 $stmt->execute();
                 $response = new StreamedResponse();
                 $response->setStatusCode(200);
