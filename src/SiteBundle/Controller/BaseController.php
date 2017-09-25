@@ -3,6 +3,7 @@
 namespace SiteBundle\Controller;
 
 
+use Goodby\CSV\Export\Standard\Collection\PdoCollection;
 use Goodby\CSV\Export\Standard\CsvFileObject;
 use Goodby\CSV\Export\Standard\Exporter;
 use Goodby\CSV\Export\Standard\ExporterConfig;
@@ -2416,7 +2417,7 @@ class BaseController extends Controller
                         ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
                     ;
                     $exporter = new Exporter($config);
-                    $exporter->export('php://output', $stmt->fetchAll());
+                    $exporter->export('php://output', new PdoCollection($stmt->getIterator()));
                 });
                 $response->send();
                 return $response;
