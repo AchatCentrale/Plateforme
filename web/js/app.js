@@ -1528,7 +1528,7 @@ $(function () {
 
         });
 
-        let tpl = `<li><a class="" href="http://localhost:8000/tag/${$elValue.val()}">#${$elValue.val()}</a></li>`;
+        let tpl = `<li><a class="" href="http://crm.achatcentrale.fr/tag/${$elValue.val()}">#${$elValue.val()}</a></li>`;
 
         $elValue.val("");
 
