@@ -1,49 +1,15 @@
-/** Ultra Light */
-@font-face {
-    font-family: "San Francisco";
-    font-weight: 100;
-    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-ultralight-webfont.woff");
-}
 
-/** Thin */
-@font-face {
-    font-family: "San Francisco";
-    font-weight: 200;
-    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-thin-webfont.woff");
-}
-
-/** Regular */
-@font-face {
-    font-family: "San Francisco";
-    font-weight: 400;
-    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
-}
-
-/** Medium */
-@font-face {
-    font-family: "San Francisco";
-    font-weight: 500;
-    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-medium-webfont.woff");
-}
-
-/** Semi Bold */
-@font-face {
-    font-family: "San Francisco";
-    font-weight: 600;
-    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-semibold-webfont.woff");
-}
-
-/** Bold */
-@font-face {
-    font-family: "San Francisco";
-    font-weight: 700;
-    src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
-}
 
 @font-face {
     font-family: 'Titillium Web', sans-serif;
 
 }
+
+@font-face {
+    font-family: 'Roboto', sans-serif;
+}
+
+
 
 .img-home {
     width: 9%;
@@ -59,7 +25,7 @@ body {
     min-height: 100%;
     margin: 0;
     padding: 0;
-    font-family: "San Francisco";
+    font-family: "Roboto";
 }
 
 img {
@@ -593,7 +559,7 @@ h3.raison-soc-titre {
 }
 
 .text-avatar{
-    font-family: "San Francisco Display", serif;
+    font-family: "Roboto", serif;
     position: relative;
     left: 15px;
     top: 7px;
@@ -615,7 +581,7 @@ h3.raison-soc-titre {
 
 
 .text-avatar-tiny{
-    font-family: "San Francisco Display", serif;
+    font-family: "Roboto", serif;
     position: relative;
     left: 11px;
     top: 6px;
