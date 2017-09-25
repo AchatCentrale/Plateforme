@@ -303,7 +303,7 @@ class CrmFilter extends \Twig_Extension
     {
 
 
-        if (isset($input)) {
+        if (!isset($input)) {
             return "À remplir";
         } else {
             return $input;

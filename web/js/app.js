@@ -267,6 +267,8 @@ $(function () {
 //sidebar
     $('#menu_toggle').on('click', function () {
 
+        console.log('salut');
+
         if ($('body').hasClass('nav-md')) {
             $('#sidebar-menu').find('li.active ul').hide();
             $('#sidebar-menu').find('li.active').addClass('active-sm').removeClass('active');
@@ -363,6 +365,10 @@ $(function () {
     });
 
     let table = $('#client-all').DataTable({
+        fixedHeader: {
+            header: true,
+            footer: true
+        },
         "colReorder": true,
         responsive: true,
         "language": {
@@ -1071,23 +1077,7 @@ $(function () {
     });
 
 
-// $(".text-area-validation").on("keydown", function(e){
-//
-//     $('#countTextarea').empty();
-//
-//   let count = $('.text-area-validation').val().length;
-//
-//   console.log(count);
-//
-//
-//   $('#countTextarea').html('<p>'+ count  +'/150</p>');
-//
-//   if(count > 145){
-//       $('.text-area-validation').addClass('border-red');
-//
-//   }
-//
-// });
+
 
     $('.ui.search').search({
         apiSettings: {
@@ -1110,8 +1100,7 @@ $(function () {
             maxResults: 'Results must be an array to use maxResults setting',
             method: 'The method you called is not defined.'
         },
-    })
-    ;
+    });
 
 
     $('.ui.search.clients-auto').search({
@@ -1135,8 +1124,7 @@ $(function () {
             method: 'The method you called is not defined.'
         },
 
-    })
-    ;
+    });
 
 
     $('.detail-tache-home-client').on('click', function (e) {
@@ -1630,7 +1618,7 @@ $(function () {
                     'Succés',
                     'TAG supprimé',
                     'success'
-                )
+                );
 
                 location.reload();
 
