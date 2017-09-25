@@ -67,8 +67,8 @@
                                     <td>
                                         <a href="{{ path('client-general', {'id' :  t['CL_ID'] , 'centrale' :  t['SO_ID'] | centrale }) }}">{{ t['CL_RAISONSOC'] | convert_encoding('UTF-8', 'Windows-1252') }}</a>
                                     </td>
-                                    <td>{{ t['CL_ADRESSE1'] }}</td>
-                                    <td>{{ t['CL_VILLE'] }}</td>
+                                    <td>{{ t['CL_ADRESSE1'] | convert_encoding('UTF-8', 'Windows-1252') }}</td>
+                                    <td>{{ t['CL_VILLE'] | convert_encoding('UTF-8', 'Windows-1252') }}</td>
                                     <td>{{ t['CL_TEL'] | phone }}</td>
                                     <td>{{ t['CL_SIRET'] | siret }}</td>
                                 </tr>
