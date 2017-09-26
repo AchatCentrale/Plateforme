@@ -187,3 +187,8 @@ remove-hashtag:
     defaults: {_controller: SiteBundle:Base:removeHastag}
     methods: POST
 
+
+consomnation-index:
+    path: /client/{id}/{centrale}/consomnation
+    defaults: {_controller: SiteBundle:Consomnation:index}
+

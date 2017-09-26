@@ -1633,4 +1633,13 @@ $(function () {
     });
 
 
+    $('#date').combodate({
+        minYear: 2015,
+        maxYear: 2085,
+        minuteStep: 10,
+        customClass: "table-conso",
+    });
+
+
+
 });

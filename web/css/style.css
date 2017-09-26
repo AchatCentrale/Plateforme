@@ -773,3 +773,24 @@ div.dataTables_wrapper div.dataTables_paginate {
 #hastag-inject li a {
     font-size: 15pt;
 }
+
+.container-conso-logo img {
+    width: 100%;
+    margin: 10% 15%;
+}
+
+.label-consomnateur {
+    width: 25%;
+    height: 20%;
+    background-color: green;
+    border-radius: 50%;
+    margin-top: 50%;
+}
+
+.table-conso{
+    color: black;
+    border: 1px solid black;
+    width: 17% !important;
+    height: 35% !important;
+    margin-top: 35px;
+}

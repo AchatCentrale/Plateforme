@@ -2501,7 +2501,6 @@ class BaseController extends Controller
 
         }
 
-
     }
 
     public function newHastagAction(Request $request, $id, $centrale)

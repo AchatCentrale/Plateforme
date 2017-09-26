@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    CONSOMNATION - ACHAT-CENTRALE
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel tile ">
+                <div class="x_content">
+
+                    <h1><i class="shop  icon"></i> Consomnations</h1>
+                    <div class="clearfix"></div>
+                    <div class="ui divider"></div>
+
+
+                    <div class="ui grid">
+                        <div class="eight wide column">
+
+                            <div class="container-conso-logo">
+                                <div class="ui grid">
+                                    <div class="two wide column">
+                                        <img src="{{ asset('images/logo_bruneau.png') }}" alt="">
+                                    </div>
+                                    <div class="two wide column">
+                                        <div class="label-consomnateur"></div>
+                                    </div>
+
+                                    <div class="twelve wide column">
+                                        <input type="text" id="date" data-format="MM-YYYY" data-template="MMM YYYY" name="date" value="01-2015">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <table class="ui celled table">
+                                <thead>
+                                <tr>
+                                    <th>Tarif public</th>
+                                    <th>Tarif AC</th>
+                                    <th>Economie</th>
+                                    <th>Economie %</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <td>60 €</td>
+                                    <td>40 €</td>
+                                    <td>20 €</td>
+                                    <td>33 %</td>
+                                </tr>
+                                </tbody>
+
+                            </table>
+
+
+                        </div>
+                        <div class="eight wide column">
+
+
+                            <div class="ui form">
+                                <div class="field">
+                                    <label>Commentaires</label>
+                                    <textarea></textarea>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+

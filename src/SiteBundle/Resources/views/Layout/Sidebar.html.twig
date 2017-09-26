@@ -32,13 +32,13 @@
                         <a href="{{ path('taches_home') }}"><i class="fa fa-calendar"></i> Action</a></li>
 
 
-                    <li class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-facturation' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' %}current-page {% endif %}">
+                    <li class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-facturation' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'consomnation-index' %}current-page {% endif %}">
 
 
                         <a href="{{ path('client', { 'c' : 'all'}) }}"><i class="fa fa-user"></i> Client</a>
 
 
-                            {% if  app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'client-facturation' %}
+                            {% if  app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'client-facturation' or app.request.attributes.get('_route') == 'consomnation-index' %}
                         </a>
 
 
@@ -56,6 +56,9 @@
                             </li>
                             <li class=" {% if app.request.attributes.get('_route') == 'client-facturation' %}current-page {% endif %}">
                                 <a href="{{ path('client-facturation', { id : app.request.attributes.get('id'), 'centrale' : app.request.attributes.get('centrale')}) }}">Facturation</a>
+                            </li>
+                            <li class=" {% if app.request.attributes.get('_route') == 'consomnation-index' %}current-page {% endif %}">
+                                <a href="{{ path('consomnation-index', { id : app.request.attributes.get('id'), 'centrale' : app.request.attributes.get('centrale')}) }}">Consomnation</a>
                             </li>
                         </ul>
                     </li>
