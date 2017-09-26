@@ -1633,12 +1633,32 @@ $(function () {
     });
 
 
-    $('#date').combodate({
+    $('#date_debut').combodate({
         minYear: 2015,
         maxYear: 2085,
         minuteStep: 10,
         customClass: "table-conso",
     });
+
+    $('#date_fin').combodate({
+        minYear: 2015,
+        maxYear: 2085,
+        minuteStep: 10,
+        customClass: "table-conso",
+    });
+
+    let date_debut = $('#date_debut').combodate('getValue', null);
+
+    $('#date_fin').on('click', function (e) {
+        console.log('ok');
+        let date_debut = $('#date_debut').combodate('getValue', null);
+
+        console.log(date_debut);
+
+
+    });
+
+
 
 
 
