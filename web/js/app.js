@@ -1632,11 +1632,15 @@ $(function () {
 
     });
 
+    let d = new Date();
+    console.log("0"+ d.getMonth()+"-"+d.getUTCFullYear() +"");
+
 
     $('#date_debut').combodate({
         minYear: 2015,
         maxYear: 2085,
         minuteStep: 10,
+        value: "0"+ d.getUTCMonth()+"-"+d.getUTCFullYear() +"",
         customClass: "table-conso",
     });
 
@@ -1644,20 +1648,24 @@ $(function () {
         minYear: 2015,
         maxYear: 2085,
         minuteStep: 10,
+        value: "0"+ d.getUTCMonth()+"-"+(d.getUTCFullYear() + 1) +"",
         customClass: "table-conso",
     });
 
-    let date_debut = $('#date_debut').combodate('getValue', null);
 
     $('.btn-periode').on('click', function (e) {
-        console.log('ok');
         let date_debut = $('#date_debut').combodate('getValue', null);
         let date_fin = $('#date_fin').combodate('getValue', null);
 
-        console.log(date_debut, date_debut);
-        console.log(date_debut._i[0], date_debut._i[1]);
-        console.log(date_fin, date_fin);
-        console.log(date_fin._i[0], date_fin._i[1]);
+        let startMonth = date_debut._i[1];
+        let startYear = date_debut._i[0];
+        let endYear = date_fin._i[0];
+        let endMonth = date_fin._i[1];
+
+        let url = CURRENT_URL + "?startM="+ startMonth + "&startY=" + startYear + "&endM=" + endMonth + "&endY=" + endYear;
+
+        window.location = url;
+
 
 
     });

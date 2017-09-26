@@ -17,6 +17,13 @@ class ConsomnationController extends Controller
     public function indexAction(Request $request){
 
 
+        $startM = $request->query->get('startM');
+        $startY = $request->query->get('startY');
+        $endY = $request->query->get('endY');
+        $endM = $request->query->get('endM');
+
+
+
 
 
         return $this->render('@Site/Consomnation/index.html.twig', []);
