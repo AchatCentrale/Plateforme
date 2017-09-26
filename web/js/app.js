@@ -1649,11 +1649,15 @@ $(function () {
 
     let date_debut = $('#date_debut').combodate('getValue', null);
 
-    $('#date_fin').on('click', function (e) {
+    $('.btn-periode').on('click', function (e) {
         console.log('ok');
         let date_debut = $('#date_debut').combodate('getValue', null);
+        let date_fin = $('#date_fin').combodate('getValue', null);
 
-        console.log(date_debut);
+        console.log(date_debut, date_debut);
+        console.log(date_debut._i[0], date_debut._i[1]);
+        console.log(date_fin, date_fin);
+        console.log(date_fin._i[0], date_fin._i[1]);
 
 
     });

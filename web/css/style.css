@@ -791,10 +791,14 @@ div.dataTables_wrapper div.dataTables_paginate {
     color: black;
     border: 1px solid black;
     width: 40% !important;
-    height: 57% !important;
+    height: 50% !important;
     margin-top: 35px;
 }
 p.numero-bruneau{
     margin-top: 35px;
     font-size: 15pt;
+}
+
+.btn-periode {
+    margin-top: 35px !important;
 }
