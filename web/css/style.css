@@ -806,3 +806,7 @@ p.numero-bruneau{
     width: 100%;
     margin-left: 35%;
 }
+.dropzone {
+    min-height: 180px;
+    border: 1px solid #e5e5e5;
+}
