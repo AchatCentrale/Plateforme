@@ -1664,6 +1664,8 @@ $(function () {
 
         let url = CURRENT_URL + "?startM="+ startMonth + "&startY=" + startYear + "&endM=" + endMonth + "&endY=" + endYear;
 
+        console.log(CURRENT_URL);
+
         window.location = url;
 
 
