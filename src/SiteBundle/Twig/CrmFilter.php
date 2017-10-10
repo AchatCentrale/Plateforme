@@ -391,7 +391,7 @@ class CrmFilter extends \Twig_Extension
                 return '<i class="sticky big note outline icon"></i>';
                 break;
             case 'RDV':
-                return '<i class="handshake icon"></i>';
+                return '<i class="handshake big icon"></i>';
                 break;
         }
 
