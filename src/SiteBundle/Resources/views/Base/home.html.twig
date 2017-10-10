@@ -14,6 +14,8 @@
 {% block body %}
 
 
+
+
     <!-- top tiles -->
     <div class="row tile_count">
 
@@ -137,20 +139,26 @@
                                         </div>
                                     </div>
                                     <div class="column">
-                                        <div class="ui form">
-                                            <div class="field">
-                                                <label>Client</label>
-                                                <div class="ui selection dropdown">
-                                                    <input type="hidden" name="periode">
-                                                    <i class="dropdown icon"></i>
-                                                    <div class="default text">Client</div>
-                                                    <div class="menu">
-                                                        <div class="item" data-value="0">ROC-ECLERC ORDENER</div>
 
-                                                    </div>
-                                                </div>
+                                        <div class="ui dropdown" id="clients-dropdown">
+                                            <input type="hidden" name="Clients">
+                                            <i class="dropdown icon"></i>
+                                            <div class="default text">clients</div>
+                                            <div class="menu">
+                                                {% for cl in clients  %}
+
+
+                                                    <div class="item" data-value="{{ cl['CL_ID'] }}">{{ cl['CL_RAISONSOC'] }}</div>
+
+                                                    {% endfor %}
                                             </div>
                                         </div>
+
+
+
+
+
+
                                     </div>
                                     <div class="column">
                                         <div class="ui form">

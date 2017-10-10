@@ -1446,6 +1446,10 @@ $(function () {
 
     $('.ui.dropdown.user-update').dropdown();
 
+    $('#clients-dropdown')
+        .dropdown()
+    ;
+
 
     $('.add-hastag-container').hide();
 
@@ -1727,6 +1731,9 @@ $(function () {
         thumbnailHeight: 100,
 
     };
+
+
+
 
 
 

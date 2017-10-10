@@ -41,7 +41,7 @@ class BaseController extends Controller
 
         $user = $this->getUser();
 
-        if ($user->getUsId() === 2) {
+        if ($user->getUsId() === 2 && $user->getUsId() === 5) {
 
 
             $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -79,17 +79,27 @@ class BaseController extends Controller
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':usId', $user->getUsId());
-
-
         $stmt->execute();
         $task = $stmt->fetchAll();
+
+
+
+
+        $sqlAllClients = "SELECT DISTINCT *
+                FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
+                ";
+        $stmtAllClients = $conn->prepare($sqlAllClients);
+        $stmtAllClients->execute();
+        $clients = $stmtAllClients->fetchAll();
+
 
 
         return $this->render(
             '@Site/Base/home.html.twig',
             [
                 'task' => $task,
-                "dataCount" => $dataCount
+                "dataCount" => $dataCount,
+                "clients" => $clients
 
             ]
         );
