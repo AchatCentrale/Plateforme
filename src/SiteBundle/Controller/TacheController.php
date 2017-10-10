@@ -565,7 +565,7 @@ class TacheController extends Controller
                 }
 
                 if ($request->getMethod() == "POST") {
-                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
+                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
                     $task
                         ->setClaType($req->get('cla_type'))
                         ->setClaNom($req->get('cla_nom'))
@@ -620,7 +620,7 @@ class TacheController extends Controller
 
 
                 if ($request->getMethod() == "POST") {
-                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
+                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
                     $task
                         ->setClaType($req->get('cla_type'))
                         ->setClaNom($req->get('cla_nom'))
@@ -673,7 +673,7 @@ class TacheController extends Controller
                 }
 
                 if ($request->getMethod() == "POST") {
-                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
+                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
                     $task
                         ->setClaType($req->get('cla_type'))
                         ->setClaNom($req->get('cla_nom'))
@@ -727,7 +727,7 @@ class TacheController extends Controller
 
 
                 if ($request->getMethod() == "POST") {
-                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $req->get('cla_echeance'));
+                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
                     $task
                         ->setClaType($req->get('cla_type'))
                         ->setClaNom($req->get('cla_nom'))
