@@ -890,7 +890,7 @@ class TacheController extends Controller
 
             case "ACHAT_CENTRALE":
             case "1":
-               $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+               $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID, CLA_ECHEANCE FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
                $stmt = $conn->prepare($sqlTask);
                $stmt->bindValue(':id', $id);
                $stmt->execute();
@@ -935,7 +935,7 @@ class TacheController extends Controller
                 ]);
             case "CENTRALE_GCCP":
             case "2":
-            $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+            $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID, CLA_ECHEANCE FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
             $stmt = $conn->prepare($sqlTask);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
@@ -981,7 +981,7 @@ class TacheController extends Controller
             ]);
             case "CENTRALE_FUNECAP":
             case "4":
-            $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+            $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID, CLA_ECHEANCE FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
             $stmt = $conn->prepare($sqlTask);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
@@ -1027,7 +1027,7 @@ class TacheController extends Controller
             ]);
             case "CENTRALE_PFPL":
             case "5":
-            $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+            $sqlTask = "SELECT CLA_NOM, CLA_DESCR, US_ID, CLA_ECHEANCE FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
             $stmt = $conn->prepare($sqlTask);
             $stmt->bindValue(':id', $id);
             $stmt->execute();
