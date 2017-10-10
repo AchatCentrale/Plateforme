@@ -436,7 +436,7 @@ p.task-description {
     background: purple;
 }
 .state-tache-detail {
-    width: 100%;
+    width: 65%;
 }
 .detail-tache-etat{
     display: flex;

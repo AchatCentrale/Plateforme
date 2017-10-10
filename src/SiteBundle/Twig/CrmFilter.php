@@ -162,7 +162,7 @@ class CrmFilter extends \Twig_Extension
 
         $m = new \Moment\Moment($date);
 
-        return $m->format('ll', new \Moment\CustomFormats\MomentJs());
+        return $m->format('lll', new \Moment\CustomFormats\MomentJs());
 
     }
 

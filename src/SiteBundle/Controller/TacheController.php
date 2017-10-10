@@ -876,7 +876,6 @@ class TacheController extends Controller
 
     }
 
-
     public function UpdateTaskAction(Request $request, $id, $centrale)
     {
 

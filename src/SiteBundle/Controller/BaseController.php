@@ -103,13 +103,26 @@ class BaseController extends Controller
         $clients = $stmtAllClients->fetchAll();
 
 
+        $sqlRdv = "SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                    WHERE CLA_TYPE = 5
+                    AND US_ID = :id
+                    ORDER BY INS_DATE DESC
+                ";
+
+        $stmtRdv = $conn->prepare($sqlRdv);
+        $stmtRdv->bindValue(':id', $user->getUsId());
+        $stmtRdv->execute();
+        $rdv = $stmtRdv->fetchAll();
+
+
         return $this->render(
             '@Site/Base/home.html.twig',
             [
                 'task' => $task,
                 "dataCount" => $dataCount,
                 "clients" => $clients,
-                "note" => $notes
+                "note" => $notes,
+                "rdv" => $rdv
 
             ]
         );

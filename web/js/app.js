@@ -875,20 +875,8 @@ $(function () {
                             ${ stateTask(data.statut) }
                         </div>
                         <div class="change-statut-tache">
-                       <div class="dropup">
-                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Changer le statut de la tache
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="${CURRENT_URL + "taches/etat/0/" + data.id + "/" + data.idCentrale}">Non commencé</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/1/" + data.id + "/" + data.idCentrale}">En cours</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/2/" + data.id + "/" + data.idCentrale}">Terminé</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/3/" + data.id + "/" + data.idCentrale}">Attente de quelqu'un d'autre</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/4/" + data.id + "/" + data.idCentrale}">Reportée</a></li>
-
-                          </ul>
-                        </div>
+                      
+                          <button class="ui button green" >Je suis en train de la faire ?</button>
                         </div>
                     </div>
                     </div>
@@ -1075,8 +1063,6 @@ $(function () {
 
         $('#client-user-new').modal('hide')
     });
-
-
 
 
     $('.ui.search').search({
@@ -1553,7 +1539,6 @@ $(function () {
     });
 
 
-
     $('.ui.search.container-search-hastag').search({
         apiSettings: {
             url: 'http://crm.achatcentrale.fr/tag/search/{query}'
@@ -1575,7 +1560,7 @@ $(function () {
         },
         onSelect: function (result, response) {
 
-            window.location.href = "http://crm.achatcentrale.fr/tag/"+ result.TAG;
+            window.location.href = "http://crm.achatcentrale.fr/tag/" + result.TAG;
 
             return false;
 
@@ -1583,21 +1568,19 @@ $(function () {
     });
 
 
-
     $('.remove-hashtag').on('click', function (e) {
 
 
-       let centrale = $(this).data('centrale');
-       let tag = $(this).data('tag');
+        let centrale = $(this).data('centrale');
+        let tag = $(this).data('tag');
 
 
         ///tag/remove/{tag}/{centrale}
 
-        let url = "http://crm.achatcentrale.fr/tag/remove/"+ tag + "/" + centrale;
+        let url = "http://crm.achatcentrale.fr/tag/remove/" + tag + "/" + centrale;
 
 
         console.log(url);
-
 
 
         swal({
@@ -1614,9 +1597,9 @@ $(function () {
             },
             function () {
 
-                $.post( url);
+                $.post(url);
 
-                $('#'+ tag).transition('fade').remove();
+                $('#' + tag).transition('fade').remove();
 
                 swal(
                     'Succés',
@@ -1630,21 +1613,17 @@ $(function () {
             });
 
 
-
-
-
-
     });
 
     let d = new Date();
-    console.log("0"+ d.getMonth()+"-"+d.getUTCFullYear() +"");
+    console.log("0" + d.getMonth() + "-" + d.getUTCFullYear() + "");
 
 
     $('#date_debut').combodate({
         minYear: 2015,
         maxYear: 2085,
         minuteStep: 10,
-        value: "0"+ d.getUTCMonth()+"-"+d.getUTCFullYear() +"",
+        value: "0" + d.getUTCMonth() + "-" + d.getUTCFullYear() + "",
         customClass: "table-conso",
     });
 
@@ -1652,7 +1631,7 @@ $(function () {
         minYear: 2015,
         maxYear: 2085,
         minuteStep: 10,
-        value: "0"+ d.getUTCMonth()+"-"+(d.getUTCFullYear() + 1) +"",
+        value: "0" + d.getUTCMonth() + "-" + (d.getUTCFullYear() + 1) + "",
         customClass: "table-conso",
     });
 
@@ -1666,24 +1645,20 @@ $(function () {
         let endYear = date_fin._i[0];
         let endMonth = date_fin._i[1];
 
-        let url = CURRENT_URL + "?startM="+ startMonth + "&startY=" + startYear + "&endM=" + endMonth + "&endY=" + endYear;
+        let url = CURRENT_URL + "?startM=" + startMonth + "&startY=" + startYear + "&endM=" + endMonth + "&endY=" + endYear;
 
         console.log(CURRENT_URL);
 
         window.location = url;
 
 
-
     });
-
-
 
 
     //chart.js
 
 
-
-    if(document.getElementById("myChart")){
+    if (document.getElementById("myChart")) {
 
         let ctx = document.getElementById("myChart").getContext("2d");
         let myChart = new Chart(ctx, {
@@ -1697,7 +1672,7 @@ $(function () {
                         'rgba(255,99,132,1)',
 
                     ],
-                    backgroundColor : 'rgba(0,0,0,0.1)',
+                    backgroundColor: 'rgba(0,0,0,0.1)',
                     borderWidth: 1
                 },
                     {
@@ -1707,7 +1682,7 @@ $(function () {
                             'rgba(101,140,223,1)',
 
                         ],
-                        backgroundColor : false,
+                        backgroundColor: false,
                         borderWidth: 1
                     }
                 ]
@@ -1724,14 +1699,12 @@ $(function () {
     }
 
 
-
     Dropzone.options.importDropzone = {
-        dictDefaultMessage : "<i class=\"file huge excel outline icon\"></i>Deposer le fichiers .csv ou <span class='button huge ui'>Choisir un fichier</span>",
+        dictDefaultMessage: "<i class=\"file huge excel outline icon\"></i>Deposer le fichiers .csv ou <span class='button huge ui'>Choisir un fichier</span>",
         thumbnailWidth: 400,
         thumbnailHeight: 100,
 
     };
-
 
 
     $('#datetimepicker1').datetimepicker({
@@ -1748,9 +1721,6 @@ $(function () {
         $('#counting-note').html(counter.all + "/500");
 
     })
-
-
-
 
 
 });

@@ -18,10 +18,14 @@
 
                             <div class="column">
 
-                                <button class="ui button green" id="btn-new-cl" role="button">Ajouter un nouveau client</button>
+                                <button class="ui button green" id="btn-new-cl" role="button">Ajouter un nouveau
+                                    client
+                                </button>
 
 
-                                <a href="{{ path('export-client', { "centrale" : app.request.query.get('c') }) }}" class="ui button" id="btn-export-cl" role="button"><i class="file excel outline icon"></i> Exporter .csv</a>
+                                <a href="{{ path('export-client', { "centrale" : app.request.query.get('c') }) }}"
+                                   class="ui button" id="btn-export-cl" role="button"><i
+                                            class="file excel outline icon"></i> Exporter .csv</a>
                             </div>
                         </div>
                     </div>
@@ -91,29 +95,55 @@
 
                             <table id="client-all" class="display hover" cellspacing="0" width="100%">
                                 <thead>
-                                <tr>
-                                    <th>Réf</th>
-                                    <th>Centrale</th>
-                                    <th>Raison Sociale</th>
-                                    <th>Groupe</th>
-                                    <th>Adresse</th>
-                                    <th>Tel</th>
-                                    <th>Siret</th>
-                                    <th>Etat</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>Réf</th>
-                                    <th>Centrale</th>
-                                    <th>Raison Sociale</th>
-                                    <th>Groupe</th>
-                                    <th>Adresse</th>
-                                    <th>Tel</th>
-                                    <th>Siret</th>
-                                    <th>Etat</th>
-                                </tr>
-                                </tfoot>
+
+                                {% if centrale == "all" %}
+                                    <tr>
+                                        <th>Réf</th>
+                                        <th>Centrale</th>
+                                        <th>Raison Sociale</th>
+                                        <th>Adresse</th>
+                                        <th>Tel</th>
+                                        <th>Siret</th>
+                                        <th>Etat</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Réf</th>
+                                        <th>Centrale</th>
+                                        <th>Raison Sociale</th>
+                                        <th>Adresse</th>
+                                        <th>Tel</th>
+                                        <th>Siret</th>
+                                        <th>Etat</th>
+                                    </tr>
+                                    </tfoot>
+                                    {% else %}
+                                        <tr>
+                                            <th>Réf</th>
+                                            <th>Centrale</th>
+                                            <th>Raison Sociale</th>
+                                            <th>Groupe</th>
+                                            <th>Adresse</th>
+                                            <th>Tel</th>
+                                            <th>Siret</th>
+                                            <th>Etat</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Réf</th>
+                                            <th>Centrale</th>
+                                            <th>Raison Sociale</th>
+                                            <th>Groupe</th>
+                                            <th>Adresse</th>
+                                            <th>Tel</th>
+                                            <th>Siret</th>
+                                            <th>Etat</th>
+                                        </tr>
+                                        </tfoot>
+                                {% endif %}
+
 
                                 <tbody>
                                 {% for cl in client %}
