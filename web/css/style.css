@@ -809,3 +809,7 @@ p.numero-bruneau{
     min-height: 180px;
     border: 1px solid #e5e5e5;
 }
+
+.fixed_height_585{
+    height: 585px;
+}
