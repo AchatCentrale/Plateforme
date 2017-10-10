@@ -69,15 +69,15 @@
             <div class="row">
 
 
-                <!-- Start to do list -->
-                <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="x_panel">
+
+                <div class="col-md-4 col-sm-12 col-xs-12  ">
+                    <div class="x_panel " >
                         <div class="x_title">
                             <h2>Actions à faire
                             </h2>
                             <div class="clearfix"></div>
                         </div>
-                        <div class="x_content">
+                        <div class="x_content ">
                             {% if task %}
 
                                 <div class="">
@@ -100,8 +100,48 @@
                             {% endif %}
                         </div>
                     </div>
+
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Dernières notes
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content ">
+                            {% if note %}
+
+                                <div class="">
+                                    <ul class="to_do">
+                                        {% for n in note %}
+
+                                            <li data-id="{{ n['CN_ID'] }}" data-centrale="{{ n['SO_ID'] }}" class="cursor detail-tache-home">
+                                                <p><b>{{ n['INS_DATE'] | dateString }}</b> --  {{ n['CN_NOTE'] | raw |  convert_encoding('UTF-8', 'Windows-1252') | limitLength }} </p>
+                                            </li>
+                                        {% endfor %}
+
+
+
+                                    </ul>
+                                </div>
+
+                            {% else %}
+                                <h5>Pas de notes pour le moment</h5>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>RDV</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content ">
+
+                        </div>
+                    </div>
+
                 </div>
-                <!-- End to do list -->
+
 
 
                 <div class="col-md-6 col-sm-12 col-xs-12">

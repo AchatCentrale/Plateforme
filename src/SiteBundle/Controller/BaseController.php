@@ -70,7 +70,7 @@ class BaseController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_gccp_connection');
 
-        $sql = "SELECT *
+        $sql = "SELECT TOP 5 *
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE US_ID = :usId
                 AND CLA_STATUS <> 10
@@ -83,6 +83,16 @@ class BaseController extends Controller
         $task = $stmt->fetchAll();
 
 
+        $sqlNote = "SELECT TOP 5 *
+                FROM CENTRALE_ACHAT.dbo.Vue_All_Notes
+                ORDER BY INS_DATE DESC
+                ";
+
+        $stmtNote = $conn->prepare($sqlNote);
+        $stmtNote->execute();
+        $notes = $stmtNote->fetchAll();
+
+
 
 
         $sqlAllClients = "SELECT DISTINCT *
@@ -92,14 +102,15 @@ class BaseController extends Controller
         $stmtAllClients->execute();
         $clients = $stmtAllClients->fetchAll();
 
-
+        dump($notes);
 
         return $this->render(
             '@Site/Base/home.html.twig',
             [
                 'task' => $task,
                 "dataCount" => $dataCount,
-                "clients" => $clients
+                "clients" => $clients,
+                "note" => $notes
 
             ]
         );
