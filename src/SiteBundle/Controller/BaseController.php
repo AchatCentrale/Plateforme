@@ -102,7 +102,6 @@ class BaseController extends Controller
         $stmtAllClients->execute();
         $clients = $stmtAllClients->fetchAll();
 
-        dump($notes);
 
         return $this->render(
             '@Site/Base/home.html.twig',
