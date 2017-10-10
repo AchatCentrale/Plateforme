@@ -26,7 +26,7 @@
                                     </div>
                                 </div>
                                 <div class="extra text">
-                                    {{ fe.meSujet | convert_encoding('UTF-8', 'Windows-1252') }}
+                                    {{ fe.meSujet }}
 
                                 </div>
                                 <div class="meta">
@@ -63,7 +63,7 @@
 
                     {% endif %}
 
-                    {% if fe |getClass == "ClientsTaches" %}
+                    {% if fe | getClass == "ClientsTaches" %}
                         <div class="event">
                             <div>
                                 <img class="ui tiny circular image avatar-feed  {% if fe.claStatus == 10 %}round-border-tache{% endif %}"
