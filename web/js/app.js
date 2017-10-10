@@ -1741,7 +1741,11 @@ $(function () {
 
     const area = document.getElementById('add-note');
     Countable.on(area, counter => {
-        console.log(counter)
+        console.log(counter.all)
+
+
+        $('#counting-note').html('');
+        $('#counting-note').html(counter.all + "/500");
 
     })
 
