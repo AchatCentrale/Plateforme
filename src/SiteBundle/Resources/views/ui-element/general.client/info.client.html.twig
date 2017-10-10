@@ -420,16 +420,23 @@
                                        {#Notes_client#}
                                        <div role="tabpanel" class="tab-pane fade" id="tab_content2"
                                             aria-labelledby="profile-tab">
-                                           <div class="ui equal width grid" style="margin-top: 30px">
-                                               <div class="equal width row">
+                                           <div class="ui equal width grid container " style="margin-top: 30px">
+                                               <div class="equal width row ">
                                                    <div class="column">
                                                        <div class="note-left">
                                                            <div class="input-group">
+                                                               <p id="counting-not">0/500</p>
+
                                                                <input type="text" class="form-control" id="add-note"
                                                                       placeholder="Consigner une note pour le client {{ client[0].clRaisonsoc }}">
+
                                                                <span class="input-group-btn">
-                                                        <button class="btn btn-secondar btn-success add-note"
-                                                                type="button">Enregistrer</button>
+
+
+                                                                <button class="btn btn-secondar btn-success add-note" type="button">Enregistrer</button>
+
+
+
                                                     </span>
                                                            </div>
                                                            <br>

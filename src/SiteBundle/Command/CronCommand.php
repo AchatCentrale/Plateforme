@@ -16,7 +16,7 @@ class CronCommand extends ContainerAwareCommand
         $this->setName('cron');
 
 // On set la description
-        $this->setDescription("Permet juste de faire un test dans la console");
+        $this->setDescription("Liste des commandes pour cron");
 
 // On set l'aide
         $this->setHelp("Je serai affiche si on lance la commande app/console app:test -h");
@@ -63,6 +63,18 @@ class CronCommand extends ContainerAwareCommand
 
 
                 break;
+
+            case 'rdv':
+
+                $message = \Swift_Message::newInstance()
+                    ->setSubject("test")
+                    ->setFrom("jb@achatcentrale.fr")
+                    ->setTo("Jbagostin@gmail.com")
+                    ->setBody('test')
+                ;
+                $this->getContainer()->get('mailer')->send($message);
+
+                $text = "Email sent!";
         }
     }
 

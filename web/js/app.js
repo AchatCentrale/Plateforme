@@ -1739,6 +1739,12 @@ $(function () {
     });
 
 
+    const area = document.getElementById('add-note');
+    Countable.on(area, counter => {
+        console.log(counter)
+
+    })
+
 
 
 
