@@ -302,7 +302,6 @@ class CrmFilter extends \Twig_Extension
     public function isEmpty($input)
     {
 
-
         if (!isset($input)) {
             return "À remplir";
         } else {
@@ -314,8 +313,13 @@ class CrmFilter extends \Twig_Extension
     public function phoneFilter($number)
     {
 
+        if (empty($number)){
+            return "À remplir";
+        }
 
-        if (strlen($number) == 10) {
+
+
+        if (strlen($number) == 10 ) {
             return chunk_split($number, 2, ' ');
         } else {
             return $number;
