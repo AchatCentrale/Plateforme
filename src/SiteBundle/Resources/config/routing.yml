@@ -204,6 +204,6 @@ notification-relance-task:
     methods: POST
 
 notification-notif-rdv:
-    path: /notifcation/relance/rdv
+    path: /notification/relance/rdv
     defaults: {_controller: SiteBundle:Notification:sendRdvRelance}
     methods: POST
