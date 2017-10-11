@@ -29,12 +29,11 @@ class NotificationController extends Controller
         $mailer = $this->get('site.service.mailer');
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-        $sql = "SELECT
-                      *
-                    FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
-                      INNER JOIN CENTRALE_ACHAT.dbo.USERS ON USERS.US_ID = Vue_All_Taches.US_ID
-                    WHERE Vue_All_Taches.CLA_STATUS = 0
-                    AND Vue_All_Taches.INS_DATE < GETDATE() - 3";
+        $sql = "SELECT *
+                FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                  LEFT OUTER JOIN CENTRALE_ACHAT.dbo.USERS ON CENTRALE_ACHAT.dbo.USERS.US_ID = Vue_All_Taches.US_ID
+                WHERE Vue_All_Taches.CLA_STATUS = 0
+                      AND Vue_All_Taches.INS_DATE < GETDATE() - 3";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $task = $stmt->fetchAll();
@@ -43,7 +42,6 @@ class NotificationController extends Controller
 
 
             $result = $mailer->RelanceTaskNotification($t['US_MAIL'], $t['CLA_NOM'], $t['CLA_DESCR'], $t['INS_DATE'], $t['CLA_ECHEANCE'], $t['US_NOM'], $t['US_PRENOM']);
-
 
 
         }

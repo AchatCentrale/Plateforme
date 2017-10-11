@@ -125,9 +125,9 @@
 
                         <h2> Bonjour {{ userPrenom }}</h2>
 
-                        <p>Nom de la tâche : {{ nom }}</p>
-                        <p>Description de la tâche : {{ desc }}</p>
-                        <p>Créée il y a :  {{ insDate | fromNowString }}</p>
+                        <p><b>Nom de la tâche :</b> {{ nom }}</p>
+                        <p><b>Description de la tâche :</b> {{ desc }}</p>
+                        <p>Créée {{ insDate | fromNowString }}</p>
                         <p>Se termine le :  {{ echeance | dateString }}</p>
 
                         <table>
