@@ -1006,7 +1006,7 @@ $(function () {
                             <div class="one column row">
                                 <div class="column">
                                     <h5>Description de la tâche a éfféctuer :</h5>
-                                    <p class="task-description"><h4>${data.nom}</h4></p>
+                                    <p class="task-description">${data.nom}</p>
                                 </div>
     
                             </div>
