@@ -177,11 +177,11 @@ class Mailer
     public function RdvRelanceNotification($to, $nom, $descr, $insDate, $echeance, $userNom, $userPrenom)
     {
 
-        $subject = "Vous avez un rendez-vous de prévu";
+        $subject = "Vous avez un rendez-vous de prévu ⏱";
 
 
 
-        $template = 'SiteBundle:mail:RelanceTaskNotification.html.twig';
+        $template = 'SiteBundle:mail:RdvMailNotification.html.twig';
         $body = $this->templating->render($template, [
             'nom' => $nom,
             'desc' => $descr,
