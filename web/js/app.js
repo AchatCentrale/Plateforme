@@ -976,7 +976,7 @@ $(function () {
         let aidyCentrale = Number(idCentrale);
 
 
-        let url = CURRENT_URL + "taches/detail/" + aidyCentrale + "/" + aidy;
+        let url = CURRENT_URL + "note/detail/" + aidyCentrale + "/" + aidy;
         console.log(url);
 
         $.ajax({
