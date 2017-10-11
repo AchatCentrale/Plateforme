@@ -1078,7 +1078,7 @@ $(function () {
                 let tpl = `<div class="ui centered  grid">
                             <div class="one column row">
                                 <div class="column">
-                                    <h5>Description de la tâche a éfféctuer :</h5>
+                                    <h5>Description du rendez vous</h5>
                                     <p class="task-description">${data.nom}</p>
                                 </div>
     
@@ -1086,6 +1086,7 @@ $(function () {
                             <div class="two column row">
                                 <div class="column">
                                     <h4>Créée ${data.ins_date} </h4>
+                                    <h4>Pour le  ${data.echeance} </h4>
                                 </div>
                                
                             </div>

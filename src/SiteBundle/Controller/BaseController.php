@@ -1958,7 +1958,8 @@ class BaseController extends Controller
             $data = [
                 "id" => $result[0]['CLA_ID'],
                 "nom" => $result[0]['CLA_DESCR'],
-                "ins_date" => $result[0]['INS_DATE']
+                "ins_date" => $result[0]['INS_DATE'],
+                "echeance" => $result[0]['CLA_ECHEANCE']
             ];
             $response = new JsonResponse($data);
             $response->headers->set('Content-Type', 'application/json');
