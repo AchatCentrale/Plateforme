@@ -89,7 +89,6 @@ detail-note:
 detail-rdv:
     path: /rdv/detail/{idCentrale}/{id}
     defaults: {_controller: SiteBundle:Base:detailRdv}
-    methods: POST
 
 
 
