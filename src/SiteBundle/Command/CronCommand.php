@@ -66,15 +66,11 @@ class CronCommand extends ContainerAwareCommand
 
             case 'test':
 
-                $message = \Swift_Message::newInstance()
-                    ->setSubject("test")
-                    ->setFrom("jb@achatcentrale.fr")
-                    ->setTo("Jbagostin@gmail.com")
-                    ->setBody('test')
-                ;
-                $this->getContainer()->get('mailer')->send($message);
+                $result = $mailer->sendTestMail();
 
-                $text = "Email sent!";
+                $output->write("Normalement c'est envoyé ");
+                break;
+
         }
     }
 
