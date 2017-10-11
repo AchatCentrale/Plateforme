@@ -992,7 +992,7 @@ $(function () {
                 $('.modal-title-task-home').empty();
                 el.empty();
 
-                let title = `<p>Tâche #${data.id}</p>`;
+                let title = `<p>Note #${data.id}</p>`;
 
                 $('.modal-title-task-home').append(title);
 
@@ -1012,7 +1012,7 @@ $(function () {
                                     <h4>Créée ${data.ins_date} </h4>
                                 </div>
                                  <div class="column">
-                                    <button class="ui button modifier-note-home">Modifier la note</button>
+                                    <button class="ui button positive modifier-note-home">Modifier la note</button>
                                 </div>
                                
                             </div>
@@ -1044,7 +1044,7 @@ $(function () {
                         '    <label>Modifier la note</label>\n' +
                         '    <textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">Eu Mme Guedour hier, je lui ai présenté la plateforme et renvoyé les codes Bruneau ainsi que ceux de la plateforme.</textarea>\n' +
                         '  </div>\n' +
-                        '<button class="ui button modifier-note-home">Modifier la note</button>\n' +
+                        '<button class="ui button modifier-note-home">Enregistrer</button>\n' +
                         '</div>');
 
                 });
