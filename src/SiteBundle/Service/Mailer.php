@@ -44,7 +44,6 @@ class Mailer
 
     public function sendTestMail(){
         $this->sendMessage("jb@achatcentrale.fr", "test message mail", "Ceci est un test");
-        return;
     }
 
 

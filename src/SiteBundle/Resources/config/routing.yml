@@ -192,3 +192,8 @@ consomnation-index:
     path: /client/{id}/{centrale}/consomnation
     defaults: {_controller: SiteBundle:Consomnation:index}
 
+
+notification-test:
+    path: /notification/test
+    defaults: {_controller: SiteBundle:Notification:test}
+    methods: POST
