@@ -965,6 +965,141 @@ $(function () {
 
     });
 
+
+
+    $('.detail-note-home').on('click', function (e) {
+
+        let id = $(this).data('id');
+        let idCentrale = $(this).data('centrale');
+
+        let aidy = Number(id);
+        let aidyCentrale = Number(idCentrale);
+
+
+        let url = CURRENT_URL + "taches/detail/" + aidyCentrale + "/" + aidy;
+        console.log(url);
+
+        $.ajax({
+
+            // Adresse à laquelle la requête est envoyée
+            url: url,
+
+            // Le délai maximun en millisecondes de traitement de la demande
+            timeout: 4000,
+
+            // La fonction à apeller si la requête aboutie
+            success: function (data) {
+
+                let el = $('.body-task-detail-home');
+                $('.modal-title-task-home').empty();
+                el.empty();
+
+                let title = `<p>Tâche #${data.id}</p>`;
+
+                $('.modal-title-task-home').append(title);
+
+
+                console.log(data);
+
+
+                let tpl = `<h4>${data.nom}</h4>
+              <div class="detail-tache-etat">
+                      <div class="state-tache-detail">
+                            ${ stateTask(data.statut) }
+                        </div>
+                        <div class="change-statut-tache">
+                      
+                          <button class="ui button green" >Je suis en train de la faire ?</button>
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+                    <div class="ui centered  grid">
+                           
+                            <div class="one column row">
+                                <div class="column">
+                                    <p>Assigné à : </p> 
+                                    <a class="ui image label">
+                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                      ${data.user}
+                                    </a>
+                                </div>
+    
+                            </div>
+                            <div class="one column row">
+                                <div class="column">
+                                    <h5>Description de la tâche a éfféctuer :</h5>
+                                    <p class="task-description">${data.descr}</p>
+                                </div>
+    
+                            </div>
+                            <div class="two column row">
+                                <div class="column">
+                                    <h4>Créée ${data.creation} </h4>
+                                </div>
+                                <div class="column">
+                                    <h4>A terminer avant le ${data.echeance}</h4>
+                                </div>
+                            </div>
+                            <div class="three column row">
+                               
+                               
+                                
+                                   
+                                </div>
+                            
+                               <div class="three column  row">
+                              
+                               <div class="update-action">
+                                        <a class="ui basic button" href="#">Modifier l'action</a>
+                                  </div>
+                                  
+                                  
+                                  
+                               <div class="archive-action">
+                                    <a class="ui basic button" href="/taches/archive/${data.id}/${data.idCentrale}"><i class="archive icon"></i>
+                                    Archiver l'action</a>
+                               </div>
+                                  
+                               <div class="archive-action">
+                                        <a class="ui red basic button" href="/taches/delete/${data.id}/${data.idCentrale}"><i class="delete icon"></i>
+                                           Supprimer l'action</a>
+                                   </div>
+                                   
+                               
+                              
+                            </div>
+                            
+                            
+                               
+                            </div>
+                            <div class="suite-task">
+                            
+                            </div>
+                                                       
+                            
+                    </div>`;
+
+
+                el.append(tpl);
+
+
+                $('#modal-detail-task-home').modal('show')
+
+
+            },
+            error: function (e) {
+                console.error(e);
+            }
+
+
+        });
+
+
+    });
+
+
+
     function showHideEl(element) {
 
         if ($(element).is(":visible")) {

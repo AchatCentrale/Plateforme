@@ -78,6 +78,15 @@ taches_home:
 detail-task:
     path:   /taches/detail/{idCentrale}/{id}
     defaults: {_controller: SiteBundle:Tache:DetailTask}
+
+
+detail-note:
+    path: /note/detail/{idCentrale}/{id}
+    defaults: {_controller: SiteBundle:Base:detailNote}
+
+
+
+
 new-task:
     path:   /taches/new
     defaults: {_controller: SiteBundle:Tache:NewTask}

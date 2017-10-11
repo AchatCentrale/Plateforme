@@ -114,7 +114,7 @@
                                     <ul class="to_do">
                                         {% for n in note %}
 
-                                            <li data-id="{{ n['CN_ID'] }}" data-centrale="{{ n['SO_ID'] }}" class="cursor detail-tache-home">
+                                            <li data-id="{{ n['CN_ID'] }}" data-centrale="{{ n['SO_ID'] }}" class="cursor detail-note-home">
                                                 <p><b>{{ n['INS_DATE'] | dateString }}</b> --  {{ n['CN_NOTE'] | limitLength }} </p>
                                             </li>
                                         {% endfor %}

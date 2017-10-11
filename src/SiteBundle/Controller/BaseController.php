@@ -1906,6 +1906,45 @@ class BaseController extends Controller
 
     }
 
+    public function detailNoteAction(Request $request, $id, $idCentrale)
+    {
+
+        //Achatcentrale
+        \Moment\Moment::setLocale('fr_FR');
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "SELECT * FROM Vue_All_Notes WHERE CN_ID = :id AND SO_ID = :centrale";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':centrale', $idCentrale);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        if ($result) {
+
+            $data = [
+                "id" => $result['CN_ID'],
+                "nom" => $result['CN_NOTE'],
+                "ins_date" => $result['INS_DATE']
+            ];
+            $response = new JsonResponse($data);
+            $response->headers->set('Content-Type', 'application/json');
+            $response->setStatusCode(200);
+            return $response;
+        } else {
+            return new JsonResponse('no taches', 200);
+        }
+
+
+
+
+
+
+    }
+
     public function ClientFacturationAction(Request $request, $id, $centrale)
     {
 
@@ -2438,21 +2477,35 @@ class BaseController extends Controller
 
         switch ($centrale) {
             case 'roc':
-                $stmt = $conn->prepare('SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Clients WHERE SO_ID = 6');
-                $stmt->execute();
-                $response = new StreamedResponse();
-                $response->setStatusCode(200);
-                $response->headers->set('Content-Type', 'text/csv');
-                $response->setCallback(function () use ($stmt) {
-                    $config = new ExporterConfig();
-                    $config
-                        ->setDelimiter(";")
-                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
-                    ;
-                    $exporter = new Exporter($config);
-                    $exporter->export('php://output', $stmt->fetchAll());
+
+
+
+                // récupère le conteneur de services pour le passer à la closure
+                $container = $this->container;
+                $response = new StreamedResponse(function() use($container) {
+                    $conn = $this->get('database_connection');
+                    $stmt = $conn->prepare('SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Clients WHERE SO_ID = 6');
+                    $stmt->execute();
+                    // La méthode getExportQuery retourne une Query qui est utilisée pour récupérer
+                    // tous les objets (lignes du fichier csv) dont vous avez besoin. La méthode iterate
+                    // est utilisée pour limiter la consommation de mémoire
+                    $results = $
+                    $handle = fopen('php://output', 'r+');
+
+                    while (false !== ($row = $results->next())) {
+                        // ajoute une ligne au fichier csv. Vous devrez implémenter la méthode toArray()
+                        // pour transformer votre objet en tableau
+                        fputcsv($handle, $row[0]->toArray());
+                        // utilisé pour limiter la consommation de mémoire
+                        $em->detach($row[0]);
+                    }
+
+                    fclose($handle);
                 });
-                $response->send();
+
+                $response->headers->set('Content-Type', 'application/force-download');
+                $response->headers->set('Content-Disposition','attachment; filename="export.csv"');
+
                 return $response;
                 break;
             case 'fun':
