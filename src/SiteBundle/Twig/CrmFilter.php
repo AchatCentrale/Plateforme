@@ -407,20 +407,15 @@ class CrmFilter extends \Twig_Extension
 
         switch ($priorite) {
             case 1:
-                $tpl = "<div class=\"ui medium red label\">A faire au plus vite</div>";
+                $tpl = "<div class=\"ui medium red label\">Important</div>";
                 return $tpl;
             case 2:
-                $tpl = "<div class=\"ui medium orange label\">Important</div>";
+                $tpl = "<div class=\"ui medium orange label\">Moyen</div>";
                 return $tpl;
             case 3:
-                $tpl = "<div class=\"ui medium yellow label\">Moyen</div>";
-                return $tpl;
-            case 4:
                 $tpl = "<div class=\"ui medium green label\">Faible</div>";
                 return $tpl;
-            case 5:
-                $tpl = "<div class=\"ui medium blue label\">Un jour peut être</div>";
-                return $tpl;
+
 
 
         }
