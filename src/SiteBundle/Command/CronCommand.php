@@ -64,7 +64,7 @@ class CronCommand extends ContainerAwareCommand
 
                 break;
 
-            case 'rdv':
+            case 'test':
 
                 $message = \Swift_Message::newInstance()
                     ->setSubject("test")
