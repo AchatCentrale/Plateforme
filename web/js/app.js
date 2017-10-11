@@ -1041,9 +1041,10 @@ $(function () {
 
                     $('.note-content-home').html('<div class="ui form">\n' +
                         '<div class="field">\n' +
-                        '    <label>Text</label>\n' +
+                        '    <label>Modifier la note</label>\n' +
                         '    <textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">Eu Mme Guedour hier, je lui ai présenté la plateforme et renvoyé les codes Bruneau ainsi que ceux de la plateforme.</textarea>\n' +
                         '  </div>\n' +
+                        '<button class="ui button modifier-note-home">Modifier la note</button>\n' +
                         '</div>');
 
                 });
