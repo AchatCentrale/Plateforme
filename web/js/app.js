@@ -1034,12 +1034,12 @@ $(function () {
                     console.log(e);
                     console.log('modifier-note-home');
 
-                    $('.note-description').html('');
+                    $('.note-content-home').html('');
 
 
 
 
-                    // $('.note-description').html('<div class="ui form">\n' +
+                    // $('.note-content-home').html('<div class="ui form">\n' +
                     //     '<div class="field">\n' +
                     //     '    <label>Text</label>\n' +
                     //     '    <textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">Eu Mme Guedour hier, je lui ai présenté la plateforme et renvoyé les codes Bruneau ainsi que ceux de la plateforme.</textarea>\n' +
