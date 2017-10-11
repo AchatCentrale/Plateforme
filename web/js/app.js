@@ -1000,6 +1000,8 @@ $(function () {
                 console.log(data);
 
 
+
+
                 let tpl = `<div class="ui centered  grid">
                             <div class="one column row">
                                 <div class="column note-content-home">
@@ -1014,7 +1016,7 @@ $(function () {
                                  <div class="column">
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
                                 </div>
-                               <a href="http://crm.achatcentrale.fr/client/${data.cl_id}/ACHAT_CENTRALE/general">Accedez au client</a>
+                               <a href="http://crm.achatcentrale.fr/client/${data.cl_id}/${aidyCentrale}/general">Accedez au client</a>
                             </div>
                      cl_id
                             
