@@ -6,110 +6,26 @@
 
 {% block body %}
 
-    <div class="row">
 
 
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="x_panel tile ">
-                <div class="x_content">
+    <table style="width:100%">
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Age</th>
+        </tr>
+        <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+        </tr>
+        <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+        </tr>
+    </table>
 
-                    <h1><i class="shop  icon"></i> Consommations</h1>
-                    <div class="clearfix"></div>
-                    <div class="ui divider"></div>
-
-
-                    <div class="ui grid">
-                        <div class="eight wide column">
-
-                            <div class="container-conso-logo">
-                                <div class="ui grid">
-                                    <div class="two wide column">
-                                        <img src="{{ asset('images/logo_bruneau.png') }}" alt="">
-                                    </div>
-
-                                    <div class="one wide column">
-                                        <div class="label-consomnateur green"></div>
-                                    </div>
-                                    <div class="three wide column">
-                                        <p class="numero-bruneau">n° 464484842</p>
-                                    </div>
-
-                                    <div class="ten wide column">
-
-
-                                        <div class="ui grid">
-                                            <div class="six wide column">
-                                               Du&nbsp;<input type="text" id="date_debut" data-format="MM-YYYY" data-template="MMM YYYY" name="date_debut" >
-                                            </div>
-                                            <div class="six wide column">
-                                               Au&nbsp;<input type="text" id="date_fin" data-format="MM-YYYY" data-template="MMM YYYY" name="date_fin" >
-
-                                            </div>
-                                            <div class="four wide column">
-                                                <button class="ui btn-periode fluid button">
-                                                    Voir
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <table class="ui celled table">
-                                <thead>
-                                <tr>
-                                    <th>Tarif public</th>
-                                    <th>Tarif AC</th>
-                                    <th>Economie</th>
-                                    <th>Economie %</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-                                <tr>
-                                    <td>60 €</td>
-                                    <td>40 €</td>
-                                    <td>20 €</td>
-                                    <td>33 %</td>
-                                </tr>
-                                </tbody>
-
-                            </table>
-
-
-                        </div>
-                        <div class="eight wide column">
-
-
-                        <h2>Importer consomnation</h2>
-
-
-
-                            <div class="zone-import-conso" id="dropzone-import">
-
-                                <form action="/file-upload" id="import-dropzone" class="dropzone">
-                                    <div class="fallback">
-                                        <input name="file" type="file" multiple />
-                                    </div>
-                                </form>
-
-                            </div>
-
-
-
-                        </div>
-
-                    </div>
-
-
-                </div>
-            </div>
-
-        </div>
-    </div>
 
 
 
