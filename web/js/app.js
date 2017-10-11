@@ -1013,7 +1013,7 @@ $(function () {
                                     <h4>Créée ${data.ins_date} </h4>
                                 </div>
                                  <div class="column">
-                                    <button class="ui button">Modifier la note</button>
+                                    <button class="ui button modifier-note-home">Modifier la note</button>
                                 </div>
                                
                             </div>
@@ -1877,6 +1877,12 @@ $(function () {
         $('#counting-note').html(counter.all + "/500");
 
     })
+
+
+
+    $('.modifier-note-home').on('click', function (e) {
+        console.log(e);
+    });
 
 
 });
