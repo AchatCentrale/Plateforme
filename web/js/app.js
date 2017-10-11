@@ -869,84 +869,6 @@ $(function () {
                 console.log(data);
 
 
-                let tpl = `<div class="ui centered  grid">
-                            <div class="one column row">
-                                <div class="column">
-                                    <h5>Description de la tâche a éfféctuer :</h5>
-                                    <p class="task-description">${data.nom}</p>
-                                </div>
-    
-                            </div>
-                            <div class="two column row">
-                                <div class="column">
-                                    <h4>Créée ${data.ins_date} </h4>
-                                </div>
-                               
-                            </div>
-                     
-                            
-                            
-                                          
-                            
-                    </div>`;
-
-
-                el.append(tpl);
-
-
-                $('#modal-detail-task-home').modal('show')
-
-
-            },
-            error: function (e) {
-                console.error(e);
-            }
-
-
-        });
-
-
-
-
-    });
-
-
-
-    $('.detail-note-home').on('click', function (e) {
-
-        let id = $(this).data('id');
-        let idCentrale = $(this).data('centrale');
-
-        let aidy = Number(id);
-        let aidyCentrale = Number(idCentrale);
-
-
-        let url = CURRENT_URL + "note/detail/" + aidyCentrale + "/" + aidy;
-        console.log(url);
-
-        $.ajax({
-
-            // Adresse à laquelle la requête est envoyée
-            url: url,
-
-            // Le délai maximun en millisecondes de traitement de la demande
-            timeout: 4000,
-
-            // La fonction à apeller si la requête aboutie
-            success: function (data) {
-
-                let el = $('.body-task-detail-home');
-                $('.modal-title-task-home').empty();
-                el.empty();
-
-                let title = `<p>Tâche #${data.id}</p>`;
-
-                $('.modal-title-task-home').append(title);
-
-
-                console.log(data);
-
-
                 let tpl = `<h4>${data.nom}</h4>
               <div class="detail-tache-etat">
                       <div class="state-tache-detail">
@@ -1022,6 +944,82 @@ $(function () {
                             
                             </div>
                                                        
+                            
+                    </div>`;
+
+
+                el.append(tpl);
+
+
+                $('#modal-detail-task-home').modal('show')
+
+
+            },
+            error: function (e) {
+                console.error(e);
+            }
+
+
+        });
+
+
+    });
+
+
+
+    $('.detail-note-home').on('click', function (e) {
+
+        let id = $(this).data('id');
+        let idCentrale = $(this).data('centrale');
+
+        let aidy = Number(id);
+        let aidyCentrale = Number(idCentrale);
+
+
+        let url = CURRENT_URL + "note/detail/" + aidyCentrale + "/" + aidy;
+        console.log(url);
+
+        $.ajax({
+
+            // Adresse à laquelle la requête est envoyée
+            url: url,
+
+            // Le délai maximun en millisecondes de traitement de la demande
+            timeout: 4000,
+
+            // La fonction à apeller si la requête aboutie
+            success: function (data) {
+
+                let el = $('.body-task-detail-home');
+                $('.modal-title-task-home').empty();
+                el.empty();
+
+                let title = `<p>Tâche #${data.id}</p>`;
+
+                $('.modal-title-task-home').append(title);
+
+
+                console.log(data);
+
+
+                let tpl = `<div class="ui centered  grid">
+                            <div class="one column row">
+                                <div class="column">
+                                    <h5>Description de la tâche a éfféctuer :</h5>
+                                    <p class="task-description">${data.nom}</p>
+                                </div>
+    
+                            </div>
+                            <div class="two column row">
+                                <div class="column">
+                                    <h4>Créée ${data.ins_date} </h4>
+                                </div>
+                               
+                            </div>
+                     
+                            
+                            
+                                          
                             
                     </div>`;
 
