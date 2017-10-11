@@ -1956,8 +1956,8 @@ class BaseController extends Controller
         if ($result) {
 
             $data = [
-                "id" => $result[0]['CN_ID'],
-                "nom" => $result[0]['CN_NOTE'],
+                "id" => $result[0]['CLA_ID'],
+                "nom" => $result[0]['CLA_DESCR'],
                 "ins_date" => $result[0]['INS_DATE']
             ];
             $response = new JsonResponse($data);
