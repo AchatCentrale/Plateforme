@@ -1926,9 +1926,9 @@ class BaseController extends Controller
         if ($result) {
 
             $data = [
-                "id" => $result['CN_ID'],
-                "nom" => $result['CN_NOTE'],
-                "ins_date" => $result['INS_DATE']
+                "id" => $result[0]['CN_ID'],
+                "nom" => $result[0]['CN_NOTE'],
+                "ins_date" => $result[0]['INS_DATE']
             ];
             $response = new JsonResponse($data);
             $response->headers->set('Content-Type', 'application/json');
