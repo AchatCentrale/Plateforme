@@ -1771,6 +1771,20 @@ $(function () {
 
     });
 
+
+
+
+
+
+    $('.modifier-note-home').on('click', function (e) {
+        console.log(e);
+        console.log('modifier-note-home');
+    });
+
+
+
+
+
     let d = new Date();
     console.log("0" + d.getMonth() + "-" + d.getUTCFullYear() + "");
 
@@ -1880,10 +1894,7 @@ $(function () {
 
 
 
-    $('.modifier-note-home').on('click', function (e) {
-        console.log(e);
-        console.log('modifier-note-home');
-    });
+
 
 
 });
