@@ -643,6 +643,7 @@ class BaseController extends Controller
 
         switch ($centrale) {
 
+            case 1:
             case "ACHAT_CENTRALE":
 
 
