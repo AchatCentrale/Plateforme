@@ -820,3 +820,7 @@ p.numero-bruneau{
 .fixed_height_585{
     height: 585px;
 }
+
+.task-date-creation p {
+    margin: 0px 0px;
+}
