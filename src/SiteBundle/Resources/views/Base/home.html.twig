@@ -236,7 +236,7 @@
                                     {% for r in rdv  %}
                                         <div class="item">
                                             <div class="content">
-                                                <a class="header">{{ r['CLA_NOM'] }}</a>
+                                                <a data-id="{{ r['CLA_ID'] }}" data-centrale="{{ r['SO_ID'] }}" class="header detail-rdv-home">{{ r['CLA_NOM'] }}</a>
                                                 <div class="description">Le {{ r['CLA_ECHEANCE'] | dateString }}</div>
                                             </div>
                                         </div>

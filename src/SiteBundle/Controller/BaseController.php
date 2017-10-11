@@ -1908,10 +1908,6 @@ class BaseController extends Controller
 
     public function detailNoteAction(Request $request, $id, $idCentrale)
     {
-
-        //Achatcentrale
-        \Moment\Moment::setLocale('fr_FR');
-
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Notes WHERE Vue_All_Notes.CN_ID = :id AND Vue_All_Notes.SO_ID = :centrale";
@@ -1938,12 +1934,39 @@ class BaseController extends Controller
         } else {
             return new JsonResponse('no taches', 200);
         }
+    }
+
+    public function detailRdvAction(Request $request, $id, $idCentrale)
+    {
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                WHERE Vue_All_Taches.CLA_ID = :id
+                AND Vue_All_Taches.SO_ID = :centrale
+                AND CLA_TYPE = 5";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':centrale', $idCentrale);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
 
+        if ($result) {
 
-
-
-
+            $data = [
+                "id" => $result[0]['CN_ID'],
+                "nom" => $result[0]['CN_NOTE'],
+                "ins_date" => $result[0]['INS_DATE']
+            ];
+            $response = new JsonResponse($data);
+            $response->headers->set('Content-Type', 'application/json');
+            $response->setStatusCode(200);
+            return $response;
+        } else {
+            return new JsonResponse('no taches', 200);
+        }
     }
 
     public function ClientFacturationAction(Request $request, $id, $centrale)
