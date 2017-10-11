@@ -1028,7 +1028,13 @@ $(function () {
                 el.append(tpl);
 
 
+
                 $('#modal-detail-task-home').modal('show')
+
+                $('.modifier-note-home').on('click', function (e) {
+                    console.log(e);
+                    console.log('modifier-note-home');
+                });
 
 
             },
@@ -1038,6 +1044,9 @@ $(function () {
 
 
         });
+
+
+
 
     });
 
@@ -1577,6 +1586,10 @@ $(function () {
         }, 200)
 
     });
+
+
+
+
 //TODO: Quand on appuie sur la croix sa retire la raison sociale
     $('#label-client-task').on('click', function (e) {
         console.log(e);
@@ -1588,9 +1601,7 @@ $(function () {
 
     $('.ui.dropdown.user-update').dropdown();
 
-    $('#clients-dropdown')
-        .dropdown()
-    ;
+    $('#clients-dropdown').dropdown();
 
 
     $('.add-hastag-container').hide();
@@ -1776,10 +1787,6 @@ $(function () {
 
 
 
-    $('.modifier-note-home').on('click', function (e) {
-        console.log(e);
-        console.log('modifier-note-home');
-    });
 
 
 
