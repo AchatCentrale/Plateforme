@@ -1012,6 +1012,9 @@ $(function () {
                                 <div class="column">
                                     <h4>Créée ${data.ins_date} </h4>
                                 </div>
+                                 <div class="column">
+                                    <h4>Créée ${data.ins_date} </h4>
+                                </div>
                                
                             </div>
                      

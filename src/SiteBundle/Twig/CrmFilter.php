@@ -107,7 +107,7 @@ class CrmFilter extends \Twig_Extension
             switch ($centrale) {
                 case 'ROC_ECLERC':
                 case 'ROC ECLERC':
-                    return "<h3><span class=\"label large label-warning \">Centrale Roc-Eclerc</span></h3>";
+                    return "<h3><span class=\"label large yellow \">Centrale Roc-Eclerc</span></h3>";
                     break;
                 case 'CENTRALE_FUNECAP':
                 case 'CENTRALE FUNECAP':
