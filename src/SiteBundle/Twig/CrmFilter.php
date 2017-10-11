@@ -109,6 +109,7 @@ class CrmFilter extends \Twig_Extension
                 case 'ROC ECLERC':
                     return "<h3><span class=\"label large label-warning \">Centrale Roc-Eclerc</span></h3>";
                     break;
+                case 'CENTRALE_FUNECAP':
                 case 'CENTRALE FUNECAP':
                     return "<h3><span class=\"label large label-danger \">Centrale Funecap</span></h3>";
                     break;
