@@ -1002,9 +1002,8 @@ $(function () {
 
                 let tpl = `<div class="ui centered  grid">
                             <div class="one column row">
-                                <div class="column">
-                                    <h5>Description de la tâche a éfféctuer :</h5>
-                                    <p class="task-description">${data.nom}</p>
+                                <div class="column note-content-home">
+                                    <p class="note-description">${data.nom}</p>
                                 </div>
     
                             </div>
@@ -1034,6 +1033,15 @@ $(function () {
                 $('.modifier-note-home').on('click', function (e) {
                     console.log(e);
                     console.log('modifier-note-home');
+
+                    $('.note-description').html('');
+                    $('.note-description').html('<div class="ui form">\n' +
+                        '<div class="field">\n' +
+                        '    <label>Text</label>\n' +
+                        '    <textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">Eu Mme Guedour hier, je lui ai présenté la plateforme et renvoyé les codes Bruneau ainsi que ceux de la plateforme.</textarea>\n' +
+                        '  </div>\n' +
+                        '</div>');
+
                 });
 
 

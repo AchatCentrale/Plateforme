@@ -382,6 +382,13 @@ p.task-description {
     word-wrap: break-word;
 }
 
+p.note-description{
+    background-color: #e8e8e8;
+    padding: 10px 10px 70px 10px;
+    font-size: 14pt;
+    border-radius: 3px;
+    word-wrap: break-word;
+}
 
 .img-centrale-new-client{
     height: 75px;
