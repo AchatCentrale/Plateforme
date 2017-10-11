@@ -1925,7 +1925,8 @@ class BaseController extends Controller
             $data = [
                 "id" => $result[0]['CN_ID'],
                 "nom" => $result[0]['CN_NOTE'],
-                "ins_date" => $result[0]['INS_DATE']
+                "ins_date" => $result[0]['INS_DATE'],
+                "cl_id" => $result[0]['CL_ID']
             ];
             $response = new JsonResponse($data);
             $response->headers->set('Content-Type', 'application/json');

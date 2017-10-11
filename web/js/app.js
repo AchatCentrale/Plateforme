@@ -1014,9 +1014,9 @@ $(function () {
                                  <div class="column">
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
                                 </div>
-                               
+                               <a href="http://crm.achatcentrale.fr/client/${data.cl_id}/ACHAT_CENTRALE/general">Accedez au client</a>
                             </div>
-                     
+                     cl_id
                             
                             
                                           
