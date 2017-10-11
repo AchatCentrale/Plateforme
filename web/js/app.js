@@ -1013,7 +1013,7 @@ $(function () {
                                     <h4>Créée ${data.ins_date} </h4>
                                 </div>
                                  <div class="column">
-                                    <h4>Créée ${data.ins_date} </h4>
+                                    <button class="ui button">Modifier la note</button>
                                 </div>
                                
                             </div>
