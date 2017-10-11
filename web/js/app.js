@@ -1882,6 +1882,7 @@ $(function () {
 
     $('.modifier-note-home').on('click', function (e) {
         console.log(e);
+        console.log('modifier-note-home');
     });
 
 
