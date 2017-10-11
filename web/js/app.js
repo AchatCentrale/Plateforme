@@ -1012,11 +1012,9 @@ $(function () {
                             </div>
                             <div class="two column row">
                                 <div class="column">
-                                    <h4>Créée ${data.creation} </h4>
+                                    <h4>Créée ${data.ins_date} </h4>
                                 </div>
-                                <div class="column">
-                                    <h4>A terminer avant le ${data.echeance}</h4>
-                                </div>
+                               
                             </div>
                      
                             
