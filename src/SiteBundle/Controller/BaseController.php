@@ -1914,7 +1914,7 @@ class BaseController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $sql = "SELECT * FROM Vue_All_Notes WHERE CN_ID = :id AND SO_ID = :centrale";
+        $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Notes WHERE Vue_All_Notes.CN_ID = :id AND Vue_All_Notes.SO_ID = :centrale";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $id);
