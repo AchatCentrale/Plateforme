@@ -197,3 +197,7 @@ notification-test:
     path: /notification/test
     defaults: {_controller: SiteBundle:Notification:test}
     methods: POST
+
+notification-relance-task:
+    path: /notification/relance/tache
+    defaults: {_controller: SiteBundle:Notification:sendTaskRelance}

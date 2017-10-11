@@ -18,8 +18,6 @@ class CronCommand extends ContainerAwareCommand
 // On set la description
         $this->setDescription("Liste des commandes pour cron");
 
-// On set l'aide
-        $this->setHelp("Je serai affiche si on lance la commande app/console app:test -h");
 
 
         $this->addArgument('type', InputArgument::REQUIRED, "Quel cron executé");
