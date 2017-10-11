@@ -1002,34 +1002,11 @@ $(function () {
                 console.log(data);
 
 
-                let tpl = `<h4>${data.nom}</h4>
-              <div class="detail-tache-etat">
-                      <div class="state-tache-detail">
-                            ${ stateTask(data.statut) }
-                        </div>
-                        <div class="change-statut-tache">
-                      
-                          <button class="ui button green" >Je suis en train de la faire ?</button>
-                        </div>
-                    </div>
-                    </div>
-                    <br>
-                    <div class="ui centered  grid">
-                           
-                            <div class="one column row">
-                                <div class="column">
-                                    <p>Assigné à : </p> 
-                                    <a class="ui image label">
-                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
-                                      ${data.user}
-                                    </a>
-                                </div>
-    
-                            </div>
+                let tpl = `<div class="ui centered  grid">
                             <div class="one column row">
                                 <div class="column">
                                     <h5>Description de la tâche a éfféctuer :</h5>
-                                    <p class="task-description">${data.descr}</p>
+                                    <p class="task-description"><h4>${data.nom}</h4></p>
                                 </div>
     
                             </div>
@@ -1041,42 +1018,10 @@ $(function () {
                                     <h4>A terminer avant le ${data.echeance}</h4>
                                 </div>
                             </div>
-                            <div class="three column row">
-                               
-                               
-                                
-                                   
-                                </div>
-                            
-                               <div class="three column  row">
-                              
-                               <div class="update-action">
-                                        <a class="ui basic button" href="#">Modifier l'action</a>
-                                  </div>
-                                  
-                                  
-                                  
-                               <div class="archive-action">
-                                    <a class="ui basic button" href="/taches/archive/${data.id}/${data.idCentrale}"><i class="archive icon"></i>
-                                    Archiver l'action</a>
-                               </div>
-                                  
-                               <div class="archive-action">
-                                        <a class="ui red basic button" href="/taches/delete/${data.id}/${data.idCentrale}"><i class="delete icon"></i>
-                                           Supprimer l'action</a>
-                                   </div>
-                                   
-                               
-                              
-                            </div>
+                     
                             
                             
-                               
-                            </div>
-                            <div class="suite-task">
-                            
-                            </div>
-                                                       
+                                          
                             
                     </div>`;
 
