@@ -979,6 +979,7 @@ $(function () {
 
 
                 let tpl = `<div class="ui centered  grid">
+                              <h4>Créée ${data.ins_date} </h4>
                             <div class="one column row">
                                 <div class="column note-content-home">
                                     <p class="note-description">${data.nom}</p>
@@ -1564,9 +1565,6 @@ $(function () {
             }, 200)
 
     });
-
-
-
 
 //TODO: Quand on appuie sur la croix sa retire la raison sociale
     $('#label-client-task').on('click', function (e) {
