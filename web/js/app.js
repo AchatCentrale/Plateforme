@@ -1872,14 +1872,52 @@ $(function () {
 
 
 let data = [
-    ["", "Ford", "Tesla", "Toyota", "Honda"],
-    ["2017", 10, 11, 12, 13],
-    ["2018", 20, 11, 14, 13],
-    ["2019", 30, 15, 12, 13]
+    ["", "Fournisseurs", "Bruneau"],
+    ["janv-17", "CA", "1 120€" ],
+    ["janv-17", "ECO", "11 €"],
+    ["fev-17", "CA", "1 120€"],
+    ["fev-17", "ECO", "11 €"],
+    ["mars-17", "CA", "1 120€"],
+    ["mars-17", "ECO", "11 €"],
+    ["avr-17", "CA", "1 120€"],
+    ["avr-17", "ECO", "11 €"],
+    ["mai-17","CA", "1 120€"],
+    ["mai-17", "ECO", "11 €"],
+    ["juin-17", "CA", "1 120€"],
+    ["juin-17", "ECO", "11 €"],
+    ["juillet-17", "CA", "1 120€"],
+    ["juillet-17", "ECO", "11 €"],
+    ["aout-17", "CA", "1 120€"],
+    ["aout-17", "ECO", "11 €"],
+    ["sept-17", "CA", "1 120€"],
+    ["sept-17", "ECO", "11 €"],
+    ["oct-17", "CA", "1 120€"],
+    ["oct-17", "ECO", "11 €"],
+    ["nov-17", "CA", "1 120€"],
+    ["nov-17", "ECO", "11 €"],
+    ["dec-17", "CA", "1 120€"],
+    ["dec-17", "ECO", "11 €"],
 ];
 
 let container = document.getElementById('example');
 let hot = new Handsontable(container, {
     data: data,
-    colHeaders: true
+    rowHeaderWidth: 1200,
+    colHeaders: true,
+    contextMenu: true,
+    mergeCells: [
+        {row: 1, col: 0, rowspan: 2, colspan: 1},
+        {row: 3, col: 0, rowspan: 2, colspan: 1},
+        {row: 5, col: 0, rowspan: 2, colspan: 1},
+        {row: 7, col: 0, rowspan: 2, colspan: 1},
+        {row: 9, col: 0, rowspan: 2, colspan: 1},
+        {row: 11, col: 0, rowspan: 2, colspan: 1},
+        {row: 13, col: 0, rowspan: 2, colspan: 1},
+        {row: 15, col: 0, rowspan: 2, colspan: 1},
+        {row: 17, col: 0, rowspan: 2, colspan: 1},
+        {row: 19, col: 0, rowspan: 2, colspan: 1},
+        {row: 21, col: 0, rowspan: 2, colspan: 1},
+        {row: 23, col: 0, rowspan: 2, colspan: 1},
+
+    ]
 });
