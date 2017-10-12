@@ -1901,7 +1901,7 @@ let data = [
     ["Total", "ECO", "11478 €","584448 €"],
 ];
 
-let container = document.getElementById('example');
+let container = document.getElementById('table-conso-client');
 let hot = new Handsontable(container, {
     data: JSON.parse(JSON.stringify(data)),
     rowHeaderWidth: 1200,
@@ -1911,7 +1911,7 @@ let hot = new Handsontable(container, {
     debug: true,
     manualColumnResize: true,
     manualRowResize: true,
-    colWidths: [70, 50, 100, 70],
+    colWidths: [150, 60, 130, 130],
     currentRowClassName: 'currentRow',
     mergeCells: [
         {row: 1, col: 0, rowspan: 2, colspan: 1},
