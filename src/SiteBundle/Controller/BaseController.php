@@ -1922,7 +1922,6 @@ class BaseController extends Controller
 
         $clientService = $this->get('site.service.client_services');
 
-
         if ($result) {
 
             $data = [
@@ -1930,7 +1929,7 @@ class BaseController extends Controller
                 "nom" => $result[0]['CN_NOTE'],
                 "ins_date" => $result[0]['INS_DATE'],
                 "cl_id" => $result[0]['CL_ID'],
-                "cl_raisonsoc" => $clientService->getTheClientRaisonSoc($result[0]['CL_ID'],$result[0]['SO_ID'] ),
+                "cl_raisonsoc" => $clientService->array_utf8_encode($clientService->getTheClientRaisonSoc($result[0]['CL_ID'],$result[0]['SO_ID'] )),
             ];
             $response = new JsonResponse($data);
             $response->headers->set('Content-Type', 'application/json');
