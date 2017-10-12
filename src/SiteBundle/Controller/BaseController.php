@@ -1911,7 +1911,7 @@ class BaseController extends Controller
     {
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Notes  LEFT OUTER JOIN Vue_Clients on Vue_All_Notes.CL_ID = Vue_Clients.CL_ID WHERE Vue_All_Notes.CN_ID = :id AND Vue_All_Notes.SO_ID = :centrale";
+        $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Notes  WHERE Vue_All_Notes.CN_ID = :id AND Vue_All_Notes.SO_ID = :centrale";
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $id);
@@ -1920,6 +1920,8 @@ class BaseController extends Controller
         $stmt->execute();
         $result = $stmt->fetchAll();
 
+        $clientService = $this->get('site.service.client_services');
+
 
         if ($result) {
 
@@ -1927,8 +1929,8 @@ class BaseController extends Controller
                 "id" => $result[0]['CN_ID'],
                 "nom" => $result[0]['CN_NOTE'],
                 "ins_date" => $result[0]['INS_DATE'],
-                "cl_id" => $result[0]['Vue_All_Notes.CL_ID'],
-                "cl_raisonsoc" => $result[0]['CL_RAISONSOC'],
+                "cl_id" => $result[0]['CL_ID'],
+                "cl_raisonsoc" => $clientService->getTheClientRaisonSoc($result[0]['CL_ID'],$result[0]['SO_ID'] ),
             ];
             $response = new JsonResponse($data);
             $response->headers->set('Content-Type', 'application/json');

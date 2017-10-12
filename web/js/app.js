@@ -993,7 +993,7 @@ $(function () {
                                  <div class="column">
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
                                 </div>
-                               <a href="http://crm.achatcentrale.fr/client/${data.cl_id}/${aidyCentrale}/general">Accedez au client</a>
+                               <a href="http://crm.achatcentrale.fr/client/${data.cl_id}/${aidyCentrale}/general">${data.cl_raisonsoc.CL_RAISONSOC}</a>
                             </div>
                             
                             

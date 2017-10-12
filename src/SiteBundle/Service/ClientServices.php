@@ -313,111 +313,45 @@ class ClientServices
 
         switch ($centraleId){
             case "1":
-                $sql = "SELECT COUNT(*)
+                $sql = "SELECT CL_RAISONSOC
                         FROM CENTRALE_ACHAT.dbo.CLIENTS
-                        WHERE CAST(INS_DATE AS DATE) > DATEADD(m,-3, GETDATE());";
+                        WHERE CL_ID = :id ";
 
                 $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                $sqlTotal = "SELECT COUNT(*)
-                            FROM CENTRALE_ACHAT.dbo.CLIENTS";
-
-                $stmtTotal = $this->connection->prepare($sqlTotal);
-                $stmtTotal->execute();
-                $resultTotal = $stmtTotal->fetchAll();
-
-                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
-
-
-
-                $data = [
-                    "total" => $total
-                ];
-
-
-                return $data;
+                return $result[0];
             case "2":
-                $sql = "SELECT COUNT(*)
-                FROM CENTRALE_GCCP.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
+                $sql = "SELECT CL_RAISONSOC
+                        FROM CENTRALE_GCCP.dbo.CLIENTS
+                        WHERE CL_ID = :id ";
 
                 $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-
-
-                $sqlTotal = "SELECT COUNT(*)
-                            FROM CENTRALE_GCCP.dbo.CLIENTS";
-
-                $stmtTotal = $this->connection->prepare($sqlTotal);
-                $stmtTotal->execute();
-                $resultTotal = $stmtTotal->fetchAll();
-
-                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
-
-
-
-                $data = [
-                    "total" => $total
-                ];
-
-
-                return $data;
+                return $result[0];
             case "4":
-                $sql = "SELECT COUNT(*)
-                FROM CENTRALE_FUNECAP.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
+                $sql = "SELECT CL_RAISONSOC
+                        FROM CENTRALE_FUNECAP.dbo.CLIENTS
+                        WHERE CL_ID = :id ";
 
                 $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-
-
-                $sqlTotal = "SELECT COUNT(*)
-                            FROM CENTRALE_FUNECAP.dbo.CLIENTS";
-
-                $stmtTotal = $this->connection->prepare($sqlTotal);
-                $stmtTotal->execute();
-                $resultTotal = $stmtTotal->fetchAll();
-
-                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
-
-
-
-                $data = [
-                    "total" => $total
-                ];
-
-
-                return $data;
+                return $result[0];
             case "5":
-                $sql = "SELECT COUNT(*)
-                FROM CENTRALE_PFPL.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
+                $sql = "SELECT CL_RAISONSOC
+                        FROM CENTRALE_GCCP.dbo.CLIENTS
+                        WHERE CL_ID = :id ";
 
                 $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-
-
-                $sqlTotal = "SELECT COUNT(*)
-                            FROM CENTRALE_PFPL.dbo.CLIENTS";
-
-                $stmtTotal = $this->connection->prepare($sqlTotal);
-                $stmtTotal->execute();
-                $resultTotal = $stmtTotal->fetchAll();
-
-                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
-
-
-
-                $data = [
-                    "total" => $total
-                ];
-
-
-                return $data;
+                return $result[0];
             case "6":
                 $sql = "SELECT CL_RAISONSOC
                 FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
