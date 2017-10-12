@@ -824,3 +824,13 @@ p.numero-bruneau{
 .task-date-creation p {
     margin: 0px 0px;
 }
+
+.wtSpreader{
+    background-color: #0d5aa7;
+}
+
+/* Selected row  */
+/* Add a custom class name in the configuration: currentRowClassName: "foo"; */
+.ht_master tr.foo > td {
+    background-color: #f00;
+}
