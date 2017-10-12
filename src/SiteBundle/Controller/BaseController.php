@@ -1927,7 +1927,7 @@ class BaseController extends Controller
                 "id" => $result[0]['CN_ID'],
                 "nom" => $result[0]['CN_NOTE'],
                 "ins_date" => $result[0]['INS_DATE'],
-                "cl_id" => $result[0]['CL_ID'],
+                "cl_id" => $result[0]['Vue_All_Notes.CL_ID'],
                 "cl_raisonsoc" => $result[0]['CL_RAISONSOC'],
             ];
             $response = new JsonResponse($data);
