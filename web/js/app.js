@@ -979,7 +979,7 @@ $(function () {
 
 
                 let tpl = `<div class="ui centered  grid">
-                              <h4>Créée ${data.ins_date} </h4>
+                              <h4>Créée ${data.ins_date} pour le client ${data.cl_raisonsoc.CL_RAISONSOC} </h4>
                             <div class="one column row">
                                 <div class="column note-content-home">
                                     <p class="note-description">${data.nom}</p>
