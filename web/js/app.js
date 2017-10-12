@@ -128,7 +128,7 @@ $(function () {
     };
 // /Sidebar
 
-    var randNum = function () {
+    let randNum = function () {
         return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
     };
 
@@ -158,7 +158,6 @@ $(function () {
         $BOX_PANEL.remove();
     });
 // /Panel toolbox
-
 
     const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
 
@@ -215,7 +214,6 @@ $(function () {
 
     }
 
-
     function unArchiveTask(e) {
         let url = 'http://localhost:8000/taches/unarchive/' + e;
 
@@ -263,7 +261,6 @@ $(function () {
             });
     }
 
-
 //sidebar
     $('#menu_toggle').on('click', function () {
 
@@ -281,7 +278,6 @@ $(function () {
 
 
     });
-
 
 //menu deroulant
     $('#sidebar-menu').find('a').on('click', function (ev) {
@@ -313,7 +309,6 @@ $(function () {
 
     });
 
-
 // check active menu
     $('#sidebar-menu').find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
 
@@ -323,7 +318,6 @@ $(function () {
     }).parent().addClass('active');
 
     $('.menu .item').tab();
-
 
     $('#siret-client').mask('000 000 000 00000');
     $('#siret-update').mask('000 000 000 00000');
@@ -348,14 +342,13 @@ $(function () {
 
     });
 
-
     $('.check').on('click', function (e) {
         terminerTask(e.currentTarget.id);
     });
+
     $('.uncheck').on('click', function (e) {
         unArchiveTask(e.currentTarget.id);
     });
-
 
     $('#btn-new-cl').on('click', function (e) {
 
@@ -384,7 +377,6 @@ $(function () {
 
 
     });
-
 
     $("form input.date").datepicker({
         altField: "#datepicker",
@@ -432,7 +424,6 @@ $(function () {
         window.location.replace(CURRENT_URL + "/" + id + "/" + centrale + "/general");
 
     });
-
 
     function stateTask(state) {
 
@@ -650,7 +641,6 @@ $(function () {
 
     });
 
-
     $('.add-note').on('click', function (e) {
 
         let $input = $('#add-note').val();
@@ -692,7 +682,6 @@ $(function () {
 
     });
 
-
     $('#isGenerique').on('click', function (e) {
 
 
@@ -712,18 +701,12 @@ $(function () {
 
     });
 
-
-    $('.text-hover-edit').on('click', function () {
-        $('#logo-edit').modal('show')
-
-    });
-
+    $('.text-hover-edit').on('click', function () { $('#logo-edit').modal('show') });
 
     $('.statut-client-edit').on('click', function () {
         $(this).hide();
         $('#select-statut-edit-client').show();
     });
-
 
     $('#select-statut-edit-client').on('change', function (e) {
 
@@ -765,21 +748,18 @@ $(function () {
 
     });
 
-
     $('.edit-client-user').on('click', function () {
 
 
         let id = $(this).parent().data('id');
-        let tpl = `<p class="hidden" id="id-user-client-update">${id}</p>`;
 
+        let tpl = `<p class="hidden" id="id-user-client-update">${id}</p>`;
 
         $('.user-client-update-title').append(tpl);
 
         $('#update_user_client').modal('show');
 
-
     });
-
 
     $('#save-client-user-update').on('click', function (e) {
 
@@ -790,11 +770,7 @@ $(function () {
         let idUsers = $('#id-user-client-update').html();
         let url = "http://localhost:8000/client/users/" + id + "/" + centrale + "/update/" + idUsers;
 
-        let values = $("input[name='us_update[]'], select[name='us_update[]']")
-            .map(function () {
-                    return $(this).val();
-                }
-            ).get();
+        let values = $("input[name='us_update[]'], select[name='us_update[]']").map(function () { return $(this).val();}).get();
 
         $.ajax({
 
@@ -832,7 +808,6 @@ $(function () {
         console.log(values);
 
     });
-
 
     $('.detail-tache-home').on('click', function (e) {
 
@@ -964,6 +939,7 @@ $(function () {
 
 
     });
+
     $('.detail-note-home').on('click', function (e) {
 
         let id = $(this).data('id');
@@ -1018,7 +994,6 @@ $(function () {
                                 </div>
                                <a href="http://crm.achatcentrale.fr/client/${data.cl_id}/${aidyCentrale}/general">Accedez au client</a>
                             </div>
-                     cl_id
                             
                             
                                           
@@ -1064,8 +1039,6 @@ $(function () {
 
 
     });
-
-
 
     $('.detail-rdv-home').on('click', function (e) {
 
@@ -1143,8 +1116,6 @@ $(function () {
 
     });
 
-
-
     function showHideEl(element) {
 
         if ($(element).is(":visible")) {
@@ -1157,7 +1128,6 @@ $(function () {
         }
     }
 
-
     $('#afficherplus-detail').on('click', function () {
 
         el = $('#detail-client-content');
@@ -1169,7 +1139,6 @@ $(function () {
 
 
     });
-
 
     $('#afficherplus-historique').on('click', function () {
 
@@ -1244,7 +1213,6 @@ $(function () {
         $('#client-user-new').modal('hide')
     });
 
-
     $('.ui.search').search({
         apiSettings: {
             url: 'http://crm.achatcentrale.fr/user/search/{query}'
@@ -1268,7 +1236,6 @@ $(function () {
         },
     });
 
-
     $('.ui.search.clients-auto').search({
         apiSettings: {
             url: 'http://crm.achatcentrale.fr/client/search/{query}/' + $('#centrale').html()
@@ -1291,7 +1258,6 @@ $(function () {
         },
 
     });
-
 
     $('.detail-tache-home-client').on('click', function (e) {
 
@@ -1557,7 +1523,6 @@ $(function () {
 
     });
 
-
     let fournisseurTable = $('#fournisseurs-all').DataTable({
         "colReorder": true,
         responsive: true,
@@ -1575,14 +1540,12 @@ $(function () {
 
     });
 
-
     function getUrlParameter(name) {
         name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
         let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
         let results = regex.exec(location.search);
         return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
     }
-
 
     $('.user-label').focusout(function () {
 
@@ -1594,11 +1557,11 @@ $(function () {
             let url = "http://crm.achatcentrale.fr/client/label/" + centrale + "/" + value + "";
 
             $.getJSON(url, function (json) {
-                $('.client-label').after('<div id="label-client-task" class="ui cursor  label ">' + json.raisonSoc + '<i class="remove icon remove-client-label cursor"></i></div>');
-                $('#client-isDisabled').val(value).attr('disabled', 'disabled');
+                    $('.client-label').after('<div id="label-client-task" class="ui cursor  label ">' + json.raisonSoc + '<i class="remove icon remove-client-label cursor"></i></div>');
+                    $('#client-isDisabled').val(value).attr('readonly', 'readonly');
 
-            });
-        }, 200)
+                });
+            }, 200)
 
     });
 
@@ -1617,7 +1580,6 @@ $(function () {
     $('.ui.dropdown.user-update').dropdown();
 
     $('#clients-dropdown').dropdown();
-
 
     $('.add-hastag-container').hide();
 
@@ -1642,7 +1604,6 @@ $(function () {
 
         $('.add-hastag-container').toggle("slow");
     });
-
 
     $('.save-hastag-client').on('click', function (e) {
 
@@ -1706,7 +1667,6 @@ $(function () {
 
     });
 
-
     $('.go-to-fournisseur').on('click', function () {
 
 
@@ -1719,7 +1679,6 @@ $(function () {
         window.location.href = url;
 
     });
-
 
     $('.ui.search.container-search-hastag').search({
         apiSettings: {
@@ -1748,7 +1707,6 @@ $(function () {
 
         }
     });
-
 
     $('.remove-hashtag').on('click', function (e) {
 
@@ -1799,16 +1757,7 @@ $(function () {
 
 
 
-
-
-
-
-
-
-
-
     let d = new Date();
-    console.log("0" + d.getMonth() + "-" + d.getUTCFullYear() + "");
 
 
     $('#date_debut').combodate({
@@ -1919,4 +1868,20 @@ $(function () {
 
 
 
+});
+
+
+
+
+let data = [
+    ["", "Ford", "Tesla", "Toyota", "Honda"],
+    ["2017", 10, 11, 12, 13],
+    ["2018", 20, 11, 14, 13],
+    ["2019", 30, 15, 12, 13]
+];
+
+let container = document.getElementById('example');
+let hot = new Handsontable(container, {
+    data: data,
+    colHeaders: true
 });

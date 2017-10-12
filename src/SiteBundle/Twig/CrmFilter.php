@@ -411,7 +411,7 @@ class CrmFilter extends \Twig_Extension
                 $tpl = "<div class=\"ui medium red label\">Important</div>";
                 return $tpl;
             case 2:
-                $tpl = "<div class=\"ui medium orange label\">Moyen</div>";
+                $tpl = "<div class=\"ui medium orange label\">Normale</div>";
                 return $tpl;
             case 3:
                 $tpl = "<div class=\"ui medium green label\">Faible</div>";
