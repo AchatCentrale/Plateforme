@@ -87,6 +87,7 @@ class TacheController extends Controller
                     $echanceFuture = $echeance->calendar();
                     $data = [
                         "id" => $result->getClaId(),
+                        "cl_id" => $result->getClId(),
                         "nom" => $result->getclaNom(),
                         "descr" => $result->getclaDescr(),
                         "user" => utf8_encode($user[0]->getUsPrenom()),
