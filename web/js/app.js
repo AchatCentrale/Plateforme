@@ -1,3 +1,5 @@
+moment.locale('fr');
+
 (function ($, sr) {
     // debouncing function from John Hann
     // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
@@ -845,82 +847,81 @@ $(function () {
 
 
                 let tpl = `<h4>${data.nom}</h4>
-              <div class="detail-tache-etat">
-                      <div class="state-tache-detail">
-                            ${ stateTask(data.statut) }
-                        </div>
-                        <div class="change-statut-tache">
-                      
-                          <button class="ui button green" >Je suis en train de la faire ?</button>
-                        </div>
-                    </div>
-                    </div>
-                    <br>
-                    <div class="ui centered  grid">
-                           
-                            <div class="one column row">
-                                <div class="column">
-                                    <p>Assigné à : </p> 
-                                    <a class="ui image label">
-                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
-                                      ${data.user}
-                                    </a>
-                                </div>
-    
-                            </div>
-                            <div class="one column row">
-                                <div class="column">
-                                    <h5>Description de la tâche a éfféctuer :</h5>
-                                    <p class="task-description">${data.descr}</p>
-                                </div>
-    
-                            </div>
-                            <div class="two column row">
-                                <div class="column">
-                                    <h4>Créée ${data.creation} </h4>
-                                </div>
-                                <div class="column">
-                                    <h4>A terminer avant le ${data.echeance}</h4>
+                      <div class="detail-tache-etat">
+                                  <div class="state-tache-detail">
+                                        ${ stateTask(data.statut) }
+                                    </div>
+                                    <div class="change-statut-tache">
+                                      <a href="http://crm.achatcentrale.fr/taches/terminer/${data.id}/${aidyCentrale}" class="ui button basic positive terminer-tache-home "> Action terminé</a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="three column row">
-                               
-                               
-                                
+                            <br>
+                            <div class="ui centered  grid">
                                    
-                                </div>
-                            
-                               <div class="three column  row">
-                              
-                               <div class="update-action">
-                                        <a class="ui basic button" href="#">Modifier l'action</a>
-                                  </div>
-                                  
-                                  
-                                  
-                               <div class="archive-action">
-                                    <a class="ui basic button" href="/taches/archive/${data.id}/${data.idCentrale}"><i class="archive icon"></i>
-                                    Archiver l'action</a>
-                               </div>
-                                  
-                               <div class="archive-action">
-                                        <a class="ui red basic button" href="/taches/delete/${data.id}/${data.idCentrale}"><i class="delete icon"></i>
-                                           Supprimer l'action</a>
-                                   </div>
-                                   
-                               
-                              
-                            </div>
-                            
-                            
-                               
-                            </div>
-                            <div class="suite-task">
-                            
-                            </div>
-                                                       
-                            
-                    </div>`;
+                                    <div class="one column row">
+                                        <div class="column">
+                                            <p>Assigné à : </p> 
+                                            <a class="ui image label">
+                                              <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                              ${data.user}
+                                            </a>
+                                        </div>
+            
+                                    </div>
+                                    <div class="one column row">
+                                        <div class="column">
+                                            <h5>Description de la tâche a éfféctuer :</h5>
+                                            <p class="task-description">${data.descr}</p>
+                                        </div>
+            
+                                    </div>
+                                    <div class="two column row">
+                                        <div class="column">
+                                            <h4>Créée ${data.creation} </h4>
+                                        </div>
+                                        <div class="column">
+                                            <h4>A terminer avant le ${data.echeance}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="three column row">
+                                       
+                                       
+                                        
+                                           
+                                        </div>
+                                    
+                                       <div class="three column  row">
+                                      
+                                       <div class="update-action">
+                                                <a class="ui basic button" href="#">Modifier l'action</a>
+                                          </div>
+                                          
+                                          
+                                          
+                                       <div class="archive-action">
+                                            <a class="ui basic button" href="/taches/archive/${data.id}/${data.idCentrale}"><i class="archive icon"></i>
+                                            Archiver l'action</a>
+                                       </div>
+                                          
+                                       <div class="archive-action">
+                                                <a class="ui red basic button" href="/taches/delete/${data.id}/${data.idCentrale}"><i class="delete icon"></i>
+                                                   Supprimer l'action</a>
+                                           </div>
+                                           
+                                       
+                                      
+                                    </div>
+                                    
+                                    
+                                       
+                                    </div>
+                                    <div class="suite-task">
+                                    
+                                    </div>
+                                                               
+                                    
+                            </div>`;
 
 
                 el.append(tpl);
@@ -978,7 +979,7 @@ $(function () {
 
 
 
-                let tpl = `<div class="ui centered  grid">
+                let tpl = `<div class="ui centered grid header-detail-note">
                               <h4>Créée ${data.ins_date} pour le client ${data.cl_raisonsoc.CL_RAISONSOC} </h4>
                             <div class="one column row">
                                 <div class="column note-content-home">
@@ -988,12 +989,12 @@ $(function () {
                             </div>
                             <div class="two column row">
                                 <div class="column">
-                                    <h4>Créée ${data.ins_date} </h4>
+                                    <h4>Créée ${moment(data.ins_date).fromNow()} </h4>
                                 </div>
-                                 <div class="column">
+                                 <div class="column footer-update-note">
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
                                 </div>
-                               <a href="http://crm.achatcentrale.fr/client/${data.cl_id}/${checkCentrale(aidyCentrale)}/general">${data.cl_raisonsoc.CL_RAISONSOC}</a>
+                               <a class="link-note-client" href="http://crm.achatcentrale.fr/client/${data.cl_id}/${checkCentrale(aidyCentrale)}/general">${data.cl_raisonsoc.CL_RAISONSOC}</a>
                             </div>
                             
                             
@@ -1015,6 +1016,8 @@ $(function () {
                     $('.note-content-home').html('');
 
 
+
+                    let tpl = ``;
 
 
                     $('.note-content-home').html('<div class="ui form">\n' +
@@ -1337,21 +1340,23 @@ $(function () {
                       <div class="state-tache-detail">
                             ${ stateTask(data.statut) }
                         </div>
+                        d
+                        
                         <div class="change-statut-tache">
-                       <div class="dropup">
-                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Changer le statut de la tache
-                            <span class="caret"></span>
-                          </button>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                            <li><a href="${CURRENT_URL + "taches/etat/0/" + data.id + "/" + data.idCentrale}">Non commencé</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/1/" + data.id + "/" + data.idCentrale}">En cours</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/2/" + data.id + "/" + data.idCentrale}">Terminé</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/3/" + data.id + "/" + data.idCentrale}">Attente de quelqu'un d'autre</a></li>
-                            <li><a href="${CURRENT_URL + "taches/etat/4/" + data.id + "/" + data.idCentrale}">Reportée</a></li>
-
-                          </ul>
-                        </div>
+                           <div class="dropup">
+                              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Changer le statut de la tache
+                                <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><a href="${CURRENT_URL + "taches/etat/0/" + data.id + "/" + data.idCentrale}">Non commencé</a></li>
+                                <li><a href="${CURRENT_URL + "taches/etat/1/" + data.id + "/" + data.idCentrale}">En cours</a></li>
+                                <li><a href="${CURRENT_URL + "taches/etat/2/" + data.id + "/" + data.idCentrale}">Terminé</a></li>
+                                <li><a href="${CURRENT_URL + "taches/etat/3/" + data.id + "/" + data.idCentrale}">Attente de quelqu'un d'autre</a></li>
+                                <li><a href="${CURRENT_URL + "taches/etat/4/" + data.id + "/" + data.idCentrale}">Reportée</a></li>
+    
+                              </ul>
+                            </div>
                         </div>
                     </div>
                     </div>
@@ -1773,10 +1778,7 @@ $(function () {
 
     });
 
-
-
     let d = new Date();
-
 
     $('#date_debut').combodate({
         minYear: 2015,
@@ -1815,7 +1817,6 @@ $(function () {
 
 
     //chart.js
-
 
     if (document.getElementById("myChart")) {
 
@@ -1857,7 +1858,6 @@ $(function () {
 
     }
 
-
     Dropzone.options.importDropzone = {
         dictDefaultMessage: "<i class=\"file huge excel outline icon\"></i>Deposer le fichiers .csv ou <span class='button huge ui'>Choisir un fichier</span>",
         thumbnailWidth: 400,
@@ -1865,11 +1865,9 @@ $(function () {
 
     };
 
-
     $('#datetimepicker1').datetimepicker({
         locale: 'fr'
     });
-
 
     const area = document.getElementById('add-note');
     Countable.on(area, counter => {
@@ -1887,6 +1885,10 @@ $(function () {
 
 
 });
+
+
+
+
 
 
 
@@ -1920,7 +1922,6 @@ let data = [
     ["Total", "CA", "1104 €","444448 €"],
     ["Total", "ECO", "11478 €","584448 €"],
 ];
-
 let container = document.getElementById('table-conso-client');
 let hot = new Handsontable(container, {
     data: JSON.parse(JSON.stringify(data)),

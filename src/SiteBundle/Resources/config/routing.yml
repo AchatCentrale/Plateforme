@@ -97,6 +97,9 @@ new-task:
     defaults: {_controller: SiteBundle:Tache:NewTask}
 
 
+terminer-tache:
+    path: /taches/terminer/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:terminer}
 
 
 archive-task:
@@ -221,3 +224,4 @@ notification-notif-rdv:
     path: /notification/relance/rdv
     defaults: {_controller: SiteBundle:Notification:sendRdvRelance}
     methods: POST
+

@@ -834,3 +834,16 @@ p.numero-bruneau{
 .ht_master tr.foo > td {
     background-color: #f00;
 }
+
+.header-detail-note h4 {
+    margin-top: 20px;
+}
+
+.modifier-note-home {
+    margin-top: 15px !important;
+}
+
+a.link-note-client {
+    margin-top: 30px;
+    font-size: 25pt;
+}

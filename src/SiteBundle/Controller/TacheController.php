@@ -2,10 +2,7 @@
 
 namespace SiteBundle\Controller;
 
-use AchatCentraleBundle\Form\ClientsTachesType as acClientsTachesType;
-use FunecapBundle\Form\ClientsTachesType as fClientsTachesType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -1080,6 +1077,54 @@ class TacheController extends Controller
 
 
         return $this->render('@Site/test.html.twig');
+
+    }
+
+    public function terminerTacheAction(Request $request, $id, $centrale){
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        switch ($centrale){
+
+
+            case "ACHAT_CENTRALE":
+            case "1":
+                $sql = "DELETE FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $this->redirectToRoute('taches_home');
+            case "CENTRALE_GCCP":
+            case "2":
+            $sql = "DELETE FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            return $this->redirectToRoute('taches_home');
+            case "CENTRALE_FUNECAP":
+            case "4":
+                $sql = "DELETE FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $this->redirectToRoute('taches_home');
+            case "CENTRALE_PFPL":
+            case "5":
+                $sql = "DELETE FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $this->redirectToRoute('taches_home');
+
+
+
+        }
+
+
 
     }
 
