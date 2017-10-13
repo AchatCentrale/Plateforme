@@ -99,7 +99,7 @@ new-task:
 
 terminer-tache:
     path: /taches/terminer/{id}/{centrale}
-    defaults: {_controller: SiteBundle:Tache:terminer}
+    defaults: {_controller: SiteBundle:Tache:terminerTache}
 
 
 archive-task:
