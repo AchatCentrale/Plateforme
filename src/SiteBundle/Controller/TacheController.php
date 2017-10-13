@@ -1086,10 +1086,9 @@ class TacheController extends Controller
 
         switch ($centrale){
 
-
             case "ACHAT_CENTRALE":
             case "1":
-                $sql = "DELETE FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue(':id', $id);
                 $stmt->execute();
@@ -1097,15 +1096,15 @@ class TacheController extends Controller
                 return $this->redirectToRoute('taches_home');
             case "CENTRALE_GCCP":
             case "2":
-            $sql = "DELETE FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':id', $id);
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-            return $this->redirectToRoute('taches_home');
+                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $this->redirectToRoute('taches_home');
             case "CENTRALE_FUNECAP":
             case "4":
-                $sql = "DELETE FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+                $sql = "UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue(':id', $id);
                 $stmt->execute();
@@ -1113,7 +1112,7 @@ class TacheController extends Controller
                 return $this->redirectToRoute('taches_home');
             case "CENTRALE_PFPL":
             case "5":
-                $sql = "DELETE FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES WHERE CLA_ID = :id";
+                $sql = "UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindValue(':id', $id);
                 $stmt->execute();
