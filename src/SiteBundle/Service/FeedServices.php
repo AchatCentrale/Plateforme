@@ -186,6 +186,9 @@ class FeedServices
     public function showTheFeed()
     {
 
+
+        dump($this);
+
         $result = array_merge( $this->getAction(), $this->getTickets(), $this->getNotes());
         $this->setFeed($result);
 
