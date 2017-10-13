@@ -193,7 +193,6 @@ class FeedServices
     {
 
 
-        dump($this->feed);
         $result = array_merge( $this->getAction(), $this->getTickets(), $this->getNotes());
         $this->setFeed($result);
 
