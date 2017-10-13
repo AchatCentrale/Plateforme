@@ -1268,7 +1268,7 @@ $(function () {
 
         if (centrale === 4) {
             return "CENTRALE_FUNECAP";
-        } else if (centrale === 1) {
+        } else if (centrale === 2) {
             return 'CENTRALE_GCCP';
         } else if (centrale === 5) {
             return 'CENTRALE_PFPL'
