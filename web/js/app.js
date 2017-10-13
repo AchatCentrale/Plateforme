@@ -507,6 +507,10 @@ $(function () {
                                               ${data.user}
                                             </a>
                                         </div>
+                                            <br/>
+                                            
+                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + checkCentrale(aidyCentrale) + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p>TEAM</p>"}
+                                           
             
                                     </div>
                                     <div class="one column row">
@@ -692,7 +696,9 @@ $(function () {
 
     });
 
-    $('.text-hover-edit').on('click', function () { $('#logo-edit').modal('show') });
+    $('.text-hover-edit').on('click', function () {
+        $('#logo-edit').modal('show')
+    });
 
     $('.statut-client-edit').on('click', function () {
         $(this).hide();
@@ -761,7 +767,9 @@ $(function () {
         let idUsers = $('#id-user-client-update').html();
         let url = "http://localhost:8000/client/users/" + id + "/" + centrale + "/update/" + idUsers;
 
-        let values = $("input[name='us_update[]'], select[name='us_update[]']").map(function () { return $(this).val();}).get();
+        let values = $("input[name='us_update[]'], select[name='us_update[]']").map(function () {
+            return $(this).val();
+        }).get();
 
         $.ajax({
 
@@ -966,8 +974,6 @@ $(function () {
                 console.log(data);
 
 
-
-
                 let tpl = `<div class="ui centered grid header-detail-note">
                               <h4>Créée ${data.ins_date} pour le client ${data.cl_raisonsoc.CL_RAISONSOC} </h4>
                             <div class="one column row">
@@ -995,7 +1001,6 @@ $(function () {
                 el.append(tpl);
 
 
-
                 $('#modal-detail-task-home').modal('show')
 
                 $('.modifier-note-home').on('click', function (e) {
@@ -1003,7 +1008,6 @@ $(function () {
                     console.log('modifier-note-home');
 
                     $('.note-content-home').html('');
-
 
 
                     let tpl = ``;
@@ -1027,8 +1031,6 @@ $(function () {
 
 
         });
-
-
 
 
     });
@@ -1104,7 +1106,6 @@ $(function () {
 
 
         });
-
 
 
     });
@@ -1253,9 +1254,7 @@ $(function () {
     });
 
 
-    function checkCentrale(centrale)
-    {
-
+    function checkCentrale(centrale) {
 
 
         if (centrale === 4) {
@@ -1572,11 +1571,11 @@ $(function () {
             let url = "http://crm.achatcentrale.fr/client/label/" + centrale + "/" + value + "";
 
             $.getJSON(url, function (json) {
-                    $('.client-label').after('<div id="label-client-task" class="ui cursor  label ">' + json.raisonSoc + '<i class="remove icon remove-client-label cursor"></i></div>');
-                    $('#client-isDisabled').val(value).attr('readonly', 'readonly');
+                $('.client-label').after('<div id="label-client-task" class="ui cursor  label ">' + json.raisonSoc + '<i class="remove icon remove-client-label cursor"></i></div>');
+                $('#client-isDisabled').val(value).attr('readonly', 'readonly');
 
-                });
-            }, 200)
+            });
+        }, 200)
 
     });
 
@@ -1869,47 +1868,37 @@ $(function () {
     })
 
 
-
-
-
-
 });
-
-
-
-
-
-
 
 
 let data = [
     ["", "", "Bruneau", "Total"],
-    ["janv-17", "CA", "1 120€","445848 €" ],
-    ["janv-17", "ECO", "11 €","444448 €"],
-    ["fev-17", "CA", "1 120€","458448 €"],
-    ["fev-17", "ECO", "11 €","444448 €"],
-    ["mars-17", "CA", "1 120€","444448 €"],
-    ["mars-17", "ECO", "11 €","444448 €"],
-    ["avr-17", "CA", "1 120€","458448 €"],
-    ["avr-17", "ECO", "11 €","444448 €"],
-    ["mai-17","CA", "1 120€","445848 €"],
-    ["mai-17", "ECO", "11 €","445848 €"],
-    ["juin-17", "CA", "1 120€","444448 €"],
-    ["juin-17", "ECO", "11 €","444448 €"],
-    ["juillet-17", "CA", "1 120€","584448 €"],
-    ["juillet-17", "ECO", "11 €","444448 €"],
-    ["aout-17", "CA", "1 120€","445848 €"],
-    ["aout-17", "ECO", "11 €","444448 €"],
-    ["sept-17", "CA", "1 120€","458448 €"],
-    ["sept-17", "ECO", "11 €","444448 €"],
-    ["oct-17", "CA", "1 120€","458448 €"],
-    ["oct-17", "ECO", "11 €","458448 €"],
-    ["nov-17", "CA", "1 120€","444448 €"],
-    ["nov-17", "ECO", "11 €","445848 €"],
-    ["dec-17", "CA", "1 120€","458448 €"],
-    ["dec-17", "ECO", "11 €","445848 €"],
-    ["Total", "CA", "1104 €","444448 €"],
-    ["Total", "ECO", "11478 €","584448 €"],
+    ["janv-17", "CA", "1 120€", "445848 €"],
+    ["janv-17", "ECO", "11 €", "444448 €"],
+    ["fev-17", "CA", "1 120€", "458448 €"],
+    ["fev-17", "ECO", "11 €", "444448 €"],
+    ["mars-17", "CA", "1 120€", "444448 €"],
+    ["mars-17", "ECO", "11 €", "444448 €"],
+    ["avr-17", "CA", "1 120€", "458448 €"],
+    ["avr-17", "ECO", "11 €", "444448 €"],
+    ["mai-17", "CA", "1 120€", "445848 €"],
+    ["mai-17", "ECO", "11 €", "445848 €"],
+    ["juin-17", "CA", "1 120€", "444448 €"],
+    ["juin-17", "ECO", "11 €", "444448 €"],
+    ["juillet-17", "CA", "1 120€", "584448 €"],
+    ["juillet-17", "ECO", "11 €", "444448 €"],
+    ["aout-17", "CA", "1 120€", "445848 €"],
+    ["aout-17", "ECO", "11 €", "444448 €"],
+    ["sept-17", "CA", "1 120€", "458448 €"],
+    ["sept-17", "ECO", "11 €", "444448 €"],
+    ["oct-17", "CA", "1 120€", "458448 €"],
+    ["oct-17", "ECO", "11 €", "458448 €"],
+    ["nov-17", "CA", "1 120€", "444448 €"],
+    ["nov-17", "ECO", "11 €", "445848 €"],
+    ["dec-17", "CA", "1 120€", "458448 €"],
+    ["dec-17", "ECO", "11 €", "445848 €"],
+    ["Total", "CA", "1104 €", "444448 €"],
+    ["Total", "ECO", "11478 €", "584448 €"],
 ];
 let container = document.getElementById('table-conso-client');
 let hot = new Handsontable(container, {

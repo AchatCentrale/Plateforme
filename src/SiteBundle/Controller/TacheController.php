@@ -71,30 +71,35 @@ class TacheController extends Controller
     public function DetailTaskAction($id, $idCentrale)
     {
 
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
         switch ($idCentrale) {
 
             case 1:
                 //Achatcentrale
                 \Moment\Moment::setLocale('fr_FR');
-                $tacheUtil = $this->get('site.service.taches_utils');
-                $task = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches');
-                $result = $task->findOneBy([ 'claId' => $id ]);
-                if ($result) {
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
-                    $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                $sqlTask = "SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES LEFT JOIN CENTRALE_ACHAT.dbo.USERS ON CENTRALE_ACHAT.dbo.USERS.US_ID = CENTRALE_ACHAT.dbo.CLIENTS_TACHES.INS_USER WHERE CENTRALE_ACHAT.dbo.CLIENTS_TACHES.CLA_ID = :id";
+                $stmt = $conn->prepare($sqlTask);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $resultTask = $stmt->fetchAll();
+                if ($resultTask) {
+                    $creation = new \Moment\Moment($resultTask[0]['INS_DATE'], 'Europe/Berlin');
                     $creationFromNow = $creation->fromNow();
-                    $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                    $echeance = new \Moment\Moment($resultTask[0]['CLA_ECHEANCE'], 'UTC');
                     $echanceFuture = $echeance->calendar();
                     $data = [
-                        "id" => $result->getClaId(),
-                        "cl_id" => $result->getClId(),
-                        "nom" => $result->getclaNom(),
-                        "descr" => $result->getclaDescr(),
-                        "user" => utf8_encode($user[0]->getUsPrenom()),
+                        "id" => $resultTask[0]['CLA_ID'],
+                        "cl_id" => $resultTask[0]['CL_ID'],
+                        "nom" => $resultTask[0]['CLA_ID'],
+                        "descr" => $resultTask[0]['CLA_DESCR'],
+                        "user" => $resultTask[0]['US_PRENOM'],
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
-                        "statut" => utf8_encode($result->getClaStatus()),
+                        "statut" => $resultTask[0]['CLA_STATUS'],
                         "centrale" => "ACHAT_CENTRALE",
                     ];
                     $response = new JsonResponse($data);
@@ -104,37 +109,30 @@ class TacheController extends Controller
                 } else {
                     return new JsonResponse('no taches', 200);
                 }
-
-
                 break;
             case 2:
                 //GCCP
-
                 \Moment\Moment::setLocale('fr_FR');
-                $tacheUtil = $this->get('site.service.taches_utils');
-                $task = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsTaches');
-                $result = $task->findOneBy([
-                    'claId' => $id
-                ]);
-                if ($result) {
-
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
-
-                    $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                $sqlTask = "SELECT * FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES LEFT JOIN CENTRALE_ACHAT.dbo.USERS ON CENTRALE_ACHAT.dbo.USERS.US_ID = CENTRALE_GCCP.dbo.CLIENTS_TACHES.INS_USER WHERE CENTRALE_GCCP.dbo.CLIENTS_TACHES.CLA_ID = :id";
+                $stmt = $conn->prepare($sqlTask);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $resultTask = $stmt->fetchAll();
+                if ($resultTask) {
+                    $creation = new \Moment\Moment($resultTask[0]['INS_DATE'], 'Europe/Berlin');
                     $creationFromNow = $creation->fromNow();
-                    $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                    $echeance = new \Moment\Moment($resultTask[0]['CLA_ECHEANCE'], 'UTC');
                     $echanceFuture = $echeance->calendar();
                     $data = [
-                        "id" => $result->getClaId(),
-                        "cl_id" => $result->getClId(),
-                        "nom" => $result->getclaNom(),
-                        "descr" => $result->getclaDescr(),
-                        "user" => utf8_encode($user[0]->getUsPrenom()),
+                        "id" => $resultTask[0]['CLA_ID'],
+                        "cl_id" => $resultTask[0]['CL_ID'],
+                        "nom" => $resultTask[0]['CLA_ID'],
+                        "descr" => $resultTask[0]['CLA_DESCR'],
+                        "user" => $resultTask[0]['US_PRENOM'],
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
-                        "statut" => utf8_encode($result->getClaStatus())
-
+                        "statut" => $resultTask[0]['CLA_STATUS'],
                     ];
                     $response = new JsonResponse($data);
                     $response->headers->set('Content-Type', 'application/json');
@@ -143,38 +141,30 @@ class TacheController extends Controller
                 } else {
                     return new JsonResponse('no taches', 200);
                 }
-
-
                 break;
             case 4:
                 //FUNECAP
-
                 \Moment\Moment::setLocale('fr_FR');
-                $tacheUtil = $this->get('site.service.taches_utils');
-                $task = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsTaches');
-                $result = $task->findOneBy([
-                    'claId' => $id
-                ]);
-                if ($result) {
-
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
-
-
-                    $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                $sqlTask = "SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES LEFT JOIN CENTRALE_ACHAT.dbo.USERS ON CENTRALE_ACHAT.dbo.USERS.US_ID = CENTRALE_FUNECAP.dbo.CLIENTS_TACHES.INS_USER WHERE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES.CLA_ID = :id";
+                $stmt = $conn->prepare($sqlTask);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $resultTask = $stmt->fetchAll();
+                if ($resultTask) {
+                    $creation = new \Moment\Moment($resultTask[0]['INS_DATE'], 'Europe/Berlin');
                     $creationFromNow = $creation->fromNow();
-                    $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                    $echeance = new \Moment\Moment($resultTask[0]['CLA_ECHEANCE'], 'UTC');
                     $echanceFuture = $echeance->calendar();
                     $data = [
-                        "id" => $result->getClaId(),
-                        "cl_id" => $result->getClId(),
-                        "nom" => $result->getclaNom(),
-                        "descr" => $result->getclaDescr(),
-                        "user" => utf8_encode($user[0]->getUsPrenom()),
+                        "id" => $resultTask[0]['CLA_ID'],
+                        "cl_id" => $resultTask[0]['CL_ID'],
+                        "nom" => $resultTask[0]['CLA_ID'],
+                        "descr" => $resultTask[0]['CLA_DESCR'],
+                        "user" => $resultTask[0]['US_PRENOM'],
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
-                        "statut" => utf8_encode($result->getClaStatus()),
-
+                        "statut" => $resultTask[0]['CLA_STATUS'],
                     ];
                     $response = new JsonResponse($data);
                     $response->headers->set('Content-Type', 'application/json');
@@ -183,38 +173,30 @@ class TacheController extends Controller
                 } else {
                     return new JsonResponse('no taches', 200);
                 }
-
-
                 break;
             case 5:
-                //PFPL
-
+                //FUNECAP
                 \Moment\Moment::setLocale('fr_FR');
-                $tacheUtil = $this->get('site.service.taches_utils');
-                $task = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsTaches');
-                $result = $task->findOneBy([
-                    'claId' => $id
-                ]);
-                if ($result) {
-
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
-
-
-                    $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                $sqlTask = "SELECT * FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES LEFT JOIN CENTRALE_ACHAT.dbo.USERS ON CENTRALE_ACHAT.dbo.USERS.US_ID = CENTRALE_PFPL.dbo.CLIENTS_TACHES.INS_USER WHERE CENTRALE_PFPL.dbo.CLIENTS_TACHES.CLA_ID = :id";
+                $stmt = $conn->prepare($sqlTask);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $resultTask = $stmt->fetchAll();
+                if ($resultTask) {
+                    $creation = new \Moment\Moment($resultTask[0]['INS_DATE'], 'Europe/Berlin');
                     $creationFromNow = $creation->fromNow();
-                    $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                    $echeance = new \Moment\Moment($resultTask[0]['CLA_ECHEANCE'], 'UTC');
                     $echanceFuture = $echeance->calendar();
                     $data = [
-                        "id" => $result->getClaId(),
-                        "cl_id" => $result->getClId(),
-                        "nom" => $result->getclaNom(),
-                        "descr" => $result->getclaDescr(),
-                        "user" => utf8_encode($user[0]->getUsPrenom()),
+                        "id" => $resultTask[0]['CLA_ID'],
+                        "cl_id" => $resultTask[0]['CL_ID'],
+                        "nom" => $resultTask[0]['CLA_ID'],
+                        "descr" => $resultTask[0]['CLA_DESCR'],
+                        "user" => $resultTask[0]['US_PRENOM'],
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
-                        "statut" => utf8_encode($result->getClaStatus()),
-
+                        "statut" => $resultTask[0]['CLA_STATUS'],
                     ];
                     $response = new JsonResponse($data);
                     $response->headers->set('Content-Type', 'application/json');
@@ -223,38 +205,30 @@ class TacheController extends Controller
                 } else {
                     return new JsonResponse('no taches', 200);
                 }
-
-
                 break;
             case 6:
-                //Roc-eclerc
-
+                //ROC
                 \Moment\Moment::setLocale('fr_FR');
-                $tacheUtil = $this->get('site.service.taches_utils');
-                $task = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsTaches');
-                $result = $task->findOneBy([
-                    'claId' => $id
-                ]);
-                if ($result) {
-
-                    $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findBy([ 'usId' => $result->getUsId() ]);
-
-
-                    $creation = new \Moment\Moment($result->getInsDate()->format('Y-m-d H:i:s'), 'UTC');
+                $sqlTask = "SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES LEFT JOIN CENTRALE_ACHAT.dbo.USERS ON CENTRALE_ACHAT.dbo.USERS.US_ID = CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES.INS_USER WHERE CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES.CLA_ID = :id";
+                $stmt = $conn->prepare($sqlTask);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $resultTask = $stmt->fetchAll();
+                if ($resultTask) {
+                    $creation = new \Moment\Moment($resultTask[0]['INS_DATE'], 'Europe/Berlin');
                     $creationFromNow = $creation->fromNow();
-                    $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
+                    $echeance = new \Moment\Moment($resultTask[0]['CLA_ECHEANCE'], 'UTC');
                     $echanceFuture = $echeance->calendar();
                     $data = [
-                        "id" => $result->getClaId(),
-                        "cl_id" => $result->getClId(),
-                        "nom" => $result->getclaNom(),
-                        "descr" => $result->getclaDescr(),
-                        "user" => utf8_encode($user[0]->getUsPrenom()),
+                        "id" => $resultTask[0]['CLA_ID'],
+                        "nom" => $resultTask[0]['CLA_ID'],
+                        "cl_id" => $resultTask[0]['CL_ID'],
+                        "descr" => $resultTask[0]['CLA_DESCR'],
+                        "user" => $resultTask[0]['US_PRENOM'],
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
-                        "statut" => utf8_encode($result->getClaStatus()),
-
+                        "statut" => $resultTask[0]['CLA_STATUS'],
                     ];
                     $response = new JsonResponse($data);
                     $response->headers->set('Content-Type', 'application/json');
@@ -263,8 +237,6 @@ class TacheController extends Controller
                 } else {
                     return new JsonResponse('no taches', 200);
                 }
-
-
                 break;
 
 

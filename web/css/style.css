@@ -847,3 +847,14 @@ a.link-note-client {
     margin-top: 30px;
     font-size: 25pt;
 }
+
+a.client-raisonsoc-detail-tache {
+    font-size: 19pt;
+    font-weight: 200 !important;
+    /* border: 1px solid black; */
+    padding: 10px;
+    border-radius: 4px;
+    color: black;
+    box-shadow: 0px 0px 3px black;
+    background-color: #F3F7F7;
+}
