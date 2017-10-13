@@ -1087,7 +1087,7 @@ $(function () {
                                     <h4>Pour ${moment(data.echeance).endOf('day').fromNow()} </h4>
                                 </div>
                                 <div class="column">
-                                    <button class="ui negative basic button">Terminer</button>
+                                    <a href="ui negative basic button">Terminer</a>
                                 </div>
                                
                             </div>
