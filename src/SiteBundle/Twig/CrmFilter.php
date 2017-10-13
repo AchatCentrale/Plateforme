@@ -207,7 +207,7 @@ class CrmFilter extends \Twig_Extension
                 return '<p class="pastille purple" ></p>';
                 break;
             case 20:
-                return '<i class="checkmark icon"></i>';
+                return '<i class="checkmark large icon"></i>';
                 break;
             default:
                 break;
