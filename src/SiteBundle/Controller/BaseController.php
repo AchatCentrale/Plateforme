@@ -710,6 +710,8 @@ class BaseController extends Controller
                 $tag = $stmtForTag->fetchAll();
 
 
+                dump($restresult);
+
                 return $this->render(
                     '@Site/Base/client.general.html.twig',
                     [

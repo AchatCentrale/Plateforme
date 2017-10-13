@@ -37,6 +37,8 @@ class FeedServices
         switch ($centrale){
 
 
+
+            case 1:
             case 'ACHAT_CENTRALE':
                 $action = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches')->findBy([
                     'clId' => $id
@@ -64,6 +66,7 @@ class FeedServices
 
                 return $this;
                 break;
+            case 6:
             case 'ROC_ECLERC':
                 $action = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsTaches')->findBy([
                     'clId' => $id
@@ -91,6 +94,7 @@ class FeedServices
 
                 return $this;
                 break;
+            case 4:
             case 'CENTRALE_FUNECAP':
                 $action = $this->doctrine->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsTaches')->findBy([
                     'clId' => $id
@@ -118,6 +122,7 @@ class FeedServices
 
                 return $this;
                 break;
+            case 2:
             case 'CENTRALE_GCCP':
                 $action = $this->doctrine->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsTaches')->findBy([
                     'clId' => $id
@@ -145,6 +150,7 @@ class FeedServices
 
                 return $this;
                 break;
+            case 5:
             case 'CENTRALE_PFPL':
                 $action = $this->doctrine->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsTaches')->findBy([
                     'clId' => $id
@@ -187,8 +193,7 @@ class FeedServices
     {
 
 
-        dump($this);
-
+        dump($this->feed);
         $result = array_merge( $this->getAction(), $this->getTickets(), $this->getNotes());
         $this->setFeed($result);
 
