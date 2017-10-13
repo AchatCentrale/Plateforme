@@ -1,4 +1,3 @@
-moment.locale('fr');
 
 (function ($, sr) {
     // debouncing function from John Hann
@@ -1084,8 +1083,11 @@ $(function () {
                             </div>
                             <div class="two column row">
                                 <div class="column">
-                                    <h4>Créée ${data.ins_date} </h4>
-                                    <h4>Pour le  ${data.echeance} </h4>
+                                    <h4>Créée ${moment(data.ins_date).fromNow()} </h4>
+                                    <h4>Pour ${moment(data.echeance).endOf('day').fromNow()} </h4>
+                                </div>
+                                <div class="column">
+                                    <button class="ui negative basic button">Terminer</button>
                                 </div>
                                
                             </div>
