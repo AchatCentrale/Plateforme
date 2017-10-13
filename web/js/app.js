@@ -864,6 +864,10 @@ $(function () {
                                               ${data.user}
                                             </a>
                                         </div>
+                                            <br/>
+                                            
+                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + checkCentrale(aidyCentrale) + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p>TEAM</p>"}
+                                           
             
                                     </div>
                                     <div class="one column row">
