@@ -125,9 +125,10 @@ class TacheController extends Controller
                     $echeance = new \Moment\Moment($result->getClaEcheance()->format('Y-m-d H:i:s'), 'UTC');
                     $echanceFuture = $echeance->calendar();
                     $data = [
-                        "id" => utf8_encode($result->getClaId()),
-                        "nom" => utf8_encode($result->getclaNom()),
-                        "descr" => utf8_encode($result->getclaDescr()),
+                        "id" => $result->getClaId(),
+                        "cl_id" => $result->getClId(),
+                        "nom" => $result->getclaNom(),
+                        "descr" => $result->getclaDescr(),
                         "user" => utf8_encode($user[0]->getUsPrenom()),
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
@@ -165,13 +166,14 @@ class TacheController extends Controller
                     $echanceFuture = $echeance->calendar();
                     $data = [
                         "id" => $result->getClaId(),
+                        "cl_id" => $result->getClId(),
                         "nom" => $result->getclaNom(),
                         "descr" => $result->getclaDescr(),
                         "user" => utf8_encode($user[0]->getUsPrenom()),
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
-                        "statut" => utf8_encode($result->getClaStatus())
+                        "statut" => utf8_encode($result->getClaStatus()),
 
                     ];
                     $response = new JsonResponse($data);
@@ -204,13 +206,14 @@ class TacheController extends Controller
                     $echanceFuture = $echeance->calendar();
                     $data = [
                         "id" => $result->getClaId(),
+                        "cl_id" => $result->getClId(),
                         "nom" => $result->getclaNom(),
                         "descr" => $result->getclaDescr(),
                         "user" => utf8_encode($user[0]->getUsPrenom()),
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
-                        "statut" => utf8_encode($result->getClaStatus())
+                        "statut" => utf8_encode($result->getClaStatus()),
 
                     ];
                     $response = new JsonResponse($data);
@@ -243,13 +246,14 @@ class TacheController extends Controller
                     $echanceFuture = $echeance->calendar();
                     $data = [
                         "id" => $result->getClaId(),
+                        "cl_id" => $result->getClId(),
                         "nom" => $result->getclaNom(),
                         "descr" => $result->getclaDescr(),
                         "user" => utf8_encode($user[0]->getUsPrenom()),
                         "creation" => $creationFromNow->getRelative(),
                         "echeance" => $echanceFuture,
                         "idCentrale" => $idCentrale,
-                        "statut" => utf8_encode($result->getClaStatus())
+                        "statut" => utf8_encode($result->getClaStatus()),
 
                     ];
                     $response = new JsonResponse($data);
