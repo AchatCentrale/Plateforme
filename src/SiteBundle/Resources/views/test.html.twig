@@ -1,15 +1,76 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <style>
+        .container-modal-home img {
+            margin: 5% 8%;
+            margin-bottom: 40px;
+        }
+    </style>
+
+    <!-- Large modal -->
+
+    <div class="modal fade" id="modal-home-promo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Offre !</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-modal-home">
+                        <img src="http://via.placeholder.com/500X300" alt="">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success">Voir le produit</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 
 
 
-</body>
-</html>
+    <script>
+
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+
+        $(window).on("load",function(){
+
+            var cookie = getCookie('modal-promo');
+
+
+            if(cookie){
+                return;
+            }else{
+                document.cookie = "modal-promo=true";
+                $('#modal-home-promo').modal('show');
+            }
+
+        });
+    </script>
+
+
+{% endblock body %}
