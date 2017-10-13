@@ -48,6 +48,7 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('avatar', [$this, 'getAvatar']),
             new \Twig_SimpleFilter('getClass', [$this, 'getClass']),
             new \Twig_SimpleFilter('centraleTickets', [$this, 'centraleTickets']),
+            new \Twig_SimpleFilter('isNumeric', [$this, 'isNumeric']),
         );
     }
 
@@ -103,7 +104,7 @@ class CrmFilter extends \Twig_Extension
     {
 
 
-        if (gettype($centrale) === "string") {
+        if (gettype($centrale) === "string" && ctype_digit($centrale) === false) {
             switch ($centrale) {
                 case 'ROC_ECLERC':
                 case 'ROC ECLERC':
@@ -128,6 +129,8 @@ class CrmFilter extends \Twig_Extension
             }
             return $centrale;
         } else {
+
+
             switch ($centrale) {
                 case '1':
                     return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-ac-tiny.png\" alt=\"\"></div>";
@@ -493,6 +496,16 @@ class CrmFilter extends \Twig_Extension
 
 
         return $tpl;
+    }
+
+    public function isNumeric($var){
+
+
+        if (ctype_digit($var)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
