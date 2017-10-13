@@ -64,7 +64,7 @@
 
                     <ul class="list-unstyled user_data">
                         <li><i class="fa fa-map-marker user-profile-icon"></i>
-                            {{ client[0].clAdresse1 | formatVille |  convert_encoding('UTF-8', 'Windows-1252') }}<br>
+                            {{ client[0].clAdresse1 | formatVille  }}<br>
                             {{ client[0].clCp }} {{ client[0].clVille | formatVille }}
                         </li>
                     </ul>
@@ -97,7 +97,7 @@
                                 <div class="item">
                                     <img class="ui avatar image image-avatar-list" data-title="Elliot Fu" data-content="Elliot has been a member since July 2012" src="https://semantic-ui.com/images/avatar/large/christian.jpg">
                                     <div class="content content-list-user">
-                                        <a href="//www.{{ centrale_link  }}.fr/Login.asp?LOGIN={{ u.ccMail }}&PASS={{ u.ccPass }}"><i class="user icon"></i>{{ u.ccPrenom| convert_encoding('UTF-8', 'Windows-1252')  }} {{ u.ccNom | convert_encoding('UTF-8', 'Windows-1252')}}</a>
+                                        <a href="//www.{{ centrale_link  }}.fr/Login.asp?LOGIN={{ u.ccMail }}&PASS={{ u.ccPass }}"><i class="user icon"></i>{{ u.ccPrenom  }} {{ u.ccNom }}</a>
                                         <div class="description"><i class="mail icon"></i>{{ u.ccMail }}</div>
                                         <div class="description"><i class="phone icon"></i>
                                             {{ u.ccTel | isEmpty | phone | raw }}
@@ -121,7 +121,7 @@
                         <div class="equal width row">
                             <div class="column">
                                 <h3 class="raison-soc-titre">
-                                    <i class="building icon"></i> {{ client[0].clRaisonsoc | convert_encoding('UTF-8', 'Windows-1252') }}
+                                    <i class="building icon"></i> {{ client[0].clRaisonsoc }}
                                 </h3>
 
                                 <div class="ui equal width grid container-hastag-label">
