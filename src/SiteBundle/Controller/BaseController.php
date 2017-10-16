@@ -1943,7 +1943,7 @@ class BaseController extends Controller
         }
     }
 
-    public function detailAction(Request $request, $id, $idCentrale)
+    public function detailRdvAction(Request $request, $id, $idCentrale)
     {
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
