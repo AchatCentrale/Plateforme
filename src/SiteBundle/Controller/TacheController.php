@@ -1105,4 +1105,50 @@ class TacheController extends Controller
     }
 
 
+    public function terminerRdvAction(Request $request, $id, $centrale){
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        switch ($centrale){
+
+            case "ACHAT_CENTRALE":
+            case "1":
+                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES SET CLA_STATUS = '30' WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $this->redirectToRoute('taches_home');
+            case "CENTRALE_GCCP":
+            case "2":
+                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $this->redirectToRoute('taches_home');
+            case "CENTRALE_FUNECAP":
+            case "4":
+                $sql = "UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $this->redirectToRoute('taches_home');
+            case "CENTRALE_PFPL":
+            case "5":
+                $sql = "UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $this->redirectToRoute('taches_home');
+
+
+
+        }
+
+
+    }
+
 }
