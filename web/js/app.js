@@ -447,6 +447,8 @@ $(function () {
             case 4:
                 return '<p class="pastille-detail purple" ></p> Reportée';
                 break;
+            case 20:
+                return '<i style="color: white;background-color: green;border-radius: 50%;height: 30px;width: 33px;padding-top: 5px;" class="checkmark large icon"></i>';
             default:
                 break;
 
