@@ -427,6 +427,8 @@ $(function () {
 
     function stateTask(state) {
 
+        console.log(state);
+
         state = parseInt(state);
 
         switch (state) {
