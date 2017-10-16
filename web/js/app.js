@@ -498,7 +498,6 @@ $(function () {
                             </div>
                             <br>
                             <div class="ui centered  grid">
-                                   
                                     <div class="one column row">
                                         <div class="column">
                                             <p>Assigné à : </p> 
@@ -508,8 +507,7 @@ $(function () {
                                             </a>
                                         </div>
                                             <br/>
-                                            
-                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + checkCentrale(aidyCentrale) + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p>TEAM</p>"}
+                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + checkCentrale(aidyCentrale) + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p><b>TEAM</b></p>"}
                                            
             
                                     </div>
@@ -818,7 +816,6 @@ $(function () {
 
 
         let url = CURRENT_URL + "taches/detail/" + aidyCentrale + "/" + aidy;
-        console.log(url);
 
         $.ajax({
 
