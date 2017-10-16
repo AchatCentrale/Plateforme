@@ -493,15 +493,9 @@ $(function () {
                                   <div class="state-tache-detail">
                                         ${ stateTask(data.statut) }
                                     </div>
-                                    `+
-                    if(data.statut === 20){
-                        `<div class="change-statut-tache">
+                                    <div class="change-statut-tache">
                                       <a href="http://crm.achatcentrale.fr/taches/terminer/${data.id}/${aidyCentrale}" class="ui button basic positive terminer-tache-home "> Action terminé</a>
-                                    </div>`
-                    }else {
-                        `<div></div>`
-                    }
-                    +`
+                                    </div>
                                 </div>
                             </div>
                             <br>
