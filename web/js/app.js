@@ -1,4 +1,3 @@
-
 (function ($, sr) {
     // debouncing function from John Hann
     // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
@@ -839,9 +838,6 @@ $(function () {
                 $('.modal-title-task-home').append(title);
 
 
-                console.log(data);
-
-
                 let tpl = `<h4>${data.nom}</h4>
                       <div class="detail-tache-etat">
                                   <div class="state-tache-detail">
@@ -854,7 +850,6 @@ $(function () {
                             </div>
                             <br>
                             <div class="ui centered  grid">
-                                   
                                     <div class="one column row">
                                         <div class="column">
                                             <p>Assigné à : </p> 
@@ -864,8 +859,7 @@ $(function () {
                                             </a>
                                         </div>
                                             <br/>
-                                            
-                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + checkCentrale(aidyCentrale) + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p>TEAM</p>"}
+                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + checkCentrale(aidyCentrale) + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p><b>TEAM</b></p>"}
                                            
             
                                     </div>
