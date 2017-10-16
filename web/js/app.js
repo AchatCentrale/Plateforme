@@ -448,7 +448,7 @@ $(function () {
                 return '<p class="pastille-detail purple" ></p> Reportée';
                 break;
             case 20:
-                return '<i style="color: white;background-color: green;border-radius: 50%;height: 30px;width: 33px;padding-top: 5px;" class="checkmark large icon"></i>';
+                return '<i style="color: white;background-color: green;border-radius: 50%;height: 30px;width: 33px;padding-top: 5px;" class="checkmark large icon">Action terminé</i>';
             default:
                 break;
 
@@ -493,9 +493,15 @@ $(function () {
                                   <div class="state-tache-detail">
                                         ${ stateTask(data.statut) }
                                     </div>
-                                    <div class="change-statut-tache">
+                                    `+
+                    if(data.statut === 20){
+                        `<div class="change-statut-tache">
                                       <a href="http://crm.achatcentrale.fr/taches/terminer/${data.id}/${aidyCentrale}" class="ui button basic positive terminer-tache-home "> Action terminé</a>
-                                    </div>
+                                    </div>`
+                    }else {
+                        `<div></div>`
+                    }
+                    +`
                                 </div>
                             </div>
                             <br>
