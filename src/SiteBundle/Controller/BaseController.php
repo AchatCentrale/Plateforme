@@ -1962,11 +1962,20 @@ class BaseController extends Controller
 
         if ($result) {
 
+
+            $creation = new \Moment\Moment($result[0]['INS_DATE'], 'Europe/Berlin');
+            $creationFromNow = $creation->fromNow();
+
+            $echeance = new \Moment\Moment($result[0]['CLA_ECHEANCE'], 'UTC');
+            $echanceFuture = $echeance->calendar();
+
+
+
             $data = [
                 "id" => $result[0]['CLA_ID'],
                 "nom" => $result[0]['CLA_DESCR'],
-                "ins_date" => $result[0]['INS_DATE'],
-                "echeance" => $result[0]['CLA_ECHEANCE']
+                "ins_date" => $creationFromNow,
+                "echeance" => $echanceFuture
             ];
             $response = new JsonResponse($data);
             $response->headers->set('Content-Type', 'application/json');
