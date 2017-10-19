@@ -1872,63 +1872,6 @@ $(function () {
 });
 
 
-let data = [
-    ["", "", "Bruneau", "Total"],
-    ["janv-17", "CA", "1 120€", "445848 €"],
-    ["janv-17", "ECO", "11 €", "444448 €"],
-    ["fev-17", "CA", "1 120€", "458448 €"],
-    ["fev-17", "ECO", "11 €", "444448 €"],
-    ["mars-17", "CA", "1 120€", "444448 €"],
-    ["mars-17", "ECO", "11 €", "444448 €"],
-    ["avr-17", "CA", "1 120€", "458448 €"],
-    ["avr-17", "ECO", "11 €", "444448 €"],
-    ["mai-17", "CA", "1 120€", "445848 €"],
-    ["mai-17", "ECO", "11 €", "445848 €"],
-    ["juin-17", "CA", "1 120€", "444448 €"],
-    ["juin-17", "ECO", "11 €", "444448 €"],
-    ["juillet-17", "CA", "1 120€", "584448 €"],
-    ["juillet-17", "ECO", "11 €", "444448 €"],
-    ["aout-17", "CA", "1 120€", "445848 €"],
-    ["aout-17", "ECO", "11 €", "444448 €"],
-    ["sept-17", "CA", "1 120€", "458448 €"],
-    ["sept-17", "ECO", "11 €", "444448 €"],
-    ["oct-17", "CA", "1 120€", "458448 €"],
-    ["oct-17", "ECO", "11 €", "458448 €"],
-    ["nov-17", "CA", "1 120€", "444448 €"],
-    ["nov-17", "ECO", "11 €", "445848 €"],
-    ["dec-17", "CA", "1 120€", "458448 €"],
-    ["dec-17", "ECO", "11 €", "445848 €"],
-    ["Total", "CA", "1104 €", "444448 €"],
-    ["Total", "ECO", "11478 €", "584448 €"],
-];
-let container = document.getElementById('table-conso-client');
-let hot = new Handsontable(container, {
-    data: JSON.parse(JSON.stringify(data)),
-    rowHeaderWidth: 1200,
-    colHeaders: true,
-    currentHeaderClassName: 'ht__highlight',
-    contextMenu: true,
-    debug: true,
-    manualColumnResize: true,
-    manualRowResize: true,
-    colWidths: [150, 60, 130, 130],
-    currentRowClassName: 'currentRow',
-    mergeCells: [
-        {row: 1, col: 0, rowspan: 2, colspan: 1},
-        {row: 3, col: 0, rowspan: 2, colspan: 1},
-        {row: 5, col: 0, rowspan: 2, colspan: 1},
-        {row: 7, col: 0, rowspan: 2, colspan: 1},
-        {row: 9, col: 0, rowspan: 2, colspan: 1},
-        {row: 11, col: 0, rowspan: 2, colspan: 1},
-        {row: 13, col: 0, rowspan: 2, colspan: 1},
-        {row: 15, col: 0, rowspan: 2, colspan: 1},
-        {row: 17, col: 0, rowspan: 2, colspan: 1},
-        {row: 19, col: 0, rowspan: 2, colspan: 1},
-        {row: 21, col: 0, rowspan: 2, colspan: 1},
-        {row: 23, col: 0, rowspan: 2, colspan: 1},
-        {row: 25, col: 0, rowspan: 2, colspan: 1},
 
-    ]
-});
 
 

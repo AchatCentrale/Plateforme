@@ -95,7 +95,7 @@
 
                             {% for u in user  %}
                                 <div class="item">
-                                    <img class="ui avatar image image-avatar-list" data-title="Elliot Fu" data-content="Elliot has been a member since July 2012" src="https://semantic-ui.com/images/avatar/large/christian.jpg">
+                                    <img class="ui avatar image image-avatar-list" data-title="" data-content="" src="https://semantic-ui.com/images/avatar/large/christian.jpg">
                                     <div class="content content-list-user">
                                         <a href="//www.{{ centrale_link  }}.fr/Login.asp?LOGIN={{ u.ccMail }}&PASS={{ u.ccPass }}"><i class="user icon"></i>{{ u.ccPrenom  }} {{ u.ccNom }}</a>
                                         <div class="description"><i class="mail icon"></i>{{ u.ccMail }}</div>
@@ -172,11 +172,7 @@
                             <div class="column">
 
 
-                                {% if groupe %}
-                                    <p class="ui label large green">{{ groupe[0].grDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p><br>
-                                {% else %}
-                                    <p></p>
-                                {% endif %}
+
 
                                 <div class="hastag-container">
 

@@ -205,10 +205,21 @@ remove-hashtag:
     methods: POST
 
 
-consomnation-index:
-    path: /client/{id}/{centrale}/consomnation
+consommation-index:
+    path: /client/consommation
     defaults: {_controller: SiteBundle:Consomnation:index}
 
+consomnation-client:
+    path: /client/{id}/{centrale}/consommation
+    defaults: {_controller: SiteBundle:Consomnation:indexClient}
+
+consommation-import:
+    path: /client/consommation/import
+    defaults: {_controller: SiteBundle:Consomnation:importConso}
+
+consommation-test:
+    path: /client/consommation/test
+    defaults: {_controller: SiteBundle:Consomnation:test}
 
 notification-test:
     path: /notification/test
