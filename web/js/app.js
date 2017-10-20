@@ -1019,6 +1019,40 @@ $(function () {
                         console.log($('.text-content-update-note').val());
                         console.log('click');
 
+
+                        let id = $(this).data('id');
+                        let idCentrale = $(this).data('centrale');
+
+                        let aidy = Number(id);
+                        let aidyCentrale = Number(idCentrale);
+
+
+                        let url = CURRENT_URL + "note/update/" + aidy + "/" + aidyCentrale;
+
+                        console.log(url);
+                        // $.ajax({
+                        //
+                        //     // Adresse à laquelle la requête est envoyée
+                        //     url: url,
+                        //
+                        //     // Le délai maximun en millisecondes de traitement de la demande
+                        //     timeout: 4000,
+                        //
+                        //     // La fonction à apeller si la requête aboutie
+                        //     success: function (data) {
+                        //
+                        //
+                        //
+                        //
+                        //     },
+                        //     error: function (e) {
+                        //         console.error(e);
+                        //     }
+                        //
+                        //
+                        // });
+
+
                     })
 
                 });
@@ -1045,7 +1079,6 @@ $(function () {
 
 
         let url = CURRENT_URL + "rdv/detail/" + aidyCentrale + "/" + aidy;
-        console.log(url);
 
         $.ajax({
 

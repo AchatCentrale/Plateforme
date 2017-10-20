@@ -1943,6 +1943,10 @@ class BaseController extends Controller
         }
     }
 
+    public function updateNoteAction(Request $request, $id, $idCentrale){
+        return new JsonResponse('Note mise à jour', 200);
+    }
+
     public function detailRdvAction(Request $request, $id, $idCentrale)
     {
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
