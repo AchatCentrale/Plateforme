@@ -54,7 +54,6 @@ class ConsomnationController extends Controller
 
             if (($handle = fopen($file->getRealPath(), "r")) !== FALSE) {
                 while(($row = fgetcsv($handle, 10000, "\r" )) !== FALSE) {
-                    dump($row);
 
 
                     $champ = str_getcsv($row[0]);
@@ -63,12 +62,12 @@ class ConsomnationController extends Controller
                     unset($row[0]);
 
 
-                    for ($i = 1; $i < count($row); $i++){
+
+                    for ($i = 1; $i <= count($row); $i++){
 
                         $ligne = $row[$i];
 
                         $ligne = explode(";", $ligne);
-
 
 
                         $date = new DateTime($ligne[4]);
@@ -87,6 +86,8 @@ class ConsomnationController extends Controller
                         $result = $stmt->fetchAll();
 
 
+                        return new JsonResponse('Importation réussie', 200);
+
 
 
                     }
@@ -98,7 +99,6 @@ class ConsomnationController extends Controller
 
 
 
-        return $this->render('@Site/test.html.twig');
     }
 
     public function testAction(Request $request){
@@ -106,23 +106,11 @@ class ConsomnationController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $sqlChamps = "SELECT DISTINCT FO_RAISONSOC
-                    FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                    LEFT JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON CENTRALE_ACHAT.dbo.CLIENTS_CONSO.FO_ID = CENTRALE_PRODUITS.dbo.FOURNISSEURS.FO_ID";
-
-
-
-        $stmt = $conn->prepare($sqlChamps);
-        $stmt->execute();
-        $champs = $stmt->fetchAll();
-
-
-
-        $sqlConso = "SELECT DISTINCT a.INS_DATE ,sum(a.CLC_PRIX_PUBLIC) as CA_PUBLIC , sum(a.CLC_PRIX_CENTRALE) as CA_CENTRALE , b.FO_RAISONSOC
-                    FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO a join CENTRALE_PRODUITS.dbo.FOURNISSEURS b
-                    on a.FO_ID = b.FO_ID
-                    GROUP BY a.INS_DATE, b.FO_RAISONSOC
-                    ORDER BY INS_DATE";
+                $sqlConso = "SELECT DISTINCT (SELECT CONVERT(VARCHAR(8), a.INS_DATE, 3) AS [MM/DD/YY]) as date ,sum(a.CLC_PRIX_PUBLIC) as CA_PUBLIC , sum(a.CLC_PRIX_CENTRALE) as CA_CENTRALE , b.FO_RAISONSOC
+                            FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO a join CENTRALE_PRODUITS.dbo.FOURNISSEURS b
+                                on a.FO_ID = b.FO_ID
+                            GROUP BY a.INS_DATE, b.FO_RAISONSOC
+                            ORDER BY date";
 
         $stmtConso = $conn->prepare($sqlConso);
         $stmtConso->execute();

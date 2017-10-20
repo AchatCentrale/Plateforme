@@ -1002,7 +1002,6 @@ $(function () {
                 $('#modal-detail-task-home').modal('show')
 
                 $('.modifier-note-home').on('click', function (e) {
-                    console.log(e);
                     console.log('modifier-note-home');
 
                     $('.note-content-home').html('');
@@ -1010,11 +1009,13 @@ $(function () {
 
                     let tpl = ``;
 
+                    let content  = $('.note-description').html();
+
 
                     $('.note-content-home').html('<div class="ui form">\n' +
                         '<div class="field">\n' +
                         '    <label>Modifier la note</label>\n' +
-                        '    <textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">Eu Mme Guedour hier, je lui ai présenté la plateforme et renvoyé les codes Bruneau ainsi que ceux de la plateforme.</textarea>\n' +
+                        '    <textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">'+content+''</textarea>\n' +
                         '  </div>\n' +
                         '<button class="ui button modifier-note-home">Enregistrer</button>\n' +
                         '</div>');
@@ -1847,12 +1848,7 @@ $(function () {
 
     }
 
-    Dropzone.options.importDropzone = {
-        dictDefaultMessage: "<i class=\"file huge excel outline icon\"></i>Deposer le fichiers .csv ou <span class='button huge ui'>Choisir un fichier</span>",
-        thumbnailWidth: 400,
-        thumbnailHeight: 100,
 
-    };
 
     $('#datetimepicker1').datetimepicker({
         locale: 'fr'
@@ -1870,6 +1866,9 @@ $(function () {
 
 
 });
+
+
+
 
 
 

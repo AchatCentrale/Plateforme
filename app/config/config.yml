@@ -64,6 +64,7 @@ doctrine:
                 options:
                     ansi_nulls: on
                     ansi_warnings: on
+                    20: false
             centrale_produits:
                 driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
                 host:           "185.29.149.32"
@@ -74,6 +75,7 @@ doctrine:
                 options:
                     ansi_nulls: on
                     ansi_warnings: on
+                    20: false
             centrale_funecap:
                  driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
                  host:           "185.29.149.32"
@@ -84,6 +86,7 @@ doctrine:
                  options:
                      ansi_nulls: on
                      ansi_warnings: on
+                     20: false
             achat_centrale:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
                 host:         "185.29.149.32"
@@ -94,6 +97,7 @@ doctrine:
                 options:
                     ansi_nulls: on
                     ansi_warnings: on
+                    20: false
             roc_eclerc:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
                 host:         "185.29.149.32"
@@ -104,6 +108,7 @@ doctrine:
                 options:
                      ansi_nulls: on
                      ansi_warnings: on
+                     20: false
             centrale_gccp:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
                 host:         "185.29.149.32"
@@ -114,6 +119,7 @@ doctrine:
                 options:
                     ansi_nulls: on
                     ansi_warnings: on
+                    20: false
             centrale_pascal_leclerc:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
                 host:         "185.29.149.32"
@@ -124,6 +130,7 @@ doctrine:
                 options:
                     ansi_nulls: on
                     ansi_warnings: on
+                    20: false
             ac_produits:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
                 host:         "185.29.149.32"
@@ -134,6 +141,7 @@ doctrine:
                 options:
                     ansi_nulls: on
                     ansi_warnings: on
+                    20: false
 
 
     orm:

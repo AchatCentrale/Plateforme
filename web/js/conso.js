@@ -1,38 +1,4 @@
-let urlConso = "http://crm.achatcentrale.fr/client/consommation/test";
-
-
-
-
-
-// let container = document.getElementById('table-conso-client');
-// let hot = new Handsontable(container, {
-//     rowHeaderWidth: 1200,
-//     colHeaders: true,
-//     currentHeaderClassName: 'ht__highlight',
-//     contextMenu: true,
-//     debug: true,
-//     manualColumnResize: true,
-//     manualRowResize: true,
-//     colWidths: [150, 60, 130, 130],
-//     currentRowClassName: 'currentRow',
-//     mergeCells: [
-//         {row: 0, col: 0, rowspan: 2, colspan: 1},
-//         {row: 2, col: 0, rowspan: 2, colspan: 1},
-//         {row: 4, col: 0, rowspan: 2, colspan: 1},
-//         {row: 6, col: 0, rowspan: 2, colspan: 1},
-//         {row: 8, col: 0, rowspan: 2, colspan: 1},
-//         {row: 10, col: 0, rowspan: 2, colspan: 1},
-//         {row: 12, col: 0, rowspan: 2, colspan: 1},
-//         {row: 14, col: 0, rowspan: 2, colspan: 1},
-//         {row: 17, col: 0, rowspan: 2, colspan: 1},
-//         {row: 19, col: 0, rowspan: 2, colspan: 1},
-//         {row: 21, col: 0, rowspan: 2, colspan: 1},
-//         {row: 23, col: 0, rowspan: 2, colspan: 1},
-//         {row: 25, col: 0, rowspan: 2, colspan: 1},
-//
-//     ]
-// });
-
+let urlConso = "http://localhost:8000/client/consommation/test";
 
 $.ajax({
 
@@ -61,13 +27,14 @@ $.ajax({
                 {row: 10, col: 0, rowspan: 2, colspan: 1},
                 {row: 12, col: 0, rowspan: 2, colspan: 1},
                 {row: 14, col: 0, rowspan: 2, colspan: 1},
-                {row: 17, col: 0, rowspan: 2, colspan: 1},
-                {row: 19, col: 0, rowspan: 2, colspan: 1},
-                {row: 21, col: 0, rowspan: 2, colspan: 1},
-                {row: 23, col: 0, rowspan: 2, colspan: 1},
-                {row: 25, col: 0, rowspan: 2, colspan: 1},
+                {row: 16, col: 0, rowspan: 2, colspan: 1},
+                {row: 18, col: 0, rowspan: 2, colspan: 1},
+                {row: 20, col: 0, rowspan: 2, colspan: 1},
+                {row: 22, col: 0, rowspan: 2, colspan: 1},
+                {row: 24, col: 0, rowspan: 2, colspan: 1},
 
             ]
+
         });
 
     },
@@ -78,3 +45,21 @@ $.ajax({
     }
 
 });
+
+
+
+Dropzone.options.importDropzone = {
+
+    init: function () {
+
+        this.on('addedfile', function (file) {
+            swal("Added file.");
+        })
+
+    },
+
+    dictDefaultMessage: "<i class=\"file huge excel outline icon\"></i>Deposer le fichiers .csv ou <span class='button huge ui'>Choisir un fichier</span>",
+    thumbnailWidth: 400,
+    thumbnailHeight: 100,
+
+};
