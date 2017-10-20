@@ -1020,11 +1020,6 @@ $(function () {
                         console.log('click');
 
 
-                        let id = $(this).data('id');
-                        let idCentrale = $(this).data('centrale');
-
-                        let aidy = Number(id);
-                        let aidyCentrale = Number(idCentrale);
 
 
                         let url = CURRENT_URL + "note/update/" + aidy + "/" + aidyCentrale;
