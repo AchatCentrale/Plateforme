@@ -1007,15 +1007,19 @@ $(function () {
                     console.log('modifier-note-home');
 
                     $('.note-content-home').html('');
-
-
-
-
-
                     let tpl = `<div class="ui form"><div class="field"><label>Modifier la note</label><textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">${content}</textarea></div><button class="ui button modifier-note-home">Enregistrer</button></div>`;
+
+                    $('.modifier-note-home').hide();
 
 
                     $('.note-content-home').html(tpl);
+
+                    $('.modifier-note-home').on('click', function (e) {
+
+
+                        console.log('click');
+
+                    })
 
                 });
 
