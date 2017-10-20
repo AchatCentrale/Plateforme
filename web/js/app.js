@@ -1007,18 +1007,13 @@ $(function () {
                     $('.note-content-home').html('');
 
 
-                    let tpl = ``;
 
-                    let content  = $('.note-description').html();
+                    let content = $('.note-description').html();
+
+                    let tpl = `<div class="ui form"><div class="field"><label>Modifier la note</label><textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">${content}</textarea></div><button class="ui button modifier-note-home">Enregistrer</button></div>`;
 
 
-                    $('.note-content-home').html('<div class="ui form">\n' +
-                        '<div class="field">\n' +
-                        '    <label>Modifier la note</label>\n' +
-                        '    <textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">'+content+''</textarea>\n' +
-                        '  </div>\n' +
-                        '<button class="ui button modifier-note-home">Enregistrer</button>\n' +
-                        '</div>');
+                    $('.note-content-home').html(tpl);
 
                 });
 
