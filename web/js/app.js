@@ -1007,7 +1007,7 @@ $(function () {
                     console.log('modifier-note-home');
 
                     $('.note-content-home').html('');
-                    let tpl = `<div class="ui form"><div class="field"><label>Modifier la note</label><textarea style="margin-top: 0px; margin-bottom: 0px; height: 112px;">${content}</textarea></div><button class="ui button modifier-note-home">Enregistrer</button></div>`;
+                    let tpl = `<div class="ui form"><div class="field"><label>Modifier la note</label><textarea class="text-content-update-note" style="margin-top: 0px; margin-bottom: 0px; height: 112px;">${content}</textarea></div><button class="ui button modifier-note-home">Enregistrer</button></div>`;
 
                     $('.modifier-note-home').hide();
 
@@ -1016,7 +1016,7 @@ $(function () {
 
                     $('.modifier-note-home').on('click', function (e) {
 
-
+                        console.log($('.text-content-update-note').val());
                         console.log('click');
 
                     })
