@@ -1,4 +1,4 @@
-let urlConso = "http://localhost:8000/client/consommation/test";
+let urlConso = "http://crm.achatcentrale.fr/client/consommation/test";
 
 $.ajax({
 
