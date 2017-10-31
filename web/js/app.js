@@ -974,13 +974,13 @@ $(function () {
 
                 let tpl = `<div class="ui centered grid header-detail-note">
                               <h4>Créée ${data.ins_date} pour le client ${data.cl_raisonsoc.CL_RAISONSOC} </h4>
-                            <div class="one column row">
+                            <div class="one column row tpl-inject-note">
                                 <div class="column note-content-home">
                                     <p class="note-description">${data.nom}</p>
                                 </div>
     
                             </div>
-                            <div class="two column row">
+                            <div class="two column row ">
                                 <div class="column">
                                     <h4>Créée ${moment(data.ins_date).fromNow()} </h4>
                                 </div>
@@ -1016,36 +1016,47 @@ $(function () {
 
                     $('.modifier-note-home').on('click', function (e) {
 
-                        console.log($('.text-content-update-note').val());
-                        console.log('click');
-
-
+                        let note = $('.text-content-update-note').val();
 
 
                         let url = CURRENT_URL + "note/update/" + aidy + "/" + aidyCentrale;
 
                         console.log(url);
-                        // $.ajax({
-                        //
-                        //     // Adresse à laquelle la requête est envoyée
-                        //     url: url,
-                        //
-                        //     // Le délai maximun en millisecondes de traitement de la demande
-                        //     timeout: 4000,
-                        //
-                        //     // La fonction à apeller si la requête aboutie
-                        //     success: function (data) {
-                        //
-                        //
-                        //
-                        //
-                        //     },
-                        //     error: function (e) {
-                        //         console.error(e);
-                        //     }
-                        //
-                        //
-                        // });
+
+
+                        $.ajax({
+
+                            // Adresse à laquelle la requête est envoyée
+                            url: url,
+                            data: {
+                                'note': note
+                            },
+
+                            method: "POST",
+
+                            // Le délai maximun en millisecondes de traitement de la demande
+                            timeout: 4000,
+
+                            // La fonction à apeller si la requête aboutie
+                            success: function (data) {
+
+                                let tpl = `<div class="column note-content-home">
+                                    <p class="note-description">Eu Madame Derhy. Je lui ai prÃ©sentÃ© la centrale. Ils ont commandÃ© une fois chez Bruneau cette annÃ©e. Je lui ai renvoyÃ© ses identifiants. test</p>
+                                    <p>enregistrement réussi</p>
+                                </div>`;
+
+                                $('.tpl-inject-note').after().remove().append(tpl);
+
+
+
+
+                            },
+                            error: function (e) {
+                                console.error(e);
+                            }
+
+
+                        });
 
 
                     })
@@ -1876,7 +1887,6 @@ $(function () {
         });
 
     }
-
 
 
     $('#datetimepicker1').datetimepicker({

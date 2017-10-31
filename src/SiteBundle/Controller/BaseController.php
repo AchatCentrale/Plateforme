@@ -3,7 +3,6 @@
 namespace SiteBundle\Controller;
 
 
-use Goodby\CSV\Export\Standard\Collection\PdoCollection;
 use Goodby\CSV\Export\Standard\CsvFileObject;
 use Goodby\CSV\Export\Standard\Exporter;
 use Goodby\CSV\Export\Standard\ExporterConfig;
@@ -91,8 +90,6 @@ class BaseController extends Controller
         $stmtNote = $conn->prepare($sqlNote);
         $stmtNote->execute();
         $notes = $stmtNote->fetchAll();
-
-
 
 
         $sqlAllClients = "SELECT DISTINCT *
@@ -1932,7 +1929,7 @@ class BaseController extends Controller
                 "nom" => $result[0]['CN_NOTE'],
                 "ins_date" => $result[0]['INS_DATE'],
                 "cl_id" => $result[0]['CL_ID'],
-                "cl_raisonsoc" => $clientService->array_utf8_encode($clientService->getTheClientRaisonSoc($result[0]['CL_ID'],$result[0]['SO_ID'] )),
+                "cl_raisonsoc" => $clientService->array_utf8_encode($clientService->getTheClientRaisonSoc($result[0]['CL_ID'], $result[0]['SO_ID'])),
             ];
             $response = new JsonResponse($data);
             $response->headers->set('Content-Type', 'application/json');
@@ -1943,8 +1940,164 @@ class BaseController extends Controller
         }
     }
 
-    public function updateNoteAction(Request $request, $id, $idCentrale){
-        return new JsonResponse('Note mise à jour', 200);
+    public function updateNoteAction(Request $request, $id, $idCentrale)
+    {
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $note = $request->get('note');
+
+        switch ($idCentrale) {
+            case "CENTRALE_FUNECAP":
+                $fct = $request->request->get('fct');
+                $mail = $request->request->get('mail');
+                $tel = $request->request->get('tel');
+                $nom = $request->request->get('nom');
+                $prenom = $request->request->get('prenom');
+                $pass = $request->request->get('pass');
+
+
+                $conn = $this->get('database_connection');
+                $sql = 'UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_USERS
+                    SET CC_FONCTION = :fct, CC_MAIL = :mail, CC_TEL = :tel, CC_PASS = :pass, CC_PRENOM = :prenom, CC_NOM = :nom 
+                    WHERE CC_ID = :id';
+
+                $stmt = $conn->prepare($sql);
+
+
+                $stmt->bindValue("fct", $fct, 'integer');
+                $stmt->bindValue("mail", $mail, 'text');
+                $stmt->bindValue("tel", $tel, 'integer');
+                $stmt->bindValue("nom", $nom, 'text');
+                $stmt->bindValue("prenom", $prenom, 'text');
+                $stmt->bindValue("pass", $pass, 'text');
+                $stmt->bindValue("id", $id);
+
+
+                $result = $stmt->execute();
+
+
+                return new JsonResponse($result, 200);
+
+                break;
+            case "ROC_ECLERC":
+                $em = $this->getDoctrine()->getManager('roc_eclerc');
+                $siret = $request->request->get('siret');
+                $mail = $request->request->get('mail');
+                $tel = $request->request->get('tel');
+                $cp = $request->request->get('cp');
+                $eff = $request->request->get('eff');
+                $ca = $request->request->get('ca');
+                $adresse = $request->request->get('adresse');
+                $ville = $request->request->get('ville');
+                $client = $em->getRepository('RocEclercBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+                if (!$client) {
+                    throw $this->createNotFoundException(
+                        'Pas de client pour l\'id ' . $id
+                    );
+                }
+                $client[0]->setClSiret($siret);
+                $client[0]->setClMail($mail);
+                $client[0]->setClTel($tel);
+                $client[0]->setClCp($cp);
+                $client[0]->setClEffectif($eff);
+                $client[0]->setClCa($ca);
+                $client[0]->setClAdresse1($adresse);
+                $client[0]->setClVille($ville);
+                $em->flush();
+                $res = "client mise à jour";
+                return new JsonResponse($res, 200);
+                break;
+            case "CENTRALE_PFPL":
+                $em = $this->getDoctrine()->getManager('centrale_pascal_leclerc');
+                $siret = $request->request->get('siret');
+                $mail = $request->request->get('mail');
+                $tel = $request->request->get('tel');
+                $cp = $request->request->get('cp');
+                $eff = $request->request->get('eff');
+                $ca = $request->request->get('ca');
+                $adresse = $request->request->get('adresse');
+                $ville = $request->request->get('ville');
+                $client = $em->getRepository('PfplBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+                if (!$client) {
+                    throw $this->createNotFoundException(
+                        'Pas de client pour l\'id ' . $id
+                    );
+                }
+                $client[0]->setClSiret($siret);
+                $client[0]->setClMail($mail);
+                $client[0]->setClTel($tel);
+                $client[0]->setClCp($cp);
+                $client[0]->setClEffectif($eff);
+                $client[0]->setClCa($ca);
+                $client[0]->setClAdresse1($adresse);
+                $client[0]->setClVille($ville);
+                $em->flush();
+                $res = "client mise à jour";
+                return new JsonResponse($res, 200);
+                break;
+            case "CENTRALE_GCCP":
+                $em = $this->getDoctrine()->getManager('centrale_gccp');
+                $siret = $request->request->get('siret');
+                $mail = $request->request->get('mail');
+                $tel = $request->request->get('tel');
+                $cp = $request->request->get('cp');
+                $eff = $request->request->get('eff');
+                $ca = $request->request->get('ca');
+                $adresse = $request->request->get('adresse');
+                $ville = $request->request->get('ville');
+                $client = $em->getRepository('GccpBundle:Clients')->findBy([
+                    'clId' => $id
+                ]);
+                if (!$client) {
+                    throw $this->createNotFoundException(
+                        'Pas de client pour l\'id ' . $id
+                    );
+                }
+                $client[0]->setClSiret($siret);
+                $client[0]->setClMail($mail);
+                $client[0]->setClTel($tel);
+                $client[0]->setClCp($cp);
+                $client[0]->setClEffectif($eff);
+                $client[0]->setClCa($ca);
+                $client[0]->setClAdresse1($adresse);
+                $client[0]->setClVille($ville);
+                $em->flush();
+                $res = "client mise à jour";
+                return new JsonResponse($res, 200);
+                break;
+            case 1:
+            case "ACHAT_CENTRALE":
+
+                $con = $this->get('database_connection');
+
+                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
+
+
+                return new JsonResponse($stmt->errorCode(), 200);
+                break;
+
+            default:
+                break;
+        }
+        $res = "Aucun client mise a jour";
+
+        return new JsonResponse($res, 200);
+
+
     }
 
     public function detailRdvAction(Request $request, $id, $idCentrale)
@@ -1972,7 +2125,6 @@ class BaseController extends Controller
 
             $echeance = new \Moment\Moment($result[0]['CLA_ECHEANCE'], 'UTC');
             $echanceFuture = $echeance->calendar();
-
 
 
             $data = [
@@ -2506,10 +2658,9 @@ class BaseController extends Controller
             case 'roc':
 
 
-
                 // récupère le conteneur de services pour le passer à la closure
                 $container = $this->container;
-                $response = new StreamedResponse(function() use($container) {
+                $response = new StreamedResponse(function () use ($container) {
                     $conn = $this->get('database_connection');
                     $stmt = $conn->prepare('SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Clients WHERE SO_ID = 6');
                     $stmt->execute();
@@ -2531,7 +2682,7 @@ class BaseController extends Controller
                 });
 
                 $response->headers->set('Content-Type', 'application/force-download');
-                $response->headers->set('Content-Disposition','attachment; filename="export.csv"');
+                $response->headers->set('Content-Disposition', 'attachment; filename="export.csv"');
 
                 return $response;
                 break;
@@ -2707,14 +2858,12 @@ class BaseController extends Controller
             $tags = $stmt->fetchAll();
 
 
-
             return $this->render('@Site/tags/all.html.twig', [
-                    "tag" => $tags
+                "tag" => $tags
             ]);
 
 
         }
-
 
 
         $sqlTags = "SELECT DISTINCT CL_REF, SO_ID, CL_RAISONSOC, CL_ADRESSE1, CL_TEL, CL_SIRET, CL_ID, CL_VILLE
@@ -2780,13 +2929,13 @@ class BaseController extends Controller
         ]);
     }
 
-    public function removeHastagAction(Request $request, $tag, $centrale){
+    public function removeHastagAction(Request $request, $tag, $centrale)
+    {
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
-        switch ($centrale)
-        {
+        switch ($centrale) {
             case 1:
                 $sql = "DELETE FROM CENTRALE_ACHAT.dbo.CLIENTS_TAG
                 WHERE TAG = :tag ";
@@ -2833,8 +2982,6 @@ class BaseController extends Controller
                 return new JsonResponse('Tag supprimé', 200);
                 break;
         }
-
-
 
 
     }
