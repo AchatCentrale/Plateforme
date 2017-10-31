@@ -1,4 +1,4 @@
-let urlConso = "http://crm.achatcentrale.fr/client/consommation/test";
+let urlConso = "http://localhost:8000/client/consommation/test";
 
 $.ajax({
 
@@ -16,7 +16,7 @@ $.ajax({
 
         hot3 = new Handsontable(container3, {
             data: dataConso,
-            colHeaders: true,
+            colHeaders: ["Date", "CA Prix public", "CA Prix centrale", "Fournisseurs" ],
             rowHeaders: true,
             minSpareRows: 1,
             mergeCells: [
