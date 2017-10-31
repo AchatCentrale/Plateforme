@@ -1948,127 +1948,77 @@ class BaseController extends Controller
         $note = $request->get('note');
 
         switch ($idCentrale) {
+            case 4:
             case "CENTRALE_FUNECAP":
-                $fct = $request->request->get('fct');
-                $mail = $request->request->get('mail');
-                $tel = $request->request->get('tel');
-                $nom = $request->request->get('nom');
-                $prenom = $request->request->get('prenom');
-                $pass = $request->request->get('pass');
+                $con = $this->get('database_connection');
 
-
-                $conn = $this->get('database_connection');
-                $sql = 'UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_USERS
-                    SET CC_FONCTION = :fct, CC_MAIL = :mail, CC_TEL = :tel, CC_PASS = :pass, CC_PRENOM = :prenom, CC_NOM = :nom 
-                    WHERE CC_ID = :id';
+                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
 
                 $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
 
 
-                $stmt->bindValue("fct", $fct, 'integer');
-                $stmt->bindValue("mail", $mail, 'text');
-                $stmt->bindValue("tel", $tel, 'integer');
-                $stmt->bindValue("nom", $nom, 'text');
-                $stmt->bindValue("prenom", $prenom, 'text');
-                $stmt->bindValue("pass", $pass, 'text');
-                $stmt->bindValue("id", $id);
-
-
-                $result = $stmt->execute();
-
-
-                return new JsonResponse($result, 200);
-
+                return new JsonResponse($stmt->errorCode(), 200);
                 break;
+            case 6:
             case "ROC_ECLERC":
-                $em = $this->getDoctrine()->getManager('roc_eclerc');
-                $siret = $request->request->get('siret');
-                $mail = $request->request->get('mail');
-                $tel = $request->request->get('tel');
-                $cp = $request->request->get('cp');
-                $eff = $request->request->get('eff');
-                $ca = $request->request->get('ca');
-                $adresse = $request->request->get('adresse');
-                $ville = $request->request->get('ville');
-                $client = $em->getRepository('RocEclercBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                if (!$client) {
-                    throw $this->createNotFoundException(
-                        'Pas de client pour l\'id ' . $id
-                    );
-                }
-                $client[0]->setClSiret($siret);
-                $client[0]->setClMail($mail);
-                $client[0]->setClTel($tel);
-                $client[0]->setClCp($cp);
-                $client[0]->setClEffectif($eff);
-                $client[0]->setClCa($ca);
-                $client[0]->setClAdresse1($adresse);
-                $client[0]->setClVille($ville);
-                $em->flush();
-                $res = "client mise à jour";
-                return new JsonResponse($res, 200);
+                $con = $this->get('database_connection');
+
+                $sql = "UPDATE CENTRALE_ROC_ECLERC.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
+
+
+                return new JsonResponse($stmt->errorCode(), 200);
                 break;
+            case 5:
             case "CENTRALE_PFPL":
-                $em = $this->getDoctrine()->getManager('centrale_pascal_leclerc');
-                $siret = $request->request->get('siret');
-                $mail = $request->request->get('mail');
-                $tel = $request->request->get('tel');
-                $cp = $request->request->get('cp');
-                $eff = $request->request->get('eff');
-                $ca = $request->request->get('ca');
-                $adresse = $request->request->get('adresse');
-                $ville = $request->request->get('ville');
-                $client = $em->getRepository('PfplBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                if (!$client) {
-                    throw $this->createNotFoundException(
-                        'Pas de client pour l\'id ' . $id
-                    );
-                }
-                $client[0]->setClSiret($siret);
-                $client[0]->setClMail($mail);
-                $client[0]->setClTel($tel);
-                $client[0]->setClCp($cp);
-                $client[0]->setClEffectif($eff);
-                $client[0]->setClCa($ca);
-                $client[0]->setClAdresse1($adresse);
-                $client[0]->setClVille($ville);
-                $em->flush();
-                $res = "client mise à jour";
-                return new JsonResponse($res, 200);
+                $con = $this->get('database_connection');
+
+                $sql = "UPDATE CENTRALE_PFPL.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
+
+
+                return new JsonResponse($stmt->errorCode(), 200);
                 break;
+            case 3 :
             case "CENTRALE_GCCP":
-                $em = $this->getDoctrine()->getManager('centrale_gccp');
-                $siret = $request->request->get('siret');
-                $mail = $request->request->get('mail');
-                $tel = $request->request->get('tel');
-                $cp = $request->request->get('cp');
-                $eff = $request->request->get('eff');
-                $ca = $request->request->get('ca');
-                $adresse = $request->request->get('adresse');
-                $ville = $request->request->get('ville');
-                $client = $em->getRepository('GccpBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                if (!$client) {
-                    throw $this->createNotFoundException(
-                        'Pas de client pour l\'id ' . $id
-                    );
-                }
-                $client[0]->setClSiret($siret);
-                $client[0]->setClMail($mail);
-                $client[0]->setClTel($tel);
-                $client[0]->setClCp($cp);
-                $client[0]->setClEffectif($eff);
-                $client[0]->setClCa($ca);
-                $client[0]->setClAdresse1($adresse);
-                $client[0]->setClVille($ville);
-                $em->flush();
-                $res = "client mise à jour";
-                return new JsonResponse($res, 200);
+                $con = $this->get('database_connection');
+
+                $sql = "UPDATE CENTRALE_GCCP.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
+
+
+                return new JsonResponse($stmt->errorCode(), 200);
                 break;
             case 1:
             case "ACHAT_CENTRALE":
@@ -2093,7 +2043,7 @@ class BaseController extends Controller
             default:
                 break;
         }
-        $res = "Aucun client mise a jour";
+        $res = "Aucune note mise a jour";
 
         return new JsonResponse($res, 200);
 
