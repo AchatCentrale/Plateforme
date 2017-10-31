@@ -1041,11 +1041,15 @@ $(function () {
                             success: function (data) {
 
                                 let tpl = `<div class="column note-content-home">
-                                    <p class="note-description">Eu Madame Derhy. Je lui ai prÃ©sentÃ© la centrale. Ils ont commandÃ© une fois chez Bruneau cette annÃ©e. Je lui ai renvoyÃ© ses identifiants. test</p>
+                                    <p class="note-description">${note}</p>
                                     <p>enregistrement réussi</p>
                                 </div>`;
 
-                                $('.tpl-inject-note').after().remove().append(tpl);
+
+
+                                $('.note-content-home').remove();
+                                $('.tpl-inject-note').append(tpl);
+                                $.notify("Note mise a jour", "success");
 
 
 
