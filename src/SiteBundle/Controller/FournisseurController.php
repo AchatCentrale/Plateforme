@@ -96,7 +96,6 @@ class FournisseurController extends Controller
                 $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $produit = $stmt->fetchAll();
-                dump($produit);
 
                 return $this->render(
                     '@Site/Fournisseurs/produits.html.twig',
@@ -145,7 +144,6 @@ class FournisseurController extends Controller
                     if ($i > 0) {
 
 
-                        dump($ligne);
 
                         if (empty($ligne[0])) {
                             $sql = "INSERT INTO CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS ( Fournisseur, Rayon, Famille, Filtre1, Valeur1, Filtre2, Valeur2, Filtre3, Valeur3, Filtre4, Valeur4, Filtre5, Valeur5, Filtre6, Valeur6, Filtre7, Valeur7, Filtre8, Valeur8, Filtre9, Valeur9, Filtre10, Valeur10, Ref_Fourn, Ref_Part, EAN, Nom_Produit, Descrip_Courte, Descrip_Longue, Triptyque, Qte_Cmde, Conditionnement, Prix_Public_HT, Prix_Part_HT, Prix_VC, Remise_PCT, Type_Lien, Lien, Photo, Variable_Session)
