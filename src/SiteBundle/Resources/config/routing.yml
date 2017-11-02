@@ -188,6 +188,14 @@ fournisseur-produits:
     path: /fournisseurs/{id}/produits
     defaults: {_controller: SiteBundle:Fournisseur:fournisseurProduit}
 
+import-produit-index:
+    path: /produit/import
+    defaults: {_controller: SiteBundle:Fournisseur:importProduct}
+
+import-produits-index:
+    path: /produits/import
+    defaults: {_controller: SiteBundle:Fournisseur:importProducts}
+
 
 new-hastag:
     path: /client/tag/new/{centrale}/{id}

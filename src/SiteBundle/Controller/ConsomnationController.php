@@ -3,8 +3,6 @@
 namespace SiteBundle\Controller;
 
 
-
-
 use DateTime;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -17,12 +15,11 @@ class ConsomnationController extends Controller
 {
 
 
-    public function indexAction(Request $request){
+    public function indexAction(Request $request)
+    {
 
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-
 
 
         $sqlConso = "SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO ";
@@ -31,38 +28,43 @@ class ConsomnationController extends Controller
         $result = $stmt->fetchAll();
 
 
-
-        return $this->render('@Site/Consomnation/index.html.twig', [
-            "conso" => $result
-        ]);
+        return $this->render(
+            '@Site/Consomnation/index.html.twig',
+            [
+                "conso" => $result,
+            ]
+        );
     }
 
-    public function indexClientAction(Request $request, $id, $centrale){
+    public function indexClientAction(Request $request, $id, $centrale)
+    {
 
 
-
-        return $this->render('@Site/Consomnation/index.client.html.twig', [
-        ]);
+        return $this->render(
+            '@Site/Consomnation/index.client.html.twig',
+            [
+            ]
+        );
     }
 
     public function importConsoAction(Request $request)
     {
 
 
-        foreach($request->files as $file) {
+        foreach ($request->files as $file) {
 
-            if (($handle = fopen($file->getRealPath(), "r")) !== FALSE) {
-                while(($row = fgetcsv($handle, 10000, "\r" )) !== FALSE) {
+            if (($handle = fopen($file->getRealPath(), "r")) !== false) {
+                while (($row = fgetcsv($handle, 10000, "\r")) !== false) {
 
 
                     $champ = str_getcsv($row[0]);
 
 
                     unset($row[0]);
+                    dump($row);
 
 
-
-                    for ($i = 1; $i <= count($row); $i++){
+                    for ($i = 1; $i <= count($row); $i++) {
 
                         $ligne = $row[$i];
 
@@ -76,8 +78,8 @@ class ConsomnationController extends Controller
 
                         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (FO_ID, CL_ID,CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) VALUES (". $ligne[0] .", ". $ligne[1] .",". $prixpublic .", ". $prixcentral ." ,  '".$date. "'  , '".$this->getUser()->getUsPrenom(). "' )";
-
+                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (FO_ID, CL_ID,CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) VALUES (".$ligne[0].", ".$ligne[1].",".$prixpublic.", ".$prixcentral." ,  '".$date."'  , '".$this->getUser(
+                            )->getUsPrenom()."' )";
 
 
                         $stmt = $conn->prepare($sql);
@@ -88,7 +90,6 @@ class ConsomnationController extends Controller
                         return new JsonResponse('Importation réussie', 200);
 
 
-
                     }
 
                 }
@@ -96,18 +97,17 @@ class ConsomnationController extends Controller
         }
 
 
-
-
     }
 
-    public function testAction(Request $request){
+    public function testAction(Request $request)
+    {
 
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-                $sqlConso = "SELECT DISTINCT (SELECT CONVERT(VARCHAR(8), a.INS_DATE, 3) AS [MM/DD/YY]) as date ,sum(a.CLC_PRIX_PUBLIC) as CA_PUBLIC , sum(a.CLC_PRIX_CENTRALE) as CA_CENTRALE , b.FO_RAISONSOC
-                            FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO a join CENTRALE_PRODUITS.dbo.FOURNISSEURS b
-                                on a.FO_ID = b.FO_ID
+        $sqlConso = "SELECT DISTINCT (SELECT CONVERT(VARCHAR(8), a.INS_DATE, 3) AS [MM/DD/YY]) AS date ,sum(a.CLC_PRIX_PUBLIC) AS CA_PUBLIC , sum(a.CLC_PRIX_CENTRALE) AS CA_CENTRALE , b.FO_RAISONSOC
+                            FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO a JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS b
+                                ON a.FO_ID = b.FO_ID
                             GROUP BY a.INS_DATE, b.FO_RAISONSOC
                             ORDER BY date";
 
