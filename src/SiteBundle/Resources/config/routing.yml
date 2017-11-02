@@ -85,7 +85,7 @@ detail-note:
     defaults: {_controller: SiteBundle:Base:detailNote}
 
 update-note:
-    path: /note/update/{idCentrale}/{id}
+    path: /note/update/{id}/{idCentrale}
     defaults: {_controller: SiteBundle:Base:updateNote}
 
 detail-rdv:

@@ -48,7 +48,6 @@ class ConsomnationController extends Controller
     public function importConsoAction(Request $request)
     {
 
-        dump($request);
 
         foreach($request->files as $file) {
 

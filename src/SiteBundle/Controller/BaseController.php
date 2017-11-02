@@ -3,7 +3,6 @@
 namespace SiteBundle\Controller;
 
 
-use Goodby\CSV\Export\Standard\Collection\PdoCollection;
 use Goodby\CSV\Export\Standard\CsvFileObject;
 use Goodby\CSV\Export\Standard\Exporter;
 use Goodby\CSV\Export\Standard\ExporterConfig;
@@ -91,8 +90,6 @@ class BaseController extends Controller
         $stmtNote = $conn->prepare($sqlNote);
         $stmtNote->execute();
         $notes = $stmtNote->fetchAll();
-
-
 
 
         $sqlAllClients = "SELECT DISTINCT *
@@ -1932,7 +1929,7 @@ class BaseController extends Controller
                 "nom" => $result[0]['CN_NOTE'],
                 "ins_date" => $result[0]['INS_DATE'],
                 "cl_id" => $result[0]['CL_ID'],
-                "cl_raisonsoc" => $clientService->array_utf8_encode($clientService->getTheClientRaisonSoc($result[0]['CL_ID'],$result[0]['SO_ID'] )),
+                "cl_raisonsoc" => $clientService->array_utf8_encode($clientService->getTheClientRaisonSoc($result[0]['CL_ID'], $result[0]['SO_ID'])),
             ];
             $response = new JsonResponse($data);
             $response->headers->set('Content-Type', 'application/json');
@@ -1943,8 +1940,114 @@ class BaseController extends Controller
         }
     }
 
-    public function updateNoteAction(Request $request, $id, $idCentrale){
-        return new JsonResponse('Note mise à jour', 200);
+    public function updateNoteAction(Request $request, $id, $idCentrale)
+    {
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $note = $request->get('note');
+
+        switch ($idCentrale) {
+            case 4:
+            case "CENTRALE_FUNECAP":
+                $con = $this->get('database_connection');
+
+                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
+
+
+                return new JsonResponse($stmt->errorCode(), 200);
+                break;
+            case 6:
+            case "ROC_ECLERC":
+                $con = $this->get('database_connection');
+
+                $sql = "UPDATE CENTRALE_ROC_ECLERC.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
+
+
+                return new JsonResponse($stmt->errorCode(), 200);
+                break;
+            case 5:
+            case "CENTRALE_PFPL":
+                $con = $this->get('database_connection');
+
+                $sql = "UPDATE CENTRALE_PFPL.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
+
+
+                return new JsonResponse($stmt->errorCode(), 200);
+                break;
+            case 3 :
+            case "CENTRALE_GCCP":
+                $con = $this->get('database_connection');
+
+                $sql = "UPDATE CENTRALE_GCCP.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
+
+
+                return new JsonResponse($stmt->errorCode(), 200);
+                break;
+            case 1:
+            case "ACHAT_CENTRALE":
+
+                $con = $this->get('database_connection');
+
+                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_NOTES
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    WHERE CN_ID = :id";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->bindValue(':note', $note);
+                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                $stmt->execute();
+                $count = $stmt->fetchAll();
+
+
+                return new JsonResponse($stmt->errorCode(), 200);
+                break;
+
+            default:
+                break;
+        }
+        $res = "Aucune note mise a jour";
+
+        return new JsonResponse($res, 200);
+
+
     }
 
     public function detailRdvAction(Request $request, $id, $idCentrale)
@@ -1972,7 +2075,6 @@ class BaseController extends Controller
 
             $echeance = new \Moment\Moment($result[0]['CLA_ECHEANCE'], 'UTC');
             $echanceFuture = $echeance->calendar();
-
 
 
             $data = [
@@ -2506,10 +2608,9 @@ class BaseController extends Controller
             case 'roc':
 
 
-
                 // récupère le conteneur de services pour le passer à la closure
                 $container = $this->container;
-                $response = new StreamedResponse(function() use($container) {
+                $response = new StreamedResponse(function () use ($container) {
                     $conn = $this->get('database_connection');
                     $stmt = $conn->prepare('SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Clients WHERE SO_ID = 6');
                     $stmt->execute();
@@ -2531,7 +2632,7 @@ class BaseController extends Controller
                 });
 
                 $response->headers->set('Content-Type', 'application/force-download');
-                $response->headers->set('Content-Disposition','attachment; filename="export.csv"');
+                $response->headers->set('Content-Disposition', 'attachment; filename="export.csv"');
 
                 return $response;
                 break;
@@ -2707,14 +2808,12 @@ class BaseController extends Controller
             $tags = $stmt->fetchAll();
 
 
-
             return $this->render('@Site/tags/all.html.twig', [
-                    "tag" => $tags
+                "tag" => $tags
             ]);
 
 
         }
-
 
 
         $sqlTags = "SELECT DISTINCT CL_REF, SO_ID, CL_RAISONSOC, CL_ADRESSE1, CL_TEL, CL_SIRET, CL_ID, CL_VILLE
@@ -2780,13 +2879,13 @@ class BaseController extends Controller
         ]);
     }
 
-    public function removeHastagAction(Request $request, $tag, $centrale){
+    public function removeHastagAction(Request $request, $tag, $centrale)
+    {
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
-        switch ($centrale)
-        {
+        switch ($centrale) {
             case 1:
                 $sql = "DELETE FROM CENTRALE_ACHAT.dbo.CLIENTS_TAG
                 WHERE TAG = :tag ";
@@ -2833,8 +2932,6 @@ class BaseController extends Controller
                 return new JsonResponse('Tag supprimé', 200);
                 break;
         }
-
-
 
 
     }
