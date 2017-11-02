@@ -163,7 +163,7 @@ class Mailer
         $template = 'SiteBundle:mail:RelanceTaskNotification.html.twig';
         $body = $this->templating->render($template, [
             'nom' => $nom,
-            'desc' => $descr,
+            'desc' => "Objet temporaire",
             'insDate' => $insDate,
             'echeance' => $echeance,
             'userNom' => $userNom,
