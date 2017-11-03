@@ -1,4 +1,4 @@
-let urlConso = "http://crm.achatcentrale.fr/client/consommation/test";
+let urlConso = "http://localhost:8000/client/consommation/test";
 
 $.ajax({
 
@@ -19,22 +19,7 @@ $.ajax({
             colHeaders: ["Date", "CA Prix public", "CA Prix centrale", "Fournisseurs" ],
             rowHeaders: true,
             minSpareRows: 1,
-            mergeCells: [
-                {row: 0, col: 0, rowspan: 2, colspan: 1},
-                {row: 2, col: 0, rowspan: 2, colspan: 1},
-                {row: 4, col: 0, rowspan: 2, colspan: 1},
-                {row: 6, col: 0, rowspan: 2, colspan: 1},
-                {row: 8, col: 0, rowspan: 2, colspan: 1},
-                {row: 10, col: 0, rowspan: 2, colspan: 1},
-                {row: 12, col: 0, rowspan: 2, colspan: 1},
-                {row: 14, col: 0, rowspan: 2, colspan: 1},
-                {row: 16, col: 0, rowspan: 2, colspan: 1},
-                {row: 18, col: 0, rowspan: 2, colspan: 1},
-                {row: 20, col: 0, rowspan: 2, colspan: 1},
-                {row: 22, col: 0, rowspan: 2, colspan: 1},
-                {row: 25, col: 0, rowspan: 2, colspan: 1},
 
-            ]
 
         });
 

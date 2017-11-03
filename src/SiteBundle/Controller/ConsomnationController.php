@@ -60,7 +60,7 @@ class ConsomnationController extends Controller
 
                     unset($row[0]);
 
-
+                    dump($row);
 
                     for ($i = 1; $i <= count($row); $i++){
 
