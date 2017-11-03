@@ -156,14 +156,14 @@ class Mailer
 
     public function RelanceTaskNotification($to, $nom, $descr, $insDate, $echeance, $userNom, $userPrenom )
     {
-        $subject = "TODO : " + $descr ;
+        $subject = "TODO : " . $descr ;
 
 
 
         $template = 'SiteBundle:mail:RelanceTaskNotification.html.twig';
         $body = $this->templating->render($template, [
             'nom' => $nom,
-            'desc' => $descr,
+            'desc' => $subject,
             'insDate' => $insDate,
             'echeance' => $echeance,
             'userNom' => $userNom,

@@ -49,3 +49,24 @@ Dropzone.options.importDropzone = {
     thumbnailHeight: 100,
 
 };
+
+
+
+
+
+//import produit
+Dropzone.options.importDropzoneProduit = {
+
+    init: function () {
+
+        this.on('addedfile', function (file) {
+            swal("Fichier importé");
+        })
+
+    },
+
+    dictDefaultMessage: "<i class=\"file huge excel outline icon\"></i>Deposer le fichiers .csv ",
+    thumbnailWidth: 400,
+    thumbnailHeight: 100,
+
+};
