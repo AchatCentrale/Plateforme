@@ -65,16 +65,12 @@ class ConsomnationController extends Controller
                 while (($row = fgetcsv($handle, 10000, "\n")) !== false) {
 
 
-
-                    dump($row);
-
-
+                    for ($i = 1; $i <= count($row); $i++) {
 
 
                         $ligne = explode(";", $row[0]);
 
                         dump($ligne);
-
 
 
                         $date = new DateTime($ligne[4]);
@@ -93,19 +89,15 @@ class ConsomnationController extends Controller
                         $result = $stmt->fetchAll();
 
 
-
-
-
+                    }
                 }
             }
+
+            return new JsonResponse('Importation réussie', 200);
+
+
         }
-
-        return new JsonResponse('Importation réussie', 200);
-
-
-
     }
-
     public function testAction(Request $request)
     {
 
