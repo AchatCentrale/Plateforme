@@ -58,7 +58,7 @@
                                 <a href="{{ path('client-facturation', { id : app.request.attributes.get('id'), 'centrale' : app.request.attributes.get('centrale')}) }}">Facturation</a>
                             </li>
                             <li class=" {% if app.request.attributes.get('_route') == 'consomnation-index' %}current-page {% endif %}">
-                                <a href="{{ path('consommation-index', { id : app.request.attributes.get('id'), 'centrale' : app.request.attributes.get('centrale')}) }}"><i class="archive icon"></i>Consommation</a>
+                                <a href="{{ path('consomnation-client', { id : app.request.attributes.get('id'), 'centrale' : app.request.attributes.get('centrale')}) }}">Consommation</a>
                             </li>
 
                         </ul>

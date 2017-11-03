@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    CONSOMNATION - ACHAT-CENTRALE
+    CONSOMmATION - ACHAT-CENTRALE
 {% endblock %}
 
 {% block body %}
@@ -10,7 +10,9 @@
     <div class="x_panel">
         <div class="x_title">
             <h2><i class="shop  icon"></i> Consommations</h2>
-
+            <a href="{{ path('import-produit-index') }}" class="ui button green" id="btn-import-produit" role="button">
+                Importer des consommations
+            </a>
 
             <div class="clearfix"></div>
         </div>

@@ -6,6 +6,7 @@ namespace SiteBundle\Controller;
 use DateTime;
 use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,12 +40,19 @@ class ConsomnationController extends Controller
     public function indexClientAction(Request $request, $id, $centrale)
     {
 
+        $cookie = new Cookie('myCookie', 'contentOfMyCookie');
 
-        return $this->render(
+
+        $response = new Response($this->render(
             '@Site/Consomnation/index.client.html.twig',
             [
             ]
-        );
+        ), 200);
+
+        $response->headers->setCookie(new Cookie('fournisseur', 'Bruneau'));
+
+        return $response;
+
     }
 
     public function importConsoAction(Request $request)
@@ -54,21 +62,19 @@ class ConsomnationController extends Controller
         foreach ($request->files as $file) {
 
             if (($handle = fopen($file->getRealPath(), "r")) !== false) {
-                while (($row = fgetcsv($handle, 10000, "\r")) !== false) {
+                while (($row = fgetcsv($handle, 10000, "\n")) !== false) {
 
 
-                    $champ = str_getcsv($row[0]);
 
-
-                    unset($row[0]);
                     dump($row);
 
 
-                    for ($i = 1; $i <= count($row); $i++) {
 
-                        $ligne = $row[$i];
 
-                        $ligne = explode(";", $ligne);
+                        $ligne = explode(";", $row[0]);
+
+                        dump($ligne);
+
 
 
                         $date = new DateTime($ligne[4]);
@@ -87,14 +93,15 @@ class ConsomnationController extends Controller
                         $result = $stmt->fetchAll();
 
 
-                        return new JsonResponse('Importation réussie', 200);
 
 
-                    }
 
                 }
             }
         }
+
+        return new JsonResponse('Importation réussie', 200);
+
 
 
     }

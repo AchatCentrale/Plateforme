@@ -1046,12 +1046,9 @@ $(function () {
                                 </div>`;
 
 
-
                                 $('.note-content-home').remove();
                                 $('.tpl-inject-note').append(tpl);
                                 $.notify("Note mise a jour", "success");
-
-
 
 
                             },
@@ -1812,103 +1809,66 @@ $(function () {
 
     });
 
-    let d = new Date();
-
-    $('#date_debut').combodate({
-        minYear: 2015,
-        maxYear: 2085,
-        minuteStep: 10,
-        value: "0" + d.getUTCMonth() + "-" + d.getUTCFullYear() + "",
-        customClass: "table-conso",
-    });
-
-    $('#date_fin').combodate({
-        minYear: 2015,
-        maxYear: 2085,
-        minuteStep: 10,
-        value: "0" + d.getUTCMonth() + "-" + (d.getUTCFullYear() + 1) + "",
-        customClass: "table-conso",
-    });
-
-
-    $('.btn-periode').on('click', function (e) {
-        let date_debut = $('#date_debut').combodate('getValue', null);
-        let date_fin = $('#date_fin').combodate('getValue', null);
-
-        let startMonth = date_debut._i[1];
-        let startYear = date_debut._i[0];
-        let endYear = date_fin._i[0];
-        let endMonth = date_fin._i[1];
-
-        let url = CURRENT_URL + "?startM=" + startMonth + "&startY=" + startYear + "&endM=" + endMonth + "&endY=" + endYear;
-
-        console.log(CURRENT_URL);
-
-        window.location = url;
-
-
-    });
-
-
-    //chart.js
-
-    if (document.getElementById("myChart")) {
-
-        let ctx = document.getElementById("myChart").getContext("2d");
-        let myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
-                datasets: [{
-                    label: 'Bruneau',
-                    data: [120000, 160000, 150056, 150896, 150256, 170256, 195256, 195698, 175256, 185256, 125256, 195256],
-                    borderColor: [
-                        'rgba(255,99,132,1)',
-
-                    ],
-                    backgroundColor: 'rgba(0,0,0,0.1)',
-                    borderWidth: 1
-                },
-                    {
-                        label: 'Bouygues Telecom',
-                        data: [120000, 125256, 175256, 150896, 150256, 170256, 195256, 150056, 175256, 185256, 125256, 120000],
-                        borderColor: [
-                            'rgba(101,140,223,1)',
-
-                        ],
-                        backgroundColor: false,
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        stacked: true
-                    }]
-                }
-            }
-        });
-
-    }
-
-
-    $('#datetimepicker1').datetimepicker({
-        locale: 'fr'
-    });
-
-    const area = document.getElementById('add-note');
-    Countable.on(area, counter => {
-        console.log(counter.all)
-
-
-        $('#counting-note').html('');
-        $('#counting-note').html(counter.all + "/500");
-
-    })
-
 
 });
+
+
+//chart.js
+
+if (document.getElementById("myChart")) {
+
+    let ctx = document.getElementById("myChart").getContext("2d");
+    let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
+            datasets: [{
+                label: 'Bruneau',
+                data: [120000, 160000, 150056, 150896, 150256, 170256, 195256, 195698, 175256, 185256, 125256, 195256],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+
+                ],
+                backgroundColor: 'rgba(0,0,0,0.1)',
+                borderWidth: 1
+            },
+                {
+                    label: 'Bouygues Telecom',
+                    data: [120000, 125256, 175256, 150896, 150256, 170256, 195256, 150056, 175256, 185256, 125256, 120000],
+                    borderColor: [
+                        'rgba(101,140,223,1)',
+
+                    ],
+                    backgroundColor: false,
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    stacked: true
+                }]
+            }
+        }
+    });
+
+}
+
+
+$('#datetimepicker1').datetimepicker({
+    locale: 'fr'
+});
+
+$('#datetimepicker2').datetimepicker({
+    locale: 'fr',
+    viewMode: 'months',
+    format: 'MM/YYYY'
+});
+
+
+
+
 
 
 

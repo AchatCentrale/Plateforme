@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    CONSOMNATION - ACHAT-CENTRALE
+    Importer une consommation - ACHAT-CENTRALE
 {% endblock %}
 
 {% block body %}
@@ -18,13 +18,30 @@
 
 
         <div class="x_content ">
-            <div class="row">
+
+            <div class="import-option row">
                 <div class="col-md-4">
+                    <label for="fourn-import-conso">Choix fournisseurs</label>
+                    <select id="fourn-import-conso" class="form-control">
+                        <option>Bruneau</option>
+
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="datetimepicker1">Choix période</label>
+                    <div class='input-group date' id='datetimepicker2'>
+                        <input name="cla_echeance" type='text' class="form-control "/>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+              {#  <div class="col-md-4">
 
                     <div id="table-conso-client"></div>
-                </div>
-                <div class="col-md-8">
-                    <h2>Importer consommation</h2>
+                </div>#}
+                <div class="col-md-12">
 
 
 

@@ -1,4 +1,7 @@
-let urlConso = "http://crm.achatcentrale.fr/client/consommation/test";
+$('.ui.dropdown.consommation').dropdown();
+
+
+let urlConso = "http://localhost:8000/client/consommation/test";
 
 $.ajax({
 
@@ -54,7 +57,7 @@ Dropzone.options.importDropzone = {
     init: function () {
 
         this.on('addedfile', function (file) {
-            swal("Added file.");
+            swal("Fichier importé");
         })
 
     },
@@ -85,3 +88,10 @@ Dropzone.options.importDropzoneProduit = {
     thumbnailHeight: 100,
 
 };
+
+
+$('#fourn-import-conso').click(function (e) {
+
+    console.log('test')
+
+});
