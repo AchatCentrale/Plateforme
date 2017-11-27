@@ -135,7 +135,7 @@ class FournisseurController extends Controller
         foreach ($request->files as $file) {
 
             if (($handle = fopen($file->getRealPath(), "r")) !== false) {
-                while (($row = fgetcsv($handle, null, "\n")) !== false) {
+                while (($row = fgetcsv($handle, null, "\r")) !== false) {
 
                     $row = array_map("utf8_encode", $row);
 
