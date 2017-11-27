@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 $('.ui.dropdown.consommation').dropdown();
 
 
-=======
->>>>>>> 1157ac3063f64e9326b019edcc5e7857e90d4a86
 let urlConso = "http://localhost:8000/client/consommation/test";
 
 $.ajax({

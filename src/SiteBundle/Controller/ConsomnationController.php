@@ -4,7 +4,6 @@ namespace SiteBundle\Controller;
 
 
 use DateTime;
-use DateTimeZone;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,35 +18,32 @@ class ConsomnationController extends Controller
     public function indexAction(Request $request)
     {
 
+        $cookie_fourn = [
+            'name' => 'Fournisseur', // Nom du cookie
+            'value' => 'Bruneau', // Valeur du cookie
+        ];
 
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $cookie_periode = [
+            'name' => 'Periode',
+            'value' => date("m/Y"),
+
+        ];
 
 
-        $sqlConso = "SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO ";
-        $stmt = $conn->prepare($sqlConso);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-
-
-        return $this->render(
-            '@Site/Consomnation/index.html.twig',
-            [
-                "conso" => $result,
-            ]
-        );
+        $html = $this->render('@Site/Consomnation/index.html.twig', []);
+        $response = new Response($html);
+        $response->headers->setCookie(new Cookie($cookie_fourn['name'], $cookie_fourn['value'], time() + (3600 * 48)));
+        $response->headers->setCookie(new Cookie($cookie_periode['name'], $cookie_periode['value'], time() + (3600 * 48)));
+        return $response;
     }
 
     public function indexClientAction(Request $request, $id, $centrale)
     {
 
-        $cookie = new Cookie('myCookie', 'contentOfMyCookie');
+        $cookie = new Cookie('test', 'test-cookie');
 
 
-        $response = new Response($this->render(
-            '@Site/Consomnation/index.client.html.twig',
-            [
-            ]
-        ), 200);
+        $response = new Response($this->render('@Site/Consomnation/index.client.html.twig', []), 200);
 
         $response->headers->setCookie(new Cookie('fournisseur', 'Bruneau'));
 
@@ -59,6 +55,10 @@ class ConsomnationController extends Controller
     {
 
 
+        $j = 0;
+        $cookie = $request->cookies->get('Fournisseur');
+        $periode = $request->cookies->get('Periode');
+
         foreach ($request->files as $file) {
 
             if (($handle = fopen($file->getRealPath(), "r")) !== false) {
@@ -68,28 +68,37 @@ class ConsomnationController extends Controller
                     for ($i = 1; $i <= count($row); $i++) {
 
 
-                        $ligne = explode(";", $row[0]);
+                        if ($j > 0) {
+                            $ligne = explode(";", $row[0]);
 
-                        dump($ligne);
+                            dump($ligne);
+                            dump($j);
+                            dump($periode);
 
 
-                        $date = new DateTime($ligne[4]);
-                        $date = $date->format("Y-m-d H:i:s");
-                        $prixpublic = floatval(str_replace(',', '.', $ligne[2]));
-                        $prixcentral = floatval(str_replace(',', '.', $ligne[3]));
+                        $dateNow = new DateTime('now');
+                        $dateNow = $dateNow->format("Y-m-d H:i:s");
+
+                        $date = date('d.m.Y H:i:s', str_replace('/', '-', '01/'.$periode));
+
+                        $prixpublic = floatval(str_replace(',', '.', $ligne[1]));
+                        $prixcentral = floatval(str_replace(',', '.', $ligne[2]));
 
                         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (FO_ID, CL_ID,CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) VALUES (".$ligne[0].", ".$ligne[1].",".$prixpublic.", ".$prixcentral." ,  '".$date."'  , '".$this->getUser(
-                            )->getUsPrenom()."' )";
+                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CF_USER, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_USER, INS_DATE, CLC_DATE, FO_ID) VALUES (" . $ligne[0] . ", " . $prixpublic . "," . $prixcentral . ", " . $this->getUser()->getUsPrenom() . " ,  '" . $date . "'  , '" . $dateNow . "' )";
 
+                        dump($sql);
 
-                        $stmt = $conn->prepare($sql);
-                        $stmt->execute();
-                        $result = $stmt->fetchAll();
+//
+//                        $stmt = $conn->prepare($sql);
+//                        $stmt->execute();
+//                        $result = $stmt->fetchAll();
+                        }
 
 
                     }
+                    $j++;
                 }
             }
 
@@ -98,6 +107,7 @@ class ConsomnationController extends Controller
 
         }
     }
+
     public function testAction(Request $request)
     {
 
