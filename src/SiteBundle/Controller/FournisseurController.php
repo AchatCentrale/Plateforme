@@ -131,9 +131,7 @@ class FournisseurController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
         $i = 0;
-        dump($i);
-        $i++;
-        dump($i);
+
 
 
 
@@ -251,6 +249,8 @@ class FournisseurController extends Controller
                         }
                     }
 
+
+                    dump('salut');
                     ++$i;
 
                 }
