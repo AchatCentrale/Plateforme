@@ -250,8 +250,9 @@ class FournisseurController extends Controller
                     }
 
 
-                    dump('salut');
                     ++$i;
+
+                    dump($i);
 
                 }
 
