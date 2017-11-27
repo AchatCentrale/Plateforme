@@ -251,7 +251,7 @@ class FournisseurController extends Controller
 
                     dump($i);
 
-                    $i++;
+                    ++$i;
 
 
                 }
