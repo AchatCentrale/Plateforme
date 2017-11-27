@@ -147,6 +147,7 @@ class FournisseurController extends Controller
 
 
                     if ($i > 0) {
+
                         if (empty($ligne[0])) {
                             $sql = "INSERT INTO CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS ( Fournisseur, Rayon, Famille, Filtre1, Valeur1, Filtre2, Valeur2, Filtre3, Valeur3, Filtre4, Valeur4, Filtre5, Valeur5, Filtre6, Valeur6, Filtre7, Valeur7, Filtre8, Valeur8, Filtre9, Valeur9, Filtre10, Valeur10, Ref_Fourn, Ref_Part, EAN, Nom_Produit, Descrip_Courte, Descrip_Longue, Triptyque, Qte_Cmde, Conditionnement, Prix_Public_HT, Prix_Part_HT, Prix_VC, Remise_PCT, Type_Lien, Lien, Photo, Variable_Session)
                             VALUES
@@ -197,8 +198,19 @@ class FournisseurController extends Controller
 
 
 
-                            $stmt->execute();
-                            $result = $stmt->fetchAll();
+
+                            try
+                            {
+                                $stmt->execute();
+                                $result = $stmt->fetchAll();
+                            }
+                            catch ( Doctrine_Connection_Exception $e )
+                            {
+                                echo 'Code : ' . $e->getPortableCode();
+                                echo 'Message : ' . $e->getPortableMessage();
+                            }
+
+
                         } else {
                             $sql = "INSERT INTO CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS (PART_ID, Fournisseur, Rayon, Famille, Filtre1, Valeur1, Filtre2, Valeur2, Filtre3, Valeur3, Filtre4, Valeur4, Filtre5, Valeur5, Filtre6, Valeur6, Filtre7, Valeur7, Filtre8, Valeur8, Filtre9, Valeur9, Filtre10, Valeur10, Ref_Fourn, Ref_Part, EAN, Nom_Produit, Descrip_Courte, Descrip_Longue, Triptyque, Qte_Cmde, Conditionnement, Prix_Public_HT, Prix_Part_HT, Prix_VC, Remise_PCT, Type_Lien, Lien, Photo, Variable_Session)
                             VALUES
@@ -244,15 +256,25 @@ class FournisseurController extends Controller
                             $stmt->bindValue(':type', $ligne[30]);
                             $stmt->bindValue(':lien', $ligne[31]);
                             $stmt->bindValue(':photo', $ligne[39]);
-                            $stmt->execute();
-                            $result = $stmt->fetchAll();
+
+
+                            try
+                            {
+                                $stmt->execute();
+                                $result = $stmt->fetchAll();
+                            }
+                            catch ( Doctrine_Connection_Exception $e )
+                            {
+                                echo 'Code : ' . $e->getPortableCode();
+                                echo 'Message : ' . $e->getPortableMessage();
+                            }
+
                         }
                     }
 
 
                     ++$i;
 
-                    dump($i);
 
                 }
 
