@@ -131,6 +131,11 @@ class FournisseurController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
         $i = 0;
+        dump($i);
+        $i++;
+        dump($i);
+
+
 
         foreach ($request->files as $file) {
 
@@ -141,7 +146,7 @@ class FournisseurController extends Controller
 
                     $ligne = explode(";", $row[0]);
 
-                    dump($row);
+
 
                     if ($i > 0) {
                         if (empty($ligne[0])) {
