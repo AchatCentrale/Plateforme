@@ -249,9 +249,7 @@ class FournisseurController extends Controller
                         }
                     }
 
-                    dump($i);
-
-                    ++$i;
+                    $i = $i + 1;
 
 
                 }
