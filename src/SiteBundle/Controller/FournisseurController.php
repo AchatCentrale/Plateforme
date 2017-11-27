@@ -198,17 +198,13 @@ class FournisseurController extends Controller
 
 
 
+                            $stmt->execute();
 
-                            try
-                            {
-                                $stmt->execute();
-                                $result = $stmt->fetchAll();
-                            }
-                            catch ( Doctrine_Connection_Exception $e )
-                            {
-                                echo 'Code : ' . $e->getPortableCode();
-                                echo 'Message : ' . $e->getPortableMessage();
-                            }
+                            dump($stmt->errorInfo());
+                            dump($stmt->errorCode());
+
+                            $result = $stmt->fetchAll();
+
 
 
                         } else {
@@ -256,19 +252,12 @@ class FournisseurController extends Controller
                             $stmt->bindValue(':type', $ligne[30]);
                             $stmt->bindValue(':lien', $ligne[31]);
                             $stmt->bindValue(':photo', $ligne[39]);
+                            $stmt->execute();
 
+                            dump($stmt->errorInfo());
+                            dump($stmt->errorCode());
 
-                            try
-                            {
-                                $stmt->execute();
-                                $result = $stmt->fetchAll();
-                            }
-                            catch ( Doctrine_Connection_Exception $e )
-                            {
-                                echo 'Code : ' . $e->getPortableCode();
-                                echo 'Message : ' . $e->getPortableMessage();
-                            }
-
+                            $result = $stmt->fetchAll();
                         }
                     }
 
