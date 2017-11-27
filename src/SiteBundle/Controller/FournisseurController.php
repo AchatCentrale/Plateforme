@@ -139,15 +139,12 @@ class FournisseurController extends Controller
 
                     $row = array_map("utf8_encode", $row);
 
-                    $ligne = explode(";", $row[0]);
+                    $ligne = explode(";", $row[$i]);
 
                     dump($row);
-                    dump($ligne);
+                    dump($i);
 
                     if ($i > 0) {
-
-
-
                         if (empty($ligne[0])) {
                             $sql = "INSERT INTO CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS ( Fournisseur, Rayon, Famille, Filtre1, Valeur1, Filtre2, Valeur2, Filtre3, Valeur3, Filtre4, Valeur4, Filtre5, Valeur5, Filtre6, Valeur6, Filtre7, Valeur7, Filtre8, Valeur8, Filtre9, Valeur9, Filtre10, Valeur10, Ref_Fourn, Ref_Part, EAN, Nom_Produit, Descrip_Courte, Descrip_Longue, Triptyque, Qte_Cmde, Conditionnement, Prix_Public_HT, Prix_Part_HT, Prix_VC, Remise_PCT, Type_Lien, Lien, Photo, Variable_Session)
                             VALUES
