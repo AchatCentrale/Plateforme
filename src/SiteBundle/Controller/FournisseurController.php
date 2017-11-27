@@ -141,6 +141,7 @@ class FournisseurController extends Controller
 
                     $ligne = explode(";", $row[0]);
 
+                    dump($row);
                     dump($ligne);
 
                     if ($i > 0) {
