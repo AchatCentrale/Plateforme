@@ -191,11 +191,6 @@ swiftmailer:
     auth_mode:  "%auth_mode%"
     logging:   '%kernel.debug%'
 
-
-
-
-
-
 fos_rest:
     body_listener:
         array_normalizer: fos_rest.normalizer.camel_keys
