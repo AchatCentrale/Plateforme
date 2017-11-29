@@ -80,5 +80,15 @@ class NotificationController extends Controller
 
     }
 
+    public function sendNewClientAcAction($name, $mail, $tel, $cl_id){
+
+
+        $mailer = $this->get('site.service.mailer');
+        $mail = $mailer->NewClientNotifAc($name, $mail, $tel, $cl_id);
+
+        return new Response('ok', 200);
+
+
+    }
 
 }

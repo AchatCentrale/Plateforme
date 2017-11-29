@@ -246,6 +246,11 @@ notification-notif-rdv:
     defaults: {_controller: SiteBundle:Notification:sendRdvRelance}
     methods: POST
 
+notification-new-client-ac:
+    path: /notification/new/client/ac/{name}/{mail}/{tel}/{cl_id}
+    defaults: {_controller: SiteBundle:Notification:sendNewClientAc}
+    methods: POST
+
 
 
 

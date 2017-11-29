@@ -195,4 +195,21 @@ class Mailer
     }
 
 
+    public function NewClientNotifAc($nom, $email, $tel, $cl_id)
+    {
+        $subject = "Demande d'adhésion 🔥";
+
+
+
+        $template = 'SiteBundle:mail:NewClientAcNotification.html.twig';
+        $body = $this->templating->render($template, [
+            'nom' => $nom,
+            'mail' => $email,
+            'tel' => $tel,
+
+        ]);
+        $this->sendMessage("jb@achatcentrale.fr", $subject, $body);
+
+    }
+
 }
