@@ -206,6 +206,7 @@ class Mailer
             'nom' => $nom,
             'mail' => $email,
             'tel' => $tel,
+            'cl_id' => $cl_id,
 
         ]);
         $this->sendMessage("jb@achatcentrale.fr", $subject, $body);
