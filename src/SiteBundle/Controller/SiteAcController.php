@@ -32,7 +32,7 @@ class SiteAcController extends Controller
             $stmt->bindValue(':raison_soc', $CL_RAISONSOC);
             $stmt->bindValue(':tel', $CL_TEL);
             $stmt->bindValue(':mail',$CL_MAIL);
-            $stmt->bindValue(':ref',mt_rand(40000, 99999));
+            $stmt->bindValue(':ref',"AC-".mt_rand(40000, 99999));
 
             $stmt->execute();
             $result = $stmt->fetchAll();
