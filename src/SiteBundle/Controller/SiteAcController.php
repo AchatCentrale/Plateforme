@@ -42,8 +42,9 @@ class SiteAcController extends Controller
 
 
 
-
-            return new JsonResponse('ok c\'est enregistrer',200 );
+            return new JsonResponse('ok c\'est enregistrer',200, [
+                'Access-Control-Allow-Origin', 'http://test.achatcentrale.fr'
+            ] );
 
 
         }
