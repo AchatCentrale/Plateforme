@@ -246,3 +246,12 @@ notification-notif-rdv:
     defaults: {_controller: SiteBundle:Notification:sendRdvRelance}
     methods: POST
 
+
+
+
+
+
+site-ac-adhesion:
+    path: /site-ac/adhesion/new
+    defaults: {_controller: SiteBundle:SiteAc:index}
+    methods: POST
