@@ -42,8 +42,12 @@ class SiteAcController extends Controller
             $result = $stmt->fetchAll();
 
 
-            $mailer = $this->get('site.service.mailer');
-            $mail = $mailer->NewClientNotifAc($CC_NOM, $CL_MAIL, $CL_TEL);
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'crm.achatcentrale.fr/notification/new/client/ac/'.$CC_NOM.'/'.$CL_MAIL.'/'.$CL_TEL.'/'.$conn->lastInsertId().'');
+
+            $response = curl_exec($ch);
+
+
 
             return new JsonResponse('ok c\'est enregistrer',200, [
                 'Access-Control-Allow-Origin', 'http://crm.achatcentrale.fr'
