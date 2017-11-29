@@ -3,6 +3,7 @@
 namespace SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -37,11 +38,16 @@ class SiteAcController extends Controller
             $stmt->execute();
             $result = $stmt->fetchAll();
 
-            return $this->render('@Site/test.html.twig');
+
+
+
+
+
+            return new JsonResponse('ok c\'est enregistrer',200 );
 
 
         }
-        return $this->render('@Site/test.html.twig');
+        return new JsonResponse('fail',200 );
 
     }
 }
