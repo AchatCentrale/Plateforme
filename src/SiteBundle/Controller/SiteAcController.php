@@ -23,6 +23,6 @@ class SiteAcController extends Controller
 
         return $this->render('@Site/test.html.twig', [
             "result" => $result
-        ], 200);
+        ]);
     }
 }
