@@ -20,8 +20,9 @@ class SiteAcController extends Controller
 
         $stmt->execute();
         $result = $stmt->fetchAll();
-        dump($result);
 
-        return new Response("ok", 200);
+        return $this->render('@Site/test.html.twig', [
+            "result" => $result
+        ], 200);
     }
 }
