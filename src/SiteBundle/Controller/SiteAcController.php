@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SiteAcController extends Controller
 {
-    public function indexAction($name)
+    public function indexAction()
     {
 
         return new Response("ok", 200);
