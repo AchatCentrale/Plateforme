@@ -209,7 +209,7 @@ class Mailer
             'cl_id' => $cl_id,
 
         ]);
-        $this->sendMessage("jb@achatcentrale.fr", $subject, $body);
+        $this->sendMessage("contact@achatcentrale.fr", $subject, $body);
 
     }
 
