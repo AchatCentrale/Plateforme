@@ -11,6 +11,9 @@ class SiteAcController extends Controller
 {
     public function indexAction(Request $request)
     {
+        header("Access-Control-Allow-Origin: *");
+
+
 
         if ($request->getMethod() == 'POST') {
 
@@ -43,7 +46,7 @@ class SiteAcController extends Controller
 
 
             return new JsonResponse('ok c\'est enregistrer',200, [
-                'Access-Control-Allow-Origin', 'http://test.achatcentrale.fr'
+                'Access-Control-Allow-Origin', 'http://crm.achatcentrale.fr'
             ] );
 
 
