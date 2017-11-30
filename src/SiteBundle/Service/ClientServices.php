@@ -466,4 +466,12 @@ class ClientServices
         }
 
     }
+
+    public function sendNotifNewClientAc($CC_NOM, $CL_MAIL, $CL_TEL, $id){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, 'crm.achatcentrale.fr/notification/new/client/ac/'.$CC_NOM.'/'.$CL_MAIL.'/'.$CL_TEL.'/'.$id.'');
+        curl_setopt($ch, CURLOPT_POST, true);
+
+        $response = curl_exec($ch);
+    }
 }
