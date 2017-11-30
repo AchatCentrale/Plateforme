@@ -24,9 +24,9 @@ class SiteAcController extends Controller
 
 
             $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-            $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS (SO_ID, RE_ID, CL_REF, CL_RAISONSOC,CL_TEL, CL_MAIL, CL_ADHESION , CL_ACTIVITE, CL_PRESCRIPT, CL_TARIF, CL_CLASSIF, INS_DATE, INS_USER, MAJ_DATE, MAJ_USER   )
+            $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS (SO_ID, RE_ID, CL_REF,CL_STATUS, CL_RAISONSOC,CL_TEL, CL_MAIL, CL_ADHESION , CL_ACTIVITE, CL_PRESCRIPT, CL_TARIF, CL_CLASSIF, INS_DATE, INS_USER, MAJ_DATE, MAJ_USER   )
                     VALUES
-                    (1, 1, :ref, :raison_soc, :tel, :mail, 'REGARDE', 0, 0, 0, 0, GETDATE(), 'SITE-AC',GETDATE(), 'SITE-AC' )
+                    (1, 1, :ref, 0 , :raison_soc, :tel, :mail, 'REGARDE', 0, 0, 0, 0, GETDATE(), 'SITE-AC',GETDATE(), 'SITE-AC' )
                 ";
 
 
