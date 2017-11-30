@@ -43,7 +43,7 @@ class SiteAcController extends Controller
 
 
 
-        return new JsonResponse('crm.achatcentrale.fr/notification/new/client/ac/'.$CC_NOM.'/'.$CL_MAIL.'/'.$CL_TEL.'/'.$conn->lastInsertId().'', 200, [
+        return new JsonResponse('http://crm.achatcentrale.fr/notification/new/client/ac/'.$CC_NOM.'/'.$CL_MAIL.'/'.$CL_TEL.'/'.$conn->lastInsertId().'', 200, [
             'Access-Control-Allow-Origin', 'http://crm.achatcentrale.fr'
         ]);
 
