@@ -1867,21 +1867,15 @@ $('#datetimepicker2').datetimepicker({
 });
 
 
-$.ajax({
-    type: 'POST',
-    url: 'http://crm.achatcentrale.fr/site-ac/adhesion/new',
-    data: {
-        'CL_RAISONSOC': societe,
-        'CL_TEL': tel,
-        'CL_MAIL': mail,
-        'CC_NOM': nom
-
-
+fetch(url, {
+    method: 'post',
+    headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
     },
-    success: function(msg){
-        alert('wow' + msg);
-    }
-});
+    body: JSON.stringify({a: 7, str: 'Some string: &=&'})
+}).then(res=>res.json())
+    .then(res => console.log(res));
 
 
 

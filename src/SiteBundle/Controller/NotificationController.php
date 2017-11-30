@@ -83,6 +83,11 @@ class NotificationController extends Controller
     public function sendNewClientAcAction($name, $mail, $tel, $cl_id){
 
 
+        header("Access-Control-Allow-Origin: *");
+        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+
+
+
         $mailer = $this->get('site.service.mailer');
         $mail = $mailer->NewClientNotifAc($name, $mail, $tel, $cl_id);
 
