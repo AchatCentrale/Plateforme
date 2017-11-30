@@ -1867,9 +1867,21 @@ $('#datetimepicker2').datetimepicker({
 });
 
 
+$.ajax({
+    type: 'POST',
+    url: 'http://crm.achatcentrale.fr/site-ac/adhesion/new',
+    data: {
+        'CL_RAISONSOC': societe,
+        'CL_TEL': tel,
+        'CL_MAIL': mail,
+        'CC_NOM': nom
 
 
-
+    },
+    success: function(msg){
+        alert('wow' + msg);
+    }
+});
 
 
 

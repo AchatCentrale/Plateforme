@@ -42,11 +42,7 @@ class SiteAcController extends Controller
             $result = $stmt->fetchAll();
 
 
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'crm.achatcentrale.fr/notification/new/client/ac/'.$CC_NOM.'/'.$CL_MAIL.'/'.$CL_TEL.'/'.$conn->lastInsertId().'');
-            curl_setopt($ch, CURLOPT_POST, true);
 
-            $response = curl_exec($ch);
 
 
 
