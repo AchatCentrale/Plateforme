@@ -1891,26 +1891,36 @@ $j('.submit-new-client').on('click', function (e) {
         success: function (url) {
 
             console.log(url);
+
+            $j.ajax({
+                type: "POST",
+                url: url["ac"],
+                crossDomain: true,
+                success: function () {
+                },
+            });
+
+            $j.ajax({
+                type: "POST",
+                url: url["client"],
+                crossDomain: true,
+                success: function () {
+                },
+            });
+
+            $j('.btn-essai-gratuit').hide().fadeOut();
+            $j('.message-win').show().fadeIn();
+
+            swal(
+                'Contact réussis',
+                'Notre équipe va traiter votre demande dans les plus bref délais.',
+                'success'
+            )
         }
     });
 });
 
-$j.ajax({
-    type: "POST",
-    url: url,
-    crossDomain: true,
-    success: function () {
-    },
-});
 
-$j('.btn-essai-gratuit').hide().fadeOut();
-$j('.message-win').show().fadeIn();
-
-swal(
-    'Contact réussis',
-    'Notre équipe va traiter votre demande dans les plus bref délais.',
-    'success'
-)
 
 
 
