@@ -251,6 +251,11 @@ notification-new-client-ac:
     defaults: {_controller: SiteBundle:Notification:sendNewClientAc}
     methods: POST
 
+notification-new-client-client:
+    path: /notification/new/client/client/{nom}/{raisonsoc}/{mail}/{tel}
+    defaults: {_controller: SiteBundle:Notification:sendNewClientAcClient}
+    methods: POST
+
 
 
 

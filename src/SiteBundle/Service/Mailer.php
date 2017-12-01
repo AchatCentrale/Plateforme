@@ -213,4 +213,22 @@ class Mailer
 
     }
 
+    public function NewClientNotifClient($nom, $raisonsoc, $mail, $tel)
+    {
+        $subject = $raisonsoc."- Bienvenue chez Achat-Centrale 👋";
+
+
+
+        $template = 'SiteBundle:mail:NewClientAcNotification.html.twig';
+        $body = $this->templating->render($template, [
+            'nom' => $nom,
+            'mail' => $mail,
+            'tel' => $tel,
+
+        ]);
+        $this->sendMessage("contact@achatcentrale.fr", $subject, $body);
+    }
+
+
+
 }
