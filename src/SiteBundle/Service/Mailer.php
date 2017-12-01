@@ -226,7 +226,7 @@ class Mailer
             'tel' => $tel,
 
         ]);
-        $this->sendMessage("contact@achatcentrale.fr", $subject, $body);
+        $this->sendMessage($mail, $subject, $body);
     }
 
 
