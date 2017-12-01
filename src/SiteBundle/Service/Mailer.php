@@ -35,7 +35,7 @@ class Mailer
             ->setTo($to)
             ->setSubject($subject)
             ->setBody($body)
-            ->setReplyTo($this->reply, $this->name)
+            ->setReplyTo($this->reply, $name)
             ->setContentType('text/html');
 
         $this->mailer->send($mail);

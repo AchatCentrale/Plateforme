@@ -105,7 +105,7 @@ class NotificationController extends Controller
         $mailer = $this->get('site.service.mailer');
         $mail = $mailer->NewClientNotifClient($nom, $raisonsoc, $mail, $tel);
 
-        return new Response('ok', 200);
+        return new Response('ok c envoyé', 200);
 
 
     }
