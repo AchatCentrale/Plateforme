@@ -124,15 +124,14 @@
                     <td class="content">
 
 
-                        <p>Bonjour,</p>
+                        <p>Bonjour {{ nom }},</p>
 
                         <p>Nous venons de recevoir les informations que vous avez saisies :</p>
 
-                        <p>Raison Sociale : Apple</p>
-                        <p>Siret : 32212091600208</p>
-                        <p>Nom : Jobs Steve</p>
-                        <p>Téléphone : 06 68 38 14 72</p>
-                        <p>eMail : jb@achatcentrale.fr</p>
+                        <p>Raison Sociale : {{ raisonsoc }}</p>
+                        <p>Nom : {{ nom }}</p>
+                        <p>Téléphone : {{ tel | phone }}</p>
+                        <p>eMail : {{ mail }}</p>
 
                         <p>
                             Nous avons bien pris en compte votre demande.
@@ -147,7 +146,7 @@
                             <tr>
                                 <td align="center">
                                     <p>
-                                        <a href="#" class="button">Accéder au site</a>
+                                        <a href="http://www.achatcentrale.fr" class="button">Accéder au site</a>
                                     </p>
                                 </td>
                             </tr>

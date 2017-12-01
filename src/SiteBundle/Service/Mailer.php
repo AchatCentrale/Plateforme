@@ -43,7 +43,7 @@ class Mailer
 
 
     public function sendTestMail(){
-        $this->sendMessage("jb@achatcentrale.fr", "test message mail", "Ceci est un test");
+        $this->sendMessage("jb@achatcentrale.fr", "test message mail", "Ceci est un test", "ACHATCENTRALE");
     }
 
 
@@ -225,6 +225,7 @@ class Mailer
             'nom' => $nom,
             'mail' => $mail,
             'tel' => $tel,
+            'raisonsoc' => $raisonsoc
 
         ]);
         $this->sendMessage($mail, $subject, $body, $name);

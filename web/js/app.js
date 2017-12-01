@@ -1867,59 +1867,6 @@ $('#datetimepicker2').datetimepicker({
 });
 
 
-$j('.plus').remove();
-
-$j('.submit-new-client').on('click', function (e) {
-    e.preventDefault();
-
-    let societe = $j('#societe').val();
-    let tel = $j('#tel').val();
-    let mail = $j('#mail').val();
-    let nom = $j('#Nom').val();
-
-    $j.ajax({
-        type: 'POST',
-        url: 'http://crm.achatcentrale.fr/site-ac/adhesion/new',
-        data: {
-            'CL_RAISONSOC': societe,
-            'CL_TEL': tel,
-            'CL_MAIL': mail,
-            'CC_NOM': nom
-
-
-        },
-        success: function (url) {
-
-            console.log(url);
-
-            $j.ajax({
-                type: "POST",
-                url: url["ac"],
-                crossDomain: true,
-                success: function () {
-                },
-            });
-
-            $j.ajax({
-                type: "POST",
-                url: url["client"],
-                crossDomain: true,
-                success: function () {
-                },
-            });
-
-            $j('.btn-essai-gratuit').hide().fadeOut();
-            $j('.message-win').show().fadeIn();
-
-            swal(
-                'Contact réussis',
-                'Notre équipe va traiter votre demande dans les plus bref délais.',
-                'success'
-            )
-        }
-    });
-});
-
 
 
 
