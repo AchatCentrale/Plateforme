@@ -22,7 +22,7 @@ class Mailer
 
     }
 
-    protected function sendMessage($to, $subject, $body)
+    protected function sendMessage($to, $subject, $body, $name)
     {
 
 
@@ -31,7 +31,7 @@ class Mailer
 
 
         $mail
-            ->setFrom($this->from, $this->name)
+            ->setFrom($this->from, $name)
             ->setTo($to)
             ->setSubject($subject)
             ->setBody($body)
@@ -158,7 +158,7 @@ class Mailer
     {
         $subject = "TODO : " . $descr ;
 
-
+        $name = "Notification achat-centrale 😋";
 
         $template = 'SiteBundle:mail:RelanceTaskNotification.html.twig';
         $body = $this->templating->render($template, [
@@ -169,7 +169,7 @@ class Mailer
             'userNom' => $userNom,
             'userPrenom' => $userPrenom,
         ]);
-        $this->sendMessage($to, $subject, $body);
+        $this->sendMessage($to, $subject, $body, $name);
 
     }
 
@@ -178,7 +178,7 @@ class Mailer
     {
 
         $subject = "Vous avez un rendez-vous de prévu ⏱";
-
+        $name = "Notification achat-centrale 😋";
 
 
         $template = 'SiteBundle:mail:RdvMailNotification.html.twig';
@@ -190,7 +190,7 @@ class Mailer
             'userNom' => $userNom,
             'userPrenom' => $userPrenom,
         ]);
-        $this->sendMessage($to, $subject, $body);
+        $this->sendMessage($to, $subject, $body, $name);
 
     }
 
@@ -199,6 +199,7 @@ class Mailer
     {
         $subject = "Demande d'adhésion 🔥";
 
+        $name = "Notification achat-centrale 😋";
 
 
         $template = 'SiteBundle:mail:NewClientAcNotification.html.twig';
@@ -209,7 +210,7 @@ class Mailer
             'cl_id' => $cl_id,
 
         ]);
-        $this->sendMessage("contact@achatcentrale.fr", $subject, $body);
+        $this->sendMessage("contact@achatcentrale.fr", $subject, $body, $name);
 
     }
 
@@ -217,16 +218,16 @@ class Mailer
     {
         $subject = $raisonsoc."- Bienvenue chez Achat-Centrale 👋";
 
+        $name = "ACHAT-CENTRALE";
 
-
-        $template = 'SiteBundle:mail:NewClientAcNotification.html.twig';
+        $template = 'SiteBundle:mail:NewClientAcNotificationClient.html.twig';
         $body = $this->templating->render($template, [
             'nom' => $nom,
             'mail' => $mail,
             'tel' => $tel,
 
         ]);
-        $this->sendMessage($mail, $subject, $body);
+        $this->sendMessage($mail, $subject, $body, $name);
     }
 
 
