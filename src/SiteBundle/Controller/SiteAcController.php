@@ -41,17 +41,14 @@ class SiteAcController extends Controller
         }
 
         $urls = [
-          "ac" => "http://crm.achatcentrale.fr/notification/new/client/ac/'.$CC_NOM.'/'.$CL_MAIL.'/'.$CL_TEL.'/'.$conn->lastInsertId().'",
-            "client" => "http://crm.achatcentrale.fr/notification/new/client/client/".$CC_NOM."/".$CL_RAISONSOC."/".$CL_MAIL."/".$CL_TEL.""
+            "ac" => "/notification/new/client/ac/".$CC_NOM."/".$CL_MAIL."/".$CL_TEL."/".$conn->lastInsertId(),
+            "client" => "http://crm.achatcentrale.fr/notification/new/client/client/" . $CC_NOM . "/" . $CL_RAISONSOC . "/" . $CL_MAIL . "/" . $CL_TEL . ""
         ];
-
-
 
 
         return new JsonResponse($urls, 200, [
             'Access-Control-Allow-Origin', 'http://crm.achatcentrale.fr'
         ]);
-
 
 
     }
