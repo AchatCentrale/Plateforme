@@ -149,7 +149,7 @@
                                 {% for cl in client %}
                                     {% if centrale == "all" %}
                                         <tr data-centrale="{{ cl.SO_RAISONSOC }}" data-id="{{ cl.CL_ID }}"
-                                            class="cursor go-to-client">
+                                            class="cursor go-to-client" {% if cl.CL_STATUS == 2 %}style="background-color: yellow"{% endif %} >
                                             <td>{{ cl.CL_REF }}</td>
                                             <td>{{ cl.SO_RAISONSOC }}</td>
                                             <td>{{ cl.CL_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252//TRANSLIT') }}</td>
@@ -162,7 +162,7 @@
                                     {% else %}
 
                                         <tr data-centrale="{{ centrale }}" data-id="{{ cl.CL_ID }}"
-                                            class="cursor go-to-client">
+                                            class="cursor go-to-client" {% if cl.CL_STATUS == 2 %}style="background-color: yellow"{% endif %} >
                                             <td>{{ cl.CL_REF }}</td>
                                             <td>{{ centrale }}</td>
                                             <td>{{ cl.CL_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252') }}</td>

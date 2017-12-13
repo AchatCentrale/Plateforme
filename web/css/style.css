@@ -695,6 +695,7 @@ div.dataTables_wrapper div.dataTables_paginate {
     height: 300px;
     padding-left: 41px;
     width: 100%;
+    padding-top: 31px;
 }
 
 .round-border-tache {

@@ -1,103 +1,86 @@
-<div class="ui three column divided grid">
+<div class="ui divided grid">
 
-    <div class="row">
-        {% if feed.feed is empty %}
-            <h3 style="margin-left: 3%">Il n'y aucune activité pour ce client</h3>
+    {% if feed.feed is empty %}
+        <h3 style="margin-left: 3%">Il n'y aucune activité pour ce client</h3>
 
-        {% else %}
+    {% else %}
 
         {% for fe in feed.feed %}
 
-            <div class="column">
-                <div class="ui  feed">
-                    {% if fe | getClass == "MessageEntete" %}
+            <div class="ui  cards">
 
-                        <div class="event">
-                            <div>
-                                <img class="ui tiny circular image avatar-feed"
-                                     src="{{ asset('assets/images/icon/logo_t.png') }}">
 
+                {% if fe | getClass == "MessageEntete" %}
+
+                    <div class="card">
+                        <div class="content">
+
+                            <div class="header">Tickets</div>
+                            <div class="meta">{{ fe.insDate |Time }}</div>
+                            <div class="description">
+                                {{ fe.meSujet | raw }}
                             </div>
-                            <div class="content">
-                                <div class="summary">
-                                    Tickets
-                                    <div class="date">
-                                        {{ fe.insDate |Time }}
-                                    </div>
-                                </div>
-                                <div class="extra text">
-                                    {{ fe.meSujet | raw }}
 
-                                </div>
-                                <div class="meta">
 
-                                </div>
-                            </div>
                         </div>
+                    </div>
 
-                    {% endif %}
+                {% endif %}
 
-                    {% if fe |getClass == "ClientsNotes" %}
-                        <div class="event">
-                            <div>
-                                <img class="ui tiny circular image avatar-feed"
-                                     src="{{ asset('assets/images/icon/logo_n.png') }}">
+                {% if fe |getClass == "ClientsNotes" %}
 
+
+                    <div class="card">
+                        <div class="content">
+
+                            <div class="header">Notes</div>
+                            <div class="meta">{{ fe.insDate |Time }}</div>
+                            <div class="description">
+                                {{ fe.cnNote }}
                             </div>
-                            <div class="content">
-                                <div class="summary">
-                                    Notes
-                                    <div class="date">
-                                        {{ fe.insDate |Time }}
-                                    </div>
-                                </div>
-                                <div class="extra text">
-                                    {{ fe.cnNote }}
 
-                                </div>
 
-                            </div>
                         </div>
+                    </div>
 
-                    {% endif %}
 
-                    {% if fe |getClass == "ClientsTaches" %}
-                        <div class="event">
-                            <div>
-                                <img class="ui tiny circular image avatar-feed  {% if fe.claStatus == 10 %}round-border-tache{% endif %}"
-                                     src="{{ asset('assets/images/icon/logo_a.png') }}">
 
+
+                {% endif %}
+
+                {% if fe |getClass == "ClientsTaches" %}
+
+
+                    <div class="card">
+                        <div class="content">
+
+                            <div class="header">Tâches &emsp;
+                                <i data-id="{{ fe.claId }}" data-centrale="{{ app.request.get('centrale') }}"
+                                   class="archive cursor icon archive-task"></i></div>
+                            <div class="meta">{{ fe.insDate |Time }}</div>
+                            <div class="description">
+                                {{ fe.claNom }}
                             </div>
-                            <div class="content">
-                                <div class="summary">
-                                    Taches
-                                    <div class="date">
-                                        {{ fe.insDate |Time }}
-                                    </div>
-                                    &emsp;
-                                    <i data-id="{{ fe.claId }}" data-centrale="{{ app.request.get('centrale') }}" class="archive cursor icon archive-task"></i>
-                                </div>
-                                <div class="extra text">
-                                    {{ fe.claNom  }}
-                                </div>
-                                <div class="meta">
 
-                                </div>
-                            </div>
+
                         </div>
+                    </div>
 
-                    {% endif %}
 
 
-                </div>
+
+
+                {% endif %}
+
             </div>
+
 
 
         {% endfor %}
 
-        {% endif %}
+    {% endif %}
 
-    </div>
+</div>
 
 
 </div>
