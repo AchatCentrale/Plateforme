@@ -1104,7 +1104,6 @@ class TacheController extends Controller
 
     }
 
-
     public function terminerRdvAction(Request $request, $id, $centrale){
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');

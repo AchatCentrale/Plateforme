@@ -1811,6 +1811,46 @@ $(function () {
     });
 
 
+    function centraleToInt($centrale) {
+
+        switch ($centrale) {
+            case "CENTRALE_ACHAT":
+                return "1";
+                break;
+            case 'CENTRALE_GCCP':
+                return "2";
+                break;
+            case 'CENTRALE_FUNECAP':
+                return "4";
+                break;
+            case 'CENTRALE_PFPL':
+                return "5";
+                break;
+            case 'ROC_ECLERC':
+                return "6";
+                break;
+        }
+
+    }
+
+
+    $('.archive-task').on('click', function (e) {
+        console.log();
+
+
+        let centrale = centraleToInt($(this).data( "centrale" ));
+        let idTask = $(this).data("id");
+
+
+
+        $.get( "/taches/archive/"+idTask+"/"+centrale, function( data ) {
+            console.log(data)
+            $.notify("Note archivé", "success");
+
+        });
+
+    })
+
 });
 
 
