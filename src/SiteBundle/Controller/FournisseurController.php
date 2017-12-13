@@ -206,7 +206,6 @@ class FournisseurController extends Controller
                                 break;
 
                             case "A ARCHIVER":
-                                dump($ligne);
                                 $sqlArchiver = "UPDATE CENTRALE_PRODUITS.dbo.PRODUITS
                                         SET PR_STATUS = 1
                                         WHERE PR_ID = :id ";
@@ -216,7 +215,6 @@ class FournisseurController extends Controller
                                 break;
 
                             case "A MODIFIER":
-                                dump($ligne);
 
 
                                 $sql = "INSERT INTO CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS (PART_ID, Fournisseur, Rayon, Famille, Filtre1, Valeur1, Filtre2, Valeur2, Filtre3, Valeur3, Filtre4, Valeur4, Filtre5, Valeur5, Filtre6, Valeur6, Filtre7, Valeur7, Filtre8, Valeur8, Filtre9, Valeur9, Filtre10, Valeur10, Ref_Fourn, Ref_Part, EAN, Nom_Produit, Descrip_Courte, Descrip_Longue, Triptyque, Qte_Cmde, Conditionnement, Prix_Public_HT, Prix_Part_HT, Prix_VC, Remise_PCT, Type_Lien, Lien, Photo, Variable_Session)
