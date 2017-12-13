@@ -19,6 +19,11 @@
                             data-target="#modal-choix-centrale">Ajouter une tâche
                     </button>
 
+
+                    <a href="{{ path('export-action') }}" class="btn btn-success">Exporter les actions</a>
+
+
+
                     {% if task %}
                         <div class="tab-task" role="tabpanel" data-example-id="togglable-tabs">
                             <table id="table-tache" class="display hover">

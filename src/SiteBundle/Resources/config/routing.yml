@@ -92,8 +92,6 @@ detail-rdv:
     path: /rdv/detail/{idCentrale}/{id}
     defaults: {_controller: SiteBundle:Base:detailRdv}
 
-
-
 new-task:
     path:   /taches/new
     defaults: {_controller: SiteBundle:Tache:NewTask}
@@ -265,3 +263,10 @@ site-ac-adhesion:
     path: /site-ac/adhesion/new
     defaults: {_controller: SiteBundle:SiteAc:index}
     methods: POST
+
+
+#EXPORT
+
+export-action:
+    path: /export/actions/all
+    defaults: {_controller: SiteBundle:Export:ExportTask}
