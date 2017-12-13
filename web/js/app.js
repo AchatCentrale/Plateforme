@@ -1296,7 +1296,6 @@ $(function () {
 
     });
 
-
     function checkCentrale(centrale) {
 
 
@@ -1312,7 +1311,6 @@ $(function () {
             return 'ACHAT_CENTRALE';
         }
     }
-
 
     $('.detail-tache-home-client').on('click', function (e) {
 
@@ -1622,7 +1620,7 @@ $(function () {
 
     });
 
-//TODO: Quand on appuie sur la croix sa retire la raison sociale
+    //TODO: Quand on appuie sur la croix sa retire la raison sociale
     $('#label-client-task').on('click', function (e) {
         console.log(e);
         $('#label-client-task').remove();
@@ -1865,6 +1863,7 @@ $('#datetimepicker2').datetimepicker({
     viewMode: 'months',
     format: 'MM/YYYY'
 });
+
 
 
 

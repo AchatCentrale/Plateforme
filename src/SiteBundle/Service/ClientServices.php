@@ -474,4 +474,31 @@ class ClientServices
 
         $response = curl_exec($ch);
     }
+
+    public function getRaisonSocFourn($raisonSoc){
+
+
+        $sql = "SELECT FO_ID FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS WHERE FO_RAISONSOC = :raison_soc";
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':raison_soc', $raisonSoc);
+        $stmt->execute();
+        return $result = $stmt->fetchAll();
+
+
+    }
+
+    public function getRayonFourn($rayon){
+
+
+        $sql = 'SELECT RA_ID FROM RAYONS WHERE RA_NOM = :rayon';
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':rayon', $rayon);
+        $stmt->execute();
+        return $result = $stmt->fetchAll();
+
+
+    }
+
 }
