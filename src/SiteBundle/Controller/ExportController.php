@@ -12,10 +12,6 @@ class ExportController extends Controller
 {
 
    public function ExportTaskAction(){
-
-
-
-
        $response = new StreamedResponse();
        $response->setCallback(function(){
            $handle = fopen('php://output', 'w+');
@@ -48,6 +44,44 @@ class ExportController extends Controller
        $response->headers->set('Content-Disposition','attachment; filename="export-action'.date('Y-m-d').'.csv"');
 
        return $response;
+   }
+
+   public function ExportNoteAction(){
+
+
+       $response = new StreamedResponse();
+       $response->setCallback(function(){
+           $handle = fopen('php://output', 'w+');
+           $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+           fputcsv($handle, ['SO_ID', 'CN_ID', 'CL_ID', 'CN_NOTE', 'INS_DATE', 'INS_USER', 'MAJ_DATE', 'MAJ_USER'], ';');
+
+           $sql = "SELECT *  FROM CENTRALE_ACHAT.dbo.Vue_All_Notes";
+
+           $stmt = $conn->prepare($sql);
+
+
+           $stmt->execute();
+           $note = $stmt->fetchAll();
+           $ClientService = $this->get('site.service.client_services');
+
+           foreach ($note as $notes) {
+               fputcsv(
+                   $handle,
+                   [$notes['SO_ID'], $notes['CN_ID'], $notes['CL_ID'], $notes['CN_NOTE'], $notes['INS_DATE'], $notes['INS_USER'], $notes['MAJ_DATE'], $notes['MAJ_USER']],
+                   ';'
+               );
+           }
+
+           fclose($handle);
+       });
+
+       $response->setStatusCode(200);
+       $response->headers->set('Content-Type', 'text/csv; charset=windows-1252');
+       $response->headers->set('Content-Disposition','attachment; filename="export-note'.date('Y-m-d').'.csv"');
+
+       return $response;
+
    }
 
 }

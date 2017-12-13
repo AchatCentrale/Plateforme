@@ -270,3 +270,8 @@ site-ac-adhesion:
 export-action:
     path: /export/actions/all
     defaults: {_controller: SiteBundle:Export:ExportTask}
+
+
+export-notes:
+    path: /export/notes/all
+    defaults: {_controller: SiteBundle:Export:ExportNote}
