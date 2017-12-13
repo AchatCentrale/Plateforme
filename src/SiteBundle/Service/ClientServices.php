@@ -142,7 +142,21 @@ class ClientServices
             case 'ac':
                 return "ACHAT_CENTRALE";
                 break;
-
+            case "1":
+                return "ACHAT CENTRALE";
+                break;
+            case '2':
+                return "CENTRALE GCCP";
+                break;
+            case '4':
+                return "CENTRALE FUNECAP";
+                break;
+            case '5':
+                return "CENTRALE_PFPL";
+                break;
+            case '6':
+                return "ROC_ECLERC";
+                break;
 
 
 
@@ -499,6 +513,15 @@ class ClientServices
         return $result = $stmt->fetchAll();
 
 
+    }
+
+    public function getUserName($idUser){
+        $sql = 'SELECT US_PRENOM FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id';
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':id', $idUser);
+        $stmt->execute();
+        return $result[0] = $stmt->fetchAll();
     }
 
 }

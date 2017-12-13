@@ -973,7 +973,7 @@ $(function () {
 
 
                 let tpl = `<div class="ui centered grid header-detail-note">
-                              <h4>Créée ${data.ins_date} pour le client ${data.cl_raisonsoc.CL_RAISONSOC} </h4>
+                              <h4>Créée le <b>${data.ins_date}</b> pour le client <b>${data.cl_raisonsoc.CL_RAISONSOC}</b> par <b>${data.ins_user}</b></h4>
                             <div class="one column row tpl-inject-note">
                                 <div class="column note-content-home">
                                     <p class="note-description">${data.nom}</p>
@@ -988,7 +988,10 @@ $(function () {
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
                                 </div>
                                <a class="link-note-client" href="http://crm.achatcentrale.fr/client/${data.cl_id}/${checkCentrale(aidyCentrale)}/general">${data.cl_raisonsoc.CL_RAISONSOC}</a>
+                               <br>
                             </div>
+                            <p>${data.centrale}</p>
+
                             
                             
                                           

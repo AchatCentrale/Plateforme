@@ -1922,6 +1922,9 @@ class BaseController extends Controller
 
         $clientService = $this->get('site.service.client_services');
 
+        $user = $clientService->getUserName($result[0]['INS_USER']);
+
+
         if ($result) {
 
             $data = [
@@ -1930,6 +1933,8 @@ class BaseController extends Controller
                 "ins_date" => $result[0]['INS_DATE'],
                 "cl_id" => $result[0]['CL_ID'],
                 "cl_raisonsoc" => $clientService->array_utf8_encode($clientService->getTheClientRaisonSoc($result[0]['CL_ID'], $result[0]['SO_ID'])),
+                "ins_user" => $user[0]['US_PRENOM'],
+                "centrale" => $clientService->getTheCentrale($result[0]['SO_ID']),
             ];
             $response = new JsonResponse($data);
             $response->headers->set('Content-Type', 'application/json');
