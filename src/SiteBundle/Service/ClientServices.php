@@ -537,7 +537,6 @@ class ClientServices
                 $result = $stmt->fetchAll();
                 if ($result) {
 
-                    dump($result);
                     return $result[0]['CL_REF'];
                 } else {
                     return 'Pas de ref';
@@ -552,7 +551,6 @@ class ClientServices
                 $result = $stmt->fetchAll();
                 if ($result) {
 
-                    dump($result);
                     return $result[0]['CL_REF'];
                 } else {
                     return 'Pas de ref';
@@ -567,7 +565,6 @@ class ClientServices
                 $result = $stmt->fetchAll();
                 if ($result) {
 
-                    dump($result);
                     return $result[0]['CL_REF'];
                 } else {
                     return 'Pas de ref';
@@ -582,7 +579,6 @@ class ClientServices
                 $result = $stmt->fetchAll();
                 if ($result) {
 
-                    dump($result);
                     return $result[0]['CL_REF'];
                 } else {
                     return 'Pas de ref';
@@ -597,7 +593,6 @@ class ClientServices
                 $result = $stmt->fetchAll();
                 if ($result) {
 
-                    dump($result);
                     return $result[0]['CL_REF'];
                 } else {
                     return 'Pas de ref';

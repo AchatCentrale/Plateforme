@@ -98,17 +98,14 @@ class ConsomnationController extends Controller
                         $ligne = explode(";", $row[$i]);
 
 
-                        dump('insertion-debut');
 
                         $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (FO_ID, CF_USER, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) 
     VALUES (:fournisseur, :ref, :date, :prix_public, :prix_centrale, :ins_date, :ins_user)";
                         try {
                             $stmt = $conn->prepare($sql);
                         } catch (DBALException $e) {
-                            dump($e);
                         }
 
-                        dump('insertion-en-cour');
 
                         $stmt->bindValue(':fournisseur', 2);
                         $stmt->bindValue(':ref', $ligne[0]);
@@ -120,8 +117,6 @@ class ConsomnationController extends Controller
                         $stmt->execute();
                         $resultDelete = $stmt->fetchAll();
 
-                        dump($stmt->errorCode());
-                        dump($stmt->errorInfo());
 
 
 
