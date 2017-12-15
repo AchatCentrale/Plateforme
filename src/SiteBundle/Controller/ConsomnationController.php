@@ -4,6 +4,7 @@ namespace SiteBundle\Controller;
 
 
 use DateTime;
+use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -40,10 +41,29 @@ class ConsomnationController extends Controller
     public function indexClientAction(Request $request, $id, $centrale)
     {
 
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
         $cookie = new Cookie('test', 'test-cookie');
 
+        $clientService = $this->get('site.service.client_services');
 
-        $response = new Response($this->render('@Site/Consomnation/index.client.html.twig', []), 200);
+
+
+        $totalSql = "SELECT sum(CLC_PRIX_PUBLIC) as ca_prix_public, sum(CLC_PRIX_CENTRALE) as ca_prix_centrale FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                    WHERE CF_USER = :ref";
+
+
+        $stmtTotal = $conn->prepare($totalSql);
+        $stmtTotal->bindValue(':ref',$clientService->getRefClient($id, $centrale) );
+        $stmtTotal->execute();
+        $total = $stmtTotal->fetchAll();
+
+
+        $response = new Response($this->render('@Site/Consomnation/index.client.html.twig', [
+            "ca_prix_public" => $total[0]['ca_prix_public'],
+            "ca_prix_centrale" => $total[0]['ca_prix_centrale'],
+
+        ]), 200);
 
         $response->headers->setCookie(new Cookie('fournisseur', 'Bruneau'));
 
@@ -55,57 +75,70 @@ class ConsomnationController extends Controller
     {
 
 
-        $j = 0;
         $cookie = $request->cookies->get('Fournisseur');
         $periode = $request->cookies->get('Periode');
 
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+
+
         foreach ($request->files as $file) {
 
+
             if (($handle = fopen($file->getRealPath(), "r")) !== false) {
-                while (($row = fgetcsv($handle, 10000, "\n")) !== false) {
+                while (($row = fgetcsv($handle, null, "\r")) !== false) {
 
 
-                    for ($i = 1; $i <= count($row); $i++) {
+                    $header = explode(";", $row[0]);
+
+                    for ($i = 1; $i < count($row); $i++) {
+
+                        $ligne = explode(";", $row[$i]);
 
 
-                        if ($j > 0) {
-                            $ligne = explode(";", $row[0]);
+                        dump('insertion-debut');
 
-                            dump($ligne);
-                            dump($j);
-                            dump($periode);
-
-
-                        $dateNow = new DateTime('now');
-                        $dateNow = $dateNow->format("Y-m-d H:i:s");
-
-                        $date = date('d.m.Y H:i:s', str_replace('/', '-', '01/'.$periode));
-
-                        $prixpublic = floatval(str_replace(',', '.', $ligne[1]));
-                        $prixcentral = floatval(str_replace(',', '.', $ligne[2]));
-
-                        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CF_USER, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_USER, INS_DATE, CLC_DATE, FO_ID) VALUES (" . $ligne[0] . ", " . $prixpublic . "," . $prixcentral . ", " . $this->getUser()->getUsPrenom() . " ,  '" . $date . "'  , '" . $dateNow . "' )";
-
-                        dump($sql);
-
-//
-//                        $stmt = $conn->prepare($sql);
-//                        $stmt->execute();
-//                        $result = $stmt->fetchAll();
+                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (FO_ID, CF_USER, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) 
+    VALUES (:fournisseur, :ref, :date, :prix_public, :prix_centrale, :ins_date, :ins_user)";
+                        try {
+                            $stmt = $conn->prepare($sql);
+                        } catch (DBALException $e) {
+                            dump($e);
                         }
+
+                        dump('insertion-en-cour');
+
+                        $stmt->bindValue(':fournisseur', 2);
+                        $stmt->bindValue(':ref', $ligne[0]);
+                        $stmt->bindValue(':date', $ligne[4]);
+                        $stmt->bindValue(':prix_public', $ligne[2]);
+                        $stmt->bindValue(':prix_centrale', $ligne[3]);
+                        $stmt->bindValue(':ins_date', date("Y-m-d H:i:s"));
+                        $stmt->bindValue(':ins_user', "ADMIN");
+                        $stmt->execute();
+                        $resultDelete = $stmt->fetchAll();
+
+                        dump($stmt->errorCode());
+                        dump($stmt->errorInfo());
+
+
+
+
 
 
                     }
-                    $j++;
+
+
                 }
+
             }
 
-            return new JsonResponse('Importation réussie', 200);
 
 
         }
+        return new JsonResponse('Importation réussie', 200);
     }
 
     public function testAction(Request $request)

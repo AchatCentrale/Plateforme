@@ -8,21 +8,21 @@ class ClientServices
 {
 
 
-
     /**
      *
      * @var Connection
      */
     private $connection;
 
-    public function __construct(Connection $dbalConnection)  {
+    public function __construct(Connection $dbalConnection)
+    {
         $this->connection = $dbalConnection;
     }
 
     public function getTheSqlForCentrale($centrale)
     {
 
-        switch ($centrale){
+        switch ($centrale) {
             case "CENTRALE_FUNECAP":
                 $sql = 'SELECT DISTINCT
                 SO_ID,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION,
@@ -47,10 +47,11 @@ class ClientServices
     }
 
 
-    public function getTheIdForTheStatut($statut){
+    public function getTheIdForTheStatut($statut)
+    {
 
 
-        switch ($statut){
+        switch ($statut) {
             case "A valider":
                 return 0;
                 break;
@@ -63,7 +64,6 @@ class ClientServices
             default:
                 break;
         }
-
 
 
         return $statut;
@@ -109,12 +109,10 @@ class ClientServices
             "roc" => $roc[0]["computed"],
             "gccp" => $gccp[0]["computed"],
             "pfpl" => $pfpl[0]["computed"],
-            "total" => $ac[0]["computed"] + $fun[0]["computed"] + $roc[0]["computed"] + $gccp[0]["computed"] +$pfpl[0]["computed"],
+            "total" => $ac[0]["computed"] + $fun[0]["computed"] + $roc[0]["computed"] + $gccp[0]["computed"] + $pfpl[0]["computed"],
         ];
 
         return $data;
-
-
 
 
     }
@@ -159,7 +157,6 @@ class ClientServices
                 break;
 
 
-
         }
     }
 
@@ -183,11 +180,11 @@ class ClientServices
 
     public function getTheEvolution($centrale)
     {
-        switch ($centrale){
+        switch ($centrale) {
             case "1":
                 $sql = "SELECT COUNT(*)
                         FROM CENTRALE_ACHAT.dbo.CLIENTS
-                        WHERE CAST(INS_DATE AS DATE) > DATEADD(m,-3, GETDATE());";
+                        WHERE CAST(INS_DATE AS DATE) > DATEADD(M,-3, GETDATE());";
 
                 $stmt = $this->connection->prepare($sql);
                 $stmt->execute();
@@ -199,8 +196,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
-
+                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
 
 
                 $data = [
@@ -226,8 +222,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
-
+                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
 
 
                 $data = [
@@ -253,8 +248,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
-
+                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
 
 
                 $data = [
@@ -280,8 +274,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
-
+                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
 
 
                 $data = [
@@ -307,8 +300,7 @@ class ClientServices
                 $stmtTotal->execute();
                 $resultTotal = $stmtTotal->fetchAll();
 
-                $total = round( ($resultTotal[0]['computed'] - $result[0]['computed']) / 100 ,  0,PHP_ROUND_HALF_UP );
-
+                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
 
 
                 $data = [
@@ -322,10 +314,11 @@ class ClientServices
 
     }
 
-    public function getTheClientRaisonSoc($id, $centraleId){
+    public function getTheClientRaisonSoc($id, $centraleId)
+    {
 
 
-        switch ($centraleId){
+        switch ($centraleId) {
             case "1":
                 $sql = "SELECT CL_RAISONSOC
                         FROM CENTRALE_ACHAT.dbo.CLIENTS
@@ -378,18 +371,18 @@ class ClientServices
                 $result = $stmt->fetchAll();
 
 
-
                 return $result[0]['CL_RAISONSOC'];
         }
 
 
-        return $id. "  " . $centraleId;
+        return $id . "  " . $centraleId;
     }
 
-    public function getTheClientGroupe($id, $centraleId){
+    public function getTheClientGroupe($id, $centraleId)
+    {
 
 
-        switch ($centraleId){
+        switch ($centraleId) {
             case "ACHAT_CENTRALE":
                 $sql = "SELECT *
                         FROM CENTRALE_ACHAT.dbo.GROUPE
@@ -399,14 +392,15 @@ class ClientServices
                 $stmt->bindValue(":id", $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                if ($result){
+                if ($result) {
 
                     return $result[0]['GR_DESCR'];
 
-                }else{
+                } else {
 
                     return 'Pas de groupe';
-                }            case "CENTRALE_GCCP":
+                }
+            case "CENTRALE_GCCP":
                 $sql = "SELECT *
                         FROM CENTRALE_GCCP.dbo.GROUPE
                         WHERE GR_ID = :id";
@@ -415,14 +409,15 @@ class ClientServices
                 $stmt->bindValue(":id", $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                if ($result){
+                if ($result) {
 
                     return $result[0]['GR_DESCR'];
 
-                }else{
+                } else {
 
                     return 'Pas de groupe';
-                }            case "CENTRALE_FUNECAP":
+                }
+            case "CENTRALE_FUNECAP":
                 $sql = "SELECT *
                         FROM CENTRALE_FUNECAP.dbo.GROUPE
                         WHERE GR_ID = :id";
@@ -431,14 +426,15 @@ class ClientServices
                 $stmt->bindValue(":id", $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                if ($result){
+                if ($result) {
 
                     return $result[0]['GR_DESCR'];
 
-                }else{
+                } else {
 
                     return 'Pas de groupe';
-                }            case "CENTRALE_PFPL":
+                }
+            case "CENTRALE_PFPL":
                 $sql = "SELECT *
                         FROM CENTRALE_PFPL.dbo.GROUPE
                         WHERE GR_ID = :id";
@@ -447,11 +443,11 @@ class ClientServices
                 $stmt->bindValue(":id", $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                if ($result){
+                if ($result) {
 
                     return $result[0]['GR_DESCR'];
 
-                }else{
+                } else {
 
                     return 'Pas de groupe';
                 }
@@ -467,12 +463,11 @@ class ClientServices
                 $result = $stmt->fetchAll();
 
 
-
-                if ($result){
+                if ($result) {
 
                     return $result[0]['GR_DESCR'];
 
-                }else{
+                } else {
 
                     return 'Pas de groupe';
                 }
@@ -481,15 +476,17 @@ class ClientServices
 
     }
 
-    public function sendNotifNewClientAc($CC_NOM, $CL_MAIL, $CL_TEL, $id){
+    public function sendNotifNewClientAc($CC_NOM, $CL_MAIL, $CL_TEL, $id)
+    {
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'crm.achatcentrale.fr/notification/new/client/ac/'.$CC_NOM.'/'.$CL_MAIL.'/'.$CL_TEL.'/'.$id.'');
+        curl_setopt($ch, CURLOPT_URL, 'crm.achatcentrale.fr/notification/new/client/ac/' . $CC_NOM . '/' . $CL_MAIL . '/' . $CL_TEL . '/' . $id . '');
         curl_setopt($ch, CURLOPT_POST, true);
 
         $response = curl_exec($ch);
     }
 
-    public function getRaisonSocFourn($raisonSoc){
+    public function getRaisonSocFourn($raisonSoc)
+    {
 
 
         $sql = "SELECT FO_ID FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS WHERE FO_RAISONSOC = :raison_soc";
@@ -502,7 +499,8 @@ class ClientServices
 
     }
 
-    public function getRayonFourn($rayon){
+    public function getRayonFourn($rayon)
+    {
 
 
         $sql = 'SELECT RA_ID FROM RAYONS WHERE RA_NOM = :rayon';
@@ -515,13 +513,99 @@ class ClientServices
 
     }
 
-    public function getUserName($idUser){
+    public function getUserName($idUser)
+    {
         $sql = 'SELECT US_PRENOM FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id';
 
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue(':id', $idUser);
         $stmt->execute();
         return $result[0] = $stmt->fetchAll();
+    }
+
+    public function getRefClient($idClient, $centrale)
+    {
+
+
+        switch ($centrale) {
+            case "ACHAT_CENTRALE":
+                $sql = "SELECT CL_REF FROM CENTRALE_ACHAT.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+                    dump($result);
+                    return $result[0]['CL_REF'];
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+            case "CENTRALE_GCCP":
+                $sql = "SELECT CL_REF FROM CENTRALE_GCCP.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+                    dump($result);
+                    return $result[0]['CL_REF'];
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+            case "CENTRALE_FUNECAP":
+                $sql = "SELECT CL_REF FROM CENTRALE_FUNECAP.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+                    dump($result);
+                    return $result[0]['CL_REF'];
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+            case "CENTRALE_PFPL":
+                $sql = "SELECT CL_REF FROM CENTRALE_PFPL.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+                    dump($result);
+                    return $result[0]['CL_REF'];
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+            case "ROC_ECLERC":
+                $sql = "SELECT CL_REF FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+                    dump($result);
+                    return $result[0]['CL_REF'];
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+        }
+
+
     }
 
 }

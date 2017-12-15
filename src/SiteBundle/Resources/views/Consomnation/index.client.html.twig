@@ -1,15 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    CONSOMmATION - ACHAT-CENTRALE
+    CONSOMMATION - ACHAT-CENTRALE
 {% endblock %}
 
 {% block body %}
 
 
+    {{ dump(ca_prix_centrale) }}
+    {{ dump(ca_prix_public) }}
+
     <div class="x_panel">
         <div class="x_title">
             <h2><i class="shop  icon"></i> Consommations</h2>
+            &nbsp;
             <a href="{{ path('import-produit-index') }}" class="ui button green" id="btn-import-produit" role="button">
                 Importer des consommations
             </a>
@@ -22,7 +26,8 @@
         <div class="x_content ">
             <div class="row">
                 <div class="col-md-4">
-                    <div id="table-conso-client"></div>
+
+
                 </div>
                 <div class="col-md-8">
 
