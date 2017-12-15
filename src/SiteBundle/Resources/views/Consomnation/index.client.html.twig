@@ -7,25 +7,55 @@
 {% block body %}
 
 
-    {{ dump(ca_prix_centrale) }}
-    {{ dump(ca_prix_public) }}
+
 
     <div class="x_panel">
-        <div class="x_title">
-            <h2><i class="shop  icon"></i> Consommations</h2>
-            &nbsp;
-            <a href="{{ path('import-produit-index') }}" class="ui button green" id="btn-import-produit" role="button">
-                Importer des consommations
-            </a>
+        <div class="row tile_count">
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                <div class="ui statistic">
+                    <div class="value">
+                        {{ ca_prix_public }} €
+                    </div>
+                    <div class="label">
+                        CA Prix Public
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                <div class="ui statistic">
+                    <div class="value">
+                        {{ ca_prix_centrale }} €
+                    </div>
+                    <div class="label">
+                        CA Prix Centrale
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                <div class="ui statistic">
+                    <div class="value">
+                        {{ ca_prix_public - ca_prix_centrale }} €
+                    </div>
+                    <div class="label">
+                        D'économie
+                    </div>
+                </div>
+            </div>
 
-            <div class="clearfix"></div>
         </div>
+    </div>
+
+
+
+    <div class="x_panel">
+
 
 
 
         <div class="x_content ">
             <div class="row">
                 <div class="col-md-4">
+                    <canvas id="myChart" width="400" height="400"></canvas>
 
 
                 </div>

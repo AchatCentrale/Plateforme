@@ -141,6 +141,33 @@ class ConsomnationController extends Controller
         return new JsonResponse('Importation réussie', 200);
     }
 
+    public function ConsoDetailAction(Request $request, $id, $centrale)
+    {
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $clientService = $this->get('site.service.client_services');
+
+
+        $totalSql = "";
+
+
+        $stmtTotal = $conn->prepare($totalSql);
+        $stmtTotal->bindValue(':ref',$clientService->getRefClient($id, $centrale) );
+        $stmtTotal->execute();
+        $total = $stmtTotal->fetchAll();
+
+
+
+        $JsonResponse = new JsonResponse();
+
+        $JsonResponse->setContent("ok");
+
+        return $JsonResponse;
+
+    }
+
+
+
     public function testAction(Request $request)
     {
 

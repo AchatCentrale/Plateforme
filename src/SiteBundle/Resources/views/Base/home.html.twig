@@ -133,95 +133,95 @@
 
 
 
-                <div class="col-md-6 col-sm-12 col-xs-12">
-                    <div class="x_panel tile fixed_height_585 ">
-                        <div class="x_title">
-                            <h2>Chiffre d'affaires</h2>
+                {#<div class="col-md-6 col-sm-12 col-xs-12">#}
+                    {#<div class="x_panel tile fixed_height_585 ">#}
+                        {#<div class="x_title">#}
+                            {#<h2>Chiffre d'affaires</h2>#}
 
-                            <div class="clearfix"></div>
-
-
-
-
-                        </div>
-                        <div class="x_content">
-
-                            <div class="ui grid">
-
-                                <div class="three column row">
-                                    <div class="column">
-                                        <div class="ui form">
-                                            <div class="field">
-                                                <label>Periode</label>
-                                                <div class="ui selection dropdown">
-                                                    <input type="hidden" name="periode">
-                                                    <i class="dropdown icon"></i>
-                                                    <div class="default text">Periode</div>
-                                                    <div class="menu">
-                                                        <div class="item" data-value="1">Mois</div>
-                                                        <div class="item" data-value="0">Trimeste</div>
-                                                        <div class="item" data-value="2">Semestre</div>
-                                                        <div class="item" data-value="3">Annuel</div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="column">
-
-                                        <div class="ui dropdown" id="clients-dropdown">
-                                            <input type="hidden" name="Clients">
-                                            <i class="dropdown icon"></i>
-                                            <div class="default text">clients</div>
-                                            <div class="menu">
-                                                {% for cl in clients  %}
-
-
-                                                    <div class="item" data-value="{{ cl['CL_ID'] }}">{{ cl['CL_RAISONSOC'] }}</div>
-
-                                                    {% endfor %}
-                                            </div>
-                                        </div>
+                            {#<div class="clearfix"></div>#}
 
 
 
 
+                        {#</div>#}
+                        {#<div class="x_content">#}
+
+                            {#<div class="ui grid">#}
+
+                                {#<div class="three column row">#}
+                                    {#<div class="column">#}
+                                        {#<div class="ui form">#}
+                                            {#<div class="field">#}
+                                                {#<label>Periode</label>#}
+                                                {#<div class="ui selection dropdown">#}
+                                                    {#<input type="hidden" name="periode">#}
+                                                    {#<i class="dropdown icon"></i>#}
+                                                    {#<div class="default text">Periode</div>#}
+                                                    {#<div class="menu">#}
+                                                        {#<div class="item" data-value="1">Mois</div>#}
+                                                        {#<div class="item" data-value="0">Trimeste</div>#}
+                                                        {#<div class="item" data-value="2">Semestre</div>#}
+                                                        {#<div class="item" data-value="3">Annuel</div>#}
+                                                    {#</div>#}
+                                                {#</div>#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                    {#<div class="column">#}
+
+                                        {#<div class="ui dropdown" id="clients-dropdown">#}
+                                            {#<input type="hidden" name="Clients">#}
+                                            {#<i class="dropdown icon"></i>#}
+                                            {#<div class="default text">clients</div>#}
+                                            {#<div class="menu">#}
+                                                {#{% for cl in clients  %}#}
 
 
-                                    </div>
-                                    <div class="column">
-                                        <div class="ui form">
-                                            <div class="field">
-                                                <label>Fournisseur</label>
-                                                <div class="ui selection dropdown">
-                                                    <input type="hidden" name="periode">
-                                                    <i class="dropdown icon"></i>
-                                                    <div class="default text">Fournisseur</div>
-                                                    <div class="menu">
-                                                        <div class="item" data-value="0">Bruneau</div>
+                                                    {#<div class="item" data-value="{{ cl['CL_ID'] }}">{{ cl['CL_RAISONSOC'] }}</div>#}
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <h2 class="ca-global-h2">CA GLOBAL : 482 852,58 €</h2>
+                                                    {#{% endfor %}#}
+                                            {#</div>#}
+                                        {#</div>#}
 
 
 
-                            <div class="chart-ca-global">
-                                <canvas id="myChart" width="400" height="200"></canvas>
 
-                            </div>
 
-                        </div>
-                    </div>
-                </div>
+
+                                    {#</div>#}
+                                    {#<div class="column">#}
+                                        {#<div class="ui form">#}
+                                            {#<div class="field">#}
+                                                {#<label>Fournisseur</label>#}
+                                                {#<div class="ui selection dropdown">#}
+                                                    {#<input type="hidden" name="periode">#}
+                                                    {#<i class="dropdown icon"></i>#}
+                                                    {#<div class="default text">Fournisseur</div>#}
+                                                    {#<div class="menu">#}
+                                                        {#<div class="item" data-value="0">Bruneau</div>#}
+
+                                                    {#</div>#}
+                                                {#</div>#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                {#</div>#}
+
+
+                            {#</div>#}
+
+                            {#<h2 class="ca-global-h2">CA GLOBAL : 482 852,58 €</h2>#}
+
+
+
+                            {#<div class="chart-ca-global">#}
+                                {#<canvas id="myChart" width="400" height="200"></canvas>#}
+
+                            {#</div>#}
+
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
 
                 <div class="col-md-2 col-sm-12 col-xs-12">
                     <div class="x_panel">

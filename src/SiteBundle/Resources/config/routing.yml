@@ -275,3 +275,12 @@ export-action:
 export-notes:
     path: /export/notes/all
     defaults: {_controller: SiteBundle:Export:ExportNote}
+
+
+
+
+#API CONSO
+
+detail-conso:
+    path: /conso/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Consomnation:ConsoDetail}
