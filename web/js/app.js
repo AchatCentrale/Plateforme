@@ -1854,47 +1854,6 @@ $(function () {
 });
 
 
-//chart.js
-
-if (document.getElementById("myChart")) {
-
-    let ctx = document.getElementById("myChart").getContext("2d");
-    let myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"],
-            datasets: [{
-                label: 'Bruneau',
-                data: [120000, 160000, 150056, 150896, 150256, 170256, 195256, 195698, 175256, 185256, 125256, 195256],
-                borderColor: [
-                    'rgba(255,99,132,1)',
-
-                ],
-                backgroundColor: 'rgba(0,0,0,0.1)',
-                borderWidth: 1
-            },
-                {
-                    label: 'Bouygues Telecom',
-                    data: [120000, 125256, 175256, 150896, 150256, 170256, 195256, 150056, 175256, 185256, 125256, 120000],
-                    borderColor: [
-                        'rgba(101,140,223,1)',
-
-                    ],
-                    backgroundColor: false,
-                    borderWidth: 1
-                }
-            ]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    stacked: true
-                }]
-            }
-        }
-    });
-
-}
 
 
 $('#datetimepicker1').datetimepicker({

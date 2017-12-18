@@ -537,7 +537,9 @@ class ClientServices
                 $result = $stmt->fetchAll();
                 if ($result) {
 
+
                     return $result[0]['CL_REF'];
+
                 } else {
                     return 'Pas de ref';
                 }

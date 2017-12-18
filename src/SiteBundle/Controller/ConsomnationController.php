@@ -46,7 +46,7 @@ class ConsomnationController extends Controller
         $cookie = new Cookie('test', 'test-cookie');
 
         $clientService = $this->get('site.service.client_services');
-
+        $ref = $clientService->getRefClient($id, $centrale);
 
 
         $totalSql = "SELECT sum(CLC_PRIX_PUBLIC) as ca_prix_public, sum(CLC_PRIX_CENTRALE) as ca_prix_centrale FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
@@ -54,14 +54,17 @@ class ConsomnationController extends Controller
 
 
         $stmtTotal = $conn->prepare($totalSql);
-        $stmtTotal->bindValue(':ref',$clientService->getRefClient($id, $centrale) );
+        $stmtTotal->bindValue(':ref', $ref);
         $stmtTotal->execute();
         $total = $stmtTotal->fetchAll();
+
+
 
 
         $response = new Response($this->render('@Site/Consomnation/index.client.html.twig', [
             "ca_prix_public" => $total[0]['ca_prix_public'],
             "ca_prix_centrale" => $total[0]['ca_prix_centrale'],
+            "ref_client" => $id
 
         ]), 200);
 
@@ -143,25 +146,174 @@ class ConsomnationController extends Controller
         $clientService = $this->get('site.service.client_services');
 
 
-        $totalSql = "";
-
-
-        $stmtTotal = $conn->prepare($totalSql);
-        $stmtTotal->bindValue(':ref',$clientService->getRefClient($id, $centrale) );
-        $stmtTotal->execute();
-        $total = $stmtTotal->fetchAll();
+        switch ($centrale){
+            case "ACHAT_CENTRALE":
 
 
 
-        $JsonResponse = new JsonResponse();
+                $start = $request->query->get('start');
+                $send = $request->query->get('send');
 
-        $JsonResponse->setContent("ok");
+                if(isset($start) && isset($send)){
+                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
+                                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                                    WHERE CF_USER = :ref
+                                      AND CLC_DATE BETWEEN :start AND :end
+                                    UNION ALL
+                                    SELECT null,  sum(CLC_PRIX_CENTRALE), round(sum(CLC_PRIX_PUBLIC),2) FROM
+                                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                                    WHERE CF_USER = :ref
+                                      ORDER BY date ASC";
 
-        return $JsonResponse;
+
+                    try {
+                        $stmtTotal = $conn->prepare($totalSql);
+                        $stmtTotal->bindValue(':ref',$clientService->getRefClient($id, $centrale) );
+                        $stmtTotal->bindValue(':start',$start );
+                        $stmtTotal->bindValue(':end',$end );
+                        $stmtTotal->execute();
+                    } catch (DBALException $e) {
+
+                    }
+                    $total = $stmtTotal->fetchAll();
+
+                    $labels = [];
+                    $dataset = [];
+                    foreach ($total as $key => $result){
+
+
+
+                        if ($key > 0){
+                            array_push($dataset, $result['CLC_PRIX_PUBLIC']);
+                            array_push($labels, $result['date']);
+
+                        }
+
+                    }
+                    $data = [
+                        'type' => 'line',
+                        'title' => 'Title',
+                        'labels' => $labels,
+                        'datasets' => [
+                            [
+                                'data' => $dataset,
+                                'borderColor' => "#f7464a",
+                                'label' => "Bruneau",
+                            ]
+                        ]
+
+                    ];
+
+
+
+                    return new JsonResponse($data, 200);
+                    break;
+
+                }
+
+                $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
+                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                            WHERE CF_USER = :ref
+                            UNION ALL
+                            SELECT null,  sum(CLC_PRIX_CENTRALE), round(sum(CLC_PRIX_PUBLIC),2) FROM
+                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                            WHERE CF_USER = :ref
+                              ORDER BY date ASC";
+                try {
+                    $stmtTotal = $conn->prepare($totalSql);
+                    $stmtTotal->bindValue(':ref',$clientService->getRefClient($id, $centrale) );
+                    $stmtTotal->execute();
+                } catch (DBALException $e) {
+
+                }
+                $total = $stmtTotal->fetchAll();
+                $labels = [];
+                $dataset = [];
+                foreach ($total as $key => $result){
+
+
+
+                    if ($key > 0){
+                        array_push($dataset, $result['CLC_PRIX_PUBLIC']);
+                        array_push($labels, $result['date']);
+
+                    }
+
+                }
+                $data = [
+                    'type' => 'line',
+                    'title' => 'Title',
+                    'labels' => $labels,
+                    'datasets' => [
+                        [
+                            'data' => $dataset,
+                            'borderColor' => "#f7464a",
+                            'label' => "Bruneau",
+                        ]
+                    ]
+
+                ];
+                return new JsonResponse($data, 200);
+                break;
+            case "CENTRALE_FUNECAP":
+                $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
+                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                            WHERE CF_USER = :ref
+                            UNION ALL
+                            SELECT null,  sum(CLC_PRIX_CENTRALE), round(sum(CLC_PRIX_PUBLIC),2) FROM
+                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                            WHERE CF_USER = :ref
+                              ORDER BY date ASC";
+
+
+
+                try {
+                    $stmtTotal = $conn->prepare($totalSql);
+                    $stmtTotal->bindValue(':ref',$clientService->getRefClient($id, $centrale) );
+                    $stmtTotal->execute();
+                } catch (DBALException $e) {
+
+                }
+                $total = $stmtTotal->fetchAll();
+
+                $labels = [];
+                $dataset = [];
+
+                foreach ($total as $key => $result){
+
+
+
+                    if ($key > 0){
+                        array_push($dataset, $result['CLC_PRIX_PUBLIC']);
+                        array_push($labels, $result['date']);
+
+                    }
+
+                }
+
+
+                $data = [
+                    'type' => 'line',
+                    'title' => 'Title',
+                    'labels' => $labels,
+                    'datasets' => [
+                        [
+                            'data' => $dataset,
+                            'borderColor' => "#f7464a",
+                            'label' => "Bruneau",
+                        ]
+                    ]
+
+                ];
+
+
+
+
+                return new JsonResponse($data, 200);
+                break;
+        }
 
     }
-
-
 
     public function testAction(Request $request)
     {
