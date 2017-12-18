@@ -142,6 +142,9 @@ class ConsomnationController extends Controller
     public function ConsoDetailAction(Request $request, $id, $centrale)
     {
 
+        header("Access-Control-Allow-Origin: *");
+
+
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
         $clientService = $this->get('site.service.client_services');
 
