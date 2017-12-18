@@ -152,7 +152,7 @@ class ConsomnationController extends Controller
 
 
                 $start = $request->query->get('start');
-                $send = $request->query->get('send');
+                $send = $request->query->get('end');
 
                 if(isset($start) && isset($send)){
                     $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
