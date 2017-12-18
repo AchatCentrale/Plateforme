@@ -99,6 +99,10 @@ $(function() {
     $('#reportrange').on('apply.daterangepicker', function (e, picker) {
         console.log(picker.startDate.format('YYYY-MM-DD'));
         console.log(picker.endDate.format('YYYY-MM-DD'));
+
+        let start = picker.startDate.format('YYYY-MM-DD');
+        let end = picker.endDate.format('YYYY-MM-DD');
+
         let ref = $('#ref-client');
         let centrale = $('#centrale-client');
 
