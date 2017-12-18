@@ -258,9 +258,9 @@ class ConsomnationController extends Controller
             case "CENTRALE_FUNECAP":
 
                 $start = $request->query->get('start');
-                $send = $request->query->get('send');
+                $end = $request->query->get('end');
 
-                if(isset($start) && isset($send)){
+                if(isset($start) && isset($end)){
                     $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
                                       CENTRALE_ACHAT.dbo.CLIENTS_CONSO
                                     WHERE CF_USER = :ref

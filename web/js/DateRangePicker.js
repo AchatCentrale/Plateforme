@@ -107,7 +107,7 @@ $(function() {
         if (document.getElementById("myChart")) {
 
 
-            let url ='http://crm.achatcentrale.fr/conso/'+ref.html()+'/'+centrale.html()+'?start='+start+'&send='+end;
+            let url ='http://crm.achatcentrale.fr/conso/'+ref.html()+'/'+centrale.html()+'?start='+start+'&end='+end;
             console.log(url);
 
             $.ajax({
