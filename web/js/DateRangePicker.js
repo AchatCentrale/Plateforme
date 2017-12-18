@@ -7,7 +7,7 @@ $(function() {
     if (document.getElementById("myChart")) {
 
 
-        let url ='http://localhost:8000/conso/'+ref.html()+'/'+centrale.html();
+        let url ='http://crm.achatcentrale.fr/conso/'+ref.html()+'/'+centrale.html();
         console.log(url);
 
         $.ajax({
@@ -107,7 +107,7 @@ $(function() {
         if (document.getElementById("myChart")) {
 
 
-            let url ='http://localhost:8000/conso/'+ref.html()+'/'+centrale.html()+'?start='+start+'&send='+end;
+            let url ='http://crm.achatcentrale.fr/conso/'+ref.html()+'/'+centrale.html()+'?start='+start+'&send='+end;
             console.log(url);
 
             $.ajax({
