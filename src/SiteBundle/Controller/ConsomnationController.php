@@ -256,6 +256,68 @@ class ConsomnationController extends Controller
                 return new JsonResponse($data, 200);
                 break;
             case "CENTRALE_FUNECAP":
+
+                $start = $request->query->get('start');
+                $send = $request->query->get('send');
+
+                if(isset($start) && isset($send)){
+                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
+                                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                                    WHERE CF_USER = :ref
+                                      AND CLC_DATE BETWEEN :start AND :end
+                                    UNION ALL
+                                    SELECT null,  sum(CLC_PRIX_CENTRALE), round(sum(CLC_PRIX_PUBLIC),2) FROM
+                                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                                    WHERE CF_USER = :ref
+                                      ORDER BY date ASC";
+
+
+                    try {
+                        $stmtTotal = $conn->prepare($totalSql);
+                        $stmtTotal->bindValue(':ref',$clientService->getRefClient($id, $centrale) );
+                        $stmtTotal->bindValue(':start',$start );
+                        $stmtTotal->bindValue(':end',$end );
+                        $stmtTotal->execute();
+                    } catch (DBALException $e) {
+
+                    }
+                    $total = $stmtTotal->fetchAll();
+
+                    $labels = [];
+                    $dataset = [];
+                    foreach ($total as $key => $result){
+
+
+
+                        if ($key > 0){
+                            array_push($dataset, $result['CLC_PRIX_PUBLIC']);
+                            array_push($labels, $result['date']);
+
+                        }
+
+                    }
+                    $data = [
+                        'type' => 'line',
+                        'title' => 'Title',
+                        'labels' => $labels,
+                        'datasets' => [
+                            [
+                                'data' => $dataset,
+                                'borderColor' => "#f7464a",
+                                'label' => "Bruneau",
+                            ]
+                        ]
+
+                    ];
+
+
+
+                    return new JsonResponse($data, 200);
+                    break;
+
+                }
+
+
                 $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
                               CENTRALE_ACHAT.dbo.CLIENTS_CONSO
                             WHERE CF_USER = :ref
