@@ -148,13 +148,11 @@ class ConsomnationController extends Controller
 
         switch ($centrale){
             case "ACHAT_CENTRALE":
-
-
-
                 $start = $request->query->get('start');
                 $end = $request->query->get('end');
 
-                if(isset($start) && isset($send)){
+
+                if(isset($start) && isset($end)){
                     $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
                                       CENTRALE_ACHAT.dbo.CLIENTS_CONSO
                                     WHERE CF_USER = :ref
@@ -180,9 +178,6 @@ class ConsomnationController extends Controller
                     $labels = [];
                     $dataset = [];
                     foreach ($total as $key => $result){
-
-
-
                         if ($key > 0){
                             array_push($dataset, $result['CLC_PRIX_PUBLIC']);
                             array_push($labels, $result['date']);
