@@ -19,7 +19,7 @@
             <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
                 <div class="ui statistic">
                     <div class="value">
-                        {{ ca_prix_public | number_format }} €
+                        {{ ca_prix_public | localizedcurrency('EUR') }}
                     </div>
                     <div class="label">
                         CA Prix Public
@@ -29,7 +29,7 @@
             <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
                 <div class="ui statistic">
                     <div class="value">
-                        {{ ca_prix_centrale | number_format }} €
+                        {{ ca_prix_centrale | localizedcurrency('EUR') }}
                     </div>
                     <div class="label">
                         CA Prix Centrale

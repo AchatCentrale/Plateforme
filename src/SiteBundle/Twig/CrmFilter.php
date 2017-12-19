@@ -16,6 +16,7 @@ class CrmFilter extends \Twig_Extension
     public function __construct(RegistryInterface $doctrine)
     {
         $this->doctrine = $doctrine;
+
     }
 
     public function getFunctions()

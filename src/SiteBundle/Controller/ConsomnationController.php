@@ -403,8 +403,6 @@ class ConsomnationController extends Controller
                                 AND CLC_DATE BETWEEN :start AND :end
                                 ORDER BY date
                                   ";
-
-
                     try {
                         $stmtTotal = $conn->prepare($totalSql);
                         $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
@@ -422,8 +420,6 @@ class ConsomnationController extends Controller
                     foreach ($total as $item => $value ){
 
                         $html .= '<tr><td>'.$value['date'].'</td><td>'.$value['CLC_PRIX_PUBLIC'].'</td><td>'.$value['CLC_PRIX_CENTRALE'].'</td><td>'.($value['CLC_PRIX_CENTRALE'] + $value['CLC_PRIX_PUBLIC']).'</td></tr>';
-
-
                     }
                     $html .= '';
 
@@ -437,7 +433,6 @@ class ConsomnationController extends Controller
 
         }
     }
-
 
     public function testAction(Request $request)
     {
