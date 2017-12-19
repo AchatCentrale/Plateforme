@@ -106,7 +106,8 @@ $(function() {
         let ref = $('#ref-client');
         let centrale = $('#centrale-client');
 
-        let url = "http://localhost:8000/conso/tableau/1063/ACHAT_CENTRALE?start=2017-04-01&end=2017-09-01";
+        let url = 'http://localhost:8000/conso/tableau/'+ref.html()+'/'+centrale.html()+'?start='+start+'&end='+end;
+
         $.ajax({
             url: url,
             timeout: 4000,
