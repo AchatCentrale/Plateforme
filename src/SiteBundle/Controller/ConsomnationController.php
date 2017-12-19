@@ -57,7 +57,9 @@ class ConsomnationController extends Controller
         $total = $stmtTotal->fetchAll();
 
         $tableSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                      WHERE CF_USER = :ref";
+                      WHERE CF_USER = :ref
+                      ORDER BY date
+                      ";
         $stmtTable = $conn->prepare($tableSql);
         $stmtTable->bindValue(':ref', $ref);
         $stmtTable->execute();
