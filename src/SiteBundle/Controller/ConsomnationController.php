@@ -51,12 +51,17 @@ class ConsomnationController extends Controller
 
         $totalSql = "SELECT sum(CLC_PRIX_PUBLIC) as ca_prix_public, sum(CLC_PRIX_CENTRALE) as ca_prix_centrale FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
                     WHERE CF_USER = :ref";
-
-
         $stmtTotal = $conn->prepare($totalSql);
         $stmtTotal->bindValue(':ref', $ref);
         $stmtTotal->execute();
         $total = $stmtTotal->fetchAll();
+
+        $tableSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                      WHERE CF_USER = :ref";
+        $stmtTable = $conn->prepare($tableSql);
+        $stmtTable->bindValue(':ref', $ref);
+        $stmtTable->execute();
+        $tableau = $stmtTable->fetchAll();
 
 
 
@@ -64,7 +69,8 @@ class ConsomnationController extends Controller
         $response = new Response($this->render('@Site/Consomnation/index.client.html.twig', [
             "ca_prix_public" => $total[0]['ca_prix_public'],
             "ca_prix_centrale" => $total[0]['ca_prix_centrale'],
-            "ref_client" => $id
+            "ref_client" => $id,
+            "tableau" => $tableau
 
         ]), 200);
 
@@ -374,6 +380,62 @@ class ConsomnationController extends Controller
         }
 
     }
+
+    public function ConsoTableauAction(Request $request, $id, $centrale){
+        header("Access-Control-Allow-Origin: *");
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $clientService = $this->get('site.service.client_services');
+
+
+        switch ($centrale) {
+
+            case "ACHAT_CENTRALE":
+                $start = $request->query->get('start');
+                $end = $request->query->get('end');
+
+
+                if (isset($start) && isset($end)) {
+                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                                WHERE CF_USER = :ref
+                                AND CLC_DATE BETWEEN :start AND :end
+                                ORDER BY date
+                                  ";
+
+
+                    try {
+                        $stmtTotal = $conn->prepare($totalSql);
+                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
+                        $stmtTotal->bindValue(':start', $start);
+                        $stmtTotal->bindValue(':end', $end);
+                        $stmtTotal->execute();
+                    } catch (DBALException $e) {
+
+                    }
+                    $total = $stmtTotal->fetchAll();
+
+
+                    $html = '';
+
+                    foreach ($total as $item => $value ){
+
+                        $html .= '<tr><td>'.$value['date'].'</td><td>'.$value['CLC_PRIX_PUBLIC'].'</td><td>'.$value['CLC_PRIX_CENTRALE'].'</td><td>'.($value['CLC_PRIX_CENTRALE'] + $value['CLC_PRIX_PUBLIC']).'</td></tr>';
+
+
+                    }
+                    $html .= '';
+
+
+                    return new JsonResponse($html, 200);
+                    break;
+
+
+                }
+
+
+        }
+    }
+
 
     public function testAction(Request $request)
     {

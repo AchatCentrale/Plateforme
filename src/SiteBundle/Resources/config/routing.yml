@@ -284,3 +284,7 @@ export-notes:
 detail-conso:
     path: /conso/{id}/{centrale}
     defaults: {_controller: SiteBundle:Consomnation:ConsoDetail}
+
+detail-tableau-conso:
+    path: /conso/tableau/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Consomnation:ConsoTableau}

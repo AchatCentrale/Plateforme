@@ -106,6 +106,20 @@ $(function() {
         let ref = $('#ref-client');
         let centrale = $('#centrale-client');
 
+        let url = "http://localhost:8000/conso/tableau/1063/ACHAT_CENTRALE?start=2017-04-01&end=2017-09-01";
+        $.ajax({
+            url: url,
+            timeout: 4000,
+            success: function (data) {
+               console.log(data);
+
+               $('#ajax-conso-table').empty().append(data).fadeIn();
+            },
+            error: function() {
+                console.log("Désolé, aucun résultat trouvé.");
+            }
+        });
+
 
 
         if (document.getElementById("myChart")) {

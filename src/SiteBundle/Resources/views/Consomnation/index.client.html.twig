@@ -71,8 +71,27 @@
 
 
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-8" style="padding-top: 55px;">
+                    <table class="ui selectable definition table">
+                        <thead>
+                        <tr><th></th>
+                            <th>Prix public</th>
+                            <th>Prix Centrale</th>
+                            <th>économie</th>
+                        </tr></thead>
+                        <tbody id="ajax-conso-table">
+                        {% for tab in tableau %}
 
+                            <tr>
+                                <td>{{ tab['date'] }}</td>
+                                <td>{{ tab['CLC_PRIX_PUBLIC'] }} €</td>
+                                <td>{{ tab['CLC_PRIX_CENTRALE'] }} €</td>
+                                <td>{{ tab['CLC_PRIX_PUBLIC'] - tab['CLC_PRIX_CENTRALE'] }} €</td>
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody></table>
 
 
 
