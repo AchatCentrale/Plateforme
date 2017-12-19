@@ -106,7 +106,7 @@ $(function() {
         let ref = $('#ref-client');
         let centrale = $('#centrale-client');
 
-        let url = 'http://localhost:8000/conso/tableau/'+ref.html()+'/'+centrale.html()+'?start='+start+'&end='+end;
+        let url = 'http://crm.achatcentrale.fr/conso/tableau/'+ref.html()+'/'+centrale.html()+'?start='+start+'&end='+end;
 
         $.ajax({
             url: url,
