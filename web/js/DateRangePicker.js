@@ -42,7 +42,7 @@ $(function() {
 
 
     let start = moment().subtract(1, 'year');
-    let end = moment().subtract(1, 'month');
+    let end = moment().subtract(1, 'month').date(0);
 
     function cb(start, end) {
         $('#reportrange span').html(start.format('D MMMM YYYY') + ' - ' + end.format('D MMMM YYYY'));
@@ -86,9 +86,9 @@ $(function() {
         startDate: start,
         endDate: end,
         ranges: {
-            'Il y a 3 mois': [moment().subtract(3, 'months'), moment()],
-            'Il y a 6 mois': [moment().subtract(6, 'months'), moment()],
-            'Il y a 1 an': [moment().subtract(1, 'year'), moment()],
+            'Il y a 3 mois': [moment().subtract(3, 'months').date(0), moment().date(0)],
+            'Il y a 6 mois': [moment().subtract(6, 'months').date(0), moment().date(0)],
+            'Il y a 1 an': [moment().subtract(1, 'year').date(0), moment().date(0)],
         }
     },
         cb);
