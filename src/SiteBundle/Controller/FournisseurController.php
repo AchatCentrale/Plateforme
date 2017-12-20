@@ -160,7 +160,7 @@ class FournisseurController extends Controller
                             VALUES
                               ( :id , :fournisseur ,  :rayon ,  :famille ,  :filtre1 ,  :valeur1 ,  :filtre2 ,  :valeur2 ,  :filtre3 ,  :valeur3 ,  :filtre4 ,  :valeur4 ,  :filtre5 ,  :valeur5 ,  :filtre6 ,  :valeur6 , :filtre7 ,  :valeur7 ,  :filtre8 ,  :valeur8 ,  :filtre9 ,  :valeur9 ,  :filtre10 ,  :valeur10 ,  :refFour ,  :refPart ,  :ean ,  :nomProduit ,  :descrCourte ,  :descrLong ,  :triptyque ,  :qteCmd, :conditionnement, :prixPubHt,  :prixPartHt ,  :prixVc  , :remise ,  :type ,  :lien ,  :photo , 123456  )";
                                 $stmt = $conn->prepare($sql);
-                                $stmt->bindValue(':id', $ligne[0]);
+                                $stmt->bindValue(':id', 1);
                                 $stmt->bindValue(':fournisseur', $ligne[1]);
                                 $stmt->bindValue(':rayon', $ligne[2]);
                                 $stmt->bindValue(':famille', $ligne[3]);
@@ -220,7 +220,7 @@ class FournisseurController extends Controller
                             VALUES
                               ( :id , :fournisseur ,  :rayon ,  :famille ,  :filtre1 ,  :valeur1 ,  :filtre2 ,  :valeur2 ,  :filtre3 ,  :valeur3 ,  :filtre4 ,  :valeur4 ,  :filtre5 ,  :valeur5 ,  :filtre6 ,  :valeur6 , :filtre7 ,  :valeur7 ,  :filtre8 ,  :valeur8 ,  :filtre9 ,  :valeur9 ,  :filtre10 ,  :valeur10 ,  :refFour ,  :refPart ,  :ean ,  :nomProduit ,  :descrCourte ,  :descrLong ,  :triptyque ,  :qteCmd, :conditionnement, :prixPubHt,  :prixPartHt ,  :prixVc  , :remise ,  :type ,  :lien ,  :photo , 123456  )";
                                 $stmt = $conn->prepare($sql);
-                                $stmt->bindValue(':id', $ligne[0]);
+                                $stmt->bindValue(':id', 1);
                                 $stmt->bindValue(':fournisseur', $ligne[1]);
                                 $stmt->bindValue(':rayon', $ligne[2]);
                                 $stmt->bindValue(':famille', $ligne[3]);

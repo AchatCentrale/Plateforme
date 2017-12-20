@@ -419,7 +419,7 @@ class ConsomnationController extends Controller
 
                     foreach ($total as $item => $value ){
 
-                        $html .= '<tr><td>'.$value['date'].'</td><td>'.$value['CLC_PRIX_PUBLIC'].'</td><td>'.$value['CLC_PRIX_CENTRALE'].'</td><td>'.($value['CLC_PRIX_CENTRALE'] + $value['CLC_PRIX_PUBLIC']).'</td></tr>';
+                        $html .= '<tr><td>'.$value['date'].'</td><td>'.$value['CLC_PRIX_PUBLIC'].'</td><td>'.$value['CLC_PRIX_CENTRALE'].'</td><td>'.($value['CLC_PRIX_CENTRALE'] - $value['CLC_PRIX_PUBLIC']).'</td></tr>';
                     }
                     $html .= '';
 
