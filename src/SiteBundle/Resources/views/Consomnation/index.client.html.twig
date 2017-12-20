@@ -7,7 +7,7 @@
 {% block body %}
 
 
-        <h1>Consomnations pour le client </h1>
+    <h1>Consomnations pour le client </h1>
     <div style="visibility: hidden; height: 2px">
         <p id="ref-client">{{ ref_client }}</p><p id="centrale-client">{{ app.request.get('centrale') }}</p>
     </div>
@@ -15,8 +15,13 @@
 
 
     <div class="x_panel">
+
+    </div>
+
+
+    <div class="x_panel">
         <div class="row tile_count">
-            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <div class="ui statistic">
                     <div class="value">
                         {{ ca_prix_public | localizedcurrency('EUR') }}
@@ -26,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <div class="ui statistic">
                     <div class="value">
                         {{ ca_prix_centrale | localizedcurrency('EUR') }}
@@ -36,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+            <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <div class="ui statistic">
                     <div class="value">
                         {{ ca_prix_public - ca_prix_centrale  }} €
@@ -72,26 +77,38 @@
 
                 </div>
                 <div class="col-md-8" style="padding-top: 55px;">
-                    <table class="ui selectable definition table">
+
+                    <table class="ui celled structured table">
                         <thead>
-                        <tr><th></th>
-                            <th>Prix public</th>
-                            <th>Prix Centrale</th>
-                            <th>économie</th>
-                        </tr></thead>
+                        <tr>
+                            <th rowspan="2">Date</th>
+                            <th class="center aligned" colspan="2">Bruneau</th>
+                        </tr>
+                        <tr>
+                            <th>CA CENTRALE</th>
+                            <th>Economie</th>
+
+                        </tr>
+                        </thead>
                         <tbody id="ajax-conso-table">
                         {% for tab in tableau %}
 
                             <tr>
                                 <td>{{ tab['date'] }}</td>
-                                <td>{{ tab['CLC_PRIX_PUBLIC'] }} €</td>
                                 <td>{{ tab['CLC_PRIX_CENTRALE'] }} €</td>
                                 <td>{{ tab['CLC_PRIX_PUBLIC'] - tab['CLC_PRIX_CENTRALE'] }} €</td>
                             </tr>
 
                         {% endfor %}
 
-                        </tbody></table>
+                        </tbody>
+                    </table>
+
+
+
+
+
+
 
 
 
