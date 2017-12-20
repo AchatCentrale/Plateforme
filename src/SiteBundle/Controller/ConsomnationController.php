@@ -434,6 +434,62 @@ class ConsomnationController extends Controller
         }
     }
 
+    public function ConsoCaAction(Request $request, $id, $centrale){
+
+        header("Access-Control-Allow-Origin: *");
+        setlocale(LC_MONETARY,"fr_FR");
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $clientService = $this->get('site.service.client_services');
+
+
+        switch ($centrale) {
+
+            case "ACHAT_CENTRALE":
+                $start = $request->query->get('start');
+                $end = $request->query->get('end');
+
+
+                if (isset($start) && isset($end)) {
+                    $totalSql = "SELECT sum(CLC_PRIX_CENTRALE) as Total_ca_centrale, sum(CLC_PRIX_PUBLIC) as Total_ca_public, SUM((coalesce(CLC_PRIX_PUBLIC ,0)) - (coalesce(CLC_PRIX_CENTRALE ,0))) as total FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                                    WHERE CF_USER = :ref
+                                    AND CLC_DATE BETWEEN :start AND :end
+                                                                  ";
+                    try {
+                        $stmtTotal = $conn->prepare($totalSql);
+                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
+                        $stmtTotal->bindValue(':start', $start);
+                        $stmtTotal->bindValue(':end', $end);
+                        $stmtTotal->execute();
+                    } catch (DBALException $e) {
+
+                    }
+                    $total = $stmtTotal->fetchAll();
+
+
+
+                    $html = [
+                        "Total_ca_centrale" => money_format('%!n &euro;', $total[0]["Total_ca_centrale"]),
+                        "Total_ca_public" => money_format('%!n &euro;', $total[0]["Total_ca_public"]),
+                        "total" => money_format('%!n &euro;', $total[0]["total"]),
+
+                    ];
+
+
+
+                    return new JsonResponse($html, 200);
+                    break;
+
+
+                }
+
+
+        }
+
+
+    }
+
     public function testAction(Request $request)
     {
 

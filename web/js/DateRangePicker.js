@@ -72,7 +72,7 @@ $(function() {
                 "Février",
                 "Mars",
                 "Avril",
-                "Mais",
+                "Mai",
                 "Juin",
                 "Juillet",
                 "Août",
@@ -107,6 +107,24 @@ $(function() {
         let centrale = $('#centrale-client');
 
         let url = 'http://crm.achatcentrale.fr/conso/tableau/'+ref.html()+'/'+centrale.html()+'?start='+start+'&end='+end;
+        let urlTotal = 'http://localhost:8000/conso/ca/'+ref.html()+'/'+centrale.html()+'?start='+start+'&end='+end;
+
+        $.ajax({
+            url: urlTotal,
+            timeout: 4000,
+            success: function (data) {
+                console.log(data);
+
+                $('.ca_prix_public').empty().append(data.Total_ca_public );
+                $('.ca_prix_centrale').empty().append(data.Total_ca_centrale);
+                $('.ca_prix_total').empty().append(data.total);
+
+            },
+            error: function() {
+                console.log("Désolé, aucun résultat trouvé.");
+            }
+        });
+
 
         $.ajax({
             url: url,

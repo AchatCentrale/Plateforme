@@ -15,15 +15,10 @@
 
 
     <div class="x_panel">
-
-    </div>
-
-
-    <div class="x_panel">
         <div class="row tile_count">
             <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <div class="ui statistic">
-                    <div class="value">
+                    <div class="value ca_prix_public">
                         {{ ca_prix_public | localizedcurrency('EUR') }}
                     </div>
                     <div class="label">
@@ -33,7 +28,7 @@
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <div class="ui statistic">
-                    <div class="value">
+                    <div class="value ca_prix_centrale">
                         {{ ca_prix_centrale | localizedcurrency('EUR') }}
                     </div>
                     <div class="label">
@@ -43,7 +38,7 @@
             </div>
             <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
                 <div class="ui statistic">
-                    <div class="value">
+                    <div class="value ca_prix_total">
                         {{ ca_prix_public - ca_prix_centrale  }} €
                     </div>
                     <div class="label">

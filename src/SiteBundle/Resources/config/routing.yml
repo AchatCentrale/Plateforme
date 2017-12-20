@@ -288,3 +288,7 @@ detail-conso:
 detail-tableau-conso:
     path: /conso/tableau/{id}/{centrale}
     defaults: {_controller: SiteBundle:Consomnation:ConsoTableau}
+
+detail-ca-conso:
+    path: /conso/ca/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Consomnation:ConsoCa}
