@@ -50,6 +50,7 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('getClass', [$this, 'getClass']),
             new \Twig_SimpleFilter('centraleTickets', [$this, 'centraleTickets']),
             new \Twig_SimpleFilter('isNumeric', [$this, 'isNumeric']),
+            new \Twig_SimpleFilter('month', [$this, 'monthIntToString']),
         );
     }
 
@@ -510,6 +511,89 @@ class CrmFilter extends \Twig_Extension
         } else {
             return false;
         }
+    }
+
+    public function monthIntToString($data){
+
+
+
+
+        switch ($data){
+
+            case '01/17':
+                $date = explode("/", $data);
+                $result = "Jan " . $date[1];
+                return $result;
+                break;
+            case '02/17':
+                $date = explode("/", $data);
+                $result = "Fev " . $date[1];
+                return $result;
+                break;
+            case '03/17':
+                $date = explode("/", $data);
+                $result = "Mars " . $date[1];
+                return $result;
+                break;
+            case '04/17':
+                $date = explode("/", $data);
+                $result = "Avr " . $date[1];
+                return $result;
+                break;
+            case '05/17':
+                $date = explode("/", $data);
+                $result = "Mai " . $date[1];
+                return $result;
+                break;
+            case '06/17':
+                $date = explode("/", $data);
+                $result = "Juin " . $date[1];
+                return $result;
+                break;
+            case '07/17':
+                $date = explode("/", $data);
+                $result = "Juil " . $date[1];
+                return $result;
+                break;
+            case '08/17':
+                $date = explode("/", $data);
+                $result = "Aou " . $date[1];
+                return $result;
+                break;
+            case '09/17':
+                $date = explode("/", $data);
+                $result = "Sept " . $date[1];
+                return $result;
+                break;
+            case '10/17':
+                $date = explode("/", $data);
+                $result = "Oct " . $date[1];
+                return $result;
+                break;
+            case '11/17':
+                $date = explode("/", $data);
+                $result = "Nov " . $date[1];
+                return $result;
+                break;
+            case '12/17':
+                $date = explode("/", $data);
+                $result = "Dec " . $date[1];
+                return $result;
+                break;
+
+
+        }
+
+
+
+
+
+
+
+        return $data;
+
+
+
     }
 
 }
