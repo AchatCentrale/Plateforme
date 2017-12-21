@@ -87,12 +87,23 @@
                         </thead>
                         <tbody id="ajax-conso-table">
                         {% for tab in tableau %}
+                            {% if tab['date'] == "total" %}
+                                <tr>
+                                    <td>{{ tab['date'] }}</td>
+                                    <td>{{ tab['CLC_PRIX_CENTRALE'] }} €</td>
+                                    <td>{{ tab['CLC_PRIX_PUBLIC'] - tab['CLC_PRIX_CENTRALE'] }} €</td>
+                                </tr>
 
-                            <tr>
-                                <td>{{ tab['date'] }}</td>
-                                <td>{{ tab['CLC_PRIX_CENTRALE'] }} €</td>
-                                <td>{{ tab['CLC_PRIX_PUBLIC'] - tab['CLC_PRIX_CENTRALE'] }} €</td>
-                            </tr>
+                                {% else %}
+                                    <tr>
+                                        <td>{{ tab['date'] }}</td>
+                                        <td>{{ tab['CLC_PRIX_CENTRALE'] }} €</td>
+                                        <td>{{ tab['CLC_PRIX_PUBLIC'] - tab['CLC_PRIX_CENTRALE'] }} €</td>
+                                    </tr>
+
+                            {% endif %}
+
+
 
                         {% endfor %}
 
