@@ -69,7 +69,6 @@ class ConsomnationController extends Controller
         $stmtTable->execute();
         $tableau = $stmtTable->fetchAll();
 
-dump($tableau);
 
 
         $response = new Response($this->render('@Site/Consomnation/index.client.html.twig', [
