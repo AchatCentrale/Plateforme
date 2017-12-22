@@ -35,15 +35,31 @@
                     <div role="tabpanel" class="tab-pane active" id="top-ca">
                         <div class="ui relaxed list">
 
-
-
                             {% for key,topC in top %}
 
                                 <div class="item">
                                     <img class="ui avatar image" src="{{ asset('images/rank-position-3.png') }}">
                                     <div class="content">
                                         <a class="header">{{ topC['CF_USER']  }}</a>
-                                        <div class="description">&nbsp;<a><b>{{ topC['ca_centrale'] }}</b></a></div>
+                                        <div class="description">&nbsp;<a><b>{{ topC['ca_centrale'] | localizedcurrency('EUR') }}</b></a></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="economie">
+
+                        <div class="ui relaxed list">
+
+
+
+                            {% for key,ecoC in eco %}
+
+                                <div class="item">
+                                    <img class="ui avatar image" src="{{ asset('images/rank-position-3.png') }}">
+                                    <div class="content">
+                                        <a class="header">{{ ecoC['CF_USER']  }}</a>
+                                        <div class="description">&nbsp;<a><b>{{ ecoC['ca_centrale'] | localizedcurrency('EUR') }}</b></a></div>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -56,17 +72,12 @@
 
 
 
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="economie">
-
-                        {{ dump(eco) }}
-
 
 
 
 
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="best-month">...</div>
+                    <div role="tabpanel" class="tab-pane" id="best-month">ok</div>
                 </div>
 
             </div>

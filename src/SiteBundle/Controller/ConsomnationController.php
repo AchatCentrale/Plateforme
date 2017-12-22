@@ -21,7 +21,7 @@ class ConsomnationController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-
+        $clientService = $this->get('site.service.client_services');
 
         $sqlTop = "SELECT TOP 3
                       CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CF_USER
@@ -45,6 +45,26 @@ class ConsomnationController extends Controller
         $stmtTopEconomie->execute();
         $eco = $stmtTopEconomie->fetchAll();
 
+        $topResult = [];
+        foreach ($top as $value){
+            $array = [
+                "CF_USER" => $clientService->getRefToRaisonSoc($value['CF_USER']),
+                "ca_centrale" => $value['ca_centrale']
+            ];
+            array_push($topResult, $array);
+        }
+
+        $ecoResult =[];
+        foreach ($eco as $value){
+
+            $array = [
+                "CF_USER" => $clientService->getRefToRaisonSoc($value['CF_USER']),
+                "ca_centrale" => $value['ca_centrale']
+            ];
+
+            array_push($ecoResult, $array);
+
+        }
 
         $cookie_fourn = [
             'name' => 'Fournisseur', // Nom du cookie
@@ -59,8 +79,8 @@ class ConsomnationController extends Controller
 
 
         $html = $this->renderView('@Site/Consomnation/index.html.twig', [
-            'top' => $top,
-            'eco' => $eco,
+            'top' => $topResult,
+            'eco' => $ecoResult,
         ]);
         $response = new Response($html);
         return $response;
@@ -616,8 +636,6 @@ class ConsomnationController extends Controller
                 }
                 return new JsonResponse($html, 200);
                 break;
-
-
             case "CENTRALE_FUNECAP":
                 $start = $request->query->get('start');
                 $end = $request->query->get('end');
@@ -650,9 +668,44 @@ class ConsomnationController extends Controller
 
 
 
-                    return new JsonResponse($html, 200);
-                    break;
                 }
+                return new JsonResponse($html, 200);
+                break;
+            case "ROC_ECLERC":
+                $start = $request->query->get('start');
+                $end = $request->query->get('end');
+
+
+                if (isset($start) && isset($end)) {
+                    $totalSql = "SELECT sum(CLC_PRIX_CENTRALE) as Total_ca_centrale, sum(CLC_PRIX_PUBLIC) as Total_ca_public, SUM((coalesce(CLC_PRIX_PUBLIC ,0)) - (coalesce(CLC_PRIX_CENTRALE ,0))) as total FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                                    WHERE CF_USER = :ref
+                                    AND CLC_DATE BETWEEN :start AND :end
+                                                                  ";
+                    try {
+                        $stmtTotal = $conn->prepare($totalSql);
+                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
+                        $stmtTotal->bindValue(':start', $start);
+                        $stmtTotal->bindValue(':end', $end);
+                        $stmtTotal->execute();
+                    } catch (DBALException $e) {
+
+                    }
+                    $total = $stmtTotal->fetchAll();
+
+
+
+                    $html = [
+                        "Total_ca_centrale" => money_format('%!n &euro;', $total[0]["Total_ca_centrale"]),
+                        "Total_ca_public" => money_format('%!n &euro;', $total[0]["Total_ca_public"]),
+                        "total" => money_format('%!n &euro;', $total[0]["total"]),
+
+                    ];
+
+
+
+                }
+                return new JsonResponse($html, 200);
+                break;
 
 
 

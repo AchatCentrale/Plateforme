@@ -526,6 +526,7 @@ class ClientServices
     {
 
 
+
         switch ($centrale) {
             case "ACHAT_CENTRALE":
                 $sql = "SELECT CL_REF FROM CENTRALE_ACHAT.dbo.CLIENTS
@@ -535,10 +536,7 @@ class ClientServices
                 $stmt->execute();
                 $result = $stmt->fetchAll();
                 if ($result) {
-
-
                     return $result[0]['CL_REF'];
-
                 } else {
                     return 'Pas de ref';
                 }
@@ -603,5 +601,62 @@ class ClientServices
 
 
     }
+
+    public function getRefToRaisonSoc($ref){
+
+
+        $sqlAc = "SELECT CL_RAISONSOC FROM CENTRALE_ACHAT.dbo.CLIENTS
+                        WHERE CL_REF = :ref";
+        $stmtAc = $this->connection->prepare($sqlAc);
+        $stmtAc->bindValue(":ref", $ref);
+        $stmtAc->execute();
+        $resultAc = $stmtAc->fetchAll();
+        if ($resultAc) {
+            return $resultAc[0]['CL_RAISONSOC'];
+        } else {
+
+            $sqlFun = "SELECT CL_RAISONSOC FROM CENTRALE_FUNECAP.dbo.CLIENTS
+                        WHERE CL_REF = :ref";
+            $stmtFun = $this->connection->prepare($sqlFun);
+            $stmtFun->bindValue(":ref", $ref);
+            $stmtFun->execute();
+            $result = $stmtFun->fetchAll();
+            if ($result) {
+                return $result[0]['CL_RAISONSOC'];
+            } else {
+
+                $sqlGccp = "SELECT CL_RAISONSOC FROM CENTRALE_GCCP.dbo.CLIENTS
+                        WHERE CL_REF = :ref";
+                $stmtGccp = $this->connection->prepare($sqlGccp);
+                $stmtGccp->bindValue(":ref", $ref);
+                $stmtGccp->execute();
+                $result = $stmtGccp->fetchAll();
+                if ($result) {
+                    return $result[0]['CL_RAISONSOC'];
+                } else {
+
+                    return $result[0]['CL_RAISONSOC'];
+
+
+
+
+
+                }
+
+
+
+
+
+            }
+
+
+
+
+        }
+
+
+
+    }
+
 
 }
