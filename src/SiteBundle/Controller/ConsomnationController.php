@@ -84,6 +84,7 @@ class ConsomnationController extends Controller
         $stmtTotal->execute();
         $total = $stmtTotal->fetchAll();
 
+
         $tableSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
                         WHERE CF_USER = :ref
                           UNION ALL
@@ -99,7 +100,7 @@ class ConsomnationController extends Controller
 
 
 
-        $response = new Response($this->render('@Site/Consomnation/index.client.html.twig', [
+        $response = new Response($this->renderView('@Site/Consomnation/index.client.html.twig', [
             "ca_prix_public" => $total[0]['ca_prix_public'],
             "ca_prix_centrale" => $total[0]['ca_prix_centrale'],
             "ref_client" => $id,
@@ -485,8 +486,7 @@ class ConsomnationController extends Controller
                 if (isset($start) && isset($end)) {
                     $totalSql = "SELECT sum(CLC_PRIX_CENTRALE) as Total_ca_centrale, sum(CLC_PRIX_PUBLIC) as Total_ca_public, SUM((coalesce(CLC_PRIX_PUBLIC ,0)) - (coalesce(CLC_PRIX_CENTRALE ,0))) as total FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
                                     WHERE CF_USER = :ref
-                                    AND CLC_DATE BETWEEN :start AND :end
-                                                                  ";
+                                    AND CLC_DATE BETWEEN :start AND :end ";
                     try {
                         $stmtTotal = $conn->prepare($totalSql);
                         $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
@@ -508,12 +508,11 @@ class ConsomnationController extends Controller
                     ];
 
 
-
-                    return new JsonResponse($html, 200);
-                    break;
-
-
                 }
+                return new JsonResponse($html, 200);
+                break;
+
+
             case "CENTRALE_FUNECAP":
                 $start = $request->query->get('start');
                 $end = $request->query->get('end');
@@ -548,9 +547,8 @@ class ConsomnationController extends Controller
 
                     return new JsonResponse($html, 200);
                     break;
-
-
                 }
+
 
 
         }
