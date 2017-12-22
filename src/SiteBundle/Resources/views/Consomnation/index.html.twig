@@ -7,6 +7,70 @@
 {% block body %}
 
 
+
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="shop  icon"></i> Top consommation</h2>
+
+
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+
+
+
+            <div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#top-ca" aria-controls="top-ca" role="tab" data-toggle="tab">Chiffre d'affaires</a></li>
+                    <li role="presentation"><a href="#economie" aria-controls="economie" role="tab" data-toggle="tab">Economie</a></li>
+                    <li role="presentation"><a href="#best-month" aria-controls="best-month" role="tab" data-toggle="tab">Mois de l'année</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="top-ca">
+                        <div class="ui relaxed list">
+
+
+
+                            {% for key,topC in top %}
+
+                                <div class="item">
+                                    <img class="ui avatar image" src="{{ asset('images/rank-position-3.png') }}">
+                                    <div class="content">
+                                        <a class="header">{{ topC['CF_USER']  }}</a>
+                                        <div class="description">&nbsp;<a><b>{{ topC['ca_centrale'] }}</b></a></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+
+
+
+                        </div>
+
+
+
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="economie">...</div>
+                    <div role="tabpanel" class="tab-pane" id="best-month">...</div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+
+    </div>
+
     <div class="x_panel">
         <div class="x_title">
             <h2><i class="shop  icon"></i> Consommations</h2>

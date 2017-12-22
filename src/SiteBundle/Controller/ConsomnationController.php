@@ -19,6 +19,22 @@ class ConsomnationController extends Controller
     public function indexAction(Request $request)
     {
 
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+
+        $sqlTop = "SELECT TOP 3
+                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CF_USER
+                      , round(sum(CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CLC_PRIX_CENTRALE), 1) as ca_centrale
+                    FROM  CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                    GROUP BY  CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CF_USER
+                    ORDER BY ca_centrale DESC";
+
+        $stmtTop = $conn->prepare($sqlTop);
+        $stmtTop->execute();
+        $top = $stmtTop->fetchAll();
+
+
         $cookie_fourn = [
             'name' => 'Fournisseur', // Nom du cookie
             'value' => 'Bruneau', // Valeur du cookie
@@ -31,10 +47,10 @@ class ConsomnationController extends Controller
         ];
 
 
-        $html = $this->render('@Site/Consomnation/index.html.twig', []);
+        $html = $this->render('@Site/Consomnation/index.html.twig', [
+            'top' => $top
+        ]);
         $response = new Response($html);
-        $response->headers->setCookie(new Cookie($cookie_fourn['name'], $cookie_fourn['value'], time() + (3600 * 48)));
-        $response->headers->setCookie(new Cookie($cookie_periode['name'], $cookie_periode['value'], time() + (3600 * 48)));
         return $response;
     }
 
@@ -510,6 +526,88 @@ class ConsomnationController extends Controller
         $conso = $stmtConso->fetchAll();
 
         return new JsonResponse($conso, 200);
+    }
+
+    public function refToRaisonSocAction($idClient, $centrale){
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+        switch ($centrale) {
+            case "ACHAT_CENTRALE":
+                $sql = "SELECT CL_REF FROM CENTRALE_ACHAT.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+
+                    return $result[0]['CL_REF'];
+
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+            case "CENTRALE_GCCP":
+                $sql = "SELECT CL_REF FROM CENTRALE_GCCP.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+                    return $result[0]['CL_REF'];
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+            case "CENTRALE_FUNECAP":
+                $sql = "SELECT CL_REF FROM CENTRALE_FUNECAP.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+                    return $result[0]['CL_REF'];
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+            case "CENTRALE_PFPL":
+                $sql = "SELECT CL_REF FROM CENTRALE_PFPL.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+                    return $result[0]['CL_REF'];
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+            case "ROC_ECLERC":
+                $sql = "SELECT CL_REF FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
+                        WHERE CL_ID = :id";
+                $stmt = $this->connection->prepare($sql);
+                $stmt->bindValue(":id", $idClient);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                if ($result) {
+
+                    return $result[0]['CL_REF'];
+                } else {
+                    return 'Pas de ref';
+                }
+                break;
+        }
     }
 
 }

@@ -861,6 +861,19 @@ a.client-raisonsoc-detail-tache {
 }
 
 
+.container-top-ca {
+    padding: 8px;
+    -moz-box-shadow: 5px 5px 5px 0px #cfcfcf;
+    -webkit-box-shadow: 5px 5px 5px 0px #cfcfcf;
+    -o-box-shadow: 5px 5px 5px 0px #cfcfcf;
+    box-shadow: 5px 5px 5px 0px #cfcfcf;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=5);
+    max-height: 100%;
+}
+
+#top-ca {
+    padding: 20px;
+}
 
 
 

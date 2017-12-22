@@ -160,7 +160,6 @@ class ClientServices
         }
     }
 
-
     /**
      * Encode array to utf8 recursively
      * @param $dat

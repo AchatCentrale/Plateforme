@@ -1867,6 +1867,11 @@ $('#datetimepicker2').datetimepicker({
 });
 
 
+console.log('ok');
+$('.menu .item')
+    .tab()
+;
+
 
 
 
