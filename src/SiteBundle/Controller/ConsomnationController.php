@@ -105,7 +105,7 @@ class ConsomnationController extends Controller
             "ca_prix_centrale" => $total[0]['ca_prix_centrale'],
             "ref_client" => $id,
             "tableau" => $tableau
-            ]);
+        ]);
 
     }
 
@@ -451,12 +451,48 @@ class ConsomnationController extends Controller
                     $html .= '';
 
 
-                    return new JsonResponse($html, 200);
-                    break;
 
 
                 }
+                return new JsonResponse($html, 200);
+                break;
+            case "CENTRALE_FUNECAP":
+                $start = $request->query->get('start');
+                $end = $request->query->get('end');
 
+
+                if (isset($start) && isset($end)) {
+                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                                WHERE CF_USER = :ref
+                                AND CLC_DATE BETWEEN :start AND :end
+                                ORDER BY date
+                                  ";
+                    try {
+                        $stmtTotal = $conn->prepare($totalSql);
+                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
+                        $stmtTotal->bindValue(':start', $start);
+                        $stmtTotal->bindValue(':end', $end);
+                        $stmtTotal->execute();
+                    } catch (DBALException $e) {
+
+                    }
+                    $total = $stmtTotal->fetchAll();
+
+
+                    $html = '';
+
+                    foreach ($total as $item => $value ){
+
+                        $html .= '<tr><td>'.$value['date'].'</td><td>'.$value['CLC_PRIX_CENTRALE'].'</td><td>'.($value['CLC_PRIX_PUBLIC'] - $value['CLC_PRIX_CENTRALE'] ).'</td></tr>';
+                    }
+                    $html .= '';
+
+
+
+
+                }
+                return new JsonResponse($html, 200);
+                break;
 
         }
     }
