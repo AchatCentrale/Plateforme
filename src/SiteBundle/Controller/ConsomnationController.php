@@ -47,7 +47,7 @@ class ConsomnationController extends Controller
         ];
 
 
-        $html = $this->render('@Site/Consomnation/index.html.twig', [
+        $html = $this->renderView('@Site/Consomnation/index.html.twig', [
             'top' => $top
         ]);
         $response = new Response($html);
