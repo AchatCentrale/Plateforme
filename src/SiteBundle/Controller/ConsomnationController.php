@@ -100,17 +100,12 @@ class ConsomnationController extends Controller
 
 
 
-        $response = new Response($this->renderView('@Site/Consomnation/index.client.html.twig', [
+        return $this->render('@Site/Consomnation/index.client.html.twig', [
             "ca_prix_public" => $total[0]['ca_prix_public'],
             "ca_prix_centrale" => $total[0]['ca_prix_centrale'],
             "ref_client" => $id,
             "tableau" => $tableau
-
-        ]), 200);
-
-        $response->headers->setCookie(new Cookie('fournisseur', 'Bruneau'));
-
-        return $response;
+            ]);
 
     }
 
