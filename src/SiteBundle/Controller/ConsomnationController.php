@@ -34,6 +34,17 @@ class ConsomnationController extends Controller
         $stmtTop->execute();
         $top = $stmtTop->fetchAll();
 
+        $sqlTopEconomie = "SELECT TOP 3
+                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CF_USER
+                              , round(CLIENTS_CONSO.CLC_PRIX_PUBLIC -  CLIENTS_CONSO.CLC_PRIX_CENTRALE, 2) as ca_centrale
+                            FROM  CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                            GROUP BY  CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CF_USER, CLIENTS_CONSO.CLC_PRIX_PUBLIC, CLIENTS_CONSO.CLC_PRIX_CENTRALE
+                            ORDER BY ca_centrale DESC";
+
+        $stmtTopEconomie = $conn->prepare($sqlTopEconomie);
+        $stmtTopEconomie->execute();
+        $eco = $stmtTopEconomie->fetchAll();
+
 
         $cookie_fourn = [
             'name' => 'Fournisseur', // Nom du cookie
@@ -48,7 +59,8 @@ class ConsomnationController extends Controller
 
 
         $html = $this->renderView('@Site/Consomnation/index.html.twig', [
-            'top' => $top
+            'top' => $top,
+            'eco' => $eco,
         ]);
         $response = new Response($html);
         return $response;
@@ -466,6 +478,43 @@ class ConsomnationController extends Controller
         switch ($centrale) {
 
             case "ACHAT_CENTRALE":
+                $start = $request->query->get('start');
+                $end = $request->query->get('end');
+
+
+                if (isset($start) && isset($end)) {
+                    $totalSql = "SELECT sum(CLC_PRIX_CENTRALE) as Total_ca_centrale, sum(CLC_PRIX_PUBLIC) as Total_ca_public, SUM((coalesce(CLC_PRIX_PUBLIC ,0)) - (coalesce(CLC_PRIX_CENTRALE ,0))) as total FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+                                    WHERE CF_USER = :ref
+                                    AND CLC_DATE BETWEEN :start AND :end
+                                                                  ";
+                    try {
+                        $stmtTotal = $conn->prepare($totalSql);
+                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
+                        $stmtTotal->bindValue(':start', $start);
+                        $stmtTotal->bindValue(':end', $end);
+                        $stmtTotal->execute();
+                    } catch (DBALException $e) {
+
+                    }
+                    $total = $stmtTotal->fetchAll();
+
+
+
+                    $html = [
+                        "Total_ca_centrale" => money_format('%!n &euro;', $total[0]["Total_ca_centrale"]),
+                        "Total_ca_public" => money_format('%!n &euro;', $total[0]["Total_ca_public"]),
+                        "total" => money_format('%!n &euro;', $total[0]["total"]),
+
+                    ];
+
+
+
+                    return new JsonResponse($html, 200);
+                    break;
+
+
+                }
+            case "CENTRALE_FUNECAP":
                 $start = $request->query->get('start');
                 $end = $request->query->get('end');
 
