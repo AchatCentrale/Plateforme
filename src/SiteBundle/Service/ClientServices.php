@@ -117,6 +117,9 @@ class ClientServices
 
     }
 
+
+
+
     public function getTheCentrale($centrale)
     {
         switch ($centrale) {
@@ -158,6 +161,8 @@ class ClientServices
 
         }
     }
+
+
 
     public function getTheEvolution($centrale)
     {

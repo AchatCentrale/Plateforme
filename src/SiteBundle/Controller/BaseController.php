@@ -2716,6 +2716,24 @@ class BaseController extends Controller
                 $response->send();
                 return $response;
                 break;
+            case 'all' :
+                $conn = $this->get('database_connection');
+                $stmt = $conn->prepare('SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Clients');
+                $stmt->execute();
+                $response = new StreamedResponse();
+                $response->setStatusCode(200);
+                $response->headers->set('Content-Type', 'text/csv');
+                $response->setCallback(function () use ($stmt) {
+                    $config = new ExporterConfig();
+                    $config
+                        ->setDelimiter(";")
+                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE);
+                    $exporter = new Exporter($config);
+                    $exporter->export('php://output', $stmt->fetchAll());
+                });
+                $response->send();
+                return $response;
+                break;
 
 
         }
