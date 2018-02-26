@@ -88,7 +88,7 @@ class Mailer
                     'tasks' => $task[0],
                     'user' => $user[0]
                 ]);
-                $this->sendMessage($to, $subject, $body);
+                $this->sendMessage($to, $subject, $body, $this->name);
                 break;
             case "ACHAT_CENTRALE":
                 $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ";
@@ -108,7 +108,7 @@ class Mailer
                     'tasks' => $task[0],
                     'user' => $user[0]
                 ]);
-                $this->sendMessage($to, $subject, $body);
+                $this->sendMessage($to, $subject, $body, $this->name);
                 break;
             case "CENTRALE_PFPL":
                 $sql = "SELECT * FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ";
@@ -128,7 +128,7 @@ class Mailer
                     'tasks' => $task[0],
                     'user' => $user[0]
                 ]);
-                $this->sendMessage($to, $subject, $body);
+                $this->sendMessage($to, $subject, $body, $this->name);
                 break;
             case "CENTRALE_GCCP":
                 $sql = "SELECT * FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ";
@@ -148,7 +148,7 @@ class Mailer
                     'tasks' => $task[0],
                     'user' => $user[0]
                 ]);
-                $this->sendMessage($to, $subject, $body);
+                $this->sendMessage($to, $subject, $body, $this->name);
                 break;
         }
     }

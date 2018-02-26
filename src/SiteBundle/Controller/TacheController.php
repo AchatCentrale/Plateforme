@@ -534,7 +534,6 @@ class TacheController extends Controller
                     ]);
 
                 }else{
-
                     $clients = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findAll();
                 }
 

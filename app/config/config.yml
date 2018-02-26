@@ -76,7 +76,7 @@ doctrine:
                     20: false
             centrale_produits:
                 driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:           "185.29.149.32"
+                host:           "185.29.149.144"
                 user:           "AC_JBAGOSTIN"
                 password:       "35H7Hjvy"
                 dbname:         "CENTRALE_PRODUITS_JB"
@@ -87,7 +87,7 @@ doctrine:
                     20: false
             centrale_funecap:
                  driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
-                 host:           "185.29.149.32"
+                 host:           "185.29.149.144"
                  user:           "AC_JBAGOSTIN"
                  password:       "35H7Hjvy"
                  dbname:         "CENTRALE_FUNECAP"
@@ -98,7 +98,7 @@ doctrine:
                      20: false
             achat_centrale:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.32"
+                host:         "185.29.149.144"
                 user:         "AC_JBAGOSTIN"
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_ACHAT"
@@ -109,7 +109,7 @@ doctrine:
                     20: false
             roc_eclerc:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.32"
+                host:         "185.29.149.144"
                 user:         "AC_JBAGOSTIN"
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_ROC_ECLERC"
@@ -120,7 +120,7 @@ doctrine:
                      20: false
             centrale_gccp:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.32"
+                host:         "185.29.149.144"
                 user:         "AC_JBAGOSTIN"
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_GCCP"
@@ -131,7 +131,7 @@ doctrine:
                     20: false
             centrale_pascal_leclerc:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.32"
+                host:         "185.29.149.144"
                 user:         "AC_JBAGOSTIN"
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_PFPL"
@@ -142,7 +142,7 @@ doctrine:
                     20: false
             ac_produits:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.32"
+                host:         "185.29.149.144"
                 user:         "AC_JBAGOSTIN"
                 password:     "35H7Hjvy"
                 dbname:       "CENTRALE_PRODUITS"

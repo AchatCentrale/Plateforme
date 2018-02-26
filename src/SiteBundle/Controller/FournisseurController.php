@@ -3,6 +3,7 @@
 namespace SiteBundle\Controller;
 
 
+use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -149,10 +150,9 @@ class FournisseurController extends Controller
 
                         $ligne = explode(";", $row[$i]);
 
+                        dump($ligne);
 
                         switch ($ligne[41]) {
-
-
                             case "A RAJOUTER":
 
 
@@ -204,18 +204,27 @@ class FournisseurController extends Controller
 
 
                                 break;
-
                             case "A ARCHIVER":
-                                $sqlArchiver = "UPDATE CENTRALE_PRODUITS.dbo.PRODUITS
-                                        SET PR_STATUS = 1
-                                        WHERE PR_ID = :id ";
-                                $stmtArchiver = $conn->prepare($sqlArchiver);
-                                $stmtArchiver->bindValue(':id', $ligne[0]);
-                                $result = $stmtArchiver->fetchAll();
+
+
+                                $ref = trim($ligne[24]);
+
+                                $sqlUpdate = "UPDATE CENTRALE_PRODUITS.dbo.PRODUITS
+                                            SET PR_STATUS = 1
+                                            WHERE PR_REF_FRS = :ref";
+
+
+                                $stmtUpdate = $conn->prepare($sqlUpdate);
+                                $stmtUpdate->bindParam(':ref', $ref);
+                                try {
+                                    $stmtUpdate->execute();
+                                } catch (DBALException $e) {
+                                    dump($e);
+                                }
+
+                                $stmtUpdate->closeCursor();
                                 break;
-
                             case "A MODIFIER":
-
                                 $sql = "INSERT INTO CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS (PART_ID, Fournisseur, Rayon, Famille, Filtre1, Valeur1, Filtre2, Valeur2, Filtre3, Valeur3, Filtre4, Valeur4, Filtre5, Valeur5, Filtre6, Valeur6, Filtre7, Valeur7, Filtre8, Valeur8, Filtre9, Valeur9, Filtre10, Valeur10, Ref_Fourn, Ref_Part, EAN, Nom_Produit, Descrip_Courte, Descrip_Longue, Triptyque, Qte_Cmde, Conditionnement, Prix_Public_HT, Prix_Part_HT, Prix_VC, Remise_PCT, Type_Lien, Lien, Photo, Variable_Session)
                             VALUES
                               ( :id , :fournisseur ,  :rayon ,  :famille ,  :filtre1 ,  :valeur1 ,  :filtre2 ,  :valeur2 ,  :filtre3 ,  :valeur3 ,  :filtre4 ,  :valeur4 ,  :filtre5 ,  :valeur5 ,  :filtre6 ,  :valeur6 , :filtre7 ,  :valeur7 ,  :filtre8 ,  :valeur8 ,  :filtre9 ,  :valeur9 ,  :filtre10 ,  :valeur10 ,  :refFour ,  :refPart ,  :ean ,  :nomProduit ,  :descrCourte ,  :descrLong ,  :triptyque ,  :qteCmd, :conditionnement, :prixPubHt,  :prixPartHt ,  :prixVc  , :remise ,  :type ,  :lien ,  :photo , 123456  )";
@@ -259,7 +268,7 @@ class FournisseurController extends Controller
                                 $stmt->bindValue(':remise', $ligne[38]);
                                 $stmt->bindValue(':type', $ligne[30]);
                                 $stmt->bindValue(':lien', $ligne[31]);
-                                $stmt->bindValue(':photo', $ligne[39]);
+                                $stmt->bindValue(':photo', $ligne[40]);
                                 $stmt->execute();
 
 
