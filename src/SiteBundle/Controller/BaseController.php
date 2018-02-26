@@ -2718,8 +2718,14 @@ class BaseController extends Controller
                 break;
             case 'all' :
                 $conn = $this->get('database_connection');
-                $stmt = $conn->prepare('SELECT (SELECT DISTINCT SO_RAISONSOC FROM CENTRALE_ACHAT.dbo.Vue_SocietesUsers WHERE Vue_SocietesUsers.SO_ID = CENTRALE_ACHAT.dbo.Vue_All_Clients.SO_ID) as CENTRALE, CL_ID, CL_REF, CL_RAISONSOC, CL_ADRESSE1, CL_SIRET, CL_CP, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, CL_STATUS, CL_ADHESION, CC_PRENOM, CC_NOM, CC_MAIL, GR_DESCR, AC_DESCR
-FROM CENTRALE_ACHAT.dbo.Vue_All_Clients');
+                    $stmt = $conn->prepare('SELECT (SELECT DISTINCT SO_RAISONSOC FROM CENTRALE_ACHAT.dbo.Vue_SocietesUsers WHERE Vue_SocietesUsers.SO_ID = CENTRALE_ACHAT.dbo.Vue_All_Clients.SO_ID) AS CENTRALE, CL_ID, CL_REF, CL_RAISONSOC, CL_ADRESSE1, CL_SIRET, CL_CP, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_DT_ADHESION, (
+                          CASE CL_STATUS
+                            WHEN 0 THEN \'A valide\'
+                            WHEN 1 THEN \'Valide\'
+                            WHEN 2 THEN \'Bloque\'
+                          END
+                        ) AS STATUT, CL_ADHESION, CL_STATUS, CL_ADHESION, CC_PRENOM, CC_NOM, CC_MAIL, GR_DESCR, AC_DESCR
+                        FROM CENTRALE_ACHAT.dbo.Vue_All_Clients');
                 $stmt->execute();
                 $response = new StreamedResponse();
                 $response->setStatusCode(200);
