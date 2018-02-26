@@ -177,6 +177,8 @@ class ClientServices
         }
     }
 
+
+
     public function getTheEvolution($centrale)
     {
         switch ($centrale) {
