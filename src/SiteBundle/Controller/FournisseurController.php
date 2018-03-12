@@ -150,7 +150,6 @@ class FournisseurController extends Controller
 
                         $ligne = explode(";", $row[$i]);
 
-                        dump($ligne);
 
                         switch ($ligne[41]) {
                             case "A RAJOUTER":
