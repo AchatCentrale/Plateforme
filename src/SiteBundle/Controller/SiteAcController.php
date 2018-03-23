@@ -19,12 +19,17 @@ class SiteAcController extends Controller
             $CC_NOM = $request->request->get('CC_NOM');
             $CL_MAIL = $request->request->get('CL_MAIL');
             $CL_TEL = $request->request->get('CL_TEL');
-
+            $token = $this->get('site.service.client_services')->getToken(8);
 
             $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-            $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS (SO_ID, RE_ID, CL_REF,CL_STATUS, CL_RAISONSOC,CL_TEL, CL_MAIL, CL_ADHESION , CL_ACTIVITE, CL_PRESCRIPT, CL_TARIF, CL_CLASSIF, INS_DATE, INS_USER, MAJ_DATE, MAJ_USER   )
+            $sql = "BEGIN TRANSACTION
+                    INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS (SO_ID, RE_ID, CL_REF,CL_STATUS, CL_RAISONSOC, CL_MAIL, CL_ADHESION , CL_ACTIVITE, CL_PRESCRIPT, CL_TARIF, CL_CLASSIF, INS_DATE, INS_USER, MAJ_DATE, MAJ_USER   )
                     VALUES
-                    (1, 1, :ref, 0 , :raison_soc, :tel, :mail, 'REGARDE', 0, 0, 0, 0, GETDATE(), 'SITE-AC',GETDATE(), 'SITE-AC' )
+                      (1, 1, :ref, 0 , :raison_soc, :mail, 'REGARDE', 0, 0, 0, 0, GETDATE(), 'SITE-AC',GETDATE(), 'SITE-AC' )
+                    INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_USERS (CL_ID, PU_ID, CC_PRENOM, CC_FONCTION, CC_TEL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER, MAJ_DATE, MAJ_USER)
+                    VALUES
+                      (scope_identity(), 1, :prenom, 'Gérant/Président', :tel, :pass, 1, true, 0, GETDATE(), 'SITE-AC',GETDATE(), 'SITE-AC' )
+                    COMMIT
                 ";
 
 
@@ -32,7 +37,9 @@ class SiteAcController extends Controller
             $stmt->bindValue(':raison_soc', $CL_RAISONSOC);
             $stmt->bindValue(':tel', $CL_TEL);
             $stmt->bindValue(':mail', $CL_MAIL);
+            $stmt->bindValue(':prenom', $CC_NOM);
             $stmt->bindValue(':ref', "AC-" . mt_rand(40000, 99999));
+            $stmt->bindValue(':pass', $token);
 
             $stmt->execute();
             $result = $stmt->fetchAll();
