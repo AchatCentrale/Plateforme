@@ -216,7 +216,7 @@ class Mailer
 
     public function NewClientNotifClient($nom, $raisonsoc, $mail, $tel)
     {
-        $subject = $raisonsoc."- Bienvenue chez Achat-Centrale 👋";
+        $subject = $raisonsoc. " - Bienvenue chez Achat Centrale ";
 
         $name = "ACHAT CENTRALE";
 
