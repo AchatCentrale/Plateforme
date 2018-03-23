@@ -199,7 +199,7 @@ class Mailer
     {
         $subject = "Demande d'adhésion 🔥";
 
-        $name = "Notification achat-centrale 😋";
+        $name = "Notification Achat Centrale 😋";
 
 
         $template = 'SiteBundle:mail:NewClientAcNotification.html.twig';
@@ -218,7 +218,7 @@ class Mailer
     {
         $subject = $raisonsoc."- Bienvenue chez Achat-Centrale 👋";
 
-        $name = "ACHAT-CENTRALE";
+        $name = "ACHAT CENTRALE";
 
         $template = 'SiteBundle:mail:NewClientAcNotificationClient.html.twig';
         $body = $this->templating->render($template, [
