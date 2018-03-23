@@ -26,9 +26,9 @@ class SiteAcController extends Controller
                     INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS (SO_ID, RE_ID, CL_REF,CL_STATUS, CL_RAISONSOC, CL_MAIL, CL_ADHESION , CL_ACTIVITE, CL_PRESCRIPT, CL_TARIF, CL_CLASSIF, INS_DATE, INS_USER, MAJ_DATE, MAJ_USER   )
                     VALUES
                       (1, 1, :ref, 0 , :raison_soc, :mail, 'REGARDE', 0, 0, 0, 0, GETDATE(), 'SITE-AC',GETDATE(), 'SITE-AC' )
-                    INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_USERS (CL_ID, PU_ID, CC_PRENOM, CC_FONCTION, CC_TEL, CC_PASS, CC_NIVEAU, CIRCUIT_VALIDATION, CC_STATUS, INS_DATE, INS_USER, MAJ_DATE, MAJ_USER)
+                    INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_USERS (CL_ID, PU_ID, CC_PRENOM, CC_FONCTION, CC_TEL, CC_PASS, CC_NIVEAU, CC_STATUS, INS_DATE, INS_USER, MAJ_DATE, MAJ_USER)
                     VALUES
-                      (scope_identity(), 1, :prenom, 'Gérant/Président', :tel, :pass, 1, true, 0, GETDATE(), 'SITE-AC',GETDATE(), 'SITE-AC' )
+                      (scope_identity(), 1, :prenom, 'Gérant/Président', :tel, :pass, 1, 0, GETDATE(), 'SITE-AC',GETDATE(), 'SITE-AC' )
                     COMMIT
                 ";
 
