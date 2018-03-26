@@ -44,19 +44,19 @@ class SiteAcController extends Controller
             $stmt->execute();
             $result = $stmt->fetchAll();
 
-            $urls = [
-                "ac" => "http://crm.achatcentrale.fr/notification/new/client/ac/".$CC_NOM."/".$CL_MAIL."/".$CL_TEL."/".$conn->lastInsertId(),
-                "client" => "http://crm.achatcentrale.fr/notification/new/client/client/" . $CC_NOM . "/" . $CL_RAISONSOC . "/" . $CL_MAIL . "/" . $CL_TEL . ""
-            ];
-
-
-            return new JsonResponse($urls, 200, [
-                'Access-Control-Allow-Origin', 'http://crm.achatcentrale.fr'
-            ]);
 
         }
 
-        return $this->redirect('http://www.achatcentrale.fr/', 301);
+        $urls = [
+            "ac" => "http://crm.achatcentrale.fr/notification/new/client/ac/".$CC_NOM."/".$CL_MAIL."/".$CL_TEL."/".$conn->lastInsertId(),
+            "client" => "http://crm.achatcentrale.fr/notification/new/client/client/" . $CC_NOM . "/" . $CL_RAISONSOC . "/" . $CL_MAIL . "/" . $CL_TEL . ""
+        ];
+
+
+        return new JsonResponse($urls, 200, [
+            'Access-Control-Allow-Origin', '*'
+        ]);
+
 
     }
 }
