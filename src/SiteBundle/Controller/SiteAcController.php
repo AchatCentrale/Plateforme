@@ -54,7 +54,7 @@ class SiteAcController extends Controller
 
 
         return new JsonResponse($urls, 200, [
-            'Access-Control-Allow-Origin', '*'
+            'Access-Control-Allow-Origin', 'http://www.achatcentrale.fr'
         ]);
 
 
