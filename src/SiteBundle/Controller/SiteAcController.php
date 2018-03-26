@@ -10,6 +10,8 @@ class SiteAcController extends Controller
 {
     public function indexAction(Request $request)
     {
+        header("Access-Control-Allow-Origin: *");
+
 
         if ($request->getMethod() == 'POST') {
 
@@ -51,7 +53,7 @@ class SiteAcController extends Controller
         ];
 
 
-        return new JsonResponse($urls, 200 );
+        return new JsonResponse($urls, 200);
 
 
     }
