@@ -210,7 +210,7 @@ class Mailer
             'cl_id' => $cl_id,
 
         ]);
-        $this->sendMessage("morgane@achatcentrale.fr", $subject, $body, $name);
+        $this->sendMessage("contact@achatcentrale.fr", $subject, $body, $name);
 
     }
 
