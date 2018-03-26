@@ -10,8 +10,6 @@ class SiteAcController extends Controller
 {
     public function indexAction(Request $request)
     {
-        header("Access-Control-Allow-Origin: *");
-
 
         if ($request->getMethod() == 'POST') {
 
@@ -53,9 +51,7 @@ class SiteAcController extends Controller
         ];
 
 
-        return new JsonResponse($urls, 200, [
-            'Access-Control-Allow-Origin', 'http://www.achatcentrale.fr'
-        ]);
+        return new JsonResponse($urls, 200 );
 
 
     }
