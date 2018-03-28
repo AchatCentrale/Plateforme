@@ -40,7 +40,6 @@ class SiteAcController extends Controller
             $stmt->bindValue(':nom', $CC_NOM);
             $stmt->bindValue(':ref', "AC-" . mt_rand(40000, 99999));
             $stmt->bindValue(':pass', $token);
-
             $stmt->execute();
             $result = $stmt->fetchAll();
 
@@ -48,7 +47,7 @@ class SiteAcController extends Controller
         }
 
         $urls = [
-            "ac" => "http://crm.achatcentrale.fr/notification/new/client/ac/".$CC_NOM."/".$CL_MAIL."/".$CL_TEL."/".$conn->lastInsertId(),
+            "ac" => "http://crm.achatcentrale.fr/notification/new/client/ac/".$CC_NOM."/".$CL_MAIL."/".$CL_TEL."/".$conn->lastInsertId()."/".$CL_RAISONSOC,
             "client" => "http://crm.achatcentrale.fr/notification/new/client/client/" . $CC_NOM . "/" . $CL_RAISONSOC . "/" . $CL_MAIL . "/" . $CL_TEL . ""
         ];
 

@@ -195,7 +195,7 @@ class Mailer
     }
 
 
-    public function NewClientNotifAc($nom, $email, $tel, $cl_id)
+    public function NewClientNotifAc($nom, $email, $tel, $cl_id, $raisonsoc)
     {
         $subject = "Demande d'adhésion 🔥";
 
@@ -208,6 +208,7 @@ class Mailer
             'mail' => $email,
             'tel' => $tel,
             'cl_id' => $cl_id,
+            'raisonsoc' => $raisonsoc
 
         ]);
         $this->sendMessage("contact@achatcentrale.fr", $subject, $body, $name);

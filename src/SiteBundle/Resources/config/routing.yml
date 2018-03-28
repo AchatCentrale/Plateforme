@@ -245,7 +245,7 @@ notification-notif-rdv:
     methods: POST
 
 notification-new-client-ac:
-    path: /notification/new/client/ac/{name}/{mail}/{tel}/{cl_id}
+    path: /notification/new/client/ac/{name}/{mail}/{tel}/{cl_id}/{raisonsoc}
     defaults: {_controller: SiteBundle:Notification:sendNewClientAc}
     methods: POST
 
