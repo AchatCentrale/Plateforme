@@ -135,7 +135,7 @@ class CrmFilter extends \Twig_Extension
 
             switch ($centrale) {
                 case '1':
-                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-ac-tiny.png\" alt=\"\"></div>";
+                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/Fourmi_AC_small.png\" alt=\"\"></div>";
                     break;
                 case '2':
                     return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-gccp-tiny.png\" alt=\"\"></div>";
