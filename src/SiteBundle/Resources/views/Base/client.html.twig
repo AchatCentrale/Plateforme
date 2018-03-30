@@ -24,8 +24,7 @@
 
 
                                 <a href="{{ path('export-client', { "centrale" : app.request.query.get('c') }) }}"
-                                   class="ui button" id="btn-export-cl" role="button"><i
-                                            class="file excel outline icon"></i> Exporter .csv</a>
+                                   class="ui button" id="btn-export-cl" role="button"><i class="file excel outline icon"></i> Exporter .csv</a>
                             </div>
                         </div>
                     </div>
@@ -68,7 +67,7 @@
                                         <img
                                                 data-centrale="achat-centrale"
                                                 class="cursor img-centrale"
-                                                src="{{ asset('images/logo-centrale/logo-ac.png') }}">
+                                                src="{{ asset('images/logo-centrale/Fourmi_AC_small.png') }}">
                                     </a></li>
                                 <li class="{% if app.request.query.get('c') == 'gccp' %}active-centrale{% endif %}">
                                     <a href="{{ path("client", { "c" : "gccp"}) }}">

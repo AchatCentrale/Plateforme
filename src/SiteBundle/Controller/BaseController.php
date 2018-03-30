@@ -2622,7 +2622,7 @@ class BaseController extends Controller
                     // La méthode getExportQuery retourne une Query qui est utilisée pour récupérer
                     // tous les objets (lignes du fichier csv) dont vous avez besoin. La méthode iterate
                     // est utilisée pour limiter la consommation de mémoire
-                    $results = $
+                    $results = $stmt->fetchAll();
                     $handle = fopen('php://output', 'r+');
 
                     while (false !== ($row = $results->next())) {
