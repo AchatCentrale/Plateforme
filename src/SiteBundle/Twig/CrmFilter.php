@@ -233,7 +233,7 @@ class CrmFilter extends \Twig_Extension
                     return "centrale-" . strtolower(str_replace("_", "-", $centrale));
                     break;
                 case 'ACHAT_CENTRALE':
-                    return "achatcentrale";
+                    return "secure.achatcentrale";
                     break;
                 case 'CENTRALE_PFPL':
                     return strtolower(str_replace("_", "-", $centrale));
