@@ -227,19 +227,19 @@ class CrmFilter extends \Twig_Extension
 
             switch ($centrale) {
                 case "CENTRALE_FUNECAP":
-                    return "centrale-" . substr($centrale, 9);
+                    return "www.centrale-" . strtolower(substr($centrale, 9));
                     break;
                 case 'ROC_ECLERC':
-                    return "centrale-" . strtolower(str_replace("_", "-", $centrale));
+                    return "wwww.centrale-" . strtolower(str_replace("_", "-", $centrale));
                     break;
                 case 'ACHAT_CENTRALE':
                     return "secure.achatcentrale";
                     break;
                 case 'CENTRALE_PFPL':
-                    return strtolower(str_replace("_", "-", $centrale));
+                    return "wwww".strtolower(str_replace("_", "-", $centrale));
                     break;
                 case 'CENTRALE_GCCP':
-                    return strtolower(str_replace("_", "-", $centrale));
+                    return "wwww".strtolower(str_replace("_", "-", $centrale));
                     break;
             }
         } else {
