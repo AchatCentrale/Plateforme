@@ -4,11 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/Fourmi_AC_small.png') }}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/Fourmi_AC_small.png') }}">
 
     <title>{% block title %}ACHAT-CENTRALE CRM{% endblock %}</title>
-    <script src="https//code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
 
 
     {% block stylesheets %}
@@ -17,6 +16,10 @@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
 
 
@@ -62,11 +65,7 @@
 <div class="container body">
     <div class="main_container">
 
-        {% if is_granted("IS_AUTHENTICATED_FULLY") %}
 
-        {% else %}
-
-        {% endif %}
         {% include 'SiteBundle:Layout:Sidebar.html.twig' %}
         {% include 'SiteBundle:Layout:topnav.html.twig' %}
 
