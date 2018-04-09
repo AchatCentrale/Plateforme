@@ -51,12 +51,13 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('centraleTickets', [$this, 'centraleTickets']),
             new \Twig_SimpleFilter('isNumeric', [$this, 'isNumeric']),
             new \Twig_SimpleFilter('month', [$this, 'monthIntToString']),
+            new \Twig_SimpleFilter('ean13', [$this, 'ean13_check_digit']),
         );
     }
 
 
-
-    public function getClass($class){
+    public function getClass($class)
+    {
         return (new \ReflectionClass($class))->getShortName();
 
     }
@@ -80,7 +81,7 @@ class CrmFilter extends \Twig_Extension
                 }
 
 
-                $result = $result . $rand;
+                $result = $result.$rand;
 
                 break;
             case "CENTRALE_ROC_ECLERC":
@@ -92,7 +93,7 @@ class CrmFilter extends \Twig_Extension
                 for ($i = 0; $i <= 8; $i++) {
                     $rand .= rand(1, 9);
                 }
-                $result = $result . $rand;
+                $result = $result.$rand;
                 break;
 
 
@@ -129,6 +130,7 @@ class CrmFilter extends \Twig_Extension
                     return "<h3><span class=\"label large label-danger \">Centrale PFPL</span></h3>";
                     break;
             }
+
             return $centrale;
         } else {
 
@@ -227,10 +229,10 @@ class CrmFilter extends \Twig_Extension
 
             switch ($centrale) {
                 case "CENTRALE_FUNECAP":
-                    return "www.centrale-" . strtolower(substr($centrale, 9));
+                    return "www.centrale-".strtolower(substr($centrale, 9));
                     break;
                 case 'ROC_ECLERC':
-                    return "wwww.centrale-" . strtolower(str_replace("_", "-", $centrale));
+                    return "wwww.centrale-".strtolower(str_replace("_", "-", $centrale));
                     break;
                 case 'ACHAT_CENTRALE':
                     return "secure.achatcentrale";
@@ -265,7 +267,8 @@ class CrmFilter extends \Twig_Extension
 
     }
 
-    public function centraleTickets($centrale){
+    public function centraleTickets($centrale)
+    {
 
         switch ($centrale) {
             case "1":
@@ -322,13 +325,12 @@ class CrmFilter extends \Twig_Extension
     public function phoneFilter($number)
     {
 
-        if (empty($number)){
+        if (empty($number)) {
             return "À remplir";
         }
 
 
-
-        if (strlen($number) == 10 ) {
+        if (strlen($number) == 10) {
             return chunk_split($number, 2, ' ');
         } else {
             return $number;
@@ -345,16 +347,22 @@ class CrmFilter extends \Twig_Extension
             if ($i === 3) {
                 array_push($result, substr($siret, 0, 3));
                 array_push($result, " ");
-            } else if ($i === 6) {
-                array_push($result, substr($siret, 3, 3));
-                array_push($result, " ");
-            } else if ($i === 9) {
-                array_push($result, substr($siret, 6, 3));
-                array_push($result, " ");
-            } else if ($i === 14) {
-                array_push($result, substr($siret, 9, 5));
+            } else {
+                if ($i === 6) {
+                    array_push($result, substr($siret, 3, 3));
+                    array_push($result, " ");
+                } else {
+                    if ($i === 9) {
+                        array_push($result, substr($siret, 6, 3));
+                        array_push($result, " ");
+                    } else {
+                        if ($i === 14) {
+                            array_push($result, substr($siret, 9, 5));
 
 
+                        }
+                    }
+                }
             }
         }
 
@@ -383,9 +391,11 @@ class CrmFilter extends \Twig_Extension
 
         $em = $this->doctrine->getManager('achat_centrale');
 
-        $typee = $em->getRepository('AchatCentraleBundle:ActionType')->findBy([
-            'acId' => $type
-        ]);
+        $typee = $em->getRepository('AchatCentraleBundle:ActionType')->findBy(
+            [
+                'acId' => $type,
+            ]
+        );
 
 
         $typeDB = $typee[0]->getAcNom();
@@ -417,14 +427,16 @@ class CrmFilter extends \Twig_Extension
         switch ($priorite) {
             case 1:
                 $tpl = "<div class=\"ui medium red label\">Important</div>";
+
                 return $tpl;
             case 2:
                 $tpl = "<div class=\"ui medium orange label\">Normale</div>";
+
                 return $tpl;
             case 3:
                 $tpl = "<div class=\"ui medium green label\">Faible</div>";
-                return $tpl;
 
+                return $tpl;
 
 
         }
@@ -449,7 +461,7 @@ class CrmFilter extends \Twig_Extension
         if (strlen($word) >= 30) {
             $chaine = substr($word, 0, 50);
 
-            return $chaine . '.....';
+            return $chaine.'.....';
         } else {
             return $word;
         }
@@ -461,6 +473,7 @@ class CrmFilter extends \Twig_Extension
 
 
         $result = strtolower($word);
+
         return ucwords($result);
     }
 
@@ -494,16 +507,17 @@ class CrmFilter extends \Twig_Extension
     {
 
         if ($tiny === true) {
-            $tpl = "<div class='avatar_background-tiny'><p class='text-avatar-tiny'>" . $prenom[0] . $nom[0] . "</p></div>";
+            $tpl = "<div class='avatar_background-tiny'><p class='text-avatar-tiny'>".$prenom[0].$nom[0]."</p></div>";
         } else {
-            $tpl = "<div class='avatar_background'><p class='text-avatar'>" . $prenom[0] . $nom[0] . "</p></div>";
+            $tpl = "<div class='avatar_background'><p class='text-avatar'>".$prenom[0].$nom[0]."</p></div>";
         }
 
 
         return $tpl;
     }
 
-    public function isNumeric($var){
+    public function isNumeric($var)
+    {
 
 
         if (ctype_digit($var)) {
@@ -513,68 +527,81 @@ class CrmFilter extends \Twig_Extension
         }
     }
 
-    public function monthIntToString($data){
+    public function monthIntToString($data)
+    {
 
-        switch ($data){
+        switch ($data) {
 
             case '01/17':
                 $date = explode("/", $data);
-                $result = "Jan " . $date[1];
+                $result = "Jan ".$date[1];
+
                 return $result;
                 break;
             case '02/17':
                 $date = explode("/", $data);
-                $result = "Fev " . $date[1];
+                $result = "Fev ".$date[1];
+
                 return $result;
                 break;
             case '03/17':
                 $date = explode("/", $data);
-                $result = "Mars " . $date[1];
+                $result = "Mars ".$date[1];
+
                 return $result;
                 break;
             case '04/17':
                 $date = explode("/", $data);
-                $result = "Avr " . $date[1];
+                $result = "Avr ".$date[1];
+
                 return $result;
                 break;
             case '05/17':
                 $date = explode("/", $data);
-                $result = "Mai " . $date[1];
+                $result = "Mai ".$date[1];
+
                 return $result;
                 break;
             case '06/17':
                 $date = explode("/", $data);
-                $result = "Juin " . $date[1];
+                $result = "Juin ".$date[1];
+
                 return $result;
                 break;
             case '07/17':
                 $date = explode("/", $data);
-                $result = "Juil " . $date[1];
+                $result = "Juil ".$date[1];
+
                 return $result;
                 break;
             case '08/17':
                 $date = explode("/", $data);
-                $result = "Aou " . $date[1];
+                $result = "Aou ".$date[1];
+
                 return $result;
                 break;
             case '09/17':
                 $date = explode("/", $data);
-                $result = "Sept " . $date[1];
+                $result = "Sept ".$date[1];
+
                 return $result;
                 break;
             case '10/17':
                 $date = explode("/", $data);
-                $result = "Oct " . $date[1];
+                $result = "Oct ".$date[1];
+
                 return $result;
                 break;
             case '11/17':
                 $date = explode("/", $data);
-                $result = "Nov " . $date[1];
+                $result = "Nov ".$date[1];
+
                 return $result;
                 break;
             case '12/17':
                 $date = explode("/", $data);
-                $result = "Dec " . $date[1];
+                $result = "Dec ".$date[1];
+
                 return $result;
                 break;
 
@@ -582,16 +609,40 @@ class CrmFilter extends \Twig_Extension
         }
 
 
-
-
-
-
-
         return $data;
 
 
+    }
+
+    public function ean13_check_digit($digits)
+    {
+
+
+
+
+        //first change digits to a string so that we can access individual numbers
+        $digits = (string)$digits;
+        // 1. Add the values of the digits in the even-numbered positions: 2, 4, 6, etc.
+        $even_sum = $digits{1} + $digits{3} + $digits{5} + $digits{7} + $digits{9} + $digits{11};
+        // 2. Multiply this result by 3.
+        $even_sum_three = $even_sum * 3;
+        // 3. Add the values of the digits in the odd-numbered positions: 1, 3, 5, etc.
+        $odd_sum = $digits{0} + $digits{2} + $digits{4} + $digits{6} + $digits{8} + $digits{10};
+        // 4. Sum the results of steps 2 and 3.
+        $total_sum = $even_sum_three + $odd_sum;
+        // 5. The check character is the smallest number which, when added to the result in step 4,  produces a multiple of 10.
+        $next_ten = (ceil($total_sum / 10)) * 10;
+        $check_digit = $next_ten - $total_sum;
+
+        if ($check_digit == substr($digits, -1)){
+            return true;
+        }else{
+            return false;
+        }
 
     }
+
+
 
 
 
