@@ -328,7 +328,6 @@ class FournisseurController extends Controller
         $stmtTwo->execute();
         $resultTwo = $stmtTwo->fetchAll();
 
-        dump(count($result));
 
         return $this->render(
             '@Site/Fournisseurs/checkBarcode.html.twig',
