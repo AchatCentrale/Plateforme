@@ -194,6 +194,11 @@ import-produits-index:
     path: /produits/import
     defaults: {_controller: SiteBundle:Fournisseur:importProducts}
 
+barcode-checker:
+    path: /barcode
+    defaults: {_controller: SiteBundle:Fournisseur:checkBarcode}
+
+
 
 new-hastag:
     path: /client/tag/new/{centrale}/{id}

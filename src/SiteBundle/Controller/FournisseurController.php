@@ -291,6 +291,54 @@ class FournisseurController extends Controller
         return new JsonResponse('Importation réussie', 200);
     }
 
+    public function checkBarcodeAction(Request $request)
+    {
+
+        $conn = $this->get('doctrine.dbal.centrale_produits_connection');
+
+        $sql = 'SELECT
+                  PR_ID,
+                  FO_RAISONSOC,
+                  PR_REF,
+                  PR_NOM,
+                  PR_STATUS,
+                  PR_EAN
+                FROM CENTRALE_PRODUITS.dbo.PRODUITS
+                  INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON PRODUITS.FO_ID = FOURNISSEURS.FO_ID
+                WHERE PR_EAN LIKE \'%E%\' AND LEN(PR_EAN) > 0';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+
+
+        $sqlTwo = 'SELECT
+                  PR_ID,
+                  FO_RAISONSOC,
+                  PR_REF,
+                  PR_NOM,
+                  PR_STATUS,
+                  PR_EAN
+                FROM CENTRALE_PRODUITS.dbo.PRODUITS
+                  INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON PRODUITS.FO_ID = FOURNISSEURS.FO_ID
+                WHERE PR_EAN NOT LIKE \'%E%\' AND LEN(PR_EAN) = 13';
+
+        $stmtTwo = $conn->prepare($sqlTwo);
+        $stmtTwo->execute();
+        $resultTwo = $stmtTwo->fetchAll();
+
+
+        return $this->render(
+            '@Site/Fournisseurs/checkBarcode.html.twig',
+            [
+                'products' => $resultTwo,
+                'productsScien' => $result,
+            ]
+        );
+
+    }
+
 
 }
 
