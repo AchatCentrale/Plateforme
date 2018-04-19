@@ -21,68 +21,6 @@
 
 
 
-            <div>
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#top-ca" aria-controls="top-ca" role="tab" data-toggle="tab">Chiffre d'affaires</a></li>
-                    <li role="presentation"><a href="#economie" aria-controls="economie" role="tab" data-toggle="tab">Economie</a></li>
-                    <li role="presentation"><a href="#best-month" aria-controls="best-month" role="tab" data-toggle="tab">Mois de l'année</a></li>
-                </ul>
-
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="top-ca">
-                        <div class="ui relaxed list">
-
-                            {% for key,topC in top %}
-
-                                <div class="item">
-                                    <img class="ui avatar image" src="{{ asset('images/rank-position-3.png') }}">
-                                    <div class="content">
-                                        <a class="header">{{ topC['CF_USER']  }}</a>
-                                        <div class="description">&nbsp;<a><b>{{ topC['ca_centrale'] | localizedcurrency('EUR') }}</b></a></div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="economie">
-
-                        <div class="ui relaxed list">
-
-
-
-                            {% for key,ecoC in eco %}
-
-                                <div class="item">
-                                    <img class="ui avatar image" src="{{ asset('images/rank-position-3.png') }}">
-                                    <div class="content">
-                                        <a class="header">{{ ecoC['CF_USER']  }}</a>
-                                        <div class="description">&nbsp;<a><b>{{ ecoC['ca_centrale'] | localizedcurrency('EUR') }}</b></a></div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-
-
-
-
-                        </div>
-
-
-
-
-
-
-
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="best-month">ok</div>
-                </div>
-
-            </div>
-
-
         </div>
 
 
@@ -102,51 +40,18 @@
 
         <div class="x_content ">
 
-            <div class="import-option row">
-                <div class="col-md-4">
-                    <label for="fourn-import-conso">Choix fournisseurs</label>
-                    <select id="fourn-import-conso" class="form-control">
-                        <option>Bruneau</option>
+            <div class="zone-import-produits" id="dropzone-import-conso">
 
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="datetimepicker1">Choix période</label>
-                    <div class='input-group date' id='datetimepicker2'>
-                        <input name="cla_echeance" type='text' class="form-control "/>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <form action="{{ path('consommation-import') }}" id="import-dropzone-conso" class="dropzone">
+                    <div class="fallback">
+                        <input name="file" type="file" multiple />
                     </div>
+                </form>
 
-                </div>
             </div>
-            <div class="row">
-              {#  <div class="col-md-4">
-
-                    <div id="table-conso-client"></div>
-                </div>#}
-                <div class="col-md-12">
 
 
-
-                    <div class="zone-import-conso" id="dropzone-import">
-
-                        <form action="{{ path('consommation-import') }}" id="import-dropzone" class="dropzone">
-                            <div class="fallback">
-                                <input name="file" type="file" multiple />
-                            </div>
-                        </form>
-
-                    </div>
-                    
-                    <div class="exemple-import">
-                        <a href="{{ asset('Excel/test_import_crm.csv') }}">Exemple import_csv</a>
-                    </div>
-
-
-
-
-                </div>
-            </div>
+            <a href="{{ asset('Excel/exemple_import.xlsx') }}">Fichier exemple import</a>
         </div>
     </div>
 

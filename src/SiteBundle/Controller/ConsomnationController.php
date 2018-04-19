@@ -23,67 +23,7 @@ class ConsomnationController extends Controller
 
         $clientService = $this->get('site.service.client_services');
 
-        $sqlTop = "SELECT TOP 3
-                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CF_USER
-                      , round(sum(CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CLC_PRIX_CENTRALE), 1) as ca_centrale
-                    FROM  CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                    GROUP BY  CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CF_USER
-                    ORDER BY ca_centrale DESC";
-
-        $stmtTop = $conn->prepare($sqlTop);
-        $stmtTop->execute();
-        $top = $stmtTop->fetchAll();
-
-        $sqlTopEconomie = "SELECT TOP 3
-                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CF_USER
-                              , round(CLIENTS_CONSO.CLC_PRIX_PUBLIC -  CLIENTS_CONSO.CLC_PRIX_CENTRALE, 2) as ca_centrale
-                            FROM  CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                            GROUP BY  CENTRALE_ACHAT.dbo.CLIENTS_CONSO.CF_USER, CLIENTS_CONSO.CLC_PRIX_PUBLIC, CLIENTS_CONSO.CLC_PRIX_CENTRALE
-                            ORDER BY ca_centrale DESC";
-
-        $stmtTopEconomie = $conn->prepare($sqlTopEconomie);
-        $stmtTopEconomie->execute();
-        $eco = $stmtTopEconomie->fetchAll();
-
-        $topResult = [];
-        foreach ($top as $value){
-            $array = [
-                "CF_USER" => $clientService->getRefToRaisonSoc($value['CF_USER']),
-                "ca_centrale" => $value['ca_centrale']
-            ];
-            array_push($topResult, $array);
-        }
-
-        $ecoResult =[];
-        foreach ($eco as $value){
-
-            $array = [
-                "CF_USER" => $clientService->getRefToRaisonSoc($value['CF_USER']),
-                "ca_centrale" => $value['ca_centrale']
-            ];
-
-            array_push($ecoResult, $array);
-
-        }
-
-        $cookie_fourn = [
-            'name' => 'Fournisseur', // Nom du cookie
-            'value' => 'Bruneau', // Valeur du cookie
-        ];
-
-        $cookie_periode = [
-            'name' => 'Periode',
-            'value' => date("m/Y"),
-
-        ];
-
-
-        $html = $this->renderView('@Site/Consomnation/index.html.twig', [
-            'top' => $topResult,
-            'eco' => $ecoResult,
-        ]);
-        $response = new Response($html);
-        return $response;
+        return $this->render('@Site/Consomnation/index.html.twig');
     }
 
     public function indexClientAction(Request $request, $id, $centrale)
@@ -144,34 +84,38 @@ class ConsomnationController extends Controller
 
         foreach ($request->files as $file) {
 
-
+            dump($file);
             if (($handle = fopen($file->getRealPath(), "r")) !== false) {
                 while (($row = fgetcsv($handle, null, "\r")) !== false) {
 
 
                     $header = explode(";", $row[0]);
 
-                    for ($i = 1; $i < count($row); $i++) {
+                    for ($i = 0; $i < count($row); $i++) {
 
                         $ligne = explode(";", $row[$i]);
 
+                        dump($ligne);
 
 
-                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (FO_ID, CF_USER, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) 
-    VALUES (:fournisseur, :ref, :date, :prix_public, :prix_centrale, :ins_date, :ins_user)";
+                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) 
+    VALUES 
+      (:cl_id, :cc_id, :fo_id, :date_conso, :prix_public, :prix_centrale, GETDATE(), :user)";
+
+
                         try {
                             $stmt = $conn->prepare($sql);
                         } catch (DBALException $e) {
                         }
 
 
-                        $stmt->bindValue(':fournisseur', 2);
-                        $stmt->bindValue(':ref', $ligne[0]);
-                        $stmt->bindValue(':date', $ligne[4]);
+                        $stmt->bindValue(':cl_id', $ligne[0]);
+                        $stmt->bindValue(':cc_id', $ligne[1]);
+                        $stmt->bindValue(':fo_id', $ligne[7]);
+                        $stmt->bindValue(':date_conso', $ligne[4]);
                         $stmt->bindValue(':prix_public', $ligne[2]);
                         $stmt->bindValue(':prix_centrale', $ligne[3]);
-                        $stmt->bindValue(':ins_date', date("Y-m-d H:i:s"));
-                        $stmt->bindValue(':ins_user', "ADMIN");
+                        $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
                         $stmt->execute();
                         $resultDelete = $stmt->fetchAll();
 

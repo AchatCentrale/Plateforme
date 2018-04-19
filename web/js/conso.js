@@ -75,6 +75,27 @@ Dropzone.options.importDropzoneProduit = {
 };
 
 
+//import produit
+Dropzone.options.importDropzoneConso = {
+
+    init: function () {
+
+        this.on('addedfile', function (file) {
+            swal("Fichier importé");
+        })
+
+    },
+
+    dictDefaultMessage: "<i class=\"file huge excel outline icon\"></i>Deposer le fichiers .csv ",
+    thumbnailWidth: 400,
+    thumbnailHeight: 100,
+
+};
+
+
+
+
+
 $('#fourn-import-conso').click(function (e) {
 
     console.log('test')

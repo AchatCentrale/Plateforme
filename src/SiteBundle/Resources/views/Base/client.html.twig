@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
 
@@ -19,8 +19,6 @@
                             <div class="column">
 
                                 <button class="ui button green" id="btn-new-cl" role="button">Ajouter un nouveau client</button>
-
-
                                 <a href="{{ path('export-client', { "centrale" : app.request.query.get('c') }) }}"
                                    class="ui button" id="btn-export-cl" role="button"><i class="file excel outline icon"></i> Exporter .csv</a>
                             </div>
