@@ -84,7 +84,6 @@ class ConsomnationController extends Controller
 
         foreach ($request->files as $file) {
 
-            dump($file);
             if (($handle = fopen($file->getRealPath(), "r")) !== false) {
                 while (($row = fgetcsv($handle, null, "\r")) !== false) {
 
@@ -95,7 +94,6 @@ class ConsomnationController extends Controller
 
                         $ligne = explode(";", $row[$i]);
 
-                        dump($ligne);
 
 
                         $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) 
