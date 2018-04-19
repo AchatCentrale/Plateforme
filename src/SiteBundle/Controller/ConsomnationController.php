@@ -94,7 +94,7 @@ class ConsomnationController extends Controller
 
                         $ligne = explode(";", $row[$i]);
 
-
+                        dump($ligne);
 
                         $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) 
     VALUES 
@@ -107,7 +107,7 @@ class ConsomnationController extends Controller
                         }
 
 
-                        $stmt->bindValue(':cl_id', $ligne[0]);
+                        $stmt->bindValue(':cl_id', intval($ligne[0]));
                         $stmt->bindValue(':cc_id', $ligne[1]);
                         $stmt->bindValue(':fo_id', $ligne[7]);
                         $stmt->bindValue(':date_conso', $ligne[4]);
