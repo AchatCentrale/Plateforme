@@ -94,7 +94,6 @@ class ConsomnationController extends Controller
 
                         $ligne = explode(";", $row[$i]);
 
-                        dump($ligne[0]);
 
                         $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) 
     VALUES 
@@ -104,6 +103,7 @@ class ConsomnationController extends Controller
                         try {
                             $stmt = $conn->prepare($sql);
                         } catch (DBALException $e) {
+
                         }
 
 
