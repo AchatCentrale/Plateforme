@@ -94,11 +94,11 @@ class ConsomnationController extends Controller
 
                         $ligne = explode(";", $row[$i]);
 
-                        dump($ligne[4]);
 
 
                         $date = date('Y-m-d',strtotime($ligne[4]));
 
+                        dump($date);
 
 
                         $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
