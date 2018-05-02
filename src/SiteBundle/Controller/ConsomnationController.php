@@ -95,9 +95,14 @@ class ConsomnationController extends Controller
                         $ligne = explode(";", $row[$i]);
 
 
-                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER) 
-    VALUES 
-      (:cl_id, :cc_id, :fo_id, :date_conso, :prix_public, :prix_centrale, GETDATE(), :user)";
+
+                        $date = date('Y-m-d',strtotime($ligne[4]));
+
+
+
+                        $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
+    VALUES
+      (:cl_id, :cc_id, :fo_id, CAST(:date_conso AS DATE), :prix_public, :prix_centrale, GETDATE(), :user)";
 
 
                         try {
@@ -110,13 +115,13 @@ class ConsomnationController extends Controller
                         $stmt->bindValue(':cl_id', $ligne[0]);
                         $stmt->bindValue(':cc_id', $ligne[1]);
                         $stmt->bindValue(':fo_id', $ligne[7]);
-                        $stmt->bindValue(':date_conso', $ligne[4]);
-                        $stmt->bindValue(':prix_public', $ligne[2]);
-                        $stmt->bindValue(':prix_centrale', $ligne[3]);
+                        $stmt->bindValue(':date_conso', $date);
+                        $stmt->bindValue(':prix_public', round($ligne[2]));
+                        $stmt->bindValue(':prix_centrale', round($ligne[3]));
                         $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
                         $stmt->execute();
                         $resultDelete = $stmt->fetchAll();
-
+//
 
 
 
