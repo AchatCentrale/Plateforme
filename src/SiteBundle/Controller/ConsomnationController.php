@@ -94,6 +94,7 @@ class ConsomnationController extends Controller
 
                         $ligne = explode(";", $row[$i]);
 
+                        dump($ligne[4]);
 
 
                         $date = date('Y-m-d',strtotime($ligne[4]));
