@@ -2236,6 +2236,13 @@ class BaseController extends Controller
                 $client = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([
                     'clId' => $id
                 ]);
+
+
+                if(!$client){
+                    return new Response('Client introuvable', 200);
+                }
+
+
                 return new Response($client[0]->getClRaisonsoc(), 200);
             case 2:
                 $client = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy([

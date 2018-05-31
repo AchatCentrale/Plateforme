@@ -139,6 +139,7 @@ class FournisseurController extends Controller
 
                     $header = explode(";", $row[0]);
 
+                    dump($row);
 
                     $sqlDelete = "DELETE FROM CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS";
                     $stmtDelete = $conn->prepare($sqlDelete);
@@ -149,7 +150,6 @@ class FournisseurController extends Controller
 
 
                         $ligne = explode(";", $row[$i]);
-
 
                         switch ($ligne[41]) {
                             case "A RAJOUTER":
