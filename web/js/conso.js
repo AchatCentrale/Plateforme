@@ -89,6 +89,7 @@ Dropzone.options.importDropzoneConso = {
     dictDefaultMessage: "<i class=\"file huge excel outline icon\"></i>Deposer le fichiers .csv ",
     thumbnailWidth: 400,
     thumbnailHeight: 100,
+    maxFilesize: 2,
 
 };
 
