@@ -90,6 +90,8 @@ Dropzone.options.importDropzoneConso = {
     thumbnailWidth: 400,
     thumbnailHeight: 100,
     maxFilesize: 2,
+    timeout: 180000,
+
 
 };
 

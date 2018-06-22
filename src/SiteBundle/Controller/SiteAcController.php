@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SiteAcController extends Controller
 {
-    public function indexAction(Request $request)
+    public function newAction(Request $request)
     {
         header("Access-Control-Allow-Origin: *");
 
