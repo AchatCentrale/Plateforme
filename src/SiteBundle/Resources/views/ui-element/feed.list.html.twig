@@ -18,7 +18,7 @@
                             <div class="header">Tickets</div>
                             <div class="meta">{{ fe.insDate |Time }}</div>
                             <div class="description">
-                                {{ fe.meSujet | raw }}
+                                {{ fe.meSujet | raw | convert_encoding('UTF-8', 'Windows-1252') }}
                             </div>
 
 
