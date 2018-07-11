@@ -324,6 +324,10 @@ class ConsomnationController extends Controller
         }
 
 
+
+        $mailer = $this->get('site.service.mailer');
+        $mail = $mailer->NewClientNotifAc($this->getUser()->getUsMail);
+
         return new JsonResponse('Importation réussie', 200);
     }
 

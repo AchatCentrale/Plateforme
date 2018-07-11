@@ -232,6 +232,17 @@ class Mailer
         $this->sendMessage($mail, $subject, $body, $name);
     }
 
+    public function importConsoClientFinish($mail)
+    {
+        $subject = "Le dernier import des consommations sont terminés 🚀🚀";
+
+        $name = "ACHAT CENTRALE";
+
+        $template = 'SiteBundle:mail:NewClientAcNotificationClient.html.twig';
+        $body = $this->templating->render($template, []);
+        $this->sendMessage($mail, $subject, $body, $name);
+
+    }
 
 
 }
