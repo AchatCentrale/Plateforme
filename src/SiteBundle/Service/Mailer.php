@@ -238,7 +238,7 @@ class Mailer
 
         $name = "ACHAT CENTRALE";
 
-        $template = 'SiteBundle:mail:NewClientAcNotificationClient.html.twig';
+        $template = 'SiteBundle:mail:mailAcImportConso.html.twig';
         $body = $this->templating->render($template, []);
         $this->sendMessage($mail, $subject, $body, $name);
 
