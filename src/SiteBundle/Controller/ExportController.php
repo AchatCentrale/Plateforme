@@ -69,14 +69,10 @@ class ExportController extends Controller
            $ClientService = $this->get('site.service.client_services');
 
            foreach ($note as $notes) {
-
-
-
-
-
+a
                fputcsv(
                    $handle,
-                   [$notes['SO_ID'], $notes['CN_ID'], $notes['CL_ID'], $helper->getTheClientRaisonSoc($notes['CL_ID'],$notes['SO_ID'] )["CL_RAISONSOC"] , $notes['CN_NOTE'], $notes['INS_DATE'], $notes['INS_USER'], $notes['MAJ_DATE'], $notes['MAJ_USER']],
+                   [$notes['SO_ID'], $notes['CN_ID'], $notes['CL_ID'], $helper->getTheClientRaisonSoc($notes['CL_ID'],$notes['SO_ID'] )['CL_RAISONSOC'] , $notes['CN_NOTE'], $notes['INS_DATE'], $notes['INS_USER'], $notes['MAJ_DATE'], $notes['MAJ_USER']],
                    ';'
                );
            }
