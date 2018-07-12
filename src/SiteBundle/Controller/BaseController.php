@@ -2198,6 +2198,13 @@ class BaseController extends Controller
     {
 
 
+        $helper = $this->get('site.service.client_services');
+
+
+
+        dump($helper->getTheClientRaisonSoc(1017,1 ));
+
+
         return $this->render('@Site/test.html.twig');
 
 
