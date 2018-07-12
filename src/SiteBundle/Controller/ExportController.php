@@ -74,6 +74,8 @@ class ExportController extends Controller
 
             dump($helper->getTheClientRaisonSoc($notes['CL_ID'],$notes['SO_ID'] )["CL_RAISONSOC"]);
 
+            die();
+
 
                fputcsv(
                    $handle,
