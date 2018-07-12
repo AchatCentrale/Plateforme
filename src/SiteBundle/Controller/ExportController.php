@@ -71,8 +71,7 @@ class ExportController extends Controller
            foreach ($note as $notes) {
 
 
-
-               $raison_soc = (is_null($helper->getTheClientRaisonSoc($notes['CL_ID'],$notes['SO_ID'] )['CL_RAISONSOC']) ? $helper->getTheClientRaisonSoc($notes['CL_ID'],$notes['SO_ID'] )['CL_RAISONSOC'] : "");
+               $raison_soc = $helper->getTheClientRaisonSoc($notes['CL_ID'],$notes['SO_ID'] );
 
 
                fputcsv(

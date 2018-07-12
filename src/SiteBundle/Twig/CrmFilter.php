@@ -240,7 +240,14 @@ class CrmFilter extends \Twig_Extension
                 case 'CENTRALE_PFPL':
                     return "wwww".strtolower(str_replace("_", "-", $centrale));
                     break;
-                case 'CENTRALE_GCCP':
+                case 'CENTRALE_G
+                
+                
+                
+                
+                
+                
+                CCP':
                     return "wwww".strtolower(str_replace("_", "-", $centrale));
                     break;
             }

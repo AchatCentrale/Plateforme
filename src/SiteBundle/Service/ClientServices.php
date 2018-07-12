@@ -135,7 +135,7 @@ class ClientServices
     }
 
 
-    public function getTheCentrale($centrale)
+    public function fgetTheCentrale($centrale)
     {
         switch ($centrale) {
 
@@ -329,7 +329,7 @@ class ClientServices
                 $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                return $result[0];
+                return $result[0]['CL_RAISONSOC'];
             case "2":
                 $sql = "SELECT CL_RAISONSOC
                         FROM CENTRALE_GCCP.dbo.CLIENTS
@@ -339,7 +339,7 @@ class ClientServices
                 $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                return $result[0];
+                return $result[0]['CL_RAISONSOC'];
             case "4":
                 $sql = "SELECT CL_RAISONSOC
                         FROM CENTRALE_FUNECAP.dbo.CLIENTS
@@ -349,7 +349,7 @@ class ClientServices
                 $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                return $result[0];
+                return $result[0]['CL_RAISONSOC'];
             case "5":
                 $sql = "SELECT CL_RAISONSOC
                         FROM CENTRALE_GCCP.dbo.CLIENTS
@@ -359,7 +359,7 @@ class ClientServices
                 $stmt->bindValue(':id', $id);
                 $stmt->execute();
                 $result = $stmt->fetchAll();
-                return $result[0];
+                return $result[0]['CL_RAISONSOC'];
             case "6":
                 $sql = "SELECT CL_RAISONSOC
                 FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS

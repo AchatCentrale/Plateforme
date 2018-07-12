@@ -427,7 +427,6 @@ $(function () {
 
     function stateTask(state) {
 
-        console.log(state);
 
         state = parseInt(state);
 
@@ -1814,7 +1813,7 @@ $(function () {
     function centraleToInt($centrale) {
 
         switch ($centrale) {
-            case "CENTRALE_ACHAT":
+            case 'CENTRALE_ACHAT':
                 return "1";
                 break;
             case 'CENTRALE_GCCP':
@@ -1867,7 +1866,6 @@ $('#datetimepicker2').datetimepicker({
 });
 
 
-console.log('ok');
 $('.menu .item')
     .tab()
 ;

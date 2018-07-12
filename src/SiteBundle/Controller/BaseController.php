@@ -2197,12 +2197,27 @@ class BaseController extends Controller
     public function testAction()
     {
 
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $helper = $this->get('site.service.client_services');
 
 
+        $sql = "SELECT *  FROM CENTRALE_ACHAT.dbo.Vue_All_Notes";
 
-        dump($helper->getTheClientRaisonSoc(1017,1 )["CL_RAISONSOC"]);
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+
+
+        $note = $stmt->fetchAll();
+        $ClientService = $this->get('site.service.client_services');
+
+        foreach ($note as $notes) {
+
+            $raison_soc = $helper->getTheClientRaisonSoc($notes['CL_ID'], $notes['SO_ID']);
+
+            dump($raison_soc);
+
+        }
 
 
         return $this->render('@Site/test.html.twig');
