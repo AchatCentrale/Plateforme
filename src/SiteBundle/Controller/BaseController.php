@@ -2202,7 +2202,7 @@ class BaseController extends Controller
 
 
 
-        dump($helper->getTheClientRaisonSoc(1017,1 ));
+        dump($helper->getTheClientRaisonSoc(1017,1 )["CL_RAISONSOC"]);
 
 
         return $this->render('@Site/test.html.twig');

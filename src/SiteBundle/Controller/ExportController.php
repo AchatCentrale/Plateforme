@@ -71,12 +71,11 @@ class ExportController extends Controller
            foreach ($note as $notes) {
 
 
-           $raison_soc = $helper->getTheClientRaisonSoc($notes['CL_ID'],$notes['SO_ID'] );
 
 
                fputcsv(
                    $handle,
-                   [$notes['SO_ID'], $notes['CN_ID'], $notes['CL_ID'], $raison_soc["CL_RAISONSOC"] , utf8_encode($notes['CN_NOTE'], $notes['INS_DATE'], $notes['INS_USER'], $notes['MAJ_DATE'], $notes['MAJ_USER']],
+                   [$notes['SO_ID'], $notes['CN_ID'], $notes['CL_ID'], $helper->getTheClientRaisonSoc($notes['CL_ID'],$notes['SO_ID'] )["CL_RAISONSOC"] , utf8_encode($notes['CN_NOTE'], $notes['INS_DATE'], $notes['INS_USER'], $notes['MAJ_DATE'], $notes['MAJ_USER']],
                    ';'
                );
            }
