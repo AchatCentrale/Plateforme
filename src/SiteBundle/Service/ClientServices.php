@@ -135,7 +135,7 @@ class ClientServices
     }
 
 
-    public function fgetTheCentrale($centrale)
+    public function getTheCentrale($centrale)
     {
         switch ($centrale) {
 
