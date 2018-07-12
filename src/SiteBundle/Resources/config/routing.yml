@@ -6,9 +6,6 @@ logout:
     path:      /logout
 
 
-profile-update:
-    path: /settings
-    defaults: {_controller: SiteBundle:Base:updateProfil}
 
 
 index_auth:
@@ -25,10 +22,6 @@ client-new:
     path:     /client/new
     defaults: { _controller: SiteBundle:Base:ClientNew }
 
-get-all-client:
-    path:     /client/All
-    defaults: {_controller: SiteBundle:Base:getAllClients}
-    methods: GET
 
 client-general:
     path:     /client/{id}/{centrale}/general
