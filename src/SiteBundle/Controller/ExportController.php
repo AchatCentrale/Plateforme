@@ -54,7 +54,9 @@ class ExportController extends Controller
            $handle = fopen('php://output', 'w+');
            $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-           fputcsv($handle, ['SO_ID', 'CN_ID', 'CL_ID', 'CN_NOTE', 'INS_DATE', 'INS_USER', 'MAJ_DATE', 'MAJ_USER'], ';');
+           $helper = $this->get('site.service.client_services');
+
+           fputcsv($handle, ['SO_ID', 'CN_ID', 'CL_ID', 'CL_RAISONSOC', 'CN_NOTE', 'INS_DATE', 'INS_USER', 'MAJ_DATE', 'MAJ_USER'], ';');
 
            $sql = "SELECT *  FROM CENTRALE_ACHAT.dbo.Vue_All_Notes";
 
@@ -68,7 +70,7 @@ class ExportController extends Controller
            foreach ($note as $notes) {
                fputcsv(
                    $handle,
-                   [$notes['SO_ID'], $notes['CN_ID'], $notes['CL_ID'], $notes['CN_NOTE'], $notes['INS_DATE'], $notes['INS_USER'], $notes['MAJ_DATE'], $notes['MAJ_USER']],
+                   [$notes['SO_ID'], $notes['CN_ID'], $notes['CL_ID'], $helper->getTheClientRaisonSoc($notes['CL_ID'],$notes['SO_ID'] ) , $helper->array_utf8_encode($notes['CN_NOTE']), $notes['INS_DATE'], $notes['INS_USER'], $notes['MAJ_DATE'], $notes['MAJ_USER']],
                    ';'
                );
            }
