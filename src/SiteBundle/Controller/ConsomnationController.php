@@ -93,8 +93,10 @@ class ConsomnationController extends Controller
 
                         $date = date('Y-d-m', strtotime($ligne[4]));
 
-                        switch ($ligne[8]) {
+                        dump($ligne);
 
+
+                        switch ($ligne[8]){
 
                             //achat centrale
                             case 1:
@@ -164,7 +166,7 @@ class ConsomnationController extends Controller
                                 }
                                 break;
 
-                                //NALDEO
+                            //NALDEO
                             case 3:
                                 //import brut
                                 //verif si la conso est dans la table
@@ -201,40 +203,40 @@ class ConsomnationController extends Controller
                             //funecap
                             case 4:
 
-                            //import brut
-                            //verif si la conso est dans la table
+                                //import brut
+                                //verif si la conso est dans la table
 
-                            $sqlVerif = "SELECT CLC_ID FROM CENTRALE_FUNECAP.dbo.CLIENTS_CONSO WHERE CLC_DATE = :date AND FO_ID = :fo_id AND CL_ID = :cl_id";
+                                $sqlVerif = "SELECT CLC_ID FROM CENTRALE_FUNECAP.dbo.CLIENTS_CONSO WHERE CLC_DATE = :date AND FO_ID = :fo_id AND CL_ID = :cl_id";
 
-                            $stmtVerif = $conn->prepare($sqlVerif);
-                            $stmtVerif->bindValue(':date', $date);
-                            $stmtVerif->bindValue(':fo_id', $ligne[7]);
-                            $stmtVerif->bindValue(':cl_id', $ligne[0]);
-                            $stmtVerif->execute();
-                            $resultVerif = $stmtVerif->fetchAll(\PDO::FETCH_COLUMN, 0);
-                            if (empty($resultVerif)) {
-                                //Il n'y a pas de conso donc insert
-                                $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
+                                $stmtVerif = $conn->prepare($sqlVerif);
+                                $stmtVerif->bindValue(':date', $date);
+                                $stmtVerif->bindValue(':fo_id', $ligne[7]);
+                                $stmtVerif->bindValue(':cl_id', $ligne[0]);
+                                $stmtVerif->execute();
+                                $resultVerif = $stmtVerif->fetchAll(\PDO::FETCH_COLUMN, 0);
+                                if (empty($resultVerif)) {
+                                    //Il n'y a pas de conso donc insert
+                                    $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
                                     VALUES
                                 (:cl_id, :cc_id, :fo_id, CAST(:date_conso AS DATE), :prix_public, :prix_centrale, GETDATE(), :user)";
-                                try {
-                                    $stmt = $conn->prepare($sql);
-                                } catch (DBALException $e) {
+                                    try {
+                                        $stmt = $conn->prepare($sql);
+                                    } catch (DBALException $e) {
+                                    }
+                                    $stmt->bindValue(':cl_id', $ligne[0]);
+                                    $stmt->bindValue(':cc_id', $ligne[1]);
+                                    $stmt->bindValue(':fo_id', $ligne[7]);
+                                    $stmt->bindValue(':date_conso', $date);
+                                    $stmt->bindValue(':prix_public', round($ligne[2]));
+                                    $stmt->bindValue(':prix_centrale', round($ligne[3]));
+                                    $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                                    $stmt->execute();
+                                    $result = $stmt->fetchAll();
+
                                 }
-                                $stmt->bindValue(':cl_id', $ligne[0]);
-                                $stmt->bindValue(':cc_id', $ligne[1]);
-                                $stmt->bindValue(':fo_id', $ligne[7]);
-                                $stmt->bindValue(':date_conso', $date);
-                                $stmt->bindValue(':prix_public', round($ligne[2]));
-                                $stmt->bindValue(':prix_centrale', round($ligne[3]));
-                                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                                $stmt->execute();
-                                $result = $stmt->fetchAll();
-
-                            }
 
 
-                            break;
+                                break;
 
                             //PFPL
                             case 5:
@@ -322,7 +324,6 @@ class ConsomnationController extends Controller
 
 
         }
-
 
 
         $mailer = $this->get('site.service.mailer');
