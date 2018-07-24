@@ -1,0 +1,177 @@
+<div class="container-data">
+    <div class="ui divider">
+
+    </div>
+    <div class="ui equal width grid">
+
+        <div class="equal width row">
+
+
+            <div class="column">
+
+                <div class="ui pointing secondary menu client-data ">
+                    <a class="active item" data-tab="first">Actions</a>
+                    <a class="item" data-tab="second">Notes</a>
+
+                </div>
+                <div class="ui tab segment active" data-tab="first">
+                    <p>first</p>
+
+
+                </div>
+                <div class="ui tab segment" data-tab="second">
+
+                    {#{% if task is empty %}
+                        <p>il n'y aucunes tâches pour le moment.</p>
+                    {%  else %}#}
+                    <table class="ui compact table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Commentaire</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+
+                        {#{% for tasks in task %}
+                            <tr>
+                                <td>{{ tasks.claNom }}</td>
+                                <td>{{ tasks.claType | type }}</td>
+                                <td>{{ tasks.claEcheance | timeFromNow }}</td>
+                                <td>{{ tasks.claPriorite | priorite | raw }}</td>
+                            </tr>
+                        {% endfor %}#}
+
+                        </tbody>
+                    </table>
+                    {#{% endif %}#}
+                </div>
+
+
+
+                <h4>Historique de navigation</h4>
+                <table class="ui table">
+                    <thead>
+                    <tr>
+                        <th class="five wide">Type action</th>
+                        <th class="ten wide">Etat</th>
+                        <th class="ten wide">Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for logs in log %}
+                        <tr>
+                            <td>
+                                <div class="ui label">{{ logs.LO_CODE }}</div>
+                            </td>
+                            <td>{{ logs.LO_DESCR | raw }}</td>
+                            <td>{{ logs.INS_DATE | date }}</td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="column">
+
+
+                <div class="ui pointing secondary menu profile-client ">
+                    <a class="active item" data-tab="first">Actions</a>
+                    <a class="item" data-tab="second">Notes</a>
+
+                </div>
+                <div class="ui tab segment active" data-tab="first">
+
+                    {% if task is empty %}
+                        <p>il n'y aucunes tâches pour le moment.</p>
+                    {% else %}
+                        <table class="ui compact table">
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Type</th>
+                                <th>Écheance</th>
+                                <th>Priorité</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for tasks in task %}
+                                <tr>
+                                    <td>{{ tasks.claNom }}</td>
+                                    <td>{{ tasks.claType | type }}</td>
+                                    <td>{{ tasks.claEcheance | timeFromNow }}</td>
+                                    <td>{{ tasks.claPriorite | priorite | raw }}</td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    {% endif %}
+
+
+                </div>
+                <div class="ui tab segment" data-tab="second">
+
+
+                    <form action="">
+                        <div class="ui form">
+                            <div class="inline fields">
+                                <div class="eight wide field">
+                                    <label>Ajouter une note</label>
+                                    <input type="text" placeholder="Votre note">
+                                </div>
+                                <div class="three wide field">
+                                    <input class="ui button" type="submit" placeholder="Middle Name">
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+
+                    {#{% if task is empty %}
+                        <p>il n'y aucunes tâches pour le moment.</p>
+                    {%  else %}#}
+                    <table class="ui compact table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Commentaire</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+
+                        {#{% for tasks in task %}
+                            <tr>
+                                <td>{{ tasks.claNom }}</td>
+                                <td>{{ tasks.claType | type }}</td>
+                                <td>{{ tasks.claEcheance | timeFromNow }}</td>
+                                <td>{{ tasks.claPriorite | priorite | raw }}</td>
+                            </tr>
+                        {% endfor %}#}
+
+                        </tbody>
+                    </table>
+                    {#{% endif %}#}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

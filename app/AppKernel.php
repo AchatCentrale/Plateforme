@@ -20,9 +20,18 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new SiteBundle\SiteBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
+            new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
 
+
+            new Ivory\SerializerBundle\IvorySerializerBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
+            new FunecapBundle\FunecapBundle(),
+            new AchatCentraleBundle\AchatCentraleBundle(),
+            new RocEclercBundle\RocEclercBundle(),
+            new GccpBundle\GccpBundle(),
+            new PfplBundle\PfplBundle(),
+            new ProductBundle\ProductBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
@@ -49,6 +58,7 @@ class AppKernel extends Kernel
     {
         return dirname(__DIR__) . '/var/logs';
     }
+
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {

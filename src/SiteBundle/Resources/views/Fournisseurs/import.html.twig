@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="upload large icon"></i>Import</h2>
+
+
+            <div class="clearfix"></div>
+        </div>
+
+
+
+        <div class="x_content ">
+            <div class="zone-import-produits" id="dropzone-import-produit">
+
+                <form action="{{ path('import-produits-index') }}" id="import-dropzone-produit" class="dropzone">
+                    <div class="fallback">
+                        <input name="file" type="file" multiple />
+                    </div>
+                </form>
+
+            </div>
+
+
+            <div>
+                <a href="{{ asset('Excel/Classeur_import.csv') }}"> Fichier csv pour l'import </a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+
+{% block title %}
+IMPORT PRODUITS - CRM ACHAT-CENTRALE
+
+{% endblock %}
+

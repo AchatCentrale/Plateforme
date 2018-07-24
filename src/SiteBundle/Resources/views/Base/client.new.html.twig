@@ -1,0 +1,277 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Nouveau client</h2>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            {% if state is defined %}
+
+                                <div class="ui success message">
+                                    <i class="close icon"></i>
+                                    <div class="header">
+                                        {{ state }}
+                                    </div>
+                                    <p>
+                                        Cliquer <a class="click-here" href="{{ path('client-general', { 'centrale' : centrale_raison_soc, 'id' : idNew }  ) }}">ici</a> pour voir la fiche client
+                                    </p>
+                                </div>
+                            {% endif %}
+                            <form action="{{ path('client-new', {'centrale' : app.request.query.get('centrale') } ) }}" method="post">
+
+                                <div class="ui stackable two column grid form-client-new">
+                                    <div class=" column  ">
+                                        <div class="info-base-new">
+
+
+                                            {#ref#}
+                                            <div class="form-group row ">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="ref-client">Réference du
+                                                    client</label>
+                                                <div class="col-xs-5">
+                                                    <input required name="client-new[ref]" type="text" class="form-control client-new" id="ref-client"
+                                                           placeholder="La réference du client"
+                                                           value="{{ random() }}"
+                                                    >
+                                                </div>
+                                            </div>
+
+                                            {#Raison sociale #}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="raison-soc-client">Raison
+                                                    social</label>
+                                                <div class="col-xs-5">
+                                                    <input required name="client-new[raison-soc]" type="text" class="form-control client-new"
+                                                           id="raison-soc-client"
+                                                           placeholder="Raison sociale de l'entreprise"
+
+                                                    >
+                                                </div>
+                                            </div>
+
+                                            {#Siret#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="siret-client">Numero SIRET</label>
+                                                <div class="col-xs-5">
+                                                    <input required name="client-new[siret]" type="text" class="form-control client-new"
+                                                           id="siret-client"
+                                                           placeholder="Le numero siret de l'entreprise">
+                                                </div>
+                                            </div>
+
+
+                                            {#Adresse#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="adresse-client">Adresse</label>
+                                                <div class="col-xs-5">
+                                                    <input required name="client-new[adresse]" type="text" class="form-control client-new"
+                                                           id="adresse-client"
+                                                           placeholder="L'adresse de l'entreprise">
+                                                </div>
+                                            </div>
+
+                                            {#ville#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="ville-client">Ville</label>
+                                                <div class="col-xs-5">
+                                                    <input required name="client-new[ville]" type="text" class="form-control client-new"
+                                                           id="ville-client"
+                                                           placeholder="La ville  de l'entreprise">
+                                                </div>
+                                            </div>
+
+                                            {#cp#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="cp-client">Code postal</label>
+                                                <div class="col-xs-5">
+                                                    <input name="client-new[cp]" type="text" class="form-control client-new" id="cp-client"
+                                                           placeholder="Le code postal de l'entreprise">
+                                                </div>
+                                            </div>
+
+
+                                            {#Pays#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="pays-client">Pays</label>
+                                                <div class="col-xs-5">
+                                                    <select name="client-new[pays]" class="form-control form-control-sm client-new"
+                                                            id="pays-client">
+                                                        <option value="0" selected>Le pays de l'entreprise</option>
+                                                        {% for country in pays %}
+                                                            <option value="{{ country.paDescr }}">{{ country.paDescr }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            {#mail#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="mail-client">Mail</label>
+                                                <div class="col-xs-5">
+                                                    <input required name="client-new[mail]" type="text" class="form-control client-new" id="mail-client"
+                                                           placeholder="Le mail de l'entreprise">
+                                                </div>
+                                            </div>
+
+
+                                            {#tel#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="tel-client">Téléphone</label>
+                                                <div class="col-xs-5">
+                                                    <input required name="client-new[tel]" type="text" class="form-control client-new" id="tel-client"
+                                                           placeholder="Le télephone de l'entreprise">
+                                                </div>
+                                            </div>
+
+
+                                            {#web#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="web-client">Site web</label>
+                                                <div class="col-xs-5">
+                                                    <input  name="client-new[web]" type="text" class="form-control client-new" id="web-client"
+                                                           placeholder="Le site web de l'entreprise">
+                                                </div>
+                                            </div>
+
+
+
+                                            {#ca#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="ca-client">Chiffre d'affaires</label>
+                                                <div class="col-xs-5">
+                                                    <input name="client-new[ca]" type="text" class="form-control client-new" id="ca-client"
+                                                           placeholder="Le chiffre d'affaires de l'entreprise">
+                                                </div>
+                                            </div>
+
+
+                                            {#effectif#}
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label col-form-label-lg" for="effectif-client">Effectif</label>
+                                                <div class="col-xs-5">
+                                                    <input name="client-new[effe]" type="text" class="form-control client-new"
+                                                           id="effectif-client"
+                                                           placeholder="Effectif de l'entreprise">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="column ">
+                                        <div class="info-complementaire">
+
+
+                                            <div class="info-final">
+
+
+                                                {#region#}
+                                                <div class="form-group">
+                                                    <label for="region-client">Région</label>
+                                                    <select   name="client-new[region]" class="form-control" id="region-client">
+                                                        <option value="">Selectionner la region pour l'entreprise</option>
+
+                                                        {% for reg in region %}
+                                                            <option value="{{ reg.reId }}">{{ reg.reNom }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+
+                                                {#acti#}
+                                                <div class="form-group">
+                                                    <label for="acti-client">Activité</label>
+                                                    <select   name="client-new[acti]" class="form-control form-control-sm"
+                                                            id="acti-client">
+                                                        <option value="">Selectionner l'activité de l'entreprise</option>
+
+                                                        {% for acti in activite %}
+                                                            <option value="{{ acti.acId }}">{{ acti.acDescr }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+                                                {#groupe#}
+                                                <div class="form-group">
+                                                    <label for="groupe-client">Groupe</label>
+                                                    <select  name="client-new[groupe]" class="form-control form-control-sm"
+                                                            id="groupe-client">
+                                                        <option value="">Selectionner le groupe du client</option>
+                                                        {% for gr in groupe %}
+                                                            <option value="{{ gr.grId }}">{{ gr.grDescr }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+
+
+                                                {#clasif#}
+                                                {% if classif %}
+                                                    <div class="form-group">
+                                                        <label for="classif-client">Classification</label>
+                                                        <select   name="client-new[classif]" class="form-control form-control-sm"
+                                                                id="classif-client">
+                                                            <option value="">Selectionner la classification pour l'entreprise</option>
+                                                            {% for class in classif %}
+                                                                <option value="{{ class.clId }}">{{ class.clDescr }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                {% endif %}
+
+
+                                                {#status#}
+                                                <div class="form-group">
+                                                    <label for="status-client">Statut</label>
+                                                    <select  required name="client-new[status]" class="form-control" id="status-client">
+                                                        <option value="">Le status de l'entreprise</option>
+                                                        <option value="A valider">A valider</option>
+                                                        <option value="Bloqué">Bloqué</option>
+                                                        <option value="Validé">Validé</option>
+                                                    </select>
+                                                </div>
+
+                                                {#Statut#}
+                                                <div class="form-group">
+                                                    <label for="statut-client">Statut de l'entreprise</label>
+                                                    <select required  class="form-control" id="statut-client">
+                                                        <option value="">Le statut d'adhésion de l'entreprise</option>
+                                                        <option value="Je regarde">Je regarde</option>
+                                                        <option value="J'adhère">J'adhère</option>
+                                                        <option value="J'ai payé">J'ai payé</option>
+                                                    </select>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="zone-submit-new container">
+                                    <button type="submit" class="fluid ui button green">Enregistrer</button>
+
+                                </div>
+                            </form>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+

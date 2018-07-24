@@ -1,0 +1,148 @@
+<?php
+
+namespace PfplBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ClientsUsers
+ *
+ * @ORM\Table(name="CLIENTS_USERS", indexes={@ORM\Index(name="IDX_E2E056FD3F592A49", columns={"CL_ID"})})
+ * @ORM\Entity
+ */
+class ClientsUsers
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CC_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ccId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PU_ID", type="integer", nullable=true)
+     */
+    private $puId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CC_PRENOM", type="string", length=50, nullable=true)
+     */
+    private $ccPrenom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CC_NOM", type="string", length=50, nullable=true)
+     */
+    private $ccNom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CC_FONCTION", type="string", length=50, nullable=true)
+     */
+    private $ccFonction;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CC_TEL", type="string", length=50, nullable=true)
+     */
+    private $ccTel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CC_GSM", type="string", length=50, nullable=true)
+     */
+    private $ccGsm;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CC_FAX", type="string", length=50, nullable=true)
+     */
+    private $ccFax;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CC_MAIL", type="string", length=100, nullable=true)
+     */
+    private $ccMail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="CC_PASS", type="string", length=50, nullable=true)
+     */
+    private $ccPass;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CC_NIVEAU", type="integer", nullable=true)
+     */
+    private $ccNiveau;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="CIRCUIT_VALIDATION", type="boolean", nullable=false)
+     */
+    private $circuitValidation;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CC_STATUS", type="integer", nullable=true)
+     */
+    private $ccStatus;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
+     */
+    private $insDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
+     */
+    private $insUser;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="MAJ_DATE", type="datetime", nullable=true)
+     */
+    private $majDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
+     */
+    private $majUser;
+
+    /**
+     * @var \PfplBundle\Entity\Clients
+     *
+     * @ORM\ManyToOne(targetEntity="PfplBundle\Entity\Clients")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="CL_ID", referencedColumnName="CL_ID")
+     * })
+     */
+    private $cl;
+
+
+}
+

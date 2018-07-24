@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+    EAN 13 CHECKER
+{% endblock %}
+
+{% block body %}
+
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fournisseur</th>
+            <th scope="col">REF</th>
+            <th scope="col">EAN</th>
+            <th scope="col">NOM</th>
+            <th scope="col">STATUS</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for produit in products %}
+        {% if produit['PR_EAN'] | ean13 == false %}
+            <tr>
+                <th>{{ produit['PR_ID'] }}</th>
+                <td>{{ produit['FO_RAISONSOC'] }}</td>
+                <td>{{ produit['PR_REF'] }}</td>
+                <td>{{ produit['PR_EAN']   }}</td>
+                <td>{{ produit['PR_NOM'] }}</td>
+                <td>{{ produit['PR_STATUS'] }}</td>
+            </tr>
+        {% endif %}
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fournisseur</th>
+            <th scope="col">REF</th>
+            <th scope="col">EAN</th>
+            <th scope="col">NOM</th>
+            <th scope="col">STATUS</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for produc in productsScien %}
+                <tr>
+                    <th>{{ produc['PR_ID'] }}</th>
+                    <td>{{ produc['FO_RAISONSOC'] }}</td>
+                    <td>{{ produc['PR_REF'] }}</td>
+                    <td>{{ produc['PR_EAN']   }}</td>
+                    <td>{{ produc['PR_NOM'] }}</td>
+                    <td>{{ produc['PR_STATUS'] }}</td>
+                </tr>
+        {% endfor %}
+
+
+
+        </tbody>
+    </table>
+
+{% endblock %}
+
+

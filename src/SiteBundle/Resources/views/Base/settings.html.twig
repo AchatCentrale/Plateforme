@@ -1,61 +1,29 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 
 {% block body %}
 
-    {#include bandeau header#}
-    {{ include ('SiteBundle:Header:Header_home.html.twig') }}
 
+    <!-- page content -->
 
+            <div class="clearfix"></div>
 
-
-
-
-
-    {{ form_start(form, {'attr': {'class': 'ink-form login-group-input'}}) }}
-    {{ form_errors(form) }}
-
-    <div class="control-group align-left">
-        {{ form_label(form.usPrenom) }}
-        {{ form_errors(form.usPrenom) }}
-        <div class="control">
-            {{ form_widget(form.usPrenom) }}
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Modifier mon profil</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            {{ dump(app.user) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <br>
-    <div class="control-group align-left ">
-        {{ form_label(form.usNom) }}
-        {{ form_errors(form.usNom) }}
-        <div class="control">
-            {{ form_widget(form.usNom) }}
-        </div>
-    </div>
-    <div class="control-group align-left ">
-        {{ form_label(form.usMail) }}
-        {{ form_errors(form.usMail) }}
-        <div class="control">
-            {{ form_widget(form.usMail) }}
-        </div>
-    </div>
-    <div class="control-group align-left ">
-        {{ form_label(form.usPass) }}
-        {{ form_errors(form.usPass) }}
-        <div class="control">
-            {{ form_widget(form.usPass) }}
-        </div>
-    </div>
-
-    <br>
-    <div>
-        {{ form_widget(form.Send, { 'label': 'Mettre a jour' }) }}
-    </div>
-
-    {{ form_end(form) }}
-
-
-
-
-
+    <!-- /page content -->
 
 
 {% endblock %}

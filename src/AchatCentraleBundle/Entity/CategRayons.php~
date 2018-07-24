@@ -1,0 +1,40 @@
+<?php
+
+namespace AchatCentraleBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CategRayons
+ *
+ * @ORM\Table(name="CATEG_RAYONS")
+ * @ORM\Entity
+ */
+class CategRayons
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CR_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $crId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="RA_ID", type="integer", nullable=false)
+     */
+    private $raId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CatID", type="integer", nullable=true)
+     */
+    private $catid;
+
+
+}
+

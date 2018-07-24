@@ -1,0 +1,242 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    TAGS - ACHAT-CENTRALE
+{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel tile fixed_height_90">
+                <div class="x_content">
+
+                    <div class="ui grid">
+                        <div class="one wide column">
+                            <i class="search huge icon"></i>
+                        </div>
+                        <div class="four wide column hastag_search">
+                            <p>#{{ app.request.attributes.get('id') }}</p>
+                        </div>
+                        <div class="two wide column">
+                            <a href="{{ path('hastag-action', {'id': 'all'}) }}" class="positive ui button">Tous les tags</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row">
+
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel tile fixed_height_320">
+
+                <div class="x_content">
+
+                    <div id='container-tabme-tag' style='height:500px;overflow-x:scroll'>
+
+
+                        <table class="ui very basic table">
+                            <thead>
+                            <tr>
+                                <th>Ref</th>
+                                <th>Centrale</th>
+                                <th>Raison social</th>
+                                <th>Adresse</th>
+                                <th>Ville</th>
+                                <th>Tel</th>
+                                <th>Siret</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for t in tag %}
+
+                                <tr>
+                                    <td>{{ t['CL_REF'] }}</td>
+                                    <td>{{ t['SO_ID'] | centrale | centraleLabel |raw }}</td>
+                                    <td>
+                                        <a href="{{ path('client-general', {'id' :  t['CL_ID'] , 'centrale' :  t['SO_ID'] | centrale }) }}">{{ t['CL_RAISONSOC'] | convert_encoding('UTF-8', 'Windows-1252') }}</a>
+                                    </td>
+                                    <td>{{ t['CL_ADRESSE1'] | convert_encoding('UTF-8', 'Windows-1252') }}</td>
+                                    <td>{{ t['CL_VILLE'] | convert_encoding('UTF-8', 'Windows-1252') }}</td>
+                                    <td>{{ t['CL_TEL'] | phone }}</td>
+                                    <td>{{ t['CL_SIRET'] | siret }}</td>
+                                </tr>
+
+
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+    <div class="row">
+
+
+        {#tickets#}
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile ">
+                <div class="x_title">
+                    <h2><i class="ticket icon"></i>Tickets</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+
+                    {% if ticketFRS %}
+
+
+
+                        <div class="dashboard-widget-content">
+
+                            <ul class="list-unstyled timeline widget">
+                                {% for tFRS in ticketFRS %}
+
+
+                                    <li>
+                                        <div class="block">
+                                            <div class="block_content">
+                                                <h2 class="title">
+                                                    <a href="http://www.achatcentrale.fr/extranet/MB_Tickets_Detail.asp?SO_ID={{ tFRS['SO_ID'] }}&ME_ID={{ tFRS['ME_ID'] }}&ME_STATUS_ORI=0&DataBase={{ tFRS['SO_ID'] | centraleTickets}}" >{{ tFRS['ME_SUJET'] }}</a>
+                                                </h2>
+                                                <div class="byline">
+                                                    <span></span> par <a>{{ tFRS['CL_RAISONSOC'] }}</a>
+                                                    <span></span> pour <a>{{ tFRS['FO_RAISONSOC'] }}</a>
+                                                </div>
+                                                <p class="excerpt">{{ tFRS['MD_CORPS'] }}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                {% endfor %}
+
+
+                            </ul>
+                        </div>
+
+                        {% else %}
+
+                        <p>Il n'y aucun ticket qui contient ce TAG</p>
+
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+        {#action#}
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile ">
+                <div class="x_title">
+                    <h2>Actions</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    {% if action %}
+                        <div class="dashboard-widget-content">
+
+                            <ul class="list-unstyled timeline widget">
+
+
+                                {% for a in action %}
+
+                                    <li>
+                                        <div class="block">
+                                            <div class="block_content">
+                                                <h2 class="title">
+                                                    <a>{{ a['CLA_NOM'] | convert_encoding('UTF-8', 'Windows-1252') }}</a>
+                                                </h2>
+                                                <div class="byline">
+                                                    <span>{{ a['INS_DATE'] | fromNowString }}</span> par <a>Céline
+                                                        Louis</a>
+                                                </div>
+                                                <p class="excerpt">{{ a['CLA_DESCR'] | convert_encoding('UTF-8', 'Windows-1252')  | limitLength }}
+                                                    <a>Lire la suite</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                {% endfor %}
+
+
+                            </ul>
+                        </div>
+                    {% else %}
+
+                        <p>Aucune action pour ce TAG</p>
+
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+        {#notes#}
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="x_panel tile ">
+                <div class="x_title">
+                    <h2>Notes</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    {% if note %}
+                        <div class="ui feed">
+                            {% for n in note %}
+                                <div class="event">
+                                    <div class="label">
+                                        <i class="sticky note icon"></i>
+                                    </div>
+                                    <div class="content">
+                                        <div class="summary">
+                                            {{ n['CN_NOTE'] }}
+
+                                            <a href="{{ path('client-general', {'centrale':n['SO_ID'] | centrale , 'id': n['CL_ID']}) }}" >{{ client_service.getTheClientRaisonSoc(n['CL_ID'], n['SO_ID']) | convert_encoding('UTF-8', 'Windows-1252') }}</a>
+                                            <div class="date">{{ n['INS_DATE'] | fromNowString }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                    {% else %}
+
+                        <p>Aucune note pour ce tag</p>
+
+
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+{% endblock %}
+

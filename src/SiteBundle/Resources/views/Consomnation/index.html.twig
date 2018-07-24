@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Importer une consommation - ACHAT-CENTRALE
+{% endblock %}
+
+{% block body %}
+
+
+
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="shop  icon"></i> Top consommation</h2>
+
+
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="shop  icon"></i> Consommations</h2>
+
+
+            <div class="clearfix"></div>
+        </div>
+
+
+
+        <div class="x_content ">
+
+            <div class="zone-import-produits" id="dropzone-import-conso">
+
+                <form action="{{ path('consommation-import') }}" id="import-dropzone-conso" class="dropzone">
+                    <div class="fallback">
+                        <input name="file" type="file" multiple />
+                    </div>
+                </form>
+
+            </div>
+
+
+            <a href="{{ asset('Excel/exemple_import.xlsx') }}">Fichier exemple import</a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

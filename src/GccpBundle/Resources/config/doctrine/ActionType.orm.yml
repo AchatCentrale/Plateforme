@@ -1,0 +1,22 @@
+GccpBundle\Entity\ActionType:
+    type: entity
+    table: ACTION_TYPE
+    id:
+        acId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: AC_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        acNom:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: AC_NOM
+    lifecycleCallbacks: {  }

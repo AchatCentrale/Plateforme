@@ -1,0 +1,838 @@
+<div class="hidden-centrale">
+    <p id="centrale">{{ centrale }}</p>
+    <p id="id">{{ client[0].clId }}</p>
+</div>
+
+
+{% set randomPassword = [] %}
+                    {% for i in 1..5 %}
+                        {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+                        {% set alphaUpper = alpha|upper %}
+                        {% set numbers = '0123456789' %}
+                        {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers) %}
+                        {% set randomPassword = randomPassword|merge([randomCharacter]) %}
+                    {% endfor %}
+                    {% set randomPassword = randomPassword|join %}
+
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>FICHE CLIENT</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-3 col-sm-3 col-xs-12  profile_left" align="center">
+
+                    <div class="profile_img">
+
+
+                        <div id="crop-avatar">
+                            <!-- Current avatar -->
+
+                            {% if client[0].clLogo %}
+
+
+                                <div class="container-hover-image">
+                                    <img class="img-responsive img-rounded  avatar-view"
+                                         src="http://{{ centrale | centrale }}.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].clId }}/{{ client[0].clLogo }}"
+                                         alt="Logo" style="width: 35%">
+                                    <div class="middle">
+                                        <div class="text-hover-edit cursor"><i class="paint large brush icon"></i></div>
+                                    </div>
+                                </div>
+                            {% else %}
+
+                                <div class="container-hover-image">
+                                    <img class="img-responsive img-rounded image-hover-edit   avatar-view"
+                                         src="{{ asset('images/phot-indispo.jpg') }}"
+                                         alt="Logo" style="width: 35%">
+                                    <div class="middle">
+                                        <div class="text-hover-edit cursor"><i class="paint large brush icon"></i></div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+
+                        </div>
+                        <!-- end of image cropping -->
+
+                    </div>
+
+
+                    <ul class="list-unstyled user_data">
+                        <li><i class="fa fa-map-marker user-profile-icon"></i>
+                            {{ client[0].clAdresse1 | formatVille | convert_encoding('UTF-8', 'Windows-1252')   }}<br>
+                            {{ client[0].clCp }} {{ client[0].clVille | formatVille | convert_encoding('UTF-8', 'Windows-1252')  }}
+                        </li>
+                    </ul>
+
+                    {% if client[0].clWeb %}
+                        <li class="m-top-xs web-li">
+                            <a href="{{ relative_path(client[0].clWeb ) }}">{{ client[0].clWeb }}</a>
+                        </li>
+                    {% else %}
+                        <p>Pas de site web</p>
+                    {% endif %}
+
+                    <button id="modifierProfil" type="button" class="btn btn-success" data-toggle="modal"
+                            data-target="#myModal">
+                        <i class="fa fa-edit edit-client m-right-xs"></i>Modifier le profil
+                    </button>
+                    <div class="ajoutuser">
+                        <button class="ui button client-user-new" type="button" data-toggle="modal"
+                                data-target="#client-user-new">
+                            Ajouter un utilisateur
+                        </button>
+                    </div>
+
+
+                    <div class="liste-users-client">
+                        <div class="ui relaxed list">
+
+
+                            {% for u in user  %}
+                                <div class="item">
+                                    <img class="ui avatar image image-avatar-list" data-title="" data-content="" src="https://semantic-ui.com/images/avatar/large/christian.jpg">
+                                    <div class="content content-list-user">
+                                        <a href="//www.{{ centrale_link  }}.fr/Login.asp?LOGIN={{ u.ccMail }}&PASS={{ u.ccPass }}"><i class="user icon"></i>{{ u.ccPrenom |  convert_encoding('UTF-8', 'Windows-1252')  }} {{ u.ccNom |  convert_encoding('UTF-8', 'Windows-1252') }}</a>
+                                        <div class="description"><i class="mail icon"></i>{{ u.ccMail }}</div>
+                                        <div class="description"><i class="phone icon"></i>
+                                            {{ u.ccTel | isEmpty | phone | raw }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div class="ui equal width grid raison-soc">
+                        <div class="equal width row">
+                            <div class="column">
+                                <h3 class="raison-soc-titre">
+                                    <i class="building icon"></i> {{ client[0].clRaisonsoc | upper }}
+                                    {% if client[0].clStatus == 2 %}
+                                        <p>Bloqué</p>
+                                    {% endif %}
+                                </h3>
+
+                                <div class="ui equal width grid container-hastag-label">
+                                    <div class="column">
+
+
+                                        {% if centrale | isNumeric %}
+
+                                                {{ centrale  | centraleLabel | raw }}
+
+                                            {% else %}
+                                                {{ centrale |replace({"_" : " "}) | centraleLabel | raw }}
+
+
+                                        {% endif %}
+
+
+
+
+                                    </div>
+                                    <div class="column " style="width: 30%;">
+
+
+                                            <i class="plus cursor large green-plus add-hastag-icon circle icon"></i>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="add-hastag-container">
+                                    <div class="ui input">
+                                        <input type="text" id="value-hashtag-client" placeholder="Ajouter un hastag">
+                                        <button class="ui button save-hastag-client ">
+                                            Enregistrer
+                                        </button>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="column ref-client">
+                                <h3><span class="pastille-ref green"></span> {{ random() }}</h3>
+                                <h3><span class="pastille-ref green"></span> {{ client[0].clRef }}</h3>
+                            </div>
+                            <div class="column">
+
+
+
+
+                                <div class="hastag-container">
+
+                                    <ul id="hastag-inject">
+                                    {% if tag is defined %}
+
+
+                                        {% for t in tag  %}
+                                            <li><a class="" href="{{ path('hastag-action', { 'id' : t['TAG'] }) }}">#{{ t['TAG'] }}</a></li>
+
+                                        {% endfor %}
+
+                                    {% endif %}
+
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="detail-client">
+
+                        <div class="profile_title">
+                            <h2>Données du client </h2>
+                        </div>
+
+
+                        <div class="ui grid">
+
+
+                            <div class="four wide column">
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Siret</p>
+                                    <p class="cursor label-background"
+                                       data-index="siret">{{ client[0].clSiret | siret }}</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Mail</p>
+                                    <p class="cursor " data-index="siret">
+                                        <a class="cursor data-client " data-index="mail"
+                                           href="mailto:{{ client[0].clMail }}">
+                                            <i class="mail link  circular icon"></i></a>{{ client[0].clMail }}</p>
+                                </div>
+                                <div class="info-client-detail " id="detail-tel">
+                                    <p class="title-detail-client ">Téléphone</p>
+                                    <p class="cursor label-background"
+                                       data-index="siret">{{ client[0].clTel | phone }}</p>
+                                </div>
+                            </div>
+
+                            <div class="three wide column">
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Éffectif</p>
+                                    <p class="cursor label-background" data-index="siret">{{ client[0].clEffectif }}</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Chiffre d'affaires</p>
+                                    <p class="cursor label-background" data-index="siret">{{ client[0].clCa }} €</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Activité</p>
+                                    {% if  activite == "Aucune activité pour le moment" %}
+                                        <p class="cursor label-background"
+                                           data-index="activite">{{ activite }}</p>
+
+                                    {% else %}
+                                        {% if activite %}
+                                            <p class="cursor label-background"
+                                               data-index="activite">{{ activite[0].acDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
+                                        {% else %}
+                                            <p class="cursor label-background"
+                                               data-index="activite">Pas d'activité enregistrer encore</p>
+                                        {% endif %}
+                                    {% endif %}
+                                </div>
+                            </div>
+
+
+                            <div class="vertical-divider"></div>
+
+                            <div class="four wide column recap-client">
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Groupe</p>
+
+                                        {% if groupe %}
+                                    <p class="ui label large green">{{ groupe[0].grDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p><br>
+                                    {% else %}
+                                        <p></p>
+                                    {% endif %}
+
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Classification</p>
+                                    <p class="cursor label-background" data-index="classif">PAS ENCORE</p>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Régions</p>
+                                    {% if region == "Aucne région pour le moment" %}
+
+                                        <p class="cursor label-background"
+                                           data-index="region">{{ region }}</p>
+
+                                    {% else %}
+                                        {% if region %}
+                                            <p class="cursor label-background"
+                                               data-index="region">{{ region[0].reNom }}</p>
+                                        {% else %}
+                                            <p class="cursor label-background"
+                                               data-index="region">Pas de region enregistrer encore</p>
+                                        {% endif %}
+                                    {% endif %}
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="four wide column recap-client">
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Afficher les prix d'achats</p>
+                                    <div class="prix-achat-check">
+                                        <input title="prix dachat-o" class="check-oui-pa"
+                                               type="checkbox" {{ (client[0].clMasqHa == 1) ? 'checked' :  '' }} > oui
+
+                                        <input title="prix dachat-n" class="check-non-pa"
+                                               type="checkbox" {{ (client[0].clMasqHa == 0) ? 'checked' :  '' }} > Non
+                                    </div>
+                                </div>
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Afficher les prix de vente</p>
+                                    <div class="prix-achat-check">
+                                        <input title="prix de vente-o" class="check-oui-pa"
+                                               type="checkbox" {{ (client[0].clMasqVt == 1) ? 'checked' :  '' }} > Oui
+                                        <input title="prix de vente-n" class="check-non-pa"
+                                               type="checkbox" {{ (client[0].clMasqVt == 0) ? 'checked' :  '' }} > Non
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                       <div class="detail-client-container">
+                           <div class="profile_title ">
+                               <h2>Détails du client
+                                   <small id="afficherplus-detail" class="cursor">Afficher plus</small>
+                               </h2>
+                           </div>
+                           <div id="detail-client-content">
+
+                               <div class="tab-detail-client" role="tabpanel" data-example-id="togglable-tabs">
+
+
+                                   <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+
+                                       <li role="presentation" class="active">
+                                           <a href="#tab_content1" id="home-tab"
+                                              role="tab"
+                                              data-toggle="tab" aria-expanded="true">
+                                               <span class="badge bg-green">{{ task | length }}</span> Actions
+                                           </a>
+                                       </li>
+                                       <li role="presentation" class="">
+                                           <a href="#tab_content4" id="home-tab"
+                                              role="tab"
+                                              data-toggle="tab" aria-expanded="true">
+                                               <span class="badge bg-green">{{ tacheA | length }}</span> Actions archivées
+                                           </a>
+                                       </li>
+
+                                       <li role="presentation" class="">
+                                           <a href="#tab_content2" role="tab" id="profile-tab"
+                                              data-toggle="tab" aria-expanded="true">
+                                               <span class="badge bg-green"> {{ note | length }} </span> Notes
+                                           </a>
+                                       </li>
+
+
+                                   </ul>
+
+
+                                   <div id="myTabContent" class="tab-content">
+
+
+
+                                       {#Action_client#}
+                                       <div role="tabpanel" class="tab-pane fade active in " id="tab_content1"
+                                            aria-labelledby="home-tab">
+                                           <a href="{{ path('new-task', {'c' : centrale, 'cl' : client[0].clId }) }}"
+                                              class="btn btn-success" role="button">Ajouter
+                                               une tâche</a>
+
+                                           <div class="ui items">
+
+                                               {% if task %}
+
+                                                   <div class="">
+                                                       <ul class="to_do">
+                                                           {% for tasks in task %}
+                                                               <li data-id="{{ tasks['CLA_ID'] }}"
+                                                                   class="cursor detail-tache-home-client">
+                                                                   <p>{{ tasks['INS_DATE'] | fromNowString }}- {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}- {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>{{ tasks['CLA_STATUS'] | etat | raw }}</li>
+                                                           {% endfor %}
+
+
+                                                       </ul>
+                                                   </div>
+
+                                               {% else %}
+                                                   <h5>Pas de taches pour le moment</h5>
+                                               {% endif %}
+
+
+                                           </div>
+
+
+                                       </div>
+
+
+                                       {#Action_client_archive#}
+                                       <div role="tabpanel" class="tab-pane fade " id="tab_content4"
+                                            aria-labelledby="home-tab">
+                                           <div class="ui items">
+
+                                               {% if tacheA %}
+
+                                                   <div class="">
+                                                       <ul class="to_do">
+                                                           {% for tasks in tacheA %}
+                                                               <li data-id="{{ tasks.claId }}"
+                                                                   class="cursor detail-tache-archive-client">
+                                                                   <p>{{ tasks.claNom | raw |  convert_encoding('UTF-8', 'Windows-1252') }}- {{ tasks.claDescr | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p></li>
+                                                           {% endfor %}
+
+
+                                                       </ul>
+                                                   </div>
+
+                                               {% else %}
+                                                   <h5>Aucune tâche n'a été encore crée pour cet utilisateur</h5>
+                                               {% endif %}
+
+
+                                           </div>
+
+
+                                       </div>
+
+                                       {#Notes_client#}
+                                       <div role="tabpanel" class="tab-pane fade" id="tab_content2"
+                                            aria-labelledby="profile-tab">
+                                           <div class="ui equal width grid container " style="margin-top: 30px">
+                                               <div class="equal width row ">
+                                                   <div class="column">
+                                                       <div class="note-left">
+                                                               <p id="counting-note">0/500</p>
+                                                           <div class="input-group">
+
+                                                               <input type="text" class="form-control" id="add-note"
+                                                                      placeholder="Consigner une note pour le client {{ client[0].clRaisonsoc }}">
+
+                                                               <span class="input-group-btn">
+
+
+                                                                <button class="btn btn-secondar btn-success add-note" type="button">Enregistrer</button>
+
+
+
+                                                    </span>
+                                                           </div>
+                                                           <br>
+
+                                                           {% if note %}
+                                                               <h5>Historique client: </h5>
+                                                               {% for n in note %}
+                                                                   <ul>
+                                                                       <li>{{ n.insDate | Time }} : {{ n.cnNote }}</li>
+                                                                   </ul>
+                                                               {% endfor %}
+                                                           {% else %}
+                                                               <p>Il n'y aucune note pour le client</p>
+
+                                                           {% endif %}
+
+
+                                                       </div>
+                                                   </div>
+                                                   {#<div class="column">#}
+                                                   {#<a href="{{ path('new-task', {'u' : client[0].clId }) }}"#}
+                                                   {#class="btn btn-success" role="button">Crée une action</a>#}
+
+                                                   {#</div>#}
+                                               </div>
+                                           </div>
+
+                                       </div>
+
+                                   </div>
+                               </div>
+
+                           </div>
+                       </div>
+
+
+                       <div class="historique-client-container">
+                           <div class="profile_title historique-client">
+                               <h2>Historique du client
+                                   <small id="afficherplus-historique" class="cursor">Afficher plus</small>
+                               </h2>
+                           </div>
+
+
+                           <div class="historique-client-content">
+
+
+                               {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0].clId, 'centrale': centrale })) }}
+
+                           </div>
+                       </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{#//modal#}
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modifier le client {{ client[0].clRaisonsoc }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ui centered grid">
+                    <div class="eight wide column">
+
+
+                        <div class="form-group">
+                            <label for="siret-update">Numero de siret</label>
+                            <input name="data-client[]" type="text" class="form-control data-update-client"
+                                   id="siret-update" value="{{ client[0].clSiret | siret }}"
+                                   placeholder="{{ client[0].clSiret | siret }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Adresse mail</label>
+                            <input name="data-client[]" type="email" class="form-control data-update-client" id="email"
+                                   value="{{ client[0].clMail }}" placeholder="{{ client[0].clMail }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="Telephone-update">Téléphone</label>
+                            <input name="data-client[]" type="tel" class="form-control data-update-client"
+                                   id="Telephone-update" value="{{ client[0].clTel | phone }}"
+                                   placeholder="{{ client[0].clTel | phone }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cp-update">Code postal</label>
+                            <input name="data-client[]" type="text" class="form-control" id="cp-update"
+                                   value="{{ client[0].clCp }}" placeholder="{{ client[0].clCp }}">
+                        </div>
+
+
+                    </div>
+                    <div class="eight wide column">
+                        <div class="form-group">
+                            <label for="effectif-update">Effectif de l'entrprise</label>
+                            <select disabled name="data-client[]" class="form-control data-update-client">
+                                <option selected> {{ client[0].clEffectif }}</option>
+                                <option>0 à 5</option>
+                                <option>6 à 20</option>
+                                <option>21 à 30</option>
+                                <option>51 à 100</option>
+                                <option>101 à 200</option>
+                                <option>+ de 200</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ca-update">Chiffre d'affaires</label>
+                            <input name="data-client[]" type="text" class="form-control data-update-client"
+                                   id="ca-update" value="{{ client[0].clCa }}" placeholder="{{ client[0].clCa }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse1-update">Adresse</label>
+                            <input name="data-client[]" type="text" class="form-control" id="dresse1-update"
+                                   value="{{ client[0].clAdresse1 }}" placeholder="{{ client[0].clAdresse1 }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="ville-update">Ville</label>
+                            <input name="data-client[]" type="text" class="form-control" id="ville-update"
+                                   value="{{ client[0].clVille }}" placeholder="{{ client[0].clVille }}">
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success save-update-client">Enregistrer les modifications</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="logo-edit" role="dialog" aria-labelledby="logo-edit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modifier le logo</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="ui equal centered width grid">
+                    <div class="equal width row">
+                        <div class="column">
+                            <h4>Photos actuelle</h4>
+                            <img class="img-responsive img-for-edit"
+                                 src="http://www.centrale-{{ centrale | centrale }}.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].clId }}/{{ client[0].clLogo }}"/>
+
+                        </div>
+                        <div class="column">
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-success save-edit-logo">Enregistrer les modifications</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="client-user-edit" role="dialog" aria-labelledby="client-user-edit">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modifier l'utilisateur # pour le
+                    client {{ client[0].clRaisonSoc }}</h4>
+            </div>
+            <div class="modal-body">
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-success save-edit-logo">Enregistrer les modifications</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="client-user-new" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Ajouter un utilisateur du compte {{ client[0].clRaisonsoc }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="ui centered grid">
+                    <div class="eight wide column">
+
+
+                        <div class="form-group">
+                            <label for="prenom-user">Prénom</label>
+                            <input name="data-user[]" type="text" class="form-control data-update-client"
+                                   id="prenom-user" placeholder="Albert">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email-user">Adresse mail</label>
+                            <input name="data-user[]" type="email" class="form-control data-update-client"
+                                   id="email-user" placeholder="Albert.bert@gmail.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="fonction-user">Fonction</label>
+                            <select name="data-user[]" class="form-control data-update-client">
+                                {% for fonctions in fonction %}
+                                    <option value="{{ fonctions.foDescr | convert_encoding('UTF-8', 'Windows-1252') }}">{{ fonctions.foDescr | convert_encoding('UTF-8', 'Windows-1252') }}</option>
+
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="profil-user">Profil utilisateur</label>
+                            <select name="data-user[]" class="form-control data-update-client">
+                                {% for profils in profil %}
+                                    <option value="{{ profils.puId }}">{% if profils.puPole %}
+                                            {{ profils.puPole | convert_encoding('UTF-8', 'Windows-1252') }} /
+                                        {% else %}
+
+                                        {% endif %} {{ profils.puDescr | convert_encoding('UTF-8', 'Windows-1252') }}</option>
+
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="eight wide column">
+                        <div class="form-group">
+                            <label for="nom-user">Nom</label>
+                            <input name="data-user[]" type="email" class="form-control data-update-client" id="nom-user"
+                                   placeholder="Bert">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd-user">Mot de passe </label>
+                            <input name="data-user[]" type="text" class="form-control data-update-client"
+                                   id="pwd-user" value="{{ randomPassword }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tel-user">Téléphone</label>
+                            <input name="data-user[]" type="text" class="form-control" id="tel-user"
+                                   placeholder="05 16 54 84 44 ">
+                        </div>
+                        <div class="form-group">
+                            <label for="niveau-user">Niveau</label>
+                            <select name="data-user[]" id="niveau-user" class="form-control data-update-client">
+                                <option value="0">Admin</option>
+                                <option value="1" selected="selected">Utilisateur</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="validation-user">Niveau de validation</label>
+                            <select name="data-user[]" id="validation-user" class="form-control data-update-client">
+                                <option value="true" selected="selected">Oui</option>
+                                <option value="false">Non</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-success new-clients-user">Enregistrer les modifications</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="modal-task-detail-home-client" role="dialog"
+     aria-labelledby="modal-task-detail-home-client">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title modal-title-task-client-detail" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body modal-content-client-detail-action">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-task-detail-archive-client" role="dialog"
+     aria-labelledby="modal-task-detail-home-client">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title modal-title-task-archive-detail" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body modal-content-client-archive-action">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="update_user_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title user-client-update-title" id="myModalLabel">Modifier l'utilisateur</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="ui form">
+                    <div class="field">
+                        <label for="us_prename" >Prénom</label>
+                        <input class="user-update-input" type="text" name="us_update[]" id="us_prename" placeholder="Prénom">
+                    </div>
+                    <div class="field">
+                        <label for="us_name" >Nom</label>
+                        <input class="user-update-input" type="text" name="us_update[]" id="us_name" placeholder="Nom">
+                    </div>
+                    <div class="field">
+                        <label for="us_pass" >Mot de passe</label>
+                        <input class="user-update-input" type="text" name="us_update[]" id="us_pass" placeholder="Mot de passe">
+                    </div>
+                    <div class="field">
+                        <label>Mail</label>
+                        <input class="user-update-input" type="text" name="us_update[]" id="us_mail" placeholder="Adresse mail">
+                    </div>
+                    <div class="field">
+                        <div class="field">
+                            <label for="us_fonct">Fonction</label>
+                            <select name="us_update[]" id="us_fonct"  class="ui dropdown user-update">
+                                <option value="">Choisir la fonction</option>
+                                <option value="1">Autres</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="Téléphone-user-update" >Téléphone</label>
+                        <input class="user-update-input" type="text" id="Téléphone-user-update" name="us_update[]" placeholder="Téléphone">
+                    </div>
+
+
+                    <button class="ui button" id="save-client-user-update" type="submit">Enregistrer</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

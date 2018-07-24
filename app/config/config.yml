@@ -3,11 +3,17 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@SiteBundle/Resources/config/services.yml" }
+    - { resource: "@FunecapBundle/Resources/config/services.yml" }
+    - { resource: "@AchatCentraleBundle/Resources/config/services.yml" }
+    - { resource: "@RocEclercBundle/Resources/config/services.yml" }
+    - { resource: "@GccpBundle/Resources/config/services.yml" }
+    - { resource: "@PfplBundle/Resources/config/services.yml" }
+    - { resource: "@ProductBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi:             ~
@@ -40,6 +46,17 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        client_service: "@site.service.client_services"
+
+
+services:
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+
 
 # Doctrine Configuration
 doctrine:
@@ -52,18 +69,88 @@ doctrine:
                 user:           "%database_user%"
                 password:       "%database_password%"
                 dbname:         "CENTRALE_ACHAT_JB"
-                charset:  UTF8
+                charset:  UTF-8
                 options:
-                    1002:  "SET NAMES 'UTF8'"
+                    ansi_nulls: on
+                    ansi_warnings: on
+                    20: false
             centrale_produits:
                 driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:           "185.29.149.32"
+                host:           "185.29.149.144"
                 user:           "AC_JBAGOSTIN"
                 password:       "35H7Hjvy"
                 dbname:         "CENTRALE_PRODUITS_JB"
-                charset:  UTF8
+                charset:  UTF-8
                 options:
-                    1002:  "SET NAMES 'UTF8'"
+                    ansi_nulls: on
+                    ansi_warnings: on
+                    20: false
+            centrale_funecap:
+                 driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
+                 host:           "185.29.149.144"
+                 user:           "AC_JBAGOSTIN"
+                 password:       "35H7Hjvy"
+                 dbname:         "CENTRALE_FUNECAP"
+                 charset:  UTF-8
+                 options:
+                     ansi_nulls: on
+                     ansi_warnings: on
+                     20: false
+            achat_centrale:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:         "185.29.149.144"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_ACHAT"
+                charset:  UTF-8
+                options:
+                    ansi_nulls: on
+                    ansi_warnings: on
+                    20: false
+            roc_eclerc:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:         "185.29.149.144"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_ROC_ECLERC"
+                charset:  UTF-8
+                options:
+                     ansi_nulls: on
+                     ansi_warnings: on
+                     20: false
+            centrale_gccp:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:         "185.29.149.144"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_GCCP"
+                charset:  UTF-8
+                options:
+                    ansi_nulls: on
+                    ansi_warnings: on
+                    20: false
+            centrale_pascal_leclerc:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:         "185.29.149.144"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_PFPL"
+                charset:  UTF-8
+                options:
+                    ansi_nulls: on
+                    ansi_warnings: on
+                    20: false
+            ac_produits:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host:         "185.29.149.144"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_PRODUITS"
+                charset:  UTF-8
+                options:
+                    ansi_nulls: on
+                    ansi_warnings: on
+                    20: false
 
 
     orm:
@@ -78,6 +165,30 @@ doctrine:
                 connection: centrale_produits
                 mappings:
                     SiteBundle : ~
+            centrale_funecap:
+                connection: centrale_funecap
+                mappings:
+                    FunecapBundle : ~
+            achat_centrale:
+                connection: achat_centrale
+                mappings:
+                    AchatCentraleBundle: ~
+            roc_eclerc:
+                connection: roc_eclerc
+                mappings:
+                    RocEclercBundle: ~
+            centrale_gccp:
+                connection: centrale_gccp
+                mappings:
+                    GccpBundle: ~
+            centrale_pascal_leclerc:
+                connection: centrale_pascal_leclerc
+                mappings:
+                    PfplBundle: ~
+            ac_produits:
+                connection: ac_produits
+                mappings:
+                    ProductBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -86,27 +197,7 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     port:      "%port%"
-    auth_mode:  "%auth_mode%"
-    spool:     { type: memory }
-
-
-assetic:
-    debug:          '%kernel.debug%'
-    use_controller: '%kernel.debug%'
-    bundles:        [ SiteBundle ]
-    filters:
-        cssrewrite: ~
-
-
-
-fos_user:
-    db_driver: orm
-    firewall_name: main
-    user_class: AchatCentrale\CrmBundle\Entity\Utilisateur
-    from_email:
-        address: "%mailer_user%"
-        sender_name: "%mailer_user%"
-
+    logging:   '%kernel.debug%'
 
 fos_rest:
     body_listener:
@@ -114,11 +205,12 @@ fos_rest:
     format_listener:
         rules:
             - { path: '^/Agence', priorities: [ json, '*/*'], fallback_format: html , prefer_extension: true }
-            - { path: ^/, priorities: ['html', '*/*'], fallback_format: html, prefer_extension: true }
+            - { path: '^/Action', priorities: [ json, '*/*'], fallback_format: html , prefer_extension: true }
+            - { path: ^/,  stop: true }
     param_fetcher_listener: true
     view:
         mime_types:
-            json: ['application/json; charset=UTF-8', 'application/json']
+            json: ['application/json']
         view_response_listener: 'force'
         formats:
             json: true
@@ -133,19 +225,20 @@ fos_rest:
             messages:
                 Symfony\Component\HttpKernel\Exception\BadRequestHttpException: true
 
+ivory_google_map:
+    map:
+        debug: "%kernel.debug%"
+        language: "%locale%"
+        api_key: AIzaSyDqTv8u6IGLtrKvwNIM6bwsBM_DLLHHHb8
+    geocoder:
+        client: httplug.client.default
+        message_factory: httplug.message_factory.default
+        format: json
 
-
-web_profiler:
-    # display the web debug toolbar at the bottom of pages with
-    # a summary of profiler info
-    toolbar:              false
-    position:             top
-
-    # gives you the opportunity to look at the collected data
-    # before following the redirect
-    intercept_redirects: false
-
-    # Exclude AJAX requests in the web debug toolbar for specified paths
-    excluded_ajax_paths:  ^/bundles|^/_wdt
-
-
+httplug:
+    classes:
+        client: Http\Adapter\Guzzle6\Client
+        message_factory: Http\Message\MessageFactory\GuzzleMessageFactory
+    clients:
+        acme:
+            factory: httplug.factory.guzzle6

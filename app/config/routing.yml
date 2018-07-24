@@ -7,11 +7,30 @@ Api:
     type:     annotation
     prefix:   /
 
-
 clients:
     type:   rest
     resource: "@AchatCentraleCrmBundle/Controller/ClientsController.php"
 
+action:
+    type:   rest
+    resource: "@AchatCentraleCrmBundle/Controller/ActionController.php"
 
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+achat_centrale:
+    resource: "@AchatCentraleBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+pfpl:
+    resource: "@PfplBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+gccp:
+    resource: "@GccpBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+roc_eclerc:
+    resource: "@RocEclercBundle/Controller/"
+    type:     annotation
+    prefix:   /

@@ -7,7 +7,8 @@ use Doctrine\ORM\EntityRepository;
 
 class ClientsRepository extends EntityRepository
 {
-    public function getNb() {
+    public function findbyCount()
+    {
 
         return $this->createQueryBuilder('Clients')
 
@@ -18,4 +19,7 @@ class ClientsRepository extends EntityRepository
             ->getSingleScalarResult();
 
     }
+
+
+
 }

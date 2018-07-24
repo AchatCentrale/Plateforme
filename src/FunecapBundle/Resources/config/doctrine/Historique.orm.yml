@@ -1,0 +1,65 @@
+FunecapBundle\Entity\Historique:
+    type: entity
+    table: historique
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mailExp:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: true
+            column: mail_exp
+        mailDest:
+            type: string
+            nullable: false
+            length: 255
+            options:
+                fixed: true
+            column: mail_dest
+        vdate:
+            type: datetime
+            nullable: false
+        codeRetour:
+            type: string
+            nullable: true
+            length: 2000
+            options:
+                fixed: false
+            column: code_retour
+        idCodeRetour:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: id_code_retour
+        codeErreur:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+            column: code_erreur
+        subjectmessage:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+            column: SubjectMessage
+        bodymessage:
+            type: string
+            nullable: true
+            length: 5000
+            options:
+                fixed: false
+            column: BodyMessage
+    lifecycleCallbacks: {  }

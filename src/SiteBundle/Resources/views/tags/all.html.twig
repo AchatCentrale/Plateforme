@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Tous les tags</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+
+
+                <div class="ui grid">
+
+
+                    {% for t in tag %}
+
+                    <div id="{{ t['TAG'] }}" class="two wide column">
+                        <div class="ui raised segment">
+                            <div class="ui grid">
+                                <div class="eight wide column">
+                                    <p>#{{ t['TAG'] }}</p>
+                                </div>
+                                <div class="eight wide column">
+                                    <i class="write cursor large right square icon "></i><i data-centrale="{{ t['SO_ID'] }}" data-tag="{{ t['TAG'] }}" class="remove cursor large circle outline icon remove-hashtag "></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block title %}
+Tous les tags
+{% endblock %}
+

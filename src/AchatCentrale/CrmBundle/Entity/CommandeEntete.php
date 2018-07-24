@@ -2,75 +2,123 @@
 
 namespace AchatCentrale\CrmBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * CommandeEntete
+ *
+ * @ORM\Table(name="COMMANDE_ENTETE")
+ * @ORM\Entity
  */
 class CommandeEntete
 {
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CE_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $ceId;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="ME_ID", type="integer", nullable=true)
+     */
+    private $meId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CL_ID", type="integer", nullable=true)
      */
     private $clId;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="CE_DATE", type="date", nullable=true)
      */
     private $ceDate;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="CE_PORT", type="float", precision=53, scale=0, nullable=true)
      */
     private $cePort;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="CE_PORT_TVA", type="float", precision=53, scale=0, nullable=true)
      */
     private $cePortTva;
 
     /**
      * @var float
+     *
+     * @ORM\Column(name="CE_TOTAL", type="float", precision=53, scale=0, nullable=true)
      */
     private $ceTotal;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="CE_ETIQ_CB", type="integer", nullable=true)
+     */
+    private $ceEtiqCb = '0';
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="CE_ETIQ_PV", type="integer", nullable=true)
+     */
+    private $ceEtiqPv = '0';
+
+    /**
      * @var string
+     *
+     * @ORM\Column(name="CE_TEMPO", type="string", length=50, nullable=true)
      */
     private $ceTempo;
 
     /**
      * @var integer
+     *
+     * @ORM\Column(name="CE_STATUS", type="integer", nullable=true)
      */
     private $ceStatus = '0';
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
      */
     private $insDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
      */
     private $insUser;
 
     /**
      * @var \DateTime
+     *
+     * @ORM\Column(name="MAJ_DATE", type="datetime", nullable=true)
      */
     private $majDate;
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
      */
     private $majUser;
 
-    /**
-     * @var \AchatCentrale\CrmBundle\Entity\MessageEntete
-     */
-    private $me;
 
 
     /**
@@ -81,6 +129,30 @@ class CommandeEntete
     public function getCeId()
     {
         return $this->ceId;
+    }
+
+    /**
+     * Set meId
+     *
+     * @param integer $meId
+     *
+     * @return CommandeEntete
+     */
+    public function setMeId($meId)
+    {
+        $this->meId = $meId;
+
+        return $this;
+    }
+
+    /**
+     * Get meId
+     *
+     * @return integer
+     */
+    public function getMeId()
+    {
+        return $this->meId;
     }
 
     /**
@@ -201,6 +273,54 @@ class CommandeEntete
     public function getCeTotal()
     {
         return $this->ceTotal;
+    }
+
+    /**
+     * Set ceEtiqCb
+     *
+     * @param integer $ceEtiqCb
+     *
+     * @return CommandeEntete
+     */
+    public function setCeEtiqCb($ceEtiqCb)
+    {
+        $this->ceEtiqCb = $ceEtiqCb;
+
+        return $this;
+    }
+
+    /**
+     * Get ceEtiqCb
+     *
+     * @return integer
+     */
+    public function getCeEtiqCb()
+    {
+        return $this->ceEtiqCb;
+    }
+
+    /**
+     * Set ceEtiqPv
+     *
+     * @param integer $ceEtiqPv
+     *
+     * @return CommandeEntete
+     */
+    public function setCeEtiqPv($ceEtiqPv)
+    {
+        $this->ceEtiqPv = $ceEtiqPv;
+
+        return $this;
+    }
+
+    /**
+     * Get ceEtiqPv
+     *
+     * @return integer
+     */
+    public function getCeEtiqPv()
+    {
+        return $this->ceEtiqPv;
     }
 
     /**
@@ -345,29 +465,5 @@ class CommandeEntete
     public function getMajUser()
     {
         return $this->majUser;
-    }
-
-    /**
-     * Set me
-     *
-     * @param \AchatCentrale\CrmBundle\Entity\MessageEntete $me
-     *
-     * @return CommandeEntete
-     */
-    public function setMe(\AchatCentrale\CrmBundle\Entity\MessageEntete $me = null)
-    {
-        $this->me = $me;
-
-        return $this;
-    }
-
-    /**
-     * Get me
-     *
-     * @return \AchatCentrale\CrmBundle\Entity\MessageEntete
-     */
-    public function getMe()
-    {
-        return $this->me;
     }
 }

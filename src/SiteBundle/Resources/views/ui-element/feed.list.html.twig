@@ -1,0 +1,90 @@
+<div class="ui divided grid">
+
+    {% if feed.feed is empty %}
+        <h3 style="margin-left: 3%">Il n'y aucune activité pour ce client</h3>
+
+    {% else %}
+
+        {% for fe in feed.feed %}
+
+            <div class="ui  cards">
+
+
+                {% if fe | getClass == "MessageEntete" %}
+
+                    <div class="card">
+                        <div class="content">
+
+                            <div class="header">Tickets</div>
+                            <div class="meta">{{ fe.insDate |Time }}</div>
+                            <div class="description">
+                                {{ fe.meSujet | raw | convert_encoding('UTF-8', 'Windows-1252') }}
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                {% endif %}
+
+                {% if fe |getClass == "ClientsNotes" %}
+
+
+                    <div class="card">
+                        <div class="content">
+
+                            <div class="header">Notes</div>
+                            <div class="meta">{{ fe.insDate |Time }}</div>
+                            <div class="description">
+                                {{ fe.cnNote }}
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+                {% endif %}
+
+                {% if fe |getClass == "ClientsTaches" %}
+
+
+                    <div class="card">
+                        <div class="content">
+
+                            <div class="header">Tâches &emsp;
+                                <i data-id="{{ fe.claId }}" data-centrale="{{ app.request.get('centrale') }}"
+                                   class="archive cursor icon archive-task"></i></div>
+                            <div class="meta">{{ fe.insDate |Time }}</div>
+                            <div class="description">
+                                {{ fe.claNom }}
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+
+
+                {% endif %}
+
+            </div>
+
+
+
+        {% endfor %}
+
+    {% endif %}
+
+</div>
+
+
+</div>
+
+
+
+
