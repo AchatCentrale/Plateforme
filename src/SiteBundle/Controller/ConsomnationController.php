@@ -93,7 +93,6 @@ class ConsomnationController extends Controller
 
                         $date = date('Y-d-m', strtotime($ligne[4]));
 
-                        dump($ligne);
 
 
                         switch ($ligne[8]){
