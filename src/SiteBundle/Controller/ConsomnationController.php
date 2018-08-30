@@ -975,7 +975,6 @@ class ConsomnationController extends Controller
                array_push($array_final, $tpl);
             }
 
-            dump($array_final);
 
             return $this->render('@Site/Consomnation/check.html.twig',[
                 "fournisseurs" => $array_final
