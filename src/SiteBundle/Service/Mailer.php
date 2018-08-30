@@ -234,9 +234,9 @@ class Mailer
 
     public function importConsoClientFinish($mail)
     {
-        $subject = "Le dernier import des consommations sont terminés 🚀🚀";
+        $subject = "Le dernier import des consommations est terminé 🚀🚀";
 
-        $name = "ACHAT CENTRALE";
+        $name = "Achat Centrale";
 
         $template = 'SiteBundle:mail:mailAcImportConso.html.twig';
         $body = $this->templating->render($template, []);
