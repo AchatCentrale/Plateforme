@@ -977,7 +977,8 @@ class ConsomnationController extends Controller
 
 
             return $this->render('@Site/Consomnation/check.html.twig',[
-                "fournisseurs" => $array_final
+                "fournisseurs" => $array_final,
+                "centrale" => $content
             ]);
         } else {
             return 'Probleme';
