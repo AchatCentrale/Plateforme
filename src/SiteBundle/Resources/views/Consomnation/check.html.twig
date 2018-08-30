@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Controle qualité - ACHAT-CENTRALE
+{% endblock %}
+
+{% block body %}
+
+
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="shop  icon"></i> Controle qualité</h2>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="choix_centrale">
+            <a href="?centrale=CENTRALE_FUNECAP" class="ui red button">Centrale-Funecap</a>
+            <a href="?centrale=CENTRALE_ACHAT" class="ui orange button">Achat centrale</a>
+            <a href="?centrale=CENTRALE_ROC_ECLERC" class="ui yellow button">Centrale Roc Eclerc</a>
+            <a href="?centrale=CENTRALE_NALDEO" class="ui blue button">Centrale Naldeo</a>
+            <a href="?centrale=CENTRALE_GCCP" class="ui grey button">Centrale GCCP</a>
+            <a href="?centrale=CENTRALE_PFPL" class="ui green button">Centrale PFPL</a>
+
+        </div>
+
+
+
+        <div class="x_content">
+            <table rules="all" cellpadding="5px" style="border:solid 1px black; width:500px;; font-size:12px;">
+                <tr style="color:steelblue;">
+                    <th>Fournisseur</th>
+                    <th>Consommation</th>
+                </tr>
+
+                {% for fournisseur in fournisseurs %}
+                    <tr>
+                        <td>{{ fournisseur["FO_RAISONSOC"] }}</td>
+                        {% if fournisseur["status"] == true %}
+                            <td style="background: darkgreen"></td>
+                        {% elseif fournisseur["status"] == false %}
+                            <td style="background: red"></td>
+
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

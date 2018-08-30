@@ -210,7 +210,6 @@ remove-hashtag:
     defaults: {_controller: SiteBundle:Base:removeHastag}
     methods: POST
 
-
 consommation-index:
     path: /client/consommation
     defaults: {_controller: SiteBundle:Consomnation:index}
@@ -226,6 +225,10 @@ consommation-import:
 consommation-test:
     path: /client/consommation/test
     defaults: {_controller: SiteBundle:Consomnation:test}
+
+consommation-check:
+    path: /client/consommation/check
+    defaults: {_controller: SiteBundle:Consomnation:checkConso}
 
 notification-test:
     path: /notification/test
