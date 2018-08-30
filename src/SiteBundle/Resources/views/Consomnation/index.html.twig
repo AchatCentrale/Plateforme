@@ -7,6 +7,11 @@
 {% block body %}
 
 
+    <div class="x_panel">
+
+        <a class="ui green button" href="{{ path('consommation-check') }}">Controle Qualité</a>
+    </div>
+
 
 
     <div class="x_panel">
@@ -20,12 +25,7 @@
         <div class="x_content">
 
 
-
         </div>
-
-
-
-
     </div>
 
     <div class="x_panel">
@@ -37,14 +37,13 @@
         </div>
 
 
-
         <div class="x_content ">
 
             <div class="zone-import-produits" id="dropzone-import-conso">
 
                 <form action="{{ path('consommation-import') }}" id="import-dropzone-conso" class="dropzone">
                     <div class="fallback">
-                        <input name="file" type="file" multiple />
+                        <input name="file" type="file" multiple/>
                     </div>
                 </form>
 

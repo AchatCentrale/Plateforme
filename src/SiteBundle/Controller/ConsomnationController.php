@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class ConsomnationController extends Controller
@@ -330,7 +331,6 @@ class ConsomnationController extends Controller
 
         return new JsonResponse('Importation réussie', 200);
     }
-
 
     public function ConsoDetailAction(Request $request, $id, $centrale)
     {
@@ -932,6 +932,62 @@ class ConsomnationController extends Controller
                 }
                 break;
         }
+    }
+
+    public function checkConsoAction(Request $request){
+
+
+        $content = $request->query->get('centrale');
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+        $sql = "SELECT FO_ID ,FO_RAISONSOC FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        if ($result) {
+
+            $array_final = [];
+
+            foreach ($result as $res){
+
+                $sqlFournisseur = sprintf("SELECT * FROM %s.dbo.CLIENTS_CONSO WHERE FO_ID = :fo_id AND CLC_DATE > DATEADD(month, -2, GETDATE())", $content);
+                $stmtFournisseur = $conn->prepare($sqlFournisseur);
+                $stmtFournisseur->bindValue(":fo_id", $res["FO_ID"]);
+                $stmtFournisseur->execute();
+                $resultFournisseur = $stmtFournisseur->fetchAll();
+
+
+
+               if (count($resultFournisseur) > 0){
+                   $tpl = [
+                       "FO_RAISONSOC" => $res["FO_RAISONSOC"],
+                       "status" => true
+                   ];
+
+               } else {
+                   $tpl = [
+                       "FO_RAISONSOC" => $res["FO_RAISONSOC"],
+                       "status" => false
+                   ];
+               }
+               array_push($array_final, $tpl);
+            }
+
+            dump($array_final);
+
+            return $this->render('@Site/Consomnation/check.html.twig',[
+                "fournisseurs" => $array_final
+            ]);
+        } else {
+            return 'Probleme';
+        }
+
+
+
+
+
     }
 
 }
