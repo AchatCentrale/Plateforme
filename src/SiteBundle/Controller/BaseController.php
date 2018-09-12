@@ -2386,9 +2386,6 @@ class BaseController extends Controller
         return new JsonResponse($data, 200);
 
 
-
-
-
     }
 
     public function exportClientAction(Request $request, $centrale)
