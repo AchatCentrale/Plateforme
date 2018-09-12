@@ -32,14 +32,12 @@
                             <div class="ui equal width grid">
                                 <div class="equal width row">
                                     <div class="column">
-
-
                                         <div class="field">
                                             <label>Type de l'action</label>
                                             <select required name="cla_type" class="ui dropdown">
                                                 <option selected value="">Type de l'action</option>
                                                 {% for ty in type %}
-                                                    <option value="{{ ty.acId }}">{{ ty.acNom }}</option>
+                                                    <option value="{{ ty["AC_ID"] }}">{{ ty["AC_NOM"] }}</option>
 
                                                 {% endfor %}
 
@@ -58,11 +56,6 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
-
-
-
 
                                         <div class="field">
                                             <label>Priorité de l'action</label>
@@ -93,7 +86,7 @@
                                                 </div>
                                                 <input id="client-isDisabled" name="cla_cl" required
                                                        class="prompt user-label" type="text"
-                                                       placeholder="{{ client[0].clId }}" value="{{ client[0].clId }}">
+                                                       placeholder="Nom du client">
                                             </div>
                                         </div>
                                         {#<div class="field">#}

@@ -454,101 +454,50 @@ class BaseController extends Controller
 
     public function ClientAction(Request $request)
     {
-
-
         $userChoice = $request->query->get('c');
-        $centrale = $this->get('site.service.client_services')->getTheCentrale($userChoice);
+
+        $conn = $this->get('database_connection');
 
 
-        switch ($userChoice) {
+        $sqlCentrale = "SELECT SO_DATABASE FROM CENTRALE_ACHAT.dbo.SOCIETES
+                                    WHERE SO_ID = :so_id";
+        $stmt = $conn->prepare($sqlCentrale);
+        $stmt->bindValue('so_id', $userChoice);
+        $stmt->execute();
+        $so_database = $stmt->fetchAll();
 
-            case "all":
-                $con = $this->getDoctrine()->getManager()->getConnection();
-                $stmt = $con->executeQuery(
-                    'SELECT DISTINCT
+        if ($userChoice == "all"){
+
+
+            $sqlClient = "SELECT DISTINCT
              SO_RAISONSOC,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION,
               GR_DESCR, AC_DESCR, CL_TEL
               FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
               INNER JOIN CENTRALE_ACHAT.dbo.SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
-              ORDER BY SO_RAISONSOC DESC 
-              '
-                );
+              ORDER BY SO_RAISONSOC DESC ";
+            $stmt = $conn->prepare($sqlCentrale);
+            $stmt->bindValue('so_id', $userChoice);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+        }
 
-
-                $result = $stmt->fetchAll();
-                break;
-            case 'roc':
-                $con = $this->getDoctrine()->getManager()->getConnection();
-                $stmt = $con->executeQuery(
-                    '
-                  SELECT DISTINCT
+        $sqlClient = sprintf("SELECT DISTINCT
                   CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
                   CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
-                  FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
-                  ORDER BY INS_DATE DESC 
-              '
-                );
-                $result = $stmt->fetchAll();
-                break;
-            case 'fun':
-                $con = $this->getDoctrine()->getManager()->getConnection();
-                $stmt = $con->executeQuery(
-                    'SELECT DISTINCT
-              CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
-              FROM CENTRALE_FUNECAP.dbo.CLIENTS
-              ORDER BY INS_DATE DESC 
-              '
-                );
-                $result = $stmt->fetchAll();
+                  FROM %s.dbo.CLIENTS
+                  ORDER BY INS_DATE DESC", $so_database[0]["SO_DATABASE"]);
+        $stmt = $conn->prepare($sqlClient);
+        $stmt->bindValue('so_id', $userChoice);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
 
-                break;
-            case 'gccp':
-                $con = $this->getDoctrine()->getManager()->getConnection();
-                $stmt = $con->executeQuery(
-                    'SELECT DISTINCT
-              CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
-              FROM CENTRALE_GCCP.dbo.CLIENTS
-              ORDER BY INS_DATE DESC 
-              '
-                );
-                $result = $stmt->fetchAll();
-                break;
-            case 'pfpl':
-                $con = $this->getDoctrine()->getManager()->getConnection();
-                $stmt = $con->executeQuery(
-                    'SELECT DISTINCT
-              CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
-              FROM CENTRALE_PFPL.dbo.CLIENTS
-              ORDER BY INS_DATE DESC 
-              '
-                );
-                $result = $stmt->fetchAll();
-                break;
-            case 'ac':
-                $con = $this->getDoctrine()->getManager()->getConnection();
-                $stmt = $con->executeQuery(
-                    'SELECT DISTINCT
-              CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
-              FROM CENTRALE_ACHAT.dbo.CLIENTS
-              ORDER BY INS_DATE DESC 
-              '
-                );
-                $result = $stmt->fetchAll();
-                break;
-
-
-        }
         return $this->render(
             '@Site/Base/client.html.twig',
             [
                 "client" => $result,
-                "centrale" => $centrale
+                "centrale" => $so_database[0]["SO_DATABASE"]
             ]
         );
 
@@ -1372,6 +1321,10 @@ class BaseController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
+
+
+
+
 
 
         switch ($centrale) {
@@ -2293,108 +2246,33 @@ class BaseController extends Controller
 
         $clientService = $this->get('site.service.client_services');
 
-        switch ($centrale) {
-            case 'pfpl':
-                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
-                FROM CENTRALE_PFPL.dbo.CLIENTS
-                WHERE CLIENTS.CL_RAISONSOC LIKE :query
-                  ";
+        $so_database = $clientService->getCentraleDB($centrale);
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%' . $query . '%');
-                $stmt->execute();
 
-                $clients = $stmt->fetchAll();
-                $result = $clientService->array_utf8_encode($clients);
 
-                $result = [
-                    "total_count" => count($clients),
-                    "incomplete_results" => false,
-                    "items" => $result
-                ];
+        $sql = sprintf("SELECT CL_RAISONSOC, CL_REF, CL_ID
+                FROM %s.dbo.CLIENTS
+                WHERE CLIENTS.CL_RAISONSOC LIKE :query", $so_database);
 
-                return new JsonResponse($result, 200);
-            case 'roc':
-                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
-                FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
-                WHERE CLIENTS.CL_RAISONSOC LIKE :query
-                  ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('query', '%' . $query . '%');
+        $stmt->execute();
+        $clients = $stmt->fetchAll();
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%' . $query . '%');
-                $stmt->execute();
 
-                $clients = $stmt->fetchAll();
-                $result = $clientService->array_utf8_encode($clients);
+        $result = $clientService->array_utf8_encode($clients);
 
-                $result = [
-                    "total_count" => count($clients),
-                    "incomplete_results" => false,
-                    "items" => $result
-                ];
+        $result = [
+            "total_count" => count($clients),
+            "incomplete_results" => false,
+            "items" => $result
+        ];
 
-                return new JsonResponse($result, 200);
-            case 'funecap':
-                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
-                FROM CENTRALE_FUNECAP.dbo.CLIENTS
-                WHERE CLIENTS.CL_RAISONSOC LIKE :query
-                  ";
+        return new JsonResponse($result, 200);
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%' . $query . '%');
-                $stmt->execute();
 
-                $clients = $stmt->fetchAll();
-                $result = $clientService->array_utf8_encode($clients);
 
-                $result = [
-                    "total_count" => count($clients),
-                    "incomplete_results" => false,
-                    "items" => $result
-                ];
 
-                return new JsonResponse($result, 200);
-            case 'ac' :
-                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
-                FROM CENTRALE_ACHAT.dbo.CLIENTS
-                WHERE CLIENTS.CL_RAISONSOC LIKE :query
-                  ";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%' . $query . '%');
-                $stmt->execute();
-
-                $clients = $stmt->fetchAll();
-                $result = $clientService->array_utf8_encode($clients);
-
-                $result = [
-                    "total_count" => count($clients),
-                    "incomplete_results" => false,
-                    "items" => $result
-                ];
-
-                return new JsonResponse($result, 200);
-            case 'gccp' :
-                $sql = "SELECT CL_RAISONSOC, CL_REF, CL_ID
-                FROM CENTRALE_GCCP.dbo.CLIENTS
-                WHERE CLIENTS.CL_RAISONSOC LIKE :query
-                  ";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('query', '%' . $query . '%');
-                $stmt->execute();
-
-                $clients = $stmt->fetchAll();
-                $result = $clientService->array_utf8_encode($clients);
-
-                $result = [
-                    "total_count" => count($clients),
-                    "incomplete_results" => false,
-                    "items" => $result
-                ];
-
-                return new JsonResponse($result, 200);
-        }
 
     }
 

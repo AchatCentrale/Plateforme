@@ -115,7 +115,24 @@ class ClientServices
         return $data;
     }
 
-    
+
+
+    public function getCentraleDB($so_id){
+        $sqlCentrale = "SELECT SO_DATABASE FROM CENTRALE_ACHAT.dbo.SOCIETES
+                                    WHERE SO_ID = :so_id";
+        $stmt = $this->connection->prepare($sqlCentrale);
+        $stmt->bindValue('so_id', $so_id);
+        $stmt->execute();
+        $so_database = $stmt->fetchAll();
+
+        if(!empty($so_database)){
+            return $so_database[0]["SO_DATABASE"];
+        }else {
+            return new \Exception("Probleme pour trouver la centrale");
+        }
+
+    }
+
 
     /**
      * Encode array to utf8 recursively
