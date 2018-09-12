@@ -2215,6 +2215,9 @@ class BaseController extends Controller
     public function getUserAutocompleteAction(Request $request, $query)
     {
 
+        header("Access-Control-Allow-Origin: *");
+
+
         $conn = $this->get('database_connection');
 
 
@@ -2240,6 +2243,8 @@ class BaseController extends Controller
 
     public function getClientAutocompleteAction(Request $request, $query, $centrale)
     {
+
+        header("Access-Control-Allow-Origin: *");
 
 
         $conn = $this->get('database_connection');
