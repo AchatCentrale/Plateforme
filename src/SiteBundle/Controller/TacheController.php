@@ -378,6 +378,11 @@ class TacheController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
+
+
+
+
+
         switch ($centrale){
             case "1":
                 $sql = "
@@ -462,279 +467,69 @@ class TacheController extends Controller
         $centrale = $request->query->get('c');
         $clientChoice = $request->query->get('cl');
         $mailer = $this->get('site.service.mailer');
+        $conn = $this->get('database_connection');
+        $req = $request->request;
 
-        switch ($centrale) {
 
-            case 'ROC_ECLERC':
-            case 'roc':
-                $req = $request->request;
-                $task = new \RocEclercBundle\Entity\ClientsTaches();
-                $type = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ActionType')->findAll();
-                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
-
-                if ($clientChoice){
-
-                    $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
-                        'clId' => $clientChoice
-                    ]);
-                }else{
-                    $clients = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findAll();
-                }
-                if ($request->getMethod() == "POST") {
 
+        $sqlCentrale = "SELECT SO_DATABASE FROM CENTRALE_ACHAT.dbo.SOCIETES
+                                    WHERE SO_ID = :so_id";
+        $stmt = $conn->prepare($sqlCentrale);
+        $stmt->bindValue('so_id', $centrale);
+        $stmt->execute();
+        $so_database = $stmt->fetchAll();
 
-
-                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
-                    $task->setClaType($req->get('cla_type'))
-                        ->setClaNom($req->get('cla_nom'))
-                        ->setClaDescr($req->get('cla_desc'))
-                        ->setClaPriorite($req->get('cla_priorite'))
-                        ->setClaEcheance($date_echeance2)
-                        ->setUsId($req->get('cla_us'))
-                        ->setInsUser($this->getUser()->getusId())
-                        ->setClId($req->get('cla_cl'));
 
 
-                    $em = $this->getDoctrine()->getManager('roc_eclerc');
-                    $em->persist($task);
-                    $em->flush();
+        $typeSql = sprintf("SELECT * FROM %s.dbo.ACTION_TYPE",$so_database[0]["SO_DATABASE"]);
+        $stmt = $conn->prepare($typeSql);
+        $stmt->bindValue('so_id', $centrale);
+        $stmt->execute();
+        $actionType = $stmt->fetchAll();
 
 
 
+        if ($request->getMethod() == "POST") {
 
 
-                    $mailer->sendTaskNotification($task->getClaId(), "ROC_ECLERC" );
-
-
-                    return $this->redirectToRoute('taches_home', [
-
-                    ], 301);
-                }
-                return $this->render(
-                    'SiteBundle:ui-element/taches:action.form.html.twig',
-                    [
-                        'type' => $type,
-                        'client' => $clients,
-                        'user' => $user,
-                        'centrale' => $centrale,
-                    ]
-                );
-                break;
-            case 'CENTRALE_FUNECAP':
-            case 'funecap':
-                $req = $request->request;
-                $task = new \FunecapBundle\Entity\ClientsTaches();
-                $type = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ActionType')->findAll();
-                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
-
-                if ($clientChoice){
-
-                    $clients = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findBy([
-                        'clId' => $clientChoice
-                    ]);
-
-                }else{
-                    $clients = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findAll();
-                }
 
-                if ($request->getMethod() == "POST") {
-                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
-                    $task
-                        ->setClaType($req->get('cla_type'))
-                        ->setClaNom($req->get('cla_nom'))
-                        ->setClaDescr($req->get('cla_desc'))
-                        ->setClaPriorite($req->get('cla_priorite'))
-                        ->setClaEcheance($date_echeance2)
-                        ->setUsId($req->get('cla_us'))
-                        ->setInsUser($this->getUser()->getusId())
-                        ->setClId($req->get('cla_cl'));
-                    $em = $this->getDoctrine()->getManager('centrale_funecap');
-                    $em->persist($task);
-                    $em->flush();
-
-
-                    $mailer->sendTaskNotification($task->getClaId(), "CENTRALE_FUNECAP" );
-
-
-
-                    return $this->redirectToRoute('taches_home', [
-
-                    ], 301);
-                }
-                return $this->render(
-                    'SiteBundle:ui-element/taches:action.form.html.twig',
-                    [
-                        'type' => $type,
-                        'client' => $clients,
-                        'user' => $user,
-                        'centrale' => $centrale
-                    ]
-                );
-                break;
-            case 'ACHAT_CENTRALE':
-            case 'ac':
-
-                $req = $request->request;
-                $task = new \AchatCentraleBundle\Entity\ClientsTaches();
-                $type = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ActionType')->findAll();
-                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
-
-                if ($clientChoice){
-
-                    $clients = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([
-                        'clId' => $clientChoice
-                    ]);
-
-                }else{
-
-                    $clients = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findAll();
-                }
-
-
-
-                if ($request->getMethod() == "POST") {
-                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
-                    $task
-                        ->setClaType($req->get('cla_type'))
-                        ->setClaNom($req->get('cla_nom'))
-                        ->setClaDescr($req->get('cla_desc'))
-                        ->setClaPriorite($req->get('cla_priorite'))
-                        ->setClaEcheance($date_echeance2)
-                        ->setUsId($req->get('cla_us'))
-                        ->setInsUser($this->getUser()->getusId())
-                        ->setClId($req->get('cla_cl'));
-                    $em = $this->getDoctrine()->getManager('achat_centrale');
-                    $em->persist($task);
-                    $em->flush();
-
-                    $mailer->sendTaskNotification($task->getClaId(), "ACHAT_CENTRALE" );
-
-
-
-                    return $this->redirectToRoute('taches_home', [
-
-                    ], 301);
-                }
-                return $this->render(
-                    'SiteBundle:ui-element/taches:action.form.html.twig',
-                    [
-                        'type' => $type,
-                        'client' => $clients,
-                        'user' => $user,
-                        'centrale' => $centrale
-                    ]
-                );
-                break;
-            case 'CENTRALE_PFPL':
-            case 'pfpl':
-                $req = $request->request;
-                $task = new \PfplBundle\Entity\ClientsTaches();
-                $type = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ActionType')->findAll();
-                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
-
-
-
-                if ($clientChoice){
-
-                    $clients = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy([
-                        'clId' => $clientChoice
-                    ]);
-
-                }else{
-
-                    $clients = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findAll();
-                }
-
-                if ($request->getMethod() == "POST") {
-                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
-                    $task
-                        ->setClaType($req->get('cla_type'))
-                        ->setClaNom($req->get('cla_nom'))
-                        ->setClaDescr($req->get('cla_desc'))
-                        ->setClaPriorite($req->get('cla_priorite'))
-                        ->setClaEcheance($date_echeance2)
-                        ->setUsId($req->get('cla_us'))
-                        ->setInsUser($this->getUser()->getusId())
-                        ->setClId($req->get('cla_cl'));
-                    $em = $this->getDoctrine()->getManager('centrale_pascal_leclerc');
-                    $em->persist($task);
-                    $em->flush();
-
-                    $mailer->sendTaskNotification($task->getClaId(), "CENTRALE_PFPL" );
-
-
-                    return $this->redirectToRoute('taches_home', [
-
-                    ], 301);
-                }
-                return $this->render(
-                    'SiteBundle:ui-element/taches:action.form.html.twig',
-                    [
-                        'type' => $type,
-                        'client' => $clients,
-                        'user' => $user,
-                        'centrale' => $centrale
-                    ]
-                );
-                break;
-            case 'CENTRALE_GCCP':
-            case 'gccp':
-
-                $req = $request->request;
-                $task = new \GccpBundle\Entity\ClientsTaches();
-                $type = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ActionType')->findAll();
-                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Users')->findAll();
-
-
-
-                if ($clientChoice){
-
-                    $clients = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy([
-                        'clId' => $clientChoice
-                    ]);
-
-                }else{
-
-                    $clients = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findAll();
-                }
-
-
-                if ($request->getMethod() == "POST") {
-                    $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
-                    $task
-                        ->setClaType($req->get('cla_type'))
-                        ->setClaNom($req->get('cla_nom'))
-                        ->setClaDescr($req->get('cla_desc'))
-                        ->setClaPriorite($req->get('cla_priorite'))
-                        ->setClaEcheance($date_echeance2)
-                        ->setUsId($req->get('cla_us'))
-                        ->setInsUser($this->getUser()->getusId())
-                        ->setClId($req->get('cla_cl'));
-                    $em = $this->getDoctrine()->getManager('centrale_gccp');
-                    $em->persist($task);
-                    $em->flush();
-
-
-                    $mailer->sendTaskNotification($task->getClaId(), "CENTRALE_GCCP" );
-
-
-                    return $this->redirectToRoute('taches_home', [
-
-                    ], 301);
-                }
-                return $this->render(
-                    'SiteBundle:ui-element/taches:action.form.html.twig',
-                    [
-                        'type' => $type,
-                        'client' => $clients,
-                        'user' => $user,
-                        'centrale' => $centrale
-                    ]
-                );
-                break;
+            $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
 
+            $sqlAddTask = sprintf("INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES (CL_ID, US_ID, CLA_TYPE, CLA_NOM, CLA_DESCR, CLA_ECHEANCE, CLA_PRIORITE, CLA_STATUS, INS_DATE, INS_USER) VALUES (:cl_id, :user, :type, :nom, :descr, :echeance, :priorite, 0, GETDATE(), :ins_user,)", $so_database[0]["SO_DATABASE"]);
+            $stmt = $conn->prepare($sqlAddTask);
+            $stmt->bindValue('cl_id', $req->get('cla_cl'));
+            $stmt->bindValue('user', $req->get('cla_us'));
+            $stmt->bindValue('type', $req->get('cla_type'));
+            $stmt->bindValue('nom', $req->get('cla_nom'));
+            $stmt->bindValue('descr', $req->get('cla_desc'));
+            $stmt->bindValue('echeance', $date_echeance2);
+            $stmt->bindValue('priorite', $req->get('cla_priorite'));
+            $stmt->bindValue('ins_user', $this->getUser()->getusMail());
+            $stmt->execute();
+            $last_id = $conn->lastInsertId();
+
+            $NewTask = $stmt->fetchAll();
+
+
+
+            //$mailer->sendTaskNotification($last_id, "ROC_ECLERC" );
+
+
+            return $this->redirectToRoute('taches_home', [
+
+            ], 301);
         }
 
+
+
+
+        return $this->render(
+            'SiteBundle:ui-element/taches:action.form.html.twig',
+            [
+                'type' => $actionType,
+                'centrale' => $centrale,
+            ]
+        );
 
 
     }
