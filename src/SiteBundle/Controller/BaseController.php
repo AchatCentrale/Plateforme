@@ -2104,46 +2104,31 @@ class BaseController extends Controller
     public function getClientRaisonSocAction(Request $request, $id, $centrale)
     {
 
-
-        switch ($centrale) {
-
-            case 1:
-                $client = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
+        header("Access-Control-Allow-Origin: *");
 
 
-                if(!$client){
-                    return new Response('Client introuvable', 200);
-                }
+        $conn = $this->get('database_connection');
+
+        $clientService = $this->get('site.service.client_services');
+
+        $so_database = $clientService->getCentraleDB($centrale);
 
 
-                return new Response($client[0]->getClRaisonsoc(), 200);
-            case 2:
-                $client = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                return new Response($client[0]->getClRaisonsoc(), 200);
-            case 4:
-                $client = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                return new Response($client[0]->getClRaisonsoc(), 200);
-            case 5:
-                $client = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                return new Response($client[0]->getClRaisonsoc(), 200);
-            case 6:
-                $client = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                return new Response($client[0]->getClRaisonsoc(), 200);
+        $sql = sprintf("SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS WHERE CL_ID = :id", $so_database);
 
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('id', $id);
+        $stmt->execute();
+        $clients = $stmt->fetchAll();
+
+
+        if(!$clients){
+            return new Response('Client introuvable', 200);
         }
 
+        $result = $clientService->array_utf8_encode($clients);
 
-        return $this->render('@Site/ui-element/taches/action.client-raisonSoc.html.twig');
+
 
     }
 
