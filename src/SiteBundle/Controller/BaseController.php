@@ -2275,10 +2275,6 @@ class BaseController extends Controller
 
         return new JsonResponse($result, 200);
 
-
-
-
-
     }
 
     public function getClientUserAction(Request $request, $id, $centrale)
@@ -2367,73 +2363,30 @@ class BaseController extends Controller
     public function getClientLabelAction(Request $request, $id, $centrale)
     {
 
+
+        header("Access-Control-Allow-Origin: *");
+
+
         $conn = $this->get('database_connection');
 
 
-        switch ($centrale) {
+        $clientService = $this->get('site.service.client_services');
 
-            case "funecap":
-                $sql = "SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS WHERE CL_ID = :id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                $data = [
-                    "raisonSoc" => $result[0]['CL_RAISONSOC']
-                ];
+        $so_database = $clientService->getCentraleDB($centrale);
 
-                return new JsonResponse($data, 200);
-                break;
-            case "pfpl" :
-                $sql = "SELECT * FROM CENTRALE_PFPL.dbo.CLIENTS WHERE CL_ID = :id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                $data = [
-                    "raisonSoc" => $result[0]['CL_RAISONSOC']
-                ];
+        $sql = sprintf("SELECT * FROM %s.dbo.CLIENTS WHERE CL_ID = :id", $so_database);
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $data = [
+            "raisonSoc" => $result[0]['CL_RAISONSOC']
+        ];
 
-                return new JsonResponse($data, 200);
-                break;
-            case "roc" :
-                $sql = "SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS WHERE CL_ID = :id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                $data = [
-                    "raisonSoc" => $result[0]['CL_RAISONSOC']
-                ];
+        return new JsonResponse($data, 200);
 
-                return new JsonResponse($data, 200);
-                break;
-            case "ac":
-                $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS WHERE CL_ID = :id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                $data = [
-                    "raisonSoc" => $result[0]['CL_RAISONSOC']
-                ];
 
-                return new JsonResponse($data, 200);
-                break;
-            case "gccp" :
-                $sql = "SELECT * FROM CENTRALE_GCCP.dbo.CLIENTS WHERE CL_ID = :id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                $data = [
-                    "raisonSoc" => $result[0]['CL_RAISONSOC']
-                ];
 
-                return new JsonResponse($data, 200);
-                break;
-
-        }
 
 
     }
