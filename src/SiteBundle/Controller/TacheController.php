@@ -492,17 +492,18 @@ class TacheController extends Controller
         if ($request->getMethod() == "POST") {
 
 
+            dump($req->get('cla_echeance'));
 
             $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
 
-            $sqlAddTask = sprintf("INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES (CL_ID, US_ID, CLA_TYPE, CLA_NOM, CLA_DESCR, CLA_ECHEANCE, CLA_PRIORITE, CLA_STATUS, INS_DATE, INS_USER) VALUES (:cl_id, :user, :type, :nom, :descr, :echeance, :priorite, 0, GETDATE(), :ins_user,)", $so_database[0]["SO_DATABASE"]);
+            $sqlAddTask = sprintf("INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES (CL_ID, US_ID, CLA_TYPE, CLA_NOM, CLA_DESCR, CLA_ECHEANCE, CLA_PRIORITE, CLA_STATUS, INS_DATE, INS_USER) VALUES (:cl_id, :user, :type, :nom, :descr, :echeance, :priorite, 0, GETDATE(), :ins_user)", $so_database[0]["SO_DATABASE"]);
             $stmt = $conn->prepare($sqlAddTask);
             $stmt->bindValue('cl_id', $req->get('cla_cl'));
             $stmt->bindValue('user', $req->get('cla_us'));
             $stmt->bindValue('type', $req->get('cla_type'));
             $stmt->bindValue('nom', $req->get('cla_nom'));
             $stmt->bindValue('descr', $req->get('cla_desc'));
-            $stmt->bindValue('echeance', $date_echeance2);
+            $stmt->bindValue('echeance', $date_echeance2, \Doctrine\DBAL\Types\Type::DATETIME);
             $stmt->bindValue('priorite', $req->get('cla_priorite'));
             $stmt->bindValue('ins_user', $this->getUser()->getusMail());
             $stmt->execute();
