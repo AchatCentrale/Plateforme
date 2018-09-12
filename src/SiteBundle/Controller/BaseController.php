@@ -2114,7 +2114,7 @@ class BaseController extends Controller
         $so_database = $clientService->getCentraleDB($centrale);
 
 
-        $sql = sprintf("SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS WHERE CL_ID = :id", $so_database);
+        $sql = sprintf("SELECT * FROM %s.dbo.CLIENTS WHERE CL_ID = :id", $so_database);
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue('id', $id);
