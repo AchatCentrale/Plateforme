@@ -525,7 +525,7 @@ class BaseController extends Controller
 
         $conn = $this->get('database_connection');
 
-
+        $ok = "ok";
 
 
         switch ($centrale) {
