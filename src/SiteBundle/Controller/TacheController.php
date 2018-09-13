@@ -17,6 +17,7 @@ class TacheController extends Controller
 
 
 
+
         $user = $this->getUser();
 
 
@@ -32,8 +33,6 @@ class TacheController extends Controller
 
             $stmt = $conn->prepare($sql);
             $stmt->bindValue(':usId', $user->getUsId());
-
-
             $stmt->execute();
             $task = $stmt->fetchAll();
 
@@ -55,13 +54,10 @@ class TacheController extends Controller
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':usId', $user->getUsId());
-
-
         $stmt->execute();
         $task = $stmt->fetchAll();
 
-
-
+        dump($task);
 
         return $this->render('@Site/Base/tache.home.html.twig', [
             'task' => $task,

@@ -468,7 +468,6 @@ class BaseController extends Controller
 
         if ($userChoice == "all"){
 
-
             $sqlClient = "SELECT DISTINCT
              SO_RAISONSOC,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION,
@@ -476,21 +475,23 @@ class BaseController extends Controller
               FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
               INNER JOIN CENTRALE_ACHAT.dbo.SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
               ORDER BY SO_RAISONSOC DESC ";
-            $stmt = $conn->prepare($sqlCentrale);
+            $stmt = $conn->prepare($sqlClient);
+            $stmt->bindValue('so_id', $userChoice);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+        } else {
+            $sqlClient = sprintf("SELECT DISTINCT
+                  CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
+                  CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
+                  FROM %s.dbo.CLIENTS
+                  ORDER BY INS_DATE DESC", $so_database[0]["SO_DATABASE"]);
+            $stmt = $conn->prepare($sqlClient);
             $stmt->bindValue('so_id', $userChoice);
             $stmt->execute();
             $result = $stmt->fetchAll();
         }
 
-        $sqlClient = sprintf("SELECT DISTINCT
-                  CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
-                  CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
-                  FROM %s.dbo.CLIENTS
-                  ORDER BY INS_DATE DESC", $so_database[0]["SO_DATABASE"]);
-        $stmt = $conn->prepare($sqlClient);
-        $stmt->bindValue('so_id', $userChoice);
-        $stmt->execute();
-        $result = $stmt->fetchAll();
+
 
 
         return $this->render(
@@ -2122,11 +2123,18 @@ class BaseController extends Controller
         $clients = $stmt->fetchAll();
 
 
+        if(!$centrale){
+            return $this->render('@Site/ui-element/taches/action.client-raisonSoc.html.twig');
+        }
+
         if(!$clients){
             return new Response('Client introuvable', 200);
         }
 
         $result = $clientService->array_utf8_encode($clients);
+
+
+        return $result[0]["CL_RAISONSOC"];
 
 
 
