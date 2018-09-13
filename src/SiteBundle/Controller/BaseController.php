@@ -1839,108 +1839,33 @@ class BaseController extends Controller
     {
 
 
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
         $note = $request->get('note');
 
-        switch ($idCentrale) {
-            case 4:
-            case "CENTRALE_FUNECAP":
-                $con = $this->get('database_connection');
+        $conn = $this->get('database_connection');
 
-                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_NOTES
+        $clientService = $this->get('site.service.client_services');
+
+        $so_database = $clientService->getCentraleDB($idCentrale);
+
+        $con = $this->get('database_connection');
+
+        $sql = sprintf("UPDATE %s.dbo.CLIENTS_NOTES
                     SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
-                    WHERE CN_ID = :id";
+                    WHERE CN_ID = :id", $so_database);
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':note', $note);
-                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                $stmt->execute();
-                $count = $stmt->fetchAll();
-
-
-                return new JsonResponse($stmt->errorCode(), 200);
-                break;
-            case 6:
-            case "ROC_ECLERC":
-                $con = $this->get('database_connection');
-
-                $sql = "UPDATE CENTRALE_ROC_ECLERC.dbo.CLIENTS_NOTES
-                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
-                    WHERE CN_ID = :id";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':note', $note);
-                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                $stmt->execute();
-                $count = $stmt->fetchAll();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':note', $note);
+        $stmt->bindValue(':user', $this->getUser()->getUsMail());
+        $stmt->execute();
+        $count = $stmt->fetchAll();
 
 
-                return new JsonResponse($stmt->errorCode(), 200);
-                break;
-            case 5:
-            case "CENTRALE_PFPL":
-                $con = $this->get('database_connection');
-
-                $sql = "UPDATE CENTRALE_PFPL.dbo.CLIENTS_NOTES
-                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
-                    WHERE CN_ID = :id";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':note', $note);
-                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                $stmt->execute();
-                $count = $stmt->fetchAll();
+        return new JsonResponse($stmt->errorCode(), 200);
 
 
-                return new JsonResponse($stmt->errorCode(), 200);
-                break;
-            case 3 :
-            case "CENTRALE_GCCP":
-                $con = $this->get('database_connection');
-
-                $sql = "UPDATE CENTRALE_GCCP.dbo.CLIENTS_NOTES
-                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
-                    WHERE CN_ID = :id";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':note', $note);
-                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                $stmt->execute();
-                $count = $stmt->fetchAll();
 
 
-                return new JsonResponse($stmt->errorCode(), 200);
-                break;
-            case 1:
-            case "ACHAT_CENTRALE":
-
-                $con = $this->get('database_connection');
-
-                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_NOTES
-                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
-                    WHERE CN_ID = :id";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':note', $note);
-                $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                $stmt->execute();
-                $count = $stmt->fetchAll();
-
-
-                return new JsonResponse($stmt->errorCode(), 200);
-                break;
-
-            default:
-                break;
-        }
-        $res = "Aucune note mise a jour";
-
-        return new JsonResponse($res, 200);
 
 
     }

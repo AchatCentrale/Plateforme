@@ -1040,7 +1040,7 @@ $(function () {
                             </div>
                             <div class="two column row ">
                                 <div class="column">
-                                    <h4>Créée ${moment(data.ins_date).fromNow()} </h4>
+                                    <h4>Crée ${moment(data.ins_date).fromNow()} </h4>
                                 </div>
                                  <div class="column footer-update-note">
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
