@@ -157,11 +157,11 @@ $(function () {
 
         $BOX_PANEL.remove();
     });
-// /Panel toolbox
+    // /Panel toolbox
 
     const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
 
-    moment.locale('fr');
+    var moment_fr = moment.locale('fr');
 
     function terminerTask(e) {
         let url = 'http://localhost:8000/taches/terminer/' + e;
@@ -972,7 +972,7 @@ $(function () {
 
 
                 let tpl = `<div class="ui centered grid header-detail-note">
-                              <h4>Créée le <b>${data.ins_date}</b> pour le client <b>${data.cl_raisonsoc}</b> par <b>${data.ins_user}</b></h4>
+                              <h4>Crée le <b>${data.ins_date}</b> pour le client <b>${data.cl_raisonsoc}</b> <br> par <b>${data.ins_user}</b></h4>
                             <div class="one column row tpl-inject-note">
                                 <div class="column note-content-home">
                                     <p class="note-description">${data.nom}</p>
@@ -981,7 +981,7 @@ $(function () {
                             </div>
                             <div class="two column row ">
                                 <div class="column">
-                                    <h4>Créée ${moment(data.ins_date).fromNow()} </h4>
+                                    <h4>Créée ${moment_fr(data.ins_date).fromNow()} </h4>
                                 </div>
                                  <div class="column footer-update-note">
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
