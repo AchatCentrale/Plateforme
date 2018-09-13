@@ -972,7 +972,7 @@ $(function () {
 
 
                 let tpl = `<div class="ui centered grid header-detail-note">
-                              <h4>Créée le <b>${data.ins_date}</b> pour le client <b>${data.cl_raisonsoc.CL_RAISONSOC}</b> par <b>${data.ins_user}</b></h4>
+                              <h4>Créée le <b>${data.ins_date}</b> pour le client <b>${data.cl_raisonsoc}</b> par <b>${data.ins_user}</b></h4>
                             <div class="one column row tpl-inject-note">
                                 <div class="column note-content-home">
                                     <p class="note-description">${data.nom}</p>
