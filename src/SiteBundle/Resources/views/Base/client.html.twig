@@ -163,7 +163,7 @@
                                             <td>{{ cl.CL_REF }}</td>
                                             <td>{{ centrale }}</td>
                                             <td>{{ cl.CL_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252') | upper }}</td>
-                                            <td>{{ client_service.getTheClientGroupe(cl.CL_GROUPE, centrale )  |  convert_encoding('UTF-8', 'Windows-1252') }}</td>
+                                            <td>{{ client_service.getTheClientGroupe(cl.CL_GROUPE, centrale )   }}</td>
                                             <td>{{ cl.CL_CP }} {{ cl.CL_VILLE |  convert_encoding('UTF-8', 'Windows-1252') | formatVille }}</td>
                                             <td>{{ cl.CL_TEL | phone }}</td>
                                             <td>{{ cl.CL_SIRET | siret }}</td>
