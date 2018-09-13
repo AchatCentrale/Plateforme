@@ -121,7 +121,7 @@
                         <div class="equal width row">
                             <div class="column">
                                 <h3 class="raison-soc-titre">
-                                    <i class="building icon"></i> {{ client[0].clRaisonsoc | upper }}
+                                    <i class="building icon"></i> {{ client[0].clRaisonsoc |  convert_encoding('UTF-8', 'Windows-1252') | upper  }}
                                     {% if client[0].clStatus == 2 %}
                                         <p>Bloqué</p>
                                     {% endif %}
@@ -441,7 +441,7 @@
                                                            <div class="input-group">
 
                                                                <input type="text" class="form-control" id="add-note"
-                                                                      placeholder="Consigner une note pour le client {{ client[0].clRaisonsoc }}">
+                                                                      placeholder="Consigner une note pour le client {{ client[0].clRaisonsoc |  convert_encoding('UTF-8', 'Windows-1252') }}">
 
                                                                <span class="input-group-btn">
 
