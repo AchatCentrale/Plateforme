@@ -2117,10 +2117,8 @@ class BaseController extends Controller
         return new Response('Mail envoyé');
     }
 
-    public function getClientRaisonSocAction(Request $request, $id, $centrale)
+    public function getClientRaisonSocAction($id, $centrale)
     {
-
-        header("Access-Control-Allow-Origin: *");
 
 
         $conn = $this->get('database_connection');
@@ -2128,7 +2126,6 @@ class BaseController extends Controller
         $clientService = $this->get('site.service.client_services');
 
         $so_database = $clientService->getCentraleDB($centrale);
-
 
         $sql = sprintf("SELECT * FROM %s.dbo.CLIENTS WHERE CL_ID = :id", $so_database);
 
@@ -2139,7 +2136,7 @@ class BaseController extends Controller
 
 
         if(!$centrale){
-            return $this->render('@Site/ui-element/taches/action.client-raisonSoc.html.twig');
+            return "NO_CENTRALE";
         }
 
         if(!$clients){
@@ -2149,7 +2146,8 @@ class BaseController extends Controller
         $result = $clientService->array_utf8_encode($clients);
 
 
-        return $result[0]["CL_RAISONSOC"];
+        return new Response($result[0]["CL_RAISONSOC"], 200);
+
 
 
 
