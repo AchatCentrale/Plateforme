@@ -479,6 +479,16 @@ class BaseController extends Controller
             $stmt->bindValue('so_id', $userChoice);
             $stmt->execute();
             $result = $stmt->fetchAll();
+
+            return $this->render(
+                '@Site/Base/client.html.twig',
+                [
+                    "client" => $result,
+                    "centrale" => "All"
+                ]
+            );
+
+
         } else {
             $sqlClient = sprintf("SELECT DISTINCT
                   CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
@@ -489,18 +499,23 @@ class BaseController extends Controller
             $stmt->bindValue('so_id', $userChoice);
             $stmt->execute();
             $result = $stmt->fetchAll();
+
+
+
+            return $this->render(
+                '@Site/Base/client.html.twig',
+                [
+                    "client" => $result,
+                    "centrale" => $so_database[0]["SO_DATABASE"]
+                ]
+            );
+
         }
 
 
 
 
-        return $this->render(
-            '@Site/Base/client.html.twig',
-            [
-                "client" => $result,
-                "centrale" => $so_database[0]["SO_DATABASE"]
-            ]
-        );
+
 
     }
 
