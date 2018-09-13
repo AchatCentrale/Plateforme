@@ -142,7 +142,7 @@
 
                                 <tbody>
                                 {% for cl in client %}
-                                    {% if centrale == "all" %}
+                                    {% if centrale == "All" %}
                                         <tr data-centrale="{{ cl.SO_RAISONSOC }}" data-id="{{ cl.CL_ID }}"
                                             class="cursor go-to-client" {% if cl.CL_STATUS == 2 %}style="background-color: yellow"{% endif %} >
                                             <td>{{ cl.CL_REF }}</td>
