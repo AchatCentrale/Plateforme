@@ -382,7 +382,7 @@ class TacheController extends Controller
 
 
 
-            //$mailer->sendTaskNotification($last_id, "ROC_ECLERC" );
+            $mailer->sendTaskNotification($last_id, $so_database);
 
 
             return $this->redirectToRoute('taches_home', [

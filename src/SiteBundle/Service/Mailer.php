@@ -49,108 +49,29 @@ class Mailer
 
     public function sendTaskNotification($id,$centrale)
     {
-        switch ($centrale) {
-            case "ROC_ECLERC":
-                $sql = "SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                $sqlUser = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id ";
-                $stmtUser = $this->conn->prepare($sqlUser);
-                $stmtUser->bindValue(":id", $task[0]['US_ID']);
-                $stmtUser->execute();
-                $user = $stmtUser->fetchAll();
-                $subject = "Nouvelle tache";
-                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
-                $to = $user[0]['US_MAIL'];
-                $body = $this->templating->render($template, [
-                    'tasks' => $task[0],
-                    'user' => $user[0]
-                ]);
-                $this->sendMessage($to, $subject, $body);
-                break;
-            case "CENTRALE_FUNECAP":
-                $sql = "SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                $sqlUser = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id ";
-                $stmtUser = $this->conn->prepare($sqlUser);
-                $stmtUser->bindValue(":id", $task[0]['US_ID']);
-                $stmtUser->execute();
-                $user = $stmtUser->fetchAll();
-                $subject = "Nouvelle tache";
-                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
-                $to = $user[0]['US_MAIL'];
-                $body = $this->templating->render($template, [
-                    'tasks' => $task[0],
-                    'user' => $user[0]
-                ]);
-                $this->sendMessage($to, $subject, $body, $this->name);
-                break;
-            case "ACHAT_CENTRALE":
-                $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                $sqlUser = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id ";
-                $stmtUser = $this->conn->prepare($sqlUser);
-                $stmtUser->bindValue(":id", $task[0]['US_ID']);
-                $stmtUser->execute();
-                $user = $stmtUser->fetchAll();
-                $subject = "Nouvelle tache";
-                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
-                $to = $user[0]['US_MAIL'];
-                $body = $this->templating->render($template, [
-                    'tasks' => $task[0],
-                    'user' => $user[0]
-                ]);
-                $this->sendMessage($to, $subject, $body, $this->name);
-                break;
-            case "CENTRALE_PFPL":
-                $sql = "SELECT * FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                $sqlUser = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id ";
-                $stmtUser = $this->conn->prepare($sqlUser);
-                $stmtUser->bindValue(":id", $task[0]['US_ID']);
-                $stmtUser->execute();
-                $user = $stmtUser->fetchAll();
-                $subject = "Nouvelle tache";
-                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
-                $to = $user[0]['US_MAIL'];
-                $body = $this->templating->render($template, [
-                    'tasks' => $task[0],
-                    'user' => $user[0]
-                ]);
-                $this->sendMessage($to, $subject, $body, $this->name);
-                break;
-            case "CENTRALE_GCCP":
-                $sql = "SELECT * FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                $sqlUser = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id ";
-                $stmtUser = $this->conn->prepare($sqlUser);
-                $stmtUser->bindValue(":id", $task[0]['US_ID']);
-                $stmtUser->execute();
-                $user = $stmtUser->fetchAll();
-                $subject = "Nouvelle tache";
-                $template = 'SiteBundle:mail:mailDetailClient.html.twig';
-                $to = $user[0]['US_MAIL'];
-                $body = $this->templating->render($template, [
-                    'tasks' => $task[0],
-                    'user' => $user[0]
-                ]);
-                $this->sendMessage($to, $subject, $body, $this->name);
-                break;
-        }
+
+        $sql = sprintf("SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ", $centrale);
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $task = $stmt->fetchAll();
+        $sqlUser = sprintf("SELECT * FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id ", $centrale);
+        $stmtUser = $this->conn->prepare($sqlUser);
+        $stmtUser->bindValue(":id", $task[0]['US_ID']);
+        $stmtUser->execute();
+        $user = $stmtUser->fetchAll();
+        $subject = "Nouvelle tache";
+        $template = 'SiteBundle:mail:mailDetailClient.html.twig';
+        $to = $user[0]['US_MAIL'];
+        $body = $this->templating->render($template, [
+            'tasks' => $task[0],
+            'user' => $user[0]
+        ]);
+
+        $this->sendMessage($to, $subject, $body, "Achat Centrale");
+
+
+
     }
 
 
