@@ -986,7 +986,7 @@ $(function () {
                                  <div class="column footer-update-note">
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
                                 </div>
-                               <a class="link-note-client" href="http://crm.achatcentrale.fr/client/${data.cl_id}/${checkCentrale(aidyCentrale)}/general">${data.cl_raisonsoc.CL_RAISONSOC}</a>
+                               <a class="link-note-client" href="http://crm.achatcentrale.fr/client/${data.cl_id}/${checkCentrale(aidyCentrale)}/general">${data.cl_raisonsoc}</a>
                                <br>
                             </div>
                             <p>${data.centrale}</p>
