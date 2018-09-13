@@ -15,11 +15,7 @@ class TacheController extends Controller
     public function TacheAction()
     {
 
-
-
-
         $user = $this->getUser();
-
 
         if($user->getUsId() === 2){
 
@@ -59,9 +55,12 @@ class TacheController extends Controller
 
         dump($task);
 
+
+
         return $this->render('@Site/Base/tache.home.html.twig', [
             'task' => $task,
         ]);
+
     }
 
     public function DetailTaskAction($id, $idCentrale)
