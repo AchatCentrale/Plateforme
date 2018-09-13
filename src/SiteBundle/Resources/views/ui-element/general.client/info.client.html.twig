@@ -99,9 +99,8 @@
                                     <div class="content content-list-user">
                                         <a href="//www.{{ centrale_link  }}.fr/Login.asp?LOGIN={{ u.ccMail }}&PASS={{ u.ccPass }}"><i class="user icon"></i>{{ u.ccPrenom |  convert_encoding('UTF-8', 'Windows-1252')  }} {{ u.ccNom |  convert_encoding('UTF-8', 'Windows-1252') }}</a>
                                         <div class="description"><i class="mail icon"></i>{{ u.ccMail }}</div>
-                                        <div class="description"><i class="phone icon"></i>
-                                            {{ u.ccTel | isEmpty | phone | raw }}
-                                        </div>
+                                        <div class="description"><i class="phone icon"></i>{{ u.ccTel | isEmpty | phone | raw }}</div>
+                                        <div class="description"><i class="phone icon square"></i>{{ u.ccGsm | isEmpty | phone | raw }}</div>
                                     </div>
                                 </div>
 
