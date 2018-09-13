@@ -525,6 +525,9 @@ class BaseController extends Controller
 
         $conn = $this->get('database_connection');
 
+
+
+
         switch ($centrale) {
 
             case 1:
@@ -704,7 +707,7 @@ class BaseController extends Controller
                 );
                 break;
             case 6:
-            case "ROC_ECLERC":
+            case "CENTRALE_ROC_ECLERC":
                 $restresult = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
                         'clId' => $id
                     ]
