@@ -1817,7 +1817,6 @@ class BaseController extends Controller
 
 
         if ($result) {
-
             $data = [
                 "id" => $result[0]['CN_ID'],
                 "nom" => $result[0]['CN_NOTE'],

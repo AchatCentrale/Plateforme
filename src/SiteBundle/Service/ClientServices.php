@@ -531,12 +531,12 @@ class ClientServices
 
     }
 
-    public function getUserName($idUser)
+    public function getUserName($mailUser)
     {
-        $sql = 'SELECT US_PRENOM FROM CENTRALE_ACHAT.dbo.USERS WHERE US_ID = :id';
+        $sql = 'SELECT US_PRENOM FROM CENTRALE_ACHAT.dbo.USERS WHERE US_MAIL = :mail';
 
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindValue(':id', $idUser);
+        $stmt->bindValue(':mail', $mailUser);
         $stmt->execute();
         return $result[0] = $stmt->fetchAll();
     }
