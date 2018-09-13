@@ -157,11 +157,11 @@ $(function () {
 
         $BOX_PANEL.remove();
     });
-// /Panel toolbox
+    // /Panel toolbox
 
     const CURRENT_URL = window.location.href.split('#')[0].split('?')[0];
 
-    moment.locale('fr');
+    var moment_fr = moment.locale('fr');
 
     function terminerTask(e) {
         let url = 'http://localhost:8000/taches/terminer/' + e;
@@ -981,7 +981,7 @@ $(function () {
                             </div>
                             <div class="two column row ">
                                 <div class="column">
-                                    <h4>Créée ${moment(data.ins_date).fromNow()} </h4>
+                                    <h4>Créée ${moment_fr(data.ins_date).fromNow()} </h4>
                                 </div>
                                  <div class="column footer-update-note">
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
