@@ -1181,8 +1181,8 @@ $(function () {
                             </div>
                             <div class="two column row">
                                 <div class="column">
-                                    <h4>Créée ${data.ins_date} </h4>
-                                    <h4>Pour ${data.echeance} </h4>
+                                    <h4>Créée ${moment(data.ins_date).fromNow()} </h4>
+                                    <h4>Pour ${moment(data.echeance).fromNow()} </h4>
                                 </div>
                                 <div class="column">
                                     <a href="" class="ui negative basic button">Terminer</a>

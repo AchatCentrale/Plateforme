@@ -1889,12 +1889,12 @@ class BaseController extends Controller
 
         if ($result) {
 
-
             $creation = new \Moment\Moment($result[0]['INS_DATE'], 'Europe/Berlin');
-            $creationFromNow = $creation->fromNow();
+            $creationFromNow = $creation->calendar();
 
-            $echeance = new \Moment\Moment($result[0]['CLA_ECHEANCE'], 'UTC');
+            $echeance = new \Moment\Moment($result[0]['CLA_ECHEANCE'], 'Europe/Berlin');
             $echanceFuture = $echeance->calendar();
+
 
 
             $data = [
