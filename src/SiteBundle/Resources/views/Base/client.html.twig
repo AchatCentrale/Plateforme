@@ -143,11 +143,13 @@
                                 <tbody>
                                 {% for cl in client %}
                                     {% if centrale == "All" %}
-                                        <tr data-centrale="{{ cl.SO_RAISONSOC }}" data-id="{{ cl.CL_ID }}"
+
+                                        <tr data-centrale="{{ cl.SO_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252') }}" data-id="{{ cl.CL_ID }}"
                                             class="cursor go-to-client" {% if cl.CL_STATUS == 2 %}style="background-color: yellow"{% endif %} >
                                             <td>{{ cl.CL_REF }}</td>
                                             <td>{{ cl.SO_RAISONSOC }}</td>
                                             <td>{{ cl.CL_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252') | upper }}</td>
+                                            <td>{{ cl.GR_DESCR }}</td>
                                             <td>{{ cl.CL_CP }} {{ cl.CL_VILLE  | formatVille |  convert_encoding('UTF-8', 'Windows-1252') }}</td>
                                             <td>{{ cl.CL_TEL | phone }}</td>
                                             <td>{{ cl.CL_SIRET | siret }}</td>
