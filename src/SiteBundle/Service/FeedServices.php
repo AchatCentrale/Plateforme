@@ -192,9 +192,15 @@ class FeedServices
     public function showTheFeed()
     {
 
+        $result = [];
 
-        $result = array_merge( $this->getAction(), $this->getTickets(), $this->getNotes());
-        $this->setFeed($result);
+        if ($this->getAction() == null){
+            $this->setFeed($result);
+        }else {
+            $result = array_merge( $this->getAction(), $this->getTickets(), $this->getNotes());
+            $this->setFeed($result);
+        }
+
 
 
 
