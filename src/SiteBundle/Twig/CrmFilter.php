@@ -225,14 +225,17 @@ class CrmFilter extends \Twig_Extension
     public function centraleFilter($centrale)
     {
 
+
+        dump($centrale);
+
         if (gettype($centrale) === "string") {
 
             switch ($centrale) {
                 case "CENTRALE_FUNECAP":
                     return "www.centrale-".strtolower(substr($centrale, 9));
                     break;
-                case 'ROC_ECLERC':
-                    return "wwww.centrale-".strtolower(str_replace("_", "-", $centrale));
+                case 'CENTRALE_ROC_ECLERC':
+                    return "www.".strtolower(str_replace("_", "-", $centrale));
                     break;
                 case 'ACHAT_CENTRALE':
                     return "secure.achatcentrale";
@@ -240,14 +243,7 @@ class CrmFilter extends \Twig_Extension
                 case 'CENTRALE_PFPL':
                     return "wwww".strtolower(str_replace("_", "-", $centrale));
                     break;
-                case 'CENTRALE_G
-                
-                
-                
-                
-                
-                
-                CCP':
+                case 'CENTRALE_GCCP':
                     return "wwww".strtolower(str_replace("_", "-", $centrale));
                     break;
             }
