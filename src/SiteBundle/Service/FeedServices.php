@@ -22,20 +22,16 @@ class FeedServices
     private $feed;
 
 
-
-
     public function __construct(RegistryInterface $doctrine)
     {
         $this->doctrine = $doctrine;
     }
 
 
-
     public function getTheLast($id, $centrale)
     {
 
-        switch ($centrale){
-
+        switch ($centrale) {
 
 
             case 1:
@@ -44,7 +40,7 @@ class FeedServices
                     'clId' => $id
                 ], [
                     'claEcheance' => 'DESC'
-                ],  5);
+                ], 5);
 
                 $notes = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
                     'clId' => $id
@@ -59,7 +55,6 @@ class FeedServices
                 ], 5);
 
 
-
                 $this->setAction($action);
                 $this->setNotes($notes);
                 $this->setTickets($tickets);
@@ -72,7 +67,7 @@ class FeedServices
                     'clId' => $id
                 ], [
                     'claEcheance' => 'DESC'
-                ],  5);
+                ], 5);
 
                 $notes = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsNotes')->findBy([
                     'clId' => $id
@@ -87,7 +82,6 @@ class FeedServices
                 ], 5);
 
 
-
                 $this->setAction($action);
                 $this->setNotes($notes);
                 $this->setTickets($tickets);
@@ -100,7 +94,7 @@ class FeedServices
                     'clId' => $id
                 ], [
                     'claEcheance' => 'DESC'
-                ],  5);
+                ], 5);
 
                 $notes = $this->doctrine->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsNotes')->findBy([
                     'clId' => $id
@@ -115,7 +109,6 @@ class FeedServices
                 ], 5);
 
 
-
                 $this->setAction($action);
                 $this->setNotes($notes);
                 $this->setTickets($tickets);
@@ -128,7 +121,7 @@ class FeedServices
                     'clId' => $id
                 ], [
                     'claEcheance' => 'DESC'
-                ],  5);
+                ], 5);
 
                 $notes = $this->doctrine->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsNotes')->findBy([
                     'clId' => $id
@@ -143,7 +136,6 @@ class FeedServices
                 ], 5);
 
 
-
                 $this->setAction($action);
                 $this->setNotes($notes);
                 $this->setTickets($tickets);
@@ -156,7 +148,7 @@ class FeedServices
                     'clId' => $id
                 ], [
                     'claEcheance' => 'DESC'
-                ],  5);
+                ], 5);
 
                 $notes = $this->doctrine->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsNotes')->findBy([
                     'clId' => $id
@@ -171,7 +163,6 @@ class FeedServices
                 ], 5);
 
 
-
                 $this->setAction($action);
                 $this->setNotes($notes);
                 $this->setTickets($tickets);
@@ -180,11 +171,7 @@ class FeedServices
                 break;
 
 
-
         }
-
-
-
 
 
     }
@@ -192,17 +179,21 @@ class FeedServices
     public function showTheFeed()
     {
 
-        $result = [];
 
-        if ($this->getAction() == null){
-            $this->setFeed($result);
-        }else {
-            $result = array_merge( $this->getAction(), $this->getTickets(), $this->getNotes());
-            $this->setFeed($result);
+        dump($this->getAction());
+        dump($this->getTickets());
+        dump($this->getNotes());
+
+
+        if ($this->getAction() === null && $this->getTickets() === null && $this->getNotes() === null) {
+            $result = [];
+        } else {
+            $result = array_merge($this->getAction(), $this->getTickets(), $this->getNotes());
+
         }
 
 
-
+        $this->setFeed($result);
 
 
     }
@@ -222,9 +213,6 @@ class FeedServices
     {
         $this->feed = $feed;
     }
-
-
-
 
 
     /**
@@ -274,10 +262,6 @@ class FeedServices
     {
         $this->action = $action;
     }
-
-
-
-
 
 
 }
