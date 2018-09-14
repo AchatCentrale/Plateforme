@@ -109,8 +109,8 @@ class CrmFilter extends \Twig_Extension
 
         if (gettype($centrale) === "string" && ctype_digit($centrale) === false) {
             switch ($centrale) {
-                case 'ROC_ECLERC':
-                case 'ROC ECLERC':
+                case 'CENTRALE_ROC_ECLERC':
+                case 'CENTRALE ROC ECLERC':
                     return "<h3><span class=\"label large yellow \">Centrale Roc-Eclerc</span></h3>";
                     break;
                 case 'CENTRALE_FUNECAP':
