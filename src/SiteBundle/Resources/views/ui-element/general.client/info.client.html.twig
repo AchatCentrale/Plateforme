@@ -495,8 +495,18 @@
 
                            <div class="historique-client-content">
 
+                               {% if client[0].clId > 0 %}
 
-                               {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0].clId, 'centrale': centrale })) }}
+
+
+                                   {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0].clId, 'centrale': centrale })) }}
+                               {% else %}
+                                   Kenny looks okay --- so far
+                               {% endif %}
+
+
+
+
 
                            </div>
                        </div>

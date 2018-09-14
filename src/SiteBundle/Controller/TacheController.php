@@ -66,7 +66,6 @@ class TacheController extends Controller
     {
 
 
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
         $conn = $this->get('database_connection');
@@ -141,102 +140,42 @@ class TacheController extends Controller
     {
 
 
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $conn = $this->get('database_connection');
 
-        switch ($centrale){
-            case "1":
-                $sql = "
-                   UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES
+        $clientService = $this->get('site.service.client_services');
+
+        $so_database = $clientService->getCentraleDB($centrale);
+
+
+        $sql = sprintf("UPDATE %s.dbo.CLIENTS_TACHES
                  SET
                   CLA_STATUS = 10,
                   MAJ_DATE = GETUTCDATE(),
                   MAJ_USER = :user
                 WHERE CLA_ID = :id
-                ";
+                ", $so_database);
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':user', $this->getUser()->getUsMail());
-
-
-                $stmt->execute();
-                $result = $stmt->fetchAll();
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':user', $this->getUser()->getUsMail());
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
 
-                return $this->redirectToRoute('taches_home',[], 301);
-            case "2":
-                $sql = "UPDATE CENTRALE_GCCP.dbo.CLIENTS_TACHES
-                 SET
-                  CLA_STATUS = 10,
-                  MAJ_DATE = GETUTCDATE(),
-                  MAJ_USER = :user
-                WHERE CLA_ID = :id
-                ";
+        $sqlRaisonSoc = sprintf("SELECT CL_ID FROM %s.dbo.CLIENTS_TACHES WHERE CLA_ID = :id", $so_database);
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':user', $this->getUser()->getUsMail());
-
-                $stmt->execute();
-                $result = $stmt->fetchAll();
+        $stmtRaisonSoc = $conn->prepare($sqlRaisonSoc);
+        $stmtRaisonSoc->bindValue(':id', $id);
+        $stmtRaisonSoc->execute();
+        $resultRaisonSoc = $stmtRaisonSoc->fetchAll();
 
 
-                return $this->redirectToRoute('taches_home',[], 301);
-            case "4":
-                $sql = "UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES
-                 SET
-                  CLA_STATUS = 10,
-                  MAJ_DATE = GETUTCDATE(),
-                  MAJ_USER = :user
-                WHERE CLA_ID = :id
-                ";
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':user', $this->getUser()->getUsMail());
+        return $this->redirectToRoute('client-general',[
+            "id" => $resultRaisonSoc[0]["CL_ID"],
+            "centrale" => $so_database
+        ], 301);
 
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                return $this->redirectToRoute('taches_home',[], 301);
-            case "5":
-                $sql = "UPDATE CENTRALE_PFPL.dbo.CLIENTS_TACHES
-                SET
-                  CLA_STATUS = 10,
-                  MAJ_DATE = GETUTCDATE(),
-                  MAJ_USER = :user
-                WHERE CLA_ID = :id
-                ";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':user', $this->getUser()->getUsMail());
-
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                return $this->redirectToRoute('taches_home',[], 301);
-            case "6":
-                $sql = "UPDATE CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES
-                 SET
-                  CLA_STATUS = 10,
-                  MAJ_DATE = GETUTCDATE(),
-                  MAJ_USER = :user
-                WHERE CLA_ID = :id
-                ";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->bindValue(':user', $this->getUser()->getUsMail());
-
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                return $this->redirectToRoute('taches_home',[], 301);
-        }
 
 
 
