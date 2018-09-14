@@ -3,6 +3,7 @@ services:
         class: SiteBundle\Twig\CrmFilter
         arguments:
             doctrine: '@doctrine'
+            dbalConnection : '@doctrine.dbal.achat_centrale_connection'
         tags:
             - { name: twig.extension}
     site.service.taches_utils:

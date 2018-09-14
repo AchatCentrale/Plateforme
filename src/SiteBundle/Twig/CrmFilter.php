@@ -5,6 +5,8 @@ namespace SiteBundle\Twig;
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Twig_Function;
+use Doctrine\DBAL\Connection;
+
 
 
 class CrmFilter extends \Twig_Extension
@@ -12,10 +14,18 @@ class CrmFilter extends \Twig_Extension
 
     protected $doctrine;
 
+    /**
+     *
+     * @var Connection
+     */
+    private $connection;
 
-    public function __construct(RegistryInterface $doctrine)
+
+    public function __construct(RegistryInterface $doctrine, $dbalConnection)
     {
         $this->doctrine = $doctrine;
+        $this->connection = $dbalConnection;
+
 
     }
 
@@ -52,9 +62,31 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('isNumeric', [$this, 'isNumeric']),
             new \Twig_SimpleFilter('month', [$this, 'monthIntToString']),
             new \Twig_SimpleFilter('ean13', [$this, 'ean13_check_digit']),
+            new \Twig_SimpleFilter('centrale_int', [$this, 'centraleStringToInt']),
+            new \Twig_SimpleFilter('centraleUrl', [$this, 'centraleUrl']),
         );
     }
 
+
+    public function centraleStringToInt($centrale){
+
+
+
+        $sqlCentrale = "SELECT SO_ID FROM CENTRALE_ACHAT.dbo.SOCIETES
+                                    WHERE SO_DATABASE = :so_database";
+        $stmt = $this->connection->prepare($sqlCentrale);
+        $stmt->bindValue('so_database', $centrale);
+        $stmt->execute();
+        $so_database = $stmt->fetchAll();
+
+
+        if(!empty($so_database)){
+            return $so_database[0]["SO_ID"];
+        }else {
+            return new \Exception("Probleme pour trouver la centrale");
+        }
+
+    }
 
     public function getClass($class)
     {
@@ -247,27 +279,49 @@ class CrmFilter extends \Twig_Extension
                     break;
             }
         } else {
-            switch ($centrale) {
-                case "1":
-                    return "ACHAT_CENTRALE";
-                    break;
-                case '2':
-                    return "CENTRALE_GCCP";
-                    break;
-                case '4':
-                    return "CENTRALE_FUNECAP";
-                    break;
-                case '5':
-                    return "CENTRALE_PFPL";
-                    break;
-                case '6':
-                    return "ROC_ECLERC";
-                    break;
+
+            $sqlCentrale = "SELECT SO_DATABASE FROM CENTRALE_ACHAT.dbo.SOCIETES
+                                    WHERE SO_ID = :id";
+            $stmt = $this->connection->prepare($sqlCentrale);
+            $stmt->bindValue('id', $centrale);
+            $stmt->execute();
+            $so_database = $stmt->fetchAll();
+
+            dump($so_database);
+
+
+            if(!empty($so_database)){
+                return $so_database[0]["SO_DATABASE"];
+            }else {
+                return new \Exception("Probleme pour trouver la centrale");
             }
+
+
+
+
         }
 
 
     }
+
+    public function centraleUrl($so_id){
+
+        $sqlCentrale = "SELECT SO_WEB FROM CENTRALE_ACHAT.dbo.SOCIETES
+                                    WHERE SO_ID = :id";
+        $stmt = $this->connection->prepare($sqlCentrale);
+        $stmt->bindValue('id', $so_id);
+        $stmt->execute();
+        $so_database = $stmt->fetchAll();
+
+
+        if(!empty($so_database)){
+            return $so_database[0]["SO_WEB"];
+        }else {
+            return new \Exception("Probleme pour trouver la centrale");
+        }
+
+    }
+
 
     public function centraleTickets($centrale)
     {

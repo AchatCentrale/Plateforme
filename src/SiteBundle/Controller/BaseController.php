@@ -459,7 +459,7 @@ class BaseController extends Controller
         $conn = $this->get('database_connection');
 
 
-        $sqlCentrale = "SELECT SO_DATABASE FROM CENTRALE_ACHAT.dbo.SOCIETES
+        $sqlCentrale = "SELECT SO_DATABASE, SO_ID FROM CENTRALE_ACHAT.dbo.SOCIETES
                                     WHERE SO_ID = :so_id";
         $stmt = $conn->prepare($sqlCentrale);
         $stmt->bindValue('so_id', $userChoice);
@@ -471,7 +471,7 @@ class BaseController extends Controller
             $sqlClient = "SELECT DISTINCT
              SO_RAISONSOC,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
              CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION,
-              GR_DESCR, AC_DESCR, CL_TEL, GR_DESCR
+              GR_DESCR, AC_DESCR, CL_TEL, GR_DESCR, Vue_All_Clients.SO_ID
               FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
               INNER JOIN CENTRALE_ACHAT.dbo.SOCIETES ON Vue_All_Clients.SO_ID = SOCIETES.SO_ID
               ORDER BY SO_RAISONSOC DESC ";
@@ -506,7 +506,7 @@ class BaseController extends Controller
                 '@Site/Base/client.html.twig',
                 [
                     "client" => $result,
-                    "centrale" => $so_database[0]["SO_DATABASE"]
+                    "centrale" => $so_database[0]["SO_ID"]
                 ]
             );
 
@@ -1339,73 +1339,26 @@ class BaseController extends Controller
     public function newNotesClientAction(Request $request, $id, $centrale)
     {
 
-        $em = $this->getDoctrine()->getManager();
+        $conn = $this->get('database_connection');
+
+        $clientService = $this->get('site.service.client_services');
+
+        $so_database = $clientService->getCentraleDB($centrale);
+
+        $content_notes = $request->request->get('content_note');
+
+        $sql = sprintf("INSERT INTO %s.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
+                        VALUES ( :id, :content, GETUTCDATE(), :user)", $so_database);
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue("id", $id);
+        $stmt->bindValue("content", $content_notes);
+        $stmt->bindValue("user", $this->getUser()->getUsMail());
+        $stmt->execute();
+        return new JsonResponse('Notes ajouté ', 200);
 
 
 
 
-        switch ($centrale) {
-            case"ACHAT_CENTRALE":
-                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-                $content_notes = $request->request->get('content_note');
-                $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
-                        VALUES ( :id, :content, GETUTCDATE(), :user)";
-                $stmt = $db2->prepare($sql);
-                $stmt->bindValue("id", $id);
-                $stmt->bindValue("content", $content_notes);
-                $stmt->bindValue("user", $this->getUser()->getUsId());
-                $stmt->execute();
-                return new JsonResponse('Notes ajouté ', 200);
-                break;
-            case"ROC_ECLERC":
-                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-                $content_notes = $request->request->get('content_note');
-                $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
-                        VALUES ( :id, :content, GETUTCDATE(), :user)";
-                $stmt = $db2->prepare($sql);
-                $stmt->bindValue("id", $id);
-                $stmt->bindValue("content", $content_notes);
-                $stmt->bindValue("user", $this->getUser()->getUsId());
-                $stmt->execute();
-                return new JsonResponse('Notes ajouté ', 200);
-                break;
-            case"CENTRALE_PFPL":
-                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-                $content_notes = $request->request->get('content_note');
-                $sql = "INSERT INTO CENTRALE_PFPL.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
-                        VALUES ( :id, :content, GETUTCDATE(), :user)";
-                $stmt = $db2->prepare($sql);
-                $stmt->bindValue("id", $id);
-                $stmt->bindValue("content", $content_notes);
-                $stmt->bindValue("user", $this->getUser()->getUsId());
-                $stmt->execute();
-                return new JsonResponse('Notes ajouté ', 200);
-                break;
-            case"CENTRALE_GCCP":
-                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-                $content_notes = $request->request->get('content_note');
-                $sql = "INSERT INTO CENTRALE_GCCP.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
-                        VALUES ( :id, :content, GETUTCDATE(), :user)";
-                $stmt = $db2->prepare($sql);
-                $stmt->bindValue("id", $id);
-                $stmt->bindValue("content", $content_notes);
-                $stmt->bindValue("user", $this->getUser()->getUsId());
-                $stmt->execute();
-                return new JsonResponse('Notes ajouté ', 200);
-                break;
-            case"CENTRALE_FUNECAP":
-                $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-                $content_notes = $request->request->get('content_note');
-                $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
-                        VALUES ( :id, :content, GETUTCDATE(), :user)";
-                $stmt = $db2->prepare($sql);
-                $stmt->bindValue("id", $id);
-                $stmt->bindValue("content", $content_notes);
-                $stmt->bindValue("user", $this->getUser()->getUsId());
-                $stmt->execute();
-                return new JsonResponse('Notes ajouté ', 200);
-                break;
-        }
 
 
     }
