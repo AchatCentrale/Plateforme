@@ -37,7 +37,7 @@
 
                                 <div class="container-hover-image">
                                     <img class="img-responsive img-rounded  avatar-view"
-                                         src="http://{{ centrale | centrale }}.fr/UploadFichiers/Uploads/CLIENT_{{ client[0].clId }}/{{ client[0].clLogo }}"
+                                         src="{{ centrale | centraleUrl }}/UploadFichiers/Uploads/CLIENT_{{ client[0].clId }}/{{ client[0].clLogo }}"
                                          alt="Logo" style="width: 35%">
                                     <div class="middle">
                                         <div class="text-hover-edit cursor"><i class="paint large brush icon"></i></div>
@@ -371,10 +371,7 @@
                                        {#Action_client#}
                                        <div role="tabpanel" class="tab-pane fade active in " id="tab_content1"
                                             aria-labelledby="home-tab">
-                                           <a href="{{ path('new-task', {'c' : centrale, 'cl' : client[0].clId }) }}"
-                                              class="btn btn-success" role="button">Ajouter
-                                               une tâche</a>
-
+                                           <a href="{{ path('new-task', {'c' : centrale , 'cl' : client[0].clId }) }}" class="btn btn-success" role="button">Ajouter une tâche</a>
                                            <div class="ui items">
 
                                                {% if task %}

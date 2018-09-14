@@ -701,6 +701,10 @@ $(function () {
 
         let url = CURRENT_URL.replace("general", "notes/add");
 
+
+        console.log(url);
+
+
         $.ajax({
 
             // Adresse à laquelle la requête est envoyée
@@ -767,7 +771,6 @@ $(function () {
 
 
         let url = CURRENT_URL.substring(0, 53) + "/update/statut";
-        console.log(url);
 
         $.ajax({
 
