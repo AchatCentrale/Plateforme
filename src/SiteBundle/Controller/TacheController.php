@@ -273,6 +273,8 @@ class TacheController extends Controller
     {
 
 
+        $clientChoice = 0;
+
         $centrale = $request->query->get('c');
         $clientChoice = $request->query->get('cl');
         $mailer = $this->get('site.service.mailer');
@@ -337,6 +339,7 @@ class TacheController extends Controller
             [
                 'type' => $actionType,
                 'centrale' => $centrale,
+                'client_choice' => $clientChoice
             ]
         );
 
