@@ -50,7 +50,9 @@ class Mailer
     public function sendTaskNotification($id,$centrale)
     {
 
-        $sql = sprintf("SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ", $centrale);
+
+
+        $sql = sprintf("SELECT * FROM %s.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ", $centrale[0]["SO_DATABASE"]);
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(":id", $id);
         $stmt->execute();
