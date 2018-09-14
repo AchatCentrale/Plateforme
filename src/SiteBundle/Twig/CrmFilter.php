@@ -287,7 +287,6 @@ class CrmFilter extends \Twig_Extension
             $stmt->execute();
             $so_database = $stmt->fetchAll();
 
-            dump($so_database);
 
 
             if(!empty($so_database)){
