@@ -2040,24 +2040,25 @@ class BaseController extends Controller
         $helper = $this->get('site.service.client_services');
 
 
-        $sql = "SELECT *  FROM CENTRALE_ACHAT.dbo.Vue_All_Notes";
+        $sql = "SELECT *  FROM CENTRALE_ACHAT.dbo.Vue_All_Notes ORDER BY INS_DATE DESC";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-
-
         $note = $stmt->fetchAll();
+
+        dump($note);
         $ClientService = $this->get('site.service.client_services');
 
         foreach ($note as $notes) {
 
             $raison_soc = $helper->getTheClientRaisonSoc($notes['CL_ID'], $notes['SO_ID']);
 
-
         }
 
 
-        return $this->render('@Site/test.html.twig');
+        return $this->render('@Site/test.html.twig', [
+            "notes" => $note
+        ]);
 
 
     }
