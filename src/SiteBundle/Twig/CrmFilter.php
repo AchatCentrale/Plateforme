@@ -226,7 +226,6 @@ class CrmFilter extends \Twig_Extension
     {
 
 
-        dump($centrale);
 
         if (gettype($centrale) === "string") {
 
