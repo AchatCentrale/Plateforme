@@ -2053,7 +2053,6 @@ class BaseController extends Controller
 
             $raison_soc = $helper->getTheClientRaisonSoc($notes['CL_ID'], $notes['SO_ID']);
 
-            dump($raison_soc);
 
         }
 
