@@ -180,9 +180,7 @@ class FeedServices
     {
 
 
-        dump($this->getAction());
-        dump($this->getTickets());
-        dump($this->getNotes());
+
 
 
         if ($this->getAction() === null && $this->getTickets() === null && $this->getNotes() === null) {
