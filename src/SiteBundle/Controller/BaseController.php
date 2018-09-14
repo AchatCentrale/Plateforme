@@ -1344,8 +1344,6 @@ class BaseController extends Controller
 
 
 
-
-
         switch ($centrale) {
             case"ACHAT_CENTRALE":
                 $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
