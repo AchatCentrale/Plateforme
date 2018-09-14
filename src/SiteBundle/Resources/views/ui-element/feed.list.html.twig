@@ -36,7 +36,7 @@
                             <div class="header">Notes</div>
                             <div class="meta">{{ fe.insDate |Time }}</div>
                             <div class="description">
-                                {{ fe.cnNote }}
+                                {{ fe.cnNote | raw | convert_encoding('UTF-8', 'Windows-1252') }}
                             </div>
 
 
@@ -57,7 +57,7 @@
                                    class="archive cursor icon archive-task"></i></div>
                             <div class="meta">{{ fe.insDate |Time }}</div>
                             <div class="description">
-                                {{ fe.claNom }}
+                                {{ fe.claNom | raw | convert_encoding('UTF-8', 'Windows-1252') }}
                             </div>
 
 
