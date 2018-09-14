@@ -122,7 +122,7 @@ class TacheController extends Controller
         $sql = "UPDATE CLIENTS_TACHES
                 SET
                   CLA_STATUS = 0,
-                  MAJ_DATE = GETUTCDATE()
+                  MAJ_DATE = GETDATE()
                 WHERE CLA_ID = :id
                 ";
 
@@ -150,7 +150,7 @@ class TacheController extends Controller
         $sql = sprintf("UPDATE %s.dbo.CLIENTS_TACHES
                  SET
                   CLA_STATUS = 10,
-                  MAJ_DATE = GETUTCDATE(),
+                  MAJ_DATE = GETDATE(),
                   MAJ_USER = :user
                 WHERE CLA_ID = :id
                 ", $so_database);
@@ -173,7 +173,7 @@ class TacheController extends Controller
 
         return $this->redirectToRoute('client-general',[
             "id" => $resultRaisonSoc[0]["CL_ID"],
-            "centrale" => $so_database
+            "centrale" => $centrale
         ], 301);
 
 
@@ -304,7 +304,7 @@ class TacheController extends Controller
 
             $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
 
-            $sqlAddTask = sprintf("INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES (CL_ID, US_ID, CLA_TYPE, CLA_NOM, CLA_DESCR, CLA_ECHEANCE, CLA_PRIORITE, CLA_STATUS, INS_DATE, INS_USER) VALUES (:cl_id, :user, :type, :nom, :descr, :echeance, :priorite, 0, GETDATE(), :ins_user)", $so_database[0]["SO_DATABASE"]);
+            $sqlAddTask = sprintf("INSERT INTO %s.dbo.CLIENTS_TACHES (CL_ID, US_ID, CLA_TYPE, CLA_NOM, CLA_DESCR, CLA_ECHEANCE, CLA_PRIORITE, CLA_STATUS, INS_DATE, INS_USER) VALUES (:cl_id, :user, :type, :nom, :descr, :echeance, :priorite, 0, GETDATE(), :ins_user)", $so_database[0]["SO_DATABASE"]);
             $stmt = $conn->prepare($sqlAddTask);
             $stmt->bindValue('cl_id', $req->get('cla_cl'));
             $stmt->bindValue('user', $req->get('cla_us'));

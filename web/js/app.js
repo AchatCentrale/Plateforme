@@ -567,7 +567,7 @@ $(function () {
                                             </a>
                                         </div>
                                             <br/>
-                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + checkCentrale(aidyCentrale) + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p><b>TEAM</b></p>"}
+                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + aidyCentrale + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p><b>TEAM</b></p>"}
                                            
             
                                     </div>
