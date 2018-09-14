@@ -538,6 +538,7 @@ class ClientServices
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue(':mail', $mailUser);
         $stmt->execute();
+
         return $result[0] = $stmt->fetchAll();
     }
 

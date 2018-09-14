@@ -1819,6 +1819,7 @@ class BaseController extends Controller
         $user = $clientService->getUserName($result[0]['INS_USER']);
 
 
+
         if ($result) {
             $data = [
                 "id" => $result[0]['CN_ID'],
