@@ -185,10 +185,6 @@ class FournisseurController extends Controller
                         $descrLong = iconv("UTF-8", "WINDOWS-1252", $ligne[29]);
                         $qteCmd = iconv("UTF-8", "WINDOWS-1252", $ligne[33]);
                         $conditionnement = iconv("UTF-8", "WINDOWS-1252", $ligne[34]);
-                        $prixPubHt = iconv("UTF-8", "WINDOWS-1252", $ligne[35]);
-                        $prixPartHt = iconv("UTF-8", "WINDOWS-1252", $ligne[36]);
-                        $prixVc = iconv("UTF-8", "WINDOWS-1252", $ligne[37]);
-                        $remise = iconv("UTF-8", "WINDOWS-1252", $ligne[38]);
                         $type = iconv("UTF-8", "WINDOWS-1252", $ligne[30]);
                         $lien = iconv("UTF-8", "WINDOWS-1252", $ligne[31]);
                         $photo = iconv("UTF-8", "WINDOWS-1252", $ligne[39]);
@@ -236,10 +232,10 @@ class FournisseurController extends Controller
                                 $stmt->bindValue(':triptyque', $triptyque);
                                 $stmt->bindValue(':qteCmd', $qteCmd);
                                 $stmt->bindValue(':conditionnement', $conditionnement);
-                                $stmt->bindValue(':prixPubHt', $prixPubHt);
-                                $stmt->bindValue(':prixPartHt', $prixPartHt);
-                                $stmt->bindValue(':prixVc', $prixVc);
-                                $stmt->bindValue(':remise', $remise);
+                                $stmt->bindValue(':prixPubHt', $ligne[35]);
+                                $stmt->bindValue(':prixPartHt', $ligne[36]);
+                                $stmt->bindValue(':prixVc', $ligne[37]);
+                                $stmt->bindValue(':remise', $ligne[38]);
                                 $stmt->bindValue(':type', $type);
                                 $stmt->bindValue(':lien', $lien);
                                 $stmt->bindValue(':photo', $photo);
@@ -306,20 +302,17 @@ class FournisseurController extends Controller
                                 $stmt->bindValue(':triptyque', $triptyque);
                                 $stmt->bindValue(':qteCmd', $qteCmd);
                                 $stmt->bindValue(':conditionnement', $conditionnement);
-                                $stmt->bindValue(':prixPubHt', $prixPubHt);
-                                $stmt->bindValue(':prixPartHt', $prixPartHt);
-                                $stmt->bindValue(':prixVc', $prixVc);
-                                $stmt->bindValue(':remise', $remise);
+                                $stmt->bindValue(':prixPubHt', $ligne[35]);
+                                $stmt->bindValue(':prixPartHt', $ligne[36]);
+                                $stmt->bindValue(':prixVc', $ligne[37]);
+                                $stmt->bindValue(':remise', $ligne[38]);
                                 $stmt->bindValue(':type', $type);
                                 $stmt->bindValue(':lien', $lien);
                                 $stmt->bindValue(':photo', $photo);
-
-
-
                                 $stmt->execute();
 
 
-                                break;
+
 
 
                                 break;
