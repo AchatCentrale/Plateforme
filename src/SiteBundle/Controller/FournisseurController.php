@@ -188,7 +188,7 @@ class FournisseurController extends Controller
                         $type = iconv("UTF-8", "WINDOWS-1252", $ligne[30]);
                         $lien = iconv("UTF-8", "WINDOWS-1252", $ligne[31]);
 
-
+                        dump($ligne);
 
                         switch ($ligne[41]) {
                             case "A RAJOUTER":
