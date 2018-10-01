@@ -194,7 +194,6 @@ class FournisseurController extends Controller
                         $photo = iconv("UTF-8", "WINDOWS-1252", $ligne[39]);
 
 
-                        dump($ligne);
 
 
                         switch ($ligne[41]) {
