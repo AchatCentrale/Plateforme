@@ -236,10 +236,10 @@ class FournisseurController extends Controller
                                 $stmt->bindValue(':triptyque', $triptyque);
                                 $stmt->bindValue(':qteCmd', $qteCmd);
                                 $stmt->bindValue(':conditionnement', $conditionnement);
-                                $stmt->bindValue(':prixPubHt', $prixPubHt);
-                                $stmt->bindValue(':prixPartHt', $prixPartHt);
-                                $stmt->bindValue(':prixVc', $prixVc);
-                                $stmt->bindValue(':remise', $remise);
+                                $stmt->bindValue(':prixPubHt', $ligne[35]);
+                                $stmt->bindValue(':prixPartHt', $ligne[36]);
+                                $stmt->bindValue(':prixVc', $ligne[37]);
+                                $stmt->bindValue(':remise', $ligne[38]);
                                 $stmt->bindValue(':type', $type);
                                 $stmt->bindValue(':lien', $lien);
                                 $stmt->bindValue(':photo', $photo);
@@ -306,20 +306,17 @@ class FournisseurController extends Controller
                                 $stmt->bindValue(':triptyque', $triptyque);
                                 $stmt->bindValue(':qteCmd', $qteCmd);
                                 $stmt->bindValue(':conditionnement', $conditionnement);
-                                $stmt->bindValue(':prixPubHt', $prixPubHt);
-                                $stmt->bindValue(':prixPartHt', $prixPartHt);
-                                $stmt->bindValue(':prixVc', $prixVc);
-                                $stmt->bindValue(':remise', $remise);
+                                $stmt->bindValue(':prixPubHt', $ligne[35]);
+                                $stmt->bindValue(':prixPartHt', $ligne[36]);
+                                $stmt->bindValue(':prixVc', $ligne[37]);
+                                $stmt->bindValue(':remise', $ligne[38]);
                                 $stmt->bindValue(':type', $type);
                                 $stmt->bindValue(':lien', $lien);
                                 $stmt->bindValue(':photo', $photo);
-
-
-
                                 $stmt->execute();
 
 
-                                break;
+
 
 
                                 break;
