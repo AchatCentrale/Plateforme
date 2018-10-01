@@ -155,7 +155,7 @@ class FournisseurController extends Controller
                         switch ($ligne[41]) {
                             case "A RAJOUTER":
 
-
+                                $descr = iconv("French_CI_AS", "UTF-8", $ligne[28]);
 
                                 $sql = "INSERT INTO CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS (PART_ID, Fournisseur, Rayon, Famille, Filtre1, Valeur1, Filtre2, Valeur2, Filtre3, Valeur3, Filtre4, Valeur4, Filtre5, Valeur5, Filtre6, Valeur6, Filtre7, Valeur7, Filtre8, Valeur8, Filtre9, Valeur9, Filtre10, Valeur10, Ref_Fourn, Ref_Part, EAN, Nom_Produit, Descrip_Courte, Descrip_Longue, Triptyque, Qte_Cmde, Conditionnement, Prix_Public_HT, Prix_Part_HT, Prix_VC, Remise_PCT, Type_Lien, Lien, Photo, Variable_Session)
                             VALUES
@@ -189,7 +189,7 @@ class FournisseurController extends Controller
                                 $stmt->bindValue(':refPart', $ligne[25]);
                                 $stmt->bindValue(':ean', $ligne[26]);
                                 $stmt->bindValue(':nomProduit', $ligne[27]);
-                                $stmt->bindValue(':descrCourte',$ligne[28]);
+                                $stmt->bindValue(':descrCourte',$descr);
                                 $stmt->bindValue(':descrLong', $ligne[29]);
                                 $stmt->bindValue(':triptyque', $ligne[32]);
                                 $stmt->bindValue(':qteCmd', $ligne[33]);
