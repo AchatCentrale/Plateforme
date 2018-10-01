@@ -152,18 +152,23 @@ class FournisseurController extends Controller
 
                         $ligne = explode(";", $row[$i]);
 
+
+                        $descr = iconv("UTF-8", "WINDOWS-1252", $ligne[28]);
+                        $triptyque = iconv("UTF-8", "WINDOWS-1252", $ligne[32]);
+                        $fournisseur = iconv("UTF-8", "WINDOWS-1252", $ligne[1]);
+
+
+
                         switch ($ligne[41]) {
                             case "A RAJOUTER":
 
-                                $descr = iconv("UTF-8", "WINDOWS-1252", $ligne[28]);
-                                $triptyque = iconv("UTF-8", "WINDOWS-1252", $ligne[32]);
 
                                 $sql = "INSERT INTO CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS (PART_ID, Fournisseur, Rayon, Famille, Filtre1, Valeur1, Filtre2, Valeur2, Filtre3, Valeur3, Filtre4, Valeur4, Filtre5, Valeur5, Filtre6, Valeur6, Filtre7, Valeur7, Filtre8, Valeur8, Filtre9, Valeur9, Filtre10, Valeur10, Ref_Fourn, Ref_Part, EAN, Nom_Produit, Descrip_Courte, Descrip_Longue, Triptyque, Qte_Cmde, Conditionnement, Prix_Public_HT, Prix_Part_HT, Prix_VC, Remise_PCT, Type_Lien, Lien, Photo, Variable_Session)
                             VALUES
                               ( :id , :fournisseur ,  :rayon ,  :famille ,  :filtre1 ,  :valeur1 ,  :filtre2 ,  :valeur2 ,  :filtre3 ,  :valeur3 ,  :filtre4 ,  :valeur4 ,  :filtre5 ,  :valeur5 ,  :filtre6 ,  :valeur6 , :filtre7 ,  :valeur7 ,  :filtre8 ,  :valeur8 ,  :filtre9 ,  :valeur9 ,  :filtre10 ,  :valeur10 ,  :refFour ,  :refPart ,  :ean ,  :nomProduit ,  :descrCourte ,  :descrLong ,  :triptyque ,  :qteCmd, :conditionnement, :prixPubHt,  :prixPartHt ,  :prixVc  , :remise ,  :type ,  :lien ,  :photo , 123456  )";
                                 $stmt = $conn->prepare($sql);
                                 $stmt->bindValue(':id', 1);
-                                $stmt->bindValue(':fournisseur', $ligne[1]);
+                                $stmt->bindValue(':fournisseur', $fournisseur);
                                 $stmt->bindValue(':rayon', $ligne[2]);
                                 $stmt->bindValue(':famille', $ligne[3]);
                                 $stmt->bindValue(':filtre1', $ligne[4]);
