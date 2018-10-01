@@ -187,7 +187,6 @@ class FournisseurController extends Controller
                         $conditionnement = iconv("UTF-8", "WINDOWS-1252", $ligne[34]);
                         $type = iconv("UTF-8", "WINDOWS-1252", $ligne[30]);
                         $lien = iconv("UTF-8", "WINDOWS-1252", $ligne[31]);
-                        $photo = iconv("UTF-8", "WINDOWS-1252", $ligne[39]);
 
 
 
@@ -238,7 +237,7 @@ class FournisseurController extends Controller
                                 $stmt->bindValue(':remise', $ligne[38]);
                                 $stmt->bindValue(':type', $type);
                                 $stmt->bindValue(':lien', $lien);
-                                $stmt->bindValue(':photo', $photo);
+                                $stmt->bindValue(':photo', $ligne[39]);
                                 $stmt->execute();
 
 
@@ -308,7 +307,7 @@ class FournisseurController extends Controller
                                 $stmt->bindValue(':remise', $ligne[38]);
                                 $stmt->bindValue(':type', $type);
                                 $stmt->bindValue(':lien', $lien);
-                                $stmt->bindValue(':photo', $photo);
+                                $stmt->bindValue(':photo', $ligne[39]);
                                 $stmt->execute();
 
 
