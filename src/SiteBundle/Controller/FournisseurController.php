@@ -189,7 +189,7 @@ class FournisseurController extends Controller
                                 $stmt->bindValue(':refPart', $ligne[25]);
                                 $stmt->bindValue(':ean', $ligne[26]);
                                 $stmt->bindValue(':nomProduit', $ligne[27]);
-                                $stmt->bindValue(':descrCourte', mb_convert_encoding($ligne[28], 'UCS-2LE', mb_detect_encoding($ligne[28], mb_detect_order(), true)));
+                                $stmt->bindValue(':descrCourte',$ligne[28]);
                                 $stmt->bindValue(':descrLong', $ligne[29]);
                                 $stmt->bindValue(':triptyque', $ligne[32]);
                                 $stmt->bindValue(':qteCmd', $ligne[33]);
