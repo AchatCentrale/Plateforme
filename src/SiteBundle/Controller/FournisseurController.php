@@ -139,7 +139,6 @@ class FournisseurController extends Controller
 
                     $header = explode(";", $row[0]);
 
-                    dump($row);
 
                     $sqlDelete = "DELETE FROM CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS";
                     $stmtDelete = $conn->prepare($sqlDelete);
