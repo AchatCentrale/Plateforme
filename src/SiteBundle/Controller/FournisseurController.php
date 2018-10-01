@@ -185,10 +185,6 @@ class FournisseurController extends Controller
                         $descrLong = iconv("UTF-8", "WINDOWS-1252", $ligne[29]);
                         $qteCmd = iconv("UTF-8", "WINDOWS-1252", $ligne[33]);
                         $conditionnement = iconv("UTF-8", "WINDOWS-1252", $ligne[34]);
-                        $prixPubHt = iconv("UTF-8", "WINDOWS-1252", $ligne[35]);
-                        $prixPartHt = iconv("UTF-8", "WINDOWS-1252", $ligne[36]);
-                        $prixVc = iconv("UTF-8", "WINDOWS-1252", $ligne[37]);
-                        $remise = iconv("UTF-8", "WINDOWS-1252", $ligne[38]);
                         $type = iconv("UTF-8", "WINDOWS-1252", $ligne[30]);
                         $lien = iconv("UTF-8", "WINDOWS-1252", $ligne[31]);
                         $photo = iconv("UTF-8", "WINDOWS-1252", $ligne[39]);
