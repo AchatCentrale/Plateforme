@@ -523,449 +523,108 @@ class BaseController extends Controller
     {
 
 
+
         $conn = $this->get('database_connection');
 
-        $ok = "ok";
+
+        $clientService = $this->get('site.service.client_services');
+
+        $so_database = $clientService->getCentraleDB($centrale);
 
 
-        switch ($centrale) {
-
-            case 1:
-            case "ACHAT_CENTRALE":
 
 
-                $restresult = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy([
-                        'clId' => $id
-                    ]
-                );
+        $sqlClient = sprintf("SELECT * FROM %s.dbo.CLIENTS WHERE CL_ID = :id", $so_database);
 
-                $sql = 'SELECT *
+        $stmtClient = $conn->prepare($sqlClient);
+        $stmtClient->bindValue('id', $id);
+        $stmtClient->execute();
+        $restresult = $stmtClient->fetchAll();
+
+
+
+        $sql = 'SELECT *
                         FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES
                        WHERE CL_ID = :id
                       AND CLA_STATUS <> 10
                       ORDER BY CLA_STATUS ASC
                         ';
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-
-
-                $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsUsers')->findBy([
-                        'cl' => $id
-                    ]
-                );
-
-                $region = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Regions')->findBy([
-                    'reId' => $restresult[0]->getReId(),
-                ]);
-
-                $activite = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Activites')->findBy([
-                    'acId' => $restresult[0]->getClActivite(),
-                ]);
-
-                $groupe = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Groupe')->findBy([
-                    'grId' => $restresult[0]->getClGroupe()
-                ]);
-
-
-                $notes = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
-                    'clId' => $id,
-                ], [
-                    'insDate' => 'DESC'
-                ]);
-                $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
-                    'soId' => 1,
-                ]);
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('id', $id);
+        $stmt->execute();
+        $task = $stmt->fetchAll();
 
-                $profil = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ProfilsUsers')->findAll();
 
+        $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsUsers')->findBy([
+                'cl' => $id
+            ]
+        );
 
-                $tacheArchive = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches')->findBy([
-                        'clId' => $id,
-                        'claStatus' => 10
-                    ]
-                );
+        $region = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Regions')->findBy([
+            'reId' => $restresult[0]["RE_ID"],
+        ]);
 
+        $activite = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Activites')->findBy([
+            'acId' => $restresult[0]["CL_ACTIVITE"],
+        ]);
 
-                $sqlForTag = 'SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
+        $groupe = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Groupe')->findBy([
+            'grId' => $restresult[0]["CL_GROUPE"],
+        ]);
 
-                $stmtForTag = $conn->prepare($sqlForTag);
-                $stmtForTag->bindValue('id', $id);
-                $stmtForTag->execute();
-                $tag = $stmtForTag->fetchAll();
-
-                return $this->render(
-                    '@Site/Base/client.general.html.twig',
-                    [
-                        "client" => $restresult,
-                        "user" => $user,
-                        "tache" => $task,
-                        "region" => $region,
-                        "activite" => $activite,
-                        "groupe" => $groupe,
-                        "note" => $notes,
-                        "centrale" => $centrale,
-                        "centrale_link" => "achatcentrale",
-                        "fonction" => $fonction,
-                        "profil" => $profil,
-                        "tacheArchiv" => $tacheArchive,
-                        "tag" => $tag
-
-                    ]
-                );
-
-
-                break;
-            case 4:
-            case "CENTRALE_FUNECAP":
-                $restresult = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findBy([
-                        'clId' => $id
-                    ]
-                );
-
-                $sql = 'SELECT *
-                  FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES
-                  WHERE CL_ID = :id
-                  AND CLA_STATUS <> 10
-                  ORDER BY CLA_STATUS ASC
-                  ';
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-
-                $task = $stmt->fetchAll();
-
-
-                $user = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsUsers')->findBy([
-                        'cl' => $id
-                    ]
-                );
-
-                $region = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Regions')->findBy([
-                    'reId' => $restresult[0]->getReId(),
-                ]);
 
-                $activite = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Activites')->findBy([
-                    'acId' => $restresult[0]->getClActivite(),
-                ]);
+        $notes = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
+            'clId' => $id,
+        ], [
+            'insDate' => 'DESC'
+        ]);
+        $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
+            'soId' => 1,
+        ]);
 
-                $groupe = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Groupe')->findBy([
-                    'grId' => $restresult[0]->getClGroupe()
-                ]);
+        $profil = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ProfilsUsers')->findAll();
 
 
-                $notes = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsNotes')->findBy([
-                    'clId' => $id,
+        $tacheArchive = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches')->findBy([
+                'clId' => $id,
+                'claStatus' => 10
+            ]
+        );
 
-                ], [
-                    'insDate' => 'ASC'
-                ]);
-                $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
-                    'soId' => 1,
-                ]);
 
-                $profil = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ProfilsUsers')->findAll();
+        $sqlForTag = sprintf('SELECT * FROM %s.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC', $so_database);
 
+        $stmtForTag = $conn->prepare($sqlForTag);
+        $stmtForTag->bindValue('id', $id);
+        $stmtForTag->execute();
+        $tag = $stmtForTag->fetchAll();
 
-                $tacheArchive = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsTaches')->findBy([
-                        'clId' => $id,
-                        'claStatus' => 10
-                    ]
-                );
+        return $this->render(
+            '@Site/Base/client.general.html.twig',
+            [
+                "client" => $restresult,
+                "user" => $user,
+                "tache" => $task,
+                "region" => $region,
+                "activite" => $activite,
+                "groupe" => $groupe,
+                "note" => $notes,
+                "centrale" => $centrale,
+                "centrale_link" => "achatcentrale",
+                "fonction" => $fonction,
+                "profil" => $profil,
+                "tacheArchiv" => $tacheArchive,
+                "tag" => $tag
 
+            ]
+        );
 
-                $sqlForTag = 'SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
 
-                $stmtForTag = $conn->prepare($sqlForTag);
-                $stmtForTag->bindValue('id', $id);
-                $stmtForTag->execute();
-                $tag = $stmtForTag->fetchAll();
-
-
-                return $this->render(
-                    '@Site/Base/client.general.html.twig',
-                    [
-                        "client" => $restresult,
-                        "user" => $user,
-                        "tache" => $task,
-                        "region" => $region,
-                        "activite" => $activite,
-                        "groupe" => $groupe,
-                        "note" => $notes,
-                        "centrale" => $centrale,
-                        "centrale_link" => "centrale-funecap",
-                        "fonction" => $fonction,
-                        "profil" => $profil,
-                        "tacheArchiv" => $tacheArchive,
-                        "tag" => $tag
-
-
-                    ]
-                );
-                break;
-            case 6:
-            case "CENTRALE_ROC_ECLERC":
-                $restresult = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
-                        'clId' => $id
-                    ]
-                );
-
-                $sql = 'SELECT *
-                FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES
-                  WHERE CL_ID = :id
-                AND CLA_STATUS <> 10
-                ORDER BY CLA_STATUS ASC
-                ';
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-
-                $task = $stmt->fetchAll();
-
-
-                $user = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsUsers')->findBy([
-                    'cl' => $id
-                ]);
-
-                $region = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Regions')->findBy([
-                    'reId' => $restresult[0]->getReId(),
-                ]);
 
-                $activite = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Activites')->findBy([
-                    'acId' => $restresult[0]->getClActivite(),
-                ]);
 
-                $groupe = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Groupe')->findBy([
-                    'grId' => $restresult[0]->getClGroupe()
-                ]);
 
 
-                $notes = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsNotes')->findBy([
-                    'clId' => $id,
-
-                ], [
-                    'insDate' => 'DESC'
-                ]);
-
-
-                $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
-                    'soId' => 1,
-                ]);
-
-                $profil = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ProfilsUsers')->findAll();
-
-                $tacheArchive = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsTaches')->findBy([
-                        'clId' => $id,
-                        'claStatus' => 10
-                    ]
-                );
-
-                $sqlForTag = 'SELECT * FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
-
-                $stmtForTag = $conn->prepare($sqlForTag);
-                $stmtForTag->bindValue('id', $id);
-                $stmtForTag->execute();
-                $tag = $stmtForTag->fetchAll();
-
-
-                return $this->render(
-                    '@Site/Base/client.general.html.twig',
-                    [
-                        "client" => $restresult,
-                        "user" => $user,
-                        "tache" => $task,
-                        "region" => $region,
-                        "activite" => $activite,
-                        "groupe" => $groupe,
-                        "note" => $notes,
-                        "centrale" => $centrale,
-                        "centrale_link" => "centrale-roc-eclerc",
-                        "fonction" => $fonction,
-                        "profil" => $profil,
-                        "tacheArchiv" => $tacheArchive,
-                        "tag" => $tag
-
-                    ]
-                );
-                break;
-            case 2:
-            case "CENTRALE_GCCP":
-                $restresult = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy([
-                        'clId' => $id
-                    ]
-                );
-
-                $sql = 'SELECT *
-                FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES
-                  WHERE CL_ID = :id
-                  AND CLA_STATUS <> 10
-
-                ORDER BY CLA_STATUS ASC
-                ';
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-
-                $task = $stmt->fetchAll();
-
-
-                $user = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsUsers')->findBy([
-                    'cl' => $id
-                ]);
-
-                $region = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Regions')->findBy([
-                    'reId' => $restresult[0]->getReId(),
-                ]);
-
-                $activite = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Activites')->findBy([
-                    'acId' => $restresult[0]->getClActivite(),
-                ]);
-
-                $groupe = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Groupe')->findBy([
-                    'grId' => $restresult[0]->getClGroupe()
-                ]);
-
-
-                $notes = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsNotes')->findBy([
-                    'clId' => $id,
-
-                ], [
-                    'insDate' => 'DESC'
-                ]);
-
-
-                $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
-                    'soId' => 1,
-                ]);
-
-                $profil = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ProfilsUsers')->findAll();
-
-
-                $tacheArchive = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsTaches')->findBy([
-                        'clId' => $id,
-                        'claStatus' => 10
-                    ]
-                );
-
-                $sqlForTag = 'SELECT * FROM CENTRALE_GCCP.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
-
-                $stmtForTag = $conn->prepare($sqlForTag);
-                $stmtForTag->bindValue('id', $id);
-                $stmtForTag->execute();
-                $tag = $stmtForTag->fetchAll();
-
-
-                return $this->render(
-                    '@Site/Base/client.general.html.twig',
-                    [
-                        "client" => $restresult,
-                        "user" => $user,
-                        "tache" => $task,
-                        "region" => $region,
-                        "activite" => $activite,
-                        "groupe" => $groupe,
-                        "note" => $notes,
-                        "centrale" => $centrale,
-                        "centrale_link" => "centrale-gccp",
-                        "fonction" => $fonction,
-                        "profil" => $profil,
-                        "tacheArchiv" => $tacheArchive,
-                        "tag" => $tag
-
-                    ]
-                );
-                break;
-            case 5:
-            case "CENTRALE_PFPL":
-                $restresult = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy([
-                        'clId' => $id
-                    ]
-                );
-
-                $sql = 'SELECT *
-                FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES
-                  WHERE CL_ID = :id
-                AND CLA_STATUS <> 10
-                ORDER BY CLA_STATUS ASC
-                ';
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-
-                $task = $stmt->fetchAll();
-
-
-                $user = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsUsers')->findBy([
-                    'cl' => $id
-                ]);
-
-                $region = "Aucne région pour le moment";
-
-                $activite = "Aucune activité pour le moment";
-
-                $groupe = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Groupe')->findBy([
-                    'grId' => $restresult[0]->getClGroupe()
-                ]);
-
-
-                $notes = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsNotes')->findBy([
-                    'clId' => $id,
-
-                ], [
-                    'insDate' => 'DESC'
-                ]);
-
-
-                $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
-                    'soId' => 1,
-                ]);
-
-                $profil = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ProfilsUsers')->findAll();
-
-
-                $tacheArchive = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsTaches')->findBy([
-                        'clId' => $id,
-                        'claStatus' => 10
-                    ]
-                );
-
-                $sqlForTag = 'SELECT * FROM CENTRALE_PFPL.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC';
-
-                $stmtForTag = $conn->prepare($sqlForTag);
-                $stmtForTag->bindValue('id', $id);
-                $stmtForTag->execute();
-                $tag = $stmtForTag->fetchAll();
-
-
-                return $this->render(
-                    '@Site/Base/client.general.html.twig',
-                    [
-                        "client" => $restresult,
-                        "user" => $user,
-                        "tache" => $task,
-                        "region" => $region,
-                        "activite" => $activite,
-                        "groupe" => $groupe,
-                        "note" => $notes,
-                        "centrale" => $centrale,
-                        "centrale_link" => "centrale-pfpl",
-                        "fonction" => $fonction,
-                        "profil" => $profil,
-                        "tacheArchiv" => $tacheArchive,
-                        "tag" => $tag
-
-                    ]
-                );
-                break;
-            default:
-                break;
-        }
 
     }
 
@@ -1796,17 +1455,16 @@ class BaseController extends Controller
 
         $note = $request->get('note');
 
-        $conn = $this->get('database_connection');
-
         $clientService = $this->get('site.service.client_services');
 
         $so_database = $clientService->getCentraleDB($idCentrale);
 
-        $con = $this->get('database_connection');
+        $conn = $this->get('database_connection');
 
         $sql = sprintf("UPDATE %s.dbo.CLIENTS_NOTES
-                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), INS_USER = :user
+                    SET CN_NOTE = :note, MAJ_DATE = GETDATE(), MAJ_USER = :user
                     WHERE CN_ID = :id", $so_database);
+
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $id);
@@ -2046,7 +1704,6 @@ class BaseController extends Controller
         $stmt->execute();
         $note = $stmt->fetchAll();
 
-        dump($note);
         $ClientService = $this->get('site.service.client_services');
 
         foreach ($note as $notes) {

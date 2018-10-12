@@ -380,16 +380,23 @@ class CrmFilter extends \Twig_Extension
     public function phoneFilter($number)
     {
 
+
+
+        dump("numero de tel : ".  $number);
+
+
         if (empty($number)) {
             return "À remplir";
+        }else {
+            if (strlen($number) == 10) {
+                return chunk_split($number, 2, ' ');
+            } else {
+                return $number;
+            }
         }
 
 
-        if (strlen($number) == 10) {
-            return chunk_split($number, 2, ' ');
-        } else {
-            return $number;
-        }
+
     }
 
     public function siretFilter($siret)
