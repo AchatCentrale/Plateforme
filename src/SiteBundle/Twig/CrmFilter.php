@@ -382,7 +382,6 @@ class CrmFilter extends \Twig_Extension
 
 
 
-        dump("numero de tel : ".  $number);
 
 
         if (empty($number)) {
