@@ -1002,12 +1002,13 @@ $(function () {
         let id = $(this).data('id');
         let idCentrale = $(this).data('centrale');
 
+        console.log(idCentrale);
+
         let aidy = Number(id);
         let aidyCentrale = Number(idCentrale);
 
 
         let url = CURRENT_URL + "note/detail/" + aidyCentrale + "/" + aidy;
-        console.log("note");
 
 
         $.ajax({
@@ -1068,7 +1069,6 @@ $(function () {
                 let content = $('.note-description').html();
 
                 $('.modifier-note-home').on('click', function (e) {
-                    console.log('modifier-note-home');
 
                     $('.note-content-home').html('');
                     let tpl = `<div class="ui form"><div class="field"><label>Modifier la note</label><textarea class="text-content-update-note" style="margin-top: 0px; margin-bottom: 0px; height: 112px;">${content}</textarea></div><button class="ui button modifier-note-home">Enregistrer</button></div>`;

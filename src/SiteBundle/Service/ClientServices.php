@@ -118,6 +118,8 @@ class ClientServices
 
 
     public function getCentraleDB($so_id){
+
+
         $sqlCentrale = "SELECT SO_DATABASE FROM CENTRALE_ACHAT.dbo.SOCIETES
                                     WHERE SO_ID = :so_id";
         $stmt = $this->connection->prepare($sqlCentrale);
