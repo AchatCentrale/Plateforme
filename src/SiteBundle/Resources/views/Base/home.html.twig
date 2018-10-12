@@ -4,8 +4,6 @@
 
     {{ parent() }}
 
-
-
 {% endblock stylesheets %}
 
 {% block top_content_header %}
@@ -115,7 +113,7 @@
                                         {% for n in note %}
 
                                             <li data-id="{{ n['CN_ID'] }}" data-centrale="{{ n['SO_ID'] }}" class="cursor detail-note-home">
-                                                <p><b>{{ n['INS_DATE'] | dateString }}</b> --  {{ n['CN_NOTE'] | limitLength }} </p>
+                                                <p><b>{{ n['INS_DATE'] | dateString }}</b> --  {{ n['CN_NOTE'] |  convert_encoding('UTF-8', 'Windows-1252') | limitLength }} </p>
                                             </li>
                                         {% endfor %}
                                     </ul>
