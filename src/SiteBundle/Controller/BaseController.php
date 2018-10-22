@@ -543,12 +543,11 @@ class BaseController extends Controller
 
 
 
-        $sql = 'SELECT *
-                        FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES
-                       WHERE CL_ID = :id
-                      AND CLA_STATUS <> 10
-                      ORDER BY CLA_STATUS ASC
-                        ';
+        $sql = sprintf('SELECT *
+                FROM %s.dbo.CLIENTS_TACHES
+                WHERE CL_ID = :id
+                AND CLA_STATUS <> 10
+                ORDER BY CLA_STATUS ASC' , $so_database);
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue('id', $id);
@@ -556,10 +555,15 @@ class BaseController extends Controller
         $task = $stmt->fetchAll();
 
 
-        $user = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsUsers')->findBy([
-                'cl' => $id
-            ]
-        );
+
+        $sqlUser = sprintf("SELECT * FROM %s.dbo.CLIENTS_USERS WHERE CL_ID = :id", $so_database);
+
+        $stmtUser = $conn->prepare($sqlUser);
+        $stmtUser->bindValue('id', $id);
+        $stmtUser->execute();
+        $user = $stmtUser->fetchAll();
+
+
 
         $region = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Regions')->findBy([
             'reId' => $restresult[0]["RE_ID"],

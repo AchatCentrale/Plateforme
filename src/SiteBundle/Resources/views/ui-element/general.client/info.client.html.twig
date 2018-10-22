@@ -96,13 +96,13 @@
                                 <div class="item">
                                     <img class="ui avatar image image-avatar-list"  src="https://semantic-ui.com/images/avatar/large/christian.jpg">
                                     <div class="content content-list-user">
-                                        <a href="//www.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u.ccMail }}&PASS={{ u.ccPass }}">
+                                        <a href="//www.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u["CC_MAIL"] }}&PASS={{ u["CC_PASS"] }}">
                                             <i class="user icon"></i>
-                                            {{ u.ccPrenom |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u.ccNom |  convert_encoding('UTF-8', 'Windows-1252') }}
+                                            {{ u["CC_PRENOM"] |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u["CC_NOM"] |  convert_encoding('UTF-8', 'Windows-1252') }}
                                         </a>
-                                        <div class="description"><i class="mail icon"></i>{{ u.ccMail }}</div>
-                                        <div class="description"><i class="phone icon"></i>{{ u.ccTel  | phone   }}</div>
-                                        <div class="description"><i class="phone icon square"></i>{{ u.ccGsm | phone  }}
+                                        <div class="description"><i class="mail icon"></i>{{ u["CC_MAIL"] }}</div>
+                                        <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone   }}</div>
+                                        <div class="description"><i class="phone icon square"></i>{{ u["CC_TEL"] | phone  }}
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +114,6 @@
                     </div>
 
                 </div>
-
 
                 <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="ui equal width grid raison-soc">
@@ -183,6 +182,10 @@
 
 
                     </div>
+
+
+
+
 
 
                     <div class="detail-client">
