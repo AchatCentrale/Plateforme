@@ -236,7 +236,7 @@
                                     {% else %}
                                         {% if activite %}
                                             <p class="cursor label-background"
-                                               data-index="activite">{{ activite[0].acDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
+                                               data-index="activite">{{ activite[0]["AC_DESCR"] |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
                                         {% else %}
                                             <p class="cursor label-background"
                                                data-index="activite">Pas d'activité enregistrer encore</p>
@@ -253,7 +253,7 @@
                                     <p class="title-detail-client ">Groupe</p>
 
                                     {% if groupe %}
-                                        <p class="ui label large green">{{ groupe[0].grDescr |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
+                                        <p class="ui label large green">{{ groupe[0]["GR_DESCR"] |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
                                         <br>
                                     {% else %}
                                         <p></p>
@@ -274,7 +274,7 @@
                                     {% else %}
                                         {% if region %}
                                             <p class="cursor label-background"
-                                               data-index="region">{{ region[0].reNom }}</p>
+                                               data-index="region">{{ region[0]["RE_NOM"] }}</p>
                                         {% else %}
                                             <p class="cursor label-background"
                                                data-index="region">Pas de region enregistrer encore</p>
@@ -667,7 +667,7 @@
                             <label for="fonction-user">Fonction</label>
                             <select name="data-user[]" class="form-control data-update-client">
                                 {% for fonctions in fonction %}
-                                    <option value="{{ fonctions.foDescr | convert_encoding('UTF-8', 'Windows-1252') }}">{{ fonctions.foDescr | convert_encoding('UTF-8', 'Windows-1252') }}</option>
+                                    <option value="{{ fonctions["FO_DESCR"] | convert_encoding('UTF-8', 'Windows-1252') }}">{{ fonctions["FO_DESCR"] | convert_encoding('UTF-8', 'Windows-1252') }}</option>
 
                                 {% endfor %}
                             </select>
@@ -677,12 +677,11 @@
                             <label for="profil-user">Profil utilisateur</label>
                             <select name="data-user[]" class="form-control data-update-client">
                                 {% for profils in profil %}
-                                    <option value="{{ profils.puId }}">{% if profils.puPole %}
-                                            {{ profils.puPole | convert_encoding('UTF-8', 'Windows-1252') }} /
+                                    <option value="{{ profils["PU_ID"] }}">{% if profils["PU_POLE"] %}
+                                            {{ profils["PU_POLE"] | convert_encoding('UTF-8', 'Windows-1252') }} /
                                         {% else %}
 
-                                        {% endif %} {{ profils.puDescr | convert_encoding('UTF-8', 'Windows-1252') }}</option>
-
+                                        {% endif %} {{ profils["PU_DESCR"] | convert_encoding('UTF-8', 'Windows-1252') }}</option>
                                 {% endfor %}
                             </select>
                         </div>

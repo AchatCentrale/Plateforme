@@ -4,7 +4,6 @@ imports:
     - { resource: services.yml }
     - { resource: "@SiteBundle/Resources/config/services.yml" }
     - { resource: "@FunecapBundle/Resources/config/services.yml" }
-    - { resource: "@AchatCentraleBundle/Resources/config/services.yml" }
     - { resource: "@RocEclercBundle/Resources/config/services.yml" }
     - { resource: "@GccpBundle/Resources/config/services.yml" }
     - { resource: "@PfplBundle/Resources/config/services.yml" }
@@ -96,17 +95,6 @@ doctrine:
                      ansi_nulls: on
                      ansi_warnings: on
                      20: false
-            achat_centrale:
-                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.144"
-                user:         "AC_JBAGOSTIN"
-                password:     "35H7Hjvy"
-                dbname:       "CENTRALE_ACHAT"
-                charset:  UTF-8
-                options:
-                    ansi_nulls: on
-                    ansi_warnings: on
-                    20: false
             roc_eclerc:
                 driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
                 host:         "185.29.149.144"
@@ -151,7 +139,17 @@ doctrine:
                     ansi_nulls: on
                     ansi_warnings: on
                     20: false
-
+            centrale_achat_v3:
+                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
+                host: "185.212.225.142"
+                user:         "AC_JBAGOSTIN"
+                password:     "35H7Hjvy"
+                dbname:       "CENTRALE_PRODUITS"
+                charset:  UTF-8
+                options:
+                    ansi_nulls: on
+                    ansi_warnings: on
+                    20: false
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -169,10 +167,6 @@ doctrine:
                 connection: centrale_funecap
                 mappings:
                     FunecapBundle : ~
-            achat_centrale:
-                connection: achat_centrale
-                mappings:
-                    AchatCentraleBundle: ~
             roc_eclerc:
                 connection: roc_eclerc
                 mappings:
