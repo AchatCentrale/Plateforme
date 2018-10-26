@@ -15,10 +15,7 @@ action:
     type:   rest
     resource: "@AchatCentraleCrmBundle/Controller/ActionController.php"
 
-achat_centrale:
-    resource: "@AchatCentraleBundle/Controller/"
-    type:     annotation
-    prefix:   /
+
 
 pfpl:
     resource: "@PfplBundle/Controller/"

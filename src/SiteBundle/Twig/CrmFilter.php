@@ -383,7 +383,6 @@ class CrmFilter extends \Twig_Extension
 
 
 
-
         if (empty($number)) {
             return "À remplir";
         }else {
@@ -450,9 +449,9 @@ class CrmFilter extends \Twig_Extension
     public function typeFilter($type)
     {
 
-        $em = $this->doctrine->getManager('achat_centrale');
+        $em = $this->doctrine->getManager('centrale_achat_jb');
 
-        $typee = $em->getRepository('AchatCentraleBundle:ActionType')->findBy(
+        $typee = $em->getRepository('AchatCentraleCrmBundle:ActionType')->findBy(
             [
                 'acId' => $type,
             ]

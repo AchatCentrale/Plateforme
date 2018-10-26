@@ -1,6 +1,6 @@
 security:
     encoders:
-        AchatCentraleBundle\Entity\Users:
+        AchatCentrale\CrmBundle\Entity\Users:
              algorithm:            plaintext
              ignore_case:          false
 
@@ -12,9 +12,9 @@ security:
     providers:
         default:
             entity:
-                class: AchatCentraleBundle:Users
+                class: AchatCentraleCrmBundle:Users
                 property: usMail
-                manager_name: achat_centrale
+                manager_name: centrale_achat_jb
 
     firewalls:
         main:
@@ -33,6 +33,5 @@ security:
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
-
         - { path: ^/taches, role: ROLE_USER }
 

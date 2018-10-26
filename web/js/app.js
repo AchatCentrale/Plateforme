@@ -702,7 +702,6 @@ $(function () {
         let url = CURRENT_URL.replace("general", "notes/add");
 
 
-        console.log(url);
 
 
         $.ajax({

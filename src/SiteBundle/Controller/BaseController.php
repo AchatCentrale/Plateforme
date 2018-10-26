@@ -524,7 +524,7 @@ class BaseController extends Controller
 
 
 
-        $conn = $this->get('database_connection');
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
         $clientService = $this->get('site.service.client_services');
@@ -564,38 +564,59 @@ class BaseController extends Controller
         $user = $stmtUser->fetchAll();
 
 
+        $sqlRegion = sprintf("SELECT * FROM %s.dbo.REGIONS WHERE RE_ID = :re_id", $so_database);
 
-        $region = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Regions')->findBy([
-            'reId' => $restresult[0]["RE_ID"],
-        ]);
-
-        $activite = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Activites')->findBy([
-            'acId' => $restresult[0]["CL_ACTIVITE"],
-        ]);
-
-        $groupe = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Groupe')->findBy([
-            'grId' => $restresult[0]["CL_GROUPE"],
-        ]);
+        $stmtRegions = $conn->prepare($sqlRegion);
+        $stmtRegions->bindValue('re_id', $restresult[0]["RE_ID"]);
+        $stmtRegions->execute();
+        $region = $stmtRegions->fetchAll();
 
 
-        $notes = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
-            'clId' => $id,
-        ], [
-            'insDate' => 'DESC'
-        ]);
-        $fonction = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Fonctions')->findBy([
-            'soId' => 1,
-        ]);
+        $sqlActivite = sprintf("SELECT * FROM %s.dbo.ACTIVITES WHERE AC_ID = :ac_id", $so_database);
 
-        $profil = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ProfilsUsers')->findAll();
+        $stmtActivite = $conn->prepare($sqlActivite);
+        $stmtActivite->bindValue('ac_id', $restresult[0]["CL_ACTIVITE"]);
+        $stmtActivite->execute();
+        $activite = $stmtActivite->fetchAll();
 
 
-        $tacheArchive = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches')->findBy([
-                'clId' => $id,
-                'claStatus' => 10
-            ]
-        );
 
+        $sqlGroupe = sprintf("SELECT * FROM %s.dbo.GROUPE WHERE GR_ID = :gr_id", $so_database);
+
+        $stmtGroupe = $conn->prepare($sqlGroupe);
+        $stmtGroupe->bindValue('gr_id', $restresult[0]["CL_GROUPE"]);
+        $stmtGroupe->execute();
+        $groupe = $stmtGroupe->fetchAll();
+
+
+        $sqlNotes = sprintf("SELECT * FROM %s.dbo.CLIENTS_NOTES WHERE CL_ID = :cl_id ORDER BY INS_DATE DESC", $so_database);
+
+        $stmtNotes = $conn->prepare($sqlNotes);
+        $stmtNotes->bindValue('cl_id', $id);
+        $stmtNotes->execute();
+        $notes = $stmtNotes->fetchAll();
+
+
+
+        $sqlFonction = sprintf("SELECT * FROM %s.dbo.FONCTIONS WHERE SO_ID = 1 ", $so_database);
+
+        $stmtFonctions = $conn->prepare($sqlFonction);
+        $stmtFonctions->execute();
+        $fonction = $stmtFonctions->fetchAll();
+
+
+        $sqlProfil = sprintf("SELECT * FROM %s.dbo.PROFILS_USERS", $so_database);
+
+        $stmtProfil = $conn->prepare($sqlProfil);
+        $stmtProfil->execute();
+        $profil = $stmtProfil->fetchAll();
+
+        $sqlTachesArchive = sprintf("SELECT * FROM %s.dbo.CLIENTS_TACHES WHERE CL_ID = :cl_id AND CLA_STATUS = 10", $so_database);
+
+        $stmtTachesArchive = $conn->prepare($sqlTachesArchive);
+        $stmtTachesArchive->bindValue('cl_id', $id);
+        $stmtTachesArchive->execute();
+        $tacheArchive = $stmtTachesArchive->fetchAll();
 
         $sqlForTag = sprintf('SELECT * FROM %s.dbo.CLIENTS_TAG WHERE CL_ID = :id ORDER BY INS_DATE DESC', $so_database);
 
@@ -1010,8 +1031,8 @@ class BaseController extends Controller
 
         $content_notes = $request->request->get('content_note');
 
-        $sql = sprintf("INSERT INTO %s.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
-                        VALUES ( :id, :content, GETUTCDATE(), :user)", $so_database);
+        $sql = "INSERT INTO CENTRALE_ACHAT_v2.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
+                        VALUES ( :id, :content, GETUTCDATE(), :user)";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("id", $id);
         $stmt->bindValue("content", $content_notes);
@@ -1697,24 +1718,19 @@ class BaseController extends Controller
     public function testAction()
     {
 
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-        $helper = $this->get('site.service.client_services');
+        $conn = $this->get('doctrine.dbal.centrale_achat_v3_connection');
 
 
-        $sql = "SELECT *  FROM CENTRALE_ACHAT.dbo.Vue_All_Notes ORDER BY INS_DATE DESC";
+        $test =  "ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗᛋᚳᛖᚪᛚ᛫ᚦᛖᚪᚻ᛫ᛗᚪᚾᚾᚪ᛫ᚷᛖᚻᚹᛦᛚᚳ᛫ᛗᛁᚳᛚᚢᚾ᛫ᚻᛦᛏ᛫ᛞᚫᛚᚪᚾᚷᛁᚠ᛫ᚻᛖ᛫ᚹᛁᛚᛖ᛫ᚠᚩᚱ᛫ᛞᚱᛁᚻᛏᚾᛖ᛫ᛞᚩᛗᛖᛋ᛫ᚻᛚᛇᛏᚪᚾ᛬";
+
+
+        $sql = "SELECT CN_NOTE  FROM CENTRALE_ACHAT_v2.dbo.CLIENTS_NOTES";
 
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $note = $stmt->fetchAll();
 
-        $ClientService = $this->get('site.service.client_services');
 
-        foreach ($note as $notes) {
-
-            $raison_soc = $helper->getTheClientRaisonSoc($notes['CL_ID'], $notes['SO_ID']);
-
-        }
 
 
         return $this->render('@Site/test.html.twig', [
