@@ -1031,6 +1031,8 @@ class BaseController extends Controller
 
         $content_notes = $request->request->get('content_note');
 
+        //test new base
+
         $sql = "INSERT INTO CENTRALE_ACHAT_v2.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
                         VALUES ( :id, :content, GETUTCDATE(), :user)";
         $stmt = $conn->prepare($sql);
