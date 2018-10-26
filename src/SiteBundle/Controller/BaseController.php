@@ -1023,7 +1023,7 @@ class BaseController extends Controller
     public function newNotesClientAction(Request $request, $id, $centrale)
     {
 
-        $conn = $this->get('database_connection');
+        $conn = $this->get('doctrine.dbal.centrale_achat_v3_connection');
 
         $clientService = $this->get('site.service.client_services');
 
