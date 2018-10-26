@@ -395,10 +395,10 @@
                                                     <div class="">
                                                         <ul class="to_do">
                                                             {% for tasks in tacheA %}
-                                                                <li data-id="{{ tasks.claId }}"
+                                                                <li data-id="{{ tasks['CLA_ID'] }}"
                                                                     class="cursor detail-tache-archive-client">
-                                                                    <p>{{ tasks.claNom | raw |  convert_encoding('UTF-8', 'Windows-1252') }}
-                                                                        - {{ tasks.claDescr | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
+                                                                    <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}
+                                                                        - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
                                                                 </li>
                                                             {% endfor %}
 
@@ -440,7 +440,7 @@
                                                                 <h5>Historique client: </h5>
                                                                 {% for n in note %}
                                                                     <ul>
-                                                                        <li>{{ n.insDate | Time }}: {{ n.cnNote | raw }}</li>
+                                                                        <li>{{ n["INS_DATE"]  }}: {{ n["CN_NOTE"] | raw }}</li>
                                                                     </ul>
                                                                 {% endfor %}
                                                             {% else %}
@@ -477,14 +477,13 @@
 
                             <div class="historique-client-content">
 
-                                {% if client[0]["CL_ID"] > 0 %}
+                                {#{% if client[0]["CL_ID"] > 0 %}#}
+                                    {##}
 
-
-
-                                    {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0]["CL_ID"], 'centrale': centrale })) }}
-                                {% else %}
-                                    Kenny looks okay --- so far
-                                {% endif %}
+                                    {#{{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0]["CL_ID"], 'centrale': centrale })) }}#}
+                                {#{% else %}#}
+                                    {#Kenny looks okay --- so far#}
+                                {#{% endif %}#}
 
 
                             </div>

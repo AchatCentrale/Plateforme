@@ -10,6 +10,12 @@ class FeedServices
 {
 
 
+    /**
+     *
+     * @var Connection
+     */
+    private $connection;
+
     protected $doctrine;
 
     private $action;
@@ -22,9 +28,12 @@ class FeedServices
     private $feed;
 
 
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(RegistryInterface $doctrine, $dbalConnection )
     {
         $this->doctrine = $doctrine;
+
+        $this->connection = $dbalConnection;
+
     }
 
 
@@ -36,19 +45,19 @@ class FeedServices
 
             case 1:
             case 'ACHAT_CENTRALE':
-                $action = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsTaches')->findBy([
+                $action = $this->doctrine->getManager('centrale_achat_jb')->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
                     'clId' => $id
                 ], [
                     'claEcheance' => 'DESC'
                 ], 5);
 
-                $notes = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:ClientsNotes')->findBy([
+                $notes = $this->doctrine->getManager('centrale_achat_jb')->getRepository('AchatCentraleCrmBundle:ClientsNotes')->findBy([
                     'clId' => $id
                 ], [
                     'insDate' => 'DESC'
                 ], 5);
 
-                $tickets = $this->doctrine->getManager('achat_centrale')->getRepository('AchatCentraleBundle:MessageEntete')->findBy([
+                $tickets = $this->doctrine->getManager('centrale_achat_jb')->getRepository('AchatCentraleCrmBundle:MessageEntete')->findBy([
                     'clId' => $id
                 ], [
                     'insDate' => 'DESC'
