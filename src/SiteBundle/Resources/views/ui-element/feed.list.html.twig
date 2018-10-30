@@ -7,38 +7,33 @@
 
     {% else %}
 
+
+
         {% for fe in feed.feed %}
 
             <div class="ui  cards">
 
 
-                {% if fe | getClass == "MessageEntete" %}
-
+                {% if fe["computed"] == 'tickets' %}
                     <div class="card">
                         <div class="content">
-
                             <div class="header">Tickets</div>
-                            <div class="meta">{{ fe.insDate |Time }}</div>
+                            <div class="meta">{{ fe["INS_DATE"] |Time }}</div>
                             <div class="description">
-                                {{ fe.meSujet | raw | convert_encoding('UTF-8', 'Windows-1252') }}
+                                {{ fe["ME_SUJET"] | raw | convert_encoding('UTF-8', 'Windows-1252') }}
                             </div>
-
-
                         </div>
                     </div>
 
                 {% endif %}
 
-                {% if fe |getClass == "ClientsNotes" %}
-
-
+                {% if fe["computed"] == 'notes' %}
                     <div class="card">
                         <div class="content">
-
                             <div class="header">Notes</div>
-                            <div class="meta">{{ fe.insDate |Time }}</div>
+                            <div class="meta">{{ fe["INS_DATE"] }}</div>
                             <div class="description">
-                                {{ fe.cnNote  }}
+                                {{ fe["CN_NOTE"]  }}
                             </div>
 
 
@@ -48,18 +43,16 @@
 
                 {% endif %}
 
-                {% if fe |getClass == "ClientsTaches" %}
-
-
+                {% if fe["computed"] == 'taches' %}
                     <div class="card">
                         <div class="content">
 
                             <div class="header">Tâches &emsp;
                                 <i data-id="{{ fe.claId }}" data-centrale="{{ app.request.get('centrale') }}"
                                    class="archive cursor icon archive-task"></i></div>
-                            <div class="meta">{{ fe.insDate |Time }}</div>
+                            <div class="meta">{{ fe["INS_DATE"] |Time }}</div>
                             <div class="description">
-                                {{ fe.claNom | raw | convert_encoding('UTF-8', 'Windows-1252') }}
+                                {{ fe["CLA_NOM"] | raw | convert_encoding('UTF-8', 'Windows-1252') }}
                             </div>
 
 
