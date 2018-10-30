@@ -1023,7 +1023,7 @@ class BaseController extends Controller
     public function newNotesClientAction(Request $request, $id, $centrale)
     {
 
-        $conn = $this->get('doctrine.dbal.centrale_achat_v3_connection');
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $clientService = $this->get('site.service.client_services');
 
@@ -1031,7 +1031,6 @@ class BaseController extends Controller
 
         $content_notes = $request->request->get('content_note');
 
-        //test new base
 
         $sql = sprintf("INSERT INTO %s.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
                         VALUES ( :id, :content, GETUTCDATE(), :user)", $so_database);
