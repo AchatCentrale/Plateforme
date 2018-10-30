@@ -1033,8 +1033,8 @@ class BaseController extends Controller
 
         //test new base
 
-        $sql = "INSERT INTO CENTRALE_ACHAT_v2.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
-                        VALUES ( :id, :content, GETUTCDATE(), :user)";
+        $sql = sprintf("INSERT INTO %s.dbo.CLIENTS_NOTES (CL_ID, CN_NOTE, INS_DATE, INS_USER)
+                        VALUES ( :id, :content, GETUTCDATE(), :user)", $so_database);
         $stmt = $conn->prepare($sql);
         $stmt->bindValue("id", $id);
         $stmt->bindValue("content", $content_notes);
