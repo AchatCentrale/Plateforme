@@ -18,6 +18,8 @@ class FeedServices
 
     protected $doctrine;
 
+    protected $clientService;
+
     private $action;
     private $notes;
     private $tickets;
@@ -28,11 +30,13 @@ class FeedServices
     private $feed;
 
 
-    public function __construct(RegistryInterface $doctrine, $dbalConnection )
+    public function __construct(RegistryInterface $doctrine, $dbalConnection, ClientServices $clientService )
     {
         $this->doctrine = $doctrine;
 
         $this->connection = $dbalConnection;
+
+        $this->clientService = $clientService;
 
     }
 
@@ -40,147 +44,51 @@ class FeedServices
     public function getTheLast($id, $centrale)
     {
 
-        switch ($centrale) {
 
 
-            case 1:
-            case 'ACHAT_CENTRALE':
-                $action = $this->doctrine->getManager('centrale_achat_jb')->getRepository('AchatCentraleCrmBundle:ClientsTaches')->findBy([
-                    'clId' => $id
-                ], [
-                    'claEcheance' => 'DESC'
-                ], 5);
-
-                $notes = $this->doctrine->getManager('centrale_achat_jb')->getRepository('AchatCentraleCrmBundle:ClientsNotes')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
-
-                $tickets = $this->doctrine->getManager('centrale_achat_jb')->getRepository('AchatCentraleCrmBundle:MessageEntete')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
+        $so_database = $this->clientService->getCentraleDB($centrale);
 
 
-                $this->setAction($action);
-                $this->setNotes($notes);
-                $this->setTickets($tickets);
+        $sqlAction = sprintf("SELECT TOP 5 *, (SELECT 'taches') FROM %s.dbo.CLIENTS_TACHES WHERE CL_ID = :id ORDER BY CLA_ECHEANCE DESC", $so_database);
+        $stmt = $this->connection->prepare($sqlAction);
+        $stmt->bindValue("id", $id);
+        $stmt->execute();
 
-                return $this;
-                break;
-            case 6:
-            case 'ROC_ECLERC':
-                $action = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsTaches')->findBy([
-                    'clId' => $id
-                ], [
-                    'claEcheance' => 'DESC'
-                ], 5);
-
-                $notes = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:ClientsNotes')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
-
-                $tickets = $this->doctrine->getManager('roc_eclerc')->getRepository('RocEclercBundle:MessageEntete')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
+        $action = $stmt->fetchAll();
 
 
-                $this->setAction($action);
-                $this->setNotes($notes);
-                $this->setTickets($tickets);
+        $sqlNotes = sprintf("SELECT TOP 5 *, (SELECT 'notes') FROM %s.dbo.CLIENTS_NOTES WHERE CL_ID = :id ORDER BY INS_DATE DESC", $so_database);
+        $stmtNotes = $this->connection->prepare($sqlNotes);
+        $stmtNotes->bindValue("id", $id);
+        $stmtNotes->execute();
 
-                return $this;
-                break;
-            case 4:
-            case 'CENTRALE_FUNECAP':
-                $action = $this->doctrine->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsTaches')->findBy([
-                    'clId' => $id
-                ], [
-                    'claEcheance' => 'DESC'
-                ], 5);
-
-                $notes = $this->doctrine->getManager('centrale_funecap')->getRepository('FunecapBundle:ClientsNotes')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
-
-                $tickets = $this->doctrine->getManager('centrale_funecap')->getRepository('FunecapBundle:MessageEntete')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
+        $notes = $stmtNotes->fetchAll();
 
 
-                $this->setAction($action);
-                $this->setNotes($notes);
-                $this->setTickets($tickets);
 
-                return $this;
-                break;
-            case 2:
-            case 'CENTRALE_GCCP':
-                $action = $this->doctrine->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsTaches')->findBy([
-                    'clId' => $id
-                ], [
-                    'claEcheance' => 'DESC'
-                ], 5);
+        $sqlTickets = sprintf("SELECT TOP 5 *, (SELECT 'tickets') FROM CENTRALE_ACHAT.dbo.MESSAGE_ENTETE WHERE CL_ID = :id ORDER BY INS_DATE DESC ", $so_database);
+        $stmtTickets = $this->connection->prepare($sqlTickets);
+        $stmtTickets->bindValue("id", $id);
+        $stmtTickets->execute();
 
-                $notes = $this->doctrine->getManager('centrale_gccp')->getRepository('GccpBundle:ClientsNotes')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
-
-                $tickets = $this->doctrine->getManager('centrale_gccp')->getRepository('GccpBundle:MessageEntete')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
+        $tickets = $stmtTickets->fetchAll();
 
 
-                $this->setAction($action);
-                $this->setNotes($notes);
-                $this->setTickets($tickets);
-
-                return $this;
-                break;
-            case 5:
-            case 'CENTRALE_PFPL':
-                $action = $this->doctrine->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsTaches')->findBy([
-                    'clId' => $id
-                ], [
-                    'claEcheance' => 'DESC'
-                ], 5);
-
-                $notes = $this->doctrine->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:ClientsNotes')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
-
-                $tickets = $this->doctrine->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:MessageEntete')->findBy([
-                    'clId' => $id
-                ], [
-                    'insDate' => 'DESC'
-                ], 5);
 
 
-                $this->setAction($action);
-                $this->setNotes($notes);
-                $this->setTickets($tickets);
 
-                return $this;
-                break;
+        $this->setAction($action);
+        $this->setNotes($notes);
+        $this->setTickets($tickets);
 
 
-        }
+
+
+        return $this;
+
+
+
+
 
 
     }

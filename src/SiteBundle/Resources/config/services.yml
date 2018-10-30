@@ -19,10 +19,7 @@ services:
         arguments: [ '@doctrine.dbal.centrale_achat_jb_connection' ]
     site.service.feed_services:
         class: SiteBundle\Service\FeedServices
-        arguments:
-            doctrine: '@doctrine'
-            tags:
-                - { name: twig.extension}
+        arguments: ['@doctrine', '@doctrine.dbal.centrale_achat_jb_connection', '@site.service.client_services']
     site.service.mailer:
         class: SiteBundle\Service\Mailer
         arguments: ['@mailer', '@templating.engine.twig', '@doctrine.dbal.centrale_achat_jb_connection']

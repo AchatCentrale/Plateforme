@@ -434,12 +434,10 @@ class CrmFilter extends \Twig_Extension
     {
 
 
-        dump(gettype($date));
 
 
         if (gettype($date) === null || gettype($date) === 'string') {
             return $date;
-
         } else {
             \Moment\Moment::setLocale('fr_FR');
 
