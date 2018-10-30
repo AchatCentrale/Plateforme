@@ -33,7 +33,7 @@
                             <div class="header">Notes</div>
                             <div class="meta">{{ fe["INS_DATE"] }}</div>
                             <div class="description">
-                                {{ fe["CN_NOTE"]  }}
+                                {{ fe["CN_NOTE"] | raw | convert_encoding('UTF-8', 'Windows-1252')  }}
                             </div>
 
 
