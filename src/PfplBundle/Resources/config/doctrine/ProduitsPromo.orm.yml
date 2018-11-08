@@ -1,0 +1,48 @@
+PfplBundle\Entity\ProduitsPromo:
+    type: entity
+    table: PRODUITS_PROMO
+    id:
+        ppId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: PP_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        soId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: SO_ID
+        prId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: PR_ID
+        ppOrdre:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: PP_ORDRE
+        ppDate:
+            type: datetime
+            nullable: true
+            column: PP_DATE
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+    lifecycleCallbacks: {  }

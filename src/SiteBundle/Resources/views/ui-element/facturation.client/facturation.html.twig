@@ -1,0 +1,141 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Données de facturation</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content container-fluid">
+
+                <div class="ui grid">
+                    <div class="eight wide column ">
+
+                        <div class="ui grid">
+                            <div class="eight wide column">
+
+
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Période d'adhésion</p>
+                                    <p class="cursor label-background"
+                                       data-index="per-adh">1 an</p>
+                                </div>
+
+
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Numero de facture</p>
+                                    <p class="cursor label-background"
+                                       data-index="num-factu">{{  randFacture(centrale) }}</p>
+                                </div>
+
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Date de facturation</p>
+                                    <p class="cursor label-background"
+                                       data-index="date-adh">{{ client[0].clDtAdhesion | Time }}</p>
+                                </div>
+
+
+                            </div>
+                            <div class="eight wide column">
+
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Montant facturé</p>
+                                    <p class="cursor label-background"
+                                       data-index="mont-fact">2M€</p>
+                                </div>
+
+
+                                <div class="info-client-detail">
+                                    <p class="title-detail-client ">Statut du compte</p>
+                                    <p class="cursor label-background"
+                                       data-index="statut-compte">{{ client[0].clStatus |status }}</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="vertical-divider"></div>
+                    <div class="seven wide column">
+                        <p class="title-detail-client ">Historique des contrats</p>
+
+
+
+                        <table class="ui celled padded table">
+                            <thead>
+                            <tr>
+                                <th>Fournisseur</th>
+                                <th>Catégorie</th>
+                                <th>Description</th>
+                                <th>Statut</th>
+                                <th>Fin de contrat</th>
+                                <th>Limite préavis</th>
+                                <th>Limite avant reconduction</th>
+                            </tr></thead>
+                            <tbody>
+                            <tr>
+                                <td>Delfosse</td>
+                                <td>Article funéraire</td>
+                                <td>Contrats de base</td>
+                                <td>Signé</td>
+                                <td>28/03/2018</td>
+                                <td>6 mois</td>
+                                <td>28/09/2018</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Actions</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content container-fluid">
+
+                <div class="ui grid">
+                    <div class="four wide column">
+                        <div class="btn-facturation-action">
+                            <button class="large ui  button">
+                                <i class="send icon"></i>
+                                Enoyer une facture
+                            </button>
+                        </div>
+                    </div>
+                    <div class="four wide column">
+                        <div class="btn-facturation-action">
+                            <button class="large ui  button">
+                                <i class="plus icon"></i>
+                                Pièce jointe
+                            </button>
+                        </div>
+                    </div>
+                    <div class="four wide column">
+                        <div class="btn-facturation-action">
+                            <button class="large ui  button">
+                                <i class="file pdf outline icon"></i>
+                                PDF
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -61,6 +61,14 @@ AchatCentrale\CrmBundle\Entity\PanierTemp:
             options:
                 fixed: false
             column: PT_DETAIL
+        ptPrixVc:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            options:
+                default: '0'
+            column: PT_PRIX_VC
         insDate:
             type: datetime
             nullable: true

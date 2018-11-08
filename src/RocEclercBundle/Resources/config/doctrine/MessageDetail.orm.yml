@@ -1,0 +1,77 @@
+RocEclercBundle\Entity\MessageDetail:
+    type: entity
+    table: MESSAGE_DETAIL
+    indexes:
+        IDX_3DB4A13DFD61DBA2:
+            columns:
+                - ME_ID
+    id:
+        mdId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: MD_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        ccId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CC_ID
+        fcId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: FC_ID
+        usId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: US_ID
+        mdDate:
+            type: datetime
+            nullable: true
+            column: MD_DATE
+        mdCorps:
+            type: text
+            nullable: true
+            length: 16
+            options:
+                fixed: false
+            column: MD_CORPS
+        mdTempo:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: MD_TEMPO
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+    manyToOne:
+        me:
+            targetEntity: MessageEntete
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                ME_ID:
+                    referencedColumnName: ME_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

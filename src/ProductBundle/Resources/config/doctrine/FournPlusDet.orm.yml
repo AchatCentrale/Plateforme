@@ -1,0 +1,66 @@
+ProductBundle\Entity\FournPlusDet:
+    type: entity
+    table: FOURN_PLUS_DET
+    indexes:
+        IDX_AB27A582E50C0AD7:
+            columns:
+                - FO_ID
+    id:
+        fdId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: FD_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        fdType:
+            type: string
+            nullable: true
+            length: 5
+            options:
+                fixed: false
+            column: FD_TYPE
+        fdTexte:
+            type: text
+            nullable: true
+            length: 16
+            options:
+                fixed: false
+            column: FD_TEXTE
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    manyToOne:
+        fo:
+            targetEntity: Fournisseurs
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                FO_ID:
+                    referencedColumnName: FO_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

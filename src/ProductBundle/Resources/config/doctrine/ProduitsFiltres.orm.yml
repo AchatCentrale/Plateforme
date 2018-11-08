@@ -1,0 +1,54 @@
+ProductBundle\Entity\ProduitsFiltres:
+    type: entity
+    table: PRODUITS_FILTRES
+    indexes:
+        IDX_D0ABA9BFA8DFE7B7:
+            columns:
+                - PR_ID
+        IDX_D0ABA9BFC067550B:
+            columns:
+                - FI_ID
+    id:
+        pfId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: PF_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+    manyToOne:
+        pr:
+            targetEntity: Produits
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                PR_ID:
+                    referencedColumnName: PR_ID
+            orphanRemoval: false
+        fi:
+            targetEntity: Filtres
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                FI_ID:
+                    referencedColumnName: FI_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -10,12 +10,24 @@ imports:
 monolog:
     handlers:
         main:
-            type:         fingers_crossed
-            action_level: error
-            handler:      nested
-        nested:
-            type:  stream
-            path:  "%kernel.logs_dir%/%kernel.environment%.log"
-            level: debug
-        console:
-            type:  console
+            type:               fingers_crossed
+            action_level:       error
+            handler:            grouped
+        grouped:
+            type:               group
+            members:            [streamed, swift]
+        streamed:
+            type:               stream
+            path:               "%kernel.logs_dir%/%kernel.environment%.log"
+            level:              debug
+        swift:
+            type:               swift_mailer
+            from_email:         jb@achatcentrale.fr
+            to_email:           jbagostin@gmail.com
+            subject:            "Il y a un soucis avec le CRM coco"
+            level:              critical
+        login:
+            type:               stream
+            path:               "%kernel.logs_dir%/auth.log"
+            level:              info
+            channels:           security

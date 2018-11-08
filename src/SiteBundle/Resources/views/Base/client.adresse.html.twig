@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div>
+
+
+
+        <div class="container-general">
+            <div class="container-info-client">
+                {% include '@Site/ui-element/adresse.client/adresse.html.twig' with {'client': client } %}
+
+            </div>
+
+
+
+        </div>
+    </div>
+{% endblock %}

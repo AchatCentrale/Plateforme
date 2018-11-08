@@ -1,4 +1,25 @@
 services:
-#    site.example:
-#        class: SiteBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    site.twig.crm_filter:
+        class: SiteBundle\Twig\CrmFilter
+        arguments:
+            doctrine: '@doctrine'
+            dbalConnection : '@doctrine.dbal.centrale_achat_jb_connection'
+        tags:
+            - { name: twig.extension}
+    site.service.taches_utils:
+        class: SiteBundle\Service\TachesUtils
+    site.service.client_services:
+        class: SiteBundle\Service\ClientServices
+        arguments: [ '@doctrine.dbal.centrale_achat_jb_connection' ]
+    site.service.bddservices:
+        class: SiteBundle\Service\BddServices
+        arguments: [ '@doctrine.dbal.centrale_achat_jb_connection' ]
+    site.service.centraleservices:
+        class: SiteBundle\Service\CentraleServices
+        arguments: [ '@doctrine.dbal.centrale_achat_jb_connection' ]
+    site.service.feed_services:
+        class: SiteBundle\Service\FeedServices
+        arguments: ['@doctrine', '@doctrine.dbal.centrale_achat_jb_connection', '@site.service.client_services']
+    site.service.mailer:
+        class: SiteBundle\Service\Mailer
+        arguments: ['@mailer', '@templating.engine.twig', '@doctrine.dbal.centrale_achat_jb_connection']

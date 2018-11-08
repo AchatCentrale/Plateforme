@@ -1,0 +1,40 @@
+<?php
+
+namespace PfplBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Groupe
+ *
+ * @ORM\Table(name="GROUPE")
+ * @ORM\Entity
+ */
+class Groupe
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="GR_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $grId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="SO_ID", type="integer", nullable=true)
+     */
+    private $soId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="GR_DESCR", type="string", length=100, nullable=true)
+     */
+    private $grDescr;
+
+
+}
+

@@ -1,0 +1,57 @@
+PfplBundle\Entity\Filesupload:
+    type: entity
+    table: FilesUpload
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        fichier:
+            type: string
+            nullable: false
+            length: 200
+            options:
+                fixed: false
+            column: Fichier
+        taille:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: Taille
+        taillex:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: TailleX
+        tailley:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: TailleY
+        commentaires:
+            type: string
+            nullable: true
+            length: 500
+            options:
+                fixed: false
+            column: Commentaires
+        docid:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: DocID
+        dateupload:
+            type: datetime
+            nullable: true
+            column: DateUpload
+    lifecycleCallbacks: {  }

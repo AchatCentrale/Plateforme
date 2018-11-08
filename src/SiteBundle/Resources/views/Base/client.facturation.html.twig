@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+
+    {% block title %}
+        {{ client[0].clRaisonsoc | convert_encoding('UTF-8', 'Windows-1252') }} - Facturation
+    {% endblock %}
+
+{% block body %}
+
+    <div>
+
+
+        <div class="container-general">
+            <div class="container-info-client">
+                {% include '@Site/ui-element/facturation.client/facturation.html.twig' with {'client': client } %}
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+GccpBundle\Entity\CodesPromo:
+    type: entity
+    table: CODES_PROMO
+    id:
+        cpId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: CP_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        soId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: SO_ID
+        cpCode:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: CP_CODE
+        cpRemise:
+            type: float
+            nullable: true
+            precision: 53
+            scale: 0
+            column: CP_REMISE
+        cpValidite:
+            type: datetime
+            nullable: true
+            column: CP_VALIDITE
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    lifecycleCallbacks: {  }

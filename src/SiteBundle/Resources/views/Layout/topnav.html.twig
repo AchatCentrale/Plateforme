@@ -1,0 +1,47 @@
+<!-- top navigation -->
+<div class="top_nav">
+    <div class="nav_menu">
+        <nav class="">
+            <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="javascript:" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                       aria-expanded="false">
+
+
+                        {% if app.user %}
+                            {{ app.user.UsPrenom | avatar(app.user.UsNom, true) | raw }}{{ app.user.usPrenom }}
+                        {% else %}
+                        {% endif %}
+
+                        <span class=" fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                        <li><a href=""> Mon profil</a></li>
+                        <li>
+                            <a href="#">
+                                <span>Modifier mon profil</span>
+                            </a>
+                        </li>
+                        <li><a href="{{ path('logout') }}"><i class="fa fa-sign-out pull-right"></i> Se deconnecter</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="">
+
+                    <div class="ui search container-search-hastag">
+                        <div class="ui left icon input">
+                            <input class="prompt" type="text" placeholder="Recherche ">
+                            <i class="search icon"></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- /top navigation -->

@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- page content -->
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Modifier une tâche</h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <div class="form-add-action">
+                        <form class="ui form" method="post" action="{{ path('update-task', { 'centrale' : centrale, 'id' : id})  }}">
+                            <div class="ui equal width grid">
+                                <div class="equal width row">
+                                    <div class="column">
+
+
+                                        <div class="field">
+                                            <label>Date d'échéance</label>
+                                            <input required type="text" class="date add-action" name="cla_echeance"
+                                                   placeholder="{{ task[0]['CLA_ECHEANCE']}}">
+                                        </div>
+
+
+
+                                        <div class="field">
+                                            <label>Priorité de l'action</label>
+                                            <select required name="cla_priorite" class="ui dropdown">
+                                                <option selected value="">Priorité de l'action</option>
+                                                <option value="1">A faire au plus vite</option>
+                                                <option value="2">Important</option>
+                                                <option value="3">Moyen</option>
+                                                <option value="4">Faible</option>
+                                                <option value="5">Un jour peut-être</option>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                    <div class="column">
+
+                                        <div class="field">
+                                            <label>Nom de l'action</label>
+                                            <input  required type="text"  name="cla_nom"
+                                                   value="{{ task[0]['CLA_NOM'] }}"  maxlength="50">
+                                        </div>
+
+                                        <div class="field">
+                                            <label>Utilisateur assigné </label>
+                                            <select required name="cla_us" class="ui dropdown fluid ">
+                                                <option selected value="">Modifier l'utilisateur</option>
+                                                {% for us in user %}
+                                                    <option value="{{ us.usId }}">{{ us.usPrenom }} {{  us.usNom }}</option>
+                                                {% endfor %}
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="field">
+                                <label>Description de l'action</label>
+                                <textarea name="cla_desc" rows="2" >{{ task[0]['CLA_DESCR'] }}</textarea>
+                            </div>
+
+                            <button type="submit" class="fluid positive ui button"> Enregistré</button>
+                        </form>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- /page content -->
+
+
+
+
+
+{% endblock %}

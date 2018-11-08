@@ -1,0 +1,27 @@
+FunecapBundle\Entity\CategRayons:
+    type: entity
+    table: CATEG_RAYONS
+    id:
+        crId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: CR_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        raId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            column: RA_ID
+        catid:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CatID
+    lifecycleCallbacks: {  }

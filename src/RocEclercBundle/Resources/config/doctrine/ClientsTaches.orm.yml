@@ -1,0 +1,91 @@
+RocEclercBundle\Entity\ClientsTaches:
+    type: entity
+    table: CLIENTS_TACHES
+    id:
+        claId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: CLA_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        clId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CL_ID
+        usId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: US_ID
+        claType:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CLA_TYPE
+        claNom:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: CLA_NOM
+        claDescr:
+            type: text
+            nullable: true
+            length: -1
+            options:
+                fixed: false
+            column: CLA_DESCR
+        claEcheance:
+            type: datetime
+            nullable: true
+            column: CLA_ECHEANCE
+        claPriorite:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CLA_PRIORITE
+        claNotifRef:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CLA_NOTIF_REF
+        claStatus:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: CLA_STATUS
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    lifecycleCallbacks: {  }

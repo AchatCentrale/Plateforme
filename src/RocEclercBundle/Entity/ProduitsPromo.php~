@@ -1,0 +1,68 @@
+<?php
+
+namespace RocEclercBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ProduitsPromo
+ *
+ * @ORM\Table(name="PRODUITS_PROMO")
+ * @ORM\Entity
+ */
+class ProduitsPromo
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PP_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $ppId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="SO_ID", type="integer", nullable=true)
+     */
+    private $soId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PR_ID", type="integer", nullable=true)
+     */
+    private $prId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="PP_ORDRE", type="integer", nullable=true)
+     */
+    private $ppOrdre;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="PP_DATE", type="datetime", nullable=true)
+     */
+    private $ppDate;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
+     */
+    private $insDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
+     */
+    private $insUser;
+
+
+}
+

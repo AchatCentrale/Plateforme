@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,6 +10,16 @@
 <body>
 
 
-{{ dump(panier) }}
+{% for note in notes %}
+
+    {{ note["CN_NOTE"] }}<br>
+    <p>------------------------------------------</p>
+
+{% endfor %}
+
+
+
+
+
 </body>
 </html>

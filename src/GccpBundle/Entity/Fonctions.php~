@@ -1,0 +1,68 @@
+<?php
+
+namespace GccpBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Fonctions
+ *
+ * @ORM\Table(name="FONCTIONS")
+ * @ORM\Entity
+ */
+class Fonctions
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="FO_ID", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $foId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="SO_ID", type="integer", nullable=true)
+     */
+    private $soId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="FO_DESCR", type="string", length=200, nullable=true)
+     */
+    private $foDescr;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="INS_DATE", type="datetime", nullable=true)
+     */
+    private $insDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="INS_USER", type="string", length=100, nullable=true)
+     */
+    private $insUser;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="MAJ_DATE", type="datetime", nullable=true)
+     */
+    private $majDate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="MAJ_USER", type="string", length=100, nullable=true)
+     */
+    private $majUser;
+
+
+}
+

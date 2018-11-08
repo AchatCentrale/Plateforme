@@ -1,0 +1,37 @@
+security:
+    encoders:
+        AchatCentrale\CrmBundle\Entity\Users:
+             algorithm:            plaintext
+             ignore_case:          false
+
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
+    providers:
+        default:
+            entity:
+                class: AchatCentraleCrmBundle:Users
+                property: usMail
+                manager_name: centrale_achat_jb
+
+    firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                login_path: login
+                check_path: login
+                provider:    default
+            logout:
+                invalidate_session: true
+                path: /logout
+                target: /login
+
+
+            anonymous:    true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/taches, role: ROLE_USER }
+

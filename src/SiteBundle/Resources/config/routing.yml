@@ -1,23 +1,58 @@
+login:
+    path:     /login
+    defaults: {_controller: SiteBundle:Security:login}
+
+logout:
+    path:      /logout
+
+
+
+
 index_auth:
     path:     /
-    defaults: { _controller: SiteBundle:Base:indexAuth }
-
-Who-Are-The-User:
-    path:     /who/{type}
-    defaults: { _controller: SiteBundle:Base:whoAre }
-
-Count:
-    path:     /Agence/count
-    defaults: { _controller: SiteBundle:Base:countAgence }
+    defaults: { _controller: SiteBundle:Base:indexAuth}
 
 
+client:
+    path:     /client
+    defaults: { _controller: SiteBundle:Base:Client }
 
 
+client-new:
+    path:     /client/new
+    defaults: { _controller: SiteBundle:Base:ClientNew }
+
+
+client-general:
+    path:     /client/{id}/{centrale}/general
+    defaults: { _controller: SiteBundle:Base:ClientGeneral }
+    methods: GET
+
+
+client-adresse:
+    path:     /client/{id}/{centrale}/adresse
+    defaults: { _controller: SiteBundle:Base:ClientAdresse }
+
+client-status:
+    path:     /client/{id}/{centrale}/status
+    defaults: { _controller: SiteBundle:Base:ClientStatut }
+
+client-facturation:
+    path:     /client/{id}/{centrale}/facturation
+    defaults: {_controller: SiteBundle:Base:ClientFacturation}
+
+client-feed:
+    path:    /client/{id}/{centrale}/feed
+    defaults: {_controller: SiteBundle:Base:ClientFeed}
 
 
 sendClientDetailMail:
     path:     /send/client/{clientId}
     defaults: {_controller: SiteBundle:Base:sendClientDetailMail}
+
+get-raison-soc:
+    path:     /client/raisonSoc/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Base:getClientRaisonSoc}
 
 test:
     path:    /test
@@ -27,3 +62,234 @@ test:
 test_param:
     path:    /test/{id}
     defaults: {_controller: SiteBundle:Base:testWithParam}
+
+
+taches_home:
+    path:    /taches
+    defaults: {_controller: SiteBundle:Tache:Tache}
+
+detail-task:
+    path:   /taches/detail/{idCentrale}/{id}
+    defaults: {_controller: SiteBundle:Tache:DetailTask}
+
+
+detail-note:
+    path: /note/detail/{idCentrale}/{id}
+    defaults: {_controller: SiteBundle:Base:detailNote}
+
+update-note:
+    path: /note/update/{id}/{idCentrale}
+    defaults: {_controller: SiteBundle:Base:updateNote}
+
+detail-rdv:
+    path: /rdv/detail/{idCentrale}/{id}
+    defaults: {_controller: SiteBundle:Base:detailRdv}
+
+new-task:
+    path:   /taches/new
+    defaults: {_controller: SiteBundle:Tache:NewTask}
+
+
+terminer-tache:
+    path: /taches/terminer/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:terminerTache}
+
+
+archive-task:
+    path: /taches/archive/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:ArchiveTask}
+
+delete-task:
+    path:   /taches/delete/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:DeleteTask}
+
+update-task:
+    path: /taches/update/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:UpdateTask}
+
+
+unarchive-task:
+    path: /taches/unarchive/{id}
+    defaults: {_controller: SiteBundle:Tache:UnArchiveTask}
+
+mail-task:
+    path: /taches/mail/{id}
+    defaults: {_controller: SiteBundle:Tache:sendMailTask}
+
+
+change-state:
+    path: /taches/etat/{state}/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:changetheState}
+
+update-client-statut:
+    path: /client/{id}/{centrale}/update/statut
+    defaults: {_controller: SiteBundle:Base:updateStatut}
+    methods: POST
+
+update-client:
+    path: /client/{id}/{centrale}/update
+    defaults: {_controller: SiteBundle:Base:updateClient}
+    methods: POST
+
+update-client-user:
+    path: /client/users/{id}/{centrale}/update/{idUser}
+    defaults: {_controller: SiteBundle:Base:updateClientUser}
+
+new-clients-user:
+    path: /client/{id}/{centrale}/users/new
+    defaults: {_controller: SiteBundle:Base:newClientsUser}
+
+
+
+add-notes:
+    path: /client/{id}/{centrale}/notes/add
+    defaults: {_controller: SiteBundle:Base:newNotesClient}
+    methods: POST
+
+get-user-autocomplete:
+    path: /user/search/{query}
+    defaults:  {_controller: SiteBundle:Base:getUserAutocomplete}
+
+get-client-autocomplete:
+    path: /client/search/{query}/{centrale}
+    defaults: {_controller: SiteBundle:Base:getClientAutocomplete}
+
+get-client-user:
+    path: /client/user/{centrale}/{id}
+    defaults: {_controller: SiteBundle:Base:getClientUser}
+
+client-label:
+    path: /client/label/{centrale}/{id}
+    defaults: {_controller: SiteBundle:Base:getClientLabel}
+
+
+export-client:
+    path: /client/export/{centrale}
+    defaults: {_controller: SiteBundle:Base:exportClient}
+
+index-fournisseur:
+    path: /fournisseurs
+    defaults: {_controller: SiteBundle:Fournisseur:index}
+
+fournisseur-general:
+    path: /fournisseurs/{id}/general
+    defaults: {_controller: SiteBundle:Fournisseur:fournisseurGeneral}
+
+fournisseur-produits:
+    path: /fournisseurs/{id}/produits
+    defaults: {_controller: SiteBundle:Fournisseur:fournisseurProduit}
+
+import-produit-index:
+    path: /produit/import
+    defaults: {_controller: SiteBundle:Fournisseur:importProduct}
+
+import-produits-index:
+    path: /produits/import
+    defaults: {_controller: SiteBundle:Fournisseur:importProducts}
+
+barcode-checker:
+    path: /barcode
+    defaults: {_controller: SiteBundle:Fournisseur:checkBarcode}
+
+
+
+new-hastag:
+    path: /client/tag/new/{centrale}/{id}
+    defaults: {_controller: SiteBundle:Base:newHastag}
+
+hastag-action:
+    path: /tag/{id}
+    defaults: {_controller: SiteBundle:Base:hashtag}
+
+hastag-typehead:
+    path: /tag/search/{query}
+    defaults: {_controller: SiteBundle:Base:getTagAutoomplete}
+
+remove-hashtag:
+    path: /tag/remove/{tag}/{centrale}
+    defaults: {_controller: SiteBundle:Base:removeHastag}
+    methods: POST
+
+consommation-index:
+    path: /client/consommation
+    defaults: {_controller: SiteBundle:Consomnation:index}
+
+consomnation-client:
+    path: /client/{id}/{centrale}/consommation
+    defaults: {_controller: SiteBundle:Consomnation:indexClient}
+
+consommation-import:
+    path: /client/consommation/import
+    defaults: {_controller: SiteBundle:Consomnation:importConso}
+
+consommation-test:
+    path: /client/consommation/test
+    defaults: {_controller: SiteBundle:Consomnation:test}
+
+consommation-check:
+    path: /client/consommation/check
+    defaults: {_controller: SiteBundle:Consomnation:checkConso}
+
+notification-test:
+    path: /notification/test
+    defaults: {_controller: SiteBundle:Notification:test}
+    methods: POST
+
+notification-relance-task:
+    path: /notification/relance/tache
+    defaults: {_controller: SiteBundle:Notification:sendTaskRelance}
+    methods: POST
+
+notification-notif-rdv:
+    path: /notification/relance/rdv
+    defaults: {_controller: SiteBundle:Notification:sendRdvRelance}
+    methods: POST
+
+notification-new-client-ac:
+    path: /notification/new/client/ac/{name}/{mail}/{tel}/{cl_id}/{raisonsoc}
+    defaults: {_controller: SiteBundle:Notification:sendNewClientAc}
+    methods: POST
+
+notification-new-client-client:
+    path: /notification/new/client/client/{nom}/{raisonsoc}/{mail}/{tel}
+    defaults: {_controller: SiteBundle:Notification:sendNewClientAcClient}
+    methods: POST
+
+
+
+
+
+
+site-ac-adhesion:
+    path: /site-ac/adhesion/new
+    defaults: {_controller: SiteBundle:SiteAc:index}
+    methods: POST
+
+
+#EXPORT
+
+export-action:
+    path: /export/actions/all
+    defaults: {_controller: SiteBundle:Export:ExportTask}
+
+
+export-notes:
+    path: /export/notes/all
+    defaults: {_controller: SiteBundle:Export:ExportNote}
+
+
+
+
+#API CONSO
+
+detail-conso:
+    path: /conso/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Consomnation:ConsoDetail}
+
+detail-tableau-conso:
+    path: /conso/tableau/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Consomnation:ConsoTableau}
+
+detail-ca-conso:
+    path: /conso/ca/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Consomnation:ConsoCa}

@@ -1,10 +1,6 @@
 AchatCentrale\CrmBundle\Entity\CommandeEntete:
     type: entity
     table: COMMANDE_ENTETE
-    indexes:
-        IDX_BD3767A9FD61DBA2:
-            columns:
-                - ME_ID
     id:
         ceId:
             type: integer
@@ -16,6 +12,12 @@ AchatCentrale\CrmBundle\Entity\CommandeEntete:
             generator:
                 strategy: IDENTITY
     fields:
+        meId:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: ME_ID
         clId:
             type: integer
             nullable: true
@@ -44,6 +46,20 @@ AchatCentrale\CrmBundle\Entity\CommandeEntete:
             precision: 53
             scale: 0
             column: CE_TOTAL
+        ceEtiqCb:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: CE_ETIQ_CB
+        ceEtiqPv:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+                default: '0'
+            column: CE_ETIQ_PV
         ceTempo:
             type: string
             nullable: true
@@ -80,15 +96,4 @@ AchatCentrale\CrmBundle\Entity\CommandeEntete:
             options:
                 fixed: false
             column: MAJ_USER
-    manyToOne:
-        me:
-            targetEntity: MessageEntete
-            cascade: {  }
-            fetch: LAZY
-            mappedBy: null
-            inversedBy: null
-            joinColumns:
-                ME_ID:
-                    referencedColumnName: ME_ID
-            orphanRemoval: false
     lifecycleCallbacks: {  }

@@ -1,0 +1,58 @@
+PfplBundle\Entity\Textes:
+    type: entity
+    table: Textes
+    indexes:
+        IDX_5BFAE4E45919F4AB:
+            columns:
+                - CatID
+    id:
+        txtid:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: TxtID
+            generator:
+                strategy: IDENTITY
+    fields:
+        txttitre:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: TxtTitre
+        txtdescription:
+            type: string
+            nullable: true
+            length: 7900
+            options:
+                fixed: false
+            column: TxtDescription
+        txtsort:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: TxtSort
+        txtsortdt:
+            type: datetime
+            nullable: true
+            column: TxtSortDt
+        txtdate:
+            type: datetime
+            nullable: true
+            column: TxtDate
+    manyToOne:
+        catid:
+            targetEntity: Categories
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                CatID:
+                    referencedColumnName: CatID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

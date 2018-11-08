@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Adresse</h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content container-fluid">
+
+
+                {% if client is empty %}
+
+                {% else %}
+
+                    <div class="ui grid">
+                        <div class=" eight wide column centered  ">
+                            <div class="profile_title">
+                                <h2>Adresse de livraison</h2>
+                            </div>
+
+                            <div class="ui card center aligned">
+                                <div class="image">
+                                    {{ ivory_google_map(mapF) }}
+                                    {{ ivory_google_api([mapF]) }}
+                                </div>
+                                <div class="content">
+                                    <a class="header">Adresse postale</a>
+                                    <div class="description">
+                                        {{ client[0].getCaAdresse1 }}
+                                        <br>
+                                        {{ client[0].getCaCp }}
+                                        <br>
+                                        {{ client[0].getCaVille }}
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="eight wide column center aligned ">
+                            {% if mapL is not defined %}
+                                <div class="profile_title">
+                                    <h2>Adresse de facturation</h2>
+                                </div>
+                                <p>Il n'y a pas d'adresse de livraison pour le moment</p>
+                                {% else %}
+                                <div class="profile_title">
+                                    <h2>Adresse de facturation</h2>
+                                </div>
+                                <div class="ui card center aligned">
+                                    <div class="image">
+                                        {{ ivory_google_map(mapF) }}
+                                        {{ ivory_google_api([mapF]) }}
+                                    </div>
+                                    <div class="content">
+                                        <a class="header">Adresse postale</a>
+                                        <div class="description">
+                                            {{ client[0].getCaAdresse1 }}
+                                            <br>
+                                            {{ client[0].getCaCp }}
+                                            <br>
+                                            {{ client[0].getCaVille }}
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+

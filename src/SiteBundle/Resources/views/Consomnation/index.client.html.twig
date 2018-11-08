@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    CONSOMMATION - ACHAT-CENTRALE
+{% endblock %}
+
+{% block body %}
+
+
+    <h1>Consomnations pour le client </h1>
+    <div style="visibility: hidden; height: 2px">
+        <p id="ref-client">{{ ref_client }}</p><p id="centrale-client">{{ app.request.get('centrale') }}</p>
+    </div>
+
+
+
+    <div class="x_panel" >
+        <div class="row tile_count">
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                <div class="ui statistic">
+                    <div class="value ca_prix_public">
+                        {{ ca_prix_public | localizedcurrency('EUR') }}
+                    </div>
+                    <div class="label">
+                        CA Prix Public
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                <div class="ui statistic">
+                    <div class="value ca_prix_centrale">
+                        {{ ca_prix_centrale | localizedcurrency('EUR') }}
+                    </div>
+                    <div class="label">
+                        CA Prix Centrale
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6 tile_stats_count">
+                <div class="ui statistic">
+                    <div class="value ca_prix_total">
+                        {{ ca_prix_public - ca_prix_centrale  }} €
+                    </div>
+                    <div class="label">
+                        D'économie
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="x_panel">
+
+
+
+
+        <div class="x_content ">
+            <h3>Période de 06/2017 à 07/2017</h3>
+            <div class="row">
+                <div class="col-md-4">
+
+                    <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                        <span></span> <b class="caret"></b>
+                    </div>
+
+                    <canvas id="myChart" width="400" height="400"></canvas>
+
+
+                </div>
+                <div class="col-md-8" >
+
+                    <table class="ui celled structured table">
+                        <thead>
+                        <tr>
+                            <th rowspan="2">Date</th>
+                            <th class="center aligned" colspan="2">Bruneau</th>
+                        </tr>
+                        <tr>
+                            <th>CA CENTRALE</th>
+                            <th>Economie</th>
+
+                        </tr>
+                        </thead>
+                        <tbody id="ajax-conso-table">
+                        {% for tab in tableau %}
+
+
+                            <tr>
+                                <td>{{ tab['date'] | month }}</td>
+                                <td>{{ tab['CLC_PRIX_CENTRALE'] }} €</td>
+                                <td>{{ tab['CLC_PRIX_PUBLIC'] - tab['CLC_PRIX_CENTRALE'] }} €</td>
+                            </tr>
+
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+
+
+
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

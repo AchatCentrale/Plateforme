@@ -1,0 +1,71 @@
+ProductBundle\Entity\Rayons:
+    type: entity
+    table: RAYONS
+    id:
+        raId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: RA_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        raNom:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: RA_NOM
+        raDescr:
+            type: text
+            nullable: true
+            length: 16
+            options:
+                fixed: false
+            column: RA_DESCR
+        raPicto:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: RA_PICTO
+        raTri:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: RA_TRI
+        raTempo:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+            column: RA_TEMPO
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    lifecycleCallbacks: {  }

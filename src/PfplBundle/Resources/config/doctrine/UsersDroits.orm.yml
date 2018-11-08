@@ -1,0 +1,142 @@
+PfplBundle\Entity\UsersDroits:
+    type: entity
+    table: USERS_DROITS
+    indexes:
+        IDX_52C12AD2D8830FA2:
+            columns:
+                - US_ID
+    id:
+        udId:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            column: UD_ID
+            generator:
+                strategy: IDENTITY
+    fields:
+        udExtranet:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_EXTRANET
+        udInstutionnel:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_INSTUTIONNEL
+        udProduit:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_PRODUIT
+        udOptions:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_OPTIONS
+        udCommission:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_COMMISSION
+        udRfaSup:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_RFA_SUP
+        udClientIns:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_CLIENT_INS
+        udClientMaj:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_CLIENT_MAJ
+        udClientSup:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_CLIENT_SUP
+        udUserIns:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_USER_INS
+        udUserMaj:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_USER_MAJ
+        udUserSup:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_USER_SUP
+        udExtraction:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_EXTRACTION
+        udFournisseur:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_FOURNISSEUR
+        udCopieTicket:
+            type: integer
+            nullable: true
+            options:
+                unsigned: false
+            column: UD_COPIE_TICKET
+        insDate:
+            type: datetime
+            nullable: true
+            column: INS_DATE
+        insUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: INS_USER
+        majDate:
+            type: datetime
+            nullable: true
+            column: MAJ_DATE
+        majUser:
+            type: string
+            nullable: true
+            length: 100
+            options:
+                fixed: false
+            column: MAJ_USER
+    manyToOne:
+        us:
+            targetEntity: Users
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                US_ID:
+                    referencedColumnName: US_ID
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

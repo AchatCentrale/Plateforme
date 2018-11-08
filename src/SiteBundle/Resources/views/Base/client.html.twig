@@ -1,15 +1,261 @@
-{% include 'base.html.twig' %}
-
+{% extends 'base.html.twig' %}
 
 {% block body %}
 
-    {#include bandeau header#}
-    {{ include ('SiteBundle:Header:Header_home.html.twig') }}
 
 
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Clients</h2>
 
-    {#include element interface#}
-    {{ include('SiteBundle:ui-element:home-ui.html.twig') }}
+                    <div class="clearfix"></div>
+                </div>
+                <div class="ation-toolbox">
+                    <div class="ui equal width grid">
+                        <div class="equal width row">
+
+                            <div class="column">
+
+                                <button class="ui button green" id="btn-new-cl" role="button">Ajouter un nouveau client</button>
+                                <a href="{{ path('export-client', { "centrale" : app.request.query.get('c') }) }}"
+                                   class="ui button" id="btn-export-cl" role="button"><i class="file excel outline icon"></i> Exporter .csv</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="ui divider"></div>
+
+
+                <div class="x_content ">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center ">
+                            <ul class="pagination pagination-split">
+                                <li class="{% if app.request.query.get('c') == 'all' %}active-centrale{% endif %}">
+                                    <a href="{{ path("client", { "c" : "all"}) }}">
+                                        <img
+                                                data-centrale="all"
+                                                class="cursor  img-circle img-centrale"
+                                                src="{{ asset('images/logo-centrale/logo-all.png') }}">
+                                    </a>
+                                </li>
+                                <li class="{% if app.request.query.get('c') == '4' %}active-centrale{% endif %}">
+                                    <a href="{{ path("client", { "c" : 4}) }}">
+                                        <img
+                                                data-centrale="CENTRALE_FUNECAP"
+                                                class="cursor img-centrale"
+                                                src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+                                    </a>
+                                </li>
+                                <li class="{% if app.request.query.get('c') == '6' %}active-centrale{% endif %}">
+                                    <a href="{{ path("client", { "c" : "6"}) }}">
+                                        <img
+                                                data-centrale="CENTRALE_ROC_ECLERC"
+                                                class="cursor img-centrale"
+                                                src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+                                    </a>
+                                </li>
+                                <li class="{% if app.request.query.get('c') == '1' %}active-centrale{% endif %}">
+                                    <a href="{{ path("client", { "c" : "1"}) }}">
+                                        <img
+                                                data-centrale="achat-centrale"
+                                                class="cursor img-centrale"
+                                                src="{{ asset('assets/images/Fourmi_AC_small.png') }}">
+                                    </a></li>
+                                <li class="{% if app.request.query.get('c') == '2' %}active-centrale{% endif %}">
+                                    <a href="{{ path("client", { "c" : "2"}) }}">
+                                        <img
+                                                data-centrale="centrale-gccp"
+                                                class="cursor img-centrale"
+                                                src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}"></a>
+                                </li>
+                                <li class="{% if app.request.query.get('c') == 'pfpl' %}active-centrale{% endif %}">
+                                    <a href="{{ path("client", { "c" : "5"}) }}">
+                                        <img
+                                                data-centrale="centrale-pfpl"
+                                                class="cursor img-centrale"
+                                                src="{{ asset('images/logo-centrale/logo-pfpl.jpg') }}">
+
+                                    </a></li>
+                            </ul>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="client-all">
+
+
+                            <table id="client-all" class="display hover" cellspacing="0" width="100%">
+                                <thead>
+
+                                {% if centrale == "all" %}
+                                    <tr>
+                                        <th>Réf</th>
+                                        <th>Centrale</th>
+                                        <th>Raison Sociale</th>
+                                        <th>Adresse</th>
+                                        <th>Tel</th>
+                                        <th>Siret</th>
+                                        <th>Etat</th>
+                                    </tr>
+                                    </thead>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Réf</th>
+                                        <th>Centrale</th>
+                                        <th>Raison Sociale</th>
+                                        <th>Adresse</th>
+                                        <th>Tel</th>
+                                        <th>Siret</th>
+                                        <th>Etat</th>
+                                    </tr>
+                                    </tfoot>
+                                    {% else %}
+                                        <tr>
+                                            <th>Réf</th>
+                                            <th>Centrale</th>
+                                            <th>Raison Sociale</th>
+                                            <th>Groupe</th>
+                                            <th>Adresse</th>
+                                            <th>Tel</th>
+                                            <th>Siret</th>
+                                            <th>Etat</th>
+                                        </tr>
+                                        </thead>
+                                        <tfoot>
+                                        <tr>
+                                            <th>Réf</th>
+                                            <th>Centrale</th>
+                                            <th>Raison Sociale</th>
+                                            <th>Groupe</th>
+                                            <th>Adresse</th>
+                                            <th>Tel</th>
+                                            <th>Siret</th>
+                                            <th>Etat</th>
+                                        </tr>
+                                        </tfoot>
+                                {% endif %}
+
+
+                                <tbody>
+                                {% for cl in client %}
+                                    {% if centrale == "All" %}
+
+                                        <tr data-centrale="{{ cl.SO_ID |  convert_encoding('UTF-8', 'Windows-1252') }}" data-id="{{ cl.CL_ID }}"
+                                            class="cursor go-to-client" {% if cl.CL_STATUS == 2 %}style="background-color: yellow"{% endif %} >
+                                            <td>{{ cl.CL_REF }}</td>
+                                            <td>{{ cl.SO_RAISONSOC }}</td>
+                                            <td>{{ cl.CL_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252') | upper }}</td>
+                                            <td>{{ cl.GR_DESCR |  convert_encoding('UTF-8', 'Windows-1252') }}</td>
+                                            <td>{{ cl.CL_CP }} {{ cl.CL_VILLE  | formatVille | upper | convert_encoding('UTF-8', 'Windows-1252') }}</td>
+                                            <td>{{ cl.CL_TEL | phone }}</td>
+                                            <td>{{ cl.CL_SIRET | siret }}</td>
+                                            <td>{{ cl.CL_STATUS | status | raw }}</td>
+                                        </tr>
+
+                                    {% else %}
+
+                                        <tr data-centrale="{{ centrale }}" data-id="{{ cl.CL_ID }}"
+                                            class="cursor go-to-client" {% if cl.CL_STATUS == 2 %}style="background-color: yellow"{% endif %} >
+                                            <td>{{ cl.CL_REF }}</td>
+                                            <td>{{ centrale  | centrale }}</td>
+                                            <td>{{ cl.CL_RAISONSOC |  convert_encoding('UTF-8', 'Windows-1252') | upper }}</td>
+                                            <td>{{ client_service.getTheClientGroupe(cl.CL_GROUPE, centrale )  |  convert_encoding('UTF-8', 'Windows-1252') }}</td>
+                                            <td>{{ cl.CL_CP }} {{ cl.CL_VILLE | formatVille | upper | convert_encoding('UTF-8', 'Windows-1252') }}</td>
+                                            <td>{{ cl.CL_TEL | phone }}</td>
+                                            <td>{{ cl.CL_SIRET | siret }}</td>
+                                            <td>{{ cl.CL_STATUS | status | raw }}</td>
+                                        </tr>
+
+
+                                    {% endif %}
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /page content -->
+
+
+    <div class="modal fade" id="modal-insert-client-new" tabindex="-1" role="dialog"
+         aria-labelledby="modal-insert-client-new">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Choississez la centrale</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Pour ajouter un nouveau client, choisir d'abord la centrale</p>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-center ">
+                        <ul class="pagination pagination-split">
+                            <li>
+                                <a href="{{ path('client-new', { 'centrale' : 1}) }}">
+                                    <img
+                                            data-centrale="ACHAT_CENTRALE"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-ac.png') }}">
+                                </a>
+                            </li>
+                            <li><a href="{{ path('client-new', { 'centrale' : 6}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_ROC_ECLERC"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+                                </a>
+                            </li>
+                            <li><a href="{{ path('client-new', { 'centrale' : 2}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_GCCP"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
+                                </a>
+                            </li>
+                            <li><a href="{{ path('client-new', { 'centrale' : 4}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_GCCP"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+                                </a>
+                            </li>
+                            <li><a href="{{ path('client-new', { 'centrale' : 5}) }}">
+                                    <img
+                                            data-centrale="CENTRALE_GCCP"
+                                            class="cursor img-centrale-new-client"
+                                            src="{{ asset('images/logo-centrale/logo-pfpl.jpg') }}">
+                                </a>
+                            </li>
+                            {#<li><a href="{{ path('client-new', { 'centrale' : 3}) }}">#}
+                            {#<img#}
+                            {#data-centrale="achat-centrale"#}
+                            {#class="cursor img-centrale-new-client"#}
+                            {#src="{{ asset('images/logo-centrale/logo-ac.png') }}">#}
+                            {#</a></li>#}
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

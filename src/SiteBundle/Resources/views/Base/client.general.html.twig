@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ client[0]["CL_RAISONSOC"] | convert_encoding('UTF-8', 'Windows-1252') }}
+{% endblock %}
+
+{% block body %}
+
+        <div class="container-general">
+            <div class="container-info-client">
+                {% include '@Site/ui-element/general.client/info.client.html.twig' with
+                {
+                "client": client,
+                "task" : tache,
+                "user" : user,
+                "activite": activite,
+                "tacheA": tacheArchiv,
+                "groupe" : groupe,
+                "profil" : profil,
+                } %}
+
+            </div>
+        </div>
+{% endblock %}
+

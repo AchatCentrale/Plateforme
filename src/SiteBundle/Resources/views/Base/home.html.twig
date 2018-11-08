@@ -1,33 +1,561 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+
+    {{ parent() }}
+
+{% endblock stylesheets %}
+
+{% block top_content_header %}
+{% endblock top_content_header %}
 
 {% block body %}
 
-    {#include bandeau header#}
-    {{ include ('SiteBundle:Header:Header_home.html.twig') }}
+
+
+
+    <!-- top tiles -->
+    <div class="row tile_count">
+
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Total</span>
+            <div class="count">{{ dataCount["total"] }} Clients</div>
+            {#<span class="count_bottom"><i class="green">{% client_service.getTheEvolution(1) %}</i> Depuis 3 semaine</span>#}
+        </div>
+
+
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Achat-Centrale</span>
+            <div class="count">{{ dataCount["ac"] }} Clients</div>
+            <span class="count_bottom"><i class="stat-home" >{{ client_service.getTheEvolution(1)['total'] }} %</i>Depuis 3 mois</span>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Centrale Funecap</span>
+            <div class="count">{{ dataCount["fun"] }} Clients</div>
+            <span class="count_bottom"><i class="stat-home" >{{ client_service.getTheEvolution(4)['total'] }} %</i>Depuis 3 mois</span>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Centrale Roc-Eclerc</span>
+            <div class="count">{{ dataCount["roc"] }} Clients</div>
+            <span class="count_bottom"><i class="stat-home" >{{ client_service.getTheEvolution(6)['total'] }} %</i>Depuis 3 mois</span>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Centrale GCCP</span>
+            <div class="count">{{ dataCount["gccp"] }} Clients</div>
+            <span class="count_bottom"><i class="stat-home" >{{ client_service.getTheEvolution(2)['total'] }} %</i>Depuis 3 mois</span>
+        </div>
+
+        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+            <span class="count_top"><i class="fa fa-user"></i> Centrale Pascal Leclerc </span>
+            <div class="count">{{ dataCount["pfpl"] }} Clients</div>
+            <span class="count_bottom"><i class="stat-home" >{{ client_service.getTheEvolution(5)['total'] }} %</i>Depuis 3 mois</span>
+        </div>
+
+
+    </div>
+    <!-- /top tiles -->
+
+    <div class="row">
+
+
+        <div class="col-md-12 col-sm-812 col-xs-12">
+
+
+            <div class="row">
+
+
+
+                <div class="col-md-4 col-sm-12 col-xs-12  ">
+                    <div class="x_panel " >
+                        <div class="x_title">
+                            <h2>Actions à faire
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content ">
+                            {% if task %}
+
+                                <div class="">
+                                    <ul class="to_do">
+                                        {% for tasks in task %}
+
+                                            <li data-id="{{ tasks['CLA_ID'] }}" data-centrale="{{ tasks['SO_ID'] }}" class="cursor detail-tache-home">
+                                                <p><b>{{ tasks['CLA_NOM']}} </b> --  {{ tasks['CLA_DESCR'] | raw  | limitLength }} </p>
+                                                {{ tasks['CLA_STATUS'] | etat | raw }}
+                                            </li>
+                                        {% endfor %}
+
+
+
+                                    </ul>
+                                </div>
+
+                            {% else %}
+                                <h5>Pas de taches pour le moment</h5>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Dernières notes
+                            </h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content ">
+                            {% if note %}
+
+                                <div class="">
+                                    <ul class="to_do">
+                                        {% for n in note %}
+
+                                            <li data-id="{{ n['CN_ID'] }}" data-centrale="{{ n['SO_ID'] }}" class="cursor detail-note-home">
+                                                <p><b>{{ n['INS_DATE'] | dateString }}</b> --  {{ n['CN_NOTE'] | limitLength }} </p>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                            {% else %}
+                                <h5>Pas de notes pour le moment</h5>
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+
+                {#<div class="col-md-6 col-sm-12 col-xs-12">#}
+                    {#<div class="x_panel tile fixed_height_585 ">#}
+                        {#<div class="x_title">#}
+                            {#<h2>Chiffre d'affaires</h2>#}
+
+                            {#<div class="clearfix"></div>#}
+
+
+
+
+                        {#</div>#}
+                        {#<div class="x_content">#}
+
+                            {#<div class="ui grid">#}
+
+                                {#<div class="three column row">#}
+                                    {#<div class="column">#}
+                                        {#<div class="ui form">#}
+                                            {#<div class="field">#}
+                                                {#<label>Periode</label>#}
+                                                {#<div class="ui selection dropdown">#}
+                                                    {#<input type="hidden" name="periode">#}
+                                                    {#<i class="dropdown icon"></i>#}
+                                                    {#<div class="default text">Periode</div>#}
+                                                    {#<div class="menu">#}
+                                                        {#<div class="item" data-value="1">Mois</div>#}
+                                                        {#<div class="item" data-value="0">Trimeste</div>#}
+                                                        {#<div class="item" data-value="2">Semestre</div>#}
+                                                        {#<div class="item" data-value="3">Annuel</div>#}
+                                                    {#</div>#}
+                                                {#</div>#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                    {#<div class="column">#}
+
+                                        {#<div class="ui dropdown" id="clients-dropdown">#}
+                                            {#<input type="hidden" name="Clients">#}
+                                            {#<i class="dropdown icon"></i>#}
+                                            {#<div class="default text">clients</div>#}
+                                            {#<div class="menu">#}
+                                                {#{% for cl in clients  %}#}
+
+
+                                                    {#<div class="item" data-value="{{ cl['CL_ID'] }}">{{ cl['CL_RAISONSOC'] }}</div>#}
+
+                                                    {#{% endfor %}#}
+                                            {#</div>#}
+                                        {#</div>#}
 
 
 
 
 
-    <div class="container-react-app">
+
+                                    {#</div>#}
+                                    {#<div class="column">#}
+                                        {#<div class="ui form">#}
+                                            {#<div class="field">#}
+                                                {#<label>Fournisseur</label>#}
+                                                {#<div class="ui selection dropdown">#}
+                                                    {#<input type="hidden" name="periode">#}
+                                                    {#<i class="dropdown icon"></i>#}
+                                                    {#<div class="default text">Fournisseur</div>#}
+                                                    {#<div class="menu">#}
+                                                        {#<div class="item" data-value="0">Bruneau</div>#}
+
+                                                    {#</div>#}
+                                                {#</div>#}
+                                            {#</div>#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                {#</div>#}
 
 
-            <div id="app">
+                            {#</div>#}
+
+                            {#<h2 class="ca-global-h2">CA GLOBAL : 482 852,58 €</h2>#}
+
+
+
+                            {#<div class="chart-ca-global">#}
+                                {#<canvas id="myChart" width="400" height="200"></canvas>#}
+
+                            {#</div>#}
+
+                        {#</div>#}
+                    {#</div>#}
+                {#</div>#}
+
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>RDV</h2>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content ">
+                            <div class="ui relaxed divided list">
+                                {% if rdv %}
+
+                                    {% for r in rdv  %}
+                                        <div class="item">
+                                            <div class="content">
+                                                <a data-id="{{ r['CLA_ID'] }}" data-centrale="{{ r['SO_ID'] }}" class="header detail-rdv-home">{{ r['CLA_NOM'] }}</a>
+                                                <div class="description">Le {{ r['CLA_ECHEANCE'] | dateString }}</div>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %}
+
+                                    {% else %}
+
+                                    <p>Aucun rendez-vous pour le moment</p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
 
             </div>
 
+        </div>
+    </div>
+    <!-- /page content -->
 
 
+    {#modal detail task#}
+    <div class="modal fade" id="modal-detail-task-home" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title modal-title-task-home" id="myModalLabel"></h4>
+                </div>
+                <div class="modal-body body-task-detail-home">
 
-        {% block javascripts %}
-
-            <script async src={{ asset('app.bundle.js') }} type="text/javascript"></script>
-
-        {% endblock %}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="ui button" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-
-
 {% endblock %}
+
+
+
+
+
+{#{% block javascripts %}
+
+    {{ parent() }}
+
+    <!-- Chart.js -->
+    <script src="{{ asset('js/vendors/Chart.js/dist/Chart.min.js') }}"></script>
+    <!-- gauge.js -->
+    <script src="{{ asset('js/vendors/gauge.js/dist/gauge.min.js') }}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{{ asset('js/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+    <!-- iCheck -->
+    <script src="{{ asset('js/vendors/iCheck/icheck.min.js') }}"></script>
+    <!-- Skycons -->
+    <script src="{{ asset('js/vendors/skycons/skycons.js') }}"></script>
+    <!-- Flot -->
+    <script src="{{ asset('js/vendors/Flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('js/vendors/Flot/jquery.flot.pie.js') }}"></script>
+    <script src="{{ asset('js/vendors/Flot/jquery.flot.time.js') }}"></script>
+    <script src="{{ asset('js/vendors/Flot/jquery.flot.stack.js') }}"></script>
+    <script src="{{ asset('js/vendors/Flot/jquery.flot.resize.js') }}"></script>
+    <!-- Flot plugins -->
+    <script src="{{ asset('js/vendors/flot.orderbars/js/jquery.flot.orderBars.js') }}"></script>
+    <script src="{{ asset('js/vendors/Flot/examples/axes-time-zones/date.js') }}"></script>
+    <script src="{{ asset('js/vendors/flot/jquery.flot.spline.js') }}"></script>
+    <script src="{{ asset('js/vendors/flot/curvedLines.js') }}"></script>
+    <!-- jVectorMap -->
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{ asset('assets/js/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datepicker/daterangepicker.js') }}"></script>
+
+    <!-- Flot -->
+    <script>
+        $(document).ready(function () {
+            var data1 = [
+                [gd(2012, 1, 1), 17],
+                [gd(2012, 1, 2), 74],
+                [gd(2012, 1, 3), 6],
+                [gd(2012, 1, 4), 39],
+                [gd(2012, 1, 5), 20],
+                [gd(2012, 1, 6), 85],
+                [gd(2012, 1, 7), 7]
+            ];
+
+            var data2 = [
+                [gd(2012, 1, 1), 82],
+                [gd(2012, 1, 2), 23],
+                [gd(2012, 1, 3), 66],
+                [gd(2012, 1, 4), 9],
+                [gd(2012, 1, 5), 119],
+                [gd(2012, 1, 6), 6],
+                [gd(2012, 1, 7), 9]
+            ];
+            $("#canvas_dahs").length && $.plot($("#canvas_dahs"), [
+                data1, data2
+            ], {
+                series: {
+                    lines: {
+                        show: false,
+                        fill: true
+                    },
+                    splines: {
+                        show: true,
+                        tension: 0.4,
+                        lineWidth: 1,
+                        fill: 0.4
+                    },
+                    points: {
+                        radius: 0,
+                        show: true
+                    },
+                    shadowSize: 2
+                },
+                grid: {
+                    verticalLines: true,
+                    hoverable: true,
+                    clickable: true,
+                    tickColor: "#d5d5d5",
+                    borderWidth: 1,
+                    color: '#fff'
+                },
+                colors: ["rgba(38, 185, 154, 0.38)", "rgba(3, 88, 106, 0.38)"],
+                xaxis: {
+                    tickColor: "rgba(51, 51, 51, 0.06)",
+                    mode: "time",
+                    tickSize: [1, "day"],
+                    //tickLength: 10,
+                    axisLabel: "Date",
+                    axisLabelUseCanvas: true,
+                    axisLabelFontSizePixels: 12,
+                    axisLabelFontFamily: 'Verdana, Arial',
+                    axisLabelPadding: 10
+                },
+                yaxis: {
+                    ticks: 8,
+                    tickColor: "rgba(51, 51, 51, 0.06)",
+                },
+                tooltip: false
+            });
+
+            function gd(year, month, day) {
+                return new Date(year, month - 1, day).getTime();
+            }
+        });
+    </script>
+    <!-- /Flot -->
+
+
+    <!-- Skycons -->
+    <script>
+        $(document).ready(function () {
+            var icons = new Skycons({
+                    "color": "#73879C"
+                }),
+                list = [
+                    "clear-day", "clear-night", "partly-cloudy-day",
+                    "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+                    "fog"
+                ],
+                i;
+
+            for (i = list.length; i--;)
+                icons.set(list[i], list[i]);
+
+            icons.play();
+        });
+    </script>
+    <!-- /Skycons -->
+
+    <!-- Doughnut Chart -->
+    <script>
+        $(document).ready(function () {
+            var options = {
+                legend: false,
+                responsive: false
+            };
+
+            new Chart(document.getElementById("canvas1"), {
+                type: 'doughnut',
+                tooltipFillColor: "rgba(51, 51, 51, 0.55)",
+                data: {
+                    labels: [
+                        "Symbian",
+                        "Blackberry",
+                        "Other",
+                        "Android",
+                        "IOS"
+                    ],
+                    datasets: [{
+                        data: [15, 20, 30, 10, 30],
+                        backgroundColor: [
+                            "#BDC3C7",
+                            "#9B59B6",
+                            "#E74C3C",
+                            "#26B99A",
+                            "#3498DB"
+                        ],
+                        hoverBackgroundColor: [
+                            "#CFD4D8",
+                            "#B370CF",
+                            "#E95E4F",
+                            "#36CAAB",
+                            "#49A9EA"
+                        ]
+                    }]
+                },
+                options: options
+            });
+        });
+    </script>
+    <!-- /Doughnut Chart -->
+
+    <!-- bootstrap-daterangepicker -->
+    <script>
+        $(document).ready(function () {
+
+            var cb = function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            };
+
+            var optionSet1 = {
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment(),
+                minDate: '01/01/2012',
+                maxDate: '12/31/2015',
+                dateLimit: {
+                    days: 60
+                },
+                showDropdowns: true,
+                showWeekNumbers: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker12Hour: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                opens: 'left',
+                buttonClasses: ['btn btn-default'],
+                applyClass: 'btn-small btn-primary',
+                cancelClass: 'btn-small',
+                format: 'MM/DD/YYYY',
+                separator: ' to ',
+                locale: {
+                    applyLabel: 'Submit',
+                    cancelLabel: 'Clear',
+                    fromLabel: 'From',
+                    toLabel: 'To',
+                    customRangeLabel: 'Custom',
+                    daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                    monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                    firstDay: 1
+                }
+            };
+            $('#reportrange span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+            $('#reportrange').daterangepicker(optionSet1, cb);
+            $('#reportrange').on('show.daterangepicker', function () {
+                console.log("show event fired");
+            });
+            $('#reportrange').on('hide.daterangepicker', function () {
+                console.log("hide event fired");
+            });
+            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                console.log("apply event fired, start/end dates are " + picker.startDate.format('MMMM D, YYYY') + " to " + picker.endDate.format('MMMM D, YYYY'));
+            });
+            $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                console.log("cancel event fired");
+            });
+            $('#options1').click(function () {
+                $('#reportrange').data('daterangepicker').setOptions(optionSet1, cb);
+            });
+            $('#options2').click(function () {
+                $('#reportrange').data('daterangepicker').setOptions(optionSet2, cb);
+            });
+            $('#destroy').click(function () {
+                $('#reportrange').data('daterangepicker').remove();
+            });
+        });
+    </script>
+    <!-- /bootstrap-daterangepicker -->
+
+    <!-- gauge.js -->
+    <script>
+        var opts = {
+            lines: 12,
+            angle: 0,
+            lineWidth: 0.4,
+            pointer: {
+                length: 0.75,
+                strokeWidth: 0.042,
+                color: '#1D212A'
+            },
+            limitMax: 'false',
+            colorStart: '#1ABC9C',
+            colorStop: '#1ABC9C',
+            strokeColor: '#F0F3F3',
+            generateGradient: true
+        };
+        var target = document.getElementById('foo'),
+            gauge = new Gauge(target).setOptions(opts);
+
+        gauge.maxValue = 6000;
+        gauge.animationSpeed = 32;
+        gauge.set(3200);
+        gauge.setTextField(document.getElementById("gauge-text"));
+    </script>
+    <!-- /gauge.js -->
+
+{% endblock javascripts %}#}
 
