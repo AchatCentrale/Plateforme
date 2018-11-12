@@ -5,14 +5,14 @@
 
 
 {% set randomPassword = [] %}
-                    {% for i in 1..5 %}
-                        {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
-                        {% set alphaUpper = alpha|upper %}
-                        {% set numbers = '0123456789' %}
-                        {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers) %}
-                        {% set randomPassword = randomPassword|merge([randomCharacter]) %}
-                    {% endfor %}
-                    {% set randomPassword = randomPassword|join %}
+    {% for i in 1..5 %}
+        {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
+        {% set alphaUpper = alpha|upper %}
+        {% set numbers = '0123456789' %}
+        {% set randomCharacter = random(alpha ~ alphaUpper ~ numbers) %}
+        {% set randomPassword = randomPassword|merge([randomCharacter]) %}
+    {% endfor %}
+{% set randomPassword = randomPassword|join %}
 
 
 <div class="row">
@@ -94,15 +94,18 @@
 
                             {% for u in user %}
                                 <div class="item">
-                                    <img class="ui avatar image image-avatar-list"  src="https://semantic-ui.com/images/avatar/large/christian.jpg">
+                                    <img class="ui avatar image image-avatar-list"
+                                         src="https://semantic-ui.com/images/avatar/large/christian.jpg">
                                     <div class="content content-list-user">
                                         <a href="//www.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u["CC_MAIL"] }}&PASS={{ u["CC_PASS"] }}">
                                             <i class="user icon"></i>
                                             {{ u["CC_PRENOM"] |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u["CC_NOM"] |  convert_encoding('UTF-8', 'Windows-1252') }}
                                         </a>
                                         <div class="description"><i class="mail icon"></i>{{ u["CC_MAIL"] }}</div>
-                                        <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone   }}</div>
-                                        <div class="description"><i class="phone icon square"></i>{{ u["CC_GSM"] | phone  }}
+                                        <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone }}
+                                        </div>
+                                        <div class="description"><i
+                                                    class="phone icon square"></i>{{ u["CC_GSM"] | phone }}
                                         </div>
                                     </div>
                                 </div>
@@ -168,7 +171,8 @@
 
 
                                             {% for t in tag %}
-                                                <li><a class="" href="{{ path('hastag-action', { 'id' : t['TAG'] }) }}">#{{ t['TAG'] }}</a></li>
+                                                <li><a class="" href="{{ path('hastag-action', { 'id' : t['TAG'] }) }}">#{{ t['TAG'] }}</a>
+                                                </li>
                                             {% endfor %}
 
                                         {% endif %}
@@ -182,10 +186,6 @@
 
 
                     </div>
-
-
-
-
 
 
                     <div class="detail-client">
@@ -209,7 +209,7 @@
                                     <p class="cursor " data-index="siret">
                                         <a class="cursor data-client " data-index="mail"
                                            href="mailto:{{ client[0]["CL_MAIL"] }}">
-                                            <i class="mail link  circular icon"></i></a>{{ client[0]["CL_MAIL"]}}</p>
+                                            <i class="mail link  circular icon"></i></a>{{ client[0]["CL_MAIL"] }}</p>
                                 </div>
                                 <div class="info-client-detail " id="detail-tel">
                                     <p class="title-detail-client ">Téléphone</p>
@@ -221,7 +221,8 @@
                             <div class="three wide column">
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Éffectif</p>
-                                    <p class="cursor label-background" data-index="effectif">{{ client[0]["CL_EFFECTIF"] }}</p>
+                                    <p class="cursor label-background"
+                                       data-index="effectif">{{ client[0]["CL_EFFECTIF"] }}</p>
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Chiffre d'affaires</p>
@@ -291,19 +292,23 @@
                                     <p class="title-detail-client ">Afficher les prix d'achats</p>
                                     <div class="prix-achat-check">
                                         <input title="prix dachat-o" class="check-oui-pa"
-                                               type="checkbox" {{ (client[0]["CL_MASQ_HA"] == 1) ? 'checked' :  '' }} > oui
+                                               type="checkbox" {{ (client[0]["CL_MASQ_HA"] == 1) ? 'checked' :  '' }} >
+                                        oui
 
                                         <input title="prix dachat-n" class="check-non-pa"
-                                               type="checkbox" {{ (client[0]["CL_MASQ_HA"] == 0) ? 'checked' :  '' }} > Non
+                                               type="checkbox" {{ (client[0]["CL_MASQ_HA"] == 0) ? 'checked' :  '' }} >
+                                        Non
                                     </div>
                                 </div>
                                 <div class="info-client-detail">
                                     <p class="title-detail-client ">Afficher les prix de vente</p>
                                     <div class="prix-achat-check">
                                         <input title="prix de vente-o" class="check-oui-pa"
-                                               type="checkbox" {{ (client[0]["CL_MASQ_VT"] == 1) ? 'checked' :  '' }} > Oui
+                                               type="checkbox" {{ (client[0]["CL_MASQ_VT"] == 1) ? 'checked' :  '' }} >
+                                        Oui
                                         <input title="prix de vente-n" class="check-non-pa"
-                                               type="checkbox" {{ (client[0]["CL_MASQ_VT"] == 0) ? 'checked' :  '' }} > Non
+                                               type="checkbox" {{ (client[0]["CL_MASQ_VT"] == 0) ? 'checked' :  '' }} >
+                                        Non
                                     </div>
                                 </div>
                             </div>
@@ -429,7 +434,8 @@
                                                                 <input type="text" class="form-control" id="add-note"
                                                                        placeholder="Consigner une note pour le client {{ client[0]["CL_RAISONSOC"] |  convert_encoding('UTF-8', 'Windows-1252') }}">
                                                                 <span class="input-group-btn">
-                                                                <button class="btn btn-secondar btn-success add-note" type="button">Enregistrer</button>
+                                                                <button class="btn btn-secondar btn-success add-note"
+                                                                        type="button">Enregistrer</button>
                                                                 <i class="window close icon empty_notes"></i>
 
                                                                 </span>
@@ -440,7 +446,8 @@
                                                                 <h5>Historique client: </h5>
                                                                 {% for n in note %}
                                                                     <ul>
-                                                                        <li>{{ n["INS_DATE"]  }}: {{ n["CN_NOTE"] | raw }}</li>
+                                                                        <li>{{ n["INS_DATE"] }}
+                                                                            : {{ n["CN_NOTE"] | raw }}</li>
                                                                     </ul>
                                                                 {% endfor %}
                                                             {% else %}
@@ -555,7 +562,8 @@
                         <div class="form-group">
                             <label for="ca-update">Chiffre d'affaires</label>
                             <input name="data-client[]" type="text" class="form-control data-update-client"
-                                   id="ca-update" value="{{ client[0]["CL_CA"] }}" placeholder="{{ client[0]["CL_CA"] }}">
+                                   id="ca-update" value="{{ client[0]["CL_CA"] }}"
+                                   placeholder="{{ client[0]["CL_CA"] }}">
                         </div>
                         <div class="form-group">
                             <label for="adresse1-update">Adresse</label>
@@ -565,7 +573,7 @@
                         <div class="form-group">
                             <label for="ville-update">Ville</label>
                             <input name="data-client[]" type="text" class="form-control" id="ville-update"
-                                   value="{{ client[0]["CL_VILLE"] }}" placeholder="{{ client[0]["CL_VILLE"]}}">
+                                   value="{{ client[0]["CL_VILLE"] }}" placeholder="{{ client[0]["CL_VILLE"] }}">
                         </div>
                     </div>
 
@@ -644,7 +652,8 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel">Ajouter un utilisateur du compte {{ client[0]["CL_RAISONSOC"] }}</h4>
+                <h4 class="modal-title" id="myModalLabel">Ajouter un utilisateur du
+                    compte {{ client[0]["CL_RAISONSOC"] }}</h4>
             </div>
             <div class="modal-body">
                 <div class="ui centered grid">
