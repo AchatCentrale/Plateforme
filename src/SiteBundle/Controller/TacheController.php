@@ -54,6 +54,7 @@ class TacheController extends Controller
         $task = $stmt->fetchAll();
 
 
+        dump($user->getUsId());
 
 
         return $this->render('@Site/Base/tache.home.html.twig', [

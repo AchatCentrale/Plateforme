@@ -67,7 +67,7 @@ doctrine:
                 host:           "%database_host%"
                 user:           "%database_user%"
                 password:       "%database_password%"
-                dbname:         "CENTRALE_ACHAT_JB"
+                dbname:         "CENTRALE_ACHAT"
                 charset:  UTF-8
                 options:
                     ansi_nulls: on
