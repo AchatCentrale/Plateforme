@@ -137,7 +137,6 @@ class FournisseurController extends Controller
 
             if (($handle = fopen($file->getRealPath(), "r")) !== false) {
                 while (($row = fgetcsv($handle, null, "\r")) !== false) {
-                    dump($row);
 
                     array_push($data, $row);
 
@@ -209,7 +208,6 @@ class FournisseurController extends Controller
                               ( :id , :fournisseur ,  :rayon ,  :famille ,  :filtre1 ,  :valeur1 ,  :filtre2 ,  :valeur2 ,  :filtre3 ,  :valeur3 ,  :filtre4 ,  :valeur4 ,  :filtre5 ,  :valeur5 ,  :filtre6 ,  :valeur6 , :filtre7 ,  :valeur7 ,  :filtre8 ,  :valeur8 ,  :filtre9 ,  :valeur9 ,  :filtre10 ,  :valeur10 ,  :refFour ,  :refPart ,  :ean ,  :nomProduit ,  :descrCourte ,  :descrLong ,  :triptyque ,  :qteCmd, :conditionnement, :prixPubHt,  :prixPartHt ,  :prixVc  , :remise ,  :type ,  :lien ,  :photo , 123456  )";
 
 
-                    dump($sql);
 
                     $stmt = $conn->prepare($sql);
                     $stmt->bindValue(':id', 1);
