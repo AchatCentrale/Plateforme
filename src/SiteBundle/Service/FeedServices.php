@@ -45,7 +45,6 @@ class FeedServices
     {
 
 
-
         $so_database = $this->clientService->getCentraleDB($centrale);
 
 
@@ -66,14 +65,12 @@ class FeedServices
 
 
 
-        $sqlTickets = sprintf("SELECT TOP 5 *, (SELECT 'tickets') FROM CENTRALE_ACHAT.dbo.MESSAGE_ENTETE WHERE CL_ID = :id ORDER BY INS_DATE DESC ", $so_database);
+        $sqlTickets = sprintf("SELECT TOP 5 *, (SELECT 'tickets') FROM %s.dbo.MESSAGE_ENTETE WHERE CL_ID = :id ORDER BY INS_DATE DESC ", $so_database);
         $stmtTickets = $this->connection->prepare($sqlTickets);
         $stmtTickets->bindValue("id", $id);
         $stmtTickets->execute();
 
         $tickets = $stmtTickets->fetchAll();
-
-
 
 
 

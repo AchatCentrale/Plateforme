@@ -485,8 +485,6 @@
                             <div class="historique-client-content">
 
                                 {% if client[0]["CL_ID"] > 0 %}
-
-
                                     {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0]["CL_ID"], 'centrale': centrale })) }}
                                 {% else %}
                                     Kenny looks okay --- so far
