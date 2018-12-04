@@ -1638,7 +1638,6 @@ class BaseController extends Controller
 
         $feed->showTheFeed();
 
-        dump($feed);
 
         return $this->render('@Site/ui-element/feed.list.html.twig', [
             'feed' => $feed,
