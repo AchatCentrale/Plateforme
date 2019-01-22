@@ -93,6 +93,7 @@
 
 
                             {% for u in user %}
+                                {{ dump(u) }}
                                 <div class="item">
                                     <img class="ui avatar image image-avatar-list"
                                          src="https://semantic-ui.com/images/avatar/large/christian.jpg">
@@ -487,7 +488,7 @@
                                 {% if client[0]["CL_ID"] > 0 %}
                                     {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0]["CL_ID"], 'centrale': centrale })) }}
                                 {% else %}
-                                    Kenny looks okay --- so far
+
                                 {% endif %}
 
 

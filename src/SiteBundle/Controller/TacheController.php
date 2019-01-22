@@ -55,9 +55,15 @@ class TacheController extends Controller
 
 
 
+        $sqlUserDispo = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS";
+
+        $stmtUser = $conn->prepare($sqlUserDispo);
+        $stmtUser->execute();
+        $user = $stmtUser->fetchAll();
 
         return $this->render('@Site/Base/tache.home.html.twig', [
             'task' => $task,
+            'user' => $user,
         ]);
 
     }
@@ -303,16 +309,14 @@ class TacheController extends Controller
         if ($request->getMethod() == "POST") {
 
 
-
             $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
 
-            $sqlAddTask = sprintf("INSERT INTO %s.dbo.CLIENTS_TACHES (CL_ID, US_ID, CLA_TYPE, CLA_NOM, CLA_DESCR, CLA_ECHEANCE, CLA_PRIORITE, CLA_STATUS, INS_DATE, INS_USER) VALUES (:cl_id, :user, :type, :nom, :descr, :echeance, :priorite, 0, GETDATE(), :ins_user)", $so_database[0]["SO_DATABASE"]);
+            $sqlAddTask = sprintf("INSERT INTO %s.dbo.CLIENTS_TACHES (CL_ID, US_ID, CLA_TYPE, CLA_NOM, CLA_ECHEANCE, CLA_PRIORITE, CLA_STATUS, INS_DATE, INS_USER) VALUES (:cl_id, :user, :type, :nom, :echeance, :priorite, 0, GETDATE(), :ins_user)", $so_database[0]["SO_DATABASE"]);
             $stmt = $conn->prepare($sqlAddTask);
             $stmt->bindValue('cl_id', $req->get('cla_cl'));
-            $stmt->bindValue('user', $req->get('cla_us'));
+            $stmt->bindValue('user', $this->getUser()->getusId());
             $stmt->bindValue('type', $req->get('cla_type'));
             $stmt->bindValue('nom', $req->get('cla_nom'));
-            $stmt->bindValue('descr', $req->get('cla_desc'));
             $stmt->bindValue('echeance', $date_echeance2, \Doctrine\DBAL\Types\Type::DATETIME);
             $stmt->bindValue('priorite', $req->get('cla_priorite'));
             $stmt->bindValue('ins_user', $this->getUser()->getusMail());
@@ -323,7 +327,9 @@ class TacheController extends Controller
 
 
 
-            $mailer->sendTaskNotification($last_id, $so_database);
+
+
+            //$mailer->sendTaskNotification($last_id, $so_database, $this->getUser());
 
 
             return $this->redirectToRoute('taches_home', [
@@ -752,6 +758,11 @@ class TacheController extends Controller
 
 
         }
+
+
+    }
+
+    public function changeUserAction(Request $request, $id, $centrale){
 
 
     }

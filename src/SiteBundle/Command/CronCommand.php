@@ -12,10 +12,10 @@ class CronCommand extends ContainerAwareCommand
 
     protected function configure()
     {
-// On set le nom de la commande
+    // On set le nom de la commande
         $this->setName('cron');
 
-// On set la description
+        // On set la description
         $this->setDescription("Liste des commandes pour cron");
 
 

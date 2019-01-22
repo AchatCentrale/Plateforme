@@ -60,9 +60,8 @@
                                         <div class="field">
                                             <label>Priorité de l'action</label>
                                             <select required name="cla_priorite" class="ui dropdown">
-                                                <option selected value="">Priorité de l'action</option>
                                                 <option value="1">Important</option>
-                                                <option value="2">Normale</option>
+                                                <option selected value="2">Normale</option>
                                                 <option value="3">Faible</option>
                                             </select>
                                         </div>
@@ -108,27 +107,21 @@
                                         {#{% endfor %}#}
                                         {#</select>#}
                                         {#</div>#}
-                                        <div class="ui search field user-auto">
-                                            <label>Utilisateur</label>
-                                            <div class="ui left icon  input">
-                                                <input class="prompt user-task-label" required name="cla_us" type="text"
-                                                       placeholder="Utilisateur associé a l'action">
-                                                <i class="user icon"></i>
-                                            </div>
-                                        </div>
+                                        {#<div class="ui search field user-auto">#}
+                                            {#<label>Utilisateur</label>#}
+                                            {#<div class="ui left icon  input">#}
+                                                {#<input class="prompt user-task-label" required name="cla_us" type="text"#}
+                                                       {#placeholder="Utilisateur associé a l'action">#}
+                                                {#<i class="user icon"></i>#}
+                                            {#</div>#}
+                                        {#</div>#}
 
                                     </div>
 
                                 </div>
 
                             </div>
-                            <div class="field">
-                                <label>Description de l'action</label>
-                                <textarea required class="text-area-validation" name="cla_desc" rows="2"></textarea>
-                                <p id="countTextarea"></p>
-                            </div>
-
-                            <button type="submit" class="fluid positive ui button"> Enregistrer</button>
+                            <button type="submit" class="fluid positive ui button mt-4" style="margin-top: 20px;"> Enregistrer</button>
                         </form>
                     </div>
                 </div>

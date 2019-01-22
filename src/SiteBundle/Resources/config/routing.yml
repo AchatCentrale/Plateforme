@@ -117,6 +117,11 @@ mail-task:
     defaults: {_controller: SiteBundle:Tache:sendMailTask}
 
 
+reassign-user-action:
+    path: /taches/reassign/{id}/{centrale}
+    defaults: {_controller: SiteBundle:Tache:changeUser}
+
+
 change-state:
     path: /taches/etat/{state}/{id}/{centrale}
     defaults: {_controller: SiteBundle:Tache:changetheState}

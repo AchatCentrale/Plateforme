@@ -15,8 +15,7 @@
                 <div class="x_content">
 
 
-                    <button type="button" class="btn btn-success" data-toggle="modal"
-                            data-target="#modal-choix-centrale">Ajouter une tâche
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-choix-centrale">Ajouter une tâche
                     </button>
 
 
@@ -36,16 +35,15 @@
                                     <th class="one wide">Écheance</th>
                                     <th class="one wide">Assigné à</th>
                                     <th class="one wide">Nom</th>
-                                    <th class="six wide">Description</th>
                                     <th class="one wide">Client</th>
                                     <th class="two wide">Date de creation</th>
                                     <th class="one wide">Centrale</th>
+                                    <th class="one wide">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
                                 {% for tasks in task %}
-
                                     <tr class="task-id " data-task="{{ tasks['CLA_ID'] }} "
                                         data-centrale="{{ tasks['SO_ID'] }}" id="{{ tasks['CLA_ID'] }}">
                                         <td>
@@ -65,23 +63,12 @@
                                                 {#<span class="count_bottom">Modifié le : {{ tasks['MAJ_DATE'] }} </span>#}
                                             </div>
                                         </td>
-                                        <td class="justify">
-                                            <h4>{{ tasks['CLA_DESCR'] | limitLength }}</h4>
-                                        </td>
-
-
-
                                         {% if tasks['CL_ID'] == null %}
 
 
                                             <td><b>TEAM</b></td>
 
-
-
                                         {% else %}
-
-
-
 
                                             <td>
                                                 <p>
@@ -94,33 +81,22 @@
 
 
                                         {% endif %}
-
-
                                         <td>
                                             <div class="task-date-creation">
                                                <p> {{ tasks['INS_DATE'] | fromNowString }}</p>
                                                <p> crée par  <b>{{ tasks['INS_USER']  }}</b></p>
                                             </div>
                                         </td>
-
-
-
-
                                         <td>{{ tasks['SO_ID'] | centraleLabel | raw }}</td>
-
+                                        <td><i data-toggle="modal" data-target="#modal-change-user" class="user plus icon cursor"></i></td>
                                     </tr>
-
                                 {% endfor %}
                                 </tbody>
                             </table>
-
                         </div>
                     {% else %}
-
                         <p>Il n'y a pas de tâches pour le moment</p>
                     {% endif %}
-
-
                 </div>
             </div>
         </div>
@@ -216,6 +192,51 @@
 
         </div>
     </div>
+
+
+    <!-- Choix centrale -->
+    <div id="modal-change-user" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Réassigner La tache</h4>
+                </div>
+                <div class="modal-body" style="margin-bottom: 20px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="ui form">
+                                <div class="field">
+                                    <label>Ajouter un commentaire</label>
+                                    <textarea id="reassign_text"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="ui form" style="margin-top: 24px;">
+                                <div class="field">
+                                    <select id="reassign_user">
+                                        <option value="">Assigner la tache</option>
+                                        {% for u in user %}
+                                            <option value="{{ u["US_ID"] }}">{{ u["US_PRENOM"] }} {{ u["US_NOM"] }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="ui green button submit_reassign" style=" margin-top: 15px;margin-left: 85px;">Ré-assigner</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
 
 
 

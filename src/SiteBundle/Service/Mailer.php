@@ -47,10 +47,11 @@ class Mailer
     }
 
 
-    public function sendTaskNotification($id,$centrale)
+    public function sendTaskNotification($id,$centrale, $user)
     {
 
-
+        $mailUser = $user->getUsMail();
+        $mailPrenom = $user->getUsPrenom();
 
         $sql = sprintf("SELECT * FROM %s.dbo.CLIENTS_TACHES WHERE CLA_ID = :id ", $centrale[0]["SO_DATABASE"]);
         $stmt = $this->conn->prepare($sql);
@@ -64,14 +65,13 @@ class Mailer
         $user = $stmtUser->fetchAll();
         $subject = "Nouvelle tache";
         $template = 'SiteBundle:mail:mailDetailClient.html.twig';
-        $to = $user[0]['US_MAIL'];
+        $to = $mailUser;
         $body = $this->templating->render($template, [
             'tasks' => $task[0],
-            'user' => $user[0]
+            'userPrenom' => $mailPrenom
         ]);
 
         $this->sendMessage($to, $subject, $body, "Achat Centrale");
-
 
 
     }
