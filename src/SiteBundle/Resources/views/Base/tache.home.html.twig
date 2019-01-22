@@ -88,7 +88,7 @@
                                             </div>
                                         </td>
                                         <td>{{ tasks['SO_ID'] | centraleLabel | raw }}</td>
-                                        <td><i data-toggle="modal" data-target="#modal-change-user" class="user plus icon cursor"></i></td>
+                                        <td><i id="reassign_user_icon" data-toggle="modal" data-task="{{ tasks['CLA_ID'] }}" data-centrale="{{ tasks['SO_ID'] }}"  data-target="#modal-change-user" class="user plus icon cursor"></i></td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

@@ -465,10 +465,6 @@ class TacheController extends Controller
     public function UpdateTaskAction(Request $request, $id, $centrale)
     {
 
-
-
-
-
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         switch ($centrale){
@@ -658,8 +654,6 @@ class TacheController extends Controller
                 'id' => $id
             ]);
 
-
-
         }
 
 
@@ -762,8 +756,20 @@ class TacheController extends Controller
 
     }
 
-    public function changeUserAction(Request $request, $id, $centrale){
+    public function changeUserAction(Request $request, $id, $centrale)
+    {
 
+
+
+
+        $user_id = $request->get('user_id');
+        $text_comment = $request->get('text_comment');
+
+
+
+
+
+        return new JsonResponse("ok", 200);
 
     }
 

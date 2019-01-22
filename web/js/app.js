@@ -1893,7 +1893,6 @@ $(function () {
 
 
     $('.archive-task').on('click', function (e) {
-        console.log();
 
 
         let centrale = centraleToInt($(this).data("centrale"));
@@ -1901,20 +1900,61 @@ $(function () {
 
 
         $.get("/taches/archive/" + idTask + "/" + centrale, function (data) {
-            console.log(data)
             $.notify("Note archivé", "success");
 
         });
 
-    })
+    });
 
 
     $('.submit_reassign').on('click', function (e) {
         let user = $('#reassign_user').val();
         let text = $('#reassign_text').val();
+        let icon_reassign = $('#reassign_user_icon');
 
         console.log(user);
         console.log(text);
+        let centrale = icon_reassign.data("centrale");
+        let idTask = icon_reassign.data("task");
+
+        let url = CURRENT_URL.substring(0, 53) + "/reassign/"+idTask+"/"+centrale;
+
+
+        console.log(url);
+
+
+        // $.ajax({
+        //
+        //     // Adresse à laquelle la requête est envoyée
+        //     url: url,
+        //
+        //     type: 'POST',
+        //
+        //
+        //     data: {
+        //         user_id: e.target.value,
+        //         text_comment: e.target.value,
+        //
+        //
+        //     },
+        //     // Le délai maximun en millisecondes de traitement de la demande
+        //     timeout: 4000,
+        //
+        //     // La fonction à apeller si la requête aboutie
+        //     success: function (data) {
+        //
+        //         console.log(data);
+        //
+        //         window.location.reload();
+        //     },
+        //
+        //     // La fonction à appeler si la requête n'a pas abouti
+        //     error: function (e) {
+        //         console.log(e);
+        //
+        //     }
+        //
+        // });
 
 
     })

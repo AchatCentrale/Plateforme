@@ -93,8 +93,11 @@
 
 
                             {% for u in user %}
-                                {{ dump(u) }}
+
+                                {% if u["CC_STATUS"] is same as(0) %}
+
                                 <div class="item">
+
                                     <img class="ui avatar image image-avatar-list"
                                          src="https://semantic-ui.com/images/avatar/large/christian.jpg">
                                     <div class="content content-list-user">
@@ -103,13 +106,13 @@
                                             {{ u["CC_PRENOM"] |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u["CC_NOM"] |  convert_encoding('UTF-8', 'Windows-1252') }}
                                         </a>
                                         <div class="description"><i class="mail icon"></i>{{ u["CC_MAIL"] }}</div>
-                                        <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone }}
-                                        </div>
-                                        <div class="description"><i
-                                                    class="phone icon square"></i>{{ u["CC_GSM"] | phone }}
-                                        </div>
+                                        <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone }}</div>
+                                        <div class="description"><i class="phone icon square"></i>{{ u["CC_GSM"] | phone }}</div>
+
+
                                     </div>
                                 </div>
+                                {% endif %}
 
                             {% endfor %}
 
