@@ -99,7 +99,7 @@
                                             <i class="user icon"></i>
                                             {{ u["CC_PRENOM"] |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u["CC_NOM"] |  convert_encoding('UTF-8', 'Windows-1252') }}
                                         </a>&nbsp;<i class="edit icon cursor edit-client-user"></i>
-                                        <div class="description"><b>{{ u["CC_FONCTION"]  }}</b></div>
+                                        <div class="description"><b>{{ u["CC_FONCTION"] | convert_encoding('UTF-8', 'Windows-1252') }}</b></div>
                                         <div class="description"><i class="mail icon"></i>{{ u["CC_MAIL"] }}</div>
                                         <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone }}</div>
                                         <div class="description"><i class="phone icon square"></i>{{ u["CC_GSM"] | phone }}</div>
