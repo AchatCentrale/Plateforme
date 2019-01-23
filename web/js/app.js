@@ -805,7 +805,6 @@ $(function () {
 
     $('.edit-client-user').on('click', function () {
 
-
         let id = $(this).parent().data('id');
 
         let tpl = `<p class="hidden" id="id-user-client-update">${id}</p>`;
