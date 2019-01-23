@@ -95,10 +95,9 @@
                                     <div style="background-color: #eee;margin-bottom: 15px;padding-top: 15px;padding-bottom: 15px;padding-left: 10px;border-radius: 20px;" class="item">
                                     {{ u["CC_PRENOM"] | avatar(u["CC_NOM"], false, true) | raw }}
                                     <div class="content content-list-user">
-                                        <a href="//www.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u["CC_MAIL"] }}&PASS={{ u["CC_PASS"] }}">
-                                            <i class="user icon"></i>
+                                        <a href="//secure.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u["CC_MAIL"] }}&PASS={{ u["CC_PASS"] }}"><i class="user icon"></i>
                                             {{ u["CC_PRENOM"] |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u["CC_NOM"] |  convert_encoding('UTF-8', 'Windows-1252') }}
-                                        </a>&nbsp;<i class="edit icon cursor edit-client-user"></i>
+                                        </a>&nbsp;&nbsp;<i class="edit icon cursor edit-client-user"></i>
                                         <div class="description"><b>{{ u["CC_FONCTION"] | convert_encoding('UTF-8', 'Windows-1252') }}</b></div>
                                         <div class="description"><i class="mail icon"></i>{{ u["CC_MAIL"] }}</div>
                                         <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone }}</div>
