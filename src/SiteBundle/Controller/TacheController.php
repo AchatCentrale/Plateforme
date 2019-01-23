@@ -759,17 +759,43 @@ class TacheController extends Controller
     public function changeUserAction(Request $request, $id, $centrale)
     {
 
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
+        $clientService = $this->get('site.service.client_services');
 
+        $so_database = $clientService->getCentraleDB($centrale);
 
-        $user_id = $request->get('user_id');
         $text_comment = $request->get('text_comment');
+        $user_id = $request->get('user_id');
 
 
 
 
+        $user_maj = $this->getUser()->getusMail();
 
-        return new JsonResponse("ok", 200);
+        $sql =  sprintf("UPDATE %s.dbo.CLIENTS_TACHES
+                                SET
+                                  US_ID = :user,
+                                  CLA_DESCR = :descr,
+                                  MAJ_USER = :user_maj,
+                                  MAJ_DATE = GETUTCDATE()
+                                WHERE CLA_ID = :id", $so_database );
+
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':user', $user_id);
+        $stmt->bindValue(':descr', $text_comment);
+        $stmt->bindValue(':user_maj', $user_maj);
+        $stmt->bindValue(':id', $id);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return new Response('taches numero :  ' . $id . ' modifier', 200, [
+            'Access-Control-Allow-Origin' => '*'
+        ]);
+
+
 
     }
 

@@ -1,39 +1,7 @@
 $('.ui.dropdown.consommation').dropdown();
 
 
-let urlConso = "http://localhost:8000/client/consommation/test";
 
-$.ajax({
-
-    // Adresse à laquelle la requête est envoyée
-    url: urlConso,
-
-    // Le délai maximun en millisecondes de traitement de la demande
-    timeout: 4000,
-
-    // La fonction à apeller si la requête aboutie
-    success: function (dataConso) {
-            let
-                container3 = document.getElementById('table-conso-client'),
-                hot3;
-
-        hot3 = new Handsontable(container3, {
-            data: dataConso,
-            colHeaders: ["Date", "CA Prix public", "CA Prix centrale", "Fournisseurs" ],
-            rowHeaders: true,
-            minSpareRows: 1,
-
-
-        });
-
-    },
-
-    // La fonction à appeler si la requête n'a pas abouti
-    error: function () {
-
-    }
-
-});
 
 
 

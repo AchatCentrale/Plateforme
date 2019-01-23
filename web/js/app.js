@@ -1912,8 +1912,6 @@ $(function () {
         let text = $('#reassign_text').val();
         let icon_reassign = $('#reassign_user_icon');
 
-        console.log(user);
-        console.log(text);
         let centrale = icon_reassign.data("centrale");
         let idTask = icon_reassign.data("task");
 
@@ -1923,38 +1921,36 @@ $(function () {
         console.log(url);
 
 
-        // $.ajax({
-        //
-        //     // Adresse à laquelle la requête est envoyée
-        //     url: url,
-        //
-        //     type: 'POST',
-        //
-        //
-        //     data: {
-        //         user_id: e.target.value,
-        //         text_comment: e.target.value,
-        //
-        //
-        //     },
-        //     // Le délai maximun en millisecondes de traitement de la demande
-        //     timeout: 4000,
-        //
-        //     // La fonction à apeller si la requête aboutie
-        //     success: function (data) {
-        //
-        //         console.log(data);
-        //
-        //         window.location.reload();
-        //     },
-        //
-        //     // La fonction à appeler si la requête n'a pas abouti
-        //     error: function (e) {
-        //         console.log(e);
-        //
-        //     }
-        //
-        // });
+        $.ajax({
+
+            // Adresse à laquelle la requête est envoyée
+            url: url,
+
+            type: 'POST',
+
+
+            data: {
+                user_id: user,
+                text_comment: text,
+            },
+            // Le délai maximun en millisecondes de traitement de la demande
+            timeout: 4000,
+
+            // La fonction à apeller si la requête aboutie
+            success: function (data) {
+
+                console.log(data);
+
+                window.location.reload();
+            },
+
+            // La fonction à appeler si la requête n'a pas abouti
+            error: function (e) {
+                console.log(e);
+
+            }
+
+        });
 
 
     })

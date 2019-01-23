@@ -120,6 +120,7 @@ mail-task:
 reassign-user-action:
     path: /taches/reassign/{id}/{centrale}
     defaults: {_controller: SiteBundle:Tache:changeUser}
+    methods: POST
 
 
 change-state:
@@ -238,16 +239,6 @@ consommation-check:
 notification-test:
     path: /notification/test
     defaults: {_controller: SiteBundle:Notification:test}
-    methods: POST
-
-notification-relance-task:
-    path: /notification/relance/tache
-    defaults: {_controller: SiteBundle:Notification:sendTaskRelance}
-    methods: POST
-
-notification-notif-rdv:
-    path: /notification/relance/rdv
-    defaults: {_controller: SiteBundle:Notification:sendRdvRelance}
     methods: POST
 
 notification-new-client-ac:
