@@ -1357,21 +1357,7 @@ $(function () {
 
     });
 
-    function checkCentrale(centrale) {
 
-
-        if (centrale === 4) {
-            return "CENTRALE_FUNECAP";
-        } else if (centrale === 2) {
-            return 'CENTRALE_GCCP';
-        } else if (centrale === 5) {
-            return 'CENTRALE_PFPL'
-        } else if (centrale === 6) {
-            return 'ROC_ECLERC'
-        } else if (centrale === 1) {
-            return 'ACHAT_CENTRALE';
-        }
-    }
 
     $('.detail-tache-home-client').on('click', function (e) {
 

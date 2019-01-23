@@ -561,15 +561,16 @@ class CrmFilter extends \Twig_Extension
 
     }
 
-    public function getAvatar($prenom, $nom, $tiny = false)
+    public function getAvatar($prenom, $nom, $tiny = false, $user = false)
     {
 
         if ($tiny === true) {
             $tpl = "<div class='avatar_background-tiny'><p class='text-avatar-tiny'>".$prenom[0].$nom[0]."</p></div>";
-        } else {
+        } elseif (!$tiny && !$user) {
             $tpl = "<div class='avatar_background'><p class='text-avatar'>".$prenom[0].$nom[0]."</p></div>";
+        } elseif ($user === true) {
+            $tpl = "<div class='avatar_background-user'><p class='text-avatar'>".$prenom[0].$nom[0]."</p></div>";
         }
-
 
         return $tpl;
     }

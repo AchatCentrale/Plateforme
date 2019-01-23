@@ -594,6 +594,18 @@ h3.raison-soc-titre {
     top: 6px;
     font-size: 11pt;
 }
+
+.avatar_background-user{
+    width: 21%;
+    background-color: #9A9B94;
+    color: white;
+    height: 66px;
+    border-radius: 100%;
+    float: left;
+    margin-right: 19px;
+}
+
+
 .label-client{
     padding-top: 5px;
     border-left: solid rgba(34, 36, 38, 0.15) 1px;
@@ -879,6 +891,9 @@ a.client-raisonsoc-detail-tache {
 #economie{
     padding: 20px;
 }
+
+
+
 
 
 

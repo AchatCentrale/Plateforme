@@ -97,9 +97,7 @@
                                 {% if u["CC_STATUS"] is same as(0) %}
 
                                 <div class="item">
-
-                                    <img class="ui avatar image image-avatar-list"
-                                         src="https://semantic-ui.com/images/avatar/large/christian.jpg">
+                                    {{ u["CC_PRENOM"] | avatar(u["CC_NOM"], false, true) | raw }}
                                     <div class="content content-list-user">
                                         <a href="//www.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u["CC_MAIL"] }}&PASS={{ u["CC_PASS"] }}">
                                             <i class="user icon"></i>
