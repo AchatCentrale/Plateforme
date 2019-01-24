@@ -856,9 +856,7 @@ class BaseController extends Controller
         $helper = $this->get('site.service.client_services');
 
         $so_database = $helper->getCentraleDB($centrale);
-        dump($so_database);
 
-        $fct = $request->request->get('fct');
         $mail = $request->request->get('mail');
         $tel = $request->request->get('tel');
         $nom = $request->request->get('nom');
@@ -1728,8 +1726,6 @@ class BaseController extends Controller
                         FROM %s.dbo.CLIENTS_USERS
                         WHERE CC_ID = :id", $so_database);
 
-
-
         $stmt = $conn->prepare($sql);
         $stmt->bindValue('id', $id);
         $stmt->execute();
@@ -1743,7 +1739,9 @@ class BaseController extends Controller
 
 
 
-        return new JsonResponse($ccUser, 200);
+        $response = new Response(json_encode($ccUser, JSON_UNESCAPED_UNICODE));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
 
 
 
