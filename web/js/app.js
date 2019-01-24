@@ -709,7 +709,7 @@ $(function () {
         let centrale = $('#centrale').html();
         let id = $('#id').html();
         let idUsers = $('#id_user_update').html();
-        let url = "http://localhost:8000/client/users/" + id + "/" + centrale + "/update/" + idUsers;
+        let url = "http://crm.achatcentrale.fr/client/users/" + id + "/" + centrale + "/update/" + idUsers;
 
         let values = $("input[name='us_update[]'], select[name='us_update[]']").map(function () {
             return $(this).val();
@@ -763,7 +763,7 @@ $(function () {
 
         let cc_id = $(this).data('utilisateur');
 
-        let url = "http://localhost:8000/client/user/"+centrale+"/"+cc_id;
+        let url = "http://crm.achatcentrale.fr/client/user/"+centrale+"/"+cc_id;
 
 
         $.ajax({
