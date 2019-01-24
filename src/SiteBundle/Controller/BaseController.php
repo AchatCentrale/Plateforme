@@ -1757,11 +1757,10 @@ class BaseController extends Controller
 
         $clientService->array_utf8_encode($fonctions);
 
-        dump($fonctions);
+        $clientService->array_utf8_encode($ccUser);
 
         array_push($ccUser,  $fonctions);
 
-        $clientService->array_utf8_encode($ccUser);
 
         return new JsonResponse($ccUser, 200);
 
