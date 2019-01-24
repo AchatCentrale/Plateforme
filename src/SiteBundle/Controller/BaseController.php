@@ -1738,7 +1738,6 @@ class BaseController extends Controller
         $clientService->array_utf8_encode($ccUser);
 
 
-
         $response = new Response(json_encode($ccUser, JSON_UNESCAPED_UNICODE));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
