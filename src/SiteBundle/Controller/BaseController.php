@@ -19,6 +19,7 @@ use Ivory\GoogleMap\Overlay\Symbol;
 use Ivory\GoogleMap\Overlay\SymbolPath;
 use Ivory\GoogleMap\Service\Geocoder\GeocoderService;
 use Ivory\GoogleMap\Service\Geocoder\Request\GeocoderAddressRequest;
+use SiteBundle\Service\ClientServices;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -853,8 +854,12 @@ class BaseController extends Controller
 
     }
 
-    public function updateClientUserAction(Request $request, $id, $centrale, $idUser)
+    public function updateClientUserAction(Request $request, $id, $centrale, $idUser,ClientServices $helper)
     {
+
+
+        $so_database = $helper->getCentraleDB($centrale);
+        dump($so_database);
 
 
 
@@ -1017,7 +1022,7 @@ class BaseController extends Controller
 //        }
         $res = "Aucun client mise a jour";
 
-        return new JsonResponse($res, 200);
+        return new JsonResponse($so_database, 200);
 
 
     }
@@ -1032,10 +1037,6 @@ class BaseController extends Controller
         $so_database = $clientService->getCentraleDB($centrale);
 
         $content_notes = $request->request->get('content_note');
-
-
-        dump($content_notes);
-        dump(strlen($content_notes));
 
 
 
@@ -1851,82 +1852,31 @@ class BaseController extends Controller
     public function getClientUserAction(Request $request, $id, $centrale)
     {
 
+
         $conn = $this->get('database_connection');
         $clientService = $this->get('site.service.client_services');
 
-
-        switch ($centrale) {
-            case 'CENTRALE_FUNECAP':
+        $so_database = $clientService->getCentraleDB($centrale);
 
 
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
-                        FROM CENTRALE_FUNECAP.dbo.CLIENTS_USERS
-                        WHERE CC_ID = :id";
+        $sql = sprintf("SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
+                        FROM %s.dbo.CLIENTS_USERS
+                        WHERE CC_ID = :id", $so_database);
 
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $ccUser = $stmt->fetchAll();
 
-                $clientService->array_utf8_encode($ccUser);
-                return new JsonResponse($ccUser, 200);
-                break;
-            case 'CENTRALE_GCCP':
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
-                        FROM CENTRALE_GCCP.dbo.CLIENTS_USERS
-                        WHERE CC_ID = :id";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('id', $id);
+        $stmt->execute();
+        $ccUser = $stmt->fetchAll();
 
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $ccUser = $stmt->fetchAll();
 
-                $clientService->array_utf8_encode($ccUser);
-                return new JsonResponse($ccUser, 200);
-            case 'ROC_ECLERC':
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
-                        FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_USERS
-                        WHERE CC_ID = :id";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $ccUser = $stmt->fetchAll();
-
-                $clientService->array_utf8_encode($ccUser);
-                return new JsonResponse($ccUser, 200);
-                break;
-            case 'CENTRALE_PFPL':
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
-                        FROM CENTRALE_PFPL.dbo.CLIENTS_USERS
-                        WHERE CC_ID = :id";
+        $clientService->array_utf8_encode($ccUser);
+        return new JsonResponse($ccUser, 200);
 
 
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $ccUser = $stmt->fetchAll();
 
-                $clientService->array_utf8_encode($ccUser);
-                return new JsonResponse($ccUser, 200);
-                break;
-            case 'ACHAT_CENTRALE' :
-                $sql = "SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
-                        FROM CENTRALE_ACHAT.dbo.CLIENTS_USERS
-                        WHERE CC_ID = :id";
-
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue('id', $id);
-                $stmt->execute();
-                $ccUser = $stmt->fetchAll();
-
-                $clientService->array_utf8_encode($ccUser);
-                return new JsonResponse($ccUser, 200);
-                break;
-        }
 
 
     }
@@ -2321,7 +2271,7 @@ class BaseController extends Controller
 
     }
 
-    public function getTagAutoompleteAction(Request $request, $query)
+    public function getTagAutocompleteAction(Request $request, $query)
     {
 
         $conn = $this->get('database_connection');
@@ -2386,6 +2336,34 @@ class BaseController extends Controller
 
     }
 
+    public function getUsersClientAction(Request $request, $id, $centrale){
+
+
+        $conn = $this->get('database_connection');
+        $clientService = $this->get('site.service.client_services');
+
+        $so_database = $clientService->getCentraleDB($centrale);
+
+
+        $sql = sprintf("SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
+                        FROM %s.dbo.CLIENTS_USERS
+                        WHERE CL_ID = :id", $so_database);
+
+
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('id', $id);
+        $stmt->execute();
+        $user = $stmt->fetchAll();
+
+
+
+        $clientService->array_utf8_encode($user);
+        return new JsonResponse($user, 200, [
+            'Access-Control-Allow-Origin' => '*'
+        ]);
+
+    }
 
 }
 

@@ -30,6 +30,10 @@
 })(jQuery, 'smartresize');
 
 
+
+
+
+
 $(function () {
 
 
@@ -807,11 +811,41 @@ $(function () {
 
     $('.edit-client-user').on('click', function () {
 
-        let id = $(this).parent().data('id');
+        let centrale = $('#centrale').html();
 
-        let tpl = `<p class="hidden" id="id-user-client-update">${id}</p>`;
 
-        $('.user-client-update-title').append(tpl);
+        let cc_id = $(this).data('utilisateur');
+
+
+
+
+
+        let url = "http://localhost:8000/client/user/"+centrale+"/"+cc_id;
+
+
+        $.ajax({
+            url: url,
+            success: function (data) {
+
+                console.log(data);
+
+                $('#us_prename').val(data[0]['CC_PRENOM']);
+                $('#us_name').val(data[0]['CC_NOM']);
+                $('#us_pass').val(data[0]['CC_PASS']);
+                $('#us_mail').val(data[0]['CC_MAIL']);
+                $('#us_fonct').val(data[0]['CC_FONCTION']);
+                $('#Téléphone-user-update').val(data[0]['CC_TEL']);
+
+
+            },
+
+            error: function (data) {
+                console.log(data);
+            }
+        });
+
+
+
 
         $('#update_user_client').modal('show');
 

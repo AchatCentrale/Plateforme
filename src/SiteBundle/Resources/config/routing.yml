@@ -164,6 +164,10 @@ get-client-user:
     path: /client/user/{centrale}/{id}
     defaults: {_controller: SiteBundle:Base:getClientUser}
 
+get-clients-user:
+    path: /client/users/{centrale}/{id}
+    defaults: {_controller: SiteBundle:Base:getUsersClient}
+
 client-label:
     path: /client/label/{centrale}/{id}
     defaults: {_controller: SiteBundle:Base:getClientLabel}
@@ -209,7 +213,7 @@ hastag-action:
 
 hastag-typehead:
     path: /tag/search/{query}
-    defaults: {_controller: SiteBundle:Base:getTagAutoomplete}
+    defaults: {_controller: SiteBundle:Base:getTagAutocomplete}
 
 remove-hashtag:
     path: /tag/remove/{tag}/{centrale}
