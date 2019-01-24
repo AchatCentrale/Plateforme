@@ -729,8 +729,16 @@ $(function () {
                 console.log(data);
                 $('input#add-note').empty();
 
+                $.notify("Note crée", "success");
 
-                window.location.reload();
+
+                setTimeout(function(){
+
+
+                    window.location.reload();
+
+                    }, 3000);
+
             },
 
             // La fonction à appeler si la requête n'a pas abouti
