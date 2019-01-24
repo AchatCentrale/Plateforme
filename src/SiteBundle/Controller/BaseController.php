@@ -1729,18 +1729,6 @@ class BaseController extends Controller
                         WHERE CC_ID = :id", $so_database);
 
 
-        function utf8ize($d) {
-            if (is_array($d)) {
-                foreach ($d as $k => $v) {
-                    $d[$k] = utf8ize($v);
-                }
-            } else if (is_string ($d)) {
-                return utf8_encode($d);
-            }
-            return $d;
-        }
-
-
 
         $stmt = $conn->prepare($sql);
         $stmt->bindValue('id', $id);
@@ -1755,9 +1743,9 @@ class BaseController extends Controller
         $fonctions = $stmtFonctions->fetchAll();
 
 
-        $clientService->array_utf8_encode($fonctions);
+        $clientService->utf8ize($fonctions);
 
-        $clientService->array_utf8_encode($ccUser);
+        $clientService->utf8ize($ccUser);
 
         array_push($ccUser,  $fonctions);
 
