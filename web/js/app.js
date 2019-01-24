@@ -728,7 +728,9 @@ $(function () {
 
                 console.log(data);
                 $('input#add-note').empty();
-                // window.location.reload();
+
+
+                window.location.reload();
             },
 
             // La fonction à appeler si la requête n'a pas abouti
