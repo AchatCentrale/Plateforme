@@ -1742,7 +1742,7 @@ class BaseController extends Controller
         $stmtFonctions = $conn->prepare($sqlFonctions);
         $stmtFonctions->execute();
         $fonctions = $stmtFonctions->fetchAll();
-
+        $clientService->array_utf8_encode($fonctions);
 
         array_push($ccUser,  $fonctions);
 
