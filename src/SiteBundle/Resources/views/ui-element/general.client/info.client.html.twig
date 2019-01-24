@@ -442,7 +442,9 @@
 
                                                             {% if note %}
                                                                 <h5>Historique client: </h5>
+
                                                                 {% for n in note %}
+                                                                    {{ dump(n) }}
                                                                     <ul>
                                                                         <li>{{ n["INS_DATE"] }}
                                                                             : {{ n["CN_NOTE"] | raw }}</li>

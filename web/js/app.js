@@ -826,10 +826,6 @@ $(function () {
 
         let cc_id = $(this).data('utilisateur');
 
-
-
-
-
         let url = "http://localhost:8000/client/user/"+centrale+"/"+cc_id;
 
 
@@ -846,6 +842,11 @@ $(function () {
                 $('#us_fonct').val(data[0]['CC_FONCTION']);
                 $('#Téléphone-user-update').val(data[0]['CC_TEL']);
 
+
+                $('#mySelect').append($('<option>', {
+                    value: 1,
+                    text: 'My option'
+                }));
 
             },
 
