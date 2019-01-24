@@ -647,6 +647,8 @@ $(function () {
 
     });
 
+
+    // soumissions pour modifications d'un client
     $('.save-update-client').on('click', function (e) {
 
         let values = $("input[name='data-client[]'], select[name='data-client[]']")
@@ -697,6 +699,105 @@ $(function () {
         $('#myModal').modal('hide')
 
     });
+
+
+    //Soumet la modale pour la mise a jour du client
+    $('#save-client-user-update').on('click', function (e) {
+
+        e.preventDefault();
+
+        let centrale = $('#centrale').html();
+        let id = $('#id').html();
+        let idUsers = $('#id_user_update').html();
+        let url = "http://localhost:8000/client/users/" + id + "/" + centrale + "/update/" + idUsers;
+
+        let values = $("input[name='us_update[]'], select[name='us_update[]']").map(function () {
+            return $(this).val();
+        }).get();
+
+
+        console.log(values);
+
+
+        $.ajax({
+
+            // Adresse à laquelle la requête est envoyée
+            url: url,
+            type: 'POST',
+            data: {
+                prenom: values[0],
+                nom: values[1],
+                pass: values[2],
+                mail: values[3],
+                // fct: $( "#us_fonct" ).val(),
+                tel: values[5].replace(/\s/g, ''),
+
+            },
+            // Le délai maximun en millisecondes de traitement de la demande
+            timeout: 4000,
+
+            // La fonction à apeller si la requête aboutie
+            success: function (data) {
+
+                console.log(data);
+
+            },
+
+            // La fonction à appeler si la requête n'a pas abouti
+            error: function (e) {
+                console.log(e);
+            }
+
+        });
+
+
+        $('#update_user_client').modal('hide');
+
+    });
+
+    //Fait apparaitre la modale pour modifier un utuoisateur
+    $('.edit-client-user').on('click', function () {
+
+        let centrale = $('#centrale').html();
+
+
+        let cc_id = $(this).data('utilisateur');
+
+        let url = "http://localhost:8000/client/user/"+centrale+"/"+cc_id;
+
+
+        $.ajax({
+            url: url,
+            success: function (data) {
+
+                $('#id_user_update').html(cc_id);
+                $('#us_prename').val(data[0]['CC_PRENOM']);
+                $('#us_name').val(data[0]['CC_NOM']);
+                $('#us_pass').val(data[0]['CC_PASS']);
+                $('#us_mail').val(data[0]['CC_MAIL']);
+                $('#Téléphone-user-update').val(data[0]['CC_TEL']);
+                data[1].map(function (index) {
+                    $('#us_fonct').append($('<option>', {
+                        value: index["FO_ID"],
+                        text: index["FO_DESCR"]
+                    }));
+                });
+
+                $("#Téléphone-user-update option[value="+data[0]['CC_FONCTION']+"]").attr('selected','selected');
+
+            },
+            error: function (data) {
+                console.log(data);
+            }
+        });
+
+
+
+
+        $('#update_user_client').modal('show');
+
+    });
+
 
     $('.add-note').on('click', function (e) {
 
@@ -819,98 +920,6 @@ $(function () {
 
     });
 
-    $('.edit-client-user').on('click', function () {
-
-        let centrale = $('#centrale').html();
-
-
-        let cc_id = $(this).data('utilisateur');
-
-        let url = "http://localhost:8000/client/user/"+centrale+"/"+cc_id;
-
-
-        $.ajax({
-            url: url,
-            success: function (data) {
-
-                console.log(data);
-
-                $('#us_prename').val(data[0]['CC_PRENOM']);
-                $('#us_name').val(data[0]['CC_NOM']);
-                $('#us_pass').val(data[0]['CC_PASS']);
-                $('#us_mail').val(data[0]['CC_MAIL']);
-                $('#us_fonct').val(data[0]['CC_FONCTION']);
-                $('#Téléphone-user-update').val(data[0]['CC_TEL']);
-
-
-                $('#mySelect').append($('<option>', {
-                    value: 1,
-                    text: 'My option'
-                }));
-
-            },
-
-            error: function (data) {
-                console.log(data);
-            }
-        });
-
-
-
-
-        $('#update_user_client').modal('show');
-
-    });
-
-    $('#save-client-user-update').on('click', function (e) {
-
-        e.preventDefault();
-
-        let centrale = $('#centrale').html();
-        let id = $('#id').html();
-        let idUsers = $('#id-user-client-update').html();
-        let url = "http://localhost:8000/client/users/" + id + "/" + centrale + "/update/" + idUsers;
-
-        let values = $("input[name='us_update[]'], select[name='us_update[]']").map(function () {
-            return $(this).val();
-        }).get();
-
-        $.ajax({
-
-            // Adresse à laquelle la requête est envoyée
-            url: url,
-            type: 'POST',
-            data: {
-                prenom: values[0],
-                nom: values[1],
-                pass: values[2],
-                mail: values[3],
-                fct: values[4],
-                tel: values[5].replace(/\s/g, ''),
-
-            },
-            // Le délai maximun en millisecondes de traitement de la demande
-            timeout: 4000,
-
-            // La fonction à apeller si la requête aboutie
-            success: function (data) {
-
-                console.log(data);
-
-            },
-
-            // La fonction à appeler si la requête n'a pas abouti
-            error: function (e) {
-                console.log(e);
-            }
-
-        });
-
-
-        $('#update_user_client').modal('hide');
-        console.log(values);
-
-    });
 
     $('.detail-tache-home').on('click', function (e) {
 
