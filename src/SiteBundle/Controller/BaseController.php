@@ -1735,19 +1735,12 @@ class BaseController extends Controller
         $stmt->execute();
         $ccUser = $stmt->fetchAll();
 
-        $sqlFonctions = "SELECT FO_ID ,FO_DESCR FROM CENTRALE_ACHAT.dbo.FONCTIONS";
 
 
-        $stmtFonctions = $conn->prepare($sqlFonctions);
-        $stmtFonctions->execute();
-        $fonctions = $stmtFonctions->fetchAll();
 
 
-        $clientService->utf8ize($fonctions);
+        $clientService->array_utf8_encode($ccUser);
 
-        $clientService->utf8ize($ccUser);
-
-        array_push($ccUser,  $fonctions);
 
 
         return new JsonResponse($ccUser, 200);
