@@ -1722,7 +1722,7 @@ class BaseController extends Controller
         $so_database = $clientService->getCentraleDB($centrale);
 
 
-        $sql = sprintf("SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL, CC_FONCTION
+        $sql = sprintf("SELECT CC_ID, CC_NOM, CC_PRENOM, CC_PASS, CC_TEL, CC_MAIL
                         FROM %s.dbo.CLIENTS_USERS
                         WHERE CC_ID = :id", $so_database);
 
@@ -1731,20 +1731,11 @@ class BaseController extends Controller
         $stmt->execute();
         $ccUser = $stmt->fetchAll();
 
-
-
-
-
         $clientService->array_utf8_encode($ccUser);
-
 
         $response = new Response(json_encode($ccUser, JSON_UNESCAPED_UNICODE));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
-
-
-
-
 
     }
 
