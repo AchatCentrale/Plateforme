@@ -716,7 +716,6 @@ $(function () {
         }).get();
 
 
-        console.log(values);
 
 
         $.ajax({
@@ -752,6 +751,8 @@ $(function () {
 
 
         $('#update_user_client').modal('hide');
+
+        window.location.reload();
 
     });
 
