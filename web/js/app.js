@@ -777,14 +777,8 @@ $(function () {
                 $('#us_pass').val(data[0]['CC_PASS']);
                 $('#us_mail').val(data[0]['CC_MAIL']);
                 $('#Téléphone-user-update').val(data[0]['CC_TEL']);
-                data[1].map(function (index) {
-                    $('#us_fonct').append($('<option>', {
-                        value: index["FO_ID"],
-                        text: index["FO_DESCR"]
-                    }));
-                });
 
-                $("#Téléphone-user-update option[value="+data[0]['CC_FONCTION']+"]").attr('selected','selected');
+
 
             },
             error: function (data) {
