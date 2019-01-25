@@ -443,7 +443,7 @@
                                                                 {% for n in note %}
                                                                     <ul>
                                                                         <li>{{ n["INS_DATE"] }}
-                                                                            : {{ n["CN_NOTE"] | raw }}</li>
+                                                                            : {{ n["CN_NOTE"] | convert_encoding('UTF-8', 'Windows-1252') }}</li>
                                                                     </ul>
                                                                 {% endfor %}
                                                             {% else %}
