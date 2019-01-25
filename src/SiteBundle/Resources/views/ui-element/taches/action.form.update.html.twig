@@ -54,11 +54,15 @@
                                                    value="{{ task[0]['CLA_NOM'] }}"  maxlength="50">
                                         </div>
 
+
+
                                         <div class="field">
                                             <label>Utilisateur assigné </label>
                                             <select required name="cla_us" class="ui dropdown fluid ">
-                                                <option selected value="">Modifier l'utilisateur</option>
                                                 {% for us in user %}
+                                                    {% if us["US_ID"]  is same as(user_task) %}
+                                                        <option selected value="{{ us["US_ID"] }}">{{ us["US_PRENOM"] }} {{  us["US_NOM"] }}</option>
+                                                    {% endif %}
                                                     <option value="{{ us["US_ID"] }}">{{ us["US_PRENOM"] }} {{  us["US_NOM"] }}</option>
                                                 {% endfor %}
 

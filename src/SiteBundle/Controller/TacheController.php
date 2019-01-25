@@ -519,7 +519,8 @@ class TacheController extends Controller
             'task' => $resultTask,
             'centrale' => $centrale,
             'user' => $resultUser,
-            'id' => $id
+            'id' => $id,
+            'user_task' => $resultTask[0]["US_ID"]
         ]);
 
 
