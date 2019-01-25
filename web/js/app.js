@@ -730,7 +730,7 @@ $(function () {
                 pass: values[2],
                 mail: values[3],
                 // fct: $( "#us_fonct" ).val(),
-                tel: values[5].replace(/\s/g, ''),
+                tel: values[4].replace(/\s/g, ''),
 
             },
             // Le délai maximun en millisecondes de traitement de la demande
