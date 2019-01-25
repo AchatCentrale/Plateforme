@@ -30,7 +30,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 class BaseController extends Controller
 {
 
-
     public function indexAuthAction(Request $request)
     {
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -1714,8 +1713,6 @@ class BaseController extends Controller
 
     public function getClientUserAction(Request $request, $id, $centrale)
     {
-
-
         $conn = $this->get('database_connection');
         $clientService = $this->get('site.service.client_services');
 

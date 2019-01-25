@@ -153,7 +153,6 @@ class ClientServices
         return $ret;
     }
 
-
     public function utf8ize($mixed) {
         if (is_array($mixed)) {
             foreach ($mixed as $key => $value) {
@@ -206,8 +205,6 @@ class ClientServices
 
         }
     }
-
-
 
     public function getTheEvolution($centrale)
     {

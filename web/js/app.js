@@ -600,7 +600,7 @@ $(function () {
                                        <div class="three column  row">
                                       
                                        <div class="update-action">
-                                                <a class="ui basic button" href="#">Modifier l'action</a>
+                                                <a class="ui basic button" href="http://crm.achatcentrale.fr/taches/update/${data.id}/${data.idCentrale}">Modifier l'action</a>
                                           </div>
                                           
                                           
@@ -777,9 +777,6 @@ $(function () {
                 $('#us_pass').val(data[0]['CC_PASS']);
                 $('#us_mail').val(data[0]['CC_MAIL']);
                 $('#Téléphone-user-update').val(data[0]['CC_TEL']);
-
-
-
             },
             error: function (data) {
                 console.log(data);
