@@ -557,7 +557,7 @@ class CrmFilter extends \Twig_Extension
                 return "Jibé";
                 break;
             case 13:
-                return "Milliana":
+                return "Milliana";
                 break;
 
         }
