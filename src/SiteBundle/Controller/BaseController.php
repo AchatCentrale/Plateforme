@@ -2058,12 +2058,8 @@ class BaseController extends Controller
 
     }
 
-
     public function updateMailClientAction(Request $request, $id, $centrale)
     {
-
-
-
 
         $mail = $request->request->get('mail');
 
@@ -2088,6 +2084,26 @@ class BaseController extends Controller
 
 
         return new JsonResponse('ok', 200);
+    }
+
+    public function removeNoteAction(Request $request, $id, $centrale)
+    {
+
+        $note = $request->request->get('note');
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $clientService = $this->get('site.service.client_services');
+
+        $so_database = $clientService->getCentraleDB($centrale);
+
+        $sql = sprintf("DELETE FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id", $so_database);
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $note);
+
+        $stmt->execute();
+
+        return new JsonResponse("ok", 200);
     }
 
 }

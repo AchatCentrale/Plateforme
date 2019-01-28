@@ -145,8 +145,11 @@ new-clients-user:
     path: /client/{id}/{centrale}/users/new
     defaults: {_controller: SiteBundle:Base:newClientsUser}
 update-client-mail:
-    path: /client/{id}/{centrale}/client/update/mail
+    path: /client/{id}/{centrale}/update/mail
     defaults: {_controller: SiteBundle:Base:updateMailClient}
+
+remove-client-note:
+    path: /client/{id}/{centrale}/
 
 
 

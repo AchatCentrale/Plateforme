@@ -437,8 +437,7 @@
 
                                                                 {% for n in note %}
                                                                     <ul>
-                                                                        <li>{{ n["INS_DATE"] }}
-                                                                            : {{ n["CN_NOTE"] | convert_encoding('UTF-8', 'Windows-1252') }}</li>
+                                                                        <li>{{ n["INS_DATE"] | fromNowString }}: {{ n["CN_NOTE"] | convert_encoding('UTF-8', 'Windows-1252') }} <i class="close icon " data-note="{{ n["CN_ID"] }}" id="remove_note"></i></li>
                                                                     </ul>
                                                                 {% endfor %}
                                                             {% else %}
