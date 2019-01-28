@@ -2220,6 +2220,35 @@ class BaseController extends Controller
 
     }
 
+
+    public function updateMailClientAction(Request $request, $id, $centrale)
+    {
+
+
+
+
+        $mail = $request->request->get('mail');
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+        $clientUtil = $this->get('site.service.client_services');
+
+
+        $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS
+                SET CL_MAIL = :mail, MAJ_USER = :user, MAJ_DATE = GETDATE()
+                WHERE CL_ID = :id";
+
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':mail', $mail);
+        $stmt->bindValue(':user', $this->getUser()->getUsMail());
+        $stmt->bindValue(':id',$id);
+
+        $stmt->execute();
+
+
+        return new JsonResponse('ok', 200);
+    }
+
 }
 
 

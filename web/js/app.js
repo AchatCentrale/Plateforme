@@ -227,7 +227,7 @@ $(function () {
     });
 
     function terminerTask(e) {
-        let url = 'http://localhost:8000/taches/terminer/' + e;
+        let url = 'http://crm.achatcentrale.fr/taches/terminer/' + e;
 
         swal({
                 title: "Terminer une action",
@@ -457,6 +457,9 @@ $(function () {
         firstDay: 1,
 
     });
+
+
+
 
     $('.go-to-client').on('click', function () {
 
@@ -1907,19 +1910,14 @@ $(function () {
         switch ($centrale) {
             case 'CENTRALE_ACHAT':
                 return "1";
-                break;
             case 'CENTRALE_GCCP':
                 return "2";
-                break;
             case 'CENTRALE_FUNECAP':
                 return "4";
-                break;
             case 'CENTRALE_PFPL':
                 return "5";
-                break;
             case 'ROC_ECLERC':
                 return "6";
-                break;
         }
 
     }
@@ -1949,10 +1947,6 @@ $(function () {
         let idTask = icon_reassign.data("task");
 
         let url = CURRENT_URL.substring(0, 53) + "/reassign/"+idTask+"/"+centrale;
-
-
-        console.log(url);
-
 
         $.ajax({
 
@@ -1986,7 +1980,66 @@ $(function () {
         });
 
 
-    })
+    });
+
+
+
+    $('#edit_mail_cursor').on('click', function (e) {
+
+        let element_mail = $('#mail_content');
+
+        let content_before = element_mail.text().replace(/ /g,'');
+
+        element_mail.html('<div class="ui input"> <input id="edit_mail_val" type="text" placeholder="'+content_before+'"> </div><button style="margin-left: 5px" class=" mini ui green button " id="save_edit_mail">Ok</button>');
+
+
+        $('#save_edit_mail').on('click', function (e) {
+
+            let value = $('#edit_mail_val').val();
+
+
+            let centrale = $('#centrale').html();
+
+            let clId = $('#id').html();
+
+            let url = "http://localhost:8000/client/"+clId+"/"+centrale+"/client/update/mail";
+
+
+            $.ajax({
+
+                // Adresse à laquelle la requête est envoyée
+                url: url,
+
+                type: 'POST',
+
+                data: {
+                    mail: value,
+                },
+                // Le délai maximun en millisecondes de traitement de la demande
+                timeout: 4000,
+
+                // La fonction à apeller si la requête aboutie
+                success: function (data) {
+
+                    element_mail.html('<a class="cursor data-client" data-index="mail" href="mailto:'+value+'"><i class="mail link  circular icon"></i></a>'+value)
+                },
+
+                // La fonction à appeler si la requête n'a pas abouti
+                error: function (e) {
+                    console.log(e);
+
+                }
+
+            });
+
+
+
+        });
+
+
+    });
+
+
 
 
 
@@ -2003,6 +2056,11 @@ $('#datetimepicker2').datetimepicker({
     viewMode: 'months',
     format: 'MM/YYYY'
 });
+
+$('#datetimepicker3').datetimepicker({
+    locale: 'fr',
+});
+
 
 
 $('.menu .item').tab();

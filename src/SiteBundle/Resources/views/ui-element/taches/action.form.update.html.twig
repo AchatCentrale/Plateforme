@@ -23,8 +23,11 @@
 
                                         <div class="field">
                                             <label>Date d'échéance</label>
-                                            <input required type="text" class="date add-action" name="cla_echeance"
-                                                   placeholder="{{ task[0]['CLA_ECHEANCE']}}">
+                                            <div class='input-group date' id='datetimepicker3'>
+                                                <input required type="text"  class="add-action form-control" name="cla_echeance" placeholder="{{ task[0]['CLA_ECHEANCE']}}">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
+
                                         </div>
 
 

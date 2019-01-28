@@ -21,7 +21,7 @@
                     <h2>Ajouter une tâche</h2>
                     <div class="clearfix"></div>
                     <div class="checkbox-action-generique">
-                        <label><input id="isGenerique" type="checkbox" value=""> Action générique ?</label>
+                        <label><input id="isGenerique" type="checkbox" value=""> Action interne ?</label>
                     </div>
                 </div>
                 <div class="x_content">
@@ -88,34 +88,6 @@
                                                        placeholder="Nom du client" value="{{ client_choice }}">
                                             </div>
                                         </div>
-                                        {#<div class="field">#}
-                                        {#<label>Client associé a l'action</label>#}
-                                        {#<select required name="cla_cl" class="ui dropdown">#}
-                                        {#<option selected value="">Client associé a l'action</option>#}
-                                        {#{% for cl in client %}#}
-                                        {#<option value="{{ cl.clId }}">{{ cl.clRaisonsoc }}</option>#}
-                                        {#{% endfor %}#}
-
-                                        {#</select>#}
-                                        {#</div>#}
-                                        {#<div class="field">#}
-                                        {#<label>Utilisateur assigné </label>#}
-                                        {#<select required name="cla_us" class="ui dropdown">#}
-                                        {#<option selected value="">Client associé a l'action</option>#}
-                                        {#{% for us in user %}#}
-                                        {#<option value="{{ us.usId }}">{{ us.usPrenom }} {{  us.usNom }}</option>#}
-                                        {#{% endfor %}#}
-                                        {#</select>#}
-                                        {#</div>#}
-                                        {#<div class="ui search field user-auto">#}
-                                            {#<label>Utilisateur</label>#}
-                                            {#<div class="ui left icon  input">#}
-                                                {#<input class="prompt user-task-label" required name="cla_us" type="text"#}
-                                                       {#placeholder="Utilisateur associé a l'action">#}
-                                                {#<i class="user icon"></i>#}
-                                            {#</div>#}
-                                        {#</div>#}
-
                                     </div>
 
                                 </div>
