@@ -955,7 +955,7 @@ class BaseController extends Controller
         $stmt->bindValue(':pass', $pwd);
         $stmt->bindValue(':niveau', $niveau);
         $stmt->bindValue(':validation', $CCvalidation);
-        $stmt->bindValue(':status', $profil);
+        $stmt->bindValue(':status', 0);
         $stmt->bindValue(':user', $this->getUser()->getUsMail());
 
 
