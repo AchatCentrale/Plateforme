@@ -484,14 +484,16 @@ class TacheController extends Controller
 
 
         if ($request->getMethod() == "POST") {
-            $echeanceNew = $request->get('cla_echeance');
             $nomNew = $request->get('cla_nom');
             $descrNew = $request->get('cla_desc');
             $usNew = $request->get('cla_us');
             $prioriteNew = $request->get('cla_priorite');
-            $date_echeance2 = \DateTime::createFromFormat('d/m/Y', $echeanceNew);
 
-            $sqlUpdate = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES
+            $date_echeance = \DateTime::createFromFormat('d/m/Y H:i', $request->get('cla_echeance'));
+
+            dump($date_echeance);
+
+            $sqlUpdate = sprintf("UPDATE %s.dbo.CLIENTS_TACHES
                                   SET
                                     CLA_DESCR = :desc,
                                     CLA_NOM = :nom,
@@ -499,20 +501,26 @@ class TacheController extends Controller
                                     CLA_PRIORITE = :priorite,
                                     MAJ_DATE = GETDATE(),
                                     US_ID = :us,
-                                    MAJ_USER = :user                                    
-                                  WHERE CLA_ID = :id";
+                                    MAJ_USER = :user
+                                  WHERE CLA_ID = :id", $so_database);
             $stmt = $conn->prepare($sqlUpdate);
+
+
             $stmt->bindValue(':id', $id);
             $stmt->bindValue(':user', $this->getUser()->getUsMail());
             $stmt->bindValue(':desc', $descrNew);
             $stmt->bindValue(':nom', $nomNew);
             $stmt->bindValue(':us', $usNew);
-            $stmt->bindValue(':echeance', $date_echeance2->format('Y-m-d H:i:s'));
+            $stmt->bindValue(':echeance', $date_echeance, \Doctrine\DBAL\Types\Type::DATETIME);
             $stmt->bindValue(':priorite', $prioriteNew);
             $stmt->execute();
             $update = $stmt->fetchAll();
 
-            return $this->redirectToRoute('taches_home', [], 301);
+
+            dump($stmt);
+
+//
+//            return $this->redirectToRoute('taches_home', [], 301);
 
         }
         return $this->render('@Site/ui-element/taches/action.form.update.html.twig', [
