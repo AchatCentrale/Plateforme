@@ -1315,7 +1315,7 @@ $(function () {
         let centrale = $('#centrale').html();
         let id = $('#id').html();
 
-        let url = "http://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/users/new";
+        let url = "localhost:8000/client/" + id + "/" + centrale + "/users/new";
 
 
         $.ajax({
@@ -1346,7 +1346,7 @@ $(function () {
 
                 console.log(data);
 
-                window.location.reload();
+
             },
 
             // La fonction à appeler si la requête n'a pas abouti
