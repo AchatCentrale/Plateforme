@@ -2041,18 +2041,18 @@ $(function () {
 
     $('#remove_note').on('click', function (e) {
 
-        console.log($(this).data("note"));
         let centrale = $('#centrale').html();
+        let note = $(this).data("note");
 
-
-
-        let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
+        let url = "http://localhost:8000/client/" + note + "/" + centrale + "/note/remove";
         console.log(url);
 
         $.ajax({
 
             // Adresse à laquelle la requête est envoyée
             url: url,
+
+
 
             // Le délai maximun en millisecondes de traitement de la demande
             timeout: 4000,
@@ -2062,52 +2062,7 @@ $(function () {
 
                 console.log(data);
 
-
-                let title = `<p>Tâche #${data.id}</p>`;
-                let el = $('.modal-content-client-archive-action');
-
-                $('.modal-title-task-archive-detail').empty();
-                el.empty();
-                $('.modal-title-task-archive-detail').append(title);
-
-
-                let tpl = `<h4>${data.nom}</h4>
-              <div class="detail-tache-etat">
-                      
-                    <br>
-                    <div class="ui centered  grid">
-
-                            <div class="one column row">
-                                <div class="column">
-                                    <p>Assigné à : </p>
-                                    <a class="ui image label">
-                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
-                                      ${data.user}
-                                    </a>
-                                </div>
-
-                            </div>
-                            <div class="one column row">
-                                <div class="column">
-                                    <h5>Description de la tâche a éfféctuer :</h5>
-                                    <p class="task-description">${data.descr}</p>
-                                </div>
-
-                            </div>
-                            <div class="two column row">
-                                <div class="column">
-                                    <h4>Créée ${data.creation} </h4>
-                                </div>
-                                <div class="column">
-                                    <h4>A terminer avant le ${data.echeance}</h4>
-                                </div>
-                            </div>
-                        
-                    </div>`;
-
-
-                el.append(tpl);
-                $('#modal-task-detail-archive-client').modal('show');
+                window.location.reload();
 
 
             },

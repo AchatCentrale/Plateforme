@@ -149,8 +149,8 @@ update-client-mail:
     defaults: {_controller: SiteBundle:Base:updateMailClient}
 
 remove-client-note:
-    path: /client/{id}/{centrale}/
-
+    path: /client/{id}/{centrale}/note/remove
+    defaults: {_controller: SiteBundle:Base:removeNote}
 
 
 add-notes:

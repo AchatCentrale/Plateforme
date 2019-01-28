@@ -2089,7 +2089,6 @@ class BaseController extends Controller
     public function removeNoteAction(Request $request, $id, $centrale)
     {
 
-        $note = $request->request->get('note');
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
@@ -2097,11 +2096,13 @@ class BaseController extends Controller
 
         $so_database = $clientService->getCentraleDB($centrale);
 
-        $sql = sprintf("DELETE FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES WHERE CLA_ID = :id", $so_database);
+
+        $sql = sprintf("DELETE FROM %s.dbo.CLIENTS_NOTES WHERE CN_ID = :id", $so_database);
         $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':id', $note);
+        $stmt->bindValue(':id', $id);
 
         $stmt->execute();
+
 
         return new JsonResponse("ok", 200);
     }
