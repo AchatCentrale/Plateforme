@@ -2002,7 +2002,7 @@ $(function () {
 
             let clId = $('#id').html();
 
-            let url = "http://localhost:8000/client/"+clId+"/"+centrale+"/client/update/mail";
+            let url = "http://crm.achatcentrale.fr/client/"+clId+"/"+centrale+"/client/update/mail";
 
 
             $.ajax({
