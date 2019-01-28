@@ -491,7 +491,6 @@ class TacheController extends Controller
 
             $date_echeance = \DateTime::createFromFormat('d/m/Y H:i', $request->get('cla_echeance'));
 
-            dump($date_echeance);
 
             $sqlUpdate = sprintf("UPDATE %s.dbo.CLIENTS_TACHES
                                   SET
@@ -517,10 +516,9 @@ class TacheController extends Controller
             $update = $stmt->fetchAll();
 
 
-            dump($stmt);
 
 //
-//            return $this->redirectToRoute('taches_home', [], 301);
+            return $this->redirectToRoute('taches_home', [], 301);
 
         }
         return $this->render('@Site/ui-element/taches/action.form.update.html.twig', [
