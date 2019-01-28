@@ -321,7 +321,6 @@ class CrmFilter extends \Twig_Extension
 
     }
 
-
     public function centraleTickets($centrale)
     {
 
