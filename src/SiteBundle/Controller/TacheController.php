@@ -71,15 +71,11 @@ class TacheController extends Controller
     public function DetailTaskAction($id, $idCentrale)
     {
 
-
-
-
         $conn = $this->get('database_connection');
 
         $clientService = $this->get('site.service.client_services');
 
         $so_database = $clientService->getCentraleDB($idCentrale);
-
 
 
         \Moment\Moment::setLocale('fr_FR');
@@ -131,7 +127,7 @@ class TacheController extends Controller
         $sql = "UPDATE CLIENTS_TACHES
                 SET
                   CLA_STATUS = 0,
-                  MAJ_DATE = GETDATE()
+                  MAJ_DATE = dateadd(hh,-1,getdate())
                 WHERE CLA_ID = :id
                 ";
 
@@ -159,7 +155,7 @@ class TacheController extends Controller
         $sql = sprintf("UPDATE %s.dbo.CLIENTS_TACHES
                  SET
                   CLA_STATUS = 10,
-                  MAJ_DATE = GETDATE(),
+                  MAJ_DATE = dateadd(hh,-1,getdate()),
                   MAJ_USER = :user
                 WHERE CLA_ID = :id
                 ", $so_database);
@@ -255,7 +251,7 @@ class TacheController extends Controller
 
             $date_echeance2 = \DateTime::createFromFormat('d/m/Y H:i', $req->get('cla_echeance'));
 
-            $sqlAddTask = sprintf("INSERT INTO %s.dbo.CLIENTS_TACHES (CL_ID, US_ID, CLA_TYPE, CLA_NOM, CLA_ECHEANCE, CLA_PRIORITE, CLA_STATUS, INS_DATE, INS_USER) VALUES (:cl_id, :user, :type, :nom, :echeance, :priorite, 0, GETDATE(), :ins_user)", $so_database[0]["SO_DATABASE"]);
+            $sqlAddTask = sprintf("INSERT INTO %s.dbo.CLIENTS_TACHES (CL_ID, US_ID, CLA_TYPE, CLA_NOM, CLA_ECHEANCE, CLA_PRIORITE, CLA_STATUS, INS_DATE, INS_USER) VALUES (:cl_id, :user, :type, :nom, :echeance, :priorite, 0, dateadd(hh,-1,getdate()), :ins_user)", $so_database[0]["SO_DATABASE"]);
             $stmt = $conn->prepare($sqlAddTask);
             $stmt->bindValue('cl_id', $req->get('cla_cl'));
             $stmt->bindValue('user', $this->getUser()->getusId());
@@ -442,7 +438,7 @@ class TacheController extends Controller
                                     CLA_NOM = :nom,
                                     CLA_ECHEANCE = :echeance,
                                     CLA_PRIORITE = :priorite,
-                                    MAJ_DATE = GETDATE(),
+                                    MAJ_DATE = dateadd(hh,-1,getdate()),
                                     US_ID = :us,
                                     MAJ_USER = :user
                                   WHERE CLA_ID = :id", $so_database);
@@ -480,44 +476,19 @@ class TacheController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        switch ($centrale){
+        $clientService = $this->get('site.service.client_services');
 
-            case "ACHAT_CENTRALE":
-            case "1":
-                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                return $this->redirectToRoute('taches_home');
-            case "CENTRALE_GCCP":
-            case "2":
-                $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                return $this->redirectToRoute('taches_home');
-            case "CENTRALE_FUNECAP":
-            case "4":
-                $sql = "UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                return $this->redirectToRoute('taches_home');
-            case "CENTRALE_PFPL":
-            case "5":
-                $sql = "UPDATE CENTRALE_FUNECAP.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                return $this->redirectToRoute('taches_home');
+        $so_database = $clientService->getCentraleDB($centrale);
 
 
+        $sql = sprintf("UPDATE %s.dbo.CLIENTS_TACHES SET CLA_STATUS = '20' WHERE CLA_ID = :id", $so_database);
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $this->redirectToRoute('taches_home');
 
-        }
+
 
 
 

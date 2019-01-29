@@ -580,8 +580,7 @@ $(function () {
                                     </div>
                                     <div class="one column row">
                                         <div class="column">
-                                            <h5>Description de la tâche a éfféctuer :</h5>
-                                            <p class="task-description">${data.descr}</p>
+                                            ${data.descr ? `<h5>Description de la tâche a éfféctuer :</h5><p class="task-description">${data.descr}</p>` : '' }
                                         </div>
             
                                     </div>
@@ -1905,33 +1904,24 @@ $(function () {
     });
 
 
-    function centraleToInt($centrale) {
 
-        switch ($centrale) {
-            case 'CENTRALE_ACHAT':
-                return "1";
-            case 'CENTRALE_GCCP':
-                return "2";
-            case 'CENTRALE_FUNECAP':
-                return "4";
-            case 'CENTRALE_PFPL':
-                return "5";
-            case 'ROC_ECLERC':
-                return "6";
-        }
-
-    }
 
 
     $('.archive-task').on('click', function (e) {
 
 
-        let centrale = centraleToInt($(this).data("centrale"));
+        let centrale = $(this).data("centrale");
         let idTask = $(this).data("id");
 
 
         $.get("/taches/archive/" + idTask + "/" + centrale, function (data) {
             $.notify("Note archivé", "success");
+
+            setTimeout(function () {
+
+                window.location.reload();
+
+            }, 3000)
 
         });
 
