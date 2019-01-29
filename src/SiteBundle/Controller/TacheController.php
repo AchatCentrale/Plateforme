@@ -83,7 +83,8 @@ class TacheController extends Controller
 
 
         \Moment\Moment::setLocale('fr_FR');
-        $sqlTask = sprintf("SELECT * FROM %s.dbo.CLIENTS_TACHES LEFT JOIN %s.dbo.USERS ON %s.dbo.USERS.US_MAIL = %s.dbo.CLIENTS_TACHES.INS_USER WHERE %s.dbo.CLIENTS_TACHES.CLA_ID = :id", $so_database, $so_database, $so_database, $so_database, $so_database);
+        $sqlTask = sprintf("SELECT * FROM %s.dbo.CLIENTS_TACHES INNER JOIN CENTRALE_ACHAT.dbo.USERS ON %s.dbo.CLIENTS_TACHES.US_ID = USERS.US_ID
+ WHERE %s.dbo.CLIENTS_TACHES.CLA_ID = :id", $so_database, $so_database, $so_database, $so_database);
         $stmt = $conn->prepare($sqlTask);
         $stmt->bindValue(':id', $id);
         $stmt->execute();
@@ -91,6 +92,8 @@ class TacheController extends Controller
 
 
         if ($resultTask) {
+
+
             $creation = new \Moment\Moment($resultTask[0]['INS_DATE'], 'Europe/Berlin');
             $creationFromNow = $creation->fromNow();
             $echeance = new \Moment\Moment($resultTask[0]['CLA_ECHEANCE'], 'UTC');
@@ -191,85 +194,26 @@ class TacheController extends Controller
     {
 
 
+
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
+        $clientService = $this->get('site.service.client_services');
+
+        $so_database = $clientService->getCentraleDB($centrale);
 
 
+        $sql = sprintf("DELETE FROM %s.dbo.CLIENTS_TACHES
+                WHERE CLA_ID = :id", $so_database);
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':id', $id);
+
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
 
+        return $this->redirectToRoute('taches_home',[], 301);
 
-        switch ($centrale){
-            case "1":
-                $sql = "
-                    DELETE FROM CENTRALE_ACHAT.dbo.CLIENTS_TACHES
-                    WHERE CLA_ID = :id
-                ";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                return $this->redirectToRoute('taches_home',[], 301);
-            case "2":
-                $sql = "
-                    DELETE FROM CENTRALE_GCCP.dbo.CLIENTS_TACHES
-                    WHERE CLA_ID = :id
-                ";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                return $this->redirectToRoute('taches_home',[], 301);
-            case "4":
-                $sql = "
-                    DELETE FROM CENTRALE_FUNECAP.dbo.CLIENTS_TACHES
-                    WHERE CLA_ID = :id
-                ";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                return $this->redirectToRoute('taches_home',[], 301);
-            case "5":
-                $sql = "
-                    DELETE FROM CENTRALE_PFPL.dbo.CLIENTS_TACHES
-                    WHERE CLA_ID = :id
-                ";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                return $this->redirectToRoute('taches_home',[], 301);
-            case "6":
-                $sql = "
-                    DELETE FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TACHES
-                    WHERE CLA_ID = :id
-                ";
-
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(':id', $id);
-
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                return $this->redirectToRoute('taches_home',[], 301);
-        }
 
 
 
