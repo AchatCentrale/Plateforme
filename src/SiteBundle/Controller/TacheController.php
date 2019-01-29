@@ -101,7 +101,7 @@ class TacheController extends Controller
             $data = [
                 "id" => $resultTask[0]['CLA_ID'],
                 "cl_id" => $resultTask[0]['CL_ID'],
-                "nom" => $resultTask[0]['CLA_ID'],
+                "nom" => $resultTask[0]['CLA_NOM'],
                 "descr" => $resultTask[0]['CLA_DESCR'],
                 "user" => $resultTask[0]['US_PRENOM'],
                 "creation" => $creationFromNow->getRelative(),
