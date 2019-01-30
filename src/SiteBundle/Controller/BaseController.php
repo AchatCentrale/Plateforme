@@ -2054,12 +2054,12 @@ class BaseController extends Controller
 
 
         $result = [
-            "CC_ID" => $user["CC_ID"],
+            "CC_ID" => $clientService->array_utf8_encode($user["CC_ID"]),
             "CC_NOM" => $clientService->array_utf8_encode($user["CC_NOM"]),
-            "CC_PRENOM" => $user["CC_PRENOM"],
-            "CC_PASS" => $user["CC_PASS"],
-            "CC_TEL" => $user["CC_TEL"],
-            "CC_MAIL" => $user["CC_MAIL"],
+            "CC_PRENOM" => $clientService->array_utf8_encode($user["CC_PRENOM"]),
+            "CC_PASS" => $clientService->array_utf8_encode($user["CC_PASS"]),
+            "CC_TEL" => $clientService->array_utf8_encode($user["CC_TEL"]),
+            "CC_MAIL" => $clientService->array_utf8_encode($user["CC_MAIL"]),
         ];
 
         return new JsonResponse($result, 200, [
