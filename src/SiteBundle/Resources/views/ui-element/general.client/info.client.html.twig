@@ -279,15 +279,11 @@
 
                             <div class="four wide column recap-client">
                                 <div class="info-client-detail">
-                                    <p class="title-detail-client ">Afficher les prix d'achats</p>
-                                    <div class="prix-achat-check">
-                                        <input title="prix dachat-o" class="check-oui-pa"
-                                               type="checkbox" {{ (client[0]["CL_MASQ_HA"] == 1) ? 'checked' :  '' }} >
-                                        oui
+                                    <p class="title-detail-client ">Etat adhésion</p>
+                                    <div class="adhesion_etat">
 
-                                        <input title="prix dachat-n" class="check-non-pa"
-                                               type="checkbox" {{ (client[0]["CL_MASQ_HA"] == 0) ? 'checked' :  '' }} >
-                                        Non
+                                        {{ dump(client) }}
+                                        <div class="ui green horizontal label">Adherent</div>
                                     </div>
                                 </div>
                                 <div class="info-client-detail">
@@ -340,8 +336,6 @@
                                                 <span class="badge bg-green"> {{ note | length }} </span> Notes
                                             </a>
                                         </li>
-
-
                                     </ul>
 
 

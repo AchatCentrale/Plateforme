@@ -2051,8 +2051,9 @@ class BaseController extends Controller
 
 
 
-        $clientService->array_utf8_encode($user);
-        return new JsonResponse($user, 200, [
+        $userUTF = $clientService->array_utf8_encode($user);
+
+        return new JsonResponse($userUTF, 200, [
             'Access-Control-Allow-Origin' => '*'
         ]);
 
