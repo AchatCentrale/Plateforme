@@ -679,171 +679,51 @@ class BaseController extends Controller
     public function updateClientAction(Request $request, $id, $centrale)
     {
 
-        switch ($centrale) {
-            case "CENTRALE_FUNECAP":
-                $em = $this->getDoctrine()->getManager('centrale_funecap');
-                $siret = $request->request->get('siret');
-                $mail = $request->request->get('mail');
-                $tel = $request->request->get('tel');
-                $cp = $request->request->get('cp');
-                $eff = $request->request->get('eff');
-                $ca = $request->request->get('ca');
-                $adresse = $request->request->get('adresse');
-                $ville = $request->request->get('ville');
-                $client = $em->getRepository('FunecapBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                if (!$client) {
-                    throw $this->createNotFoundException(
-                        'Pas de client pour l\'id ' . $id
-                    );
-                }
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $clientService = $this->get('site.service.client_services');
+
+        $so_database = $clientService->getCentraleDB($centrale);
+
+        $siret = $request->request->get('siret');
+        $mail = $request->request->get('mail');
+        $tel = $request->request->get('tel');
+        $cp = $request->request->get('cp');
+        $eff = $request->request->get('eff');
+        $ca = $request->request->get('ca');
+        $adresse = $request->request->get('adresse');
+        $ville = $request->request->get('ville');
 
 
-                $client[0]->setClSiret($siret);
-                $client[0]->setClMail($mail);
-                $client[0]->setClTel($tel);
-                $client[0]->setClCp($cp);
-                $client[0]->setClEffectif($eff);
-                $client[0]->setClCa($ca);
-                $client[0]->setClAdresse1($adresse);
-                $client[0]->setClVille($ville);
-
-                $em->flush();
-
-                $res = "client mise à jour";
+        $sql = sprintf("UPDATE %s.dbo.CLIENTS
+                SET CL_SIRET = :siret, CL_MAIL = :mail, CL_TEL = :tel, CL_CP = :cp, CL_EFFECTIF = :effectif, CL_CA = :ca, CL_ADRESSE1 = :adresse, CL_VILLE = :ville, MAJ_USER = :user, MAJ_DATE = GETDATE()
+                WHERE CL_ID = :id", $so_database);
 
 
-                return new JsonResponse($res, 200);
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':mail', $mail);
+        $stmt->bindValue(':siret', $siret);
+        $stmt->bindValue(':mail', $mail);
+        $stmt->bindValue(':tel', $tel);
+        $stmt->bindValue(':cp', $cp);
+        $stmt->bindValue(':effectif', $eff);
+        $stmt->bindValue(':ca', $ca);
+        $stmt->bindValue(':adresse', $adresse);
+        $stmt->bindValue(':ville', $ville);
+        $stmt->bindValue(':id',$id);
+        $stmt->bindValue(':user', $this->getUser()->getUsMail());
 
-                break;
-            case "ROC_ECLERC":
-                $em = $this->getDoctrine()->getManager('roc_eclerc');
-                $siret = $request->request->get('siret');
-                $mail = $request->request->get('mail');
-                $tel = $request->request->get('tel');
-                $cp = $request->request->get('cp');
-                $eff = $request->request->get('eff');
-                $ca = $request->request->get('ca');
-                $adresse = $request->request->get('adresse');
-                $ville = $request->request->get('ville');
-                $client = $em->getRepository('RocEclercBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                if (!$client) {
-                    throw $this->createNotFoundException(
-                        'Pas de client pour l\'id ' . $id
-                    );
-                }
-                $client[0]->setClSiret($siret);
-                $client[0]->setClMail($mail);
-                $client[0]->setClTel($tel);
-                $client[0]->setClCp($cp);
-                $client[0]->setClEffectif($eff);
-                $client[0]->setClCa($ca);
-                $client[0]->setClAdresse1($adresse);
-                $client[0]->setClVille($ville);
-                $em->flush();
-                $res = "client mise à jour";
-                return new JsonResponse($res, 200);
-                break;
-            case "CENTRALE_PFPL":
-                $em = $this->getDoctrine()->getManager('centrale_pascal_leclerc');
-                $siret = $request->request->get('siret');
-                $mail = $request->request->get('mail');
-                $tel = $request->request->get('tel');
-                $cp = $request->request->get('cp');
-                $eff = $request->request->get('eff');
-                $ca = $request->request->get('ca');
-                $adresse = $request->request->get('adresse');
-                $ville = $request->request->get('ville');
-                $client = $em->getRepository('PfplBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                if (!$client) {
-                    throw $this->createNotFoundException(
-                        'Pas de client pour l\'id ' . $id
-                    );
-                }
-                $client[0]->setClSiret($siret);
-                $client[0]->setClMail($mail);
-                $client[0]->setClTel($tel);
-                $client[0]->setClCp($cp);
-                $client[0]->setClEffectif($eff);
-                $client[0]->setClCa($ca);
-                $client[0]->setClAdresse1($adresse);
-                $client[0]->setClVille($ville);
-                $em->flush();
-                $res = "client mise à jour";
-                return new JsonResponse($res, 200);
-                break;
-            case "CENTRALE_GCCP":
-                $em = $this->getDoctrine()->getManager('centrale_gccp');
-                $siret = $request->request->get('siret');
-                $mail = $request->request->get('mail');
-                $tel = $request->request->get('tel');
-                $cp = $request->request->get('cp');
-                $eff = $request->request->get('eff');
-                $ca = $request->request->get('ca');
-                $adresse = $request->request->get('adresse');
-                $ville = $request->request->get('ville');
-                $client = $em->getRepository('GccpBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                if (!$client) {
-                    throw $this->createNotFoundException(
-                        'Pas de client pour l\'id ' . $id
-                    );
-                }
-                $client[0]->setClSiret($siret);
-                $client[0]->setClMail($mail);
-                $client[0]->setClTel($tel);
-                $client[0]->setClCp($cp);
-                $client[0]->setClEffectif($eff);
-                $client[0]->setClCa($ca);
-                $client[0]->setClAdresse1($adresse);
-                $client[0]->setClVille($ville);
-                $em->flush();
-                $res = "client mise à jour";
-                return new JsonResponse($res, 200);
-                break;
-            case "ACHAT_CENTRALE":
-                $em = $this->getDoctrine()->getManager('achat_centrale');
-                $siret = $request->request->get('siret');
-                $mail = $request->request->get('mail');
-                $tel = $request->request->get('tel');
-                $cp = $request->request->get('cp');
-                $eff = $request->request->get('eff');
-                $ca = $request->request->get('ca');
-                $adresse = $request->request->get('adresse');
-                $ville = $request->request->get('ville');
-                $client = $em->getRepository('AchatCentraleBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                if (!$client) {
-                    throw $this->createNotFoundException(
-                        'Pas de client pour l\'id ' . $id
-                    );
-                }
-                $client[0]->setClSiret($siret);
-                $client[0]->setClMail($mail);
-                $client[0]->setClTel($tel);
-                $client[0]->setClCp($cp);
-                $client[0]->setClEffectif($eff);
-                $client[0]->setClCa($ca);
-                $client[0]->setClAdresse1($adresse);
-                $client[0]->setClVille($ville);
-                $em->flush();
-                $res = "client mise à jour";
-                return new JsonResponse($res, 200);
-                break;
+        $stmt->execute();
 
-            default:
-                break;
-        }
-        $res = "Aucun client mise a jour";
+
+
+        $res = "client mise à jour";
+
 
         return new JsonResponse($res, 200);
+
+
 
 
     }

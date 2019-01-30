@@ -663,6 +663,9 @@ $(function () {
         let id = $('#id').html();
         let url = "http://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/update";
 
+
+        console.log(values);
+
         $.ajax({
 
             // Adresse à laquelle la requête est envoyée
