@@ -1993,7 +1993,6 @@ class BaseController extends Controller
         $sql = sprintf("DELETE FROM %s.dbo.CLIENTS_NOTES WHERE CN_ID = :id", $so_database);
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':id', $id);
-
         $stmt->execute();
 
 

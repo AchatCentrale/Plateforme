@@ -2032,12 +2032,14 @@ $(function () {
 
     });
 
-    $('#remove_note').on('click', function (e) {
+    $('.remove_note').on('click', function (e) {
+
+
 
         let centrale = $('#centrale').html();
         let note = $(this).data("note");
 
-        let url = "http://localhost:8000/client/" + note + "/" + centrale + "/note/remove";
+        let url = "http://crm.achatcentrale.fr/client/" + note + "/" + centrale + "/note/remove";
         console.log(url);
 
         $.ajax({
