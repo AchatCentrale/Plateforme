@@ -2055,15 +2055,15 @@ class BaseController extends Controller
 
         $result = [
             "CC_ID" => $clientService->array_utf8_encode($user["CC_ID"]),
-            "CC_NOM" => $clientService->array_utf8_encode($user["CC_NOM"]),
-            "CC_PRENOM" => $clientService->array_utf8_encode($user["CC_PRENOM"]),
+            "CC_NOM" => $user["CC_NOM"],
+            "CC_PRENOM" => $user["CC_PRENOM"],
             "CC_PASS" => $clientService->array_utf8_encode($user["CC_PASS"]),
             "CC_TEL" => $clientService->array_utf8_encode($user["CC_TEL"]),
             "CC_MAIL" => $clientService->array_utf8_encode($user["CC_MAIL"]),
         ];
 
-        $response = new Response(json_encode($result, JSON_UNESCAPED_UNICODE));
-        $response->headers->set('Content-Type', 'application/json; charset=UTF-8');
+        $response = new Response(json_encode($result, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE));
+        $response->headers->set('Content-Type', 'application/json;');
         $response->setStatusCode(200);
         return $response;
 
