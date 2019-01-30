@@ -2062,9 +2062,13 @@ class BaseController extends Controller
             "CC_MAIL" => $clientService->array_utf8_encode($user["CC_MAIL"]),
         ];
 
-        return new JsonResponse($result, 200, [
-            'Access-Control-Allow-Origin' => '*'
-        ]);
+        $response = new JsonResponse($result);
+        $response->headers->set('Content-Type', 'application/json');
+        $response->headers->set("Access-Control-Allow-Origin", "*");
+        $response->setStatusCode(200);
+        return $response;
+
+
 
     }
 
