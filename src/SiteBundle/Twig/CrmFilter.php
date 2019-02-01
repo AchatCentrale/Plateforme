@@ -150,7 +150,6 @@ class CrmFilter extends \Twig_Extension
         if(!empty($so_database)){
 
             $tpl = "<p class='label large yellow '>".$so_database[0]["SO_DATABASE"]."</p>";
-            dump($tpl);
 
             return $tpl;
 
