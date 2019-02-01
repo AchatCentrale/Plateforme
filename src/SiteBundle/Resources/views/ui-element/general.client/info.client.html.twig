@@ -126,13 +126,7 @@
 
                                 <div class="ui equal width grid container-hastag-label">
                                     <div class="column">
-
-
-                                        {% if centrale | isNumeric %}
-                                            {{ centrale  | centraleLabel | raw }}
-                                        {% else %}
-                                            {{ centrale |replace({"_" : " "}) | centraleLabel | raw }}
-                                        {% endif %}
+                                        {{ centrale  | centraleLabel | raw }}
 
                                     </div>
                                     <div class="column " style="width: 30%;">

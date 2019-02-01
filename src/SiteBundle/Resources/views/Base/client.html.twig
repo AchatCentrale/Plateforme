@@ -72,14 +72,36 @@
                                                 class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}"></a>
                                 </li>
-                                <li class="{% if app.request.query.get('c') == 'pfpl' %}active-centrale{% endif %}">
+                                <li class="{% if app.request.query.get('c') == '5' %}active-centrale{% endif %}">
                                     <a href="{{ path("client", { "c" : "5"}) }}">
                                         <img
                                                 data-centrale="centrale-pfpl"
                                                 class="cursor img-centrale"
                                                 src="{{ asset('images/logo-centrale/logo-pfpl.jpg') }}">
 
-                                    </a></li>
+                                    </a>
+                                </li>
+
+                                <li class="{% if app.request.query.get('c') == '3' %}active-centrale{% endif %}">
+                                    <a href="{{ path("client", { "c" : "3"}) }}">
+                                        <img
+                                                data-centrale="centrale-naldeo"
+                                                class="cursor img-centrale"
+                                                src="{{ asset('images/logo-centrale/logo_naldeo.png') }}">
+
+                                    </a>
+                                </li>
+
+                                <li class="{% if app.request.query.get('c') == '8' %}active-centrale{% endif %}">
+                                    <a href="{{ path("client", { "c" : "8"}) }}">
+                                        <img
+                                                data-centrale="centrale-pfpl"
+                                                class="cursor img-centrale"
+                                                src="{{ asset('images/logo-centrale/logo_abm.png') }}">
+
+                                    </a>
+                                </li>
+
                             </ul>
                         </div>
 
