@@ -158,59 +158,7 @@ class CrmFilter extends \Twig_Extension
         }
 
 
-//        if (gettype($centrale) === "string" && ctype_digit($centrale) === false) {
-//            switch ($centrale) {
-//                case 'CENTRALE_ROC_ECLERC':
-//                case 'CENTRALE ROC ECLERC':
-//                    return "<h3><span class=\"label large yellow \">Centrale Roc-Eclerc</span></h3>";
-//                    break;
-//                case 'CENTRALE_FUNECAP':
-//                case 'CENTRALE FUNECAP':
-//                    return "<h3><span class=\"label large label-danger \">Centrale Funecap</span></h3>";
-//                    break;
-//                case 'CENTRALE_GCCP':
-//                case 'CENTRALE GCCP':
-//                    return "<h3><span class=\"label large label-danger \">Centrale GCCP</span></h3>";
-//                    break;
-//                case'ACHAT_CENTRALE':
-//                case 'ACHAT CENTRALE':
-//                    return "<h3><span class=\"label large label-danger \">Achat Centrale</span></h3>";
-//                    break;
-//                case 'CENTRALE_PFPL':
-//                case 'CENTRALE PFPL':
-//                    return "<h3><span class=\"label large label-danger \">Centrale PFPL</span></h3>";
-//                    break;
-//            }
-//
-//            return $centrale;
-//        } else {
-//
-//
-//            switch ($centrale) {
-//                case '1':
-//                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/Fourmi_AC_small.png\" alt=\"\"></div>";
-//                    break;
-//                case '2':
-//                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-gccp-tiny.png\" alt=\"\"></div>";
-//                    break;
-//                case '3':
-//                    return "<h3><span class=\"label big label-danger \">Centrale PROMUCF</span></h3>";
-//                    break;
-//                case '4':
-//                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-funecap-tiny.png\" alt=\"\"></div>";
-//                    break;
-//                case '5':
-//                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-pfpl-tiny.jpg\" alt=\"\"></div>";
-//                    break;
-//                case '6':
-//                    return "<div class=\"little-pic-centrale\"><img src=\"/assets/images/logo-roc-tiny.png\" alt=\"\"></div>";
-//                    break;
-//
-//            }
-//        }
-//
-//
-//        return $centrale;
+
 
     }
 
