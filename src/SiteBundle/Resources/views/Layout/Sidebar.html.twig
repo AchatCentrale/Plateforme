@@ -32,12 +32,19 @@
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section current-page">
                 <ul class="nav side-menu" style="">
-                    <li class="{% if app.request.attributes.get('_route') == 'index_auth' %}current-page {% endif %}"><a
-                                href="/"><i class="fa fa-home"></i> Home</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'index_auth' %}current-page {% endif %}"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                    <li class="">
+                        <a href="{{ path('taches_home') }}"><i class="fa fa-calendar"></i> Actions</a>
+                        <ul class="nav child_menu">
+                            <li class="">
+                                <a href="{{ path('taches_home') }}">Actions clients</a>
+                            </li>
+                            <li class="">
+                                <a href="{{ path('personnal-task') }}">Actions personnelles</a>
+                            </li>
 
-
-                    <li class="{% if app.request.attributes.get('_route') == 'taches_home' or app.request.attributes.get('_route') == 'new-task' %}current-page {% endif %}">
-                        <a href="{{ path('taches_home') }}"><i class="fa fa-calendar"></i> Action</a></li>
+                        </ul>
+                    </li>
 
 
                     <li class="{% if app.request.attributes.get('_route') == 'client' or app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-facturation' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'consomnation-client'  %}current-page {% endif %}">
@@ -46,8 +53,7 @@
                         <a href="{{ path('client', { 'c' : 'all'}) }}"><i class="fa fa-user"></i> Client</a>
 
 
-                            {% if  app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'client-facturation' or app.request.attributes.get('_route') == 'consomnation-client'  %}
-                        </a>
+                            {% if  app.request.attributes.get('_route') == 'client-general' or app.request.attributes.get('_route') == 'client-adresse' or app.request.attributes.get('_route') == 'client-status' or app.request.attributes.get('_route') == 'client-facturation' or app.request.attributes.get('_route') == 'consomnation-client'  %}</a>
 
 
                         <ul class="nav child_menu">

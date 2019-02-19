@@ -49,13 +49,13 @@ class TacheController extends Controller
 
 
         if(isset($sort)){
-
             switch ($sort){
                 case "today":
                     $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
                             FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                             WHERE US_ID = :usId
                               AND CLA_STATUS <> 10
+                              AND CL_ID IS NOT NULL
                               AND CLA_ECHEANCE BETWEEN
                               CAST(GETDATE() AS DATE) AND DATEADD(DAY, 1, CAST(GETDATE() AS DATE))
                               ORDER BY CLA_ECHEANCE ASC";
@@ -65,6 +65,7 @@ class TacheController extends Controller
                             FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                             WHERE US_ID = :usId
                               AND CLA_STATUS <> 10
+                              AND CL_ID IS NOT NULL
                               AND CLA_ECHEANCE > GETDATE()
                               ORDER BY CLA_ECHEANCE ASC";
                     break;
@@ -73,6 +74,7 @@ class TacheController extends Controller
                             FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                             WHERE US_ID = :usId
                               AND CLA_STATUS <> 10
+                              AND CL_ID IS NOT NULL
                               AND CLA_ECHEANCE < GETDATE()
                               ORDER BY CLA_ECHEANCE ASC";
                     break;
@@ -84,6 +86,116 @@ class TacheController extends Controller
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE US_ID = :usId
                 AND CLA_STATUS <> 10
+                AND CL_ID IS NOT NULL
+                ORDER BY INS_DATE DESC";
+        }
+
+
+
+
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':usId', $user->getUsId());
+        $stmt->execute();
+        $task = $stmt->fetchAll();
+
+
+
+        $sqlUserDispo = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS";
+
+        $stmtUser = $conn->prepare($sqlUserDispo);
+        $stmtUser->execute();
+        $user = $stmtUser->fetchAll();
+
+
+
+
+
+        return $this->render('@Site/Base/tache.home.html.twig', [
+            'task' => $task,
+            'user' => $user,
+        ]);
+
+    }
+
+
+    public function PersonnalTaskAction(Request $request)
+    {
+
+
+        $user = $this->getUser();
+
+        if($user->getUsId() === 2){
+
+
+            $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+            $sql = "SELECT CL_ID, CLA_STATUS,INS_USER, CLA_ECHEANCE, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
+                    FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                    WHERE CLA_STATUS <> 10
+                    ORDER BY INS_DATE DESC";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':usId', $user->getUsId());
+            $stmt->execute();
+            $task = $stmt->fetchAll();
+
+
+
+            return $this->render('@Site/Base/tache.home.html.twig', [
+                'task' => $task,
+            ]);
+        }
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+
+        $sort = $request->query->get('sortBy');
+
+
+
+        if(isset($sort)){
+
+            switch ($sort){
+                case "today":
+                    $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
+                            FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                            WHERE US_ID = :usId
+                              AND CLA_STATUS <> 10
+                              AND CL_ID IS NULL
+                              AND CLA_ECHEANCE BETWEEN
+                              CAST(GETDATE() AS DATE) AND DATEADD(DAY, 1, CAST(GETDATE() AS DATE))
+                              ORDER BY CLA_ECHEANCE ASC";
+                    break;
+                case "future":
+                    $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
+                            FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                            WHERE US_ID = :usId
+                              AND CLA_STATUS <> 10
+                              AND CL_ID IS NULL
+                              AND CLA_ECHEANCE > GETDATE()
+                AND CL_ID IS NULL
+
+                              ORDER BY CLA_ECHEANCE ASC";
+                    break;
+                case "past":
+                    $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
+                            FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                            WHERE US_ID = :usId
+                              AND CLA_STATUS <> 10
+                              AND CLA_ECHEANCE < GETDATE()
+                              AND CL_ID IS NULL
+                              ORDER BY CLA_ECHEANCE ASC";
+                    break;
+            }
+        }else {
+            $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
+                FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                WHERE US_ID = :usId
+                AND CLA_STATUS <> 10
+                AND CL_ID IS NULL
                 ORDER BY INS_DATE DESC";
         }
 

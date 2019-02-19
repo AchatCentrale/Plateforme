@@ -68,6 +68,12 @@ taches_home:
     path:    /taches
     defaults: {_controller: SiteBundle:Tache:Tache}
 
+
+personnal-task:
+    path: /taches/personnal
+    defaults: {_controller: SiteBundle:Tache:PersonnalTask}
+
+
 detail-task:
     path:   /taches/detail/{idCentrale}/{id}
     defaults: {_controller: SiteBundle:Tache:DetailTask}
