@@ -15,7 +15,7 @@
                     <div class="card">
                         <div class="content">
                             <div class="header">Tickets</div>
-                            <div class="meta">{{ fe["INS_DATE"] |Time }}</div>
+                            <div class="meta">{{ fe["INS_DATE"] | fromNowString }}</div>
                             <div class="description">
                                 {{ fe["ME_SUJET"] | raw | convert_encoding('UTF-8', 'Windows-1252') }}
                             </div>
@@ -28,7 +28,7 @@
                     <div class="card">
                         <div class="content">
                             <div class="header">Notes</div>
-                            <div class="meta">{{ fe["INS_DATE"] }}</div>
+                            <div class="meta">{{ fe["INS_DATE"] | fromNowString }}</div>
                             <div class="description">
                                 {{ fe["CN_NOTE"] | raw | convert_encoding('UTF-8', 'Windows-1252')  }}
                             </div>
@@ -47,7 +47,7 @@
                             <div class="header">Tâches &emsp;
                                 <i data-id="{{ fe["CLA_ID"] }}" data-centrale="{{ app.request.get('centrale') }}"
                                    class="archive cursor icon archive-task"></i></div>
-                            <div class="meta">{{ fe["INS_DATE"] |Time }}</div>
+                            <div class="meta">{{ fe["INS_DATE"] | fromNowString }}</div>
                             <div class="description">
                                 {{ fe["CLA_NOM"] | raw | convert_encoding('UTF-8', 'Windows-1252') }}
                             </div>
