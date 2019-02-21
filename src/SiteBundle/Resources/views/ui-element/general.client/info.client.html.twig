@@ -116,7 +116,7 @@
                 <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="ui equal width grid raison-soc">
                         <div class="equal width row">
-                            <div class="column">
+                            <div class="eight wide column">
                                 <h3 class="raison-soc-titre">
                                     <i class="building icon"></i> {{ client[0]["CL_RAISONSOC"] |  convert_encoding('UTF-8', 'Windows-1252') | upper }}
                                     {% if client[0]["CL_STATUS"] == 2 %}
@@ -129,24 +129,24 @@
                                         {{ centrale  | centraleLabel | raw }}
 
                                     </div>
-                                    <div class="column " style="width: 30%;">
-                                        <i class="plus cursor large green-plus add-hastag-icon circle icon"></i>
-                                    </div>
+{#                                    <div class="column " style="width: 30%;">#}
+{#                                        <i class="plus cursor large green-plus add-hastag-icon circle icon"></i>#}
+{#                                    </div>#}
                                 </div>
 
 
-                                <div class="add-hastag-container">
-                                    <div class="ui input">
-                                        <input type="text" id="value-hashtag-client" placeholder="Ajouter un hastag">
-                                        <button class="ui button save-hastag-client ">
-                                            Enregistrer
-                                        </button>
-                                    </div>
-                                </div>
+{#                                <div class="add-hastag-container">#}
+{#                                    <div class="ui input">#}
+{#                                        <input type="text" id="value-hashtag-client" placeholder="Ajouter un hastag">#}
+{#                                        <button class="ui button save-hastag-client ">#}
+{#                                            Enregistrer#}
+{#                                        </button>#}
+{#                                    </div>#}
+{#                                </div>#}
 
 
                             </div>
-                            <div class="column ref-client">
+                            <div class="four wide column ref-client">
                                 <h3><span class="pastille-ref green"></span> {{ client[0]["CL_REF"] }}</h3>
                                 <div class="hastag-container">
 
@@ -162,6 +162,18 @@
                                         {% endif %}
 
 
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="four wide column">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Action</a></li>
+                                        <li><a href="#">Another action</a></li>
+                                        <li><a href="#">Something else here</a></li>
                                     </ul>
                                 </div>
                             </div>

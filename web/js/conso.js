@@ -67,11 +67,4 @@ Dropzone.options.importDropzoneConso = {
 
 
 
-$('#fourn-import-conso').click(function (e) {
-
-    console.log('test')
-
-});
-
-
 

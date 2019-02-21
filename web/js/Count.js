@@ -6,6 +6,5 @@ Countable.on(area, counter =>{
     }else{
         $('#counting-note').empty().append('<p style="color: red;">'+counter.all+'/500</p>');
 
-
     }
 });
