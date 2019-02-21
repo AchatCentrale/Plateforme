@@ -93,16 +93,16 @@
                             {% for u in user %}
                                 {% if u["CC_STATUS"] is same as(0) %}
                                     <div style="background-color: #eee;margin-bottom: 15px;padding-top: 15px;padding-bottom: 15px;padding-left: 10px;border-radius: 20px;" class="item">
-                                    {{ u["CC_PRENOM"] | avatar(u["CC_NOM"], false, true) | raw }}
-                                    <div class="content content-list-user">
-                                        <a href="//secure.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u["CC_MAIL"] }}&PASS={{ u["CC_PASS"] }}"><i class="user icon"></i>
-                                            {{ u["CC_PRENOM"] |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u["CC_NOM"] |  convert_encoding('UTF-8', 'Windows-1252') }}
-                                        </a>&nbsp;&nbsp;<i data-utilisateur="{{ u["CC_ID"] }}" class="edit icon cursor edit-client-user"></i>
-                                        <div class="description"><b>{{ u["CC_FONCTION"] | convert_encoding('UTF-8', 'Windows-1252') }}</b></div>
-                                        <div class="description"><i class="mail icon"></i>{{ u["CC_MAIL"] }}</div>
-                                        <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone }}</div>
+                                        {{ u["CC_PRENOM"] | avatar(u["CC_NOM"], false, true) | raw }}
+                                        <div class="content content-list-user">
+                                            <a href="//secure.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u["CC_MAIL"] }}&PASS={{ u["CC_PASS"] }}"><i class="user icon"></i>
+                                                {{ u["CC_PRENOM"] |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u["CC_NOM"] |  convert_encoding('UTF-8', 'Windows-1252') }}
+                                            </a>&nbsp;&nbsp;<i data-utilisateur="{{ u["CC_ID"] }}" class="edit icon cursor edit-client-user"></i>
+                                            <div class="description"><b>{{ u["CC_FONCTION"] | convert_encoding('UTF-8', 'Windows-1252') }}</b></div>
+                                            <div class="description"><i class="mail icon"></i>{{ u["CC_MAIL"] }}</div>
+                                            <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone }}</div>
+                                        </div>
                                     </div>
-                                </div>
                                 {% endif %}
 
                             {% endfor %}
@@ -129,24 +129,24 @@
                                         {{ centrale  | centraleLabel | raw }}
 
                                     </div>
-{#                                    <div class="column " style="width: 30%;">#}
-{#                                        <i class="plus cursor large green-plus add-hastag-icon circle icon"></i>#}
-{#                                    </div>#}
+                                    {#                                    <div class="column " style="width: 30%;">#}
+                                    {#                                        <i class="plus cursor large green-plus add-hastag-icon circle icon"></i>#}
+                                    {#                                    </div>#}
                                 </div>
 
 
-{#                                <div class="add-hastag-container">#}
-{#                                    <div class="ui input">#}
-{#                                        <input type="text" id="value-hashtag-client" placeholder="Ajouter un hastag">#}
-{#                                        <button class="ui button save-hastag-client ">#}
-{#                                            Enregistrer#}
-{#                                        </button>#}
-{#                                    </div>#}
-{#                                </div>#}
+                                {#                                <div class="add-hastag-container">#}
+                                {#                                    <div class="ui input">#}
+                                {#                                        <input type="text" id="value-hashtag-client" placeholder="Ajouter un hastag">#}
+                                {#                                        <button class="ui button save-hastag-client ">#}
+                                {#                                            Enregistrer#}
+                                {#                                        </button>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
 
 
                             </div>
-                            <div class="four wide column ref-client">
+                            <div class="two wide column ref-client">
                                 <h3><span class="pastille-ref green"></span> {{ client[0]["CL_REF"] }}</h3>
                                 <div class="hastag-container">
 
@@ -165,17 +165,51 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="four wide column">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Action <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Action</a></li>
-                                        <li><a href="#">Another action</a></li>
-                                        <li><a href="#">Something else here</a></li>
-                                    </ul>
+                            <div class="six wide column">
+
+                                <div class="ui two column grid">
+
+                                    <div class="column ">
+
+                                        <h4>Origine du prospet <i class="pencil cursor icon"></i> </h4>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1">Type</span>
+                                            <input disabled type="text" class="form-control" placeholder="Web, prospection" aria-describedby="basic-addon1">
+                                        </div>
+                                        <div class="ui  two column grid">
+                                            <div class="column">
+                                                <a class="ui label">
+                                                    <i class="user icon"></i>
+                                                    Jb
+                                                </a>
+                                            </div>
+                                            <div class="column">
+                                                <h3>12/09/1993</h3>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="column">
+{#                                        <div class="btn-group">#}
+{#                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
+{#                                                Changer le statut du client <span class="caret"></span>#}
+{#                                            </button>#}
+{#                                            <ul class="dropdown-menu">#}
+{#                                                <li><a href="#">Action</a></li>#}
+{#                                                <li><a href="#">Another action</a></li>#}
+{#                                                <li><a href="#">Something else here</a></li>#}
+{#                                            </ul>#}
+{#                                        </div>#}
+
+                                    </div>
                                 </div>
+
+
+
+
+
+
                             </div>
 
                         </div>
@@ -798,13 +832,13 @@
                                placeholder="Adresse mail">
                     </div>
                     {#<div class="field">#}
-                        {#<div class="field">#}
-                            {#<label for="us_fonct">Fonction</label>#}
-                            {#<select name="us_update[]" id="us_fonct" class="ui dropdown user-update">#}
-                                {#<option value="">Choisir la fonction</option>#}
-                                {#<option value="1">Autres</option>#}
-                            {#</select>#}
-                        {#</div>#}
+                    {#<div class="field">#}
+                    {#<label for="us_fonct">Fonction</label>#}
+                    {#<select name="us_update[]" id="us_fonct" class="ui dropdown user-update">#}
+                    {#<option value="">Choisir la fonction</option>#}
+                    {#<option value="1">Autres</option>#}
+                    {#</select>#}
+                    {#</div>#}
                     {#</div>#}
                     <div class="field">
                         <label for="Téléphone-user-update">Téléphone</label>
@@ -820,3 +854,13 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade bs-example-modal-sm modal_origin_client_update" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            ...
+        </div>
+    </div>
+</div>
+
