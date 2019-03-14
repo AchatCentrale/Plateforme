@@ -459,14 +459,12 @@
                                                                 {% if note %}
                                                                     <h5>Historique client: </h5>
 
-                                                                    {% for n in note %}
                                                                         <ul>
+                                                                    {% for n in note %}
 
-                                                                            - {{ n["CN_NOTE"] }}
-
-                                                                            {#                                                                        <li>{{ n["INS_DATE"] | fromNowString }}: {{ n["CN_NOTE"] | convert_encoding('UTF-8', 'Windows-1252') }} <i class="close icon remove_note" data-note="{{ n["CN_ID"] }}" ></i></li>#}
-                                                                        </ul>
+                                                                            <li>{{ n["INS_DATE"]  }}: {{ n["CN_NOTE"] | convert_encoding('UTF-8', 'Windows-1252') }} <i class="close icon remove_note" data-note="{{ n["CN_ID"] }}" ></i></li>
                                                                     {% endfor %}
+                                                                        </ul>
                                                                 {% else %}
                                                                     <p>Il n'y aucune note pour le client</p>
                                                                 {% endif %}
