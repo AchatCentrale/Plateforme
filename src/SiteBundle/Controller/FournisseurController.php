@@ -186,7 +186,7 @@ class FournisseurController extends Controller
             $ean = iconv("UTF-8", "WINDOWS-1252", $ligne[26]);
             $nomProduit = iconv("UTF-8", "WINDOWS-1252", $ligne[27]);
             $descrLong = iconv("UTF-8", "WINDOWS-1252", $ligne[29]);
-            $qteCmd = iconv("UTF-8", "WINDOWS-1252", $ligne[33]);
+            $qteCmd = empty($ligne[33]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[33]);
             $conditionnement = iconv("UTF-8", "WINDOWS-1252", $ligne[34]);
             $prixPubHt = iconv("UTF-8", "WINDOWS-1252", $ligne[35]);
             $prixPartHt = iconv("UTF-8", "WINDOWS-1252", $ligne[36]);
