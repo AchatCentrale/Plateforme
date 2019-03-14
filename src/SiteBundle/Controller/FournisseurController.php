@@ -187,14 +187,14 @@ class FournisseurController extends Controller
             $nomProduit = iconv("UTF-8", "WINDOWS-1252", $ligne[27]);
             $descrLong = iconv("UTF-8", "WINDOWS-1252", $ligne[29]);
             $qteCmd = empty($ligne[33]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[33]);
-            $conditionnement = iconv("UTF-8", "WINDOWS-1252", $ligne[34]);
-            $prixPubHt = iconv("UTF-8", "WINDOWS-1252", $ligne[35]);
-            $prixPartHt = iconv("UTF-8", "WINDOWS-1252", $ligne[36]);
-            $prixVc = iconv("UTF-8", "WINDOWS-1252", $ligne[37]);
-            $remise = iconv("UTF-8", "WINDOWS-1252", $ligne[38]);
-            $type = iconv("UTF-8", "WINDOWS-1252", $ligne[30]);
-            $lien = iconv("UTF-8", "WINDOWS-1252", $ligne[31]);
-            $photo = iconv("UTF-8", "WINDOWS-1252", $ligne[39]);
+            $conditionnement = empty($ligne[34]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[34]);
+            $prixPubHt = empty($ligne[35]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[35]);
+            $prixPartHt = empty($ligne[36]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[36]);
+            $prixVc = empty($ligne[37]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[37]);
+            $remise = empty($ligne[38]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[38]);
+            $type = empty($ligne[30]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[30]);
+            $lien = empty($ligne[31]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[31]);
+            $photo = empty($ligne[39]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[39]);
 
 
             ini_set('auto_detect_line_endings',FALSE);
