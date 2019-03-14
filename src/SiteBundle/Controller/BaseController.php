@@ -596,7 +596,7 @@ class BaseController extends Controller
         $stmtNotes->execute();
         $notes = $stmtNotes->fetchAll();
 
-
+        dump( mb_detect_encoding($notes[0]["CN_NOTE"]));
 
 
         $sqlFonction = sprintf("SELECT * FROM %s.dbo.FONCTIONS WHERE SO_ID = 1 ", $so_database);
@@ -797,6 +797,8 @@ class BaseController extends Controller
         $so_database = $clientService->getCentraleDB($centrale);
 
         $content_notes = $request->request->get('content_note');
+
+        dump($content_notes);
 
 
 
