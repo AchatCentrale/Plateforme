@@ -798,7 +798,6 @@ class BaseController extends Controller
 
         $content_notes = $request->request->get('content_note');
 
-        dump($content_notes);
 
 
 
