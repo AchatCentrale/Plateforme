@@ -596,7 +596,8 @@ class BaseController extends Controller
         $stmtNotes->execute();
         $notes = $stmtNotes->fetchAll();
 
-//        dump( mb_detect_encoding($notes[0]["CN_NOTE"]));
+        dump( $notes[1]["CN_NOTE"]);
+        dump( mb_detect_encoding($notes[0]["CN_NOTE"]));
 
 
         $sqlFonction = sprintf("SELECT * FROM %s.dbo.FONCTIONS WHERE SO_ID = 1 ", $so_database);

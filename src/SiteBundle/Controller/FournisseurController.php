@@ -157,7 +157,7 @@ class FournisseurController extends Controller
 
 
             $descr = iconv("UTF-8", "WINDOWS-1252", $ligne[28]);
-            $triptyque = iconv("UTF-8", "WINDOWS-1252", $ligne[32]);
+            $triptyque = empty($ligne[32]) ? " ": iconv("UTF-8", "WINDOWS-1252", $ligne[32]);
             $fournisseur = iconv("UTF-8", "WINDOWS-1252", $ligne[1]);
             $rayon = iconv("UTF-8", "WINDOWS-1252", $ligne[2]);
             $famille = iconv("UTF-8", "WINDOWS-1252", $ligne[3]);
