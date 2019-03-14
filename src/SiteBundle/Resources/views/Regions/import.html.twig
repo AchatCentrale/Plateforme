@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+    Configurer une région - ACHAT-CENTRALE
+{% endblock %}
+
+{%  block body %}
+
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><i class="folder outline icon"></i> Régions</h2>
+
+
+            <div class="clearfix"></div>
+        </div>
+
+
+        <div class="x_content ">
+
+            <div class="zone-import-region" id="dropzone-import-region">
+                <form action="{{ path('region-import') }}" id="import-dropzone-region" class="dropzone">
+                    <div class="fallback">
+                        <input name="file" type="file" multiple/>
+                    </div>
+                </form>
+
+            </div>
+
+
+            <a href="{{ asset('Excel/Exemple_import.csv') }}">Fichier exemple import</a>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/region.js') }}"></script>
+
+{% endblock %}

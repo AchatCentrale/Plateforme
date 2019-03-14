@@ -529,7 +529,8 @@ class BaseController extends Controller
         $so_database = $clientService->getCentraleDB($centrale);
 
 
-        $sqlClient = sprintf("SELECT * FROM %s.dbo.CLIENTS WHERE CL_ID = :id", $so_database);
+        $sqlClient = sprintf("SELECT * FROM %s.dbo.CLIENTS INNER JOIN CLIENTS_ORIG_CONTACT ON CLIENTS_ORIG_CONTACT.COC_ID = CLIENTS.COC_ID
+ WHERE CL_ID = :id", $so_database);
 
         $stmtClient = $conn->prepare($sqlClient);
         $stmtClient->bindValue('id', $id);
@@ -620,6 +621,17 @@ class BaseController extends Controller
         $stmtForTag->execute();
         $tag = $stmtForTag->fetchAll();
 
+
+        $sqlForOrigine = sprintf('SELECT * FROM %s.dbo.CLIENTS_ORIG_CONTACT', $so_database);
+
+        $stmtForOrigine = $conn->prepare($sqlForOrigine);
+        $stmtForOrigine->bindValue('id', $id);
+        $stmtForOrigine->execute();
+        $origine = $stmtForOrigine->fetchAll();
+
+
+
+
         return $this->render(
             '@Site/Base/client.general.html.twig',
             [
@@ -635,7 +647,8 @@ class BaseController extends Controller
                 "fonction" => $fonction,
                 "profil" => $profil,
                 "tacheArchiv" => $tacheArchive,
-                "tag" => $tag
+                "tag" => $tag,
+                "origine" => $origine
 
             ]
         );
@@ -1998,6 +2011,7 @@ class BaseController extends Controller
 
         return new JsonResponse("ok", 200);
     }
+
 
 }
 

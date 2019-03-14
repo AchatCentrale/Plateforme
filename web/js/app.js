@@ -2073,6 +2073,23 @@ $(function () {
 
 
 
+    $('#add_origin_client').on('click', function () {
+
+
+        $('.form-check-input').each(function(idx, elem){
+
+            if(elem.checked){
+                console.log(elem.value)
+            }
+
+
+        });
+    });
+
+
+
+
+
 
 
 });

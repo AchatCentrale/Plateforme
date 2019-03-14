@@ -48,11 +48,17 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
 
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+
     {% endblock stylesheets %}
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('css/custom.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <!-- dropzone.css-->
+    <link src="{{ asset('css/dropzone.css') }}"/>
 
 </head>
 
@@ -100,12 +106,6 @@
                         {% set randomPassword = randomPassword|merge([randomCharacter]) %}
                     {% endfor %}
                     {% set randomPassword = randomPassword|join %}
-
-
-
-
-
-
 
                 {% endblock %}
 
@@ -159,13 +159,8 @@
 <!-- dropzone.js-->
 <script src="{{ asset('js/dropzone.js') }}"></script>
 
-<!-- dropzone.css-->
-<link src="{{ asset('css/dropzone.css') }}"></link>
-
-
 
 <!-- TimePicker-->
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
 
@@ -174,21 +169,19 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/countable/3.0.0/Countable.min.js" ></script>
-<script src="{{ asset('js/Count.js') }}" ></script>
 
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
-
-{% block modals %}{% endblock modals %}
-
-
-
-
 <script src="{{ asset('js/notify.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/conso.js') }}"></script>
-<script src="{{ asset('js/DateRangePicker.js') }}"></script>
+
+{% block javascripts %}
+    <script src="{{ asset('js/Count.js') }}" ></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/conso.js') }}"></script>
+    <script src="{{ asset('js/DateRangePicker.js') }}"></script>
+{% endblock %}
+
+
 
 
 </body>

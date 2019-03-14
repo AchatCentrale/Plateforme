@@ -305,3 +305,16 @@ detail-tableau-conso:
 detail-ca-conso:
     path: /conso/ca/{id}/{centrale}
     defaults: {_controller: SiteBundle:Consomnation:ConsoCa}
+
+
+
+
+# Regions
+
+region-index:
+    path: /regions
+    defaults: {_controller: SiteBundle:Regions:index}
+
+region-import:
+    path: /regions/import
+    defaults: {_controller: SiteBundle:Regions:import}

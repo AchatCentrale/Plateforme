@@ -1,10 +1,5 @@
 $('.ui.dropdown.consommation').dropdown();
 
-
-
-
-
-
 Dropzone.options.importDropzone = {
 
     init: function () {

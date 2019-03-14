@@ -148,59 +148,43 @@
                             </div>
                             <div class="two wide column ref-client">
                                 <h3><span class="pastille-ref green"></span> {{ client[0]["CL_REF"] }}</h3>
-                                <div class="hastag-container">
+{#                                <div class="hastag-container">#}
 
-                                    <ul id="hastag-inject">
-                                        {% if tag is defined %}
-
-
-                                            {% for t in tag %}
-                                                <li><a class="" href="{{ path('hastag-action', { 'id' : t['TAG'] }) }}">#{{ t['TAG'] }}</a>
-                                                </li>
-                                            {% endfor %}
-
-                                        {% endif %}
+{#                                    <ul id="hastag-inject">#}
+{#                                        {% if tag is defined %}#}
 
 
-                                    </ul>
-                                </div>
+{#                                            {% for t in tag %}#}
+{#                                                <li><a class="" href="{{ path('hastag-action', { 'id' : t['TAG'] }) }}">#{{ t['TAG'] }}</a>#}
+{#                                                </li>#}
+{#                                            {% endfor %}#}
+
+{#                                        {% endif %}#}
+
+
+{#                                    </ul>#}
+{#                                </div>#}
                             </div>
                             <div class="six wide column">
 
                                 <div class="ui two column grid">
 
                                     <div class="column ">
-
-                                        <h4>Origine du prospet <i class="pencil cursor icon"></i> </h4>
+                                        <h4><b>Origine du prospet</b> <i data-toggle="modal" data-target=".modal_origin_client_update" class="pencil cursor icon"></i> </h4>
                                         <div class="input-group">
                                             <span class="input-group-addon" id="basic-addon1">Type</span>
-                                            <input disabled type="text" class="form-control" placeholder="Web, prospection" aria-describedby="basic-addon1">
+                                            <input disabled type="text" class="form-control" placeholder="{{ client[0]["COC_DESCR"] }}" aria-describedby="basic-addon1">
                                         </div>
-                                        <div class="ui  two column grid">
-                                            <div class="column">
-                                                <a class="ui label">
-                                                    <i class="user icon"></i>
-                                                    Jb
-                                                </a>
-                                            </div>
-                                            <div class="column">
-                                                <h3>12/09/1993</h3>
-                                            </div>
-                                        </div>
-
                                     </div>
 
                                     <div class="column">
-{#                                        <div class="btn-group">#}
-{#                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                                                Changer le statut du client <span class="caret"></span>#}
-{#                                            </button>#}
-{#                                            <ul class="dropdown-menu">#}
-{#                                                <li><a href="#">Action</a></li>#}
-{#                                                <li><a href="#">Another action</a></li>#}
-{#                                                <li><a href="#">Something else here</a></li>#}
-{#                                            </ul>#}
-{#                                        </div>#}
+
+                                        <a class="ui label">
+                                            <i class="user icon"></i>
+                                            {{ client[0]["INS_USER"] }}
+                                        </a>
+                                        <h3 style="margin-top: 20px;" > Crée {{ client[0]["INS_DATE"] }}</h3>
+
 
                                     </div>
                                 </div>
@@ -470,6 +454,8 @@
 
                                                                 {% for n in note %}
                                                                     <ul>
+                                                                        {{ n["CN_NOTE"] }}
+
                                                                         <li>{{ n["INS_DATE"] | fromNowString }}: {{ n["CN_NOTE"] | convert_encoding('UTF-8', 'Windows-1252') }} <i class="close icon remove_note" data-note="{{ n["CN_ID"] }}" ></i></li>
                                                                     </ul>
                                                                 {% endfor %}
@@ -856,10 +842,28 @@
 </div>
 
 
+
+
 <div class="modal fade bs-example-modal-sm modal_origin_client_update" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
-            ...
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Selectionner l'origine du tiers</h4>
+            </div>
+            <div class="modal-body">
+                {% for o in origine %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="{{ o["COC_ID"] }}">
+                        <label class="form-check-label" for="exampleRadios1">
+                            {{ o["COC_DESCR"] }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="add_origin_client" class="btn btn-block btn-success" data-client="{{ client[0]["CL_ID"] }}" data-dismiss="modal">Enregistrer</button>
+            </div>
         </div>
     </div>
 </div>
