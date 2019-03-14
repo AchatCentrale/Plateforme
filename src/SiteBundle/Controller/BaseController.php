@@ -592,6 +592,8 @@ class BaseController extends Controller
         $stmtNotes->execute();
         $notes = $stmtNotes->fetchAll();
 
+        dump($notes);
+
 
 
         $sqlFonction = sprintf("SELECT * FROM %s.dbo.FONCTIONS WHERE SO_ID = 1 ", $so_database);
