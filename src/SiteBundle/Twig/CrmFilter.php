@@ -64,6 +64,8 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('ean13', [$this, 'ean13_check_digit']),
             new \Twig_SimpleFilter('centrale_int', [$this, 'centraleStringToInt']),
             new \Twig_SimpleFilter('centraleUrl', [$this, 'centraleUrl']),
+            new \Twig_SimpleFilter('encoding_to', [$this, 'encoding_to']),
+            new \Twig_SimpleFilter('encoding_from', [$this, 'encoding_from']),
         );
     }
 
@@ -670,6 +672,20 @@ class CrmFilter extends \Twig_Extension
 
     }
 
+
+    public function encoding_from($value){
+
+        mb_detect_encoding($value, mb_detect_order(), true) === 'UTF-8' ? $value : mb_convert_encoding($value, 'UTF-8');
+        return $value;
+
+    }
+
+    public function encoding_to($value){
+
+        mb_convert_encoding($value, 'UCS-2LE', mb_detect_encoding($value, mb_detect_order(), true));
+
+        return $value;
+    }
 
 
 

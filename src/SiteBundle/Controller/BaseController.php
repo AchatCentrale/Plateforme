@@ -522,6 +522,10 @@ class BaseController extends Controller
     public function ClientGeneralAction($id, $centrale)
     {
 
+
+        ini_set('mssql.charset', 'UTF-8');
+
+
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $clientService = $this->get('site.service.client_services');
