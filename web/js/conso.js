@@ -38,7 +38,7 @@ Dropzone.options.importDropzoneProduit = {
 };
 
 
-//import produit
+//import conso
 Dropzone.options.importDropzoneConso = {
 
     init: function () {
