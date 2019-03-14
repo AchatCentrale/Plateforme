@@ -323,6 +323,24 @@
                             </div>
                         </div>
 
+                        <br>
+
+
+                        <div class="notes">
+                            {% if note %}
+                                <h5>Historique client: </h5>
+
+                                {% for n in note %}
+                                    <ul>
+                                        - {{ n["CN_NOTE"] }}
+
+                                        {#                                                                        <li>{{ n["INS_DATE"] | fromNowString }}: {{ n["CN_NOTE"] | convert_encoding('UTF-8', 'Windows-1252') }} <i class="close icon remove_note" data-note="{{ n["CN_ID"] }}" ></i></li>#}
+                                    </ul>
+                                {% endfor %}
+                            {% else %}
+                                <p>Il n'y aucune note pour le client</p>
+                            {% endif %}
+                        </div>
 
                         <div class="detail-client-container">
                             <div class="profile_title ">
@@ -360,6 +378,9 @@
                                             </a>
                                         </li>
                                     </ul>
+
+
+
 
 
                                     <div id="myTabContent" class="tab-content">
@@ -449,19 +470,7 @@
                                                             </div>
                                                             <br>
 
-                                                            {% if note %}
-                                                                <h5>Historique client: </h5>
 
-                                                                {% for n in note %}
-                                                                    <ul>
-                                                                        {{ n["CN_NOTE"] }}
-
-{#                                                                        <li>{{ n["INS_DATE"] | fromNowString }}: {{ n["CN_NOTE"] | convert_encoding('UTF-8', 'Windows-1252') }} <i class="close icon remove_note" data-note="{{ n["CN_ID"] }}" ></i></li>#}
-                                                                    </ul>
-                                                                {% endfor %}
-                                                            {% else %}
-                                                                <p>Il n'y aucune note pour le client</p>
-                                                            {% endif %}
 
 
                                                         </div>
