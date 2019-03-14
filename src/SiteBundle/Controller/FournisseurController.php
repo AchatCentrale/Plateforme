@@ -199,7 +199,9 @@ class FournisseurController extends Controller
 
             ini_set('auto_detect_line_endings',FALSE);
 
-            switch ($ligne[41]) {
+
+            if (!empty($ligne[41])){
+                switch ($ligne[41]) {
                 case "A RAJOUTER":
 
 
@@ -326,6 +328,9 @@ class FournisseurController extends Controller
                     break;
 
             }
+
+            }
+
 
 
         }
