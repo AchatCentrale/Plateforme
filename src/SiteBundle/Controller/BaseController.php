@@ -533,8 +533,7 @@ class BaseController extends Controller
         $so_database = $clientService->getCentraleDB($centrale);
 
 
-        $sqlClient = sprintf("SELECT * FROM %s.dbo.CLIENTS INNER JOIN CLIENTS_ORIG_CONTACT ON CLIENTS_ORIG_CONTACT.COC_ID = CLIENTS.COC_ID
- WHERE CL_ID = :id", $so_database);
+        $sqlClient = sprintf("SELECT * FROM %s.dbo.CLIENTS WHERE CL_ID = :id", $so_database);
 
         $stmtClient = $conn->prepare($sqlClient);
         $stmtClient->bindValue('id', $id);
@@ -566,6 +565,9 @@ class BaseController extends Controller
 
         $sqlRegion = sprintf("SELECT * FROM %s.dbo.REGIONS WHERE RE_ID = :re_id", $so_database);
 
+
+
+        dump($restresult);
         $stmtRegions = $conn->prepare($sqlRegion);
         $stmtRegions->bindValue('re_id', $restresult[0]["RE_ID"]);
         $stmtRegions->execute();
