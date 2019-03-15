@@ -567,7 +567,6 @@ class BaseController extends Controller
 
 
 
-        dump($restresult);
         $stmtRegions = $conn->prepare($sqlRegion);
         $stmtRegions->bindValue('re_id', $restresult[0]["RE_ID"]);
         $stmtRegions->execute();
