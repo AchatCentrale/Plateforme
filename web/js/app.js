@@ -1415,24 +1415,7 @@ $(function () {
 
 
         let centrale = $('#centrale').html();
-        let aidyCentrale = 0;
 
-
-        if (centrale === "CENTRALE_FUNECAP") {
-            aidyCentrale = 4;
-
-        } else if (centrale === 'CENTRALE_GCCP') {
-
-            aidyCentrale = 2;
-
-        } else if (centrale === 'CENTRALE_PFPL') {
-
-            aidyCentrale = 5
-        } else if (centrale === 'ROC_ECLERC') {
-            aidyCentrale = 6
-        } else if (centrale === 'ACHAT_CENTRALE') {
-            aidyCentrale = 1;
-        }
 
 
         let id = $(this).data('id');
@@ -1441,7 +1424,7 @@ $(function () {
         let aidy = Number(id);
 
 
-        let url = "//crm.achatcentrale.fr/taches/detail/" + aidyCentrale + "/" + aidy;
+        let url = "//crm.achatcentrale.fr/taches/detail/" + centrale + "/" + aidy;
         console.log(url);
 
         $.ajax({

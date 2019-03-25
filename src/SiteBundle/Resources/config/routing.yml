@@ -315,6 +315,10 @@ region-index:
     path: /regions
     defaults: {_controller: SiteBundle:Regions:index}
 
+region-detail:
+    path: /region/{centrale}/{region_id}
+    defaults: {_controller: SiteBundle:Regions:detailRegion}
+
 region-import:
     path: /regions/import
     defaults: {_controller: SiteBundle:Regions:import}

@@ -13,53 +13,45 @@
     <div class="" role="main">
         <div>
             <div class="row">
-                <div class="col-md-4">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Régions <small>Achat Centrale</small></h2>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
 
+
+
+                {% for re in regions %}
+
+                    <div class="col-md-4">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>{{ re["SO_RAISONSOC"] }}</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nom régions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                    {% for r in re[0] %}
+                                        <tr>
+                                            <th scope="row">{{ r["RE_ID"]  }}</th>
+                                            <td><a href="{{ path("region-detail", {"centrale" : re["SO_ID"], "region_id" : r["RE_ID"] }) }}">{{ r["RE_NOM"] }}</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                        </tbody>
+                                    </table>
+
+
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-md-4">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Régions <small>Centrale Funecap</small></h2>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
 
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
 
-                <div class="col-md-4">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Régions <small>Centrale GCCP</small></h2>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>Régions <small>Roc Eclerc</small></h2>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
