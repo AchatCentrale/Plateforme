@@ -44,9 +44,13 @@
                     <div class="card">
                         <div class="content">
 
-                            <div class="header">Tâches &emsp;
-                                <i data-id="{{ fe["CLA_ID"] }}" data-centrale="{{ app.request.get('centrale') }}"
-                                   class="archive cursor icon archive-task"></i></div>
+
+                            <div class="header">Tâches
+                                <i data-id="{{ fe["CLA_ID"] }}" data-centrale="{{ app.request.get('centrale') }}" class="archive cursor icon archive-task"></i>
+                                <a href="{{ path("update-task", { "id" : fe["CLA_ID"], "centrale" : app.request.get('centrale') }) }}" >
+                                    <i class="edit icon"></i>
+                                </a>
+                            </div>
                             <div class="meta">{{ fe["INS_DATE"] | Time }}</div>
                             <div class="description">
                                 {{ fe["CLA_NOM"] | raw | convert_encoding('UTF-8', 'Windows-1252') }}

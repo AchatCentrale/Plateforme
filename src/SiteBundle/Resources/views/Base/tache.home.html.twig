@@ -229,12 +229,12 @@
                         <div class="col-md-6">
                             <div class="ui form" style="margin-top: 24px;">
                                 <div class="field">
-                                    <select id="reassign_user">
-                                        <option value="">Assigner la tache</option>
-                                        {% for u in user %}
-                                            <option value="{{ u["US_ID"] }}">{{ u["US_PRENOM"] }} {{ u["US_NOM"] }}</option>
-                                        {% endfor %}
-                                    </select>
+{#                                    <select id="reassign_user">#}
+{#                                        <option value="">Assigner la tache</option>#}
+{#                                        {% for u in user %}#}
+{#                                            <option value="{{ u["US_ID"] }}">{{ u["US_PRENOM"] }} {{ u["US_NOM"] }}</option>#}
+{#                                        {% endfor %}#}
+{#                                    </select>#}
                                 </div>
                             </div>
                             <button class="ui green button submit_reassign" style=" margin-top: 15px;margin-left: 85px;">Ré-assigner</button>
