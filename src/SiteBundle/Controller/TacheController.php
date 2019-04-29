@@ -92,7 +92,6 @@ class TacheController extends Controller
 
         if (isset($order)) {
 
-            dump($order);
             switch ($order) {
                 case "DESC":
                     $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
