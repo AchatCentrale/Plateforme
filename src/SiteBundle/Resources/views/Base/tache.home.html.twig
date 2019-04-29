@@ -17,10 +17,14 @@
 
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-choix-centrale">Ajouter une tâche
                     </button>
-
-
                     <a href="{{ path('export-action') }}" class="btn btn-success">Exporter les actions</a>
                     <a href="{{ path('export-notes') }}" class="btn btn-success">Exporter les notes</a>
+                    <div class="ui buttons">
+                        <a class="ui {{ app.request.get('order') == 'ASC' ? 'positive' }} button" href="{{ path('taches_home', {'order' : 'ASC'}) }}">Plus récent</a>
+                        <div class="or" data-text="ou"></div>
+                        <a class="ui {{ app.request.get('order') == 'DESC' ? 'positive' }} button" href="{{ path('taches_home', {'order' : 'DESC'}) }}">Plus lointaine</a>
+                    </div>
+
                     <div class="dropdown">
                         <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             Lister les taches
@@ -32,6 +36,8 @@
                             <li><a href="{{ path('taches_home', {'sortBy' : 'future'}) }}">Dans le futur</a></li>
                         </ul>
                     </div>
+
+
 
 
                     {% if task %}

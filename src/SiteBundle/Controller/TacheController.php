@@ -3,7 +3,6 @@
 namespace SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,13 +16,9 @@ class TacheController extends Controller
     {
 
 
-
-
-
-
         $user = $this->getUser();
 
-        if($user->getUsId() === 2){
+        if ($user->getUsId() === 2) {
 
 
             $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -39,7 +34,6 @@ class TacheController extends Controller
             $task = $stmt->fetchAll();
 
 
-
             return $this->render('@Site/Base/tache.home.html.twig', [
                 'task' => $task,
             ]);
@@ -49,18 +43,13 @@ class TacheController extends Controller
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
-
-
-
         $sort = $request->query->get('sortBy');
+        $order = $request->query->get('order');
 
 
 
-
-
-
-        if(isset($sort)){
-            switch ($sort){
+        if (isset($sort)) {
+            switch ($sort) {
                 case "today":
                     $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
                             FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
@@ -92,7 +81,7 @@ class TacheController extends Controller
             }
 
 
-        }else {
+        } else {
             $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE US_ID = :usId
@@ -101,8 +90,30 @@ class TacheController extends Controller
                 ORDER BY INS_DATE DESC";
         }
 
+        if (isset($order)) {
+
+            dump($order);
+            switch ($order) {
+                case "DESC":
+                    $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
+                            FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                            WHERE US_ID = :usId
+                            AND CLA_STATUS <> 10
+                            AND CL_ID IS NOT NULL
+                            ORDER BY CLA_ECHEANCE DESC";
+                    break;
+                case "ASC":
+                    $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
+                            FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
+                            WHERE US_ID = :usId
+                            AND CLA_STATUS <> 10
+                            AND CL_ID IS NOT NULL
+                            ORDER BY CLA_ECHEANCE ASC";
+                    break;
+            }
 
 
+        }
 
 
         $stmt = $conn->prepare($sql);
@@ -111,15 +122,11 @@ class TacheController extends Controller
         $task = $stmt->fetchAll();
 
 
-
         $sqlUserDispo = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS";
 
         $stmtUser = $conn->prepare($sqlUserDispo);
         $stmtUser->execute();
         $user = $stmtUser->fetchAll();
-
-
-
 
 
         return $this->render('@Site/Base/tache.home.html.twig', [
@@ -136,7 +143,7 @@ class TacheController extends Controller
 
         $user = $this->getUser();
 
-        if($user->getUsId() === 2){
+        if ($user->getUsId() === 2) {
 
 
             $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -152,7 +159,6 @@ class TacheController extends Controller
             $task = $stmt->fetchAll();
 
 
-
             return $this->render('@Site/Base/tache.home.html.twig', [
                 'task' => $task,
             ]);
@@ -162,14 +168,12 @@ class TacheController extends Controller
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
 
-
         $sort = $request->query->get('sortBy');
 
 
+        if (isset($sort)) {
 
-        if(isset($sort)){
-
-            switch ($sort){
+            switch ($sort) {
                 case "today":
                     $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
                             FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
@@ -201,7 +205,7 @@ class TacheController extends Controller
                               ORDER BY CLA_ECHEANCE ASC";
                     break;
             }
-        }else {
+        } else {
             $sql = "SELECT CL_ID, CLA_STATUS, CLA_ECHEANCE,INS_USER, CLA_DESCR, CLA_PRIORITE, CLA_TYPE, CLA_NOM, CLA_ID, SO_ID, INS_DATE, US_ID
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
                 WHERE US_ID = :usId
@@ -211,14 +215,10 @@ class TacheController extends Controller
         }
 
 
-
-
-
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':usId', $user->getUsId());
         $stmt->execute();
         $task = $stmt->fetchAll();
-
 
 
         $sqlUserDispo = "SELECT * FROM CENTRALE_ACHAT.dbo.USERS";
@@ -226,9 +226,6 @@ class TacheController extends Controller
         $stmtUser = $conn->prepare($sqlUserDispo);
         $stmtUser->execute();
         $user = $stmtUser->fetchAll();
-
-
-
 
 
         return $this->render('@Site/Base/tache.home.html.twig', [
@@ -285,13 +282,10 @@ class TacheController extends Controller
         }
 
 
-
-
-
-
     }
 
-    public function UnArchiveTaskAction($id){
+    public function UnArchiveTaskAction($id)
+    {
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "UPDATE CLIENTS_TACHES
@@ -345,20 +339,16 @@ class TacheController extends Controller
         $resultRaisonSoc = $stmtRaisonSoc->fetchAll();
 
 
-
-        return $this->redirectToRoute('client-general',[
+        return $this->redirectToRoute('client-general', [
             "id" => $resultRaisonSoc[0]["CL_ID"],
             "centrale" => $centrale
         ], 301);
-
-
 
 
     }
 
     public function DeleteTaskAction($id, $centrale)
     {
-
 
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -378,9 +368,7 @@ class TacheController extends Controller
         $result = $stmt->fetchAll();
 
 
-        return $this->redirectToRoute('taches_home',[], 301);
-
-
+        return $this->redirectToRoute('taches_home', [], 301);
 
 
     }
@@ -398,7 +386,6 @@ class TacheController extends Controller
         $req = $request->request;
 
 
-
         $sqlCentrale = "SELECT SO_DATABASE FROM CENTRALE_ACHAT.dbo.SOCIETES
                                     WHERE SO_ID = :so_id";
         $stmt = $conn->prepare($sqlCentrale);
@@ -407,13 +394,11 @@ class TacheController extends Controller
         $so_database = $stmt->fetchAll();
 
 
-
-        $typeSql = sprintf("SELECT * FROM %s.dbo.ACTION_TYPE",$so_database[0]["SO_DATABASE"]);
+        $typeSql = sprintf("SELECT * FROM %s.dbo.ACTION_TYPE", $so_database[0]["SO_DATABASE"]);
         $stmt = $conn->prepare($typeSql);
         $stmt->bindValue('so_id', $centrale);
         $stmt->execute();
         $actionType = $stmt->fetchAll();
-
 
 
         if ($request->getMethod() == "POST") {
@@ -436,9 +421,6 @@ class TacheController extends Controller
             $NewTask = $stmt->fetchAll();
 
 
-
-
-
             //$mailer->sendTaskNotification($last_id, $so_database, $this->getUser());
 
 
@@ -446,8 +428,6 @@ class TacheController extends Controller
 
             ], 301);
         }
-
-
 
 
         return $this->render(
@@ -466,7 +446,7 @@ class TacheController extends Controller
     {
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        switch ($centrale){
+        switch ($centrale) {
             case "1":
                 $sql = "UPDATE CENTRALE_ACHAT.dbo.CLIENTS_TACHES
                 SET
@@ -562,9 +542,6 @@ class TacheController extends Controller
         $mailer = $this->get('site.service.mailer');
 
 
-
-
-
         $mailer->sendTestMessage($id);
 
         return $this->render('@Site/test.html.twig');
@@ -626,7 +603,6 @@ class TacheController extends Controller
             $update = $stmt->fetchAll();
 
 
-
 //
             return $this->redirectToRoute('taches_home', [], 301);
 
@@ -642,7 +618,8 @@ class TacheController extends Controller
 
     }
 
-    public function terminerTacheAction(Request $request, $id, $centrale){
+    public function terminerTacheAction(Request $request, $id, $centrale)
+    {
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
@@ -659,16 +636,14 @@ class TacheController extends Controller
         return $this->redirectToRoute('taches_home');
 
 
-
-
-
     }
 
-    public function terminerRdvAction(Request $request, $id, $centrale){
+    public function terminerRdvAction(Request $request, $id, $centrale)
+    {
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        switch ($centrale){
+        switch ($centrale) {
 
             case "ACHAT_CENTRALE":
             case "1":
@@ -704,7 +679,6 @@ class TacheController extends Controller
                 return $this->redirectToRoute('taches_home');
 
 
-
         }
 
 
@@ -723,17 +697,15 @@ class TacheController extends Controller
         $user_id = $request->get('user_id');
 
 
-
-
         $user_maj = $this->getUser()->getusMail();
 
-        $sql =  sprintf("UPDATE %s.dbo.CLIENTS_TACHES
+        $sql = sprintf("UPDATE %s.dbo.CLIENTS_TACHES
                                 SET
                                   US_ID = :user,
                                   CLA_DESCR = :descr,
                                   MAJ_USER = :user_maj,
                                   MAJ_DATE = GETUTCDATE()
-                                WHERE CLA_ID = :id", $so_database );
+                                WHERE CLA_ID = :id", $so_database);
 
 
         $stmt = $conn->prepare($sql);
@@ -748,7 +720,6 @@ class TacheController extends Controller
         return new Response('taches numero :  ' . $id . ' modifier', 200, [
             'Access-Control-Allow-Origin' => '*'
         ]);
-
 
 
     }
