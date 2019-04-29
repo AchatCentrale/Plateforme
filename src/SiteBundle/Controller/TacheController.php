@@ -3,6 +3,7 @@
 namespace SiteBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,11 @@ class TacheController extends Controller
 
     public function TacheAction(Request $request)
     {
+
+
+
+
+
 
         $user = $this->getUser();
 
@@ -44,7 +50,12 @@ class TacheController extends Controller
 
 
 
+
+
         $sort = $request->query->get('sortBy');
+
+
+
 
 
 
