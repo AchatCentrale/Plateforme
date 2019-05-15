@@ -163,7 +163,7 @@ class FournisseurController extends Controller
 
 
             $fournisseur = empty($ligne[1]) ? " " : utf8_encode($ligne[1]);
-            $rayon = empty($ligne[2]) ? " " : utf8_encode($ligne[2]);
+            $rayon = empty($ligne[2]) ? " " : iconv("UTF-8", "WINDOWS-1252", $ligne[2]);
             $famille = empty($ligne[3]) ? " " : utf8_encode($ligne[3]);
             $filtre1 = empty($ligne[4]) ? " " : utf8_encode($ligne[4]);
             $valeur1 = empty($ligne[5]) ? " " : utf8_encode($ligne[5]);
