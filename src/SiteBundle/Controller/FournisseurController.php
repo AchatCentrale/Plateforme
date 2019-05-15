@@ -161,7 +161,6 @@ class FournisseurController extends Controller
         for ($i = 1; $i < count($data); $i++){
             $ligne = explode(";", $data[$i][0]);
 
-            dump($ligne[2]);
 
             $fournisseur = empty($ligne[1]) ? " " : $ligne[1];
             $rayon = empty($ligne[2]) ? " " : $ligne[2];
