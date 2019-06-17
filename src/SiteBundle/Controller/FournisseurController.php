@@ -251,7 +251,6 @@ class FournisseurController extends Controller
 
 
 
-
             ini_set('auto_detect_line_endings',FALSE);
 
 
@@ -533,6 +532,33 @@ class FournisseurController extends Controller
 
     }
 
+
+    public function checkImportProductAction(Request $request, $id_import)
+    {
+
+
+
+
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+        $sql = 'SELECT TOP 50
+                  *
+                FROM CENTRALE_PRODUITS.dbo.PRODUITS
+                  INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON PRODUITS.FO_ID = FOURNISSEURS.FO_ID
+                WHERE PR_STATUS = 100 
+                
+                ';
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+
+
+        return $this->render('@Site/Import/index.html.twig', [
+            "Produit" => $result
+        ]);
+    }
 
 }
 

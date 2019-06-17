@@ -40,7 +40,7 @@ class CrmFilter extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('phone', [$this, 'phoneFilter']),
+            new \Twig_Filter('phone', [$this, 'phoneFilter']),
             new \Twig_SimpleFilter('Time', [$this, 'dateFilter']),
             new \Twig_SimpleFilter('type', [$this, 'typeFilter']),
             new \Twig_SimpleFilter('priorite', [$this, 'priorityFilter']),
@@ -66,6 +66,10 @@ class CrmFilter extends \Twig_Extension
             new \Twig_SimpleFilter('centraleUrl', [$this, 'centraleUrl']),
             new \Twig_SimpleFilter('encoding_to', [$this, 'encoding_to']),
             new \Twig_SimpleFilter('encoding_from', [$this, 'encoding_from']),
+            new \Twig_SimpleFilter('product_pic', [$this, 'getProductPic']),
+            new \Twig_SimpleFilter('declinaison', [$this, 'getDeclinaison']),
+            new \Twig_SimpleFilter('picFrs', [$this, 'getProfilePicFrs']),
+            new \Twig_SimpleFilter('remise', [$this, 'getDiscountPercentage']),
         );
     }
 
@@ -687,6 +691,70 @@ class CrmFilter extends \Twig_Extension
         return $value;
     }
 
+
+
+    public function getProductPic($id)
+    {
+
+        $sql = "SELECT PP_FICHIER FROM CENTRALE_PRODUITS.dbo.PRODUITS_PHOTOS WHERE PR_ID = :id AND PP_TYPE = 'PRINCIPALE'";
+
+        $conn = $this->connection->prepare($sql);
+        $conn->bindValue("id", $id);
+        $conn->execute();
+        $pic = $conn->fetchAll();
+
+
+        if (isset($pic[0])){
+
+            $result = sprintf("http://secure.achatcentrale.fr/UploadFichiers/Uploads/PRODUIT_%s/%s", $id, $pic[0]["PP_FICHIER"]);
+        }else {
+            $result = "";
+        }
+
+        dump($result);
+
+        return $result;
+    }
+
+    public function getDeclinaison($id){
+
+        $sql = "SELECT DISTINCT DECLINAISONS.DE_ID, DE_DESCR, DE_TRI
+                FROM CENTRALE_PRODUITS.dbo.PRODUITS_DECLIN
+                INNER JOIN CENTRALE_PRODUITS.dbo.DECLINAISONS ON PRODUITS_DECLIN.DE_ID = DECLINAISONS.DE_ID
+                INNER JOIN CENTRALE_PRODUITS.dbo.DECLINAISONS_DETAIL ON PRODUITS_DECLIN.DE_ID = DECLINAISONS_DETAIL.DE_ID
+                WHERE PR_ID = :id
+                ORDER BY DE_TRI";
+
+
+        $conn = $this->connection->prepare($sql);
+        $conn->bindValue("id", $id);
+        $conn->execute();
+        $declinaison = $conn->fetchAll();
+
+
+        return $declinaison[0]["DE_DESCR"];
+    }
+
+    public function getProfilePicFrs($id)
+    {
+
+        $sql = "SELECT FO_LOGO FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS WHERE FO_ID = :id";
+
+        $conn = $this->connection->prepare($sql);
+        $conn->bindValue("id", $id);
+        $conn->execute();
+        $pic = $conn->fetchAll();
+
+
+        return "http://secure.achatcentrale.fr/UploadFichiers/Uploads/FOURN_".$id."/".$pic[0]["FO_LOGO"];
+
+
+    }
+
+    public function getDiscountPercentage($prix_ac, $prix_public)
+    {
+        return ($prix_public - $prix_ac) / $prix_public * 100;
+    }
 
 
 

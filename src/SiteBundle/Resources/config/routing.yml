@@ -322,3 +322,12 @@ region-detail:
 region-import:
     path: /regions/import
     defaults: {_controller: SiteBundle:Regions:import}
+
+
+
+# IMPORT
+
+
+import-check:
+    path: /checkImport/{id_import}
+    defaults: {_controller: SiteBundle:Fournisseur:checkImportProduct}

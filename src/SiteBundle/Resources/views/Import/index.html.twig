@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Verification Import produit</title>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
+    <link rel="stylesheet" href="{{ asset('css/checkImport.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <div class="titre-page" style="text-align: center;padding: 20px;">
+        <h1 class="is-size-4">Import <b>#324342</b> pour le fournisseur <b>Solitaire</b></h1>
+    </div>
+
+    <div class="container" style="padding: 25px 25px 0px 25px;">
+        <div class="columns">
+            <div class="column is-10">
+                <div class="select is-fullwidth">
+                    <select>
+                        <option>Catégorie d'achat</option>
+                    </select>
+                </div>
+            </div>
+            <div class="column">
+                <a class="button is-success">
+                    <span class="icon is-small">
+                      <i class="fas fa-check"></i>
+                    </span>
+                    <span>Importer les produits</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 30px;" class="container">
+        <div id="main-wrap" class="main-wrap gallery-mode" style="width: 100%;">
+            <div id="gallery-item">
+                <div id="list-items" class="clearfix temp-height lazy-load">
+
+                    <ul class="util-clearfix son-list ">
+
+
+                        {% for produit in Produit %}
+
+
+                            <li class="list-item list-item-first ">
+
+                                <div class="container-remise">
+                                    <p>- {{ produit["PR_PRIX_CA"] | remise(produit["PR_PRIX_PUBLIC"]) | round }} %</p>
+                                </div>
+
+                                <div class="item">
+
+
+                                    <div class="img img-border">
+
+                                        <div class="pic">
+                                            <a class="picRind " href="" target="_blank">
+                                                <img class="picCore pic-Core-v"
+                                                     src="{{ produit["PR_ID"] | product_pic }}" alt="">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="has-sku-image">
+                                        <a class="" href="" title="" target="_blank">
+                                            <p align="center"
+                                               style="color: #df4e92;">{{ produit["PR_TRIPTYQUE"] | encoding_from }}</p>
+                                        </a>
+                                    </div>
+
+
+                                    <div class="info">
+                                        <h3>
+                                            <a class="product "
+                                               target="_blank">{{ produit["PR_NOM"] | encoding_from | raw }}</a>
+                                        </h3>
+
+                                        <span class="price price-m">
+                                            {% if produit["PR_PRIX_PUBLIC"] == 0 %}
+
+                                                <p>Prix sur devis</p>
+                                                                    {% else %}
+                                                {% if produit["PR_CONDT"] | replace({' ': ''}) == "àpartirde" %}
+                                                    <span class="unit">{{ produit["PR_CONDT"] | encoding_from }}</span>
+                                                    <span class="value"
+                                                          itemprop="price_centrale">{{ produit["PR_PRIX_CA"]| number_format(2, ',', ' ') }}&nbsp;€</span>
+                                                    <span class="value-barre"
+                                                          itemprop="price_public">{{ produit["PR_PRIX_PUBLIC"] | number_format(2, ',', ' ') }}&nbsp;€</span>
+                                                                            {% else %}
+                                                    <span class="value-barre"
+                                                          itemprop="price_public">{{ produit["PR_PRIX_PUBLIC"] | number_format(2, ',', ' ') }}&nbsp;€</span>
+                                                    <span class="value"
+                                                          itemprop="price_centrale">{{ produit["PR_PRIX_CA"] | number_format(2, ',', ' ') }}&nbsp;€</span>
+                                                    <span class="separator">/</span>
+                                                    <span class="unit">{{ produit["PR_CONDT"] | encoding_from }}</span>
+                                                {% endif %}
+
+
+                                            {% endif %}
+                                        </span>
+
+                                        <div class="has_stock">
+                                            {% if produit["PR_STOCK_GEST"] > 0 %}
+                                                <p>
+                                                    <img src="http://www.centrale-funecap.fr/Images/Picto_StockOK.png"
+                                                         alt="en stock" width="15">&nbsp;en stock
+                                                </p>
+
+                                            {% endif %}
+                                        </div>
+
+
+
+                                        <div class="info-more">
+                                            {% if produit["PR_DESCR_COURTE"] %}
+                                                <div class="description">
+                                                    {{ produit["PR_DESCR_COURTE"] | encoding_from | raw }}
+                                                </div>
+
+                                            {% endif %}
+
+
+                                            {% if produit["PR_INFO_LIEN"] | spaceless %}
+
+                                                <div class="container-info-produit">
+                                                    <a class="F_Ubuntu FondRose Blanc"
+                                                       style="border-style:none; border-radius:5px; cursor:pointer; padding:5px;background-color: #DE359F;color: #FFFFFF;text-align: center"
+                                                       href="{{ produit["PR_INFO_LIEN"] }}">{{ produit["PR_INFO_TXT"] | encoding_from }}</a>
+
+                                                </div>
+                                            {% endif %}
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+
+        <ul class="pagination-list">
+            <li>
+                <a class="pagination-link" aria-label="Goto page 1">1</a>
+            </li>
+            <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+                <a class="pagination-link" aria-label="Goto page 45">45</a>
+            </li>
+            <li>
+                <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
+            </li>
+            <li>
+                <a class="pagination-link" aria-label="Goto page 47">47</a>
+            </li>
+            <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+                <a class="pagination-link" aria-label="Goto page 86">86</a>
+            </li>
+        </ul>
+    </nav>
+
+
+</div>
+
+
+</body>
+</html>
