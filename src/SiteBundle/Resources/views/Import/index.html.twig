@@ -25,19 +25,21 @@
     <div class="container" style="padding: 25px 25px 0px 25px;">
         <div class="columns">
             <div class="column is-3">
-                <div class="select is-fullwidth">
-                    <select>
-                        <option>Catégorie d'achat</option>
-                    </select>
-                </div>
+{#                <div class="select is-fullwidth">#}
+{#                    <select>#}
+{#                        <option>Catégorie d'achat</option>#}
+{#                    </select>#}
+{#                </div>#}
             </div>
         </div>
         <div class="columns">
-            <div class="column">
+            <div class="column is-9">
                 <a href="?order=ASC" class="button {{ (app.request.query.get('order') == 'ASC') ? 'is-warning'  }}">Croissant</a>
                 <a href="?order=DESC" class="button {{ (app.request.query.get('order') == 'DESC') ? 'is-warning'  }}">Décroissant</a>
 
-                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page'), 'order' : app.request.query.get('order'), 'photo' : false}) }}" class="button is-success">Afficher produits sans photo</a>
+            </div>
+            <div class="column">
+                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page'), 'order' : app.request.query.get('order'), 'photo' : true}) }}" class="button is-success">Afficher produits sans photo</a>
             </div>
 
         </div>
