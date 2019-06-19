@@ -551,7 +551,24 @@ class FournisseurController extends Controller
 
 
         if ($photo){
-            $sql = 'SELECT
+            if ($query === "ASC"){
+                $sql = 'SELECT
+                        *
+                    FROM
+                        (
+                            SELECT ROW_NUMBER() OVER(ORDER BY CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID ASC) AS numero_ligne, PR_PRIX_CA, PR_PRIX_PUBLIC, CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID, PR_TRIPTYQUE, PR_NOM, PR_CONDT, PR_STOCK_GEST, PR_DESCR_COURTE, PR_INFO_LIEN, PR_INFO_TXT FROM CENTRALE_PRODUITS.dbo.PRODUITS  LEFT JOIN CENTRALE_PRODUITS.dbo.PRODUITS_PHOTOS ON CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID = PRODUITS_PHOTOS.PR_ID  WHERE PP_FICHIER IS NULL AND PR_STATUS = 200 AND PR_TEMPO = :id
+                        ) t
+                    WHERE t.numero_ligne > :start
+                      AND t.numero_ligne <= :end
+                ';
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":id", $id_import);
+                $stmt->bindValue(":start", $start);
+                $stmt->bindValue(":end", $end);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+            }else {
+                $sql = 'SELECT
                         *
                     FROM
                         (
@@ -560,21 +577,24 @@ class FournisseurController extends Controller
                     WHERE t.numero_ligne > :start
                       AND t.numero_ligne <= :end
                 ';
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(":id", $id_import);
-            $stmt->bindValue(":start", $start);
-            $stmt->bindValue(":end", $end);
-            $stmt->execute();
-            $result = $stmt->fetchAll();
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(":id", $id_import);
+                $stmt->bindValue(":start", $start);
+                $stmt->bindValue(":end", $end);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+            }
 
-            dump($result);
 
             return $this->render('@Site/Import/index.html.twig', [
                 "Produit" => $result,
-                "pageNumber" => $count
+                "pageNumber" => count($result)
             ]);
-        }else {
 
+
+
+
+        }else {
             if ($query === "DESC") {
                 $sql = 'SELECT
                            *
