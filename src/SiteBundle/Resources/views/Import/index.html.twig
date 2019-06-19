@@ -85,9 +85,12 @@
 
                                     <div class="info">
                                         <h3>
-                                            <a class="product "
-                                               target="_blank">{{ produit["PR_NOM"] | encoding_from | raw }}</a>
+                                            {{ produit["PR_NOM"] | encoding_from | raw }}
                                         </h3>
+                                        <div class="has_stock">
+                                            <p>PR_ID : <b>{{ produit["PR_ID"] }}</b></p>
+                                        </div>
+
 
                                         <span class="price price-m">
                                             {% if produit["PR_PRIX_PUBLIC"] == 0 %}
@@ -113,15 +116,7 @@
                                             {% endif %}
                                         </span>
 
-                                        <div class="has_stock">
-                                            {% if produit["PR_STOCK_GEST"] > 0 %}
-                                                <p>
-                                                    <img src="http://www.centrale-funecap.fr/Images/Picto_StockOK.png"
-                                                         alt="en stock" width="15">&nbsp;en stock
-                                                </p>
 
-                                            {% endif %}
-                                        </div>
 
 
 
