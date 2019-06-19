@@ -170,6 +170,10 @@
 
             <ul class="pagination-list">
                 <li>
+                    <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : 1, 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-link" >1</a>
+                </li>
+                <li><span class="pagination-ellipsis">&hellip;</span></li>
+                <li>
                     <a
                             href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page'), 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-link is-current" aria-label="Page 1" aria-current="page">{{ app.request.query.get('page') }}</a>
                 </li>
