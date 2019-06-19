@@ -711,7 +711,6 @@ class CrmFilter extends \Twig_Extension
             $result = "";
         }
 
-        dump($result);
 
         return $result;
     }
