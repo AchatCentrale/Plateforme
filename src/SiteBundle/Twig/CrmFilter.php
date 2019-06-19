@@ -678,10 +678,7 @@ class CrmFilter extends \Twig_Extension
 
 
     public function encoding_from($value){
-
-        mb_detect_encoding($value, mb_detect_order(), true) === 'UTF-8' ? $value : mb_convert_encoding($value, 'UTF-8');
-        return $value;
-
+        return utf8_encode($value);
     }
 
     public function encoding_to($value){
