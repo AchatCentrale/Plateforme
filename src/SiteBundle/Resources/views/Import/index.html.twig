@@ -19,7 +19,7 @@
     <div class="titre-page" style="text-align: center;padding: 20px;">
         <h1 class="is-size-4">Import <b>#{{ app.request.attributes.get('id_import') }}</b></h1>
         <br>
-        <h2 class="is-size-5"><b>{{ pageNumber * 12 }}</b> Produits</h2>
+        <h2 class="is-size-5"><b>{{ pageNumber }}</b> Produits</h2>
     </div>
 
     <div class="container" style="padding: 25px 25px 0px 25px;">
@@ -166,24 +166,24 @@
     <nav class="pagination" role="navigation" aria-label="pagination">
 
         {% if app.request.query.get('page') >= 1 %}
-            <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') - 1, 'order' : app.request.query.get('order') }) }}" class="pagination-next">Page précédente</a>
+            <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') - 1, 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-next">Page précédente</a>
         {% endif %}
         
         
-        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') + 1, 'order' : app.request.query.get('order') }) }}" class="pagination-next">Page suivante</a>
+        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') + 1, 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-next">Page suivante</a>
         {% if app.request.query.get('page') >= 1 %}
 
             <ul class="pagination-list">
                 <li>
                     <a
-                            href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page'), 'order' : app.request.query.get('order') }) }}" class="pagination-link is-current" aria-label="Page 1" aria-current="page">{{ app.request.query.get('page') }}</a>
+                            href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page'), 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-link is-current" aria-label="Page 1" aria-current="page">{{ app.request.query.get('page') }}</a>
                 </li>
                 {% if pageNumber + 1 != app.request.query.get('page')  %}
                     <li>
-                        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') + 1, 'order' : app.request.query.get('order') }) }}" class="pagination-link" aria-label="Goto page 2">{{ app.request.query.get('page') + 1 }}</a>
+                        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') + 1, 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-link" aria-label="Goto page 2">{{ app.request.query.get('page') + 1 }}</a>
                     </li>
                     <li>
-                        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') + 2, 'order' : app.request.query.get('order') }) }}" class="pagination-link" aria-label="Goto page 3">{{ app.request.query.get('page') + 2 }}</a>
+                        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') + 2, 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-link" aria-label="Goto page 3">{{ app.request.query.get('page') + 2 }}</a>
                     </li>
                 {% endif %}
             </ul>

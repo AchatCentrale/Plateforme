@@ -550,6 +550,9 @@ class FournisseurController extends Controller
 
 
 
+
+
+
         if ($photo){
             if ($query === "ASC"){
                 $sql = 'SELECT
@@ -585,6 +588,7 @@ class FournisseurController extends Controller
                 $result = $stmt->fetchAll();
             }
 
+            dump(count($result));
 
             return $this->render('@Site/Import/index.html.twig', [
                 "Produit" => $result,
