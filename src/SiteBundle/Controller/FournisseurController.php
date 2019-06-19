@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class FournisseurController extends Controller
 {
 
+
     public function indexAction(Request $request)
     {
 
@@ -89,22 +90,22 @@ class FournisseurController extends Controller
 
 
             case 'all':
-                {
-                    $conn = $this->get('doctrine.dbal.centrale_produits_connection');
-                    $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.Vue_Produits_CRFF WHERE FO_ID = :id";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bindValue(':id', $id);
-                    $stmt->execute();
-                    $produit = $stmt->fetchAll();
+            {
+                $conn = $this->get('doctrine.dbal.centrale_produits_connection');
+                $sql = "SELECT * FROM CENTRALE_ACHAT.dbo.Vue_Produits_CRFF WHERE FO_ID = :id";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                $produit = $stmt->fetchAll();
 
-                    return $this->render(
-                        '@Site/Fournisseurs/produits.html.twig',
-                        [
-                            'produit' => $produit,
-                            'raisonSoc' => $produit[0]['FO_RAISONSOC'],
-                        ]
-                    );
-                }
+                return $this->render(
+                    '@Site/Fournisseurs/produits.html.twig',
+                    [
+                        'produit' => $produit,
+                        'raisonSoc' => $produit[0]['FO_RAISONSOC'],
+                    ]
+                );
+            }
         }
 
 
@@ -127,7 +128,7 @@ class FournisseurController extends Controller
     public function importProductsAction(Request $request)
     {
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-        ini_set('auto_detect_line_endings',TRUE);
+        ini_set('auto_detect_line_endings', TRUE);
 
 
         $replace = $this->get("site.service.bddservices");
@@ -146,7 +147,6 @@ class FournisseurController extends Controller
                     $header = explode(";", $row[0]);
 
 
-
                     $sqlDelete = "DELETE FROM CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS";
                     $stmtDelete = $conn->prepare($sqlDelete);
 
@@ -156,10 +156,7 @@ class FournisseurController extends Controller
         }
 
 
-
-
-
-        for ($i = 1; $i < count($data); $i++){
+        for ($i = 1; $i < count($data); $i++) {
             $ligne = explode(";", $data[$i][0]);
 
 
@@ -249,12 +246,10 @@ class FournisseurController extends Controller
             $pdf_lien_3 = empty($ligne[84]) ? " " : iconv("UTF-8", "WINDOWS-1252", $ligne[84]);
 
 
+            ini_set('auto_detect_line_endings', FALSE);
 
 
-            ini_set('auto_detect_line_endings',FALSE);
-
-
-            if (!empty($ligne[88])){
+            if (!empty($ligne[88])) {
 
 
                 switch ($ligne[88]) {
@@ -478,7 +473,6 @@ class FournisseurController extends Controller
             }
 
 
-
         }
 
         return new JsonResponse('Importation réussie', 200);
@@ -503,7 +497,6 @@ class FournisseurController extends Controller
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll();
-
 
 
         $sqlTwo = 'SELECT
@@ -536,27 +529,70 @@ class FournisseurController extends Controller
     public function checkImportProductAction(Request $request, $id_import)
     {
 
-
-
+        define("OFFSET", 12);
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $sql = 'SELECT TOP 50
-                  *
-                FROM CENTRALE_PRODUITS.dbo.PRODUITS
-                  INNER JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS ON PRODUITS.FO_ID = FOURNISSEURS.FO_ID
-                WHERE PR_STATUS = 100 
-                
+
+        $query = $request->query->get('order');
+        $page = $request->query->get('page');
+
+
+        if ($page) {
+            $end = $page * OFFSET;
+            $start = $end - OFFSET;
+        } else {
+            $start = 0;
+            $end = OFFSET;
+        }
+
+
+        if ($query === "DESC") {
+            $sql = 'SELECT
+                           *
+                    FROM
+                         (SELECT ROW_NUMBER() OVER(ORDER BY PR_ID DESC) AS numero_ligne, * FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id) t
+                    WHERE t.numero_ligne > :start
+                    AND t.numero_ligne <= :end
                 ';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(":id", $id_import);
+            $stmt->bindValue(":start", $start);
+            $stmt->bindValue(":end", $end);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
 
-        $stmt = $conn->prepare($sql);
+
+        } else {
+            $sql = 'SELECT
+                           *
+                    FROM
+                         (SELECT ROW_NUMBER() OVER(ORDER BY PR_ID ASC) AS numero_ligne, * FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id) t
+                    WHERE t.numero_ligne > :start
+                    AND t.numero_ligne <= :end
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(":id", $id_import);
+            $stmt->bindValue(":start", $start);
+            $stmt->bindValue(":end", $end);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+        }
+
+
+        $sqlCount = "SELECT (count(*) / 12) FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id";
+
+        $stmt = $conn->prepare($sqlCount);
+        $stmt->bindValue(":id", $id_import);
         $stmt->execute();
-        $result = $stmt->fetchAll();
+        $count = $stmt->fetchAll()[0]["computed"];
 
+        dump($count);
 
 
         return $this->render('@Site/Import/index.html.twig', [
-            "Produit" => $result
+            "Produit" => $result,
+            "pageNumber" => $count
         ]);
     }
 
