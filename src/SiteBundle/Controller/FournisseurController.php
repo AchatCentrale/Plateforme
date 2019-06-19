@@ -547,10 +547,12 @@ class FournisseurController extends Controller
             $end = OFFSET;
         }
 
+        $sqlCount = "SELECT (count(*) / 12) FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id";
 
-
-
-
+        $stmt = $conn->prepare($sqlCount);
+        $stmt->bindValue(":id", $id_import);
+        $stmt->execute();
+        $count = $stmt->fetchAll()[0]["computed"];
 
 
         if ($photo){
@@ -588,7 +590,12 @@ class FournisseurController extends Controller
                 $result = $stmt->fetchAll();
             }
 
-            dump(count($result));
+            $sqlCount = "SELECT count(*)  FROM CENTRALE_PRODUITS.dbo.PRODUITS  LEFT JOIN CENTRALE_PRODUITS.dbo.PRODUITS_PHOTOS ON CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID = PRODUITS_PHOTOS.PR_ID  WHERE PP_FICHIER IS NULL AND PR_STATUS = 200 AND PR_TEMPO = :id";
+
+            $stmt = $conn->prepare($sqlCount);
+            $stmt->bindValue(":id", $id_import);
+            $stmt->execute();
+            $count = $stmt->fetchAll()[0]["computed"];
 
             return $this->render('@Site/Import/index.html.twig', [
                 "Produit" => $result,
@@ -639,7 +646,6 @@ class FournisseurController extends Controller
 
 
 
-        $count = count($result);
 
 
 

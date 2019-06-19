@@ -36,10 +36,15 @@
             <div class="column is-9">
                 <a href="?order=ASC" class="button {{ (app.request.query.get('order') == 'ASC') ? 'is-warning'  }}">Croissant</a>
                 <a href="?order=DESC" class="button {{ (app.request.query.get('order') == 'DESC') ? 'is-warning'  }}">Décroissant</a>
-
+                <select onchange="location = this.value;">
+                    <option>Choisir la page</option>
+                    {% for i in range(1, pageNumber) %}
+                        <option value="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : i, 'order' : app.request.query.get('order') }) }}">Page {{ i }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="column">
-                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page'), 'order' : app.request.query.get('order'), 'photo' : true}) }}" class="button is-success">Afficher produits sans photo</a>
+                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'photo' : true}) }}" class="button is-success">Afficher produits sans photo</a>
             </div>
 
         </div>
