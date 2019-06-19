@@ -702,7 +702,6 @@ class CrmFilter extends \Twig_Extension
 
 
         if (isset($pic[0])){
-
             $result = sprintf("http://secure.achatcentrale.fr/UploadFichiers/Uploads/PRODUIT_%s/%s", $id, $pic[0]["PP_FICHIER"]);
         }else {
             $result = "";

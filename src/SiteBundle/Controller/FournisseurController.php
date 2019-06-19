@@ -536,6 +536,7 @@ class FournisseurController extends Controller
 
         $query = $request->query->get('order');
         $page = $request->query->get('page');
+        $photo = $request->query->get('photo');
 
 
         if ($page) {
@@ -578,6 +579,24 @@ class FournisseurController extends Controller
             $stmt->execute();
             $result = $stmt->fetchAll();
         }
+
+
+        if ($photo){
+            $sql = 'SELECT
+                           *
+                    FROM
+                         (SELECT ROW_NUMBER() OVER(ORDER BY PR_ID DESC) AS numero_ligne, * FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id) t
+                    WHERE t.numero_ligne > :start
+                    AND t.numero_ligne <= :end
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(":id", $id_import);
+            $stmt->bindValue(":start", $start);
+            $stmt->bindValue(":end", $end);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+        }
+
 
 
         $sqlCount = "SELECT (count(*) / 12) FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id";

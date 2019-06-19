@@ -18,6 +18,8 @@
 <div class="container">
     <div class="titre-page" style="text-align: center;padding: 20px;">
         <h1 class="is-size-4">Import <b>#{{ app.request.attributes.get('id_import') }}</b></h1>
+        <br>
+        <h2 class="is-size-5"><b>{{ pageNumber * 12 }}</b> Produits</h2>
     </div>
 
     <div class="container" style="padding: 25px 25px 0px 25px;">
@@ -34,6 +36,8 @@
             <div class="column">
                 <a href="?order=ASC" class="button {{ (app.request.query.get('order') == 'ASC') ? 'is-warning'  }}">Croissant</a>
                 <a href="?order=DESC" class="button {{ (app.request.query.get('order') == 'DESC') ? 'is-warning'  }}">Décroissant</a>
+
+                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page'), 'order' : app.request.query.get('order'), 'photo' : false}) }}" class="button is-success">Afficher produits sans photo</a>
             </div>
 
         </div>
