@@ -587,7 +587,6 @@ class FournisseurController extends Controller
         $stmt->execute();
         $count = $stmt->fetchAll()[0]["computed"];
 
-        dump($count);
 
 
         return $this->render('@Site/Import/index.html.twig', [
