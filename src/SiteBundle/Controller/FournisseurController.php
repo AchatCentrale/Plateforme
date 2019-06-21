@@ -525,7 +525,6 @@ class FournisseurController extends Controller
 
     }
 
-
     public function checkImportProductAction(Request $request, $id_import)
     {
 
@@ -547,115 +546,89 @@ class FournisseurController extends Controller
             $end = OFFSET;
         }
 
-        $sqlCount = "SELECT (count(*) / 12) FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id";
 
-        $stmt = $conn->prepare($sqlCount);
-        $stmt->bindValue(":id", $id_import);
-        $stmt->execute();
-        $count = $stmt->fetchAll()[0]["computed"];
 
 
         if ($photo){
-            if ($query === "ASC"){
-                $sql = 'SELECT
+            $sql = 'SELECT
                         *
+                    FROM
+                        (
+                            SELECT ROW_NUMBER() OVER(ORDER BY CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID '.$query.') AS numero_ligne, PR_PRIX_CA, PR_PRIX_PUBLIC, CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID, PR_TRIPTYQUE, PR_NOM, PR_CONDT, PR_STOCK_GEST, PR_DESCR_COURTE, PR_INFO_LIEN, PR_INFO_TXT FROM CENTRALE_PRODUITS.dbo.PRODUITS  LEFT JOIN CENTRALE_PRODUITS.dbo.PRODUITS_PHOTOS ON CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID = PRODUITS_PHOTOS.PR_ID  WHERE PP_FICHIER IS NULL AND PR_STATUS = 200 AND PR_TEMPO = :id
+                        ) t
+                    WHERE t.numero_ligne > :start
+                      AND t.numero_ligne <= :end
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(":id", $id_import);
+            $stmt->bindValue(":start", $start);
+            $stmt->bindValue(":end", $end);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+
+            $sqlCount = "SELECT
+                        PR_ID
                     FROM
                         (
                             SELECT ROW_NUMBER() OVER(ORDER BY CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID ASC) AS numero_ligne, PR_PRIX_CA, PR_PRIX_PUBLIC, CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID, PR_TRIPTYQUE, PR_NOM, PR_CONDT, PR_STOCK_GEST, PR_DESCR_COURTE, PR_INFO_LIEN, PR_INFO_TXT FROM CENTRALE_PRODUITS.dbo.PRODUITS  LEFT JOIN CENTRALE_PRODUITS.dbo.PRODUITS_PHOTOS ON CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID = PRODUITS_PHOTOS.PR_ID  WHERE PP_FICHIER IS NULL AND PR_STATUS = 200 AND PR_TEMPO = :id
-                        ) t
-                    WHERE t.numero_ligne > :start
-                      AND t.numero_ligne <= :end
-                ';
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":id", $id_import);
-                $stmt->bindValue(":start", $start);
-                $stmt->bindValue(":end", $end);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-            }else {
-                $sql = 'SELECT
-                        *
-                    FROM
-                        (
-                            SELECT ROW_NUMBER() OVER(ORDER BY CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID DESC) AS numero_ligne, PR_PRIX_CA, PR_PRIX_PUBLIC, CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID, PR_TRIPTYQUE, PR_NOM, PR_CONDT, PR_STOCK_GEST, PR_DESCR_COURTE, PR_INFO_LIEN, PR_INFO_TXT FROM CENTRALE_PRODUITS.dbo.PRODUITS  LEFT JOIN CENTRALE_PRODUITS.dbo.PRODUITS_PHOTOS ON CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID = PRODUITS_PHOTOS.PR_ID  WHERE PP_FICHIER IS NULL AND PR_STATUS = 200 AND PR_TEMPO = :id
-                        ) t
-                    WHERE t.numero_ligne > :start
-                      AND t.numero_ligne <= :end
-                ';
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":id", $id_import);
-                $stmt->bindValue(":start", $start);
-                $stmt->bindValue(":end", $end);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-            }
-
-            $sqlCount = "SELECT count(*)  FROM CENTRALE_PRODUITS.dbo.PRODUITS  LEFT JOIN CENTRALE_PRODUITS.dbo.PRODUITS_PHOTOS ON CENTRALE_PRODUITS.dbo.PRODUITS.PR_ID = PRODUITS_PHOTOS.PR_ID  WHERE PP_FICHIER IS NULL AND PR_STATUS = 200 AND PR_TEMPO = :id";
+                        ) t";
 
             $stmt = $conn->prepare($sqlCount);
             $stmt->bindValue(":id", $id_import);
             $stmt->execute();
-            $count = $stmt->fetchAll()[0]["computed"];
+            $count = $stmt->fetchAll();
+
 
             return $this->render('@Site/Import/index.html.twig', [
                 "Produit" => $result,
-                "pageNumber" => count($result)
+                "pageNumber" => count($count)
             ]);
 
 
-
-
         }else {
-            if ($query === "DESC") {
-                $sql = 'SELECT
+            $sql = 'SELECT
+                           *
+                    FROM
+                         (SELECT ROW_NUMBER() OVER(ORDER BY PR_ID '.$query.') AS numero_ligne, * FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id) t
+                    WHERE t.numero_ligne > :start
+                    AND t.numero_ligne <= :end
+                ';
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(":id", $id_import);
+            $stmt->bindValue(":start", $start);
+            $stmt->bindValue(":end", $end);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+
+
+            $sqlCount = 'SELECT
                            *
                     FROM
                          (SELECT ROW_NUMBER() OVER(ORDER BY PR_ID DESC) AS numero_ligne, * FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id) t
-                    WHERE t.numero_ligne > :start
-                    AND t.numero_ligne <= :end
                 ';
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":id", $id_import);
-                $stmt->bindValue(":start", $start);
-                $stmt->bindValue(":end", $end);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
+
+            $stmt = $conn->prepare($sqlCount);
+            $stmt->bindValue(":id", $id_import);
+            $stmt->execute();
+            $count = $stmt->fetchAll();
 
 
-            } else {
-                $sql = 'SELECT
-                           *
-                    FROM
-                         (SELECT ROW_NUMBER() OVER(ORDER BY PR_ID ASC) AS numero_ligne, * FROM CENTRALE_PRODUITS.dbo.PRODUITS WHERE PR_STATUS = 200 AND PR_TEMPO = :id) t
-                    WHERE t.numero_ligne > :start
-                    AND t.numero_ligne <= :end
-                ';
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":id", $id_import);
-                $stmt->bindValue(":start", $start);
-                $stmt->bindValue(":end", $end);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-            }
+
+            return $this->render('@Site/Import/index.html.twig', [
+                "Produit" => $result,
+                "pageNumber" => count($count)
+            ]);
 
         }
 
+    }
+
+    public function importProduitIndexAction(Request $request){
 
 
 
 
-
-
-
-
-
-
-
-
-        return $this->render('@Site/Import/index.html.twig', [
-            "Produit" => $result,
-            "pageNumber" => $count
-        ]);
+        return $this->render('@Site/Import/indexCheckImport.html.twig');
     }
 
 }

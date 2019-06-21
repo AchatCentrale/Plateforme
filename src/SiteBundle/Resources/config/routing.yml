@@ -331,3 +331,8 @@ region-import:
 import-check:
     path: /checkImport/{id_import}
     defaults: {_controller: SiteBundle:Fournisseur:checkImportProduct}
+
+
+import-check-index:
+    path: /import/produits
+    defaults: {_controller: SiteBundle:Fournisseur:importProduitIndex}

@@ -109,6 +109,12 @@
                         <a href="{{ path('region-index') }}"><i class="compass icon"></i>&nbsp;Régions</a>
                     </li>
 
+
+
+                    <li class=" {% if app.request.attributes.get('_route') == 'import-check-index' %}current-page{% endif %}">
+                        <a href="{{ path('import-check-index') }}"><i class="compass icon"></i>&nbsp;Import produit</a>
+                    </li>
+
                 </ul>
             </div>
         </div>

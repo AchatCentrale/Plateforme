@@ -33,18 +33,14 @@
             </div>
         </div>
         <div class="columns">
-            <div class="column is-9">
-                <a href="?order=ASC" class="button {{ (app.request.query.get('order') == 'ASC') ? 'is-warning'  }}">Croissant</a>
-                <a href="?order=DESC" class="button {{ (app.request.query.get('order') == 'DESC') ? 'is-warning'  }}">Décroissant</a>
-                <select onchange="location = this.value;">
-                    <option>Choisir la page</option>
-                    {% for i in range(1, pageNumber) %}
-                        <option value="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : i, 'order' : app.request.query.get('order') }) }}">Page {{ i }}</option>
-                    {% endfor %}
-                </select>
+            <div class="column is-8">
+                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') , 'order' : 'ASC', 'photo' : app.request.query.get('photo') }) }}" class="button {{ (app.request.query.get('order') == 'ASC') ? 'is-warning'  }}">Croissant</a>
+                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') , 'order' : 'DESC', 'photo' : app.request.query.get('photo') }) }}"  class="button {{ (app.request.query.get('order') == 'DESC') ? 'is-warning'  }}">Décroissant</a>
+
             </div>
             <div class="column">
-                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'photo' : true}) }}" class="button is-success">Afficher produits sans photo</a>
+                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import') }) }}" class="button">Page d'accueil</a>
+                <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page'), 'order' : app.request.query.get('order'), 'photo' : false }) }}" class="button is-success">Afficher produits avec photo</a>
             </div>
 
         </div>
@@ -190,20 +186,28 @@
                         <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : app.request.query.get('page') + 2, 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-link" aria-label="Goto page 3">{{ app.request.query.get('page') + 2 }}</a>
                     </li>
                 {% endif %}
+
+                <li>
+                    <select onchange="location = this.value;">
+                        <option>Choisir la page</option>
+                        {% for i in range(1, pageNumber) %}
+                            <option value="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : i , 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}">Page {{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </li>
             </ul>
             {% elseif app.request.query.get('page')  == pageNumber + 1 %}
                 <p>ok</p>
             {% else %}
                 <ul class="pagination-list">
                     <li>
-                        <a
-                                href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : 1, 'order' : app.request.query.get('order') }) }}" class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
+                        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : 1, 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
                     </li>
                     <li>
-                        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : 2, 'order' : app.request.query.get('order') }) }}" class="pagination-link" aria-label="Goto page 2">2</a>
+                        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : 2, 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-link" aria-label="Goto page 2">2</a>
                     </li>
                     <li>
-                        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : 3, 'order' : app.request.query.get('order') }) }}" class="pagination-link" aria-label="Goto page 3">3</a>
+                        <a href="{{ path('import-check', { 'id_import' : app.request.attributes.get('id_import'), 'page' : 3, 'order' : app.request.query.get('order'), 'photo' : app.request.query.get('photo') }) }}" class="pagination-link" aria-label="Goto page 3">3</a>
                     </li>
                 </ul>
         {% endif %}
