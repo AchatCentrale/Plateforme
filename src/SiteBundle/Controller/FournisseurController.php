@@ -549,6 +549,8 @@ class FournisseurController extends Controller
 
 
 
+        dump($photo);
+
         if ($photo){
             $sql = 'SELECT
                         *
