@@ -626,10 +626,20 @@ class FournisseurController extends Controller
 
     public function importProduitIndexAction(Request $request){
 
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
+
+
+        $sql = "SELECT distinct TOP 5 PR_TEMPO FROM  CENTRALE_PRODUITS.dbo.PRODUITS";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
 
 
 
-        return $this->render('@Site/Import/indexCheckImport.html.twig');
+        return $this->render('@Site/Import/indexCheckImport.html.twig', [
+            "tempo" => $result
+        ]);
     }
 
 }
