@@ -146,7 +146,6 @@ class FournisseurController extends Controller
 
                     $header = explode(";", $row[0]);
 
-
                     $sqlDelete = "DELETE FROM CENTRALE_PRODUITS.dbo.IMPORT_PRODUITS";
                     $stmtDelete = $conn->prepare($sqlDelete);
 
@@ -158,7 +157,6 @@ class FournisseurController extends Controller
 
         for ($i = 1; $i < count($data); $i++) {
             $ligne = explode(";", $data[$i][0]);
-
 
             $fournisseur = empty($ligne[1]) ? " " : iconv("UTF-8", "WINDOWS-1252", $ligne[1]);
             $rayon = empty($ligne[2]) ? " " : iconv("UTF-8", "WINDOWS-1252", $ligne[2]);
@@ -245,13 +243,14 @@ class FournisseurController extends Controller
             $pdf_txt_3 = empty($ligne[83]) ? " " : iconv("UTF-8", "WINDOWS-1252", $ligne[83]);
             $pdf_lien_3 = empty($ligne[84]) ? " " : iconv("UTF-8", "WINDOWS-1252", $ligne[84]);
 
-
             ini_set('auto_detect_line_endings', FALSE);
+
+            if (count($ligne) <= 88){
+                return new JsonResponse('Problème sur les colones', 400);
+            }
 
 
             if (!empty($ligne[88])) {
-
-
                 switch ($ligne[88]) {
                     case "A RAJOUTER":
 
@@ -377,6 +376,8 @@ class FournisseurController extends Controller
                                         VALUES
                                     (1, :fournisseur, :rayon, :famille, :filtre1, :valeur1, :filtre2, :valeur2, :filtre3, :valeur3, :filtre4, :valeur4, :filtre5, :valeur5, :filtre6, :valeur6, :filtre7, :valeur7, :filtre8, :valeur8, :filtre9, :valeur9, :filtre10, :valeur10, :type_prod, :ref_parent, :code_maitre, :vte_addi, :ref_part, :ref_fourn, :ean, :nom, :descr_courte, :descr_longue, :detail_prod, :info_fourn, :triptyque, :no_serie, :delais_liv, :qte_cmd, :conditionnement, :prix_net, :prix_public_ht, :prix_ca_1, :prix_vc_1, :prix_ca_2, :prix_vc_2,:prix_ca_3, :prix_vc_3, :prix_ca_4, :prix_vc_4, :prix_ca_5, :prix_vc_5, :degres_qte_1, :degres_prix_1, :degres_qte_2, :degres_prix_2, :degres_qte_3, :degres_prix_3, :degres_qte_4, :degres_prix_4, :degres_qte_5, :degres_prix_5, :degres_qte_6, :degres_prix_6, :degres_qte_7, :degres_prix_7, :degres_qte_8, :degres_prix_8, :degres_qte_9, :degres_prix_9, :degres_qte_10, :degres_prix_10, :remise, :type_lien, :lien, :photo_1, :photo_2, :photo_3, :pdf_txt_1, :pdf_lien_1, :pdf_txt_2, :pdf_lien_2, :pdf_txt_3, :pdf_lien_3, 123456)";
 
+
+
                         $stmt = $conn->prepare($sql);
                         $stmt->bindValue(':fournisseur', $fournisseur);
                         $stmt->bindValue(':rayon', $rayon);
@@ -467,7 +468,6 @@ class FournisseurController extends Controller
 
 
                         break;
-
                 }
 
             }
@@ -545,7 +545,6 @@ class FournisseurController extends Controller
             $start = 0;
             $end = OFFSET;
         }
-
 
 
 
