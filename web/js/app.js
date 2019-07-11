@@ -1,6 +1,6 @@
 (function ($, sr) {
     // debouncing function from John Hann
-    // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
+    // https://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
     var debounce = function (func, threshold, execAsap) {
         var timeout;
 
@@ -227,7 +227,7 @@ $(function () {
     });
 
     function terminerTask(e) {
-        let url = 'http://crm.achatcentrale.fr/taches/terminer/' + e;
+        let url = 'https://crm.achatcentrale.fr/taches/terminer/' + e;
 
         swal({
                 title: "Terminer une action",
@@ -278,7 +278,7 @@ $(function () {
     }
 
     function unArchiveTask(e) {
-        let url = 'http://localhost:8000/taches/unarchive/' + e;
+        let url = 'https://localhost:8000/taches/unarchive/' + e;
 
         swal({
                 title: "Achiver d'une action",
@@ -559,7 +559,7 @@ $(function () {
                                         ${stateTask(data.statut)}
                                     </div>
                                     <div class="change-statut-tache">
-                                      <a href="http://crm.achatcentrale.fr/taches/terminer/${data.id}/${aidyCentrale}" class="ui button basic positive terminer-tache-home "> Action terminé</a>
+                                      <a href="https://crm.achatcentrale.fr/taches/terminer/${data.id}/${aidyCentrale}" class="ui button basic positive terminer-tache-home "> Action terminé</a>
                                     </div>
                                 </div>
                             </div>
@@ -569,12 +569,12 @@ $(function () {
                                         <div class="column">
                                             <p>Assigné à : </p> 
                                             <a class="ui image label">
-                                              <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                              <img src="httpss://semantic-ui.com/images/avatar/small/elliot.jpg">
                                               ${data.user}
                                             </a>
                                         </div>
                                             <br/>
-                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + aidyCentrale + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p><b>TEAM</b></p>"}
+                                            ${data.cl_id ? "<a href=\"https://crm.achatcentrale.fr/client/" + data.cl_id + "/" + aidyCentrale + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p><b>TEAM</b></p>"}
                                            
             
                                     </div>
@@ -602,7 +602,7 @@ $(function () {
                                        <div class="three column  row">
                                       
                                        <div class="update-action">
-                                                <a class="ui basic button" href="http://crm.achatcentrale.fr/taches/update/${data.id}/${data.idCentrale}">Modifier l'action</a>
+                                                <a class="ui basic button" href="https://crm.achatcentrale.fr/taches/update/${data.id}/${data.idCentrale}">Modifier l'action</a>
                                           </div>
                                           
                                           
@@ -661,7 +661,7 @@ $(function () {
 
         let centrale = $('#centrale').html();
         let id = $('#id').html();
-        let url = "http://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/update";
+        let url = "https://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/update";
 
 
         console.log(values);
@@ -714,7 +714,7 @@ $(function () {
         let centrale = $('#centrale').html();
         let id = $('#id').html();
         let idUsers = $('#id_user_update').html();
-        let url = "http://crm.achatcentrale.fr/client/users/" + id + "/" + centrale + "/update/" + idUsers;
+        let url = "https://crm.achatcentrale.fr/client/users/" + id + "/" + centrale + "/update/" + idUsers;
 
         let values = $("input[name='us_update[]'], select[name='us_update[]']").map(function () {
             return $(this).val();
@@ -769,7 +769,7 @@ $(function () {
 
         let cc_id = $(this).data('utilisateur');
 
-        let url = "http://crm.achatcentrale.fr/client/user/"+centrale+"/"+cc_id;
+        let url = "https://crm.achatcentrale.fr/client/user/"+centrale+"/"+cc_id;
 
 
         $.ajax({
@@ -955,7 +955,7 @@ $(function () {
                                         ${stateTask(data.statut)}
                                     </div>
                                     <div class="change-statut-tache">
-                                      <a href="http://crm.achatcentrale.fr/taches/terminer/${data.id}/${aidyCentrale}" class="ui button basic positive terminer-tache-home "> Action terminé</a>
+                                      <a href="https://crm.achatcentrale.fr/taches/terminer/${data.id}/${aidyCentrale}" class="ui button basic positive terminer-tache-home "> Action terminé</a>
                                     </div>
                                 </div>
                             </div>
@@ -965,12 +965,12 @@ $(function () {
                                         <div class="column">
                                             <p>Assigné à : </p> 
                                             <a class="ui image label">
-                                              <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                              <img src="httpss://semantic-ui.com/images/avatar/small/elliot.jpg">
                                               ${data.user}
                                             </a>
                                         </div>
                                             <br/>
-                                            ${data.cl_id ? "<a href=\"http://crm.achatcentrale.fr/client/" + data.cl_id + "/" + aidyCentrale + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p><b>TEAM</b></p>"}
+                                            ${data.cl_id ? "<a href=\"https://crm.achatcentrale.fr/client/" + data.cl_id + "/" + aidyCentrale + "/general\" class=\"client-raisonsoc-detail-tache \"> Voir le client</a>\n" : "<p><b>TEAM</b></p>"}
                                            
             
                                     </div>
@@ -1098,7 +1098,7 @@ $(function () {
                                  <div class="column footer-update-note">
                                     <button class="ui button positive modifier-note-home">Modifier la note</button>
                                 </div>
-                               <a class="link-note-client" href="http://crm.achatcentrale.fr/client/${data.cl_id}/${aidyCentrale}/general">${data.cl_raisonsoc}</a>
+                               <a class="link-note-client" href="https://crm.achatcentrale.fr/client/${data.cl_id}/${aidyCentrale}/general">${data.cl_raisonsoc}</a>
                                <br>
                             </div>
                             <p>${data.centrale}</p>
@@ -1317,7 +1317,7 @@ $(function () {
         let centrale = $('#centrale').html();
         let id = $('#id').html();
 
-        let url = "http://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/users/new";
+        let url = "https://crm.achatcentrale.fr/client/" + id + "/" + centrale + "/users/new";
 
 
         $.ajax({
@@ -1365,7 +1365,7 @@ $(function () {
 
     $('.ui.search').search({
         apiSettings: {
-            url: 'http://crm.achatcentrale.fr/user/search/{query}'
+            url: 'https://crm.achatcentrale.fr/user/search/{query}'
         },
         searchOnFocus: true,
         fields: {
@@ -1388,7 +1388,7 @@ $(function () {
 
     $('.ui.search.clients-auto').search({
         apiSettings: {
-            url: 'http://crm.achatcentrale.fr/client/search/{query}/' + $('#centrale').html()
+            url: 'https://crm.achatcentrale.fr/client/search/{query}/' + $('#centrale').html()
         },
         searchOnFocus: true,
         fields: {
@@ -1478,7 +1478,7 @@ $(function () {
                                 <div class="column">
                                     <p>Assigné à : </p>
                                     <a class="ui image label">
-                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                      <img src="httpss://semantic-ui.com/images/avatar/small/elliot.jpg">
                                       ${data.user}
                                     </a>
                                 </div>
@@ -1597,7 +1597,7 @@ $(function () {
                                 <div class="column">
                                     <p>Assigné à : </p>
                                     <a class="ui image label">
-                                      <img src="https://semantic-ui.com/images/avatar/small/elliot.jpg">
+                                      <img src="httpss://semantic-ui.com/images/avatar/small/elliot.jpg">
                                       ${data.user}
                                     </a>
                                 </div>
@@ -1678,7 +1678,7 @@ $(function () {
             let value = $('.user-label').val();
             let centrale = getUrlParameter('c');
 
-            let url = "http://crm.achatcentrale.fr/client/label/" + centrale + "/" + value + "";
+            let url = "https://crm.achatcentrale.fr/client/label/" + centrale + "/" + value + "";
 
             $.getJSON(url, function (json) {
                 $('.client-label').after('<div id="label-client-task" class="ui cursor  label ">' + json.raisonSoc + '<i class="remove icon remove-client-label cursor"></i></div>');
@@ -1735,7 +1735,7 @@ $(function () {
 
         let clId = $('#id').html();
 
-        let url = "http://crm.achatcentrale.fr/client/tag/new/" + centrale + "/" + clId;
+        let url = "https://crm.achatcentrale.fr/client/tag/new/" + centrale + "/" + clId;
 
 
         $.ajax({
@@ -1770,7 +1770,7 @@ $(function () {
 
         });
 
-        let tpl = `<li><a class="" href="http://crm.achatcentrale.fr/tag/${$elValue.val()}">#${$elValue.val()}</a></li>`;
+        let tpl = `<li><a class="" href="https://crm.achatcentrale.fr/tag/${$elValue.val()}">#${$elValue.val()}</a></li>`;
 
         $elValue.val("");
 
@@ -1803,7 +1803,7 @@ $(function () {
 
     $('.ui.search.container-search-hastag').search({
         apiSettings: {
-            url: 'http://crm.achatcentrale.fr/tag/search/{query}'
+            url: 'https://crm.achatcentrale.fr/tag/search/{query}'
         },
         searchOnFocus: true,
         fields: {
@@ -1822,7 +1822,7 @@ $(function () {
         },
         onSelect: function (result, response) {
 
-            window.location.href = "http://crm.achatcentrale.fr/tag/" + result.TAG;
+            window.location.href = "https://crm.achatcentrale.fr/tag/" + result.TAG;
 
             return false;
 
@@ -1838,7 +1838,7 @@ $(function () {
 
         ///tag/remove/{tag}/{centrale}
 
-        let url = "http://crm.achatcentrale.fr/tag/remove/" + tag + "/" + centrale;
+        let url = "https://crm.achatcentrale.fr/tag/remove/" + tag + "/" + centrale;
 
 
         console.log(url);
@@ -1965,7 +1965,7 @@ $(function () {
 
             let clId = $('#id').html();
 
-            let url = "http://crm.achatcentrale.fr/client/"+clId+"/"+centrale+"/update/mail";
+            let url = "https://crm.achatcentrale.fr/client/"+clId+"/"+centrale+"/update/mail";
 
 
             $.ajax({
@@ -2009,7 +2009,7 @@ $(function () {
         let centrale = $('#centrale').html();
         let note = $(this).data("note");
 
-        let url = "http://crm.achatcentrale.fr/client/" + note + "/" + centrale + "/note/remove";
+        let url = "https://crm.achatcentrale.fr/client/" + note + "/" + centrale + "/note/remove";
         console.log(url);
 
         $.ajax({
