@@ -590,12 +590,7 @@ class BaseController extends Controller
         $groupe = $stmtGroupe->fetchAll();
 
 
-        $sqlNotes = sprintf("SELECT CN_ID, CN_NOTE, INS_DATE, INS_USER FROM %s.dbo.CLIENTS_NOTES WHERE CL_ID = :cl_id ORDER BY INS_DATE DESC", $so_database);
 
-        $stmtNotes = $conn->prepare($sqlNotes);
-        $stmtNotes->bindValue('cl_id', $id);
-        $stmtNotes->execute();
-        $notes = $stmtNotes->fetchAll();
 
 
 
@@ -633,6 +628,17 @@ class BaseController extends Controller
         $stmtForOrigine->bindValue('id', $id);
         $stmtForOrigine->execute();
         $origine = $stmtForOrigine->fetchAll();
+
+
+        $sqlNotes = sprintf("SELECT CN_ID, CN_NOTE, INS_DATE, INS_USER FROM %s.dbo.CLIENTS_NOTES WHERE CL_ID = :cl_id ORDER BY INS_DATE DESC", $so_database);
+
+        $stmtNotes = $conn->prepare($sqlNotes);
+        $stmtNotes->bindValue('cl_id', $id);
+        $stmtNotes->execute();
+        $notes = $stmtNotes->fetchAll();
+
+
+        dump($notes);
 
 
 
