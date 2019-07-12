@@ -638,7 +638,6 @@ class BaseController extends Controller
         $notes = $stmtNotes->fetchAll();
 
 
-        dump($notes);
 
 
 
