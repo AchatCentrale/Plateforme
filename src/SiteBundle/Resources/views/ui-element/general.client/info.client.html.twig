@@ -463,6 +463,8 @@
                                                                     {% for n in note %}
 
 
+
+                                                                            {{ dump(n["CN_NOTE"]) }}
                                                                             <li>{{ n["INS_DATE"]  }}: {{ n["CN_NOTE"] }} <i class="close icon remove_note" data-note="{{ n["CN_ID"] }}" ></i></li>
                                                                     {% endfor %}
                                                                         </ul>
