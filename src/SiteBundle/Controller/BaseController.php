@@ -630,7 +630,7 @@ class BaseController extends Controller
         $origine = $stmtForOrigine->fetchAll();
 
 
-        $sqlNotes = sprintf("SELECT CN_ID, CN_NOTE, INS_DATE, INS_USER FROM %s.dbo.CLIENTS_NOTES WHERE CL_ID = :cl_id ORDER BY INS_DATE DESC", $so_database);
+        $sqlNotes = sprintf("SELECT CN_ID, CAST(CN_NOTE as TEXT) as CN_NOTE, INS_DATE, INS_USER FROM %s.dbo.CLIENTS_NOTES WHERE CL_ID = :cl_id ORDER BY INS_DATE DESC", $so_database);
 
         $stmtNotes = $conn->prepare($sqlNotes);
         $stmtNotes->bindValue('cl_id', $id);
