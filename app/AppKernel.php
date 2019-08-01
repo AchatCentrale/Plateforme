@@ -23,14 +23,9 @@ class AppKernel extends Kernel
             new Bmatzner\FontAwesomeBundle\BmatznerFontAwesomeBundle(),
             new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
 
-
             new Ivory\SerializerBundle\IvorySerializerBundle(),
             new Http\HttplugBundle\HttplugBundle(),
-            new FunecapBundle\FunecapBundle(),
-            new RocEclercBundle\RocEclercBundle(),
-            new GccpBundle\GccpBundle(),
-            new PfplBundle\PfplBundle(),
-            new ProductBundle\ProductBundle(),
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

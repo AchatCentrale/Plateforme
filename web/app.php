@@ -10,11 +10,7 @@ umask(0000);
 $loader = require __DIR__ . '/../app/autoload.php';
 include_once __DIR__ . '/../var/bootstrap.php.cache';
 
-use Ivory\GoogleMap;
-
-
-
-$kernel = new AppKernel('prod', true);
+$kernel = new AppKernel('dev', true);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 

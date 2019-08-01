@@ -28,27 +28,10 @@ client-general:
     defaults: { _controller: SiteBundle:Base:ClientGeneral }
     methods: GET
 
-
-client-adresse:
-    path:     /client/{id}/{centrale}/adresse
-    defaults: { _controller: SiteBundle:Base:ClientAdresse }
-
-client-status:
-    path:     /client/{id}/{centrale}/status
-    defaults: { _controller: SiteBundle:Base:ClientStatut }
-
-client-facturation:
-    path:     /client/{id}/{centrale}/facturation
-    defaults: {_controller: SiteBundle:Base:ClientFacturation}
-
 client-feed:
     path:    /client/{id}/{centrale}/feed
     defaults: {_controller: SiteBundle:Base:ClientFeed}
 
-
-sendClientDetailMail:
-    path:     /send/client/{clientId}
-    defaults: {_controller: SiteBundle:Base:sendClientDetailMail}
 
 get-raison-soc:
     path:     /client/raisonSoc/{id}/{centrale}

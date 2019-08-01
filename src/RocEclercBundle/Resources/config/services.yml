@@ -1,4 +1,0 @@
-services:
-#    roc_eclerc.example:
-#        class: RocEclercBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]

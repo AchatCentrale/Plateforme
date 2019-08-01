@@ -3,11 +3,6 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     - { resource: "@SiteBundle/Resources/config/services.yml" }
-    - { resource: "@FunecapBundle/Resources/config/services.yml" }
-    - { resource: "@RocEclercBundle/Resources/config/services.yml" }
-    - { resource: "@GccpBundle/Resources/config/services.yml" }
-    - { resource: "@PfplBundle/Resources/config/services.yml" }
-    - { resource: "@ProductBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -73,83 +68,7 @@ doctrine:
                     ansi_nulls: on
                     ansi_warnings: on
                     20: false
-            centrale_produits:
-                driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:           "185.29.149.144"
-                user:           "AC_JBAGOSTIN"
-                password:       "35H7Hjvy"
-                dbname:         "CENTRALE_PRODUITS_JB"
-                charset:  UTF-8
-                options:
-                    ansi_nulls: on
-                    ansi_warnings: on
-                    20: false
-            centrale_funecap:
-                 driver_class:   Realestate\MssqlBundle\Driver\PDODblib\Driver
-                 host:           "185.29.149.144"
-                 user:           "AC_JBAGOSTIN"
-                 password:       "35H7Hjvy"
-                 dbname:         "CENTRALE_FUNECAP"
-                 charset:  UTF-8
-                 options:
-                     ansi_nulls: on
-                     ansi_warnings: on
-                     20: false
-            roc_eclerc:
-                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.144"
-                user:         "AC_JBAGOSTIN"
-                password:     "35H7Hjvy"
-                dbname:       "CENTRALE_ROC_ECLERC"
-                charset:  UTF-8
-                options:
-                     ansi_nulls: on
-                     ansi_warnings: on
-                     20: false
-            centrale_gccp:
-                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.144"
-                user:         "AC_JBAGOSTIN"
-                password:     "35H7Hjvy"
-                dbname:       "CENTRALE_GCCP"
-                charset:  UTF-8
-                options:
-                    ansi_nulls: on
-                    ansi_warnings: on
-                    20: false
-            centrale_pascal_leclerc:
-                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.144"
-                user:         "AC_JBAGOSTIN"
-                password:     "35H7Hjvy"
-                dbname:       "CENTRALE_PFPL"
-                charset:  UTF-8
-                options:
-                    ansi_nulls: on
-                    ansi_warnings: on
-                    20: false
-            ac_produits:
-                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host:         "185.29.149.144"
-                user:         "AC_JBAGOSTIN"
-                password:     "35H7Hjvy"
-                dbname:       "CENTRALE_PRODUITS"
-                charset:  UTF-8
-                options:
-                    ansi_nulls: on
-                    ansi_warnings: on
-                    20: false
-            centrale_achat_v3:
-                driver_class: Realestate\MssqlBundle\Driver\PDODblib\Driver
-                host: "185.212.225.142"
-                user:         "AC_JBAGOSTIN"
-                password:     "35H7Hjvy"
-                dbname:       "CENTRALE_PRODUITS"
-                charset:  UTF-8
-                options:
-                    ansi_nulls: on
-                    ansi_warnings: on
-                    20: false
+
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -159,30 +78,8 @@ doctrine:
                 connection: centrale_achat_jb
                 mappings:
                     AchatCentraleCrmBundle : ~
-            centrale_produits:
-                connection: centrale_produits
-                mappings:
-                    SiteBundle : ~
-            centrale_funecap:
-                connection: centrale_funecap
-                mappings:
-                    FunecapBundle : ~
-            roc_eclerc:
-                connection: roc_eclerc
-                mappings:
-                    RocEclercBundle: ~
-            centrale_gccp:
-                connection: centrale_gccp
-                mappings:
-                    GccpBundle: ~
-            centrale_pascal_leclerc:
-                connection: centrale_pascal_leclerc
-                mappings:
-                    PfplBundle: ~
-            ac_produits:
-                connection: ac_produits
-                mappings:
-                    ProductBundle: ~
+
+
 
 # Swiftmailer Configuration
 swiftmailer:

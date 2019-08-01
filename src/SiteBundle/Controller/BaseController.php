@@ -67,7 +67,7 @@ class BaseController extends Controller
             );
         }
 
-        $conn = $this->get('doctrine.dbal.centrale_gccp_connection');
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = "SELECT TOP 5 *
                 FROM CENTRALE_ACHAT.dbo.Vue_All_Taches
@@ -459,12 +459,15 @@ class BaseController extends Controller
         $conn = $this->get('database_connection');
 
 
-        $sqlCentrale = "SELECT SO_DATABASE, SO_ID FROM CENTRALE_ACHAT.dbo.SOCIETES
-                                    WHERE SO_ID = :so_id";
-        $stmt = $conn->prepare($sqlCentrale);
-        $stmt->bindValue('so_id', $userChoice);
-        $stmt->execute();
-        $so_database = $stmt->fetchAll();
+        $sqlListeCentrale = "SELECT * FROM CENTRALE_ACHAT.dbo.SOCIETES WHERE SO_STATUS = 1";
+
+        $stmtListeCentrale = $conn->prepare($sqlListeCentrale);
+        $stmtListeCentrale->execute();
+        $listeCentrale = $stmtListeCentrale->fetchAll();
+
+        dump($listeCentrale);
+
+
 
         if ($userChoice == "all"){
 
@@ -484,12 +487,21 @@ class BaseController extends Controller
                 '@Site/Base/client.html.twig',
                 [
                     "client" => $result,
-                    "centrale" => "All"
+                    "centrale" => "All",
+                    "listeCentrale" => $listeCentrale
                 ]
             );
 
 
         } else {
+
+            $sqlCentrale = "SELECT SO_DATABASE, SO_ID FROM CENTRALE_ACHAT.dbo.SOCIETES
+                                    WHERE SO_ID = :so_id";
+            $stmt = $conn->prepare($sqlCentrale);
+            $stmt->bindValue('so_id', $userChoice);
+            $stmt->execute();
+            $so_database = $stmt->fetchAll();
+
             $sqlClient = sprintf("SELECT DISTINCT
                   CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,
                   CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION, CL_STATUS, CL_ADHESION, INS_DATE, CL_TEL, CL_GROUPE
@@ -506,7 +518,9 @@ class BaseController extends Controller
                 '@Site/Base/client.html.twig',
                 [
                     "client" => $result,
-                    "centrale" => $so_database[0]["SO_ID"]
+                    "centrale" => $so_database[0]["SO_ID"],
+                    "listeCentrale" => $listeCentrale
+
                 ]
             );
 
@@ -873,182 +887,6 @@ class BaseController extends Controller
 
     }
 
-    public function ClientAdresseAction($id, $centrale, Request $request)
-    {
-
-
-        switch ($centrale) {
-            case "CENTRALE_FUNECAP":
-
-                $restresult = $this->getDoctrine()->getManager('centrale_funecap_jb')->getRepository('FunecapBundle:ClientsAdresses')->findBy([
-                        'clId' => $id
-                    ]
-                );
-
-
-                foreach ($restresult as &$adresse) {
-                    if ($adresse->getCaType() === "L") {
-
-                        $mapF = new Map();
-                        $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
-
-
-                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " . $restresult[0]->getCaCp() . " " . $restresult[0]->getCaVille());
-                        $response = $geocoder->geocode($request);
-                        foreach ($response->getResults() as $result) {
-                            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
-                            $mapF->setAutoZoom(false);
-                            $mapF->setCenter($here);
-                            $mapF->setMapOption('zoom', 12);
-
-
-                            $marker = new Marker(
-                                new Coordinate($here->getLatitude(), $here->getLatitude()),
-                                Animation::BOUNCE,
-                                new Icon(),
-                                new Symbol(SymbolPath::CIRCLE),
-                                new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]),
-                                ['clickable' => false]
-                            );
-                            $marker->setVariable('marker');
-                            $marker->setAnimation(Animation::DROP);
-                            $marker->setIcon(new Icon());
-                            $marker->setSymbol(new Symbol(SymbolPath::CIRCLE));
-                            $marker->setShape(new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]));
-                            // TODO : mettre Marker sur l'adresse
-                            $mapF->getOverlayManager()->addMarker($marker);
-                        }
-
-
-                    } elseif ($adresse->getCaType() === "F") {
-                        return 0;
-                    }
-                }
-
-
-                return $this->render(
-                    '@Site/Base/client.adresse.html.twig',
-                    [
-                        "client" => $restresult,
-                        "mapF" => $mapF
-
-                    ]
-                );
-
-                break;
-            case "CENTRALE_ROC_ECLERC":
-                $restresult = $this->getDoctrine()->getManager()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy([
-                        'clId' => $id
-                    ]
-                );
-
-
-                $mapF = new Map();
-                $mapL = new Map();
-                $geocoder = new GeocoderService(new Client(), new GuzzleMessageFactory());
-
-
-                foreach ($restresult as &$adresse) {
-                    if ($adresse->getCaType() === "L") {
-
-
-                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " . $restresult[0]->getCaCp() . " " . $restresult[0]->getCaVille());
-                        $response = $geocoder->geocode($request);
-
-
-                        foreach ($response->getResults() as $result) {
-                            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
-                            $mapF->setAutoZoom(false);
-                            $mapF->setCenter($here);
-                            $mapF->setMapOption('zoom', 12);
-
-
-                            $marker = new Marker(
-                                new Coordinate($here->getLatitude(), $here->getLatitude()),
-                                Animation::BOUNCE,
-                                new Icon(),
-                                new Symbol(SymbolPath::CIRCLE),
-                                new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]),
-                                ['clickable' => false]
-                            );
-                            $marker->setVariable('marker');
-                            $marker->setAnimation(Animation::DROP);
-                            $marker->setIcon(new Icon());
-                            $marker->setSymbol(new Symbol(SymbolPath::CIRCLE));
-                            $marker->setShape(new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]));
-                            // TODO : mettre Marker sur l'adresse
-                            $mapF->getOverlayManager()->addMarker($marker);
-                        }
-
-
-                    } elseif ($adresse->getCaType() === "F") {
-
-
-                        $request = new GeocoderAddressRequest($restresult[0]->getCaAdresse1() . " " . $restresult[0]->getCaCp() . " " . $restresult[0]->getCaVille());
-                        $response = $geocoder->geocode($request);
-
-
-                        foreach ($response->getResults() as $result) {
-                            $here = new Coordinate($result->getGeometry()->getLocation()->getLatitude(), $result->getGeometry()->getLocation()->getLongitude());
-                            $mapL->setAutoZoom(false);
-                            $mapL->setCenter($here);
-                            $mapL->setMapOption('zoom', 12);
-
-
-                            $marker = new Marker(
-                                new Coordinate($here->getLatitude(), $here->getLatitude()),
-                                Animation::BOUNCE,
-                                new Icon(),
-                                new Symbol(SymbolPath::CIRCLE),
-                                new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]),
-                                ['clickable' => false]
-                            );
-                            $marker->setVariable('marker');
-                            $marker->setAnimation(Animation::DROP);
-                            $marker->setIcon(new Icon());
-                            $marker->setSymbol(new Symbol(SymbolPath::CIRCLE));
-                            $marker->setShape(new MarkerShape(MarkerShapeType::CIRCLE, [1.1, 2.1, 1.4]));
-                            // TODO : mettre Marker sur l'adresse
-                            $mapL->getOverlayManager()->addMarker($marker);
-                        }
-                    }
-                }
-
-
-                return $this->render(
-                    '@Site/Base/client.adresse.html.twig',
-                    [
-                        "client" => $restresult,
-                        "mapF" => $mapF,
-                        "mapL" => $mapL
-
-                    ]
-                );
-                break;
-            default:
-                break;
-        }
-
-
-    }
-
-    public function ClientStatutAction($id)
-    {
-        $restresult = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsAdresses')->findBy(
-            array(
-                "clId" => $id,
-            )
-        );
-
-        return $this->render(
-            '@Site/Base/client.status.html.twig',
-            [
-                "client" => $restresult,
-            ]
-        );
-
-    }
-
     public function detailNoteAction(Request $request, $id, $idCentrale)
     {
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
@@ -1163,82 +1001,6 @@ class BaseController extends Controller
         }
     }
 
-    public function ClientFacturationAction(Request $request, $id, $centrale)
-    {
-
-        switch ($centrale) {
-            case "CENTRALE_FUNECAP":
-                $restresult = $this->getDoctrine()->getManager('centrale_funecap')->getRepository('FunecapBundle:Clients')->findBy(['clId' => $id]);
-                return $this->render(
-                    '@Site/Base/client.facturation.html.twig',
-                    [
-                        "client" => $restresult,
-                        "centrale" => $centrale,
-                    ]
-                );
-                break;
-            case "ROC_ECLERC":
-                $restresult = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Clients')->findBy([
-                    'clId' => $id
-                ]);
-                $contrat = $this->getDoctrine()->getManager('roc_eclerc')->getRepository('RocEclercBundle:Contrats')->findBy([
-                    'cl' => $id
-                ]);
-                return $this->render(
-                    '@Site/Base/client.facturation.html.twig',
-                    [
-                        "client" => $restresult,
-                        "centrale" => $centrale,
-                        "contrat" => $contrat
-                    ]
-                );
-                break;
-            case 'CENTRALE_PFPL':
-                $restresult = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Clients')->findBy(['clId' => $id]);
-                $contrat = $this->getDoctrine()->getManager('centrale_pascal_leclerc')->getRepository('PfplBundle:Contrats')->findBy(['cl' => $id]);
-
-                return $this->render(
-                    '@Site/Base/client.facturation.html.twig',
-                    [
-                        "client" => $restresult,
-                        "centrale" => $centrale,
-                        "contrat" => $contrat
-                    ]
-                );
-                break;
-            case "CENTRALE_GCCP":
-                $restresult = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Clients')->findBy(['clId' => $id]);
-                $contrat = $this->getDoctrine()->getManager('centrale_gccp')->getRepository('GccpBundle:Contrats')->findBy(['clId' => $id]);
-                return $this->render(
-                    '@Site/Base/client.facturation.html.twig',
-                    [
-                        "client" => $restresult,
-                        "centrale" => $centrale,
-                        "contrat" => $contrat
-                    ]
-                );
-                break;
-            case "ACHAT_CENTRALE":
-                $restresult = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Clients')->findBy(['clId' => $id]);
-                $contrat = $this->getDoctrine()->getManager('achat_centrale')->getRepository('AchatCentraleBundle:Contrats')->findBy(['cl' => $id]);
-
-
-                return $this->render(
-                    '@Site/Base/client.facturation.html.twig',
-                    [
-                        "client" => $restresult,
-                        "centrale" => $centrale,
-                        "contrat" => $contrat
-                    ]
-                );
-                break;
-            default:
-                break;
-        }
-
-
-    }
-
     public function ClientFeedAction($id, $centrale)
     {
 
@@ -1258,39 +1020,6 @@ class BaseController extends Controller
         ]);
 
 
-    }
-
-    public function sendClientDetailMailAction(Request $request, $clientId)
-    {
-
-        $client_info = $this->getDoctrine()->getRepository('AchatCentraleCrmBundle:ClientsUsers')->findBy(
-            array('ccId' => $clientId)
-        );
-
-        /**
-         * @var \Swift_Mime_Message $message
-         */
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Vos codes pour la centrale')
-            ->setFrom(array('contact@achatcentrale.fr' => "Votre centrale"))
-            ->setTo('jb@achatcentrale.fr')
-            ->setBody(
-                $this->renderView(
-                    'SiteBundle:mail:RelanceTaskNotification.html.twig',
-                    array(
-                        'client' => $client_info,
-                    )
-                ),
-                'text/html'
-            );
-
-        $mailer = $this->get('mailer');
-        $mailer->send($message);
-        $spool = $mailer->getTransport()->getSpool();
-        $transport = $this->get('swiftmailer.transport.real');
-        $spool->flushQueue($transport);
-
-        return new Response('Mail envoyé');
     }
 
     public function getClientRaisonSocAction($id, $centrale)
@@ -1326,65 +1055,6 @@ class BaseController extends Controller
 
 
 
-
-    }
-
-    public function testAction()
-    {
-
-        $conn = $this->get('doctrine.dbal.centrale_achat_v3_connection');
-
-
-        $test =  "ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗᛋᚳᛖᚪᛚ᛫ᚦᛖᚪᚻ᛫ᛗᚪᚾᚾᚪ᛫ᚷᛖᚻᚹᛦᛚᚳ᛫ᛗᛁᚳᛚᚢᚾ᛫ᚻᛦᛏ᛫ᛞᚫᛚᚪᚾᚷᛁᚠ᛫ᚻᛖ᛫ᚹᛁᛚᛖ᛫ᚠᚩᚱ᛫ᛞᚱᛁᚻᛏᚾᛖ᛫ᛞᚩᛗᛖᛋ᛫ᚻᛚᛇᛏᚪᚾ᛬";
-
-
-        $sql = "SELECT CN_NOTE  FROM CENTRALE_ACHAT_v2.dbo.CLIENTS_NOTES";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $note = $stmt->fetchAll();
-
-
-
-
-        return $this->render('@Site/test.html.twig', [
-            "notes" => $note
-        ]);
-
-
-    }
-
-    public function testWithParamAction(Request $request, $id)
-    {
-
-
-        $db2 = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-
-        $sql = "SELECT *
-                FROM CLIENTS AS C
-                
-                  JOIN CLIENTS_TACHES AS CT ON C.CL_ID = CT.CL_ID
-                  LEFT OUTER JOIN CLIENTS_NOTES AS CN ON C.CL_ID = CN.CL_ID
-                  LEFT OUTER JOIN MESSAGE_ENTETE AS ME ON C.CL_ID = ME.CL_ID
-                  LEFT OUTER JOIN MESSAGE_DETAIL AS MD ON ME.ME_ID = MD.ME_ID
-                WHERE C.CL_ID = :id
-                ORDER BY CT.INS_DATE, CN.INS_DATE, ME.INS_DATE ASC               
-                        ";
-
-
-        $stmt = $db2->prepare($sql);
-
-        $stmt->bindValue("id", $id);
-        $stmt->execute();
-
-
-        return $this->render(
-            '@Site/test.html.twig',
-            array(
-                'panier' => $stmt->fetchAll(),
-            )
-        );
 
     }
 
@@ -1510,117 +1180,9 @@ class BaseController extends Controller
     {
         $conn = $this->get('database_connection');
 
-
-        switch ($centrale) {
-            case 'roc':
-
-
-                // récupère le conteneur de services pour le passer à la closure
-                $container = $this->container;
-                $response = new StreamedResponse(function () use ($container) {
-                    $conn = $this->get('database_connection');
-                    $stmt = $conn->prepare('SELECT * FROM CENTRALE_ACHAT.dbo.Vue_All_Clients WHERE SO_ID = 6');
-                    $stmt->execute();
-                    // La méthode getExportQuery retourne une Query qui est utilisée pour récupérer
-                    // tous les objets (lignes du fichier csv) dont vous avez besoin. La méthode iterate
-                    // est utilisée pour limiter la consommation de mémoire
-                    $results = $stmt->fetchAll();
-                    $handle = fopen('php://output', 'r+');
-
-                    while (false !== ($row = $results->next())) {
-                        // ajoute une ligne au fichier csv. Vous devrez implémenter la méthode toArray()
-                        // pour transformer votre objet en tableau
-                        fputcsv($handle, $row[0]->toArray());
-                        // utilisé pour limiter la consommation de mémoire
-                        $em->detach($row[0]);
-                    }
-
-                    fclose($handle);
-                });
-
-                $response->headers->set('Content-Type', 'application/force-download');
-                $response->headers->set('Content-Disposition', 'attachment; filename="export.csv"');
-
-                return $response;
-                break;
-            case 'fun':
-                $stmt = $conn->prepare('SELECT * FROM CENTRALE_FUNECAP.dbo.CLIENTS');
-                $stmt->execute();
-                $response = new StreamedResponse();
-                $response->setStatusCode(200);
-                $response->headers->set('Content-Type', 'text/csv');
-                $response->setCallback(function () use ($stmt) {
-                    $config = new ExporterConfig();
-                    $config
-                        ->setDelimiter(";")
-                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
-                    ;
-                    $exporter = new Exporter($config);
-                    $exporter->export('php://output', $stmt->fetchAll());
-                });
-                $response->send();
-                return $response;
-                break;
-            case 'ac':
-                $conn = $this->get('database_connection');
-                $stmt = $conn->prepare('SELECT * FROM CENTRALE_ACHAT.dbo.CLIENTS');
-                $stmt->execute();
-                $response = new StreamedResponse();
-                $response->setStatusCode(200);
-                $response->headers->set('Content-Type', 'text/csv');
-                $response->setCallback(function () use ($stmt) {
-                    $config = new ExporterConfig();
-                    $config
-                        ->setDelimiter(";")
-                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
-                    ;
-                    $exporter = new Exporter($config);
-                    $exporter->export('php://output', $stmt->fetchAll());
-                });
-                $response->send();
-                return $response;
-                break;
-            case 'gccp':
-                $conn = $this->get('database_connection');
-                $stmt = $conn->prepare('SELECT * FROM CENTRALE_GCCP.dbo.CLIENTS');
-                $stmt->execute();
-                $response = new StreamedResponse();
-                $response->setStatusCode(200);
-                $response->headers->set('Content-Type', 'text/csv');
-                $response->setCallback(function () use ($stmt) {
-                    $config = new ExporterConfig();
-                    $config
-                        ->setDelimiter(";")
-                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
-                    ;
-                    $exporter = new Exporter($config);
-                    $exporter->export('php://output', $stmt->fetchAll());
-                });
-                $response->send();
-                return $response;
-                break;
-            case 'pfpl':
-                $conn = $this->get('database_connection');
-                $stmt = $conn->prepare('SELECT * FROM CENTRALE_PFPL.dbo.CLIENTS');
-                $stmt->execute();
-                $response = new StreamedResponse();
-                $response->setStatusCode(200);
-                $response->headers->set('Content-Type', 'text/csv');
-                $response->setCallback(function () use ($stmt) {
-                    $config = new ExporterConfig();
-                    $config
-                        ->setDelimiter(";")
-                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
-                    ;
-                    $exporter = new Exporter($config);
-                    $exporter->export('php://output', $stmt->fetchAll());
-                });
-                $response->send();
-                return $response;
-                break;
-            case 'all' :
-                $conn = $this->get('database_connection');
-                    $stmt = $conn->prepare('SELECT (SELECT DISTINCT SO_RAISONSOC FROM CENTRALE_ACHAT.dbo.Vue_SocietesUsers WHERE Vue_SocietesUsers.SO_ID = CENTRALE_ACHAT.dbo.Vue_All_Clients.SO_ID) AS CENTRALE,SO_ID, CL_ID, CL_REF, CL_RAISONSOC, CL_ADRESSE1, CL_SIRET, CL_CP, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_DT_ADHESION, (
+        if($centrale === "all"){
+            $conn = $this->get('database_connection');
+            $stmt = $conn->prepare('SELECT (SELECT DISTINCT SO_RAISONSOC FROM CENTRALE_ACHAT.dbo.Vue_SocietesUsers WHERE Vue_SocietesUsers.SO_ID = CENTRALE_ACHAT.dbo.Vue_All_Clients.SO_ID) AS CENTRALE,SO_ID, CL_ID, CL_REF, CL_RAISONSOC, CL_ADRESSE1, CL_SIRET, CL_CP, CL_VILLE, CL_PAYS, CL_TEL, CL_MAIL, CL_WEB, CL_DT_ADHESION, (
                           CASE CL_STATUS
                             WHEN 0 THEN \'A valide\'
                             WHEN 1 THEN \'Valide\'
@@ -1628,307 +1190,50 @@ class BaseController extends Controller
                           END
                         ) AS STATUT, CL_ADHESION, CL_STATUS, CL_ADHESION, CC_PRENOM, CC_NOM, CC_MAIL, GR_DESCR, AC_DESCR
                         FROM CENTRALE_ACHAT.dbo.Vue_All_Clients');
-                $stmt->execute();
-                $response = new StreamedResponse();
-                $response->setStatusCode(200);
-                $response->headers->set('Content-Type', 'text/csv');
-                $response->setCallback(function () use ($stmt) {
-                    $config = new ExporterConfig();
-                    $config
-                        ->setDelimiter(";")
-                        ->setFileMode(CsvFileObject::FILE_MODE_WRITE);
-                    $exporter = new Exporter($config);
-                    $exporter->export('php://output', $stmt->fetchAll());
-                });
-                $response->send();
-                return $response;
-                break;
-
-
-        }
-
-    }
-
-    public function newHastagAction(Request $request, $id, $centrale)
-    {
-
-
-        $message = $request->request->get('tag');
-        $cl = $request->request->get('cl');
-
-
-        switch ($centrale) {
-
-            case "ROC_ECLERC":
-                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-                $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":cl", $id);
-                $stmt->bindValue(":tag", $message);
-                $stmt->bindValue(":user", $this->getUser()->getUsId());
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                return new JsonResponse("Tag enregistrer", 200);
-                break;
-            case "CENTRALE_FUNECAP":
-                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-                $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":cl", $id);
-                $stmt->bindValue(":tag", $message);
-                $stmt->bindValue(":user", $this->getUser()->getUsId());
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                return new JsonResponse("Tag enregistrer", 200);
-                break;
-            case "ACHAT_CENTRALE":
-                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-                $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":cl", $id);
-                $stmt->bindValue(":tag", $message);
-                $stmt->bindValue(":user", $this->getUser()->getUsId());
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                return new JsonResponse("Tag enregistrer", 200);
-                break;
-            case "CENTRALE_PFPL":
-                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-                $sql = "INSERT INTO CENTRALE_PFPL.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":cl", $id);
-                $stmt->bindValue(":tag", $message);
-                $stmt->bindValue(":user", $this->getUser()->getUsId());
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                return new JsonResponse("Tag enregistrer", 200);
-                break;
-            case "CENTRALE_GCCP":
-                $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-                $sql = "INSERT INTO CENTRALE_GCCP.dbo.CLIENTS_TAG ( CL_ID, TAG, INS_DATE, INS_USER) VALUES (:cl, :tag, GETUTCDATE(), :user)";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":cl", $id);
-                $stmt->bindValue(":tag", $message);
-                $stmt->bindValue(":user", $this->getUser()->getUsId());
-                $stmt->execute();
-                $task = $stmt->fetchAll();
-                return new JsonResponse("Tag enregistrer", 200);
-                break;
-
-        }
-
-
-    }
-
-    public function hashtagAction(Request $request, $id)
-    {
-
-
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-
-        if ($id === "all") {
-
-
-            $sqlTags = "SELECT *
-                        FROM CENTRALE_ACHAT.dbo.Vue_All_Tags";
-            $stmt = $conn->prepare($sqlTags);
             $stmt->execute();
-            $tags = $stmt->fetchAll();
+            $response = new StreamedResponse();
+            $response->setStatusCode(200);
+            $response->headers->set('Content-Type', 'text/csv');
+            $response->setCallback(function () use ($stmt) {
+                $config = new ExporterConfig();
+                $config
+                    ->setDelimiter(";")
+                    ->setFileMode(CsvFileObject::FILE_MODE_WRITE);
+                $exporter = new Exporter($config);
+                $exporter->export('php://output', $stmt->fetchAll());
+            });
+            $response->send();
+            return $response;
+        } else {
 
+            $clientService = $this->get('site.service.client_services');
 
-            return $this->render('@Site/tags/all.html.twig', [
-                "tag" => $tags
-            ]);
+            $so_database = $clientService->getCentraleDB($centrale);
 
-
-        }
-
-
-        $sqlTags = "SELECT DISTINCT CL_REF, SO_ID, CL_RAISONSOC, CL_ADRESSE1, CL_TEL, CL_SIRET, CL_ID, CL_VILLE
-                    FROM CENTRALE_ACHAT.dbo.Vue_All_Clients
-                    WHERE CL_ID IN (SELECT CL_ID
-                                   FROM CENTRALE_ACHAT.dbo.Vue_All_Tags
-                                   WHERE TAG = :tag)";
-        $stmt = $conn->prepare($sqlTags);
-        $stmt->bindValue(":tag", $id);
-        $stmt->execute();
-        $tags = $stmt->fetchAll();
-
-        $sqlAction = "SELECT
-                      *
-                    FROM
-                      CENTRALE_ACHAT.dbo.Vue_All_Taches
-                    WHERE CLA_DESCR LIKE :query";
-        $stmtAction = $conn->prepare($sqlAction);
-        $stmtAction->bindValue(":query", '%#' . $id . '%');
-        $stmtAction->execute();
-        $action = $stmtAction->fetchAll();
-
-
-        $sqlNote = "SELECT
-                      *
-                    FROM
-                      CENTRALE_ACHAT.dbo.Vue_All_Notes
-                    WHERE Vue_All_Notes.CN_NOTE LIKE :query";
-        $stmtNote = $conn->prepare($sqlNote);
-        $stmtNote->bindValue(":query", '%#' . $id . '%');
-        $stmtNote->execute();
-        $note = $stmtNote->fetchAll();
-
-
-        $sqlTicketsFrs = "SELECT
-                      *
-                    FROM
-                      CENTRALE_ACHAT.dbo.Vue_All_Tickets_Frs
-                    WHERE Vue_All_Tickets_Frs.MD_CORPS LIKE :query";
-        $stmtTicketsFrs = $conn->prepare($sqlTicketsFrs);
-        $stmtTicketsFrs->bindValue(":query", '%#' . $id . '%');
-        $stmtTicketsFrs->execute();
-        $TicketsFrs = $stmtTicketsFrs->fetchAll();
-
-
-        $sqlTickets = "SELECT
-                          *
-                        FROM
-                          CENTRALE_ACHAT.dbo.Vue_All_Tickets_Frs
-                        WHERE Vue_All_Tickets_Frs.MD_CORPS LIKE :query";
-        $stmtTickets = $conn->prepare($sqlTickets);
-        $stmtTickets->bindValue(":query", '%#' . $id . '%');
-        $stmtTickets->execute();
-        $Tickets = $stmtTickets->fetchAll();
-
-
-        return $this->render('@Site/tags/index.html.twig', [
-            "tag" => $tags,
-            "action" => $action,
-            "note" => $note,
-            "ticketFRS" => $TicketsFrs,
-            "ticket" => $Tickets,
-        ]);
-    }
-
-    public function removeHastagAction(Request $request, $tag, $centrale)
-    {
-
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-
-        switch ($centrale) {
-            case 1:
-                $sql = "DELETE FROM CENTRALE_ACHAT.dbo.CLIENTS_TAG
-                WHERE TAG = :tag ";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":tag", $tag);
-                $stmt->execute();
-                $tags = $stmt->fetchAll();
-                return new JsonResponse('Tag supprimé', 200);
-                break;
-            case 2:
-                $sql = "DELETE FROM CENTRALE_GCCP.dbo.CLIENTS_TAG
-                WHERE TAG = :tag ";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":tag", $tag);
-                $stmt->execute();
-                $tags = $stmt->fetchAll();
-                return new JsonResponse('Tag supprimé', 200);
-                break;
-            case 4:
-                $sql = "DELETE FROM CENTRALE_FUNECAP.dbo.CLIENTS_TAG
-                WHERE TAG = :tag ";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":tag", $tag);
-                $stmt->execute();
-                $tags = $stmt->fetchAll();
-                return new JsonResponse('Tag supprimé', 200);
-                break;
-            case 5:
-                $sql = "DELETE FROM CENTRALE_PFPL.dbo.CLIENTS_TAG
-                WHERE TAG = :tag ";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":tag", $tag);
-                $stmt->execute();
-                $tags = $stmt->fetchAll();
-                return new JsonResponse('Tag supprimé', 200);
-                break;
-            case 6:
-                $sql = "DELETE FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_TAG
-                WHERE TAG = :tag ";
-                $stmt = $conn->prepare($sql);
-                $stmt->bindValue(":tag", $tag);
-                $stmt->execute();
-                $tags = $stmt->fetchAll();
-                return new JsonResponse('Tag supprimé', 200);
-                break;
-        }
-
-
-    }
-
-    public function getTagAutocompleteAction(Request $request, $query)
-    {
-
-        $conn = $this->get('database_connection');
-
-        $clientService = $this->get('site.service.client_services');
-
-
-        $sql = "SELECT TAG
-                FROM CENTRALE_ACHAT.dbo.Vue_All_Tags
-                WHERE TAG LIKE :query
-                  ";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue('query', $query . '%');
-        $stmt->execute();
-
-        $clients = $stmt->fetchAll();
-        $result = $clientService->array_utf8_encode($clients);
-
-
-        if (empty($result)) {
-            $sqlAction = "SELECT
-                      CLA_NOM, CL_ID
-                    FROM
-                      CENTRALE_ACHAT.dbo.Vue_All_Taches
-                    WHERE CLA_DESCR LIKE :query
-                  ";
-
-            $stmtAction = $conn->prepare($sqlAction);
-            $stmtAction->bindValue('query', '%' . $query . '%');
-            $stmtAction->execute();
-
-            $action = $stmt->fetchAll();
-
-            $Action = $clientService->array_utf8_encode($action);
-
-
-            $tag = [
-                'TAG' => $query
-            ];
-
-
-            $result = [
-                "total_count" => count($Action),
-                "incomplete_results" => false,
-                "items" => [$tag]
-            ];
-
-            return new JsonResponse($result, 200);
+            $conn = $this->get('database_connection');
+            $stmt = $conn->prepare(sprintf('SELECT * FROM %s.dbo.CLIENTS', $so_database ));
+            $stmt->execute();
+            $response = new StreamedResponse();
+            $response->setStatusCode(200);
+            $response->headers->set('Content-Type', 'text/csv');
+            $response->headers->set('Content-Disposition', 'attachment; filename="export-'.$so_database.'-'.date('mdys').'.csv"');
+            $response->setCallback(function () use ($stmt) {
+                $config = new ExporterConfig();
+                $config
+                    ->setDelimiter(";")
+                    ->setFileMode(CsvFileObject::FILE_MODE_WRITE) // Customize file mode and choose either write or append. Default value is write ('w'). See fopen() php docs
+                ;
+                $exporter = new Exporter($config);
+                $exporter->export('php://output', $stmt->fetchAll());
+            });
+            $response->send();
+            return $response;
 
         }
 
 
-        $result = [
-            "total_count" => count($clients),
-            "incomplete_results" => false,
-            "items" => $result
-        ];
 
-        return new JsonResponse($result, 200);
+
 
 
     }

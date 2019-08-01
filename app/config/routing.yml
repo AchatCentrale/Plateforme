@@ -17,17 +17,4 @@ action:
 
 
 
-pfpl:
-    resource: "@PfplBundle/Controller/"
-    type:     annotation
-    prefix:   /
 
-gccp:
-    resource: "@GccpBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-roc_eclerc:
-    resource: "@RocEclercBundle/Controller/"
-    type:     annotation
-    prefix:   /

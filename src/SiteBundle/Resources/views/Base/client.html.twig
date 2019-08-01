@@ -42,65 +42,17 @@
                                                 src="{{ asset('images/logo-centrale/logo-all.png') }}">
                                     </a>
                                 </li>
-                                <li class="{% if app.request.query.get('c') == '4' %}active-centrale{% endif %}">
-                                    <a href="{{ path("client", { "c" : 4}) }}">
-                                        <img
-                                                data-centrale="CENTRALE_FUNECAP"
-                                                class="cursor img-centrale"
-                                                src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
-                                    </a>
-                                </li>
-                                <li class="{% if app.request.query.get('c') == '6' %}active-centrale{% endif %}">
-                                    <a href="{{ path("client", { "c" : "6"}) }}">
-                                        <img
-                                                data-centrale="CENTRALE_ROC_ECLERC"
-                                                class="cursor img-centrale"
-                                                src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
-                                    </a>
-                                </li>
-                                <li class="{% if app.request.query.get('c') == '1' %}active-centrale{% endif %}">
-                                    <a href="{{ path("client", { "c" : "1"}) }}">
-                                        <img
-                                                data-centrale="achat-centrale"
-                                                class="cursor img-centrale"
-                                                src="{{ asset('assets/images/Fourmi_AC_small.png') }}">
-                                    </a></li>
-                                <li class="{% if app.request.query.get('c') == '2' %}active-centrale{% endif %}">
-                                    <a href="{{ path("client", { "c" : "2"}) }}">
-                                        <img
-                                                data-centrale="centrale-gccp"
-                                                class="cursor img-centrale"
-                                                src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}"></a>
-                                </li>
-                                <li class="{% if app.request.query.get('c') == '5' %}active-centrale{% endif %}">
-                                    <a href="{{ path("client", { "c" : "5"}) }}">
-                                        <img
-                                                data-centrale="centrale-pfpl"
-                                                class="cursor img-centrale"
-                                                src="{{ asset('images/logo-centrale/logo-pfpl.jpg') }}">
+                                {% for centrale in listeCentrale %}
+                                    <li class="{% if app.request.query.get('c') == centrale["SO_ID"] %}active-centrale{% endif %}">
+                                        <a href="{{ path("client", { "c" : centrale["SO_ID"]}) }}">
+                                            <img
+                                                    data-centrale="{{ centrale["SO_DATABASE"] }}"
+                                                    class="cursor img-centrale"
+                                                    src="/images/logo-centrale/logo-{{centrale["SO_DATABASE"]  }}.png">
+                                        </a>
+                                    </li>
+                                {% endfor %}
 
-                                    </a>
-                                </li>
-
-                                <li class="{% if app.request.query.get('c') == '3' %}active-centrale{% endif %}">
-                                    <a href="{{ path("client", { "c" : "3"}) }}">
-                                        <img
-                                                data-centrale="centrale-naldeo"
-                                                class="cursor img-centrale"
-                                                src="{{ asset('images/logo-centrale/logo_naldeo.png') }}">
-
-                                    </a>
-                                </li>
-
-                                <li class="{% if app.request.query.get('c') == '8' %}active-centrale{% endif %}">
-                                    <a href="{{ path("client", { "c" : "8"}) }}">
-                                        <img
-                                                data-centrale="centrale-pfpl"
-                                                class="cursor img-centrale"
-                                                src="{{ asset('images/logo-centrale/logo_abm.png') }}">
-
-                                    </a>
-                                </li>
 
                             </ul>
                         </div>
@@ -237,28 +189,28 @@
                                     <img
                                             data-centrale="CENTRALE_ROC_ECLERC"
                                             class="cursor img-centrale-new-client"
-                                            src="{{ asset('images/logo-centrale/logo-centrale-roc.png') }}">
+                                            src="{{ asset('images/logo-centrale/logo-CENTRALE_ROC_ECLERC.png') }}">
                                 </a>
                             </li>
                             <li><a href="{{ path('client-new', { 'centrale' : 2}) }}">
                                     <img
                                             data-centrale="CENTRALE_GCCP"
                                             class="cursor img-centrale-new-client"
-                                            src="{{ asset('images/logo-centrale/logo-centrale-gccp.png') }}">
+                                            src="{{ asset('images/logo-centrale/logo-CENTRALE_GCCP.png') }}">
                                 </a>
                             </li>
                             <li><a href="{{ path('client-new', { 'centrale' : 4}) }}">
                                     <img
                                             data-centrale="CENTRALE_GCCP"
                                             class="cursor img-centrale-new-client"
-                                            src="{{ asset('images/logo-centrale/logo-centrale-funecap.png') }}">
+                                            src="{{ asset('images/logo-centrale/logo-CENTRALE_FUNECAP.png') }}">
                                 </a>
                             </li>
                             <li><a href="{{ path('client-new', { 'centrale' : 5}) }}">
                                     <img
                                             data-centrale="CENTRALE_GCCP"
                                             class="cursor img-centrale-new-client"
-                                            src="{{ asset('images/logo-centrale/logo-pfpl.jpg') }}">
+                                            src="{{ asset('images/logo-centrale/logo-CENTRALE_PFPL.png') }}">
                                 </a>
                             </li>
                             {#<li><a href="{{ path('client-new', { 'centrale' : 3}) }}">#}
