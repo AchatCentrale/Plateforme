@@ -465,9 +465,6 @@ class BaseController extends Controller
         $stmtListeCentrale->execute();
         $listeCentrale = $stmtListeCentrale->fetchAll();
 
-        dump($listeCentrale);
-
-
 
         if ($userChoice == "all"){
 

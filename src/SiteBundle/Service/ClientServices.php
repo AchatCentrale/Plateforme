@@ -6,8 +6,6 @@ use Doctrine\DBAL\Connection;
 
 class ClientServices
 {
-
-
     /**
      *
      * @var Connection
@@ -114,7 +112,6 @@ class ClientServices
 
         return $data;
     }
-
 
 
     public function getCentraleDB($so_id){
@@ -346,6 +343,9 @@ class ClientServices
     {
 
 
+
+
+
         switch ($centraleId) {
             case "1":
                 $sql = "SELECT CL_RAISONSOC
@@ -554,82 +554,21 @@ class ClientServices
 
     public function getRefClient($idClient, $centrale)
     {
+        $so_database = $this->getCentraleDB($centrale);
 
+        $sql = sprintf("SELECT CL_REF FROM %s.dbo.CLIENTS
+                        WHERE CL_ID = :id", $so_database);
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(":id", $idClient);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        if ($result) {
+            dump($result);
 
-
-        switch ($centrale) {
-            case "ACHAT_CENTRALE":
-                $sql = "SELECT CL_REF FROM CENTRALE_ACHAT.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-                    return $result[0]['CL_REF'];
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
-            case "CENTRALE_GCCP":
-                $sql = "SELECT CL_REF FROM CENTRALE_GCCP.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['CL_REF'];
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
-            case "CENTRALE_FUNECAP":
-                $sql = "SELECT CL_REF FROM CENTRALE_FUNECAP.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['CL_REF'];
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
-            case "CENTRALE_PFPL":
-                $sql = "SELECT CL_REF FROM CENTRALE_PFPL.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['CL_REF'];
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
-            case "ROC_ECLERC":
-                $sql = "SELECT CL_REF FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['CL_REF'];
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
+            return $result[0]['CL_REF'];
+        } else {
+            return 'Pas de ref';
         }
-
-
     }
 
     public function getRefToRaisonSoc($ref){

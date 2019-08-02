@@ -10,7 +10,7 @@ services:
         class: SiteBundle\Service\TachesUtils
     site.service.client_services:
         class: SiteBundle\Service\ClientServices
-        arguments: [ '@doctrine.dbal.centrale_achat_jb_connection' ]
+        arguments: [ '@doctrine.dbal.centrale_achat_jb_connection']
     site.service.bddservices:
         class: SiteBundle\Service\BddServices
         arguments: [ '@doctrine.dbal.centrale_achat_jb_connection' ]

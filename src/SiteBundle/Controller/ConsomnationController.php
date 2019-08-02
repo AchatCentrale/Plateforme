@@ -5,15 +5,12 @@ namespace SiteBundle\Controller;
 
 use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class ConsomnationController extends Controller
 {
-
 
     public function indexAction(Request $request)
     {
@@ -30,30 +27,29 @@ class ConsomnationController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
-        $cookie = new Cookie('test', 'test-cookie');
 
         $clientService = $this->get('site.service.client_services');
         $ref = $clientService->getRefClient($id, $centrale);
 
 
         $totalSql = "SELECT sum(CLC_PRIX_PUBLIC) as ca_prix_public, sum(CLC_PRIX_CENTRALE) as ca_prix_centrale FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                    WHERE CF_USER = :ref";
+                    WHERE CC_ID = :id";
         $stmtTotal = $conn->prepare($totalSql);
-        $stmtTotal->bindValue(':ref', $ref);
+        $stmtTotal->bindValue(':id', $id);
         $stmtTotal->execute();
         $total = $stmtTotal->fetchAll();
 
 
         $tableSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                        WHERE CF_USER = :ref
+                        WHERE CC_ID = :ref
                           UNION ALL
                         SELECT 'total',  sum(CLC_PRIX_PUBLIC), round(sum(CLC_PRIX_CENTRALE),2) FROM
                           CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                        WHERE CF_USER = :ref
+                        WHERE CC_ID = :ref
                         ORDER BY date
                       ";
         $stmtTable = $conn->prepare($tableSql);
-        $stmtTable->bindValue(':ref', $ref);
+        $stmtTable->bindValue(':ref', $id);
         $stmtTable->execute();
         $tableau = $stmtTable->fetchAll();
 
@@ -94,225 +90,39 @@ class ConsomnationController extends Controller
 
                         $date = date('Y-d-m', strtotime($ligne[4]));
 
+                        $clientService = $this->get('site.service.client_services');
 
+                        $so_database = $clientService->getCentraleDB($ligne[8]);
 
-                        switch ($ligne[8]){
+                        //import brut
+                        //verif si la conso est dans la table
 
-                            //achat centrale
-                            case 1:
-                                //import brut
-                                //verif si la conso est dans la table
+                        $sqlVerif = sprintf("SELECT CLC_ID FROM %s.dbo.CLIENTS_CONSO WHERE CLC_DATE = :date AND FO_ID = :fo_id AND CL_ID = :cl_id", $so_database);
 
-                                $sqlVerif = "SELECT CLC_ID FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO WHERE CLC_DATE = :date AND FO_ID = :fo_id AND CL_ID = :cl_id";
-
-                                $stmtVerif = $conn->prepare($sqlVerif);
-                                $stmtVerif->bindValue(':date', $date);
-                                $stmtVerif->bindValue(':fo_id', $ligne[7]);
-                                $stmtVerif->bindValue(':cl_id', $ligne[0]);
-                                $stmtVerif->execute();
-                                $resultVerif = $stmtVerif->fetchAll(\PDO::FETCH_COLUMN, 0);
-                                if (empty($resultVerif)) {
-                                    //Il n'y a pas de conso donc insert
-                                    $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
+                        $stmtVerif = $conn->prepare($sqlVerif);
+                        $stmtVerif->bindValue(':date', $date);
+                        $stmtVerif->bindValue(':fo_id', $ligne[7]);
+                        $stmtVerif->bindValue(':cl_id', $ligne[0]);
+                        $stmtVerif->execute();
+                        $resultVerif = $stmtVerif->fetchAll(\PDO::FETCH_COLUMN, 0);
+                        if (empty($resultVerif)) {
+                            //Il n'y a pas de conso donc insert
+                            $sql = "INSERT INTO CENTRALE_ACHAT.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
                                     VALUES
                                 (:cl_id, :cc_id, :fo_id, CAST(:date_conso AS DATE), :prix_public, :prix_centrale, GETDATE(), :user)";
-                                    try {
-                                        $stmt = $conn->prepare($sql);
-                                    } catch (DBALException $e) {
-                                    }
-                                    $stmt->bindValue(':cl_id', $ligne[0]);
-                                    $stmt->bindValue(':cc_id', $ligne[1]);
-                                    $stmt->bindValue(':fo_id', $ligne[7]);
-                                    $stmt->bindValue(':date_conso', $date);
-                                    $stmt->bindValue(':prix_public', round($ligne[2]));
-                                    $stmt->bindValue(':prix_centrale', round($ligne[3]));
-                                    $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll();
-                                }
-                                break;
-
-                            //GCCP
-                            case 2:
-                                //import brut
-                                //verif si la conso est dans la table
-
-                                $sqlVerif = "SELECT CLC_ID FROM CENTRALE_GCCP.dbo.CLIENTS_CONSO WHERE CLC_DATE = :date AND FO_ID = :fo_id AND CL_ID = :cl_id";
-
-                                $stmtVerif = $conn->prepare($sqlVerif);
-                                $stmtVerif->bindValue(':date', $date);
-                                $stmtVerif->bindValue(':fo_id', $ligne[7]);
-                                $stmtVerif->bindValue(':cl_id', $ligne[0]);
-                                $stmtVerif->execute();
-                                $resultVerif = $stmtVerif->fetchAll(\PDO::FETCH_COLUMN, 0);
-                                if (empty($resultVerif)) {
-                                    //Il n'y a pas de conso donc insert
-                                    $sql = "INSERT INTO CENTRALE_GCCP.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
-                                    VALUES
-                                (:cl_id, :cc_id, :fo_id, CAST(:date_conso AS DATE), :prix_public, :prix_centrale, GETDATE(), :user)";
-                                    try {
-                                        $stmt = $conn->prepare($sql);
-                                    } catch (DBALException $e) {
-                                    }
-                                    $stmt->bindValue(':cl_id', $ligne[0]);
-                                    $stmt->bindValue(':cc_id', $ligne[1]);
-                                    $stmt->bindValue(':fo_id', $ligne[7]);
-                                    $stmt->bindValue(':date_conso', $date);
-                                    $stmt->bindValue(':prix_public', round($ligne[2]));
-                                    $stmt->bindValue(':prix_centrale', round($ligne[3]));
-                                    $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll();
-                                }
-                                break;
-
-                            //NALDEO
-                            case 3:
-                                //import brut
-                                //verif si la conso est dans la table
-
-                                $sqlVerif = "SELECT CLC_ID FROM CENTRALE_NALDEO.dbo.CLIENTS_CONSO WHERE CLC_DATE = :date AND FO_ID = :fo_id AND CL_ID = :cl_id";
-
-                                $stmtVerif = $conn->prepare($sqlVerif);
-                                $stmtVerif->bindValue(':date', $date);
-                                $stmtVerif->bindValue(':fo_id', $ligne[7]);
-                                $stmtVerif->bindValue(':cl_id', $ligne[0]);
-                                $stmtVerif->execute();
-                                $resultVerif = $stmtVerif->fetchAll(\PDO::FETCH_COLUMN, 0);
-                                if (empty($resultVerif)) {
-                                    //Il n'y a pas de conso donc insert
-                                    $sql = "INSERT INTO CENTRALE_NALDEO.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
-                                    VALUES
-                                (:cl_id, :cc_id, :fo_id, CAST(:date_conso AS DATE), :prix_public, :prix_centrale, GETDATE(), :user)";
-                                    try {
-                                        $stmt = $conn->prepare($sql);
-                                    } catch (DBALException $e) {
-                                    }
-                                    $stmt->bindValue(':cl_id', $ligne[0]);
-                                    $stmt->bindValue(':cc_id', $ligne[1]);
-                                    $stmt->bindValue(':fo_id', $ligne[7]);
-                                    $stmt->bindValue(':date_conso', $date);
-                                    $stmt->bindValue(':prix_public', round($ligne[2]));
-                                    $stmt->bindValue(':prix_centrale', round($ligne[3]));
-                                    $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll();
-                                }
-                                break;
-
-                            //funecap
-                            case 4:
-
-                                //import brut
-                                //verif si la conso est dans la table
-
-                                $sqlVerif = "SELECT CLC_ID FROM CENTRALE_FUNECAP.dbo.CLIENTS_CONSO WHERE CLC_DATE = :date AND FO_ID = :fo_id AND CL_ID = :cl_id";
-
-                                $stmtVerif = $conn->prepare($sqlVerif);
-                                $stmtVerif->bindValue(':date', $date);
-                                $stmtVerif->bindValue(':fo_id', $ligne[7]);
-                                $stmtVerif->bindValue(':cl_id', $ligne[0]);
-                                $stmtVerif->execute();
-                                $resultVerif = $stmtVerif->fetchAll(\PDO::FETCH_COLUMN, 0);
-                                if (empty($resultVerif)) {
-                                    //Il n'y a pas de conso donc insert
-                                    $sql = "INSERT INTO CENTRALE_FUNECAP.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
-                                    VALUES
-                                (:cl_id, :cc_id, :fo_id, CAST(:date_conso AS DATE), :prix_public, :prix_centrale, GETDATE(), :user)";
-                                    try {
-                                        $stmt = $conn->prepare($sql);
-                                    } catch (DBALException $e) {
-                                    }
-                                    $stmt->bindValue(':cl_id', $ligne[0]);
-                                    $stmt->bindValue(':cc_id', $ligne[1]);
-                                    $stmt->bindValue(':fo_id', $ligne[7]);
-                                    $stmt->bindValue(':date_conso', $date);
-                                    $stmt->bindValue(':prix_public', round($ligne[2]));
-                                    $stmt->bindValue(':prix_centrale', round($ligne[3]));
-                                    $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll();
-
-                                }
-
-
-                                break;
-
-                            //PFPL
-                            case 5:
-
-                                //import brut
-                                //verif si la conso est dans la table
-
-                                $sqlVerif = "SELECT CLC_ID FROM CENTRALE_PFPL.dbo.CLIENTS_CONSO WHERE CLC_DATE = :date AND FO_ID = :fo_id AND CL_ID = :cl_id";
-
-                                $stmtVerif = $conn->prepare($sqlVerif);
-                                $stmtVerif->bindValue(':date', $date);
-                                $stmtVerif->bindValue(':fo_id', $ligne[7]);
-                                $stmtVerif->bindValue(':cl_id', $ligne[0]);
-                                $stmtVerif->execute();
-                                $resultVerif = $stmtVerif->fetchAll(\PDO::FETCH_COLUMN, 0);
-                                if (empty($resultVerif)) {
-                                    //Il n'y a pas de conso donc insert
-                                    $sql = "INSERT INTO CENTRALE_PFPL.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
-                                    VALUES
-                                (:cl_id, :cc_id, :fo_id, CAST(:date_conso AS DATE), :prix_public, :prix_centrale, GETDATE(), :user)";
-                                    try {
-                                        $stmt = $conn->prepare($sql);
-                                    } catch (DBALException $e) {
-                                    }
-                                    $stmt->bindValue(':cl_id', $ligne[0]);
-                                    $stmt->bindValue(':cc_id', $ligne[1]);
-                                    $stmt->bindValue(':fo_id', $ligne[7]);
-                                    $stmt->bindValue(':date_conso', $date);
-                                    $stmt->bindValue(':prix_public', round($ligne[2]));
-                                    $stmt->bindValue(':prix_centrale', round($ligne[3]));
-                                    $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll();
-
-                                }
-
-
-                                break;
-
-                            //ROC
-                            case 6:
-
-                                //import brut
-                                //verif si la conso est dans la table
-
-                                $sqlVerif = "SELECT CLC_ID FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS_CONSO WHERE CLC_DATE = :date AND FO_ID = :fo_id AND CL_ID = :cl_id";
-
-                                $stmtVerif = $conn->prepare($sqlVerif);
-                                $stmtVerif->bindValue(':date', $date);
-                                $stmtVerif->bindValue(':fo_id', $ligne[7]);
-                                $stmtVerif->bindValue(':cl_id', $ligne[0]);
-                                $stmtVerif->execute();
-                                $resultVerif = $stmtVerif->fetchAll(\PDO::FETCH_COLUMN, 0);
-                                if (empty($resultVerif)) {
-                                    //Il n'y a pas de conso donc insert
-                                    $sql = "INSERT INTO CENTRALE_ROC_ECLERC.dbo.CLIENTS_CONSO (CL_ID, CC_ID, FO_ID, CLC_DATE, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE, INS_DATE, INS_USER)
-                                    VALUES
-                                (:cl_id, :cc_id, :fo_id, CAST(:date_conso AS DATE), :prix_public, :prix_centrale, GETDATE(), :user)";
-                                    try {
-                                        $stmt = $conn->prepare($sql);
-                                    } catch (DBALException $e) {
-                                    }
-                                    $stmt->bindValue(':cl_id', $ligne[0]);
-                                    $stmt->bindValue(':cc_id', $ligne[1]);
-                                    $stmt->bindValue(':fo_id', $ligne[7]);
-                                    $stmt->bindValue(':date_conso', $date);
-                                    $stmt->bindValue(':prix_public', round($ligne[2]));
-                                    $stmt->bindValue(':prix_centrale', round($ligne[3]));
-                                    $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
-                                    $stmt->execute();
-                                    $result = $stmt->fetchAll();
-
-                                }
-
-
-                                break;
+                            try {
+                                $stmt = $conn->prepare($sql);
+                            } catch (DBALException $e) {
+                            }
+                            $stmt->bindValue(':cl_id', $ligne[0]);
+                            $stmt->bindValue(':cc_id', $ligne[1]);
+                            $stmt->bindValue(':fo_id', $ligne[7]);
+                            $stmt->bindValue(':date_conso', $date);
+                            $stmt->bindValue(':prix_public', round($ligne[2]));
+                            $stmt->bindValue(':prix_centrale', round($ligne[3]));
+                            $stmt->bindValue(':user', $this->getUser()->getUsPrenom());
+                            $stmt->execute();
+                            $result = $stmt->fetchAll();
                         }
 
                     }
@@ -340,222 +150,63 @@ class ConsomnationController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
         $clientService = $this->get('site.service.client_services');
+        $so_database = $clientService->getCentraleDB($centrale);
+
+        $start = $request->query->get('start');
+        $end = $request->query->get('end');
 
 
-        switch ($centrale) {
-            case "ACHAT_CENTRALE":
-                $start = $request->query->get('start');
-                $end = $request->query->get('end');
-
-
-                if (isset($start) && isset($end)) {
-                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
-                                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                                    WHERE CF_USER = :ref
+        if (isset($start) && isset($end)) {
+            $totalSql = sprintf("SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
+                                      %s.dbo.CLIENTS_CONSO
+                                    WHERE CC_ID = :if
                                       AND CLC_DATE BETWEEN :start AND :end
                                     UNION ALL
                                     SELECT null,  sum(CLC_PRIX_CENTRALE), round(sum(CLC_PRIX_PUBLIC),2) FROM
-                                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                                    WHERE CF_USER = :ref
-                                      ORDER BY date ASC";
+                                      %s.dbo.CLIENTS_CONSO
+                                    WHERE CC_ID = :if
+                                      ORDER BY date ASC", $so_database);
 
 
-                    try {
-                        $stmtTotal = $conn->prepare($totalSql);
-                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                        $stmtTotal->bindValue(':start', $start);
-                        $stmtTotal->bindValue(':end', $end);
-                        $stmtTotal->execute();
-                    } catch (DBALException $e) {
+            try {
+                $stmtTotal = $conn->prepare($totalSql);
+                $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
+                $stmtTotal->bindValue(':start', $start);
+                $stmtTotal->bindValue(':end', $end);
+                $stmtTotal->execute();
+            } catch (DBALException $e) {
 
-                    }
-                    $total = $stmtTotal->fetchAll();
+            }
+            $total = $stmtTotal->fetchAll();
 
-                    $labels = [];
-                    $dataset = [];
-                    foreach ($total as $key => $result) {
-                        if ($key > 0) {
-                            array_push($dataset, $result['CLC_PRIX_PUBLIC']);
-                            array_push($labels, $result['date']);
-
-                        }
-
-                    }
-                    $data = [
-                        'type' => 'line',
-                        'title' => 'Title',
-                        'labels' => $labels,
-                        'datasets' => [
-                            [
-                                'data' => $dataset,
-                                'borderColor' => "#f7464a",
-                                'label' => "Bruneau",
-                            ]
-                        ]
-
-                    ];
-
-
-                    return new JsonResponse($data, 200);
-                    break;
+            $labels = [];
+            $dataset = [];
+            foreach ($total as $key => $result) {
+                if ($key > 0) {
+                    array_push($dataset, $result['CLC_PRIX_PUBLIC']);
+                    array_push($labels, $result['date']);
 
                 }
 
-                $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
-                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                            WHERE CF_USER = :ref
-                            UNION ALL
-                            SELECT null,  sum(CLC_PRIX_CENTRALE), round(sum(CLC_PRIX_PUBLIC),2) FROM
-                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                            WHERE CF_USER = :ref
-                              ORDER BY date ASC";
-                try {
-                    $stmtTotal = $conn->prepare($totalSql);
-                    $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                    $stmtTotal->execute();
-                } catch (DBALException $e) {
-
-                }
-                $total = $stmtTotal->fetchAll();
-                $labels = [];
-                $dataset = [];
-                foreach ($total as $key => $result) {
-
-
-                    if ($key > 0) {
-                        array_push($dataset, $result['CLC_PRIX_PUBLIC']);
-                        array_push($labels, $result['date']);
-
-                    }
-
-                }
-                $data = [
-                    'type' => 'line',
-                    'title' => 'Title',
-                    'labels' => $labels,
-                    'datasets' => [
-                        [
-                            'data' => $dataset,
-                            'borderColor' => "#f7464a",
-                            'label' => "Bruneau",
-                        ]
+            }
+            $data = [
+                'type' => 'line',
+                'title' => 'Title',
+                'labels' => $labels,
+                'datasets' => [
+                    [
+                        'data' => $dataset,
+                        'borderColor' => "#f7464a",
+                        'label' => "Bruneau",
                     ]
+                ]
 
-                ];
-                return new JsonResponse($data, 200);
-                break;
-            case "CENTRALE_FUNECAP":
-
-                $start = $request->query->get('start');
-                $end = $request->query->get('end');
-
-                if (isset($start) && isset($end)) {
-                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
-                                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                                    WHERE CF_USER = :ref
-                                      AND CLC_DATE BETWEEN :start AND :end
-                                    UNION ALL
-                                    SELECT null,  sum(CLC_PRIX_CENTRALE), round(sum(CLC_PRIX_PUBLIC),2) FROM
-                                      CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                                    WHERE CF_USER = :ref
-                                      ORDER BY date ASC";
+            ];
 
 
-                    try {
-                        $stmtTotal = $conn->prepare($totalSql);
-                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                        $stmtTotal->bindValue(':start', $start);
-                        $stmtTotal->bindValue(':end', $end);
-                        $stmtTotal->execute();
-                    } catch (DBALException $e) {
-
-                    }
-                    $total = $stmtTotal->fetchAll();
-
-                    $labels = [];
-                    $dataset = [];
-                    foreach ($total as $key => $result) {
+            return new JsonResponse($data, 200);
 
 
-                        if ($key > 0) {
-                            array_push($dataset, $result['CLC_PRIX_PUBLIC']);
-                            array_push($labels, $result['date']);
-
-                        }
-
-                    }
-                    $data = [
-                        'type' => 'line',
-                        'title' => 'Title',
-                        'labels' => $labels,
-                        'datasets' => [
-                            [
-                                'data' => $dataset,
-                                'borderColor' => "#f7464a",
-                                'label' => "Bruneau",
-                            ]
-                        ]
-
-                    ];
-
-
-                    return new JsonResponse($data, 200);
-                    break;
-
-                }
-
-
-                $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC FROM
-                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                            WHERE CF_USER = :ref
-                            UNION ALL
-                            SELECT null,  sum(CLC_PRIX_CENTRALE), round(sum(CLC_PRIX_PUBLIC),2) FROM
-                              CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                            WHERE CF_USER = :ref
-                              ORDER BY date ASC";
-
-
-                try {
-                    $stmtTotal = $conn->prepare($totalSql);
-                    $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                    $stmtTotal->execute();
-                } catch (DBALException $e) {
-
-                }
-                $total = $stmtTotal->fetchAll();
-
-                $labels = [];
-                $dataset = [];
-
-                foreach ($total as $key => $result) {
-
-
-                    if ($key > 0) {
-                        array_push($dataset, $result['CLC_PRIX_PUBLIC']);
-                        array_push($labels, $result['date']);
-
-                    }
-
-                }
-
-
-                $data = [
-                    'type' => 'line',
-                    'title' => 'Title',
-                    'labels' => $labels,
-                    'datasets' => [
-                        [
-                            'data' => $dataset,
-                            'borderColor' => "#f7464a",
-                            'label' => "Bruneau",
-                        ]
-                    ]
-
-                ];
-
-
-                return new JsonResponse($data, 200);
-                break;
         }
 
     }
@@ -566,152 +217,43 @@ class ConsomnationController extends Controller
 
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
         $clientService = $this->get('site.service.client_services');
+        $so_database = $clientService->getCentraleDB($centrale);
 
 
-        switch ($centrale) {
-
-            case "ACHAT_CENTRALE":
-                $start = $request->query->get('start');
-                $end = $request->query->get('end');
+        $start = $request->query->get('start');
+        $end = $request->query->get('end');
 
 
-                if (isset($start) && isset($end)) {
-                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+        if (isset($start) && isset($end)) {
+            $totalSql = sprintf("SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM %s.dbo.CLIENTS_CONSO
                                 WHERE CF_USER = :ref
                                 AND CLC_DATE BETWEEN :start AND :end
                                 ORDER BY date
-                                  ";
-                    try {
-                        $stmtTotal = $conn->prepare($totalSql);
-                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                        $stmtTotal->bindValue(':start', $start);
-                        $stmtTotal->bindValue(':end', $end);
-                        $stmtTotal->execute();
-                    } catch (DBALException $e) {
+                                  ", $so_database);
+            try {
+                $stmtTotal = $conn->prepare($totalSql);
+                $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
+                $stmtTotal->bindValue(':start', $start);
+                $stmtTotal->bindValue(':end', $end);
+                $stmtTotal->execute();
+            } catch (DBALException $e) {
 
-                    }
-                    $total = $stmtTotal->fetchAll();
-
-
-                    $html = '';
-
-                    foreach ($total as $item => $value) {
-
-                        $html .= '<tr><td>' . $value['date'] . '</td><td>' . $value['CLC_PRIX_CENTRALE'] . '</td><td>' . ($value['CLC_PRIX_PUBLIC'] - $value['CLC_PRIX_CENTRALE']) . '</td></tr>';
-                    }
-                    $html .= '';
+            }
+            $total = $stmtTotal->fetchAll();
 
 
-                }
-                return new JsonResponse($html, 200);
-                break;
-            case "CENTRALE_FUNECAP":
-                $start = $request->query->get('start');
-                $end = $request->query->get('end');
+            $html = '';
 
+            foreach ($total as $item => $value) {
 
-                if (isset($start) && isset($end)) {
-                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                                WHERE CF_USER = :ref
-                                AND CLC_DATE BETWEEN :start AND :end
-                                ORDER BY date
-                                  ";
-                    try {
-                        $stmtTotal = $conn->prepare($totalSql);
-                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                        $stmtTotal->bindValue(':start', $start);
-                        $stmtTotal->bindValue(':end', $end);
-                        $stmtTotal->execute();
-                    } catch (DBALException $e) {
+                $html .= '<tr><td>' . $value['date'] . '</td><td>' . $value['CLC_PRIX_CENTRALE'] . '</td><td>' . ($value['CLC_PRIX_PUBLIC'] - $value['CLC_PRIX_CENTRALE']) . '</td></tr>';
+            }
+            $html .= '';
 
-                    }
-                    $total = $stmtTotal->fetchAll();
-
-
-                    $html = '';
-
-                    foreach ($total as $item => $value) {
-
-                        $html .= '<tr><td>' . $value['date'] . '</td><td>' . $value['CLC_PRIX_CENTRALE'] . '</td><td>' . ($value['CLC_PRIX_PUBLIC'] - $value['CLC_PRIX_CENTRALE']) . '</td></tr>';
-                    }
-                    $html .= '';
-
-
-                }
-                return new JsonResponse($html, 200);
-                break;
-            case "CENTRALE_GCCP":
-                $start = $request->query->get('start');
-                $end = $request->query->get('end');
-
-
-                if (isset($start) && isset($end)) {
-                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                                WHERE CF_USER = :ref
-                                AND CLC_DATE BETWEEN :start AND :end
-                                ORDER BY date
-                                  ";
-                    try {
-                        $stmtTotal = $conn->prepare($totalSql);
-                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                        $stmtTotal->bindValue(':start', $start);
-                        $stmtTotal->bindValue(':end', $end);
-                        $stmtTotal->execute();
-                    } catch (DBALException $e) {
-
-                    }
-                    $total = $stmtTotal->fetchAll();
-
-
-                    $html = '';
-
-                    foreach ($total as $item => $value) {
-
-                        $html .= '<tr><td>' . $value['date'] . '</td><td>' . $value['CLC_PRIX_CENTRALE'] . '</td><td>' . ($value['CLC_PRIX_PUBLIC'] - $value['CLC_PRIX_CENTRALE']) . '</td></tr>';
-                    }
-                    $html .= '';
-
-
-                }
-                return new JsonResponse($html, 200);
-                break;
-            case "ROC_ECLERC":
-                $start = $request->query->get('start');
-                $end = $request->query->get('end');
-
-
-                if (isset($start) && isset($end)) {
-                    $totalSql = "SELECT SUBSTRING(CONVERT(VARCHAR(8), CLC_DATE, 3), 4, 5) AS date, CLC_PRIX_PUBLIC, CLC_PRIX_CENTRALE FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                                WHERE CF_USER = :ref
-                                AND CLC_DATE BETWEEN :start AND :end
-                                ORDER BY date
-                                  ";
-                    try {
-                        $stmtTotal = $conn->prepare($totalSql);
-                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                        $stmtTotal->bindValue(':start', $start);
-                        $stmtTotal->bindValue(':end', $end);
-                        $stmtTotal->execute();
-                    } catch (DBALException $e) {
-
-                    }
-                    $total = $stmtTotal->fetchAll();
-
-
-                    $html = '';
-
-                    foreach ($total as $item => $value) {
-
-                        $html .= '<tr><td>' . $value['date'] . '</td><td>' . $value['CLC_PRIX_CENTRALE'] . '</td><td>' . ($value['CLC_PRIX_PUBLIC'] - $value['CLC_PRIX_CENTRALE']) . '</td></tr>';
-                    }
-                    $html .= '';
-
-
-                }
-                return new JsonResponse($html, 200);
-                break;
 
         }
+        return new JsonResponse($html, 200);
+
     }
 
     public function ConsoCaAction(Request $request, $id, $centrale)
@@ -724,217 +266,66 @@ class ConsomnationController extends Controller
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
         $clientService = $this->get('site.service.client_services');
 
-
-        switch ($centrale) {
-
-            case "ACHAT_CENTRALE":
-                $start = $request->query->get('start');
-                $end = $request->query->get('end');
+        $so_database = $clientService->getCentraleDB($centrale);
 
 
-                if (isset($start) && isset($end)) {
-                    $totalSql = "SELECT sum(CLC_PRIX_CENTRALE) as Total_ca_centrale, sum(CLC_PRIX_PUBLIC) as Total_ca_public, SUM((coalesce(CLC_PRIX_PUBLIC ,0)) - (coalesce(CLC_PRIX_CENTRALE ,0))) as total FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
+        $start = $request->query->get('start');
+        $end = $request->query->get('end');
+
+
+        if (isset($start) && isset($end)) {
+            $totalSql = sprintf("SELECT sum(CLC_PRIX_CENTRALE) as Total_ca_centrale, sum(CLC_PRIX_PUBLIC) as Total_ca_public, SUM((coalesce(CLC_PRIX_PUBLIC ,0)) - (coalesce(CLC_PRIX_CENTRALE ,0))) as total FROM %s.dbo.CLIENTS_CONSO
                                     WHERE CF_USER = :ref
-                                    AND CLC_DATE BETWEEN :start AND :end ";
-                    try {
-                        $stmtTotal = $conn->prepare($totalSql);
-                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                        $stmtTotal->bindValue(':start', $start);
-                        $stmtTotal->bindValue(':end', $end);
-                        $stmtTotal->execute();
-                    } catch (DBALException $e) {
+                                    AND CLC_DATE BETWEEN :start AND :end ", $so_database);
+            try {
+                $stmtTotal = $conn->prepare($totalSql);
+                $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
+                $stmtTotal->bindValue(':start', $start);
+                $stmtTotal->bindValue(':end', $end);
+                $stmtTotal->execute();
+            } catch (DBALException $e) {
 
-                    }
-                    $total = $stmtTotal->fetchAll();
-
-
-                    $html = [
-                        "Total_ca_centrale" => money_format('%!n &euro;', $total[0]["Total_ca_centrale"]),
-                        "Total_ca_public" => money_format('%!n &euro;', $total[0]["Total_ca_public"]),
-                        "total" => money_format('%!n &euro;', $total[0]["total"]),
-
-                    ];
+            }
+            $total = $stmtTotal->fetchAll();
 
 
-                }
-                return new JsonResponse($html, 200);
-                break;
-            case "CENTRALE_FUNECAP":
-                $start = $request->query->get('start');
-                $end = $request->query->get('end');
+            $html = [
+                "Total_ca_centrale" => money_format('%!n &euro;', $total[0]["Total_ca_centrale"]),
+                "Total_ca_public" => money_format('%!n &euro;', $total[0]["Total_ca_public"]),
+                "total" => money_format('%!n &euro;', $total[0]["total"]),
 
-
-                if (isset($start) && isset($end)) {
-                    $totalSql = "SELECT sum(CLC_PRIX_CENTRALE) as Total_ca_centrale, sum(CLC_PRIX_PUBLIC) as Total_ca_public, SUM((coalesce(CLC_PRIX_PUBLIC ,0)) - (coalesce(CLC_PRIX_CENTRALE ,0))) as total FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                                    WHERE CF_USER = :ref
-                                    AND CLC_DATE BETWEEN :start AND :end
-                                                                  ";
-                    try {
-                        $stmtTotal = $conn->prepare($totalSql);
-                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                        $stmtTotal->bindValue(':start', $start);
-                        $stmtTotal->bindValue(':end', $end);
-                        $stmtTotal->execute();
-                    } catch (DBALException $e) {
-
-                    }
-                    $total = $stmtTotal->fetchAll();
-
-
-                    $html = [
-                        "Total_ca_centrale" => money_format('%!n &euro;', $total[0]["Total_ca_centrale"]),
-                        "Total_ca_public" => money_format('%!n &euro;', $total[0]["Total_ca_public"]),
-                        "total" => money_format('%!n &euro;', $total[0]["total"]),
-
-                    ];
-
-
-                }
-                return new JsonResponse($html, 200);
-                break;
-            case "ROC_ECLERC":
-                $start = $request->query->get('start');
-                $end = $request->query->get('end');
-
-
-                if (isset($start) && isset($end)) {
-                    $totalSql = "SELECT sum(CLC_PRIX_CENTRALE) as Total_ca_centrale, sum(CLC_PRIX_PUBLIC) as Total_ca_public, SUM((coalesce(CLC_PRIX_PUBLIC ,0)) - (coalesce(CLC_PRIX_CENTRALE ,0))) as total FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO
-                                    WHERE CF_USER = :ref
-                                    AND CLC_DATE BETWEEN :start AND :end
-                                                                  ";
-                    try {
-                        $stmtTotal = $conn->prepare($totalSql);
-                        $stmtTotal->bindValue(':ref', $clientService->getRefClient($id, $centrale));
-                        $stmtTotal->bindValue(':start', $start);
-                        $stmtTotal->bindValue(':end', $end);
-                        $stmtTotal->execute();
-                    } catch (DBALException $e) {
-
-                    }
-                    $total = $stmtTotal->fetchAll();
-
-
-                    $html = [
-                        "Total_ca_centrale" => money_format('%!n &euro;', $total[0]["Total_ca_centrale"]),
-                        "Total_ca_public" => money_format('%!n &euro;', $total[0]["Total_ca_public"]),
-                        "total" => money_format('%!n &euro;', $total[0]["total"]),
-
-                    ];
-
-
-                }
-                return new JsonResponse($html, 200);
-                break;
+            ];
 
 
         }
+        return new JsonResponse($html, 200);
 
-
-    }
-
-    public function testAction(Request $request)
-    {
-
-
-        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
-
-        $sqlConso = "SELECT DISTINCT (SELECT CONVERT(VARCHAR(8), a.INS_DATE, 3) AS [MM/DD/YY]) AS date ,sum(a.CLC_PRIX_PUBLIC) AS CA_PUBLIC , sum(a.CLC_PRIX_CENTRALE) AS CA_CENTRALE , b.FO_RAISONSOC
-                            FROM CENTRALE_ACHAT.dbo.CLIENTS_CONSO a JOIN CENTRALE_PRODUITS.dbo.FOURNISSEURS b
-                                ON a.FO_ID = b.FO_ID
-                            GROUP BY a.INS_DATE, b.FO_RAISONSOC
-                            ORDER BY date";
-
-        $stmtConso = $conn->prepare($sqlConso);
-        $stmtConso->execute();
-        $conso = $stmtConso->fetchAll();
-
-        return new JsonResponse($conso, 200);
     }
 
     public function refToRaisonSocAction($idClient, $centrale)
     {
-
-
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
+        $clientService = $this->get('site.service.client_services');
 
-        switch ($centrale) {
-            case "ACHAT_CENTRALE":
-                $sql = "SELECT CL_REF FROM CENTRALE_ACHAT.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
+        $so_database = $clientService->getCentraleDB($centrale);
 
 
-                    return $result[0]['CL_REF'];
-
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
-            case "CENTRALE_GCCP":
-                $sql = "SELECT CL_REF FROM CENTRALE_GCCP.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['CL_REF'];
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
-            case "CENTRALE_FUNECAP":
-                $sql = "SELECT CL_REF FROM CENTRALE_FUNECAP.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['CL_REF'];
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
-            case "CENTRALE_PFPL":
-                $sql = "SELECT CL_REF FROM CENTRALE_PFPL.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['CL_REF'];
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
-            case "ROC_ECLERC":
-                $sql = "SELECT CL_REF FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
-                        WHERE CL_ID = :id";
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $idClient);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['CL_REF'];
-                } else {
-                    return 'Pas de ref';
-                }
-                break;
+        $sql = sprintf("SELECT CL_REF FROM %s.dbo.CLIENTS
+                        WHERE CL_ID = :id", $so_database);
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(":id", $idClient);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        if ($result) {
+            return $result[0]['CL_REF'];
+        } else {
+            return 'Pas de ref';
         }
     }
 
-    public function checkConsoAction(Request $request){
+    public function checkConsoAction(Request $request)
+    {
 
 
         $content = $request->query->get('centrale');
@@ -950,7 +341,7 @@ class ConsomnationController extends Controller
 
             $array_final = [];
 
-            foreach ($result as $res){
+            foreach ($result as $res) {
 
                 $sqlFournisseur = sprintf("SELECT * FROM %s.dbo.CLIENTS_CONSO WHERE FO_ID = :fo_id AND CLC_DATE > DATEADD(month, -2, GETDATE())", $content);
                 $stmtFournisseur = $conn->prepare($sqlFournisseur);
@@ -959,33 +350,29 @@ class ConsomnationController extends Controller
                 $resultFournisseur = $stmtFournisseur->fetchAll();
 
 
+                if (count($resultFournisseur) > 0) {
+                    $tpl = [
+                        "FO_RAISONSOC" => $res["FO_RAISONSOC"],
+                        "status" => true
+                    ];
 
-               if (count($resultFournisseur) > 0){
-                   $tpl = [
-                       "FO_RAISONSOC" => $res["FO_RAISONSOC"],
-                       "status" => true
-                   ];
-
-               } else {
-                   $tpl = [
-                       "FO_RAISONSOC" => $res["FO_RAISONSOC"],
-                       "status" => false
-                   ];
-               }
-               array_push($array_final, $tpl);
+                } else {
+                    $tpl = [
+                        "FO_RAISONSOC" => $res["FO_RAISONSOC"],
+                        "status" => false
+                    ];
+                }
+                array_push($array_final, $tpl);
             }
 
 
-            return $this->render('@Site/Consomnation/check.html.twig',[
+            return $this->render('@Site/Consomnation/check.html.twig', [
                 "fournisseurs" => $array_final,
                 "centrale" => $content
             ]);
         } else {
             return 'Probleme';
         }
-
-
-
 
 
     }

@@ -2,19 +2,6 @@ site:
     resource: "@SiteBundle/Resources/config/routing.yml"
     prefix:   /
 
-Api:
-    resource: "@AchatCentraleCrmBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
-clients:
-    type:   rest
-    resource: "@AchatCentraleCrmBundle/Controller/ClientsController.php"
-
-action:
-    type:   rest
-    resource: "@AchatCentraleCrmBundle/Controller/ActionController.php"
-
 
 
 
