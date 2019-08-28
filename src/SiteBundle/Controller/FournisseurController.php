@@ -131,9 +131,6 @@ class FournisseurController extends Controller
         ini_set('auto_detect_line_endings', TRUE);
 
 
-        $replace = $this->get("site.service.bddservices");
-
-
         $data = [];
 
 
@@ -481,7 +478,7 @@ class FournisseurController extends Controller
     public function checkBarcodeAction(Request $request)
     {
 
-        $conn = $this->get('doctrine.dbal.centrale_produits_connection');
+        $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $sql = 'SELECT
                   PR_ID,

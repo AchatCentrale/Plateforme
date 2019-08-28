@@ -17,32 +17,6 @@ class ClientServices
         $this->connection = $dbalConnection;
     }
 
-    public function getTheSqlForCentrale($centrale)
-    {
-
-        switch ($centrale) {
-            case "CENTRALE_FUNECAP":
-                $sql = 'SELECT DISTINCT
-                SO_ID,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION,
-                CL_STATUS, CL_ADHESION, GR_DESCR, CL_DESCR, AC_DESCR
-
-                FROM Vue_All_Clients
-
-                WHERE
-                  SO_ID = 2';
-                return $sql;
-            case "CENTRALE_ROC_ECLERC":
-                $sql = 'SELECT DISTINCT
-                SO_ID,CL_ID, CL_REF, CL_RAISONSOC, CL_SIRET,CL_CP, CL_VILLE ,CL_PAYS, CL_MAIL, CL_WEB, CL_DT_ADHESION,
-                CL_STATUS, CL_ADHESION, GR_DESCR, CL_DESCR, AC_DESCR
-
-                FROM Vue_All_Clients
-
-                WHERE
-                  SO_ID = 1';
-                return $sql;
-        }
-    }
 
 
     public function getTheIdForTheStatut($statut)
@@ -150,359 +124,28 @@ class ClientServices
         return $ret;
     }
 
-    public function utf8ize($mixed) {
-        if (is_array($mixed)) {
-            foreach ($mixed as $key => $value) {
-                $mixed[$key] = self::utf8ize($value);
-            }
-        } else if (is_string ($mixed)) {
-            return utf8_encode($mixed);
-        }
-        return $mixed;
-    }
-
-    public function getTheCentrale($centrale)
-    {
-        switch ($centrale) {
-
-            case 'all':
-                return "all";
-                break;
-            case 'roc':
-                return "ROC_ECLERC";
-                break;
-            case 'fun':
-                return "CENTRALE_FUNECAP";
-                break;
-            case 'gccp':
-                return "CENTRALE_GCCP";
-                break;
-            case 'pfpl':
-                return "CENTRALE_PFPL";
-                break;
-            case 'ac':
-                return "ACHAT_CENTRALE";
-                break;
-            case "1":
-                return "ACHAT CENTRALE";
-                break;
-            case '2':
-                return "CENTRALE GCCP";
-                break;
-            case '4':
-                return "CENTRALE FUNECAP";
-                break;
-            case '5':
-                return "CENTRALE_PFPL";
-                break;
-            case '6':
-                return "ROC_ECLERC";
-                break;
 
 
-        }
-    }
 
-    public function getTheEvolution($centrale)
-    {
-        switch ($centrale) {
-            case "1":
-                $sql = "SELECT COUNT(*)
-                        FROM CENTRALE_ACHAT.dbo.CLIENTS
-                        WHERE CAST(INS_DATE AS DATE) > DATEADD(M,-3, GETDATE());";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                $sqlTotal = "SELECT COUNT(*)
-                            FROM CENTRALE_ACHAT.dbo.CLIENTS";
-
-                $stmtTotal = $this->connection->prepare($sqlTotal);
-                $stmtTotal->execute();
-                $resultTotal = $stmtTotal->fetchAll();
-
-                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
-
-
-                $data = [
-                    "total" => $total
-                ];
-
-
-                return $data;
-            case "2":
-                $sql = "SELECT COUNT(*)
-                FROM CENTRALE_GCCP.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                $sqlTotal = "SELECT COUNT(*)
-                            FROM CENTRALE_GCCP.dbo.CLIENTS";
-
-                $stmtTotal = $this->connection->prepare($sqlTotal);
-                $stmtTotal->execute();
-                $resultTotal = $stmtTotal->fetchAll();
-
-                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
-
-
-                $data = [
-                    "total" => $total
-                ];
-
-
-                return $data;
-            case "4":
-                $sql = "SELECT COUNT(*)
-                FROM CENTRALE_FUNECAP.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                $sqlTotal = "SELECT COUNT(*)
-                            FROM CENTRALE_FUNECAP.dbo.CLIENTS";
-
-                $stmtTotal = $this->connection->prepare($sqlTotal);
-                $stmtTotal->execute();
-                $resultTotal = $stmtTotal->fetchAll();
-
-                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
-
-
-                $data = [
-                    "total" => $total
-                ];
-
-
-                return $data;
-            case "5":
-                $sql = "SELECT COUNT(*)
-                FROM CENTRALE_PFPL.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                $sqlTotal = "SELECT COUNT(*)
-                            FROM CENTRALE_PFPL.dbo.CLIENTS";
-
-                $stmtTotal = $this->connection->prepare($sqlTotal);
-                $stmtTotal->execute();
-                $resultTotal = $stmtTotal->fetchAll();
-
-                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
-
-
-                $data = [
-                    "total" => $total
-                ];
-
-
-                return $data;
-            case "6":
-                $sql = "SELECT COUNT(*)
-                FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
-                WHERE CAST(INS_DATE AS DATE) > DATEADD(MONTH,1,GETDATE());";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                $sqlTotal = "SELECT COUNT(*)
-                            FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS";
-
-                $stmtTotal = $this->connection->prepare($sqlTotal);
-                $stmtTotal->execute();
-                $resultTotal = $stmtTotal->fetchAll();
-
-                $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
-
-
-                $data = [
-                    "total" => round($total)
-                ];
-
-
-                return $data;
-        }
-
-
-    }
 
     public function getTheClientRaisonSoc($id, $centraleId)
     {
 
+        $so_database = $this->getCentraleDB($centraleId);
+
+        $sql = sprintf("SELECT CL_RAISONSOC
+                        FROM %s.dbo.CLIENTS
+                        WHERE CL_ID = :id ", $so_database);
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result[0]['CL_RAISONSOC'];
 
 
-
-
-        switch ($centraleId) {
-            case "1":
-                $sql = "SELECT CL_RAISONSOC
-                        FROM CENTRALE_ACHAT.dbo.CLIENTS
-                        WHERE CL_ID = :id ";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                return $result[0]['CL_RAISONSOC'];
-            case "2":
-                $sql = "SELECT CL_RAISONSOC
-                        FROM CENTRALE_GCCP.dbo.CLIENTS
-                        WHERE CL_ID = :id ";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                return $result[0]['CL_RAISONSOC'];
-            case "4":
-                $sql = "SELECT CL_RAISONSOC
-                        FROM CENTRALE_FUNECAP.dbo.CLIENTS
-                        WHERE CL_ID = :id ";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                return $result[0]['CL_RAISONSOC'];
-            case "5":
-                $sql = "SELECT CL_RAISONSOC
-                        FROM CENTRALE_GCCP.dbo.CLIENTS
-                        WHERE CL_ID = :id ";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                return $result[0]['CL_RAISONSOC'];
-            case "6":
-                $sql = "SELECT CL_RAISONSOC
-                FROM CENTRALE_ROC_ECLERC.dbo.CLIENTS
-                WHERE CL_ID = :id
-                ";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(':id', $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                return $result[0]['CL_RAISONSOC'];
-        }
-
-
-        return $id . "  " . $centraleId;
     }
 
-    public function getTheClientGroupe($id, $centraleId)
-    {
-
-
-        switch ($centraleId) {
-            case "ACHAT_CENTRALE":
-                $sql = "SELECT *
-                        FROM CENTRALE_ACHAT.dbo.GROUPE
-                        WHERE GR_ID = :id";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['GR_DESCR'];
-
-                } else {
-
-                    return 'Pas de groupe';
-                }
-            case "CENTRALE_GCCP":
-                $sql = "SELECT *
-                        FROM CENTRALE_GCCP.dbo.GROUPE
-                        WHERE GR_ID = :id";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['GR_DESCR'];
-
-                } else {
-
-                    return 'Pas de groupe';
-                }
-            case "CENTRALE_FUNECAP":
-                $sql = "SELECT *
-                        FROM CENTRALE_FUNECAP.dbo.GROUPE
-                        WHERE GR_ID = :id";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['GR_DESCR'];
-
-                } else {
-
-                    return 'Pas de groupe';
-                }
-            case "CENTRALE_PFPL":
-                $sql = "SELECT *
-                        FROM CENTRALE_PFPL.dbo.GROUPE
-                        WHERE GR_ID = :id";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-                if ($result) {
-
-                    return $result[0]['GR_DESCR'];
-
-                } else {
-
-                    return 'Pas de groupe';
-                }
-            case "ROC_ECLERC":
-
-                $sql = "SELECT *
-                        FROM CENTRALE_ROC_ECLERC.dbo.GROUPE
-                        WHERE GR_ID = :id";
-
-                $stmt = $this->connection->prepare($sql);
-                $stmt->bindValue(":id", $id);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
-
-
-                if ($result) {
-
-                    return $result[0]['GR_DESCR'];
-
-                } else {
-
-                    return 'Pas de groupe';
-                }
-
-        }
-
-    }
 
     public function sendNotifNewClientAc($CC_NOM, $CL_MAIL, $CL_TEL, $id)
     {
@@ -513,33 +156,7 @@ class ClientServices
         $response = curl_exec($ch);
     }
 
-    public function getRaisonSocFourn($raisonSoc)
-    {
 
-
-        $sql = "SELECT FO_ID FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS WHERE FO_RAISONSOC = :raison_soc";
-
-        $stmt = $this->connection->prepare($sql);
-        $stmt->bindValue(':raison_soc', $raisonSoc);
-        $stmt->execute();
-        return $result = $stmt->fetchAll();
-
-
-    }
-
-    public function getRayonFourn($rayon)
-    {
-
-
-        $sql = 'SELECT RA_ID FROM RAYONS WHERE RA_NOM = :rayon';
-
-        $stmt = $this->connection->prepare($sql);
-        $stmt->bindValue(':rayon', $rayon);
-        $stmt->execute();
-        return $result = $stmt->fetchAll();
-
-
-    }
 
     public function getUserName($mailUser)
     {
@@ -571,68 +188,12 @@ class ClientServices
         }
     }
 
-    public function getRefToRaisonSoc($ref){
-
-
-        $sqlAc = "SELECT CL_RAISONSOC FROM CENTRALE_ACHAT.dbo.CLIENTS
-                        WHERE CL_REF = :ref";
-        $stmtAc = $this->connection->prepare($sqlAc);
-        $stmtAc->bindValue(":ref", $ref);
-        $stmtAc->execute();
-        $resultAc = $stmtAc->fetchAll();
-        if ($resultAc) {
-            return $resultAc[0]['CL_RAISONSOC'];
-        } else {
-
-            $sqlFun = "SELECT CL_RAISONSOC FROM CENTRALE_FUNECAP.dbo.CLIENTS
-                        WHERE CL_REF = :ref";
-            $stmtFun = $this->connection->prepare($sqlFun);
-            $stmtFun->bindValue(":ref", $ref);
-            $stmtFun->execute();
-            $result = $stmtFun->fetchAll();
-            if ($result) {
-                return $result[0]['CL_RAISONSOC'];
-            } else {
-
-                $sqlGccp = "SELECT CL_RAISONSOC FROM CENTRALE_GCCP.dbo.CLIENTS
-                        WHERE CL_REF = :ref";
-                $stmtGccp = $this->connection->prepare($sqlGccp);
-                $stmtGccp->bindValue(":ref", $ref);
-                $stmtGccp->execute();
-                $result = $stmtGccp->fetchAll();
-                if ($result) {
-                    return $result[0]['CL_RAISONSOC'];
-                } else {
-
-                    return $result[0]['CL_RAISONSOC'];
-
-
-
-
-
-                }
-
-
-
-
-
-            }
-
-
-
-
-        }
-
-
-
-    }
-
-
     /**
      * @param $length
      * @return string
+     * @throws \Exception
      */
-    public function getToken($length){
+    public function generateToken($length){
         $token = "";
         $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         $codeAlphabet.= "abcdefghijklmnopqrstuvwxyz";
@@ -647,9 +208,29 @@ class ClientServices
     }
 
 
+    public function getTheEvolution($centrale)
+    {
 
+        $so_database = $this->getCentraleDB($centrale);
 
+        $sql = sprintf("SELECT COUNT(*)
+                        FROM %s.dbo.CLIENTS
+                        WHERE CAST(INS_DATE AS DATE) > DATEADD(M,-3, GETDATE());", $so_database);
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $sqlTotal = "SELECT COUNT(*)
+                            FROM CENTRALE_ACHAT.dbo.CLIENTS";
+        $stmtTotal = $this->connection->prepare($sqlTotal);
+        $stmtTotal->execute();
+        $resultTotal = $stmtTotal->fetchAll();
+        $total = round(($resultTotal[0]['computed'] - $result[0]['computed']) / 100, 0, PHP_ROUND_HALF_UP);
+        $data = [
+            "total" => $total
+        ];
+        return $data;
 
+    }
 
 
 }

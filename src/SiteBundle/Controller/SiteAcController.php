@@ -19,7 +19,7 @@ class SiteAcController extends Controller
             $CC_NOM = $request->request->get('CC_NOM');
             $CL_MAIL = $request->request->get('CL_MAIL');
             $CL_TEL = $request->request->get('CL_TEL');
-            $token = $this->get('site.service.client_services')->getToken(8);
+            $token = $this->get('site.service.client_services')->generateToken(8);
 
             $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
             $sql = "BEGIN TRANSACTION

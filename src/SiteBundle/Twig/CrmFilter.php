@@ -4,12 +4,14 @@ namespace SiteBundle\Twig;
 
 
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Twig_Function;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 use Doctrine\DBAL\Connection;
 
 
 
-class CrmFilter extends \Twig_Extension
+class CrmFilter extends AbstractExtension
 {
 
     protected $doctrine;
@@ -32,7 +34,7 @@ class CrmFilter extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new Twig_Function('randFacture', [$this, 'generateFactureNumber']),
+            new TwigFunction('randFacture', [$this, 'generateFactureNumber']),
         );
     }
 
@@ -40,36 +42,36 @@ class CrmFilter extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_Filter('phone', [$this, 'phoneFilter']),
-            new \Twig_SimpleFilter('Time', [$this, 'dateFilter']),
-            new \Twig_SimpleFilter('type', [$this, 'typeFilter']),
-            new \Twig_SimpleFilter('priorite', [$this, 'priorityFilter']),
-            new \Twig_SimpleFilter('timeFromNow', [$this, 'timeFromNowFilter']),
-            new \Twig_SimpleFilter('siret', [$this, 'siretFilter']),
-            new \Twig_SimpleFilter('status', [$this, 'statusFilter']),
-            new \Twig_SimpleFilter('isEmpty', [$this, 'isEmpty']),
-            new \Twig_SimpleFilter('centrale', [$this, 'centraleFilter']),
-            new \Twig_SimpleFilter('etat', [$this, 'etatTache']),
-            new \Twig_SimpleFilter('dateString', [$this, 'dateString']),
-            new \Twig_SimpleFilter('fromNowString', [$this, 'dateFromNowString']),
-            new \Twig_SimpleFilter('centraleLabel', [$this, 'centraleLabel']),
-            new \Twig_SimpleFilter('limitLength', [$this, 'limitLength']),
-            new \Twig_SimpleFilter('formatVille', [$this, 'formatVille']),
-            new \Twig_SimpleFilter('userFilter', [$this, 'userFilter']),
-            new \Twig_SimpleFilter('avatar', [$this, 'getAvatar']),
-            new \Twig_SimpleFilter('getClass', [$this, 'getClass']),
-            new \Twig_SimpleFilter('centraleTickets', [$this, 'centraleTickets']),
-            new \Twig_SimpleFilter('isNumeric', [$this, 'isNumeric']),
-            new \Twig_SimpleFilter('month', [$this, 'monthIntToString']),
-            new \Twig_SimpleFilter('ean13', [$this, 'ean13_check_digit']),
-            new \Twig_SimpleFilter('centrale_int', [$this, 'centraleStringToInt']),
-            new \Twig_SimpleFilter('centraleUrl', [$this, 'centraleUrl']),
-            new \Twig_SimpleFilter('encoding_to', [$this, 'encoding_to']),
-            new \Twig_SimpleFilter('encoding_from', [$this, 'encoding_from']),
-            new \Twig_SimpleFilter('product_pic', [$this, 'getProductPic']),
-            new \Twig_SimpleFilter('declinaison', [$this, 'getDeclinaison']),
-            new \Twig_SimpleFilter('picFrs', [$this, 'getProfilePicFrs']),
-            new \Twig_SimpleFilter('remise', [$this, 'getDiscountPercentage']),
+            new TwigFilter('phone', [$this, 'phoneFilter']),
+            new TwigFilter('Time', [$this, 'dateFilter']),
+            new TwigFilter('type', [$this, 'typeFilter']),
+            new TwigFilter('priorite', [$this, 'priorityFilter']),
+            new TwigFilter('timeFromNow', [$this, 'timeFromNowFilter']),
+            new TwigFilter('siret', [$this, 'siretFilter']),
+            new TwigFilter('status', [$this, 'statusFilter']),
+            new TwigFilter('isEmpty', [$this, 'isEmpty']),
+            new TwigFilter('centrale', [$this, 'centraleFilter']),
+            new TwigFilter('etat', [$this, 'etatTache']),
+            new TwigFilter('dateString', [$this, 'dateString']),
+            new TwigFilter('fromNowString', [$this, 'dateFromNowString']),
+            new TwigFilter('centraleLabel', [$this, 'centraleLabel']),
+            new TwigFilter('limitLength', [$this, 'limitLength']),
+            new TwigFilter('formatVille', [$this, 'formatVille']),
+            new TwigFilter('userFilter', [$this, 'userFilter']),
+            new TwigFilter('avatar', [$this, 'getAvatar']),
+            new TwigFilter('getClass', [$this, 'getClass']),
+            new TwigFilter('centraleTickets', [$this, 'centraleTickets']),
+            new TwigFilter('isNumeric', [$this, 'isNumeric']),
+            new TwigFilter('month', [$this, 'monthIntToString']),
+            new TwigFilter('ean13', [$this, 'ean13_check_digit']),
+            new TwigFilter('centrale_int', [$this, 'centraleStringToInt']),
+            new TwigFilter('centraleUrl', [$this, 'centraleUrl']),
+            new TwigFilter('encoding_to', [$this, 'encoding_to']),
+            new TwigFilter('encoding_from', [$this, 'encoding_from']),
+            new TwigFilter('product_pic', [$this, 'getProductPic']),
+            new TwigFilter('declinaison', [$this, 'getDeclinaison']),
+            new TwigFilter('picFrs', [$this, 'getProfilePicFrs']),
+            new TwigFilter('remise', [$this, 'getDiscountPercentage']),
         );
     }
 

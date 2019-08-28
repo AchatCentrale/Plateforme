@@ -12,7 +12,7 @@ class Mailer
     protected $conn;
     private $from = "contact@achatcentrale.fr";
     private $reply = "contact@achatcentrale.fr";
-    private $name = "Notification achat-centrale 😋";
+    private $name = "Notification achat-centrale";
 
     public function __construct($mailer, EngineInterface $templating,Connection $dbalConnection )
     {

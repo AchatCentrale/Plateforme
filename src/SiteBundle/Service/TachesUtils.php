@@ -12,16 +12,4 @@ class TachesUtils
 
 
 
-
-
-    public function utf8_encode_datetime($Datetime){
-
-
-        return utf8_encode(date_format($Datetime, 'd-m-Y H:i:s'));
-
-    }
-
-
-
-
 }

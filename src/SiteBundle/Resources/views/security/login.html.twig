@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +15,12 @@
 
 <div class="login-container">
     <img class="img-home" src="{{ asset('images/logo-achatcentrale.png') }}" alt="Logo">
-
+    {% if error %}
+        <div class="ink-alert basic error" role="alert" style="width: 50%;margin: 0 auto;margin-bottom: 50px;">
+            <button class="ink-dismiss">&times;</button>
+            <p><b>Erreur:</b> {{ error.message | replace({"Bad credentials." : "Identifiant incorrecte"}) }}</p>
+        </div>
+    {% endif %}
 
     <div class="login-group">
 
@@ -45,13 +50,6 @@
 
             <button type="submit" class="ink-button green btn-login">Se connecter</button>
         </form>
-
-        {% if error %}
-            <div>
-                <p class="align-center error-login">{{ error.message | replace({"Bad credentials." : "Identifiant incorrecte"}) }}</p>
-            </div>
-        {% endif %}
-
     </div>
 </div>
 
