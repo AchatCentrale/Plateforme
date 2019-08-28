@@ -115,87 +115,34 @@
 
                 <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="ui equal width grid raison-soc">
-                        <div class="equal width row">
+                        <div class="row">
                             <div class="eight wide column">
-                                <h3 class="raison-soc-titre">
-                                    <i class="building icon"></i> {{ client[0]["CL_RAISONSOC"] |  convert_encoding('UTF-8', 'Windows-1252') | upper }}
-                                    {% if client[0]["CL_STATUS"] == 2 %}
-                                        <p>Bloqué</p>
-                                    {% endif %}
-                                </h3>
-
                                 <div class="ui equal width grid container-hastag-label">
                                     <div class="column">
-                                        {{ centrale  | centraleLabel | raw }}
-
+                                        <h3 class="raison-soc-titre">
+                                            <i class="building icon"></i> {{ client[0]["CL_RAISONSOC"] |  convert_encoding('UTF-8', 'Windows-1252') | upper }}
+                                            {% if client[0]["CL_STATUS"] == 2 %}
+                                                <p>Bloqué</p>
+                                            {% endif %}
+                                        </h3>
                                     </div>
-                                    {#                                    <div class="column " style="width: 30%;">#}
-                                    {#                                        <i class="plus cursor large green-plus add-hastag-icon circle icon"></i>#}
-                                    {#                                    </div>#}
-                                </div>
-
-
-                                {#                                <div class="add-hastag-container">#}
-                                {#                                    <div class="ui input">#}
-                                {#                                        <input type="text" id="value-hashtag-client" placeholder="Ajouter un hastag">#}
-                                {#                                        <button class="ui button save-hastag-client ">#}
-                                {#                                            Enregistrer#}
-                                {#                                        </button>#}
-                                {#                                    </div>#}
-                                {#                                </div>#}
-
-
-                            </div>
-                            <div class="two wide column ref-client">
-                                <h3><span class="pastille-ref green"></span> {{ client[0]["CL_REF"] }}</h3>
-{#                                <div class="hastag-container">#}
-
-{#                                    <ul id="hastag-inject">#}
-{#                                        {% if tag is defined %}#}
-
-
-{#                                            {% for t in tag %}#}
-{#                                                <li><a class="" href="{{ path('hastag-action', { 'id' : t['TAG'] }) }}">#{{ t['TAG'] }}</a>#}
-{#                                                </li>#}
-{#                                            {% endfor %}#}
-
-{#                                        {% endif %}#}
-
-
-{#                                    </ul>#}
-{#                                </div>#}
-                            </div>
-                            <div class="six wide column">
-
-                                <div class="ui two column grid">
-
-                                    {#<div class="column ">#}
-                                        {#<h4><b>Origine du prospet</b> <i data-toggle="modal" data-target=".modal_origin_client_update" class="pencil cursor icon"></i> </h4>#}
-                                        {#<div class="input-group">#}
-                                            {#<span class="input-group-addon" id="basic-addon1">Type</span>#}
-                                            {#<input disabled type="text" class="form-control" placeholder="{{ client[0]["COC_DESCR"] }}" aria-describedby="basic-addon1">#}
-                                        {#</div>#}
-                                    {#</div>#}
-
                                     <div class="column">
-
-                                        <a class="ui label">
-                                            <i class="user icon"></i>
-                                            {{ client[0]["INS_USER"] }}
-                                        </a>
-                                        <h3 style="margin-top: 20px;" > Crée {{ client[0]["INS_DATE"] }}</h3>
-
-
+                                        {{ centrale  | centraleLabel | raw }}
                                     </div>
                                 </div>
-
-
-
-
-
-
                             </div>
-
+                            <div class="two wide column">
+                                <h3><span class="pastille-ref green"></span> {{ client[0]["CL_REF"] }}</h3>
+                            </div>
+                            <div class="column two wide">
+                                <a class="ui label">
+                                    <i class="user icon"></i>
+                                    {{ client[0]["INS_USER"] }}
+                                </a>
+                            </div>
+                            <div class="column">
+                                <h3 > Crée le {{ client[0]["INS_DATE"] | localizeddate('full', 'none', null, null, 'd MMMM Y') }}</h3>
+                            </div>
                         </div>
 
 

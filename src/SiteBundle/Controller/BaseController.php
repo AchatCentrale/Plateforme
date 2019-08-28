@@ -536,13 +536,11 @@ class BaseController extends Controller
 
         ini_set('mssql.charset', 'UTF-8');
 
-
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $clientService = $this->get('site.service.client_services');
 
         $so_database = $clientService->getCentraleDB($centrale);
-
 
         $sqlClient = sprintf("SELECT * FROM %s.dbo.CLIENTS WHERE CL_ID = :id", $so_database);
 
@@ -563,8 +561,6 @@ class BaseController extends Controller
         $stmt->bindValue('id', $id);
         $stmt->execute();
         $task = $stmt->fetchAll();
-
-
 
         $sqlUser = sprintf("SELECT * FROM %s.dbo.CLIENTS_USERS WHERE CL_ID = :id", $so_database);
 
@@ -599,10 +595,6 @@ class BaseController extends Controller
         $stmtGroupe->bindValue('gr_id', $restresult[0]["CL_GROUPE"]);
         $stmtGroupe->execute();
         $groupe = $stmtGroupe->fetchAll();
-
-
-
-
 
 
         $sqlFonction = sprintf("SELECT * FROM %s.dbo.FONCTIONS WHERE SO_ID = 1 ", $so_database);
@@ -649,10 +641,6 @@ class BaseController extends Controller
         $notes = $stmtNotes->fetchAll();
 
 
-
-
-
-
         return $this->render(
             '@Site/Base/client.general.html.twig',
             [
@@ -673,13 +661,6 @@ class BaseController extends Controller
 
             ]
         );
-
-
-
-
-
-
-
     }
 
     public function updateStatutAction($id, $centrale, Request $request)
