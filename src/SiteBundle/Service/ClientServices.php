@@ -18,7 +18,6 @@ class ClientServices
     }
 
 
-
     public function getTheIdForTheStatut($statut)
     {
 
@@ -88,7 +87,8 @@ class ClientServices
     }
 
 
-    public function getCentraleDB($so_id){
+    public function getCentraleDB($so_id)
+    {
 
 
         $sqlCentrale = "SELECT SO_DATABASE FROM CENTRALE_ACHAT.dbo.SOCIETES
@@ -98,9 +98,9 @@ class ClientServices
         $stmt->execute();
         $so_database = $stmt->fetchAll();
 
-        if(!empty($so_database)){
+        if (!empty($so_database)) {
             return $so_database[0]["SO_DATABASE"];
-        }else {
+        } else {
             return new \Exception("Probleme pour trouver la centrale");
         }
 
@@ -123,9 +123,6 @@ class ClientServices
             $ret[$i] = self::array_utf8_encode($d);
         return $ret;
     }
-
-
-
 
 
     public function getTheClientRaisonSoc($id, $centraleId)
@@ -155,7 +152,6 @@ class ClientServices
 
         $response = curl_exec($ch);
     }
-
 
 
     public function getUserName($mailUser)
@@ -193,15 +189,16 @@ class ClientServices
      * @return string
      * @throws \Exception
      */
-    public function generateToken($length){
+    public function generateToken($length)
+    {
         $token = "";
         $codeAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        $codeAlphabet.= "abcdefghijklmnopqrstuvwxyz";
-        $codeAlphabet.= "0123456789";
+        $codeAlphabet .= "abcdefghijklmnopqrstuvwxyz";
+        $codeAlphabet .= "0123456789";
         $max = strlen($codeAlphabet); // edited
 
-        for ($i=0; $i < $length; $i++) {
-            $token .= $codeAlphabet[random_int(0, $max-1)];
+        for ($i = 0; $i < $length; $i++) {
+            $token .= $codeAlphabet[random_int(0, $max - 1)];
         }
 
         return $token;
@@ -229,6 +226,32 @@ class ClientServices
             "total" => $total
         ];
         return $data;
+
+    }
+
+    public function getTheClientGroupe($id, $centraleId)
+    {
+
+
+        $so_database = $this->getCentraleDB($centraleId);
+
+        $sql = sprintf("SELECT *
+                        FROM %s.dbo.GROUPE
+                        WHERE GR_ID = :id", $so_database);
+
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        if ($result) {
+
+            return $result[0]['GR_DESCR'];
+
+        } else {
+
+            return 'Pas de groupe';
+        }
+
 
     }
 

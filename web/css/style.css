@@ -740,7 +740,7 @@ div.dataTables_wrapper div.dataTables_paginate {
 
 .container-search-hastag {
     width: 100%;
-    margin-top: 12px;
+    margin-top: 8px;
     margin-right: 25px;
 }
 
@@ -844,8 +844,6 @@ p.numero-bruneau{
     background-color: #0d5aa7;
 }
 
-/* Selected row  */
-/* Add a custom class name in the configuration: currentRowClassName: "foo"; */
 .ht_master tr.foo > td {
     background-color: #f00;
 }
@@ -915,4 +913,59 @@ a.client-raisonsoc-detail-tache {
 }
 
 
+.container_detail_client {
+    margin-top: 30px;
+}
 
+div#container_detail_general {
+    padding-top: 25px;
+}
+
+.notes li {
+    list-style-type: none;
+    padding: 2rem 0 2rem 0;
+}
+
+.notes ul {
+    padding-left: 5px;
+}
+
+.container_last_activity {
+    margin-top: 20px;
+}
+
+.last_notes {
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.last_notes h2 {
+    font-weight: 600;
+    font-size: 20pt;
+}
+
+.horizontal_line {
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+
+.notes {
+    overflow: auto;
+    height: 140pt;
+}
+
+.container_liste_users {
+    margin-top: 20px;
+}
+
+span.bold {
+    font-weight: bolder !important;
+    font-size: 13pt;
+    color: black;
+}
+
+.container_conso_client {
+    margin-top: 40px;
+}

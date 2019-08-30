@@ -3,7 +3,6 @@
     <p id="id">{{ client[0]["CL_ID"] }}</p>
 </div>
 
-
 {% set randomPassword = [] %}
     {% for i in 1..5 %}
         {% set alpha = 'abcdefghijklmnopqrstuvwxyz' %}
@@ -23,100 +22,10 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <div class="col-md-3 col-sm-3 col-xs-12  profile_left" align="center">
-
-                    <div class="profile_img">
-
-
-                        <div id="crop-avatar">
-                            <!-- Current avatar -->
-
-                            {% if client[0]["CL_LOGO"] %}
-
-
-                                <div class="container-hover-image">
-                                    <img class="img-responsive img-rounded  avatar-view"
-                                         src="{{ centrale | centraleUrl }}/UploadFichiers/Uploads/CLIENT_{{ client[0]["CL_ID"] }}/{{ client[0]["CL_LOGO"] }}"
-                                         alt="Logo" style="width: 35%">
-                                    <div class="middle">
-                                        <div class="text-hover-edit cursor"><i class="paint large brush icon"></i></div>
-                                    </div>
-                                </div>
-                            {% else %}
-
-                                <div class="container-hover-image">
-                                    <img class="img-responsive img-rounded image-hover-edit   avatar-view"
-                                         src="{{ asset('images/phot-indispo.jpg') }}"
-                                         alt="Logo" style="width: 35%">
-                                    <div class="middle">
-                                        <div class="text-hover-edit cursor"><i class="paint large brush icon"></i></div>
-                                    </div>
-                                </div>
-                            {% endif %}
-
-
-                        </div>
-                        <!-- end of image cropping -->
-
-                    </div>
-
-
-                    <ul class="list-unstyled user_data">
-                        <li><i class="fa fa-map-marker user-profile-icon"></i>
-                            {{ client[0]["CL_ADRESSE1"] | formatVille | convert_encoding('UTF-8', 'Windows-1252') }}<br>
-                            {{ client[0]["CL_CP"] }} {{ client[0]["CL_VILLE"] | formatVille | convert_encoding('UTF-8', 'Windows-1252') }}
-                        </li>
-                    </ul>
-
-                    {% if client[0]["CL_WEB"] %}
-                        <li class="m-top-xs web-li">
-                            <a href="{{ relative_path(client[0]["CL_WEB"] ) }}">{{ client[0]["CL_WEB"] }}</a>
-                        </li>
-                    {% else %}
-                        <p>Pas de site web</p>
-                    {% endif %}
-
-                    <button id="modifierProfil" type="button" class="btn btn-success" data-toggle="modal"
-                            data-target="#myModal">
-                        <i class="fa fa-edit edit-client m-right-xs"></i>Modifier le profil
-                    </button>
-                    <div class="ajoutuser">
-                        <button class="ui button client-user-new" type="button" data-toggle="modal"
-                                data-target="#client-user-new">
-                            Ajouter un utilisateur
-                        </button>
-                    </div>
-
-
-                    <div class="liste-users-client">
-                        <div class="ui relaxed list" >
-                            {% for u in user %}
-                                {% if u["CC_STATUS"] is same as(0) %}
-                                    <div style="background-color: #eee;margin-bottom: 15px;padding-top: 15px;padding-bottom: 15px;padding-left: 10px;border-radius: 20px;" class="item">
-                                        {{ u["CC_PRENOM"] | avatar(u["CC_NOM"], false, true) | raw }}
-                                        <div class="content content-list-user">
-                                            <a href="//secure.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u["CC_MAIL"] }}&PASS={{ u["CC_PASS"] }}"><i class="user icon"></i>
-                                                {{ u["CC_PRENOM"] |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u["CC_NOM"] |  convert_encoding('UTF-8', 'Windows-1252') }}
-                                            </a>&nbsp;&nbsp;<i data-utilisateur="{{ u["CC_ID"] }}" class="edit icon cursor edit-client-user"></i>
-                                            <div class="description"><b>{{ u["CC_FONCTION"] | convert_encoding('UTF-8', 'Windows-1252') }}</b></div>
-                                            <div class="description"><i class="mail icon"></i>{{ u["CC_MAIL"] }}</div>
-                                            <div class="description"><i class="phone icon"></i>{{ u["CC_TEL"]  | phone }}</div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-
-                            {% endfor %}
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-md-9 col-sm-9 col-xs-12">
+                <div>
                     <div class="ui equal width grid raison-soc">
                         <div class="row">
-                            <div class="eight wide column">
+                            <div class="seven wide column">
                                 <div class="ui equal width grid container-hastag-label">
                                     <div class="column">
                                         <h3 class="raison-soc-titre">
@@ -131,7 +40,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="two wide column">
+                            <div class="three wide column">
                                 <h3><span class="pastille-ref green"></span> {{ client[0]["CL_REF"] }}</h3>
                             </div>
                             <div class="column two wide">
@@ -141,7 +50,8 @@
                                 </a>
                             </div>
                             <div class="column">
-                                <h3 > Crée le {{ client[0]["INS_DATE"] | localizeddate('full', 'none', null, null, 'd MMMM Y') }}</h3>
+                                <h3> Crée
+                                    le {{ client[0]["INS_DATE"] | localizeddate('full', 'none', null, null, 'd MMMM Y') }}</h3>
                             </div>
                         </div>
 
@@ -149,319 +59,629 @@
                     </div>
 
 
-                    <div class="detail-client">
-
-                        <div class="profile_title">
-                            <h2>Données du client </h2>
-                        </div>
-
-
-                        <div class="ui grid">
-
-
-                            <div class="four wide column">
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Siret</p>
-                                    <p class="cursor label-background"
-                                       data-index="siret">{{ client[0]["CL_SIRET"] | siret }}</p>
-                                </div>
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Mail  <i style="cursor:pointer;" class=" small pencil alternate icon" id="edit_mail_cursor"></i></p>
-                                    <p data-index="mail" id="mail_content">
-                                        <a class="cursor data-client " data-index="mail" href="mailto:{{ client[0]["CL_MAIL"] }}"><i class="mail link  circular icon"></i></a>{{ client[0]["CL_MAIL"] }}
-
-                                    </p>
-                                </div>
-                                <div class="info-client-detail " id="detail-tel">
-                                    <p class="title-detail-client ">Téléphone</p>
-                                    <p class="cursor label-background"
-                                       data-index="tel">{{ client[0]["CL_TEL"] | phone }}</p>
-                                </div>
-                            </div>
-
-                            <div class="three wide column">
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Éffectif</p>
-                                    <p class="cursor label-background"
-                                       data-index="effectif">{{ client[0]["CL_EFFECTIF"] }}</p>
-                                </div>
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Chiffre d'affaires</p>
-                                    <p class="cursor label-background" data-index="ca">{{ client[0]["CL_CA"] }} €</p>
-                                </div>
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Activité</p>
-                                    {% if  activite == "Aucune activité pour le moment" %}
-                                        <p class="cursor label-background"
-                                           data-index="activite">{{ activite }}</p>
-
-                                    {% else %}
-                                        {% if activite %}
-                                            <p class="cursor label-background"
-                                               data-index="activite">{{ activite[0]["AC_DESCR"] |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
-                                        {% else %}
-                                            <p class="cursor label-background"
-                                               data-index="activite">Pas d'activité enregistrer encore</p>
-                                        {% endif %}
-                                    {% endif %}
-                                </div>
-                            </div>
-
-
-                            <div class="vertical-divider"></div>
-
-                            <div class="four wide column recap-client">
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Groupe</p>
-
-                                    {% if groupe %}
-                                        <p class="ui label large green">{{ groupe[0]["GR_DESCR"] |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
-                                        <br>
-                                    {% else %}
-                                        <p></p>
-                                    {% endif %}
-
-                                </div>
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Classification</p>
-                                    <p class="cursor label-background" data-index="classif">PAS ENCORE</p>
-                                </div>
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Régions</p>
-                                    {% if region == "Aucne région pour le moment" %}
-
-                                        <p class="cursor label-background"
-                                           data-index="region">{{ region }}</p>
-
-                                    {% else %}
-                                        {% if region %}
-                                            <p class="cursor label-background"
-                                               data-index="region">{{ region[0]["RE_NOM"] }}</p>
-                                        {% else %}
-                                            <p class="cursor label-background"
-                                               data-index="region">Pas de region enregistrer encore</p>
-                                        {% endif %}
-                                    {% endif %}
-
-                                </div>
-
-
-                            </div>
-
-                            <div class="four wide column recap-client">
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Etat adhésion</p>
-                                    <div class="adhesion_etat">
-
-                                        <div class="ui green horizontal label">Adherent</div>
-                                    </div>
-                                </div>
-                                <div class="info-client-detail">
-                                    <p class="title-detail-client ">Afficher les prix de vente</p>
-                                    <div class="prix-achat-check">
-                                        <input title="prix de vente-o" class="check-oui-pa"
-                                               type="checkbox" {{ (client[0]["CL_MASQ_VT"] == 1) ? 'checked' :  '' }} >
-                                        Oui
-                                        <input title="prix de vente-n" class="check-non-pa"
-                                               type="checkbox" {{ (client[0]["CL_MASQ_VT"] == 0) ? 'checked' :  '' }} >
-                                        Non
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br>
-
-
-
-
-                        <div class="detail-client-container">
-                            <div class="profile_title ">
-                                <h2>Détails du client
-                                    <small id="afficherplus-detail" class="cursor">Afficher plus</small>
-                                </h2>
-                            </div>
-                            <div id="detail-client-content">
-
-                                <div class="tab-detail-client" role="tabpanel" data-example-id="togglable-tabs">
-
-
-                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-
-                                        <li role="presentation" class="active">
-                                            <a href="#tab_content1" id="home-tab"
-                                               role="tab"
-                                               data-toggle="tab" aria-expanded="true">
-                                                <span class="badge bg-green">{{ task | length }}</span> Actions
-                                            </a>
-                                        </li>
-                                        <li role="presentation" class="">
-                                            <a href="#tab_content4" id="home-tab"
-                                               role="tab"
-                                               data-toggle="tab" aria-expanded="true">
-                                                <span class="badge bg-green">{{ tacheA | length }}</span> Actions
-                                                archivées
-                                            </a>
-                                        </li>
-
-                                        <li role="presentation" class="">
-                                            <a href="#tab_content2" role="tab" id="profile-tab"
-                                               data-toggle="tab" aria-expanded="true">
-                                                <span class="badge bg-green"> {{ note | length }} </span> Notes
-                                            </a>
-                                        </li>
-                                    </ul>
-
-
-
-
-
-                                    <div id="myTabContent" class="tab-content">
-
-
-                                        {#Action_client#}
-                                        <div role="tabpanel" class="tab-pane fade active in " id="tab_content1"
-                                             aria-labelledby="home-tab">
-                                            <a href="{{ path('new-task', {'c' : centrale , 'cl' : client[0]["CL_ID"] }) }}"
-                                               class="btn btn-success" role="button">Ajouter une tâche</a>
-                                            <div class="ui items">
-
-                                                {% if task %}
-                                                    <div class="">
-                                                        <ul class="to_do">
-                                                            {% for tasks in task %}
-                                                                <li data-id="{{ tasks['CLA_ID'] }}"
-                                                                    class="cursor detail-tache-home-client">
-                                                                    <p>{{ tasks['CLA_ECHEANCE'] | fromNowString }}
-                                                                        - {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}
-                                                                        - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>{{ tasks['CLA_STATUS'] | etat | raw }}
-                                                                </li>
-                                                            {% endfor %}
-                                                        </ul>
-                                                    </div>
-
-                                                {% else %}
-                                                    <h5>Pas de taches pour le moment</h5>
-                                                {% endif %}
-
-
-                                            </div>
-
-
-                                        </div>
-
-
-                                        {#Action_client_archive#}
-                                        <div role="tabpanel" class="tab-pane fade " id="tab_content4"
-                                             aria-labelledby="home-tab">
-                                            <div class="ui items">
-
-                                                {% if tacheA %}
-
-                                                    <div class="">
-                                                        <ul class="to_do">
-                                                            {% for tasks in tacheA %}
-                                                                <li data-id="{{ tasks['CLA_ID'] }}"
-                                                                    class="cursor detail-tache-archive-client">
-                                                                    <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}
-                                                                        - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>
-                                                                </li>
-                                                            {% endfor %}
-
-
-                                                        </ul>
-                                                    </div>
-
-                                                {% else %}
-                                                    <h5>Aucune tâche n'a été encore crée pour cet utilisateur</h5>
-                                                {% endif %}
-
-
-                                            </div>
-
-
-                                        </div>
-
-                                        {#Notes_client#}
-                                        <div role="tabpanel" class="tab-pane fade" id="tab_content2"
-                                             aria-labelledby="profile-tab">
-                                            <div class="ui equal width grid container " style="margin-top: 30px">
-                                                <div class="equal width row ">
-                                                    <div class="column">
-                                                        <div class="note-left">
-                                                            <p id="counting-note">0/500</p>
-                                                            <div class="input-group">
-
-                                                                <input type="text" class="form-control" id="add-note"
-                                                                       placeholder="Consigner une note pour le client {{ client[0]["CL_RAISONSOC"] |  convert_encoding('UTF-8', 'Windows-1252') }}">
-                                                                <span class="input-group-btn">
-                                                                <button class="btn btn-secondar btn-success add-note"
-                                                                        type="button">Enregistrer</button>
-                                                                <i class="window close icon empty_notes"></i>
-
-                                                                </span>
-                                                            </div>
-                                                            <br>
-                                                            <div class="notes">
-                                                                {% if note %}
-                                                                    <h5>Historique client: </h5>
-
-                                                                        <ul>
-                                                                    {% for n in note %}
-
-
-
-                                                                            <li>{{ n["INS_DATE"]  }}: {{ n["CN_NOTE"] }} <i class="close icon remove_note" data-note="{{ n["CN_ID"] }}" ></i></li>
-                                                                    {% endfor %}
-                                                                        </ul>
-                                                                {% else %}
-                                                                    <p>Il n'y aucune note pour le client</p>
-                                                                {% endif %}
-                                                            </div>
-
-
-
-                                                        </div>
-                                                    </div>
-                                                    {#<div class="column">#}
-                                                    {#<a href="{{ path('new-task', {'u' : client[0].clId }) }}"#}
-                                                    {#class="btn btn-success" role="button">Crée une action</a>#}
-
-                                                    {#</div>#}
+                    <div class="container_detail_client">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#last_activity"
+                                                                      aria-controls="last_activity" role="tab"
+                                                                      data-toggle="tab">Dernières activités</a></li>
+                            <li role="presentation"><a href="#general" aria-controls="general" role="tab"
+                                                       data-toggle="tab">Géneral</a></li>
+                            <li role="presentation"><a href="#utilisateur" aria-controls="utilisateur" role="tab"
+                                                       data-toggle="tab">Utilisateurs</a></li>
+                            <li role="presentation"><a href="#detail" aria-controls="detail" role="tab"
+                                                       data-toggle="tab">Détails</a></li>
+                            <li role="presentation"><a href="#conso" aria-controls="conso" role="tab" data-toggle="tab">Consommation</a>
+                            </li>
+                            <li role="presentation"><a href="#admin" aria-controls="admin" role="tab" data-toggle="tab">Admninistration </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="last_activity">
+                                <div class="container_last_activity">
+                                    <div class="last_notes">
+                                        <h2>Dernières notes</h2>
+                                        <div class="notes_listes">
+                                            <div class="container_ajout_note">
+                                                <div class="input-group">
+
+                                                    <input type="text" class="form-control" id="add-note"
+                                                           placeholder="Consigner une note pour le client {{ client[0]["CL_RAISONSOC"] |  convert_encoding('UTF-8', 'Windows-1252') }}">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-secondar btn-success add-note"
+                                                                type="button">Enregistrer</button>
+                                                        <i class="window close icon empty_notes"></i>
+                                                    </span>
                                                 </div>
                                             </div>
 
+                                            <div class="notes">
+                                                {% if note %}
+                                                    <ul>
+                                                        {% for n in note %}
+                                                            <li>
+
+                                                                <div class="ui grid">
+                                                                    <div class="fifteen wide column">
+                                                                        <p>
+                                                                            <span class="bold">{{ n["INS_DATE"] | localizeddate('full', 'none', null, null, 'd MMMM Y') }}</span>: {{ n["CN_NOTE"] }}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="one wide column">
+                                                                        <div class="action_delete">
+                                                                            <i class="close icon remove_note"
+                                                                               data-note="{{ n["CN_ID"] }}"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </li>
+                                                            <div class="horizontal_line"></div>
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% else %}
+                                                    <p>Il n'y aucune note pour le client</p>
+                                                {% endif %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="last_notes">
+                                        <h2>Dernières actions</h2>
+                                        <div class="notes_listes">
+
+                                            {% if task %}
+                                                <div class="">
+                                                    <ul class="to_do">
+                                                        {% for tasks in task %}
+                                                            <li data-id="{{ tasks['CLA_ID'] }}"
+                                                                class="cursor detail-tache-home-client">
+                                                                <p>{{ tasks['CLA_ECHEANCE'] | localizeddate('full', 'none', null, null, 'd MMMM Y') }}
+                                                                    - {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}
+                                                                    - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} {{ tasks['CLA_STATUS'] | etat | raw }}</p>
+                                                            </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+
+                                            {% else %}
+                                                <h5>Pas de taches pour le moment</h5>
+                                            {% endif %}
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="general">
+                                <div id="container_detail_general">
+
+                                    <div class="ui grid">
+                                        <div class="two wide column ">
+                                            <div class="profile_img">
+                                                <div id="crop-avatar">
+                                                    {% if client[0]["CL_LOGO"] %}
+                                                        <div class="container-hover-image">
+                                                            <img class="img-responsive img-rounded  avatar-view"
+                                                                 src="{{ centrale | centraleUrl }}/UploadFichiers/Uploads/CLIENT_{{ client[0]["CL_ID"] }}/{{ client[0]["CL_LOGO"] }}"
+                                                                 alt="Logo" style="width: 90%">
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="four wide column">
+                                            <ul class="list-unstyled user_data">
+                                                <li><i class="fa fa-map-marker user-profile-icon"></i>
+                                                    {{ client[0]["CL_ADRESSE1"] | formatVille | convert_encoding('UTF-8', 'Windows-1252') }}
+                                                    <br>
+                                                    {{ client[0]["CL_CP"] }} {{ client[0]["CL_VILLE"] | formatVille | convert_encoding('UTF-8', 'Windows-1252') }}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="ten wide column" style="padding-top: 35px;">
+                                            <div class="ui equal width grid">
+                                                <div class="row" style="padding-left: 23px;">
+                                                    <div class="nine wide column">
+                                                        <a href="mailto:{{ client[0]["CL_MAIL"] }}"><p><span
+                                                                        class="ui header">Adresse mail</span>
+                                                                &nbsp; {{ client[0]["CL_MAIL"] }}</p></a>
+                                                    </div>
+                                                    <div class="seven wide column">
+                                                        <a href="mailto:{{ client[0]["CL_MAIL"] }}"><p><span
+                                                                        class="ui header">Téléphone</span>
+                                                                &nbsp; {{ client[0]["CL_TEL"] | phone }}</p></a>
+                                                    </div>
+                                                    <div class="column">
+                                                        {% if client[0]["CL_WEB"] %}
+                                                            <li class="m-top-xs web-li">
+                                                                <a href="{{ relative_path(client[0]["CL_WEB"] ) }}">{{ client[0]["CL_WEB"] }}</a>
+                                                            </li>
+                                                        {% else %}
+                                                            <p>Pas de site web</p>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ui grid">
+                                        <div class="five wide column">
+                                            <div class="info-client-detail">
+                                                <p class="title-detail-client ">Siret</p>
+                                                <p class="cursor label-background" data-index="siret">308 381 086
+                                                    00000</p>
+                                            </div>
+                                        </div>
+                                        <div class="five wide column">
+                                            <div class="info-client-detail">
+                                                <p class="title-detail-client ">Éffectif</p>
+                                                <p class="cursor label-background" data-index="effectif">0</p>
+                                            </div>
+                                        </div>
+                                        <div class="six wide column">
+                                            <div class="info-client-detail">
+                                                <p class="title-detail-client ">Chiffre d'affaire</p>
+                                                <p class="cursor label-background" data-index="ca">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ui grid">
+                                        <div class="five wide column">
+                                            <div class="info-client-detail">
+                                                <p class="title-detail-client ">Activité</p>
+                                                {% if  activite == "Aucune activité pour le moment" %}
+                                                    <p class="cursor label-background"
+                                                       data-index="activite">{{ activite }}</p>
+
+                                                {% else %}
+                                                    {% if activite %}
+                                                        <p class="cursor label-background"
+                                                           data-index="activite">{{ activite[0]["AC_DESCR"] |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
+                                                    {% else %}
+                                                        <p class="cursor label-background"
+                                                           data-index="activite">Pas d'activité enregistrer encore</p>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="five wide column">
+                                            <div class="info-client-detail">
+                                                <p class="title-detail-client ">Groupe</p>
+
+                                                {% if groupe %}
+                                                    <p class="ui label large green">{{ groupe[0]["GR_DESCR"] |  convert_encoding('UTF-8', 'Windows-1252') }}</p>
+                                                    <br>
+                                                {% else %}
+                                                    <p>Aucun groupe renseigné</p>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                        <div class="five wide column">
+                                            <div class="info-client-detail">
+                                                <p class="title-detail-client ">Chiffre d'affaire</p>
+                                                <p class="cursor label-background" data-index="ca">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="detail">...</div>
+                            <div role="tabpanel" class="tab-pane" id="utilisateur">
+                                <div class="container_liste_users">
+                                    <table class="ui celled table">
+                                        <thead>
+                                        <tr>
+                                            <th>Noms du contact</th>
+                                            <th>Poste</th>
+                                            <th>Mail</th>
+                                            <th>Tel</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for u in user %}
+                                            {% if u["CC_STATUS"] is same as(0) %}
+                                                <tr>
+                                                    <td data-label="Noms du contact"><a
+                                                                href="//secure.{{ centrale_link }}.fr/Login.asp?LOGIN={{ u["CC_MAIL"] }}&PASS={{ u["CC_PASS"] }}"><i
+                                                                    class="user icon"></i>
+                                                            {{ u["CC_PRENOM"] |  convert_encoding('UTF-8', 'Windows-1252') }} {{ u["CC_NOM"] |  convert_encoding('UTF-8', 'Windows-1252') }}
+                                                        </a></td>
+                                                    <td data-label="Poste">
+                                                        <b>{{ u["CC_FONCTION"] | convert_encoding('UTF-8', 'Windows-1252') }}</b>
+                                                    </td>
+                                                    <td data-label="Mail"><a
+                                                                href="mailto:{{ u["CC_MAIL"] }}">{{ u["CC_MAIL"] }}</a>
+                                                    </td>
+                                                    <td data-label="Tel">{{ u["CC_TEL"]  | phone }}</td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="conso">
+                                <div class="container_conso_client">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h3>Depuis le {{ client[0]["INS_DATE"] | localizeddate('full', 'none', null, null, 'd MMMM Y') }}, il y a eu {{ topEconomie | localizedcurrency('EUR') }} d'économies</h3>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h3>Top fournisseurs</h3>
+                                            <br>
+                                            <table class="ui very basic collapsing celled table">
+                                                <thead>
+                                                <tr>
+                                                    <th><h4>Fournisseur</h4></th>
+                                                    <th><h4>Economie</h4></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for t in topConso %}
+                                                    <tr>
+                                                        <td>
+                                                            {{ t["FO_ID"] | capitalize }}
+                                                        </td>
+                                                        <td>
+                                                            {{ t["Economie"] | localizedcurrency('EUR') }}
+
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h3>Dernières consommations</h3>
+                                            <br>
+                                            <table class="ui very basic collapsing celled table">
+                                                <thead>
+                                                <tr>
+                                                    <th><h4>Fournisseurs</h4></th>
+                                                    <th><h4>Date de conso</h4></th>
+                                                    <th><h4>Economie</h4></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for l in lastConso %}
+                                                    <tr>
+                                                        <td>{{ l["FO_ID"] | capitalize }}</td>
+                                                        <td>{{ l["CLC_DATE"]   }}</td>
+                                                        <td>{{ l["Economie"] | localizedcurrency('EUR') }}</td>
+                                                    </tr>
+                                                {% endfor %}
+
+                                                </tbody>
+                                            </table>
                                         </div>
 
                                     </div>
                                 </div>
-
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="admin">
+                                <button id="modifierProfil" type="button" class="btn btn-success" data-toggle="modal"
+                                        data-target="#myModal">
+                                    <i class="fa fa-edit edit-client m-right-xs"></i>Modifier le profil
+                                </button>
+                                <div class="ajoutuser">
+                                    <button class="ui button client-user-new" type="button" data-toggle="modal"
+                                            data-target="#client-user-new">
+                                        Ajouter un utilisateur
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
-
-                        <div class="historique-client-container">
-                            <div class="profile_title historique-client">
-                                <h2>Historique du client
-                                    <small id="afficherplus-historique" class="cursor">Afficher plus</small>
-                                </h2>
-                            </div>
-
-
-                            <div class="historique-client-content">
-
-                                {% if client[0]["CL_ID"] > 0 %}
-                                    {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0]["CL_ID"], 'centrale': centrale })) }}
-                                {% else %}
-
-                                {% endif %}
-
-
-                            </div>
-                        </div>
                     </div>
 
+                    {#                    <div class="detail-client">#}
+                    {#                        <div class="profile_title">#}
+                    {#                            <h2>Données du client </h2>#}
+                    {#                        </div>#}
+
+
+                    {#                        <div class="ui grid">#}
+
+
+                    {#                            <div class="four wide column">#}
+                    {#                                <div class="info-client-detail">#}
+                    {#                                    <p class="title-detail-client ">Siret</p>#}
+                    {#                                    <p class="cursor label-background"#}
+                    {#                                       data-index="siret">{{ client[0]["CL_SIRET"] | siret }}</p>#}
+                    {#                                </div>#}
+                    {#                                <div class="info-client-detail " id="detail-tel">#}
+                    {#                                    <p class="title-detail-client ">Téléphone</p>#}
+                    {#                                    <p class="cursor label-background"#}
+                    {#                                       data-index="tel">{{ client[0]["CL_TEL"] | phone }}</p>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+
+                    {#                            <div class="three wide column">#}
+                    {#                                <div class="info-client-detail">#}
+                    {#                                    <p class="title-detail-client ">Éffectif</p>#}
+                    {#                                    <p class="cursor label-background"#}
+                    {#                                       data-index="effectif">{{ client[0]["CL_EFFECTIF"] }}</p>#}
+                    {#                                </div>#}
+                    {#                                <div class="info-client-detail">#}
+                    {#                                    <p class="title-detail-client ">Chiffre d'affaires</p>#}
+                    {#                                    <p class="cursor label-background" data-index="ca">{{ client[0]["CL_CA"] }} €</p>#}
+                    {#                                </div>#}
+                    {#                                <div class="info-client-detail">#}
+                    {#                                    <p class="title-detail-client ">Activité</p>#}
+                    {#                                    {% if  activite == "Aucune activité pour le moment" %}#}
+                    {#                                        <p class="cursor label-background"#}
+                    {#                                           data-index="activite">{{ activite }}</p>#}
+
+                    {#                                    {% else %}#}
+                    {#                                        {% if activite %}#}
+                    {#                                            <p class="cursor label-background"#}
+                    {#                                               data-index="activite">{{ activite[0]["AC_DESCR"] |  convert_encoding('UTF-8', 'Windows-1252') }}</p>#}
+                    {#                                        {% else %}#}
+                    {#                                            <p class="cursor label-background"#}
+                    {#                                               data-index="activite">Pas d'activité enregistrer encore</p>#}
+                    {#                                        {% endif %}#}
+                    {#                                    {% endif %}#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+
+
+                    {#                            <div class="vertical-divider"></div>#}
+
+                    {#                            <div class="four wide column recap-client">#}
+                    {#                                <div class="info-client-detail">#}
+                    {#                                    <p class="title-detail-client ">Groupe</p>#}
+
+                    {#                                    {% if groupe %}#}
+                    {#                                        <p class="ui label large green">{{ groupe[0]["GR_DESCR"] |  convert_encoding('UTF-8', 'Windows-1252') }}</p>#}
+                    {#                                        <br>#}
+                    {#                                    {% else %}#}
+                    {#                                        <p></p>#}
+                    {#                                    {% endif %}#}
+
+                    {#                                </div>#}
+                    {#                                <div class="info-client-detail">#}
+                    {#                                    <p class="title-detail-client ">Classification</p>#}
+                    {#                                    <p class="cursor label-background" data-index="classif">PAS ENCORE</p>#}
+                    {#                                </div>#}
+                    {#                                <div class="info-client-detail">#}
+                    {#                                    <p class="title-detail-client ">Régions</p>#}
+                    {#                                    {% if region == "Aucne région pour le moment" %}#}
+
+                    {#                                        <p class="cursor label-background"#}
+                    {#                                           data-index="region">{{ region }}</p>#}
+
+                    {#                                    {% else %}#}
+                    {#                                        {% if region %}#}
+                    {#                                            <p class="cursor label-background"#}
+                    {#                                               data-index="region">{{ region[0]["RE_NOM"] }}</p>#}
+                    {#                                        {% else %}#}
+                    {#                                            <p class="cursor label-background"#}
+                    {#                                               data-index="region">Pas de region enregistrer encore</p>#}
+                    {#                                        {% endif %}#}
+                    {#                                    {% endif %}#}
+
+                    {#                                </div>#}
+
+
+                    {#                            </div>#}
+
+                    {#                            <div class="four wide column recap-client">#}
+                    {#                                <div class="info-client-detail">#}
+                    {#                                    <p class="title-detail-client ">Etat adhésion</p>#}
+                    {#                                    <div class="adhesion_etat">#}
+
+                    {#                                        <div class="ui green horizontal label">Adherent</div>#}
+                    {#                                    </div>#}
+                    {#                                </div>#}
+
+                    {#                            </div>#}
+                    {#                        </div>#}
+
+                    {#                        <br>#}
+
+
+
+
+                    {#                        <div class="detail-client-container">#}
+                    {#                            <div class="profile_title ">#}
+                    {#                                <h2>Détails du client#}
+                    {#                                    <small id="afficherplus-detail" class="cursor">Afficher plus</small>#}
+                    {#                                </h2>#}
+                    {#                            </div>#}
+                    {#                            <div id="detail-client-content">#}
+
+                    {#                                <div class="tab-detail-client" role="tabpanel" data-example-id="togglable-tabs">#}
+
+
+                    {#                                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">#}
+
+                    {#                                        <li role="presentation" class="active">#}
+                    {#                                            <a href="#tab_content1" id="home-tab"#}
+                    {#                                               role="tab"#}
+                    {#                                               data-toggle="tab" aria-expanded="true">#}
+                    {#                                                <span class="badge bg-green">{{ task | length }}</span> Actions#}
+                    {#                                            </a>#}
+                    {#                                        </li>#}
+                    {#                                        <li role="presentation" class="">#}
+                    {#                                            <a href="#tab_content4" id="home-tab"#}
+                    {#                                               role="tab"#}
+                    {#                                               data-toggle="tab" aria-expanded="true">#}
+                    {#                                                <span class="badge bg-green">{{ tacheA | length }}</span> Actions#}
+                    {#                                                archivées#}
+                    {#                                            </a>#}
+                    {#                                        </li>#}
+
+                    {#                                        <li role="presentation" class="">#}
+                    {#                                            <a href="#tab_content2" role="tab" id="profile-tab"#}
+                    {#                                               data-toggle="tab" aria-expanded="true">#}
+                    {#                                                <span class="badge bg-green"> {{ note | length }} </span> Notes#}
+                    {#                                            </a>#}
+                    {#                                        </li>#}
+                    {#                                    </ul>#}
+
+
+
+
+
+                    {#                                    <div id="myTabContent" class="tab-content">#}
+
+
+                    {#                                        Action_client#}
+                    {#                                        <div role="tabpanel" class="tab-pane fade active in " id="tab_content1"#}
+                    {#                                             aria-labelledby="home-tab">#}
+                    {#                                            <a href="{{ path('new-task', {'c' : centrale , 'cl' : client[0]["CL_ID"] }) }}"#}
+                    {#                                               class="btn btn-success" role="button">Ajouter une tâche</a>#}
+                    {#                                            <div class="ui items">#}
+
+                    {#                                                {% if task %}#}
+                    {#                                                    <div class="">#}
+                    {#                                                        <ul class="to_do">#}
+                    {#                                                            {% for tasks in task %}#}
+                    {#                                                                <li data-id="{{ tasks['CLA_ID'] }}"#}
+                    {#                                                                    class="cursor detail-tache-home-client">#}
+                    {#                                                                    <p>{{ tasks['CLA_ECHEANCE'] | fromNowString }}#}
+                    {#                                                                        - {{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}#}
+                    {#                                                                        - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>{{ tasks['CLA_STATUS'] | etat | raw }}#}
+                    {#                                                                </li>#}
+                    {#                                                            {% endfor %}#}
+                    {#                                                        </ul>#}
+                    {#                                                    </div>#}
+
+                    {#                                                {% else %}#}
+                    {#                                                    <h5>Pas de taches pour le moment</h5>#}
+                    {#                                                {% endif %}#}
+
+
+                    {#                                            </div>#}
+
+
+                    {#                                        </div>#}
+
+
+                    {#                                        Action_client_archive#}
+                    {#                                        <div role="tabpanel" class="tab-pane fade " id="tab_content4"#}
+                    {#                                             aria-labelledby="home-tab">#}
+                    {#                                            <div class="ui items">#}
+
+                    {#                                                {% if tacheA %}#}
+
+                    {#                                                    <div class="">#}
+                    {#                                                        <ul class="to_do">#}
+                    {#                                                            {% for tasks in tacheA %}#}
+                    {#                                                                <li data-id="{{ tasks['CLA_ID'] }}"#}
+                    {#                                                                    class="cursor detail-tache-archive-client">#}
+                    {#                                                                    <p>{{ tasks['CLA_NOM'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }}#}
+                    {#                                                                        - {{ tasks['CLA_DESCR'] | raw |  convert_encoding('UTF-8', 'Windows-1252') }} </p>#}
+                    {#                                                                </li>#}
+                    {#                                                            {% endfor %}#}
+
+
+                    {#                                                        </ul>#}
+                    {#                                                    </div>#}
+
+                    {#                                                {% else %}#}
+                    {#                                                    <h5>Aucune tâche n'a été encore crée pour cet utilisateur</h5>#}
+                    {#                                                {% endif %}#}
+
+
+                    {#                                            </div>#}
+
+
+                    {#                                        </div>#}
+
+                    {#                                        Notes_client#}
+                    {#                                        <div role="tabpanel" class="tab-pane fade" id="tab_content2"#}
+                    {#                                             aria-labelledby="profile-tab">#}
+                    {#                                            <div class="ui equal width grid container " style="margin-top: 30px">#}
+                    {#                                                <div class="equal width row ">#}
+                    {#                                                    <div class="column">#}
+                    {#                                                        <div class="note-left">#}
+                    {#                                                            <p id="counting-note">0/500</p>#}
+                    {#                                                            <div class="input-group">#}
+
+                    {#                                                                <input type="text" class="form-control" id="add-note"#}
+                    {#                                                                       placeholder="Consigner une note pour le client {{ client[0]["CL_RAISONSOC"] |  convert_encoding('UTF-8', 'Windows-1252') }}">#}
+                    {#                                                                <span class="input-group-btn">#}
+                    {#                                                                <button class="btn btn-secondar btn-success add-note"#}
+                    {#                                                                        type="button">Enregistrer</button>#}
+                    {#                                                                <i class="window close icon empty_notes"></i>#}
+
+                    {#                                                                </span>#}
+                    {#                                                            </div>#}
+                    {#                                                            <br>#}
+                    {#                                                            <div class="notes">#}
+                    {#                                                                {% if note %}#}
+                    {#                                                                    <h5>Historique client: </h5>#}
+
+                    {#                                                                        <ul>#}
+                    {#                                                                    {% for n in note %}#}
+
+
+
+                    {#                                                                            <li>{{ n["INS_DATE"]  }}: {{ n["CN_NOTE"] }} <i class="close icon remove_note" data-note="{{ n["CN_ID"] }}" ></i></li>#}
+                    {#                                                                    {% endfor %}#}
+                    {#                                                                        </ul>#}
+                    {#                                                                {% else %}#}
+                    {#                                                                    <p>Il n'y aucune note pour le client</p>#}
+                    {#                                                                {% endif %}#}
+                    {#                                                            </div>#}
+
+
+
+                    {#                                                        </div>#}
+                    {#                                                    </div>#}
+                    {#                                                    <div class="column">#}
+                    {#                                                    <a href="{{ path('new-task', {'u' : client[0].clId }) }}"#}
+                    {#                                                    class="btn btn-success" role="button">Crée une action</a>#}
+
+                    {#                                                    </div>#}
+                    {#                                                </div>#}
+                    {#                                            </div>#}
+
+                    {#                                        </div>#}
+
+                    {#                                    </div>#}
+                    {#                                </div>#}
+
+                    {#                            </div>#}
+                    {#                        </div>#}
+
+
+                    {#                        <div class="historique-client-container">#}
+                    {#                            <div class="profile_title historique-client">#}
+                    {#                                <h2>Historique du client#}
+                    {#                                    <small id="afficherplus-historique" class="cursor">Afficher plus</small>#}
+                    {#                                </h2>#}
+                    {#                            </div>#}
+
+
+                    {#                            <div class="historique-client-content">#}
+
+                    {#                                {% if client[0]["CL_ID"] > 0 %}#}
+                    {#                                    {{ render(controller('SiteBundle:Base:ClientFeed', { 'id' : client[0]["CL_ID"], 'centrale': centrale })) }}#}
+                    {#                                {% else %}#}
+
+                    {#                                {% endif %}#}
+
+
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+
                 </div>
+
+
             </div>
         </div>
     </div>
@@ -798,20 +1018,20 @@
     </div>
 </div>
 
-
-
-
-<div class="modal fade bs-example-modal-sm modal_origin_client_update" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+<div class="modal fade bs-example-modal-sm modal_origin_client_update" tabindex="-1" role="dialog"
+     aria-labelledby="mySmallModalLabel">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">Selectionner l'origine du tiers</h4>
             </div>
             <div class="modal-body">
                 {% for o in origine %}
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="{{ o["COC_ID"] }}">
+                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                               value="{{ o["COC_ID"] }}">
                         <label class="form-check-label" for="exampleRadios1">
                             {{ o["COC_DESCR"] }}
                         </label>
@@ -819,7 +1039,9 @@
                 {% endfor %}
             </div>
             <div class="modal-footer">
-                <button type="button" id="add_origin_client" class="btn btn-block btn-success" data-client="{{ client[0]["CL_ID"] }}" data-dismiss="modal">Enregistrer</button>
+                <button type="button" id="add_origin_client" class="btn btn-block btn-success"
+                        data-client="{{ client[0]["CL_ID"] }}" data-dismiss="modal">Enregistrer
+                </button>
             </div>
         </div>
     </div>

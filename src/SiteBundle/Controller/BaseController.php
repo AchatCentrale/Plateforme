@@ -533,9 +533,6 @@ class BaseController extends Controller
     public function ClientGeneralAction($id, $centrale)
     {
 
-
-        ini_set('mssql.charset', 'UTF-8');
-
         $conn = $this->get('doctrine.dbal.centrale_achat_jb_connection');
 
         $clientService = $this->get('site.service.client_services');
@@ -641,6 +638,31 @@ class BaseController extends Controller
         $notes = $stmtNotes->fetchAll();
 
 
+        $sqlTopFournConso = sprintf("SELECT (SELECT FO_RAISONSOC FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS WHERE FOURNISSEURS.FO_ID = CLIENTS_CONSO.FO_ID) as FO_ID, SUM(CLC_PRIX_PUBLIC - CLC_PRIX_CENTRALE) as Economie FROM %s.dbo.CLIENTS_CONSO WHERE CL_ID = :id GROUP BY FO_ID ORDER BY Economie DESC", $so_database);
+
+        $stmtTopConso = $conn->prepare($sqlTopFournConso);
+        $stmtTopConso->bindValue('id', $id);
+        $stmtTopConso->execute();
+        $topConso = $stmtTopConso->fetchAll();
+
+
+        $sqlLastConso = sprintf("SELECT TOP 5 (SELECT FO_RAISONSOC FROM CENTRALE_PRODUITS.dbo.FOURNISSEURS WHERE FOURNISSEURS.FO_ID = CLIENTS_CONSO.FO_ID) as FO_ID, CLC_DATE, CLC_PRIX_CENTRALE, CLC_PRIX_CENTRALE, CLC_PRIX_PUBLIC - CLC_PRIX_CENTRALE as Economie FROM %s.dbo.CLIENTS_CONSO WHERE CL_ID = :id ORDER BY CLC_DATE DESC", $so_database);
+        $stmtLastConso = $conn->prepare($sqlLastConso);
+        $stmtLastConso->bindValue('id', $id);
+        $stmtLastConso->execute();
+        $lastConso = $stmtLastConso->fetchAll();
+
+
+        $sqlEconomieTotal = sprintf("SELECT sum(CLC_PRIX_PUBLIC - CLC_PRIX_CENTRALE) as Economie FROM %s.dbo.CLIENTS_CONSO WHERE CL_ID = :id", $so_database);
+        $stmtEconomieTotal = $conn->prepare($sqlEconomieTotal);
+        $stmtEconomieTotal->bindValue('id', $id);
+        $stmtEconomieTotal->execute();
+        $topEconomie = $stmtEconomieTotal->fetchAll()[0]["Economie"];
+
+
+        dump($topEconomie);
+
+
         return $this->render(
             '@Site/Base/client.general.html.twig',
             [
@@ -657,7 +679,10 @@ class BaseController extends Controller
                 "profil" => $profil,
                 "tacheArchiv" => $tacheArchive,
                 "tag" => $tag,
-                "origine" => $origine
+                "origine" => $origine,
+                "topConso" => $topConso,
+                "lastConso" => $lastConso,
+                "topEconomie" => $topEconomie,
 
             ]
         );

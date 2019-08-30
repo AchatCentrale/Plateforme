@@ -203,19 +203,19 @@ class CrmFilter extends AbstractExtension
 
         switch ($state) {
             case 0:
-                return '<p class="pastille blue" ></p>';
+                return '<span class="pastille blue" ></span>';
                 break;
             case 1:
-                return '<p class="pastille orange" ></p>';
+                return '<span class="pastille orange" ></span>';
                 break;
             case 2:
-                return '<p class="pastille green" ></p>';
+                return '<span class="pastille green" ></span>';
                 break;
             case 3:
-                return '<p class="pastille red" ></p>';
+                return '<span class="pastille red" ></span>';
                 break;
             case 4:
-                return '<p class="pastille purple" ></p>';
+                return '<span class="pastille purple" ></span>';
                 break;
             case 20:
                 return '<i class="check huge square icon"></i>';

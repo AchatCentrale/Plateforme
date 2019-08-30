@@ -30,10 +30,6 @@
 })(jQuery, 'smartresize');
 
 
-
-
-
-
 $(function () {
 
 
@@ -459,8 +455,6 @@ $(function () {
     });
 
 
-
-
     $('.go-to-client').on('click', function () {
 
         let centrale = $(this).data('centrale');
@@ -580,7 +574,7 @@ $(function () {
                                     </div>
                                     <div class="one column row">
                                         <div class="column">
-                                            ${data.descr ? `<h5>Description de la tâche a éfféctuer :</h5><p class="task-description">${data.descr}</p>` : '' }
+                                            ${data.descr ? `<h5>Description de la tâche a éfféctuer :</h5><p class="task-description">${data.descr}</p>` : ''}
                                         </div>
             
                                     </div>
@@ -721,8 +715,6 @@ $(function () {
         }).get();
 
 
-
-
         $.ajax({
 
             // Adresse à laquelle la requête est envoyée
@@ -769,7 +761,7 @@ $(function () {
 
         let cc_id = $(this).data('utilisateur');
 
-        let url = "https://crm.achatcentrale.fr/client/user/"+centrale+"/"+cc_id;
+        let url = "https://crm.achatcentrale.fr/client/user/" + centrale + "/" + cc_id;
 
 
         $.ajax({
@@ -787,8 +779,6 @@ $(function () {
                 console.log(data);
             }
         });
-
-
 
 
         $('#update_user_client').modal('show');
@@ -824,18 +814,14 @@ $(function () {
             // La fonction à apeller si la requête aboutie
             success: function (data) {
 
-                console.log(data);
                 $('input#add-note').empty();
 
                 $.notify("Note crée", "success");
 
 
-                setTimeout(function(){
-
-
-                    // window.location.reload();
-
-                    }, 3000);
+                setTimeout(function () {
+                    window.location.reload();
+                }, 300);
 
             },
 
@@ -1410,12 +1396,10 @@ $(function () {
     });
 
 
-
     $('.detail-tache-home-client').on('click', function (e) {
 
 
         let centrale = $('#centrale').html();
-
 
 
         let id = $(this).data('id');
@@ -1559,7 +1543,6 @@ $(function () {
         let id = $(this).data('id');
 
         let aidy = Number(id);
-
 
 
         let url = "//crm.achatcentrale.fr/taches/detail/" + centrale + "/" + aidy;
@@ -1877,9 +1860,6 @@ $(function () {
     });
 
 
-
-
-
     $('.archive-task').on('click', function (e) {
 
 
@@ -1909,7 +1889,7 @@ $(function () {
         let centrale = icon_reassign.data("centrale");
         let idTask = icon_reassign.data("task");
 
-        let url = CURRENT_URL.substring(0, 53) + "/reassign/"+idTask+"/"+centrale;
+        let url = CURRENT_URL.substring(0, 53) + "/reassign/" + idTask + "/" + centrale;
 
         $.ajax({
 
@@ -1946,14 +1926,13 @@ $(function () {
     });
 
 
-
     $('#edit_mail_cursor').on('click', function (e) {
 
         let element_mail = $('#mail_content');
 
-        let content_before = element_mail.text().replace(/ /g,'');
+        let content_before = element_mail.text().replace(/ /g, '');
 
-        element_mail.html('<div class="ui input"> <input id="edit_mail_val" type="text" placeholder="'+content_before+'"> </div><button style="margin-left: 5px" class=" mini ui green button " id="save_edit_mail">Ok</button>');
+        element_mail.html('<div class="ui input"> <input id="edit_mail_val" type="text" placeholder="' + content_before + '"> </div><button style="margin-left: 5px" class=" mini ui green button " id="save_edit_mail">Ok</button>');
 
 
         $('#save_edit_mail').on('click', function (e) {
@@ -1965,7 +1944,7 @@ $(function () {
 
             let clId = $('#id').html();
 
-            let url = "https://crm.achatcentrale.fr/client/"+clId+"/"+centrale+"/update/mail";
+            let url = "https://crm.achatcentrale.fr/client/" + clId + "/" + centrale + "/update/mail";
 
 
             $.ajax({
@@ -1984,7 +1963,7 @@ $(function () {
                 // La fonction à apeller si la requête aboutie
                 success: function (data) {
 
-                    element_mail.html('<a class="cursor data-client" data-index="mail" href="mailto:'+value+'"><i class="mail link  circular icon"></i></a>'+value)
+                    element_mail.html('<a class="cursor data-client" data-index="mail" href="mailto:' + value + '"><i class="mail link  circular icon"></i></a>' + value)
                 },
 
                 // La fonction à appeler si la requête n'a pas abouti
@@ -1996,14 +1975,12 @@ $(function () {
             });
 
 
-
         });
 
 
     });
 
     $('.remove_note').on('click', function (e) {
-
 
 
         let centrale = $('#centrale').html();
@@ -2016,7 +1993,6 @@ $(function () {
 
             // Adresse à laquelle la requête est envoyée
             url: url,
-
 
 
             // Le délai maximun en millisecondes de traitement de la demande
@@ -2042,24 +2018,18 @@ $(function () {
     });
 
 
-
     $('#add_origin_client').on('click', function () {
 
 
-        $('.form-check-input').each(function(idx, elem){
+        $('.form-check-input').each(function (idx, elem) {
 
-            if(elem.checked){
+            if (elem.checked) {
                 console.log(elem.value)
             }
 
 
         });
     });
-
-
-
-
-
 
 
 });
@@ -2080,9 +2050,16 @@ $('#datetimepicker3').datetimepicker({
 });
 
 
-
 $('.menu .item').tab();
 
+
+$(document).ready(function () {
+// Tab detail client
+    $('#myTabs a').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    })
+});
 
 
 
