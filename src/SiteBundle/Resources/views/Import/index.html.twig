@@ -154,7 +154,8 @@
         </div>
     </div>
 
-    {% if Produit | length > 12 %}
+
+    {% if Produit | length >= 12 %}
         <nav class="pagination" role="navigation" aria-label="pagination">
 
             {% if app.request.query.get('page') >= 1 %}
